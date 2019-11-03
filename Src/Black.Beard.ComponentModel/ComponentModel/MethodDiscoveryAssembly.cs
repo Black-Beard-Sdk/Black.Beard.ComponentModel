@@ -86,11 +86,9 @@ namespace Bb.ComponentModel
 
                         foreach (var method in items)
                         {
-
-                            ExposeMethodAttribute attribute2 = TypeDescriptor.GetAttributes(method).OfType<ExposeMethodAttribute>().FirstOrDefault();
+                            var attribute2 = method.GetCustomAttribute<ExposeMethodAttribute>();
                             if (attribute2 != null && (string.IsNullOrEmpty(Context) || attribute2.Context == Context))
                                 _result.Add((u.Key, attribute, attribute2, method));
-
                         }
                     }
 

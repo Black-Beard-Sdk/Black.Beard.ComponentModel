@@ -3,6 +3,24 @@
 namespace Bb.ComponentModel.Attributes
 {
 
+    [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    public sealed class DependOfAttribute : Attribute
+    {
+        
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="type"></param>
+        public DependOfAttribute(Type type)
+        {
+            this.Type = type;
+        }
+
+        public Type Type { get; }
+    
+    }
+
+
     /// <summary>
     /// specify this class contains method to expose
     /// </summary>
@@ -36,7 +54,7 @@ namespace Bb.ComponentModel.Attributes
         public ExposeClassAttribute(string context, string display)
         {
             Context = context;
-            this.Filename = display;
+            this.Name = display;
         }
 
         /// <summary>
@@ -45,7 +63,7 @@ namespace Bb.ComponentModel.Attributes
         /// <value>
         /// The display name.
         /// </value>
-        public string Filename { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the context of the class exposed byy this attribute.
@@ -102,8 +120,8 @@ namespace Bb.ComponentModel.Attributes
 
             if (!string.IsNullOrEmpty(Context))
             {
-                if (!string.IsNullOrEmpty(Filename))
-                    return Context.GetHashCode() ^ Filename.GetHashCode();
+                if (!string.IsNullOrEmpty(Name))
+                    return Context.GetHashCode() ^ Name.GetHashCode();
 
                 return Context.GetHashCode();
             }
