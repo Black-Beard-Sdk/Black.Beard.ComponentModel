@@ -4,6 +4,7 @@ using System.Globalization;
 
 namespace Bb.ComponentModel.Accessors
 {
+
     /// <summary>
     /// My Converter
     /// </summary>
@@ -214,11 +215,15 @@ namespace Bb.ComponentModel.Accessors
                 return formattable.ToString(null, CultureInfo.CurrentCulture);
 
             var c = TypeDescriptor.GetConverter(value.GetType());
-            string result = c.ConvertTo(value, typeof(string)) as string;
-            return result;
+            if (c != null)
+            {
+                string result = c.ConvertTo(value, typeof(string)) as string;
+                return result;
+            }
+
+            return Serializer.SerializeObject(value);
 
         }
-
 
         /// <summary>
         /// Unserializes the specified string value in the specified type.

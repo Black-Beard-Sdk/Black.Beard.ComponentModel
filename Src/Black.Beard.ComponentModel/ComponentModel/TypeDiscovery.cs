@@ -681,6 +681,15 @@ namespace Bb.ComponentModel
 
         #endregion Factories
 
+        #region Serializers
+
+        public Func<string, Type, object> DeserializeObject { get => Serializer.DeserializeObject; }
+
+        public Func<object, string> SerializeObject { get => Serializer.SerializeObject; }
+        
+        public Action<string, object> PopulateObject { get => Serializer.PopulateObject; }
+
+        #endregion Serializers
 
         //public void GetTypeDescriptor(Type type)
         //{
