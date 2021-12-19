@@ -2,14 +2,34 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/2vvwy6m9dkr50du7?svg=true)](https://ci.appveyor.com/project/gaelgael5/black-beard-componentmodel)
 
-Method helper for resolve types and methods
+Method helper for resolve types and methods.
+
+
+
+# How to use
+You can use in non-intrusive mode. use the type descriptor.
+
+Register the new TypeDescriptorProvider
+```csharp
+GenericTypeDescriptionProvider.Register<ExampleType>();
+```
+
+Create a new instance for the specified type
+```csharp
+var instance = (ExampleType)TypeDescriptor.CreateInstance(null, typeof(ExampleType), null, null);
+```
+
+```csharp
+var p = TypeDescriptor.GetProperties(i);
+var property = p[nameof(ExampleType.Message)];
+property.GetValue(i).Should().Be("3");
+```
+
+# Add a virtual property
 
 The part based on PropertyTypeDescriptor is insparated from [MatthewKing
 /
 DynamicDescriptors](https://github.com/MatthewKing/DynamicDescriptors/tree/adc6e5321d36261e80d6d2bf0502ee1886ed659c)
-
-
-For add a virtual properties use an easy-to-use fluent interface:
 
 ```csharp
 var instanceToBind = new ExampleClass();

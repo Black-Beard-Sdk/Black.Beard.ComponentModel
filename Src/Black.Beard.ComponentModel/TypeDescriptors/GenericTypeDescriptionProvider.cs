@@ -1,6 +1,7 @@
 ﻿using Bb.ComponentModel.Factories;
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Bb.TypeDescriptors
@@ -23,9 +24,9 @@ namespace Bb.TypeDescriptors
                 return;
 
             var parentCtd = parentProvider.GetTypeDescriptor(typeof(T));
-            //var ourCtd = new DynamicTypeDescriptor(parentCtd, typeof(T));
+            
 
-            var ourProvider = new GenericTypeDescriptionProvider<T>(parentProvider/*, ourCtd*/);
+            var ourProvider = new GenericTypeDescriptionProvider<T>(parentProvider);
 
             TypeDescriptor.AddProvider(ourProvider, typeof(T));
 
@@ -65,13 +66,17 @@ namespace Bb.TypeDescriptors
 
         }
 
+        public override ICustomTypeDescriptor GetTypeDescriptor([DynamicallyAccessedMembers((DynamicallyAccessedMemberTypes)(-1))] Type objectType, object instance)
+        {
+            var parentCtd = base.GetTypeDescriptor(objectType, instance);
+            var ourCtd = new DynamicTypeDescriptor(parentCtd);
+            return ourCtd;
+        }
+
         public override object CreateInstance(IServiceProvider provider, Type objectType, Type[] argTypes, object[] args)
         {
 
             T result = default(T);
-
-            if (objectType.IsGenericType)
-                objectType = objectType.BaseType;
 
             if (argTypes == null)
                 argTypes = new Type[0];
@@ -83,7 +88,7 @@ namespace Bb.TypeDescriptors
             if (activator != null)
                 result = activator(args);
             else
-            result = (T)base.CreateInstance(provider, objectType, argTypes, args);
+                result = (T)base.CreateInstance(provider, objectType, argTypes, args);
 
             return result;
 

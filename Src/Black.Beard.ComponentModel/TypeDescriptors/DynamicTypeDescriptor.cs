@@ -39,6 +39,7 @@ namespace Bb.TypeDescriptors
                 dynamicPropertyDescriptor.AddValueChanged(this, (s, e) => OnPropertyChanged(propertyDescriptor.Name));
                 _dynamicProperties.Add(dynamicPropertyDescriptor);
             }
+
         }
 
         /// <summary>

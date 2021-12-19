@@ -70,7 +70,7 @@ namespace Bb.TypeDescriptors
         public override object GetValue(object component)
         {
 
-            if (component is DynamicTypeDescriptor)
+            if (component is CustomTypeDescriptor)
                 return _descriptor.GetValue(component);
 
             if (_accessor != null)
