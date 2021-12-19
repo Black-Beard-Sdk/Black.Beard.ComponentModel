@@ -21,7 +21,7 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public static string Serialize(object value)
+        public static string Serialize(dynamic value)
         {
             if (value == null)
                 return Default;
@@ -82,146 +82,62 @@ namespace Bb.ComponentModel.Accessors
             if (type.IsEnum)
                 return value.ToString();
 
-            if (type == typeof(bool?))
-            {
-                var _b14 = (bool?)value;
-                if (_b14.HasValue)
-                    return _b14.ToString();
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(bool) || type == typeof(bool?))
+                return value.ToString();
 
-            if (type == typeof(byte?))
-            {
-                var _b15 = (byte?)value;
-                if (_b15.HasValue)
-                    return _b15.ToString();
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(byte) || type == typeof(byte?))
+                return value.ToString(CultureInfo.CurrentCulture);
 
-            if (type == typeof(char?))
-            {
-                var _b16 = (char?)value;
-                if (_b16.HasValue)
-                    return char.ToString(_b16.Value);
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(char) || type == typeof(char?))
+                return char.ToString(value);
 
-            if (type == typeof(DateTime?))
-            {
-                var _b17 = (DateTime?)value;
-                if (_b17.HasValue)
-                    return _b17.Value.ToString();
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(DateTime) || type == typeof(DateTime?))
+                return value.ToString();
 
-            if (type == typeof(decimal?))
-            {
-                var _b18 = (decimal?)value;
-                if (_b18.HasValue)
-                    return _b18.Value.ToString(CultureInfo.CurrentCulture);
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(decimal) || type == typeof(decimal?))
+                return value.ToString(CultureInfo.CurrentCulture);
 
-            if (type == typeof(double?))
-            {
-                var _b19 = (byte?)value;
-                if (_b19.HasValue)
-                    return _b19.Value.ToString(CultureInfo.CurrentCulture);
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(double) || type == typeof(double?))
+                return value.ToString(CultureInfo.CurrentCulture);
 
-            if (type == typeof(short?))
-            {
-                var _b20 = (byte?)value;
-                if (_b20.HasValue)
-                    return _b20.Value.ToString(CultureInfo.CurrentCulture);
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(short) || type == typeof(short?))
+                return value.ToString(CultureInfo.CurrentCulture);
 
-            if (type == typeof(int?))
-            {
-                var _b21 = (byte?)value;
-                if (_b21.HasValue)
-                    return _b21.Value.ToString(CultureInfo.CurrentCulture);
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(int) || type == typeof(int?))
+                return value.ToString(CultureInfo.CurrentCulture);
 
-            if (type == typeof(long?))
-            {
-                var _b22 = (byte?)value;
-                if (_b22.HasValue)
-                    return _b22.Value.ToString(CultureInfo.CurrentCulture);
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(long) || type == typeof(long?))
+                return value.ToString(CultureInfo.CurrentCulture);
 
-            if (type == typeof(sbyte?))
-            {
-                var _b23 = (byte?)value;
-                if (_b23.HasValue)
-                    return _b23.Value.ToString(CultureInfo.CurrentCulture);
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(sbyte) || type == typeof(sbyte?))
+                return value.ToString(CultureInfo.CurrentCulture);
 
-            if (type == typeof(float?))
-            {
-                var _b24 = (byte?)value;
-                if (_b24.HasValue)
-                    return _b24.Value.ToString(CultureInfo.CurrentCulture);
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(float) || type == typeof(float?))
+                return value.ToString(CultureInfo.CurrentCulture);
 
-            if (type == typeof(ushort?))
-            {
-                var _b25 = (byte?)value;
-                if (_b25.HasValue)
-                    return _b25.Value.ToString(CultureInfo.CurrentCulture);
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(string))
+                return value.ToString();
 
-            if (type == typeof(uint?))
-            {
-                var _b26 = (byte?)value;
-                if (_b26.HasValue)
-                    return _b26.Value.ToString(CultureInfo.CurrentCulture);
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(ushort) || type == typeof(ushort?))
+                return value.ToString(CultureInfo.CurrentCulture);
 
-            if (type == typeof(ulong?))
-            {
-                var _b27 = (byte?)value;
-                if (_b27.HasValue)
-                    return _b27.Value.ToString(CultureInfo.CurrentCulture);
-                else
-                    return string.Empty;
-            }
+            if (type == typeof(uint) || type == typeof(uint?))
+                return value.ToString(CultureInfo.CurrentCulture);
 
-            if (value is IConvertible convertible)
+            if (type == typeof(ulong) || type == typeof(ulong?))
+                return value.ToString(CultureInfo.CurrentCulture);
+
+            IConvertible convertible = value as IConvertible;
+            if (convertible != null)
                 return convertible.ToString(CultureInfo.CurrentCulture);
 
-            if (value is IFormattable formattable)
+            IFormattable formattable = value as IFormattable;
+            if (formattable != null)
                 return formattable.ToString(null, CultureInfo.CurrentCulture);
 
             var c = TypeDescriptor.GetConverter(value.GetType());
-            if (c != null)
-            {
-                string result = c.ConvertTo(value, typeof(string)) as string;
-                return result;
-            }
-
-            return Serializer.SerializeObject(value);
+            string result = c.ConvertTo(value, typeof(string)) as string;
+            return result;
 
         }
 
@@ -231,7 +147,7 @@ namespace Bb.ComponentModel.Accessors
         /// <param name="value">The value.</param>
         /// <param name="type">The type.</param>
         /// <returns></returns>
-        internal static object Unserialize(string value, Type type)
+        internal static dynamic Unserialize(string value, Type type)
         {
 
             if (value == Default)

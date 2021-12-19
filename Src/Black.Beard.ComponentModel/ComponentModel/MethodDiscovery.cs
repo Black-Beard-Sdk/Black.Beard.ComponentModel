@@ -12,33 +12,18 @@ namespace Bb.ComponentModel
     public static class MethodDiscovery
     {
 
-        /// <summary>
-        /// Return the list of method from list of types
-        /// </summary>
-        /// <param name="type">type the declare methods</param>
-        /// <param name="returnType">Not evaluated if null. method return type</param>
-        /// <param name="parameters">Not evaluated if null. method arguments type</param>
-        /// <returns></returns>
-        public static IEnumerable<MethodInfo> GetMethods(Type returnType, BindingFlags bindings, params Type[] parameters)
-        {
-            var _methods = GetMethods(TypeDiscovery.Instance, bindings, returnType, parameters.ToList());
-            return _methods;
-        }
-
-
-        /// <summary>
-        /// Return the list of method from list of types
-        /// </summary>
-        /// <param name="type">type the declare methods</param>
-        /// <param name="returnType">Not evaluated if null. method return type</param>
-        /// <param name="parameters">Not evaluated if null. method arguments type</param>
-        /// <returns></returns>
-        public static IEnumerable<MethodInfo> GetMethods(this TypeDiscovery self, BindingFlags bindings, Type returnType, List<Type> parameters)
-        {
-            var types = self.GetTypes(c => c.IsPublic | c.IsClass);
-            var _methods = GetMethods(types, bindings, returnType, parameters);
-            return _methods;
-        }
+        ///// <summary>
+        ///// Return the list of method from list of types
+        ///// </summary>
+        ///// <param name="type">type the declare methods</param>
+        ///// <param name="returnType">Not evaluated if null. method return type</param>
+        ///// <param name="parameters">Not evaluated if null. method arguments type</param>
+        ///// <returns></returns>
+        //public static IEnumerable<MethodInfo> GetMethods(Type returnType, BindingFlags bindings, params Type[] parameters)
+        //{
+        //    var _methods = GetMethods(TypeDiscovery.Instance, bindings, returnType, parameters);
+        //    return _methods;
+        //}
 
         /// <summary>
         /// Return the list of method from list of types
@@ -53,9 +38,7 @@ namespace Bb.ComponentModel
             List<MethodInfo> _methods = new List<MethodInfo>();
             foreach (var type in types)
             {
-                var methods = type.GetMethods(bindings)
-                    .Where(c => Evaluate(c, returnType, parameters))
-                    .ToList();
+                var methods = GetMethods(type, bindings, returnType, parameters);
                 _methods.AddRange(methods);
             }
 
@@ -85,11 +68,14 @@ namespace Bb.ComponentModel
         /// <param name="returnType">Not evaluated if null. method return type</param>
         /// <param name="parameters">Not evaluated if null. method arguments type</param>
         /// <returns></returns>
-        public static IEnumerable<MethodInfo> GetMethods(Type type, BindingFlags bindings, Type returnType, List<Type> parameters)
+        public static IEnumerable<MethodInfo> GetMethods(Type type, BindingFlags bindings, Type returnType, List<Type> parameters = null)
         {
-            var methods = type.GetMethods(bindings).ToList()
-                .Where(c => (returnType == null || c.ReturnType == returnType) && (parameters == null || EvaluateMethodParameters(c, parameters))).ToList();
-            return methods;
+            var methods = type.GetMethods(bindings);
+            foreach (var c in methods)
+                if (returnType == null || c.ReturnType == returnType)
+                    if (parameters == null || EvaluateMethodParameters(c, parameters))
+                        yield return c;
+
         }
 
         private static bool EvaluateMethodParameters(MethodInfo item, List<Type> parameters)

@@ -1,9 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Bb.Helpers</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ComponentModel\Factories\FactoryProvider.cs" />
+    <Compile Remove="ComponentModel\Factory.cs" />
+    <Compile Remove="ComponentModel\FactoryProvider.cs" />
+    <Compile Remove="ComponentModel\MethodDiscoveryAssembly.cs" />
+    <Compile Remove="ComponentModel\ObjectCreator.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />

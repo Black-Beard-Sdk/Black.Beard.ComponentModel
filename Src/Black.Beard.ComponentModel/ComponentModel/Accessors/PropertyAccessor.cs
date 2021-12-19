@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Bb.ComponentModel.Accessors
 {
@@ -62,7 +66,7 @@ namespace Bb.ComponentModel.Accessors
                 var convertedValueParameter = Expression.ConvertChecked(valueParameter, property.PropertyType);
                 var propertyExpression = Expression.Property(this.IsStatic ? null : convertedObjectParameter, property);
 
-                AssignValue =
+                SetValue =
                 Expression.Lambda<Action<object, object>>
                 (
                     Expression.Assign

@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Bb.ComponentModel.Accessors
 {
@@ -20,7 +22,7 @@ namespace Bb.ComponentModel.Accessors
         private string _category = null;
         string _displayDesciption = null;
         private bool? _required = null;
-        //private dynamic _defaultValue = null;
+        private dynamic _defaultValue = null;
 
         /// <summary>
         /// The _accessors
@@ -57,7 +59,7 @@ namespace Bb.ComponentModel.Accessors
         /// <value>
         ///   <c>true</c> if [can write]; otherwise, <c>false</c>.
         /// </value>
-        public bool CanWrite { get { return this.AssignValue != null; } }
+        public bool CanWrite { get { return SetValue != null; } }
 
         /// <summary>
         /// Gets a value indicating whether [can read].
@@ -73,7 +75,7 @@ namespace Bb.ComponentModel.Accessors
         /// <value>
         ///   <c>true</c> if [is clonable]; otherwise, <c>false</c>.
         /// </value>
-        public bool IsClonable { get { return this.GetValue != null && this.AssignValue != null; } }
+        public bool IsClonable { get { return GetValue != null && SetValue != null; } }
 
         /// <summary>
         /// Gets or sets the get value method.
@@ -100,7 +102,7 @@ namespace Bb.ComponentModel.Accessors
         /// <value>
         /// The set value.
         /// </value>
-        public Action<object, object> AssignValue { get; protected set; }
+        public Action<object, object> SetValue { get; protected set; }
 
         /// <summary>
         /// Gets or sets the name.
@@ -343,33 +345,33 @@ namespace Bb.ComponentModel.Accessors
             }
         }
 
-        ///// <summary>
-        ///// Gets the default value.
-        ///// </summary>
-        ///// <value>
-        ///// The default value.
-        ///// </value>
-        //public dynamic DefaultValue
-        //{
-        //    get
-        //    {
-        //        if (_defaultValue == null)
-        //        {
-        //            DefaultValueAttribute a = GetAttributes().OfType<DefaultValueAttribute>().FirstOrDefault();
-        //            if (a != null)
-        //            {
-        //                _defaultValue = a.Value;
-        //                if (_defaultValue != null)
-        //                {
-        //                    Type t = _defaultValue.GetType();
-        //                    if (t == typeof(string) && t != Type)
-        //                        _defaultValue = MyConverter.Unserialize(_defaultValue, Type);
-        //                }
-        //            }
-        //        }
-        //        return _defaultValue;
-        //    }
-        //}
+        /// <summary>
+        /// Gets the default value.
+        /// </summary>
+        /// <value>
+        /// The default value.
+        /// </value>
+        public dynamic DefaultValue
+        {
+            get
+            {
+                if (_defaultValue == null)
+                {
+                    DefaultValueAttribute a = GetAttributes().OfType<DefaultValueAttribute>().FirstOrDefault();
+                    if (a != null)
+                    {
+                        _defaultValue = a.Value;
+                        if (_defaultValue != null)
+                        {
+                            Type t = _defaultValue.GetType();
+                            if (t == typeof(string) && t != Type)
+                                _defaultValue = MyConverter.Unserialize(_defaultValue, Type);
+                        }
+                    }
+                }
+                return _defaultValue;
+            }
+        }
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="T:IAccessorItem" /> is required.
@@ -420,8 +422,8 @@ namespace Bb.ComponentModel.Accessors
         {
             try
             {
-                object result = MyConverter.Unserialize(value, Type);
-                this.AssignValue(instance, result);
+                dynamic result = MyConverter.Unserialize(value, Type);
+                SetValue(instance, result);
             }
             catch (Exception e)
             {

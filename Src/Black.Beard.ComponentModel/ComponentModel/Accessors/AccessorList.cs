@@ -182,7 +182,7 @@ namespace Bb.ComponentModel.Accessors
                 if (i.IsClonable)
                 {
                     var data = i.GetValue(source);
-                    i.AssignValue(target, data);
+                    i.SetValue(target, data);
                 }
             }
         }
@@ -269,9 +269,6 @@ namespace Bb.ComponentModel.Accessors
 
         }
 
-
-
     }
-
 
 }

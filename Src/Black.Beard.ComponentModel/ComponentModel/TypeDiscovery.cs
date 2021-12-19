@@ -1,6 +1,4 @@
-﻿using Bb.ComponentModel.Accessors;
-using Bb.ComponentModel.Factories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -13,7 +11,7 @@ using System.Runtime.CompilerServices;
 namespace Bb.ComponentModel
 {
 
-    public class TypeDiscovery : ITypeReferential
+    public class TypeDiscovery //: ITypeReferential
     {
 
         #region Initialize
@@ -21,7 +19,7 @@ namespace Bb.ComponentModel
         private TypeDiscovery(params string[] paths)
         {
 
-            _factoryProvider = new FactoryProvider();
+            //_factoryProvider = new FactoryProvider();
             _paths = new HashSet<string>();
 
             if (paths == null)
@@ -105,9 +103,64 @@ namespace Bb.ComponentModel
             }
         }
 
+        internal IEnumerable<Assembly> GetAssemblies(IEnumerable<string> namespaces)
+        {
+
+            HashSet<Assembly> assemblies = new HashSet<Assembly>(10);
+            HashSet<string> n = namespaces as HashSet<string>;
+
+            if (n == null)
+                n = new HashSet<string>(namespaces);
+
+            foreach (var assembly in this.Assemblies())
+            {
+
+                Type[] types = null;
+                if (assembly.IsDynamic)
+                    types = assembly.GetTypes();
+                else
+                    types = assembly.GetExportedTypes();
+
+                try
+                {
+                    foreach (var item in types)
+                        if (n.Contains(item.Namespace))
+                        {
+                            assemblies.Add(assembly);
+                            break;
+                        }
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+            return assemblies;
+
+        }
+
+
         #endregion Initialize
 
         #region Resolve methods
+
+
+        ///// <summary>
+        /////     Return a list of type that match with the specified filter
+        ///// </summary>
+        ///// <param name="typeFilter"></param>
+        ///// <returns></returns>
+        //public IEnumerable<Type> ParseTypes()
+        //{
+        //    Func<Type, bool> typeFilter = c => true;
+        //    var assemblies = Assemblies().ToArray();
+        //    var items = Collect(typeFilter, assemblies);
+        //    foreach (var item in items)
+        //        yield return item;
+        //}
+
 
         /// <summary>
         ///     Return a list of type that match with the specified filter
@@ -330,6 +383,12 @@ namespace Bb.ComponentModel
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileAssembly">filename of the assembly</param>
+        /// <param name="withPdb">if true, test if the pdb exist and load it</param>
+        /// <returns></returns>
         public Assembly AddAssemblyFile(string fileAssembly, bool withPdb)
         {
 
@@ -346,6 +405,24 @@ namespace Bb.ComponentModel
 
             return LoadAssembly(file, null);
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="assemblyName">name of the assembly</param>
+        /// <returns></returns>
+        public Assembly AddAssemblyname(string assemblyName)
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            try
+            {
+                return Assembly.Load(assemblyName);
+            }
+            finally
+            {
+                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -390,8 +467,12 @@ namespace Bb.ComponentModel
                     {
                         bool test()
                         {
-                            filePdb.Refresh();
-                            return filePdb.Exists;
+                            if (filePdb != null)
+                            {
+                                filePdb.Refresh();
+                                return filePdb.Exists;
+                            }
+                            return false;
                         };
 
                         if (filePdb == null && test())
@@ -401,8 +482,14 @@ namespace Bb.ComponentModel
                         {
                             Trace.WriteLine($"Loading assembly {fileAssembly.FullName}");
                             var data = File.ReadAllBytes(fileAssembly.FullName);
-                            var pdbData = File.ReadAllBytes(filePdb.FullName);
-                            assembly = Assembly.Load(data, pdbData);
+                            if (filePdb != null)
+                            {
+                                var pdbData = File.ReadAllBytes(filePdb.FullName);
+                                assembly = Assembly.Load(data, pdbData);
+                            }
+                            else
+                                assembly = Assembly.Load(data);
+
                         }
                     }
                     catch (Exception e)
@@ -506,22 +593,24 @@ namespace Bb.ComponentModel
         ///     Registers the specified assemblies.
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
-        private List<Type> Collect(Func<Type, bool> typeFilter, params Assembly[] assemblies)
+        private IEnumerable<Type> Collect(Func<Type, bool> typeFilter, params Assembly[] assemblies)
         {
-            var result = new List<Type>();
 
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
             try
             {
                 foreach (var item in assemblies)
-                    result.AddRange(Resolve(item, typeFilter));
+                {
+                    var list = Resolve(item, typeFilter);
+                    foreach (var type in list)
+                        yield return type;
+                }
             }
             finally
             {
                 AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
             }
 
-            return result;
         }
 
         /// <summary>
@@ -617,79 +706,79 @@ namespace Bb.ComponentModel
 
         #endregion Properties
 
-        /// <summary>
-        /// Gets the specified type.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns></returns>
-        public AccessorList GetProperties(Type type, bool withSubType = false)
-        {
-            return AccessorItem.Get(type, withSubType);
-        }
+        ///// <summary>
+        ///// Gets the specified type.
+        ///// </summary>
+        ///// <param name="type">The type.</param>
+        ///// <returns></returns>
+        //public AccessorList GetProperties(Type type, bool withSubType = false)
+        //{
+        //    return AccessorItem.Get(type, withSubType);
+        //}
 
         #region Factories
 
-        /// <summary>
-        /// Resolve types argument and Creates an optimized factory for the specified arguments.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="args">The arguments.</param>
-        /// <returns></returns>
-        public IFactory<T> Create<T>(params dynamic[] args)
-            where T : class
-        {
-            return _factoryProvider.Create<T>(args);
-        }
+        ///// <summary>
+        ///// Resolve types argument and Creates an optimized factory for the specified arguments.
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="args">The arguments.</param>
+        ///// <returns></returns>
+        //public IFactory<T> Create<T>(params dynamic[] args)
+        //    where T : class
+        //{
+        //    return _factoryProvider.Create<T>(args);
+        //}
 
-        /// <summary>
-        /// Creates an optimized factory for the specified arguments.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="args">The arguments.</param>
-        /// <returns></returns>
-        public IFactory<T> CreateWithTypes<T>(params Type[] types)
-            where T : class
-        {
-            return _factoryProvider.CreateWithTypes<T>(types);
-        }
+        ///// <summary>
+        ///// Creates an optimized factory for the specified arguments.
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="args">The arguments.</param>
+        ///// <returns></returns>
+        //public IFactory<T> CreateWithTypes<T>(params Type[] types)
+        //    where T : class
+        //{
+        //    return _factoryProvider.CreateWithTypes<T>(types);
+        //}
 
-        /// <summary>
-        /// Resolve types argument and Creates an optimized factory for the specified arguments. The real type instance is the specified type
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="type">The real type instance.</param>
-        /// <param name="args">The arguments.</param>
-        /// <returns></returns>
-        public IFactory<T> CreateFrom<T>(Type type, params dynamic[] args)
-            where T : class
-        {
-            return _factoryProvider.CreateFrom<T>(type, args);
-        }
+        ///// <summary>
+        ///// Resolve types argument and Creates an optimized factory for the specified arguments. The real type instance is the specified type
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="type">The real type instance.</param>
+        ///// <param name="args">The arguments.</param>
+        ///// <returns></returns>
+        //public IFactory<T> CreateFrom<T>(Type type, params dynamic[] args)
+        //    where T : class
+        //{
+        //    return _factoryProvider.CreateFrom<T>(type, args);
+        //}
 
-        /// <summary>
-        /// Creates an optimized factory for the specified arguments. The real type instance is the specified type
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="type">The real type instance.</param>
-        /// <param name="types">The types.</param>
-        /// <returns></returns>
-        public IFactory<T> CreateFromWithTypes<T>(Type type, params Type[] types)
-            where T : class
-        {
-            return _factoryProvider.CreateFromWithTypes<T>(type, types);
-        }
+        ///// <summary>
+        ///// Creates an optimized factory for the specified arguments. The real type instance is the specified type
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="type">The real type instance.</param>
+        ///// <param name="types">The types.</param>
+        ///// <returns></returns>
+        //public IFactory<T> CreateFromWithTypes<T>(Type type, params Type[] types)
+        //    where T : class
+        //{
+        //    return _factoryProvider.CreateFromWithTypes<T>(type, types);
+        //}
 
         #endregion Factories
 
-        #region Serializers
+        //#region Serializers
 
-        public Func<string, Type, object> DeserializeObject { get => Serializer.DeserializeObject; }
+        //public Func<string, Type, object> DeserializeObject { get => Serializer.DeserializeObject; }
 
-        public Func<object, string> SerializeObject { get => Serializer.SerializeObject; }
-        
-        public Action<string, object> PopulateObject { get => Serializer.PopulateObject; }
+        //public Func<object, string> SerializeObject { get => Serializer.SerializeObject; }
 
-        #endregion Serializers
+        //public Action<string, object> PopulateObject { get => Serializer.PopulateObject; }
+
+        //#endregion Serializers
 
         //public void GetTypeDescriptor(Type type)
         //{
@@ -704,7 +793,7 @@ namespace Bb.ComponentModel
         private readonly Func<IEnumerable<Assembly>> Assemblies;
         private readonly HashSet<string> _paths;
         private static readonly object _lock = new object();
-        private readonly FactoryProvider _factoryProvider;
+        //private readonly FactoryProvider _factoryProvider;
         private static TypeDiscovery _instance;
 
     }
