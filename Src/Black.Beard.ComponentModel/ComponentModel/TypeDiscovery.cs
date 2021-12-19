@@ -103,7 +103,7 @@ namespace Bb.ComponentModel
             }
         }
 
-        internal IEnumerable<Assembly> GetAssemblies(IEnumerable<string> namespaces)
+        public IEnumerable<Assembly> GetAssemblies(IEnumerable<string> namespaces)
         {
 
             HashSet<Assembly> assemblies = new HashSet<Assembly>(10);
