@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Bb.Helpers</RootNamespace>
+    <RootNamespace>Bb</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/Black-Beard-Sdk/Black.Beard.ComponentModel</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>

@@ -23,6 +23,7 @@ namespace Bb.ComponentModel.Accessors
         /// <returns></returns>
         public static string Serialize(dynamic value)
         {
+
             if (value == null)
                 return Default;
 

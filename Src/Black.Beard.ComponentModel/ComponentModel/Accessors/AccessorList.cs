@@ -30,8 +30,6 @@ namespace Bb.ComponentModel.Accessors
                 _list.Add(item.Name, item);
         }
 
-        private Dictionary<string, AccessorItem> _list = new Dictionary<string, AccessorItem>();
-
         /// <summary>
         /// The _lock
         /// </summary>
@@ -268,6 +266,8 @@ namespace Bb.ComponentModel.Accessors
             return null;
 
         }
+
+        private Dictionary<string, AccessorItem> _list = new Dictionary<string, AccessorItem>();
 
     }
 

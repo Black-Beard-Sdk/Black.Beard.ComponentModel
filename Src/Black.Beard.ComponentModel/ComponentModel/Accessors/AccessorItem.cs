@@ -10,19 +10,13 @@ using System.Threading.Tasks;
 namespace Bb.ComponentModel.Accessors
 {
 
+
     /// <summary>
     /// Base accessor
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{Name}")]
     public class AccessorItem
     {
-
-        List<Attribute> _attributes;
-        private string _displayName = null;
-        private string _category = null;
-        string _displayDesciption = null;
-        private bool? _required = null;
-        private dynamic _defaultValue = null;
 
         /// <summary>
         /// The _accessors
@@ -156,9 +150,9 @@ namespace Bb.ComponentModel.Accessors
         /// Gets the specified component type.
         /// </summary>
         /// <param name="componentType">Type of the component.</param>
-        /// <param name="withSubType">if set to <c>true</c> [with sub type].</param>
+        /// <param name="withPropertiesEmbeddedInSubType">if set to <c>true</c> [with sub type].</param>
         /// <returns></returns>
-        internal static AccessorList Get(Type componentType, bool withSubType = false)
+        internal static AccessorList Get(Type componentType, bool withPropertiesEmbeddedInSubType = false)
         {
 
             AccessorList list = null;
@@ -180,7 +174,7 @@ namespace Bb.ComponentModel.Accessors
                         list = new AccessorList();
 
                         foreach (PropertyInfo item in AccessorList.GetProperties(componentType))
-                            if (withSubType || item.DeclaringType == componentType && !list.ContainsKey(item.Name))
+                            if (withPropertiesEmbeddedInSubType || item.DeclaringType == componentType && !list.ContainsKey(item.Name))
                                 list.Add(new PropertyAccessor(componentType, item));
 
                         _accessors.Add(componentType, list);
@@ -400,50 +394,60 @@ namespace Bb.ComponentModel.Accessors
         #endregion Attributes / validations
 
 
-        #region Serialize /Unserialize
+        //#region Serialize /Unserialize
 
-        /// <summary>
-        /// Serializes the specified member for instance.
-        /// </summary>
-        /// <param name="instance">The instance.</param>
-        /// <returns></returns>
-        public string Serialize(object instance)
-        {
-            return MyConverter.Serialize(GetValue(instance));
-        }
+        ///// <summary>
+        ///// Serializes the specified member for instance.
+        ///// </summary>
+        ///// <param name="instance">The instance.</param>
+        ///// <returns></returns>
+        //public string Serialize(object instance)
+        //{
+        //    return MyConverter.Serialize(GetValue(instance));
+        //}
 
-        /// <summary>
-        /// Unserializes the value int the specified instance.
-        /// </summary>
-        /// <param name="instance">The instance.</param>
-        /// <param name="value">The value.</param>
-        /// <exception cref="System.InvalidCastException"></exception>
-        public void Unserialize(object instance, string value)
-        {
-            try
-            {
-                dynamic result = MyConverter.Unserialize(value, Type);
-                SetValue(instance, result);
-            }
-            catch (Exception e)
-            {
-                throw new InvalidCastException(string.Format("invalid cast in the property '{0}'. The value '{1}' can't be casted in '{2}'", Name, value, Type.Name), e);
-            }
-        }
+        ///// <summary>
+        ///// Unserializes the value int the specified instance.
+        ///// </summary>
+        ///// <param name="instance">The instance.</param>
+        ///// <param name="value">The value.</param>
+        ///// <exception cref="System.InvalidCastException"></exception>
+        //public void Unserialize(object instance, string value)
+        //{
+        //    try
+        //    {
+        //        dynamic result = MyConverter.Unserialize(value, Type);
+        //        SetValue(instance, result);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new InvalidCastException(string.Format("invalid cast in the property '{0}'. The value '{1}' can't be casted in '{2}'", Name, value, Type.Name), e);
+        //    }
+        //}
 
-        #endregion
+        //#endregion
 
 
+        ///// <summary>
+        ///// Determines whether [is].
+        ///// </summary>
+        ///// <typeparam name="T1">The type of the 1.</typeparam>
+        ///// <returns></returns>
+        //public bool Is<T1>()
+        //{
+        //    return Type.IsAssignableFrom(typeof(T1));
+        //}
 
-        /// <summary>
-        /// Determines whether [is].
-        /// </summary>
-        /// <typeparam name="T1">The type of the 1.</typeparam>
-        /// <returns></returns>
-        public bool Is<T1>()
-        {
-            return Type.IsAssignableFrom(typeof(T1));
-        }
+        #region private
+
+        List<Attribute> _attributes;
+        private string _displayName = null;
+        private string _category = null;
+        string _displayDesciption = null;
+        private bool? _required = null;
+        private dynamic _defaultValue = null;
+
+        #endregion private
 
 
     }
