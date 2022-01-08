@@ -14,22 +14,39 @@ namespace Bb.ComponentModel
     public class ExposedTypes
     {
 
+
+        static ExposedTypes()
+        {
+            _instance = new ExposedTypes();
+        }
+
+
+        public static ExposedTypes Instance { get => _instance; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExposedTypes"/> class.
         /// </summary>
-        public ExposedTypes()
+        private ExposedTypes()
         {
             _items = new Dictionary<Type, HashSet<ExposeClassAttribute>>();
             Refresh();
         }
 
+
         /// <summary>
         /// Refreshes this instance.
         /// </summary>
-        public void Refresh()
+        public ExposedTypes Refresh()
         {
-            IEnumerable<KeyValuePair<Type, IEnumerable<ExposeClassAttribute>>> items = TypeWithAttributeReferential<ExposeClassAttribute>.Instance.GetAttributes().ToList();
+            
+            IEnumerable<KeyValuePair<Type, IEnumerable<ExposeClassAttribute>>> items
+                = TypeWithAttributeReferential<ExposeClassAttribute>.Instance.GetAttributes()
+                .ToList();
+
             Add(items);
+
+            return this;
+
         }
 
 
@@ -42,6 +59,7 @@ namespace Bb.ComponentModel
             foreach (var item in _items)
                 yield return item;
         }
+
 
         /// <summary>
         /// Gets the types with specified context.
@@ -66,6 +84,7 @@ namespace Bb.ComponentModel
 
         }
 
+
         /// <summary>
         /// Gets the context's list.
         /// </summary>
@@ -83,6 +102,7 @@ namespace Bb.ComponentModel
 
         }
 
+
         /// <summary>
         /// Removes the specified type of exposed types.
         /// </summary>
@@ -97,6 +117,7 @@ namespace Bb.ComponentModel
             return this;
 
         }
+
 
         /// <summary>
         /// Adds the specified configurations.
@@ -137,21 +158,24 @@ namespace Bb.ComponentModel
 
         }
 
+
         /// <summary>
         /// Refreshes the specified items.
         /// </summary>
         /// <param name="items">The items.</param>
         /// <returns><see cref="ExposedTypes"/></returns>
-        public ExposedTypes Add(IEnumerable<KeyValuePair<Type, IEnumerable<ExposeClassAttribute>>> items)
+        private ExposedTypes Add(IEnumerable<KeyValuePair<Type, IEnumerable<ExposeClassAttribute>>> items)
         {
 
             foreach (KeyValuePair<Type, IEnumerable<ExposeClassAttribute>> item in items)
             {
 
                 if (!_items.TryGetValue(item.Key, out HashSet<ExposeClassAttribute> list))
-                    _items.Add(item.Key, list = new HashSet<ExposeClassAttribute>());
+                    lock (this._lock)
+                        if (!_items.TryGetValue(item.Key, out list))
+                            _items.Add(item.Key, list = new HashSet<ExposeClassAttribute>());
 
-                foreach (var item3 in item.Value)
+                foreach (ExposeClassAttribute item3 in item.Value)
                     list.Add(item3);
 
             }
@@ -159,6 +183,7 @@ namespace Bb.ComponentModel
             return this;
 
         }
+
 
         /// <summary>
         /// push the <see cref="ExposeClassAttribute" /> registered types.
@@ -182,7 +207,10 @@ namespace Bb.ComponentModel
 
         }
 
+
         private readonly Dictionary<Type, HashSet<ExposeClassAttribute>> _items;
+        private static readonly ExposedTypes _instance;
+        private volatile object _lock = new object();
 
     }
 
