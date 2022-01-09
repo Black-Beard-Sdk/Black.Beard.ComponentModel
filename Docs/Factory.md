@@ -39,3 +39,8 @@ object instance = ObjectCreator.GetActivatorByTypeAndArguments<object>(typeof(Te
 Test1 result = (Test1)factory.Call(null, "t1", 1);
 
 ```
+
+You can resolve the types of the arguments like that
+```CSHARP
+var types = ObjectCreator.ResolveTypesOfArguments("t2", 1);
+```
