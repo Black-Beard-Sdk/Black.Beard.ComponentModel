@@ -8,3 +8,11 @@ Method helper for resolve types and methods.
 
 [PropertyDescriptor.md](/Docs/PropertyTypeDescriptor.md)
 
+
+## Auto idscovering
+
+Method helper for resolve types and methods.
+
+[Exposing class for auto discovering.md](/ExposedTypes.md)
+
+

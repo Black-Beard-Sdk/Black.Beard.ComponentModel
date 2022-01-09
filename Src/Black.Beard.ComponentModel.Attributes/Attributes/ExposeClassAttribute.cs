@@ -3,23 +3,6 @@
 namespace Bb.ComponentModel.Attributes
 {
 
-    [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
-    public sealed class DependOfAttribute : Attribute
-    {
-        
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="type"></param>
-        public DependOfAttribute(Type type)
-        {
-            this.Type = type;
-        }
-
-        public Type Type { get; }
-    
-    }
-
 
     /// <summary>
     /// specify this class contains method to expose
@@ -66,12 +49,17 @@ namespace Bb.ComponentModel.Attributes
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the context of the class exposed byy this attribute.
+        /// Gets or sets the context of the class exposed by this attribute.
         /// </summary>
         /// <value>
         /// The context.
         /// </value>
         public string Context { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ConfigurationKey of the class exposed by this attribute.
+        /// </summary>
+        public string ConfigurationKey { get; set; }
 
         /// <summary>
         /// Gets or sets the life cycle if must be use in Ioc.
