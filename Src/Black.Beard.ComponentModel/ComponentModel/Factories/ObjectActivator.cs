@@ -19,15 +19,87 @@ namespace Bb.ComponentModel.Factories
     public static class ObjectCreator
     {
 
+
+        public static Type[] ResolveTypesOfArguments(params dynamic[] args )
+        {
+
+            Type[] results = new Type[args.Length];
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                var value = args[i];
+                
+                if (value == null)
+                    results[i] = typeof(object);
+
+                else
+                    results[i] = value.GetType();
+
+            }
+
+            return results;
+
+        }
+
+
         /// <summary>
         /// Gets an customed activator factory for the specified ctor.
-        /// Note if the the generic is diferent of the declaring type of the ctor a cast is injected in the method.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">is the type that containt the constructor with the specified arguments types</typeparam>
+        /// <param name="types">arguments types of the constructor</param>
+        /// <returns></returns>
+        public static Factory<T> GetActivatorByArguments<T>(params Type[] types)
+            where T : class
+        {
+            return GetActivatorByTypeAndArguments<T>(typeof(T), types);
+        }
+
+
+        /// <summary>
+        /// Gets an customed activator factory for the specified ctor.
+        /// Note if the the generic is diferent of the declaring type of the ctor do a cast and is injected in the method.
+        /// </summary>
+        /// <typeparam name="T">is the type that containt the constructor with the specified arguments types</typeparam>
+        /// <param name="type">type must see from external method call</param>
+        /// <param name="types">arguments types of the constructor</param>
+        /// <returns></returns>
+        public static Factory<T> GetActivatorByTypeAndArguments<T>(Type type, params Type[] types)
+            where T : class
+        {
+            var ctor = type.GetConstructor(types);
+
+            if (ctor == null)
+                throw new NullReferenceException($"no constructor resolved on '{type}' by specified arguments ({types})");
+
+            var description = new MethodDescription(ctor.ToString(), ctor);
+            return GetCallMethod<T>(ctor, description);
+        }
+
+        /// <summary>
+        /// Gets an customed activator factory for the specified ctor.
+        /// Note if the the generic is diferent of the declaring type of the ctor do a cast and is injected in the method.
+        /// </summary>
+        /// <typeparam name="T">is the type that containt the constructor with the specified arguments types</typeparam>
         /// <param name="ctor">The ctor.</param>
         /// <returns></returns>
-        public static Factory<T> GetActivator<T>(MethodBase methodBase, MethodDescription description)
+        public static Factory<T> GetActivator<T>(ConstructorInfo methodBase, MethodDescription description)
             where T : class
+        {
+
+            return GetCallMethod<T>(methodBase, description);
+
+        }
+
+
+        /// <summary>
+        /// Gets an customed method call factory for the specified ctor.
+        /// Note if the the generic is diferent of the declaring type of the ctor do a cast and is injected in the method.
+        /// </summary>
+        /// <typeparam name="T">is the type that containt the method</typeparam>
+        /// <param name="ctor">The ctor.</param>
+        /// <returns></returns>
+        public static Factory<T> GetCallMethod<T>(MethodBase methodBase, MethodDescription description)
+        where T : class
         {
 
             Type type = methodBase.DeclaringType;

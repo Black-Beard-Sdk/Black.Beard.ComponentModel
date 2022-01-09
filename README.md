@@ -6,13 +6,14 @@
 ## PropertyDescriptors
 Method helper for resolve types and methods.
 
-[PropertyDescriptor.md](/Docs/PropertyTypeDescriptor.md)
+[PropertyDescriptor.md](./Docs/PropertyTypeDescriptor.md)
 
 
 ## Auto idscovering
 
 Method helper for resolve types and methods.
 
-[Exposing class for auto discovering.md](/ExposedTypes.md)
+[Exposing class for auto discovering.md](./Docs/ExposedTypes.md)
 
-
+## factory for create fast activator & fast method calling
+[Factory.md](./Docs/factory.md)

@@ -21,7 +21,7 @@
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns></returns>
-        T Create(params dynamic[] args);
+        T Call(string name, params dynamic[] args);
 
     }
 

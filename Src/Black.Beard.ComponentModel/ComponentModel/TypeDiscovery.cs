@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bb.ComponentModel.Factories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -19,7 +20,6 @@ namespace Bb.ComponentModel
         private TypeDiscovery(params string[] paths)
         {
 
-            //_factoryProvider = new FactoryProvider();
             _paths = new HashSet<string>();
 
             if (paths == null)
@@ -718,55 +718,60 @@ namespace Bb.ComponentModel
 
         #region Factories
 
-        ///// <summary>
-        ///// Resolve types argument and Creates an optimized factory for the specified arguments.
-        ///// </summary>
-        ///// <typeparam name="T"></typeparam>
-        ///// <param name="args">The arguments.</param>
-        ///// <returns></returns>
-        //public IFactory<T> Create<T>(params dynamic[] args)
-        //    where T : class
-        //{
-        //    return _factoryProvider.Create<T>(args);
-        //}
+        /// <summary>
+        /// Resolve types argument and Creates an optimized factory for the specified arguments.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
+        public IFactory<T> Create<T>(params dynamic[] args)
+            where T : class
+        {
+            var types = ObjectCreator.ResolveTypesOfArguments(args);
+            var factory = ObjectCreator.GetActivatorByArguments<T>(types);
+            return factory;
+        }
 
-        ///// <summary>
-        ///// Creates an optimized factory for the specified arguments.
-        ///// </summary>
-        ///// <typeparam name="T"></typeparam>
-        ///// <param name="args">The arguments.</param>
-        ///// <returns></returns>
-        //public IFactory<T> CreateWithTypes<T>(params Type[] types)
-        //    where T : class
-        //{
-        //    return _factoryProvider.CreateWithTypes<T>(types);
-        //}
+        /// <summary>
+        /// Creates an optimized factory for the specified arguments.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
+        public IFactory<T> CreateWithTypes<T>(params Type[] types)
+            where T : class
+        {
+            var factory = ObjectCreator.GetActivatorByArguments<T>(types);
+            return factory;
+        }
 
-        ///// <summary>
-        ///// Resolve types argument and Creates an optimized factory for the specified arguments. The real type instance is the specified type
-        ///// </summary>
-        ///// <typeparam name="T"></typeparam>
-        ///// <param name="type">The real type instance.</param>
-        ///// <param name="args">The arguments.</param>
-        ///// <returns></returns>
-        //public IFactory<T> CreateFrom<T>(Type type, params dynamic[] args)
-        //    where T : class
-        //{
-        //    return _factoryProvider.CreateFrom<T>(type, args);
-        //}
+        /// <summary>
+        /// Resolve types argument and Creates an optimized factory for the specified arguments. The real type instance is the specified type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="type">The real type instance.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
+        public IFactory<T> CreateFrom<T>(Type type, params dynamic[] args)
+            where T : class
+        {
+            var types = ObjectCreator.ResolveTypesOfArguments(args);
+            var factory = ObjectCreator.GetActivatorByArguments<T>(types);
+            return factory;
+        }
 
-        ///// <summary>
-        ///// Creates an optimized factory for the specified arguments. The real type instance is the specified type
-        ///// </summary>
-        ///// <typeparam name="T"></typeparam>
-        ///// <param name="type">The real type instance.</param>
-        ///// <param name="types">The types.</param>
-        ///// <returns></returns>
-        //public IFactory<T> CreateFromWithTypes<T>(Type type, params Type[] types)
-        //    where T : class
-        //{
-        //    return _factoryProvider.CreateFromWithTypes<T>(type, types);
-        //}
+        /// <summary>
+        /// Creates an optimized factory for the specified arguments. The real type instance is the specified type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="type">The real type instance.</param>
+        /// <param name="types">The types.</param>
+        /// <returns></returns>
+        public IFactory<T> CreateFromWithTypes<T>(Type type, params Type[] types)
+            where T : class
+        {
+            return ObjectCreator.GetActivatorByTypeAndArguments<T>(type, types);
+        }
 
         #endregion Factories
 
@@ -793,7 +798,6 @@ namespace Bb.ComponentModel
         private readonly Func<IEnumerable<Assembly>> Assemblies;
         private readonly HashSet<string> _paths;
         private static readonly object _lock = new object();
-        //private readonly FactoryProvider _factoryProvider;
         private static TypeDiscovery _instance;
 
     }

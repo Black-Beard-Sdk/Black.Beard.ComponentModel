@@ -10,6 +10,10 @@ namespace Bb.ComponentModel.Factories
 
         public MethodDescription(string name, MethodBase method)
         {
+
+            if (method == null)
+                throw new NullReferenceException(nameof(Method));
+
             Method = method;
             this.Name = name;
             var parameters = method.GetParameters();
