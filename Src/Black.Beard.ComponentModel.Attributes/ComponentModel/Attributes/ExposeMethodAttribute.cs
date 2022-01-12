@@ -3,7 +3,7 @@
 namespace Bb.ComponentModel.Attributes
 {
 
-    [AttributeUsage(AttributeTargets.Method, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
     public class ExposeMethodAttribute : Attribute
     {
 
