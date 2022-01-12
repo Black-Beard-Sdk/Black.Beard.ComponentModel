@@ -34,7 +34,7 @@ namespace Bb.ComponentModel.Factories
 
         public MethodInfo MethodCall { get; internal set; }
 
-        public MethodInfo MethodReset { get; internal set; }    
+        public MethodInfo MethodReset { get; internal set; }
 
         public abstract bool IsEmpty { get; }
 

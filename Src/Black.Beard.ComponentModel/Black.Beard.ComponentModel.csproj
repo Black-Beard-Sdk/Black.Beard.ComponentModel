@@ -1,34 +1,41 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Bb</RootNamespace>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <RepositoryUrl>https://github.com/Black-Beard-Sdk/Black.Beard.ComponentModel</RepositoryUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<RootNamespace>Bb</RootNamespace>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/Black-Beard-Sdk/Black.Beard.ComponentModel</RepositoryUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="ComponentModel\Factories\FactoryProvider.cs" />
-    <Compile Remove="ComponentModel\Factory.cs" />
-    <Compile Remove="ComponentModel\FactoryProvider.cs" />
-    <Compile Remove="ComponentModel\MethodDiscoveryAssembly.cs" />
-    <Compile Remove="ComponentModel\ObjectCreator.cs" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="ComponentModel\Factories\FactoryProvider.cs" />
+		<Compile Remove="ComponentModel\Factory.cs" />
+		<Compile Remove="ComponentModel\FactoryProvider.cs" />
+		<Compile Remove="ComponentModel\MethodDiscoveryAssembly.cs" />
+		<Compile Remove="ComponentModel\ObjectCreator.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Black.Beard.ComponentModel.Attributes\Black.Beard.ComponentModel.Attributes.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Black.Beard.ComponentModel.Attributes\Black.Beard.ComponentModel.Attributes.csproj" />
+	</ItemGroup>
 
 </Project>

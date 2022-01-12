@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Bb.ComponentModel.Factories
+﻿namespace Bb.ComponentModel.Factories
 {
+
 
     /// <summary>
     /// I factory generic
@@ -17,9 +16,6 @@ namespace Bb.ComponentModel.Factories
         /// <param name="args">The arguments.</param>
         /// <returns></returns>
         T Call(string name, params dynamic[] args);
-
-       
-
 
     }
 

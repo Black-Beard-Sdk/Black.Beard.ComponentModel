@@ -8,7 +8,6 @@ namespace Bb.ComponentModel.Factories
     public interface IFactory
     {
 
-
         public string Name { get; }
 
         /// <summary>
@@ -24,8 +23,9 @@ namespace Bb.ComponentModel.Factories
 
         public MethodDescription MethodInfos { get; }
 
+
     }
-      
+       
 
 }
 
