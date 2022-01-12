@@ -64,8 +64,8 @@ namespace Bb.ComponentModel
         /// <summary>
         /// Gets the types with specified context.
         /// </summary>
-        /// <param name="context">The context.</param>
-        /// <returns></returns>
+        /// <param name="context">The context is used for filter on <see cref="ExposedClass"/> declared context.</param>
+        /// <returns>return a list of keys/values (Exposed type/attribute) <see cref="IEnumerable<KeyValuePair<Type, HashSet<ExposeClassAttribute>>>"/></returns>
         public IEnumerable<KeyValuePair<Type, HashSet<ExposeClassAttribute>>> GetTypes(string context)
         {
 
@@ -76,6 +76,33 @@ namespace Bb.ComponentModel
                 foreach (var item2 in item1.Value)
                     if (item2.Context == context)
                         _attributes.Add(item2);
+
+                if (_attributes.Any())
+                    yield return new KeyValuePair<Type, HashSet<ExposeClassAttribute>>(item1.Key, _attributes);
+
+            }
+
+        }
+
+        /// <summary>
+        /// Gets the types with specified context.
+        /// </summary>
+        /// <param name="context">The context is used for filter on <see cref="ExposedClass"/> declared context.</param>
+        /// <returns>return a list of keys/values (Exposed type/attribute) <see cref="IEnumerable<KeyValuePair<Type, HashSet<ExposeClassAttribute>>>"/></returns>
+        public IEnumerable<KeyValuePair<Type, HashSet<ExposeClassAttribute>>> GetTypes(string context, Type type)
+        {
+
+            foreach (var item1 in _items)
+            {
+
+                HashSet<ExposeClassAttribute> _attributes = new HashSet<ExposeClassAttribute>();
+                foreach (var item2 in item1.Value)
+                    if (item2.Context == context && item2.ExposedType == type)
+                    {
+
+                        _attributes.Add(item2);
+
+                    }
 
                 if (_attributes.Any())
                     yield return new KeyValuePair<Type, HashSet<ExposeClassAttribute>>(item1.Key, _attributes);

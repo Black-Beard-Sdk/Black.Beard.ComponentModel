@@ -10,7 +10,8 @@ using Xunit;
 
 namespace ComponentModels.Tests.LibResolvers
 {
-    public sealed class Tests
+
+    public sealed class Tests1
     {
 
         [Fact]
@@ -19,7 +20,7 @@ namespace ComponentModels.Tests.LibResolvers
 
             ExposedTypes.Instance
                 .GetTypes("test1111")
-                .Where(c => c.Key == typeof(Test1))
+                .Where(c => c.Key == typeof(SubTest1))
                 .FirstOrDefault()
                 .Should()
                 .NotBeNull()
@@ -27,12 +28,12 @@ namespace ComponentModels.Tests.LibResolvers
 
         }
 
-        [ExposeClass("test1111", ExposedType = typeof(Test1), LifeCycle = IocScopeEnum.Singleton, Name = "t1")]
-        private class Test1
+        [ExposeClass("test1111", ExposedType = typeof(SubTest1), LifeCycle = IocScopeEnum.Singleton, Name = "t1")]
+        private class SubTest1
         {
 
         }
 
-
     }
+
 }
