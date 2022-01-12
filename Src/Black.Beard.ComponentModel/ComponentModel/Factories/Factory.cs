@@ -36,19 +36,18 @@ namespace Bb.ComponentModel.Factories
 
         public MethodInfo MethodReset { get; internal set; }
 
-        /// <summary>
-        /// Creates a new instance of T with the specified arguments.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <returns></returns>
-        //public abstract object Create(params dynamic[] args);
-
         public abstract bool IsEmpty { get; }
 
         public MethodDescription MethodInfos { get; }
 
         public string Name { get; set; }
 
-    }
+        /// <summary>
+        /// Creates a new instance of T with the specified arguments.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
+        public abstract object CallInstance(params dynamic[] args);
 
+    }
 }
