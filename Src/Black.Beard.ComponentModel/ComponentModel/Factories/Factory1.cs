@@ -11,7 +11,7 @@ namespace Bb.ComponentModel.Factories
     /// Factory of T
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Factory<T> : Factory, IFactory<T>
+    public class Factory<T> : Factory, IFactory<T> 
         where T : class
     {
 
@@ -29,16 +29,6 @@ namespace Bb.ComponentModel.Factories
             this.Name = description.Name;
         }
 
-
-        /// <summary>
-        /// Creates a new instance of T with the specified arguments.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <returns></returns>
-        public override object CallInstance(params dynamic[] args)
-        {
-            return Call(null, args);
-        }
 
         /// <summary>
         /// Creates a new instance of T with the specified arguments.
@@ -74,9 +64,6 @@ namespace Bb.ComponentModel.Factories
             this._dic.Clear();
         }
 
-        /// <summary>
-        /// return false if the delegate is null
-        /// </summary>
         public override bool IsEmpty => _delegate == null;
 
         private ObjectActivator<T> _delegate { get; }

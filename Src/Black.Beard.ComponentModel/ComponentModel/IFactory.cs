@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Bb.ComponentModel.Factories
+﻿namespace Bb.ComponentModel.Factories
 {
     /// <summary>
     /// IFactory base
@@ -8,24 +6,24 @@ namespace Bb.ComponentModel.Factories
     public interface IFactory
     {
 
+    }
 
-        public string Name { get; }
+    /// <summary>
+    /// I factory generic
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IFactory<T> : IFactory
+        where T : class
+    {
 
         /// <summary>
-        /// return false if the delegate is null
+        /// Creates this instance.
         /// </summary>
-        public bool IsEmpty { get; }
-
-        public bool IsStatic { get; }
-
-        public bool IsCtor { get; }
-
-        public Type[] Types { get; }
-
-        public MethodDescription MethodInfos { get; }
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
+        T Call(string name, params dynamic[] args);
 
     }
-      
 
 }
 
