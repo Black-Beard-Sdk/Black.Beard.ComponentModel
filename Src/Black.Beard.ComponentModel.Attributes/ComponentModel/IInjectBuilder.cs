@@ -15,6 +15,9 @@ namespace Bb.ComponentModel
 
         object Run(object context);
 
+        Type Type { get; }
+
+
     }
 
 }

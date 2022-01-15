@@ -46,6 +46,9 @@ namespace ComponentModels.Tests.LibResolvers
         public class InjectBuilder : IInjectBuilder<MyContext>
         {
 
+            public Type Type => typeof(MyContext);
+
+
             public object Run(object context)
             {
                 return Run((MyContext)context);
