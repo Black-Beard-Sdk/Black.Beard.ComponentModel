@@ -33,7 +33,7 @@ namespace ComponentModels.Tests.LibResolvers
             var ctx = new MyContext();
             foreach (var item in items)
             {
-                var instance = (IInjectBuilder<MyContext>)Activator.CreateInstance(item.Key);
+                var instance = (IInjectBuilder)Activator.CreateInstance(item.Key);
                 instance.Run(ctx);
             }
 
@@ -42,7 +42,7 @@ namespace ComponentModels.Tests.LibResolvers
         }
 
 
-        [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder<MyContext>))]
+        [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder))]
         public class InjectBuilder : IInjectBuilder<MyContext>
         {
 
@@ -60,6 +60,7 @@ namespace ComponentModels.Tests.LibResolvers
                 // do action
                 return null;
             }
+
 
         }
 
