@@ -41,6 +41,102 @@ namespace Bb.ComponentModel
 
         }
 
+        public void EnsureAllAssembliesAreLoaded()
+        {
+
+            var hash = new HashSet<string>();
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            try
+            {
+
+                foreach (var ass in Assemblies())
+                    if (hash.Add(ass.FullName))
+                        EnsureAssemblyIsLoaded(ass, true, hash);
+
+            }
+            finally
+            {
+
+                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
+
+            }
+
+        }
+
+        public void EnsureAssemblyIsLoaded(Assembly assembly, bool recursively)
+        {
+
+            var hash = new HashSet<string>();
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+
+            try
+            {
+
+                var assemblies = assembly.GetReferencedAssemblies();
+                foreach (var ass in assemblies)
+                {
+                    if (hash.Add(ass.FullName))
+                    {
+
+                        Assembly refAssembly = null;
+
+                        try
+                        {
+                            refAssembly = Assembly.Load(ass);
+
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                        
+                        if (refAssembly != null)
+                            EnsureAssemblyIsLoaded(refAssembly, true, hash);
+
+                    }
+                }
+
+            }
+            finally
+            {
+
+                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
+
+            }
+
+
+        }
+
+
+        private void EnsureAssemblyIsLoaded(Assembly ass, bool recursively, HashSet<string> hash = null)
+        {
+
+            var assemblies = ass.GetReferencedAssemblies();
+
+            foreach (var item in assemblies)
+            {
+
+                Assembly assembly = null;
+
+                try
+                {
+                    assembly = Assembly.Load(item);
+
+                }
+                catch (FileNotFoundException ex)
+                {
+                    Trace.WriteLine(ex);
+                }
+
+                if (recursively && assembly != null)
+                    if (hash.Add(assembly.FullName))
+                        EnsureAssemblyIsLoaded(assembly, recursively, hash);
+
+            }
+
+        }
+
         public static TypeDiscovery Initialize(params string[] paths)
         {
             if (_instance == null)
