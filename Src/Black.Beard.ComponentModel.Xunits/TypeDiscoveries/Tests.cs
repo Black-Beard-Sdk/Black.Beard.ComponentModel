@@ -26,6 +26,29 @@ namespace ComponentModels.Tests.TypeDiscoveries
 
         }
 
+        [Fact]
+        public void Constructor_Factory2()
+        {
+
+
+            TypeDiscovery.Instance.CreateFromWithTypes<object>(typeof(ClassTest), new Type[] { });
+
+
+
+        }
+
+
+        public class ClassTest
+        {
+
+            public string Name { get; }
+
+
+        }
+
 
     }
+
+
+
 }

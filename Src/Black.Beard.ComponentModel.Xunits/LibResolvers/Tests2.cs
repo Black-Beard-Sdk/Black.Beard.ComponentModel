@@ -48,6 +48,15 @@ namespace ComponentModels.Tests.LibResolvers
 
             public Type Type => typeof(MyContext);
 
+            public bool CanExecute(MyContext context)
+            {
+                return true;
+            }
+
+            public bool CanExecute(object context)
+            {
+                return CanExecute((MyContext)context);
+            }
 
             public object Run(object context)
             {
