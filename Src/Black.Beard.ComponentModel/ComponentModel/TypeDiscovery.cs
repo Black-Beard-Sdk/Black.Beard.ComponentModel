@@ -199,7 +199,7 @@ namespace Bb.ComponentModel
             }
         }
 
-        public IEnumerable<Assembly> GetAssemblies(IEnumerable<string> namespaces)
+        public IEnumerable<Assembly> GetAssemblies(IEnumerable<string> namespaces = null)
         {
 
             HashSet<Assembly> assemblies = new HashSet<Assembly>(10);
@@ -207,6 +207,8 @@ namespace Bb.ComponentModel
 
             if (n == null)
                 n = new HashSet<string>(namespaces);
+
+            var test = n.Count == 0;
 
             foreach (var assembly in this.Assemblies())
             {
@@ -220,16 +222,16 @@ namespace Bb.ComponentModel
                 try
                 {
                     foreach (var item in types)
-                        if (n.Contains(item.Namespace))
+                        if (n.Contains(item.Namespace) || test)
                         {
                             assemblies.Add(assembly);
                             break;
                         }
 
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    Trace.TraceError(e.ToString());
                     throw;
                 }
             }
@@ -891,7 +893,7 @@ namespace Bb.ComponentModel
         /// <summary>
         ///     function  return the list of loaded assemblies
         /// </summary>
-        private readonly Func<IEnumerable<Assembly>> Assemblies;
+        public readonly Func<IEnumerable<Assembly>> Assemblies;
         private readonly HashSet<string> _paths;
         private static readonly object _lock = new object();
         private static TypeDiscovery _instance;
