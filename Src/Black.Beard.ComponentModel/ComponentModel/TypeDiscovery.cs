@@ -334,9 +334,9 @@ namespace Bb.ComponentModel
         /// return a list of type that contains specified attibute and filter is valid
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="filter"></param>
+        /// <param name="filterOnAttribute">filter to apply on the attributes</param>
         /// <returns></returns>
-        public List<Type> GetTypesWithAttributes<T>(Type typebase, Func<T, bool> filter) where T : Attribute
+        public List<Type> GetTypesWithAttributes<T>(Type typebase, Func<T, bool> filterOnAttribute) where T : Attribute
         {
 
             var result = new List<Type>();
@@ -354,7 +354,7 @@ namespace Bb.ComponentModel
                         return false;
 
                     foreach (T attribute in attributes)
-                        if (filter(attribute))
+                        if (filterOnAttribute(attribute))
                             return true;
 
                 }

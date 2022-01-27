@@ -3,6 +3,7 @@
 namespace Bb.ComponentModel.Attributes
 {
 
+
     [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
     public sealed class DependOfAttribute : Attribute
     {
