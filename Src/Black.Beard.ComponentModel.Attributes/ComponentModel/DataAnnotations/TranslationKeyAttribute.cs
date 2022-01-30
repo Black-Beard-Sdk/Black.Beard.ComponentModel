@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bb.ComponentModel.Attributes
+namespace Bb.ComponentModel.DataAnnotations
 {
 
     [System.AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]

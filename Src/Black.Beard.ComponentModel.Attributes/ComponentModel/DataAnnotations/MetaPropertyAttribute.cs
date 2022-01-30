@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bb.ComponentModel.Attributes
+namespace Bb.ComponentModel.DataAnnotations
 {
 
 
@@ -37,5 +37,17 @@ namespace Bb.ComponentModel.Attributes
 
 
     }
+
+    [System.AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = true)]
+    sealed class EnumerationProviderAttribute : Attribute
+    {
+
+        public EnumerationProviderAttribute(Type typeProvider)
+        {
+
+        }
+
+    }
+
 
 }
