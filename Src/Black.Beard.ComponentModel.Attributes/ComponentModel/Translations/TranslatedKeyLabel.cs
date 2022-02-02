@@ -15,16 +15,16 @@ namespace Bb.ComponentModel.Translations
         public TranslatedKeyLabel()
         {
             Culture = CultureInfo.InvariantCulture;
+            this.Datas = new Dictionary<CultureInfo, string>();
         }
 
         public TranslatedKeyLabel(string context, string key, string defaultDisplay, CultureInfo? culture = null)
         {
             Culture = culture ?? CultureInfo.InvariantCulture;
+            this.Datas = new Dictionary<CultureInfo, string>();
             this.Path = context;
             this.Key = key;
-
             this.DefaultDisplay = defaultDisplay;
-
         }
 
         public static TranslatedKeyLabel EmptyKey { get; } = new TranslatedKeyLabel(string.Empty, string.Empty, string.Empty);
@@ -34,7 +34,7 @@ namespace Bb.ComponentModel.Translations
         public string? Key { get; private set; }
 
         public CultureInfo Culture { get; private set; }
-
+        public Dictionary<CultureInfo, string> Datas { get; }
         public string? DefaultDisplay { get; private set; }
 
         public bool IsNotValidKey { get; private set; }
@@ -95,14 +95,11 @@ namespace Bb.ComponentModel.Translations
             if (string.IsNullOrEmpty(key))
                 return null;
 
-            if (key.Contains("::"))
-            {
-
-            }
-
             TranslatedKeyLabel keyLabel = new TranslatedKeyLabel();
             bool t = false;
             var lexer = new Lexer(key);
+
+            Dictionary<string, DataTranslation> _items = new Dictionary<string, DataTranslation>();
 
             while (lexer.Next())
             {
@@ -114,30 +111,65 @@ namespace Bb.ComponentModel.Translations
                 {
 
                     t = true;
-                    var name = subKey.Substring(0, index2).ToLower();
-                    var value = subKey.Substring(index2 + 1).Trim();
+                    string index = string.Empty;
+                    var name = subKey.Trim().Substring(0, index2).ToLower();
+                    var value = subKey.Trim().Substring(index2 + 1).Trim();
+
+                    if (name.Length > 1)
+                    {
+                        index = name.Substring(1);
+                        name = name.Substring(0, 1);
+                    }
 
                     switch (name)
                     {
 
-                        case "c":
+                        case "p":
                             keyLabel.Path = value;
                             break;
+
                         case "k":
                             keyLabel.Key = value;
                             break;
+
                         case "l":
-                            keyLabel.Culture = CultureInfo.GetCultureInfo(value);
+                            var c = CultureInfo.GetCultureInfo(value);
+                            if (!string.IsNullOrEmpty(index))
+                            {
+                                if (!_items.TryGetValue(index, out DataTranslation data))
+                                    _items.Add(index, (data = new DataTranslation() { Culture = c }));
+                                else
+                                    data.Culture = c;
+                            }
+                            else
+                                keyLabel.Culture = c;
                             break;
+
                         case "d":
-                            keyLabel.DefaultDisplay = value;
+                            if (!string.IsNullOrEmpty(index))
+                            {
+                                if (!_items.TryGetValue(index, out DataTranslation data))
+                                    _items.Add(index, (data = new DataTranslation() { Value = value }));
+                                else
+                                    data.Value = value;
+                            }
+                            else
+                                keyLabel.DefaultDisplay = value;
                             break;
+
                         default:
                             break;
                     }
 
                 }
 
+            }
+
+            foreach (var item in _items)
+            {
+                var i = item.Value;
+                if (i.Culture != CultureInfo.InvariantCulture && !string.IsNullOrEmpty(i.Value))
+                    keyLabel.Datas.Add(i.Culture, i.Value);
             }
 
             if (t)
@@ -193,6 +225,16 @@ namespace Bb.ComponentModel.Translations
             public string SubKey { get; private set; }
 
         }
+
+    }
+
+
+    public class DataTranslation
+    {
+
+        public CultureInfo Culture { get; set; } = CultureInfo.InvariantCulture;
+
+        public string Value { get; set; } = string.Empty;
 
     }
 
