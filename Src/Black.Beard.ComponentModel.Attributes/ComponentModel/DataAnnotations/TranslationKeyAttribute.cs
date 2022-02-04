@@ -49,6 +49,9 @@ namespace Bb.ComponentModel.DataAnnotations
         /// </summary>
         public string Key { get; }
 
+        public TranslatedKeyLabel GetTranslation() => TranslatedKeyLabel.Parse(this.Key);
+
+
         /// <summary>
         /// Context of translation
         /// </summary>
