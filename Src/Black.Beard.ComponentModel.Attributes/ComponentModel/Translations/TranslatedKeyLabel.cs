@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 
 namespace Bb.ComponentModel.Translations
 {
+
     /// <summary>
     /// "p:path, k:key, l:en-us, d:default value"
     /// </summary>
@@ -14,15 +16,13 @@ namespace Bb.ComponentModel.Translations
 
         public TranslatedKeyLabel()
         {
-            Culture = CultureInfo.InvariantCulture;
-            this.Datas = new Dictionary<CultureInfo, string>();
+            this.Datas = new Dictionary<CultureInfo, DataTranslation>();
         }
 
-        public TranslatedKeyLabel(string context, string key, string defaultDisplay, CultureInfo? culture = null)
+        public TranslatedKeyLabel(string? path, string key, string defaultDisplay, CultureInfo? culture = null)
         {
-            Culture = culture ?? CultureInfo.InvariantCulture;
-            this.Datas = new Dictionary<CultureInfo, string>();
-            this.Path = context;
+            this.Datas = new Dictionary<CultureInfo, DataTranslation>();
+            this.Path = path;
             this.Key = key;
             this.DefaultDisplay = defaultDisplay;
         }
@@ -33,8 +33,8 @@ namespace Bb.ComponentModel.Translations
 
         public string? Key { get; private set; }
 
-        public CultureInfo Culture { get; private set; }
-        public Dictionary<CultureInfo, string> Datas { get; }
+        public Dictionary<CultureInfo, DataTranslation> Datas { get; }
+
         public string? DefaultDisplay { get; private set; }
 
         public bool IsNotValidKey { get; private set; }
@@ -50,11 +50,13 @@ namespace Bb.ComponentModel.Translations
             if (!string.IsNullOrEmpty(Key))
                 list.Add("k:" + Key);
 
-            if (Culture != CultureInfo.InvariantCulture)
-                list.Add("l:" + Culture.IetfLanguageTag);
+            //if (!string.IsNullOrEmpty(DefaultDisplay))
+            //    list.Add("d:" + DefaultDisplay);
 
-            if (!string.IsNullOrEmpty(DefaultDisplay))
-                list.Add("d:" + DefaultDisplay);
+            //foreach (var item in this.Datas)
+            //{
+            //    list.Add("");
+            //}
 
             StringBuilder sb = new StringBuilder();
             string comma = string.Empty;
@@ -114,6 +116,7 @@ namespace Bb.ComponentModel.Translations
                     string index = string.Empty;
                     var name = subKey.Trim().Substring(0, index2).ToLower();
                     var value = subKey.Trim().Substring(index2 + 1).Trim();
+                    DataTranslation data;
 
                     if (name.Length > 1)
                     {
@@ -134,26 +137,18 @@ namespace Bb.ComponentModel.Translations
 
                         case "l":
                             var c = CultureInfo.GetCultureInfo(value);
-                            if (!string.IsNullOrEmpty(index))
-                            {
-                                if (!_items.TryGetValue(index, out DataTranslation data))
-                                    _items.Add(index, (data = new DataTranslation() { Culture = c }));
-                                else
-                                    data.Culture = c;
-                            }
+                            if (!_items.TryGetValue(index, out data))
+                                _items.Add(index, (data = new DataTranslation(keyLabel) { Culture = c }));
                             else
-                                keyLabel.Culture = c;
+                                data.Culture = c;
                             break;
 
                         case "d":
-                            if (!string.IsNullOrEmpty(index))
-                            {
-                                if (!_items.TryGetValue(index, out DataTranslation data))
-                                    _items.Add(index, (data = new DataTranslation() { Value = value }));
-                                else
-                                    data.Value = value;
-                            }
+                            if (!_items.TryGetValue(index, out data))
+                                _items.Add(index, (data = new DataTranslation(keyLabel) { Value = value }));
                             else
+                                data.Value = value;
+                            if (string.IsNullOrEmpty(index))
                                 keyLabel.DefaultDisplay = value;
                             break;
 
@@ -169,7 +164,7 @@ namespace Bb.ComponentModel.Translations
             {
                 var i = item.Value;
                 if (i.Culture != CultureInfo.InvariantCulture && !string.IsNullOrEmpty(i.Value))
-                    keyLabel.Datas.Add(i.Culture, i.Value);
+                    keyLabel.Datas.Add(i.Culture, i);
             }
 
             if (t)
@@ -225,16 +220,6 @@ namespace Bb.ComponentModel.Translations
             public string SubKey { get; private set; }
 
         }
-
-    }
-
-
-    public class DataTranslation
-    {
-
-        public CultureInfo Culture { get; set; } = CultureInfo.InvariantCulture;
-
-        public string Value { get; set; } = string.Empty;
 
     }
 
