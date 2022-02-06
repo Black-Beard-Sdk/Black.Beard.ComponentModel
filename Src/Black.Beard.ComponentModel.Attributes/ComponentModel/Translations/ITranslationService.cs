@@ -18,6 +18,10 @@ namespace Bb.ComponentModel.Translations
 
         CultureInfo[] AvailableCultures { get; }
 
+
+        public object Container { get; }
+
+
     }
 
 }
