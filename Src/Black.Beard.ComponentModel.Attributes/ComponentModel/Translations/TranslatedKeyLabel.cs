@@ -25,6 +25,8 @@ namespace Bb.ComponentModel.Translations
             this.Path = path;
             this.Key = key;
             this.DefaultDisplay = defaultDisplay;
+            if (culture != null)
+                this.Datas.Add(culture, new DataTranslation(this) { Culture = culture, Value = defaultDisplay });
         }
 
         public static TranslatedKeyLabel EmptyKey { get; } = new TranslatedKeyLabel(string.Empty, string.Empty, string.Empty);
