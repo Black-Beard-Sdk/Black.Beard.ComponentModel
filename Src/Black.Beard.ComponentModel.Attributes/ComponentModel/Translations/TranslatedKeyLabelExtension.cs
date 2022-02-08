@@ -40,21 +40,18 @@ namespace Bb.ComponentModel.Translations
                 .ToList();
 
             foreach (TranslationKeyAttribute attribute in items)
-                yield return (TranslatedKeyLabel)attribute.Key;
+                yield return attribute.GetTranslation();
 
         }
 
-        public static bool IsValidKey(this string self)
+        public static bool IsValidTranslationKey(this string self)
         {
-
-            return TranslatedKeyLabel.Parse(self) != null;
-
+            return TranslatedKeyLabel.IsValid(self);
         }
 
-        public static bool IsValidKey(this string self, out TranslatedKeyLabel key)
+        public static bool IsValidTranslationKey(this string self, out TranslatedKeyLabel key)
         {
-            key = TranslatedKeyLabel.Parse(self);
-            return key != null;
+            return TranslatedKeyLabel.IsValid(self, out key);
         }
 
 

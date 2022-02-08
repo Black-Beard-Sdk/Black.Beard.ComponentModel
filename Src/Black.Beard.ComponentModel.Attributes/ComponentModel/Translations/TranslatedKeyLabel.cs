@@ -75,6 +75,38 @@ namespace Bb.ComponentModel.Translations
             return TranslatedKeyLabel.Parse(key) ?? TranslatedKeyLabel.EmptyKey;
         }
 
+
+        public static bool IsValid(string key)
+        {
+            
+            if (!string.IsNullOrEmpty(key))
+            {
+                var k = key.Replace(" ", "");
+                return k.Contains("d:") && k.Contains("l:") && k.Contains("k:");
+            }
+
+            return false;
+
+        }
+
+        public static bool IsValid(string key, out TranslatedKeyLabel keyLabel)
+        {
+
+            keyLabel = null;
+            if (!string.IsNullOrEmpty(key))
+            {
+                var k = key.Replace(" ", "");
+                if ( k.Contains("d:") && k.Contains("l:") && k.Contains("k:"))
+                {
+                    keyLabel = TranslatedKeyLabel.Parse(key);
+                    return keyLabel != null;
+                }
+            }
+
+            return false;
+
+        }
+
         public override bool Equals(object? obj)
         {
 
