@@ -8,10 +8,12 @@ namespace Bb.ComponentModel.DataAnnotations
     public sealed class DisplayOnUITextAreaAttribute : Attribute
     {
 
-        public DisplayOnUITextAreaAttribute()
+        public DisplayOnUITextAreaAttribute(int lines = 5)
         {
-
+            this.Lines = lines;
         }
+
+        public int Lines { get; }
 
     }
 
