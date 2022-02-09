@@ -19,10 +19,18 @@ namespace ComponentModels.Tests.TypeDiscoveries
         public void Constructor_Factory1()
         {
 
+            TypeDiscovery.Instance.LoadAssembliesFromFolders();
 
+            TypeDiscovery.Instance.EnsureAllAssembliesAreLoaded();
             TypeDiscovery.Instance.EnsureAllAssembliesAreLoaded();
 
 
+
+            //var list = AppDomain.CurrentDomain.GetAssemblies();
+            //HashSet<string> visited = new HashSet<string>();
+            //foreach (Assembly assembly in list)
+            //    if (!visited.Add(assembly.FullName))
+            //        throw new Exception("Duplicated");
 
         }
 
