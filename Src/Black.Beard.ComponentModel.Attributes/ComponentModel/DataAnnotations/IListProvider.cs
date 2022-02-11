@@ -1,4 +1,5 @@
 ﻿using Bb.ComponentModel.Translations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -9,7 +10,7 @@ namespace Bb.ComponentModel.DataAnnotations
 
         PropertyDescriptor Property { get; set; }
 
-        ITranslateService TranslateService { get; set; }
+        IServiceProvider Services { get; set; }
 
         IEnumerable<ListItem> GetItems();
 
