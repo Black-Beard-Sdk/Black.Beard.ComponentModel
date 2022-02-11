@@ -10,6 +10,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Configurations\**" />
+	  <EmbeddedResource Remove="Configurations\**" />
+	  <None Remove="Configurations\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="..\..\README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
@@ -21,10 +27,6 @@
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Configurations\" />
 	</ItemGroup>
 
 </Project>
