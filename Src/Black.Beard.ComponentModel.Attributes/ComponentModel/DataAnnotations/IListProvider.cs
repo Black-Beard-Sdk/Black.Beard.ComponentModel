@@ -8,10 +8,10 @@ namespace Bb.ComponentModel.DataAnnotations
     public interface IListProvider
     {
 
+        object Instance { get; set; }
+
         PropertyDescriptor Property { get; set; }
-
-        IServiceProvider Services { get; set; }
-
+                
         IEnumerable<ListItem> GetItems();
 
     }
