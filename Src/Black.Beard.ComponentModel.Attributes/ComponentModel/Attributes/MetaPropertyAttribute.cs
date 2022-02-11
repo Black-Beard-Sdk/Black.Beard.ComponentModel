@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bb.ComponentModel.DataAnnotations
+namespace Bb.ComponentModel.Attributes
 {
 
 

@@ -1,7 +1,7 @@
 ﻿using Bb.ComponentModel.Translations;
 using System;
 
-namespace Bb.ComponentModel.DataAnnotations
+namespace Bb.ComponentModel.Attributes
 {
 
 

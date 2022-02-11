@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bb.ComponentModel.DataAnnotations
+namespace Bb.ComponentModel.Attributes
 {
     [System.AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Struct, Inherited = false, AllowMultiple = true)]
     public sealed class ListProviderAttribute : Attribute
