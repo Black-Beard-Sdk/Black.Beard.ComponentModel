@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bb.ComponentModel.DataAnnotations;
+using System;
 
 namespace Bb.ComponentModel.Attributes
 {

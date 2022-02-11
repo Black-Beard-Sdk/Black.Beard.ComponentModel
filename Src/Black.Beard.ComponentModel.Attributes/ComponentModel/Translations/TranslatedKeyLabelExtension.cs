@@ -1,4 +1,5 @@
-﻿using Bb.ComponentModel.DataAnnotations;
+﻿using Bb.ComponentModel.Attributes;
+using Bb.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
