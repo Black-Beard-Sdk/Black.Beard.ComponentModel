@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bb.ComponentModel.DataAnnotations
+namespace Bb.ComponentModel.Attributes
 {
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public sealed class StepNumericAttribute : Attribute

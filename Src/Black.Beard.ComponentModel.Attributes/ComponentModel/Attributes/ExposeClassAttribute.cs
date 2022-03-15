@@ -55,12 +55,7 @@ namespace Bb.ComponentModel.Attributes
         /// <value>
         /// The context.
         /// </value>
-        public string Context { get; set; }
-
-        /// <summary>
-        /// Gets or sets the ConfigurationKey of the class exposed by this attribute.
-        /// </summary>
-        public string ConfigurationKey { get; set; }
+        public string Context { get; set; }              
 
         /// <summary>
         /// Gets or sets the life cycle if must be use in Ioc.
