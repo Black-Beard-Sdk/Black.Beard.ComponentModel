@@ -597,7 +597,7 @@ namespace Bb.ComponentModel
             try
             {
 
-                if (!IsLoadedByAssemblyByName(name, acceptAllVersion))
+                if (!IsLoadedByAssemblyByName(assemblyName, acceptAllVersion))
                     return AssemblyLoad(assemblyName);
 
                 return GetAssembly(assemblyName);
