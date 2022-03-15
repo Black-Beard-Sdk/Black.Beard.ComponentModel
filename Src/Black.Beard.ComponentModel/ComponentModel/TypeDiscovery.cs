@@ -101,7 +101,13 @@ namespace Bb.ComponentModel
             return _loadedByFile.ContainsKey(fullname);
         }
 
-        private bool IsLoadedByAssemblyByName(AssemblyName name, bool acceptAllversions)
+        /// <summary>
+        /// Return true if assembly is allready loaded
+        /// </summary>
+        /// <param name="name">assemblyName</param>
+        /// <param name="acceptAllversions">if false don't try to match the version</param>
+        /// <returns></returns>
+        public bool IsLoadedByAssemblyByName(AssemblyName name, bool acceptAllversions)
         {
 
             if (!_assemblyNames.TryGetValue(name.Name, out var dic))
@@ -119,6 +125,10 @@ namespace Bb.ComponentModel
             return IsLoadedByAssemblyByName(AssemblyName.GetAssemblyName(assemblyName), acceptAllVersion);
         }
 
+        /// <summary>
+        /// try to load all referenced assemblies
+        /// </summary>
+        /// <param name="acceptAllVersion"></param>
         public void EnsureAllAssembliesAreLoaded(bool acceptAllVersion = true)
         {
 
@@ -577,7 +587,30 @@ namespace Bb.ComponentModel
         }
 
         /// <summary>
-        /// 
+        /// Get assembly by assembly name. load this if not yet loaded.
+        /// </summary>
+        /// <param name="assemblyName">name of the assembly</param>
+        /// <returns></returns>
+        public Assembly AddAssemblyname(AssemblyName assemblyName, bool acceptAllVersion)
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            try
+            {
+
+                if (!IsLoadedByAssemblyByName(name, acceptAllVersion))
+                    return AssemblyLoad(assemblyName);
+
+                return GetAssembly(assemblyName);
+
+            }
+            finally
+            {
+                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
+            }
+        }
+
+        /// <summary>
+        /// Get assembly by assembly name. load this if not yet loaded.
         /// </summary>
         /// <param name="assemblyName">name of the assembly</param>
         /// <returns></returns>
@@ -756,18 +789,13 @@ namespace Bb.ComponentModel
 
         }
 
-        //private Assembly ResolveAssemblyByFilename(string fullPath)
-        //{
-
-        //    foreach (var item in GetAssemblies())
-        //        if (item.Location == fullPath)
-        //            return item;
-
-        //    return Assembly.LoadFile(fullPath);
-
-        //}
-
-        private Assembly GetAssembly(AssemblyName name, bool AcceptAllVersion = true)
+        /// <summary>
+        /// Get assembly if allready loaded
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="AcceptAllVersion"></param>
+        /// <returns></returns>
+        public Assembly GetAssembly(AssemblyName name, bool AcceptAllVersion = true)
         {
 
             foreach (var item in GetAssemblies())
@@ -778,10 +806,10 @@ namespace Bb.ComponentModel
                 if (n.Name == name.Name)
                 {
 
-                    if (AcceptAllVersion)
+                    if (n.Version.ToString() == name.Version.ToString())
                         return item;
 
-                    else if (n.Version.ToString() == name.Version.ToString())
+                    if (AcceptAllVersion)
                         return item;
 
                 }
