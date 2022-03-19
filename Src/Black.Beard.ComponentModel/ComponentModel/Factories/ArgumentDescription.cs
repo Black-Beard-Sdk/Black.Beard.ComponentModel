@@ -1,7 +1,10 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 
 namespace Bb.ComponentModel.Factories
 {
+
+    [DebuggerDisplay("{ParameterType} {Name}")]
     public class ArgumentDescription
     {
 
