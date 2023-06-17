@@ -1,6 +1,8 @@
 ﻿using Bb.ComponentModel.Exceptions;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -113,6 +115,9 @@ namespace Bb.ComponentModel.Factories
         where T : class
         {
 
+            var testInitialize = typeof(IInitialize).IsAssignableFrom(methodBase.DeclaringType);
+            List<Expression> blk = new List<Expression>();
+
             Type type = methodBase.DeclaringType;
             ParameterInfo[] paramsInfo = methodBase.GetParameters();
 
@@ -121,6 +126,7 @@ namespace Bb.ComponentModel.Factories
 
             //create a single param of type object[]
             ParameterExpression param = Expression.Parameter(typeof(IServiceProvider), "arg");
+            ParameterExpression param1 = Expression.Parameter(typeof(T), "param1");
 
             Expression[] argsExp = new Expression[paramsInfo.Length];
 
@@ -143,8 +149,38 @@ namespace Bb.ComponentModel.Factories
             if (methodBase.DeclaringType != typeof(T))
                 newExp = Expression.Convert(newExp, typeof(T));
 
-            //create a lambda with the New expression as body and our param object[] as arg
-            LambdaExpression lambda = Expression.Lambda(typeof(ObjectCreatorByIoc<T>), newExp, param);
+            blk.Add(Expression.Assign(param1, newExp));
+
+            LambdaExpression lambda;
+
+            if (testInitialize)
+            {
+
+                LabelTarget returnTarget = Expression.Label(typeof(T));
+
+                var method2 = typeof(IInitialize).GetMethods(BindingFlags.Instance | BindingFlags.Public).First();
+
+                ParameterExpression param2 = Expression.Parameter(typeof(IInitialize), "param2");
+
+                blk.Add(Expression.Assign(param2, Expression.Convert(param1, typeof(IInitialize))));
+
+                blk.Add(Expression.Call(param2, method2, param));
+                //blk.Add(Expression.Return(returnTarget, param1, typeof(T)));
+                blk.Add(Expression.Label(returnTarget, param1));
+
+                var block = Expression.Block(typeof(T), new ParameterExpression[] { param1, param2 }, blk.ToArray());
+
+                lambda = Expression.Lambda(typeof(ObjectCreatorByIoc<T>), block, param);
+
+            }
+            else
+            {
+
+                //create a lambda with the New expression as body and our param object[] as arg
+                lambda = Expression.Lambda(typeof(ObjectCreatorByIoc<T>), newExp, param);
+
+            }
+
 
             //compile it
             ObjectCreatorByIoc<T> compiled = (ObjectCreatorByIoc<T>)lambda.Compile();

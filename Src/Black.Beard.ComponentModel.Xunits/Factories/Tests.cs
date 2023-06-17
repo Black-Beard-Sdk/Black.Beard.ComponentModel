@@ -18,8 +18,8 @@ namespace ComponentModels.Tests.Factories
         public void Constructor_FactoryByIoc()
         {
 
-            var factory1 = ObjectCreatorByIoc.GetActivator<TestByIoc2>();
             var factory2 = ObjectCreatorByIoc.GetActivator<TestByIoc1>();
+            var factory1 = ObjectCreatorByIoc.GetActivator<TestByIoc2>();
 
             var serviceProvider = new CustomIServiceProvider();
             serviceProvider.Add(factory1);
@@ -57,45 +57,6 @@ namespace ComponentModels.Tests.Factories
             result.Arg1.Should().Be("t2");
         }
 
-        private class Test1
-        {
-
-            public Test1(string arg1, int arg2)
-            {
-                this.Arg1 = arg1;
-                this.Arg2 = arg2;
-            }
-
-            public string Arg1 { get; }
-
-            public int Arg2 { get; }
-
-        }
-
-
-        private class TestByIoc1
-        {
-
-            public TestByIoc1(TestByIoc2 child)
-            {
-                Child = child;
-            }
-
-            public TestByIoc2 Child { get; }
-
-        }
-
-        private class TestByIoc2
-        {
-
-            public TestByIoc2()
-            {
-
-            }
-
-
-        }
-
 
 
 
@@ -123,4 +84,51 @@ namespace ComponentModels.Tests.Factories
 
 
     }
+
+
+    public class Test1
+    {
+
+        public Test1(string arg1, int arg2)
+        {
+            this.Arg1 = arg1;
+            this.Arg2 = arg2;
+        }
+
+        public string Arg1 { get; }
+
+        public int Arg2 { get; }
+
+    }
+
+
+    public class TestByIoc1
+    {
+
+        public TestByIoc1(TestByIoc2 child)
+        {
+            Child = child;
+        }
+
+        public TestByIoc2 Child { get; }
+
+    }
+
+    public class TestByIoc2 : IInitialize
+    {
+
+        public TestByIoc2()
+        {
+
+        }
+
+        public void Initialize(IServiceProvider services)
+        {
+        
+
+        }
+
+    }
+
+
 }
