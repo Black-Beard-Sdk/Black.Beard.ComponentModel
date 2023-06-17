@@ -10,8 +10,9 @@ namespace Bb.ComponentModel.Factories
     public abstract class Factory
     {
 
-        public Factory(MethodBase method, ParameterInfo[] paramsInfo, MethodDescription description)
+        public Factory(MethodBase method, ParameterInfo[] paramsInfo, MethodDescription description, Type type)
         {
+            this.ExposedType = type;
             this.MethodSource = method;
             IsStatic = method.IsStatic;
             IsCtor = method is ConstructorInfo;
@@ -19,6 +20,8 @@ namespace Bb.ComponentModel.Factories
             this.MethodInfos = description;
 
         }
+
+        public Type ExposedType { get; }
 
         public MethodBase MethodSource { get; }
 

@@ -15,6 +15,23 @@ namespace ComponentModels.Tests.Factories
     {
 
         [Fact]
+        public void Constructor_FactoryByIoc()
+        {
+
+            var factory1 = ObjectCreatorByIoc.GetActivator<TestByIoc2>();
+            var factory2 = ObjectCreatorByIoc.GetActivator<TestByIoc1>();
+
+            var serviceProvider = new CustomIServiceProvider();
+            serviceProvider.Add(factory1);
+            serviceProvider.Add(factory2);
+
+            var srv = (TestByIoc1)serviceProvider.GetService(typeof(TestByIoc1));
+
+            // Test1 result = (TestByIoc1)factory.Call(null, "t1", 1);
+            //result.Arg1.Should().Be("t1");
+        }
+
+        [Fact]
         public void Constructor_Factory1()
         {
             var factory = ObjectCreator.GetActivatorByTypeAndArguments<object>(typeof(Test1), typeof(string), typeof(int));
@@ -52,6 +69,55 @@ namespace ComponentModels.Tests.Factories
             public string Arg1 { get; }
 
             public int Arg2 { get; }
+
+        }
+
+
+        private class TestByIoc1
+        {
+
+            public TestByIoc1(TestByIoc2 child)
+            {
+                Child = child;
+            }
+
+            public TestByIoc2 Child { get; }
+
+        }
+
+        private class TestByIoc2
+        {
+
+            public TestByIoc2()
+            {
+
+            }
+
+
+        }
+
+
+
+
+        public class CustomIServiceProvider : IServiceProvider
+        {
+
+            public CustomIServiceProvider()
+            {
+                this._dic = new Dictionary<Type, Factory>();
+            }
+
+            public object? GetService(Type serviceType)
+            {
+                return _dic[serviceType].CallInstance(this);
+            }
+
+            public void Add(Factory factory)
+            {
+                _dic.Add(factory.ExposedType, factory);
+            }
+
+            private readonly Dictionary<Type, Factory> _dic;
 
         }
 

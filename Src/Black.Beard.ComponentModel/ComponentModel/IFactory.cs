@@ -23,9 +23,11 @@ namespace Bb.ComponentModel.Factories
 
         public MethodDescription MethodInfos { get; }
 
+        public Type ExposedType { get; }
+
 
     }
-       
+
 
 }
 

@@ -21,7 +21,7 @@ namespace Bb.ComponentModel.Factories
 
         }
 
-        public ObjectActivator<T> Get(Type[] args)
+        public ObjectCreator<T> Get(Type[] args)
         {
 
             var instance = _dic.Get(args);
@@ -43,7 +43,7 @@ namespace Bb.ComponentModel.Factories
                 this._dic = new Dictionary<Type, Index>();
             }
 
-            public void Add(Type[] types, ObjectActivator<T> instance)
+            public void Add(Type[] types, ObjectCreator<T> instance)
             {
 
                 if (types.Length == 0)
@@ -54,7 +54,7 @@ namespace Bb.ComponentModel.Factories
 
             }
 
-            private void Add(int index, Type[] types, ObjectActivator<T> instance)
+            private void Add(int index, Type[] types, ObjectCreator<T> instance)
             {
 
                 if (index < types.Length)
@@ -73,12 +73,12 @@ namespace Bb.ComponentModel.Factories
 
             }
 
-            internal ObjectActivator<T> Get(Type[] args)
+            internal ObjectCreator<T> Get(Type[] args)
             {
                 return Get(0, args);
             }
 
-            private ObjectActivator<T> Get(int v, Type[] args)
+            private ObjectCreator<T> Get(int v, Type[] args)
             {
                 if (v == args.Length)
                     return _instance;
@@ -87,7 +87,7 @@ namespace Bb.ComponentModel.Factories
 
             }
 
-            private ObjectActivator<T> _instance;
+            private ObjectCreator<T> _instance;
             private readonly Dictionary<Type, Index> _dic;
         }
 
