@@ -17,7 +17,7 @@ namespace Bb.ComponentModel
 
         #region Initialize
 
-        private TypeDiscovery(params string[] paths)
+        public TypeDiscovery(params string[] paths)
         {
 
             _paths = new HashSet<string>();
