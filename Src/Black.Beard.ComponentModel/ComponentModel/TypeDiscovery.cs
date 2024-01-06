@@ -402,8 +402,7 @@ namespace Bb.ComponentModel
             var assemblies = Assemblies().ToArray();
             result.AddRange(Collect(type =>
             {
-                return baseType.IsAssignableFrom(type)
-                        && ToList(TypeDescriptor.GetAttributes(type)).Any(c => c.GetType() == typeFilter);
+                return baseType.IsAssignableFrom(type) && TypeDescriptor.GetAttributes(type).ToList().Any(c => c.GetType() == typeFilter);
             }, assemblies));
 
             return result;
@@ -411,7 +410,7 @@ namespace Bb.ComponentModel
         }
 
         /// <summary>
-        /// return a list of type that contains specified attibute
+        /// return a list of type that contains specified attribute
         /// </summary>
         /// <param name="attributeTypeFilter"></param>
         /// <returns></returns>
@@ -425,14 +424,14 @@ namespace Bb.ComponentModel
             var assemblies = Assemblies().ToArray();
             result.AddRange(Collect(type =>
             {
-                return ToList(TypeDescriptor.GetAttributes(type)).Any(c => c.GetType() == attributeTypeFilter);
+                return TypeDescriptor.GetAttributes(type).ToList().Any(c => c.GetType() == attributeTypeFilter);
             }, assemblies));
 
             return result;
         }
 
         /// <summary>
-        /// return a list of type that contains specified attribute and filter is valid
+        /// return a list of type that contains specified attribute and the filter must be valid
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filterOnAttribute">filter to apply on the attributes</param>
@@ -549,11 +548,11 @@ namespace Bb.ComponentModel
             return result;
         }
 
-        private IEnumerable<Attribute> ToList(AttributeCollection attributes)
-        {
-            foreach (Attribute attribute in attributes)
-                yield return attribute;
-        }
+        //private IEnumerable<Attribute> ToList(AttributeCollection attributes)
+        //{
+        //    foreach (Attribute attribute in attributes)
+        //        yield return attribute;
+        //}
 
         #endregion Resolve methods
 
