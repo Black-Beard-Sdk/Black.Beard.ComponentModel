@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 namespace Bb.ComponentModel
 {
 
+
     public class TypeDiscovery //: ITypeReferential
     {
 
@@ -101,6 +102,7 @@ namespace Bb.ComponentModel
             return _loadedByFile.ContainsKey(fullname);
         }
 
+
         /// <summary>
         /// Return true if assembly is allready loaded
         /// </summary>
@@ -120,10 +122,19 @@ namespace Bb.ComponentModel
 
         }
 
+        /// <summary>
+        /// Determines whether assembly name is loaded.
+        /// </summary>
+        /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="acceptAllVersion">if set to <c>true</c> [accept all version].</param>
+        /// <returns>
+        ///   <c>true</c> if is loaded otherwise, <c>false</c>.
+        /// </returns>
         private bool IsLoadedByAssemblyByName(string assemblyName, bool acceptAllVersion)
         {
             return IsLoadedByAssemblyByName(AssemblyName.GetAssemblyName(assemblyName), acceptAllVersion);
         }
+
 
         /// <summary>
         /// try to load all referenced assemblies
@@ -147,9 +158,14 @@ namespace Bb.ComponentModel
             }
         }
 
+        /// <summary>
+        /// Ensures that all referenced the assembly are loaded.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        /// <param name="acceptAllVersion">if set to <c>true</c> [accept all version].</param>
+        /// <param name="recursively">if set to <c>true</c> [recursively].</param>
         public void EnsureAssemblyIsLoaded(Assembly assembly, bool acceptAllVersion = true, bool recursively = false)
         {
-
 
             var hash = new HashSet<string>();
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
@@ -159,7 +175,6 @@ namespace Bb.ComponentModel
 
                 var assemblies = assembly.GetReferencedAssemblies();
                 foreach (AssemblyName ass in assemblies)
-                {
                     if (hash.Add(ass.FullName))
                     {
 
@@ -173,7 +188,6 @@ namespace Bb.ComponentModel
                             EnsureAssemblyIsLoadedWithReferences(refAssembly, acceptAllVersion, recursively, hash);
 
                     }
-                }
 
             }
             finally
@@ -217,6 +231,11 @@ namespace Bb.ComponentModel
         }
 
 
+        /// <summary>
+        /// Initializes the sigleton instance with specified paths.
+        /// </summary>
+        /// <param name="paths">The paths.</param>
+        /// <returns></returns>
         public static TypeDiscovery Initialize(params string[] paths)
         {
             if (_instance == null)
@@ -231,6 +250,12 @@ namespace Bb.ComponentModel
             return _instance;
         }
 
+        /// <summary>
+        /// Gets the instance singleton.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
         public static TypeDiscovery Instance
         {
             get
@@ -278,6 +303,20 @@ namespace Bb.ComponentModel
             }
         }
 
+
+        /// <summary>
+        /// Gets the paths folder list.
+        /// </summary>
+        /// <value>
+        /// The paths.
+        /// </value>
+        public IEnumerable<string> Paths => _paths.ToArray();
+
+        /// <summary>
+        /// Gets the already assemblies lodaded that match withe specified namespaces.
+        /// </summary>
+        /// <param name="namespaces">The namespaces filter.</param>
+        /// <returns></returns>
         public IEnumerable<Assembly> GetAssemblies(IEnumerable<string> namespaces = null)
         {
 
@@ -392,14 +431,8 @@ namespace Bb.ComponentModel
             return result;
         }
 
-        private IEnumerable<Attribute> ToList(AttributeCollection attributes)
-        {
-            foreach (Attribute attribute in attributes)
-                yield return attribute;
-        }
-
         /// <summary>
-        /// return a list of type that contains specified attibute and filter is valid
+        /// return a list of type that contains specified attribute and filter is valid
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filterOnAttribute">filter to apply on the attributes</param>
@@ -514,6 +547,12 @@ namespace Bb.ComponentModel
             result.AddRange(Collect(type => typeFilter.IsAssignableFrom(type) && type != typeFilter, assemblies));
 
             return result;
+        }
+
+        private IEnumerable<Attribute> ToList(AttributeCollection attributes)
+        {
+            foreach (Attribute attribute in attributes)
+                yield return attribute;
         }
 
         #endregion Resolve methods
@@ -934,17 +973,7 @@ namespace Bb.ComponentModel
         /// </value>
         public static bool HideAssemblyLoadException { get; set; }
 
-        #endregion Properties
-
-        ///// <summary>
-        ///// Gets the specified type.
-        ///// </summary>
-        ///// <param name="type">The type.</param>
-        ///// <returns></returns>
-        //public AccessorList GetProperties(Type type, bool withSubType = false)
-        //{
-        //    return AccessorItem.Get(type, withSubType);
-        //}
+        #endregion Properties              
 
         #region Factories
 
@@ -1003,17 +1032,7 @@ namespace Bb.ComponentModel
             return ObjectCreator.GetActivatorByTypeAndArguments<T>(type, types);
         }
 
-        #endregion Factories
-
-        //#region Serializers
-
-        //public Func<string, Type, object> DeserializeObject { get => Serializer.DeserializeObject; }
-
-        //public Func<object, string> SerializeObject { get => Serializer.SerializeObject; }
-
-        //public Action<string, object> PopulateObject { get => Serializer.PopulateObject; }
-
-        //#endregion Serializers
+        #endregion Factories               
 
         //public void GetTypeDescriptor(Type type)
         //{
