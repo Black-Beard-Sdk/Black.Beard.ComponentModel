@@ -24,7 +24,7 @@ namespace Bb.ComponentModel.Attributes
         /// <summary>
         /// Initializes a new instance of the <see cref="ExposeClassAttribute"/> class.
         /// </summary>
-        /// <param name="context">key for matching ruless</param>
+        /// <param name="context">key for matching context</param>
         public ExposeClassAttribute(string context)
         {
             Context = context;
@@ -33,7 +33,7 @@ namespace Bb.ComponentModel.Attributes
         /// <summary>
         /// Initializes a new instance of the <see cref="ExposeClassAttribute"/> class.
         /// </summary>
-        /// <param name="context">key for matching ruless</param>
+        /// <param name="context">key for matching context</param>
         /// <param name="display">The display.</param>
         public ExposeClassAttribute(string context, string display)
         {

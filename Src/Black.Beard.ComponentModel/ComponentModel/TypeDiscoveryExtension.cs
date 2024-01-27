@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace Bb.ComponentModel
 {
@@ -11,6 +12,49 @@ namespace Bb.ComponentModel
     public static class TypeDiscoveryExtension
     {
 
+
+        public static IEnumerable<FileInfo> ResolveAssemblyFilename(this AssemblyName self)
+        {
+            var path = TypeDiscovery.Instance.Paths;
+            foreach (var item in path.GetPaths())
+            {
+                var file = self.ResolveAssemblyFilename(item);
+                if (file != null)
+                    yield return file;
+            }
+        }
+
+        public static FileInfo ResolveAssemblyFilename(this AssemblyName self, string baseDirectory)
+        {
+            var dir = new DirectoryInfo(baseDirectory);
+            dir.Refresh();
+            return ResolveAssemblyFilename(self, dir);
+        }
+        public static FileInfo ResolveAssemblyFilename(this AssemblyName self, DirectoryInfo directory)
+        {
+
+            if (directory.Exists)
+            {
+
+                var filename = directory.GetFiles(self.Name + ".dll", SearchOption.AllDirectories).FirstOrDefault();
+                if (filename != null)
+                    return filename;
+
+                filename = directory.GetFiles(self.Name + ".exe", SearchOption.AllDirectories).FirstOrDefault();
+                if (filename != null)
+                    return filename;
+
+            }
+
+            return null;
+
+        }
+
+
+        public static string GetFileName(this Type self)
+        {
+            return self.Assembly.Location;
+        }
 
         /// <summary>
         /// return a list of type that assignable from the specified type

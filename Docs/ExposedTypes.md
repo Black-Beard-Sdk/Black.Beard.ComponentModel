@@ -26,8 +26,8 @@ You must add the package resolve the exposed types
 ```CSHARP
 
     // Now you acces to exposed type by this method
-    ExposedTypes.Instance
-        .GetTypes("my context name")
+    TypeDiscovery.Instance
+        .GetExposedTypes("my context name")
         .ToList()
         ;
 
@@ -37,46 +37,64 @@ You must add the package resolve the exposed types
 ## Case 2
 ```CSHARP
 
-        [ExposeClass(ConstantsCore.Initialization,
-        ExposedType = typeof(IInjectBuilder<MyContext>))]
-        public class InjectBuilder : IInjectBuilder<MyContext>
+    [ExposeClass(ConstantsCore.Initialization,
+    ExposedType = typeof(IInjectBuilder<MyContext>))]
+    public class InjectBuilder : IInjectBuilder<MyContext>
+    {
+        
+        public object Run(object context)
         {
-
-
-            public object Run(object context)
-            {
-                return Run((MyContext)context);
-            }
-
-
-            public object Run(MyContext context)
-            {
-                // do action
-                return null;
-            }
-
-
+            return Run((MyContext)context);
         }
-
-        public class MyContext
+        
+        public object Run(MyContext context)
         {
-
-
+            // do action
+            return null;
         }
+        
+    }
+    
+    public class MyContext
+    {
+        
+    }       
+
+    // Looking for exposed class
+    var items = TypeDiscovery.Instance
+        .GetExposedTypes(ConstantsCore.Initialization, typeof(IInjectBuilder<MyContext>))        
+        .ToList()
+            ;
+    
+    var ctx = new MyContext();
+    foreach (var item in items)
+    {
+        var instance = (IInjectBuilder<MyContext>)Activator.CreateInstance(item.Key);
+        instance.Run(ctx);
+    }
+
+```
 
 
-        // Looking for exposed class
-        var items = ExposedTypes.Instance
-            .GetTypes(ConstantsCore.Initialization, typeof(IInjectBuilder<MyContext>))
-            .Where(c => typeof(IInjectBuilder<MyContext>).IsAssignableFrom(c.Key))
-            .ToList()
-                ;
+## autodiscover types in assemblies load only assemblies not yet loaded that match with the filters
 
-        var ctx = new MyContext();
-        foreach (var item in items)
-        {
-            var instance = (IInjectBuilder<MyContext>)Activator.CreateInstance(item.Key);
-            instance.Run(ctx);
-        }
+```CSHARP
 
+    var autoloadTypes = true;
+    
+    // build the folders source for resolve types
+    var directories = new AssemblyDirectoryResolver()
+        .AddDirectoryFromFiles("Location file")
+        .AddDirectory("Location directory")
+    ;
+    
+    TypeDiscovery.Initialize(directories);
+    
+    var types = TypeDiscovery.Instance
+        .Search(c =>
+            c.InContext(ConstantsCore.Plugin)
+            .Implements(typeof(IInjectBuilder))
+        , autoloadTypes)
+        .ToList()
+        ;
 ```

@@ -23,6 +23,7 @@ namespace Bb.ComponentModel
 
         public static ExposedTypes Instance { get => _instance; }
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExposedTypes"/> class.
         /// </summary>
@@ -98,11 +99,7 @@ namespace Bb.ComponentModel
                 HashSet<ExposeClassAttribute> _attributes = new HashSet<ExposeClassAttribute>();
                 foreach (var item2 in item1.Value)
                     if (item2.Context == context && item2.ExposedType == type)
-                    {
-
                         _attributes.Add(item2);
-
-                    }
 
                 if (_attributes.Any())
                     yield return new KeyValuePair<Type, HashSet<ExposeClassAttribute>>(item1.Key, _attributes);

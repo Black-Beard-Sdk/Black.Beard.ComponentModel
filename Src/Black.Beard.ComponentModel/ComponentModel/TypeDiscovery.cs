@@ -1,4 +1,5 @@
-﻿using Bb.ComponentModel.Factories;
+﻿using Bb.ComponentModel.Attributes;
+using Bb.ComponentModel.Factories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,39 +8,38 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace Bb.ComponentModel
 {
 
 
-    public class TypeDiscovery //: ITypeReferential
+    public class TypeDiscovery
     {
 
         #region Initialize
 
-        public TypeDiscovery(params string[] paths)
+        private TypeDiscovery(AssemblyDirectoryResolver? paths = null)
         {
 
-            _paths = new HashSet<string>();
-
             if (paths == null)
-                paths = new string[] { };
+                Paths = AssemblyDirectoryResolver.Instance;
+            else
+                Paths = paths;
+
 
             ExcludedAssemblies = new List<string>();
             FilterAssembly = c => true;
             FilterFilename = c => true;
-            Assemblies = () => AppDomain.CurrentDomain.GetAssemblies()
-                .Where(c => !ExcludedAssemblies.Contains(c.GetName().Name)
-                ).ToList();
+
+            Assemblies = () => AppDomain.CurrentDomain
+                    .GetAssemblies()
+                    .Where(c => !ExcludedAssemblies.Contains(c.GetName().Name))
+                    .ToList();
+
             //OnRegisterException = e => Logger.Error(e);
             HideAssemblyLoadException = true;
-
-            var dir = FolderBinResolver.GetConsoleBinPath().ToList();
-
-            AddDirectories(dir.Where(c => c.Exists).ToArray());
-            AddDirectories(paths);
-
 
             AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad;
             var a = this.GetAssemblies();   //.OrderBy(c => c.FullName).ToList();
@@ -47,6 +47,66 @@ namespace Bb.ComponentModel
                 AddAssembly(assembly);
 
         }
+
+        /// <summary>
+        /// Initializes the singleton instance with specified paths.
+        /// </summary>
+        /// <param name="paths">The paths.</param>
+        /// <returns></returns>
+        public static TypeDiscovery Initialize(params string[] paths)
+        {
+            if (_instance == null)
+                lock (_lock)
+                    if (_instance == null)
+                        _instance = new TypeDiscovery();
+
+            _instance.Paths.AddDirectories(paths);
+
+            return _instance;
+        }
+
+        /// <summary>
+        /// Initializes the singleton instance with specified paths.
+        /// </summary>
+        /// <param name="paths">The paths.</param>
+        /// <returns></returns>
+        public static TypeDiscovery Initialize(AssemblyDirectoryResolver paths)
+        {
+            if (_instance == null)
+                lock (_lock)
+                    if (_instance == null)
+                        _instance = new TypeDiscovery(paths);
+
+            return _instance;
+        }
+
+        /// <summary>
+        /// Gets the instance singleton.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static TypeDiscovery Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    lock (_lock)
+                        if (_instance == null)
+                            _instance = new TypeDiscovery();
+                return _instance;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Gets the paths folder list for resolver types.
+        /// </summary>
+        /// <value>
+        /// <see cref="AssemblyDirectoryResolver"/> 
+        /// </value>
+        public AssemblyDirectoryResolver Paths { get; }
 
         private Assembly AssemblyLoad(AssemblyName item)
         {
@@ -73,7 +133,9 @@ namespace Bb.ComponentModel
                 if (!_assemblyNames.TryGetValue(name.Name, out var dic))
                     _assemblyNames.Add(name.Name, dic = new HashSet<string>());
 
+                Paths.AddDirectoryFromFiles(ass.Location);
                 dic.Add(name.Version.ToString());
+
             }
         }
 
@@ -91,20 +153,25 @@ namespace Bb.ComponentModel
                 if (!_assemblyNames.TryGetValue(name.Name, out var dic))
                     _assemblyNames.Add(name.Name, dic = new HashSet<string>());
 
+                Paths.AddDirectoryFromFiles(a.Location);
                 dic.Add(name.Version.ToString());
+
             }
 
         }
-
 
         private bool IsLoadedByFile(string fullname)
         {
             return _loadedByFile.ContainsKey(fullname);
         }
 
+        private bool IsLoadedByFile(FileInfo filename)
+        {
+            return _loadedByFile.ContainsKey(filename.FullName);
+        }
 
         /// <summary>
-        /// Return true if assembly is allready loaded
+        /// Return true if assembly is already loaded
         /// </summary>
         /// <param name="name">assemblyName</param>
         /// <param name="acceptAllversions">if false don't try to match the version</param>
@@ -134,7 +201,6 @@ namespace Bb.ComponentModel
         {
             return IsLoadedByAssemblyByName(AssemblyName.GetAssemblyName(assemblyName), acceptAllVersion);
         }
-
 
         /// <summary>
         /// try to load all referenced assemblies
@@ -230,57 +296,9 @@ namespace Bb.ComponentModel
 
         }
 
-
-        /// <summary>
-        /// Initializes the sigleton instance with specified paths.
-        /// </summary>
-        /// <param name="paths">The paths.</param>
-        /// <returns></returns>
-        public static TypeDiscovery Initialize(params string[] paths)
-        {
-            if (_instance == null)
-                lock (_lock)
-                    if (_instance == null)
-                        _instance = new TypeDiscovery(paths);
-                    else
-                        _instance.AddDirectories(paths);
-            else
-                _instance.AddDirectories(paths);
-
-            return _instance;
-        }
-
-        /// <summary>
-        /// Gets the instance singleton.
-        /// </summary>
-        /// <value>
-        /// The instance.
-        /// </value>
-        public static TypeDiscovery Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    lock (_lock)
-                        if (_instance == null)
-                            _instance = new TypeDiscovery();
-                return _instance;
-            }
-        }
-
         public void AddDirectories(params string[] paths)
         {
-            foreach (var path in paths)
-                if (!string.IsNullOrEmpty(path))
-                {
-
-                    if (!Directory.Exists(path))
-                        throw new DirectoryNotFoundException(path);
-
-                    _paths.Add(path);
-
-                }
-
+            Paths.AddDirectories(paths);
         }
 
         /// <summary>
@@ -289,31 +307,12 @@ namespace Bb.ComponentModel
         /// <param name="configuration"></param>
         public void AddDirectories(params DirectoryInfo[] paths)
         {
-
-            foreach (var configuration in paths)
-            {
-
-                configuration.Refresh();
-
-                if (!configuration.Exists)
-                    throw new DirectoryNotFoundException(configuration.FullName);
-
-                _paths.Add(configuration.FullName);
-
-            }
+            Paths.AddDirectories(paths);
         }
 
 
         /// <summary>
-        /// Gets the paths folder list.
-        /// </summary>
-        /// <value>
-        /// The paths.
-        /// </value>
-        public IEnumerable<string> Paths => _paths.ToArray();
-
-        /// <summary>
-        /// Gets the already assemblies lodaded that match withe specified namespaces.
+        /// Gets the already assemblies lodaded that match with specified namespaces.
         /// </summary>
         /// <param name="namespaces">The namespaces filter.</param>
         /// <returns></returns>
@@ -331,8 +330,6 @@ namespace Bb.ComponentModel
                     n = new HashSet<string>();
             }
 
-            var test = n.Count == 0;
-
             foreach (var assembly in this.Assemblies())
             {
 
@@ -345,7 +342,7 @@ namespace Bb.ComponentModel
                 try
                 {
                     foreach (var item in types)
-                        if (n.Contains(item.Namespace) || test)
+                        if (n.Count == 0 || n.Contains(item.Namespace))
                         {
                             assemblies.Add(assembly);
                             break;
@@ -358,6 +355,7 @@ namespace Bb.ComponentModel
                     throw;
                 }
             }
+
             return assemblies;
 
         }
@@ -372,16 +370,17 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="typeFilter"></param>
         /// <returns></returns>
-        public List<Type> GetTypes(Func<Type, bool> typeFilter)
+        public IEnumerable<Type> GetTypes(Func<Type, bool> typeFilter)
         {
 
             if (typeFilter == null)
                 typeFilter = t => true;
 
-            var result = new List<Type>();
             var assemblies = Assemblies().ToArray();
-            result.AddRange(Collect(typeFilter, assemblies));
+            var result = Collect(typeFilter, assemblies);
+
             return result;
+
         }
 
         /// <summary>
@@ -389,7 +388,7 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="typeFilter"></param>
         /// <returns></returns>
-        public List<Type> GetTypesWithAttributes(Type baseType, Type typeFilter)
+        public IEnumerable<Type> GetTypesWithAttributes(Type baseType, Type typeFilter)
         {
 
             if (baseType == null)
@@ -398,12 +397,11 @@ namespace Bb.ComponentModel
             if (typeFilter == null)
                 typeFilter = typeof(Attribute);
 
-            var result = new List<Type>();
             var assemblies = Assemblies().ToArray();
-            result.AddRange(Collect(type =>
+            var result = Collect(type =>
             {
                 return baseType.IsAssignableFrom(type) && TypeDescriptor.GetAttributes(type).ToList().Any(c => c.GetType() == typeFilter);
-            }, assemblies));
+            }, assemblies);
 
             return result;
 
@@ -414,21 +412,21 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="attributeTypeFilter"></param>
         /// <returns></returns>
-        public List<Type> GetTypesWithAttributes(Type attributeTypeFilter)
+        public IEnumerable<Type> GetTypesWithAttributes(Type attributeTypeFilter)
         {
 
             if (attributeTypeFilter == null)
                 attributeTypeFilter = typeof(Attribute);
 
-            var result = new List<Type>();
             var assemblies = Assemblies().ToArray();
-            result.AddRange(Collect(type =>
+            var result = Collect(type =>
             {
                 return TypeDescriptor.GetAttributes(type).ToList().Any(c => c.GetType() == attributeTypeFilter);
-            }, assemblies));
+            }, assemblies);
 
             return result;
         }
+
 
         /// <summary>
         /// return a list of type that contains specified attribute and the filter must be valid
@@ -436,13 +434,12 @@ namespace Bb.ComponentModel
         /// <typeparam name="T"></typeparam>
         /// <param name="filterOnAttribute">filter to apply on the attributes</param>
         /// <returns></returns>
-        public List<Type> GetTypesWithAttributes<T>(Type typebase, Func<T, bool> filterOnAttribute) where T : Attribute
+        public IEnumerable<Type> GetTypesWithAttributes<T>(Type typebase, Func<T, bool> filterOnAttribute) where T : Attribute
         {
 
-            var result = new List<Type>();
             var assemblies = Assemblies().ToArray();
 
-            result.AddRange(Collect(type =>
+            var list = Collect(type =>
             {
 
                 if (typebase == null || typebase.IsAssignableFrom(type))
@@ -461,9 +458,10 @@ namespace Bb.ComponentModel
 
                 return false;
 
-            }, assemblies));
+            }, assemblies);
 
-            return result;
+            return list;
+
         }
 
         /// <summary>
@@ -539,65 +537,88 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="typeFilter"></param>
         /// <returns></returns>
-        public List<Type> GetTypes(Type typeFilter)
+        public IEnumerable<Type> GetTypes(Type typeFilter)
         {
-            var result = new List<Type>();
             var assemblies = Assemblies().ToArray();
-            result.AddRange(Collect(type => typeFilter.IsAssignableFrom(type) && type != typeFilter, assemblies));
-
-            return result;
+            foreach (var item in Collect(type => typeFilter.IsAssignableFrom(type) && type != typeFilter, assemblies))
+                yield return item;
         }
 
-        //private IEnumerable<Attribute> ToList(AttributeCollection attributes)
-        //{
-        //    foreach (Attribute attribute in attributes)
-        //        yield return attribute;
-        //}
+
+        /// <summary>
+        /// Gets the exposed types for the specified context.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <returns></returns>
+        public IEnumerable<KeyValuePair<Type, HashSet<ExposeClassAttribute>>> GetExposedTypes(string context)
+        {
+            return ExposedTypes.Instance.GetTypes(context);
+        }
+
+        /// <summary>
+        /// Gets the exposed types for the specified context.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="typeExposedFilter">The type exposed filter.</param>
+        /// <returns></returns>
+        public IEnumerable<KeyValuePair<Type, HashSet<ExposeClassAttribute>>> GetExposedTypes(string context, Func<Type, bool> filter)
+        {
+            return ExposedTypes.Instance.GetTypes(context).Where(c => filter(c.Key));
+        }
+
+        /// <summary>
+        /// Gets the exposed types for the specified context.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="typeExposedFilter">The type exposed filter.</param>
+        /// <returns>List of types</returns>
+        public IEnumerable<KeyValuePair<Type, HashSet<ExposeClassAttribute>>> GetExposedTypes(string context, Type typeExposedFilter)
+        {
+            return ExposedTypes.Instance.GetTypes(context, typeExposedFilter);
+        }
+
+        /// <summary>
+        /// Gets the exposed types for the specified context.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="typeExposedFilter">The type exposed filter.</param>
+        /// <param name="filter">type filter.</param>
+        /// <returns>List of types</returns>
+        public IEnumerable<KeyValuePair<Type, HashSet<ExposeClassAttribute>>> GetExposedTypes(string context, Type typeExposedFilter, Func<Type, bool> filter)
+        {
+            return ExposedTypes.Instance.GetTypes(context, typeExposedFilter).Where(c => filter(c.Key));
+        }
+
 
         #endregion Resolve methods
 
-        #region Load assembly
+        #region Load assemblies
 
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
 
             var n = new AssemblyName(args.Name);
 
-            foreach (var baseDirectory in _paths)
+            foreach (var filename in Paths.ResolveAssemblyFilenames(n))
             {
+
                 Assembly assembly;
-                var filename = Directory.GetFiles(baseDirectory, n.Name + ".dll", SearchOption.AllDirectories).FirstOrDefault();
-                if (filename != null)
-                {
 
+                if (!IsLoadedByFile(filename))
+                    assembly = AssemblyLoad(filename.FullName);
+                else
+                    assembly = _loadedByFile[filename.FullName];
 
-                    if (!IsLoadedByFile(filename))
-                        assembly = AssemblyLoad(filename);
-                    else
-                        assembly = _loadedByFile[filename];
+                return assembly;
 
-                    return assembly;
-
-                }
-                filename = Directory.GetFiles(baseDirectory, n.Name + ".exe").FirstOrDefault();
-                if (filename != null)
-                {
-
-                    if (!IsLoadedByFile(filename))
-                        assembly = AssemblyLoad(filename);
-                    else
-                        assembly = _loadedByFile[filename];
-
-                    return assembly;
-                }
             }
 
-            var str =
-                $"the assembly '{args.Name}' can't be resolved in the folder '{AppDomain.CurrentDomain.BaseDirectory}'";
+            var str = $"the assembly '{args.Name}' can't be resolved'";
 
             Console.Write(str);
 
             return null;
+
         }
 
         /// <summary>
@@ -689,6 +710,8 @@ namespace Bb.ComponentModel
                     assembly = LoadAssembly_Impl(fileAssembly, filePdb);
 
             }
+            else
+                assembly = AssemblyLoad(fileAssembly.FullName);
 
             return assembly;
 
@@ -708,6 +731,13 @@ namespace Bb.ComponentModel
                         return item;
 
             var name1 = Path.GetFileNameWithoutExtension(fileAssembly.Name);
+
+            if (filePdb == null)
+            {
+                var path = Path.Combine(fileAssembly.Directory.FullName, name1) + ".pdb";
+                var filePdbBuilded = new FileInfo(path);
+                filePdb = filePdbBuilded.Exists ? filePdbBuilded : null;
+            }
 
             try
             {
@@ -781,7 +811,7 @@ namespace Bb.ComponentModel
         /// </summary>
         public void LoadAssembliesFromFolders()
         {
-            foreach (var path in _paths)
+            foreach (var path in Paths.GetDirectories())
                 LoadAssembliesFrom(path);
         }
 
@@ -789,17 +819,57 @@ namespace Bb.ComponentModel
         ///     Load in memory all the assemblies from the specified with directory.
         /// </summary>
         /// <returns></returns>
-        public int LoadAssembliesFrom(string dir)
+        public int LoadAssembliesFrom(string directory)
         {
 
             int result = 0;
-            var directory = new DirectoryInfo(dir);
 
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
             try
             {
-                var files = directory.GetFiles("*.dll").Where(c => FilterFilename(c));
+                var files = Paths.GetAssemblies(directory, c => FilterFilename(c));
+                foreach (var file in files)
+                    if (!IsLoadedByFile(file.FullName))
+                    {
+
+                        Assembly ass = null;
+                        try
+                        {
+                            ass = AssemblyLoad(file.FullName);
+                            result += ass.ExportedTypes.Count();
+                        }
+                        catch (Exception e)
+                        {
+                            OnRegisterException(e);
+                            Trace.TraceError(e.ToString());
+                        }
+
+                    }
+            }
+            finally
+            {
+                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
+            }
+
+            return result;
+
+        }
+
+        /// <summary>
+        ///     Load in memory all the assemblies from the specified with directory.
+        /// </summary>
+        /// <returns></returns>
+        public int LoadAssembliesFrom(DirectoryInfo directory)
+        {
+
+            int result = 0;
+
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+
+            try
+            {
+                var files = Paths.GetAssemblies(directory, c => FilterFilename(c));
                 foreach (var file in files)
                     if (!IsLoadedByFile(file.FullName))
                     {
@@ -935,7 +1005,7 @@ namespace Bb.ComponentModel
 
         }
 
-        #endregion Load assembly
+        #endregion Load assemblies
 
         #region Properties
 
@@ -1031,20 +1101,48 @@ namespace Bb.ComponentModel
             return ObjectCreator.GetActivatorByTypeAndArguments<T>(type, types);
         }
 
+        public bool IsLoaded(FileInfo location)
+        {
+            return IsLoaded(location.FullName);
+        }
+
+        public bool IsLoaded(string location)
+        {
+
+            if (File.Exists(location))
+                foreach (var item in Assemblies())
+                    if (!item.IsDynamic && item.Location == location)
+                        return true;
+
+            return false;
+
+        }
+
         #endregion Factories               
 
-        //public void GetTypeDescriptor(Type type)
-        //{
 
-        //    //TypeDescriptor.
+        public IEnumerable<TypeMatched> Search(Action<AddonsResolver> action, bool autoload = false, bool failedOnloadError = false)
+        {
 
-        //}
+            var resolver = new AddonsResolver(Paths);
+
+            action(resolver);
+
+            foreach (var item in resolver.Search())
+            {
+
+                if (autoload)
+                    item.Load(failedOnloadError);
+
+                yield return item;
+
+            }
+        }
 
         /// <summary>
         ///     function  return the list of loaded assemblies
         /// </summary>
         public readonly Func<IEnumerable<Assembly>> Assemblies;
-        private readonly HashSet<string> _paths;
         private static readonly object _lock = new object();
         private static readonly object _lock2 = new object();
         private static TypeDiscovery _instance;

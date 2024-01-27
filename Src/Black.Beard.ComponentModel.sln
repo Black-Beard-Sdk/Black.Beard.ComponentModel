@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\Docs\ExposedTypes.md = ..\Docs\ExposedTypes.md
 		..\Docs\PropertyTypeDescriptor.md = ..\Docs\PropertyTypeDescriptor.md
 		..\README.md = ..\README.md
+		..\_config.yml = ..\_config.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Black.Beard.ComponentModel.Xunits", "Black.Beard.ComponentModel.Xunits\Black.Beard.ComponentModel.Xunits.csproj", "{D3384036-B9D0-49AA-BF34-904B5638D8BB}"

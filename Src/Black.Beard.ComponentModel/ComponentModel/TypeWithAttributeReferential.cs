@@ -6,6 +6,8 @@ using System.Linq;
 
 namespace Bb.ComponentModel
 {
+
+
     /// <summary>
     /// Collect all types decorated with attribute <see cref="TAttribute"/>
     /// </summary>

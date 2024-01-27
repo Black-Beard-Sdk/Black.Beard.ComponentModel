@@ -6,7 +6,14 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/Black-Beard-Sdk/Black.Beard.ComponentModel</RepositoryUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="ComponentModel\PEReaders\**" />
+	  <EmbeddedResource Remove="ComponentModel\PEReaders\**" />
+	  <None Remove="ComponentModel\PEReaders\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<Compile Remove="ComponentModel\Factories\FactoryProvider.cs" />
@@ -14,6 +21,7 @@
 		<Compile Remove="ComponentModel\FactoryProvider.cs" />
 		<Compile Remove="ComponentModel\MethodDiscoveryAssembly.cs" />
 		<Compile Remove="ComponentModel\ObjectCreator.cs" />
+		<Compile Remove="ComponentModel\WalkerFilter.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -36,6 +44,34 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Black.Beard.ComponentModel.Attributes\Black.Beard.ComponentModel.Attributes.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="AssemblyReader\IL\Instructions.tt">
+	    <Generator>TextTemplatingFileGenerator</Generator>
+	    <LastGenOutput>Instructions.cs</LastGenOutput>
+	  </None>
+	  <None Update="AssemblyReader\Metadata\ILOpCodes.tt">
+	    <Generator>TextTemplatingFileGenerator</Generator>
+	    <LastGenOutput>ILOpCodes.cs</LastGenOutput>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="AssemblyReader\IL\Instructions.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Instructions.tt</DependentUpon>
+	  </Compile>
+	  <Compile Update="AssemblyReader\Metadata\ILOpCodes.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>ILOpCodes.tt</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>
