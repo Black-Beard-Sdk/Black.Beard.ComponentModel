@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using Bb.ComponentModel.Factories;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,9 +46,9 @@ namespace Bb.ComponentModel
             else
                 _paths = new HashSet<string>(paths);
 
-
-            var dir = FolderBinResolver.GetConsoleBinPath().ToList();
-
+            AddDirectories(AppDomain.CurrentDomain.BaseDirectory);
+            
+            var dir = FolderBinResolver.GetBinPaths().ToList();
             AddDirectories(dir);
 
         }
@@ -62,7 +63,7 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public AssemblyDirectoryResolver Clear()
         {
-                _paths.Clear();
+            _paths.Clear();
             return this;
 
         }
@@ -120,7 +121,6 @@ namespace Bb.ComponentModel
                 foreach (var item in paths)
                     _paths.Remove(item.FullName.Trim(Path.DirectorySeparatorChar));
             return this;
-
         }
 
         #endregion Remove directories
@@ -139,7 +139,6 @@ namespace Bb.ComponentModel
                 foreach (var item in paths)
                     AddDirectories(new DirectoryInfo(item));
             return this;
-
         }
 
         /// <summary>
@@ -238,6 +237,7 @@ namespace Bb.ComponentModel
             if (paths != null)
                 foreach (var item in paths)
                 {
+
                     item.Refresh();
                     if (item.Exists)
                         _paths.Add(item.FullName.Trim(Path.DirectorySeparatorChar));
@@ -246,30 +246,51 @@ namespace Bb.ComponentModel
                         throw new DirectoryNotFoundException(item.FullName);
 
                 }
+
             return this;
 
         }
 
         #endregion Add directories
 
-        #region Get Paths
 
-        public IEnumerable<string> GetPaths()
-        {            
-            foreach (var item in _paths)
-                yield return item;
+        /// <summary>
+        /// Gets the system directories.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> GetSystemDirectories()
+        {
+            var list = GetPaths().Where(c => !c.StartsWith(Environment.CurrentDirectory)).ToList();
+            return list;
         }
 
 
+        #region Get Paths
+
+        public IEnumerable<string> GetPaths()
+        {
+
+            if (!_initialized)
+            {
+                _initialized = true;
+                AddDirectories(TypeDiscovery.Instance.GetDirectoryPathFromAssemblies());
+            }
+
+            foreach (var item in _paths)
+                yield return item;
+
+        }
+
         public IEnumerable<DirectoryInfo> GetDirectories()
         {
-            foreach (var item in _paths)
+            foreach (var item in GetPaths())
                 yield return new DirectoryInfo(item);
         }
 
         #endregion Get Paths
 
-        #region Get assemblies
+
+        #region Get assembly files
 
         /// <summary>
         /// Gets the assemblies list.
@@ -379,7 +400,7 @@ namespace Bb.ComponentModel
             return this;
         }
 
-        #endregion Get assemblies
+        #endregion Get assembly files
 
 
         /// <summary>
@@ -394,6 +415,7 @@ namespace Bb.ComponentModel
         private readonly HashSet<string> _paths;
         private readonly HashSet<string> _excludedFiles;
         private static AssemblyDirectoryResolver _instance;
+        private bool _initialized;
 
     }
 

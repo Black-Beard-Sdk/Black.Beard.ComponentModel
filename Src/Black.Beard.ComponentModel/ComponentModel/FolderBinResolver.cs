@@ -7,7 +7,7 @@ using System.Reflection;
 namespace Bb.ComponentModel
 {
     /// <summary>
-    /// Ressolve the folder's list of binaries files
+    /// Resolve the folder's list of binaries files
     /// </summary>
     public class FolderBinResolver
     {
@@ -57,14 +57,45 @@ namespace Bb.ComponentModel
         }
 
         /// <summary>
-        ///     Gets loaded assemblies.
+        ///     return all known bin paths
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<Assembly> GetLoadedAssemblies()
+        public static IEnumerable<DirectoryInfo> GetBinPaths()
         {
-            var items = AppDomain.CurrentDomain.GetAssemblies().ToList();
-            return items;
+
+            var _h = new HashSet<string>();
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            foreach (var item in assemblies)
+                if (!item.IsDynamic)
+                {
+                    var dir = new FileInfo(item.Location).Directory;
+                    if (_h.Add(dir.FullName))
+                        yield return dir;
+                }
+
         }
+
+
+        /// <summary>
+        /// return the corelib bin path
+        /// </summary>
+        /// <returns></returns>
+        public static DirectoryInfo GetCoreLibPath()
+        {
+            var file = new FileInfo(typeof(DateTime).Assembly.Location);
+            return file.Directory;
+        }
+
+        ///// <summary>
+        /////     Gets loaded assemblies.
+        ///// </summary>
+        ///// <returns></returns>
+        //public static IEnumerable<Assembly> GetLoadedAssemblies()
+        //{
+        //    var items = AppDomain.CurrentDomain.GetAssemblies().ToList();
+        //    return items;
+        //}
 
         private static bool? _isSystemWebAssemblyLoaded;
 

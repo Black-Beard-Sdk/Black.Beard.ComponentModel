@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
 
@@ -79,6 +80,7 @@ namespace Bb.ComponentModel
 
             return _instance;
         }
+        
 
         /// <summary>
         /// Gets the instance singleton.
@@ -1121,10 +1123,72 @@ namespace Bb.ComponentModel
         #endregion Factories               
 
 
-        public IEnumerable<TypeMatched> Search(Action<AddonsResolver> action, bool autoload = false, bool failedOnloadError = false)
+        /// <summary>
+        /// return the list of loaded assemblies
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> GetLoadedAssemblies()
+        {
+            foreach (var item in Assemblies())
+                yield return item.FullName;
+        }
+
+        /// <summary>
+        /// return the list of available assemblies.
+        /// </summary>
+        /// <returns>list of assemblies and a flag that indicate the filename and if the assembly is loaded.</returns>
+        public IDictionary<string, KeyValuePair<string, bool>> GetAllAssemblies()
         {
 
+            Dictionary<string, KeyValuePair<string, bool>> _hash = new Dictionary<string, KeyValuePair<string, bool>>();
+
+            foreach (var item in Assemblies())
+            {
+
+                string key = item.IsDynamic
+                    ? item.FullName
+                    : item.Location;
+
+                if (!_hash.ContainsKey(key))
+                    _hash.Add(key, new KeyValuePair<string, bool>(item.FullName, true));
+            }
+
             var resolver = new AddonsResolver(Paths);
+            foreach (var item in resolver.GetAssemblies())
+                if ((!_hash.ContainsKey(item.Key)))
+                    _hash.Add(item.Key, new KeyValuePair<string, bool>(item.Value, false));
+
+
+            return _hash;
+
+        }
+
+        /// <summary>
+        /// return the list of available assemblies.
+        /// </summary>
+        /// <returns>list of assemblies and a flag that indicate the filename and if the assembly is loaded.</returns>
+        public HashSet<string> GetDirectoryPathFromAssemblies()
+        {
+
+            HashSet<string> _hash = new HashSet<string>(50);
+
+            foreach (var item in Assemblies())
+                if (!item.IsDynamic)
+                {
+                    var file = new FileInfo(item.Location);
+                    file.Refresh();
+                    if (file.Directory.Exists)
+                        _hash.Add(file.Directory.FullName);
+                }
+
+            return _hash;
+
+        }
+
+        public IEnumerable<TypeMatched> Search(Action<AddonsResolver> action, bool autoload = false, bool failedOnloadError = false, AssemblyDirectoryResolver paths = null)
+        {
+
+            var resolver = new AddonsResolver(paths ?? Paths);
 
             action(resolver);
 

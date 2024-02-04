@@ -321,6 +321,7 @@ namespace Bb.ComponentModel
 
         #endregion Filters
 
+
         /// <summary>
         /// Apply filters and return the list of types
         /// </summary>
@@ -329,21 +330,12 @@ namespace Bb.ComponentModel
         {
 
             Filter filter = AddImplementations(AddBaseTypes(AddContext(AddRemoveAsbstract(AddRemoveGenerics()))));
-            
+
             foreach (FileInfo assemblyPath in Paths.GetAssemblies(FileFilter))
                 if (_excludedAssemblies.Count == 0 || _excludedAssemblies.Contains(assemblyPath.Name))
                 {
 
-                    PEFile file = null;
-                    try
-                    {
-                        file = new PEFile(assemblyPath.FullName);
-                    }
-                    catch (PEFileNotSupportedException)
-                    {
-                        Paths.AddFileNotLoading(assemblyPath.FullName);
-                    }
-
+                    PEFile file = GetAssembly(assemblyPath);
 
                     if (file != null)
                         try
@@ -417,6 +409,53 @@ namespace Bb.ComponentModel
                 DeclaringTypeFullName = item.DeclaringType?.FullName,
                 GenericParameters = list,
             };
+
+        }
+
+
+        /// <summary>
+        /// Apply filters and return the list of types
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<KeyValuePair<string, string>> GetAssemblies()
+        {
+
+            foreach (FileInfo assemblyPath in Paths.GetAssemblies(FileFilter))
+                if (_excludedAssemblies.Count == 0 || _excludedAssemblies.Contains(assemblyPath.Name))
+                {
+
+                    PEFile file = GetAssembly(assemblyPath);
+
+                    if (file != null)
+                        try
+                        {
+                            if (FilterAssembly == null || FilterAssembly(file))
+                                yield return new KeyValuePair<string, string>(file.FileName, file.Module.FullAssemblyName);
+                        }
+                        finally
+                        {
+                            file.Dispose();
+                        }
+
+                }
+
+        }
+
+
+        public PEFile GetAssembly(FileInfo file)
+        {
+
+            PEFile peFile = null;
+            try
+            {
+                peFile = new PEFile(file.FullName);
+            }
+            catch (PEFileNotSupportedException)
+            {
+                Paths.AddFileNotLoading(file.FullName);
+            }
+
+            return peFile;
 
         }
 

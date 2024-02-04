@@ -13,6 +13,18 @@ namespace DynamicDescriptors.Tests
 
 
         [Fact]
+        public void ResolveDirectory()
+        {
+
+            var directories = new AssemblyDirectoryResolver();
+
+            directories.GetSystemDirectory();
+
+
+        }
+
+
+            [Fact]
         public void FilterTest1()
         {
 
@@ -58,7 +70,7 @@ namespace DynamicDescriptors.Tests
                 ;
 
             types.Single(c => c.FullName == typeof(TestClass).FullName);
-        
+
         }
 
 
@@ -154,6 +166,46 @@ namespace DynamicDescriptors.Tests
             Assert.Single(types);
 
             types.Single(c => c.FullName == typeof(TestClass).FullName);
+
+        }
+
+
+        [Fact]
+        public void GetLoadedAsseembliesTest()
+        {
+
+            var directories = new AssemblyDirectoryResolver()
+                .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
+            TypeDiscovery.Initialize(directories);
+
+            var dic = TypeDiscovery.Instance.GetLoadedAssemblies().ToList();
+
+            foreach (var item in AppDomain.CurrentDomain.GetAssemblies())
+                if (dic.Contains(item.FullName))
+                    Assert.True(true);
+                else
+                    Assert.True(false, $"assembly {item.FullName} not found");
+
+        }
+
+
+        [Fact]
+        public void GetAllAsseembliesTest()
+        {
+
+
+            var directories = new AssemblyDirectoryResolver()
+                .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
+            TypeDiscovery.Initialize(directories);
+
+            var dic = TypeDiscovery.Instance.GetAllAssemblies();
+
+            foreach (var item in AppDomain.CurrentDomain.GetAssemblies())
+                if (dic.ContainsKey(item.FullName))
+                    Assert.True(dic[item.FullName].Value);
+                else
+                    Assert.True(false, $"assembly {item.FullName} not found");
+
 
         }
 
