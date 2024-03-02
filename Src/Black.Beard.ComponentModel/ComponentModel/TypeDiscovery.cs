@@ -80,7 +80,7 @@ namespace Bb.ComponentModel
 
             return _instance;
         }
-        
+
 
         /// <summary>
         /// Gets the instance singleton.
@@ -366,6 +366,27 @@ namespace Bb.ComponentModel
         #endregion Initialize
 
         #region Resolve methods
+
+        /// <summary>
+        ///    Return a list of static type that match with the specified filter
+        /// </summary>
+        /// <param name="typeFilter"></param>
+        /// <returns></returns>
+        public IEnumerable<Type> GetStaticTypes(Func<Type, bool> typeFilter)
+        {
+
+            if (typeFilter == null)
+                typeFilter = t => t.IsClass && t.IsSealed && t.IsAbstract;
+            else
+                typeFilter = t => t.IsClass && t.IsSealed && t.IsAbstract && typeFilter(t);
+
+
+            var assemblies = Assemblies().ToArray();
+            var result = Collect(typeFilter, assemblies);
+
+            return result;
+
+        }
 
         /// <summary>
         ///     Return a list of type that match with the specified filter
