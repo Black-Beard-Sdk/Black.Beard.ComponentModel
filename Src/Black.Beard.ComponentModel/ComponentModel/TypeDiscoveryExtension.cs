@@ -12,6 +12,17 @@ namespace Bb.ComponentModel
     public static class TypeDiscoveryExtension
     {
 
+
+        /// <summary>
+        /// return true if specified type is static
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsStatic(this Type self)
+        {
+            return self.IsClass && self.IsSealed && self.IsAbstract; ;
+        }
+
+
         /// <summary>
         /// return a list of type that contains the specified attribute
         /// </summary>
