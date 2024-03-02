@@ -12,7 +12,101 @@ namespace Bb.ComponentModel
     public static class TypeDiscoveryExtension
     {
 
+        /// <summary>
+        /// return a list of type that contains the specified attribute
+        /// </summary>
+        /// <param name="self">type to test</param>
+        /// <param name="flags">member that match with specified flags</param>
+        /// <param name="func"> function to evaluate on the member</param>
+        /// <returns></returns>
+        public static bool MatchField(this Type self, BindingFlags flags, Func<FieldInfo, bool> func)
+        {
+            if (self != null)
+                foreach (var item in self.GetFields(flags))
+                    if (func(item))
+                        return true;
+            
+            return false;
 
+        }
+
+        /// <summary>
+        /// Return true if the type contains the specified property
+        /// </summary>
+        /// <param name="self">type to test</param>
+        /// <param name="flags">member that match with specified flags</param>
+        /// <param name="func"> function to evaluate on the member</param>
+        /// <returns></returns>
+        public static bool MatchProperty(this Type self, BindingFlags flags, Func<PropertyInfo, bool> func)
+        {
+            if (self != null)
+                foreach (var item in self.GetProperties(flags))
+                    if (func(item))
+                        return true;
+
+            return false;
+
+        }
+
+        /// <summary>
+        /// return true if the type contains the specified method
+        /// </summary>
+        /// <param name="self">type to test</param>
+        /// <param name="flags">member that match with specified flags</param>
+        /// <param name="func"> function to evaluate on the member</param>
+        /// <returns></returns>
+        public static bool MatchMethod(this Type self, BindingFlags flags, Func<MethodInfo, bool> func)
+        {
+            if (self != null)
+                foreach (var item in self.GetMethods(flags))
+                    if (func(item))
+                        return true;
+
+            return false;
+
+        }
+
+        /// <summary>
+        /// return true if the type contains the specified event
+        /// </summary>
+        /// <param name="self">type to test</param>
+        /// <param name="flags">member that match with specified flags</param>
+        /// <param name="func"> function to evaluate on the member</param>
+        /// <returns></returns>
+        public static bool MatchEvent(this Type self, BindingFlags flags, Func<EventInfo, bool> func)
+        {
+            if (self != null)
+                foreach (var item in self.GetEvents(flags))
+                    if (func(item))
+                        return true;
+
+            return false;
+
+        }
+
+        /// <summary>
+        /// return true if the type contains the specified constructor
+        /// </summary>
+        /// <param name="self">type to test</param>
+        /// <param name="flags">member that match with specified flags</param>
+        /// <param name="func"> function to evaluate on the member</param>
+        /// <returns></returns>
+        public static bool MatchConstructor(this Type self, BindingFlags flags, Func<ConstructorInfo, bool> func)
+        {
+            if (self != null)
+                foreach (var item in self.GetConstructors(flags))
+                    if (func(item))
+                        return true;
+
+            return false;
+
+        }
+
+        /// <summary>
+        /// return a list file that contains the assembly name
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static IEnumerable<FileInfo> ResolveAssemblyFilename(this AssemblyName self)
         {
             var path = TypeDiscovery.Instance.Paths;
@@ -24,12 +118,25 @@ namespace Bb.ComponentModel
             }
         }
 
+        /// <summary>
+        /// return a file that contains the assembly name
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="baseDirectory"></param>
+        /// <returns></returns>
         public static FileInfo ResolveAssemblyFilename(this AssemblyName self, string baseDirectory)
         {
             var dir = new DirectoryInfo(baseDirectory);
             dir.Refresh();
             return ResolveAssemblyFilename(self, dir);
         }
+
+        /// <summary>
+        /// return a file that contains the assembly name
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="directory"></param>
+        /// <returns></returns>
         public static FileInfo ResolveAssemblyFilename(this AssemblyName self, DirectoryInfo directory)
         {
 
@@ -50,7 +157,11 @@ namespace Bb.ComponentModel
 
         }
 
-
+        /// <summary>
+        /// return the assembly file name that contains the specified type
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static string GetFileName(this Type self)
         {
             return self.Assembly.Location;
@@ -104,13 +215,13 @@ namespace Bb.ComponentModel
         /// <typeparam name="T"></typeparam>
         /// <param name="filterOnAttribute">filter to apply on the attributes</param>
         /// <returns></returns>
-        public static IEnumerable<Type> GetTypesWithAttributes<T>(this IEnumerable<Type> self, Type typebase, Func<T, bool> filterOnAttribute) where T : Attribute
+        public static IEnumerable<Type> GetTypesWithAttributes<T>(this IEnumerable<Type> self, Type typeBase, Func<T, bool> filterOnAttribute) where T : Attribute
         {
 
             return self.Where(type =>
             {
 
-                if (typebase == null || typebase.IsAssignableFrom(type))
+                if (typeBase == null || typeBase.IsAssignableFrom(type))
                 {
 
                     var attributes = TypeDescriptor.GetAttributes(type).OfType<T>().ToArray();
@@ -130,6 +241,11 @@ namespace Bb.ComponentModel
 
         }
 
+        /// <summary>
+        /// convert <see cref="AttributeCollection"/> to list of attributes
+        /// </summary>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
         public static IEnumerable<Attribute> ToList(this AttributeCollection attributes)
         {
             foreach (Attribute attribute in attributes)
