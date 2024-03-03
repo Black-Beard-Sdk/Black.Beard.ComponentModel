@@ -13,29 +13,27 @@ using static System.Net.WebRequestMethods;
 namespace Bb.ComponentModel
 {
 
+
+    /// <summary>
+    /// Manage the assemblies folders
+    /// </summary>
     public class AssemblyDirectoryResolver
     {
 
         #region Singleton & ctors
 
+        /// <summary>
+        /// Initializes the <see cref="AssemblyDirectoryResolver"/> class.
+        /// </summary>
         static AssemblyDirectoryResolver()
         {
 
         }
 
-        public static AssemblyDirectoryResolver Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    lock (_lock)
-                        if (_instance == null)
-                            _instance = new AssemblyDirectoryResolver();
-                return _instance;
-            }
-        }
-
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssemblyDirectoryResolver"/> class.
+        /// </summary>
+        /// <param name="paths"></param>
         public AssemblyDirectoryResolver(params string[] paths)
         {
 
@@ -47,10 +45,25 @@ namespace Bb.ComponentModel
                 _paths = new HashSet<string>(paths);
 
             AddDirectories(AppDomain.CurrentDomain.BaseDirectory);
-            
+
             var dir = FolderBinResolver.GetBinPaths().ToList();
             AddDirectories(dir);
 
+        }
+
+        /// <summary>
+        /// Prevents a default instance of the <see cref="AssemblyDirectoryResolver"/> class from being created.
+        /// </summary>
+        public static AssemblyDirectoryResolver Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    lock (_lock)
+                        if (_instance == null)
+                            _instance = new AssemblyDirectoryResolver();
+                return _instance;
+            }
         }
 
         #endregion Singleton & ctors
@@ -64,6 +77,7 @@ namespace Bb.ComponentModel
         public AssemblyDirectoryResolver Clear()
         {
             _paths.Clear();
+            _initialized = false;
             return this;
 
         }
@@ -77,7 +91,7 @@ namespace Bb.ComponentModel
         {
             if (paths != null)
                 foreach (var item in paths)
-                    DeldDirectories(new DirectoryInfo(item));
+                    DelDirectories(new DirectoryInfo(item));
             return this;
 
         }
@@ -87,11 +101,11 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="paths">The paths.</param>
         /// <returns></returns>
-        public AssemblyDirectoryResolver DeldDirectories(params string[] paths)
+        public AssemblyDirectoryResolver DelDirectories(params string[] paths)
         {
             if (paths != null)
                 foreach (var item in paths)
-                    DeldDirectories(new DirectoryInfo(item));
+                    DelDirectories(new DirectoryInfo(item));
             return this;
 
         }
@@ -101,7 +115,7 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="paths">The paths.</param>
         /// <returns></returns>
-        public AssemblyDirectoryResolver DeldDirectories(IEnumerable<DirectoryInfo> paths)
+        public AssemblyDirectoryResolver DelDirectories(IEnumerable<DirectoryInfo> paths)
         {
             if (paths != null)
                 foreach (var item in paths)
@@ -115,7 +129,7 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="paths">The paths.</param>
         /// <returns></returns>
-        public AssemblyDirectoryResolver DeldDirectories(params DirectoryInfo[] paths)
+        public AssemblyDirectoryResolver DelDirectories(params DirectoryInfo[] paths)
         {
             if (paths != null)
                 foreach (var item in paths)
@@ -264,23 +278,37 @@ namespace Bb.ComponentModel
             return list;
         }
 
+        /// <summary>
+        /// return system Directory that contains the root assemblies
+        /// </summary>
+        public static DirectoryInfo SystemDirectory => _sSystemDirectory ?? (_sSystemDirectory = new FileInfo(typeof(object).Assembly.Location).Directory);
 
         #region Get Paths
 
+        /// <summary>
+        /// return the list of directories of loaded assemblies.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<string> GetPaths()
         {
 
             if (!_initialized)
-            {
-                _initialized = true;
-                AddDirectories(TypeDiscovery.Instance.GetDirectoryPathFromAssemblies());
-            }
+                lock (_lock)
+                    if (!_initialized)
+                    {
+                        _initialized = true;
+                        AddDirectories(TypeDiscovery.Instance.GetDirectoryPathFromAssemblies());
+                    }
 
             foreach (var item in _paths)
                 yield return item;
 
         }
 
+        /// <summary>
+        /// return the list of directories of loaded assemblies.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DirectoryInfo> GetDirectories()
         {
             foreach (var item in GetPaths())
@@ -411,6 +439,7 @@ namespace Bb.ComponentModel
         /// </value>
         public bool ThrowExceptionIfNotFound { get; set; } = false;
 
+        private static DirectoryInfo _sSystemDirectory;
         private static readonly object _lock = new object();
         private readonly HashSet<string> _paths;
         private readonly HashSet<string> _excludedFiles;

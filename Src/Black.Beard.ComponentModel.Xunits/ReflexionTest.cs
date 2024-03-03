@@ -1,6 +1,9 @@
-﻿using Bb.ComponentModel;
+﻿using Bb;
+using Bb.ComponentModel;
 using Bb.ComponentModel.Attributes;
+using Bb.Diagnostics;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Xunit;
 
@@ -18,13 +21,65 @@ namespace DynamicDescriptors.Tests
 
             var directories = new AssemblyDirectoryResolver();
 
-            directories.GetSystemDirectory();
 
+            AssemblyDirectoryResolver.Instance
+                .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
+
+            TypeDiscovery.Initialize();
 
         }
 
 
-            [Fact]
+        [Fact]
+        public void FilterStatic()
+        {
+            var types = TypeDiscovery.Instance.GetStaticTypes().Any();
+            Assert.True(types);
+        }
+
+
+        //[Fact]
+        //public void ResolveMeterSource()
+        //{
+        //    var names = DiagnosticProviderExtensions.GetMeterNames().ToArray();
+        //    var test = names.Any();
+        //    Assert.True(test);
+        //    ComponentModelMetricProvider.Counter.Add(1);
+        //}
+
+
+        [Fact]
+        public void ResolveActivitySource()
+        {
+            var names = DiagnosticProviderExtensions.GetActivityNames().ToArray();
+            var test = names.Any();
+            Assert.True(test);
+        }
+
+
+        [Fact]
+        public void ResolveActivitySource2()
+        {
+                                                                  
+            ActivitySource.AddActivityListener(new ActivityListener()
+            {
+                ShouldListenTo = (activitySource) =>
+                {
+                    return true;
+                },
+                ActivityStarted = (activity) => 
+                {
+                    Console.WriteLine(activity.OperationName);
+                },
+            });
+
+            TypeDiscovery.Initialize();
+
+            TypeDiscovery.Instance.EnsureAllAssembliesAreLoaded();
+
+        }
+
+        [Fact]
         public void FilterTest1()
         {
 
@@ -56,10 +111,7 @@ namespace DynamicDescriptors.Tests
         public void FilterTest2()
         {
 
-            var directories = new AssemblyDirectoryResolver()
-                .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
-
-            TypeDiscovery.Initialize(directories);
+            TypeDiscovery.Initialize();
 
             var types = TypeDiscovery.Instance
                 .Search(c =>
@@ -81,7 +133,6 @@ namespace DynamicDescriptors.Tests
             var directories = new AssemblyDirectoryResolver()
                 .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
 
-            TypeDiscovery.Initialize(directories);
 
             var types = TypeDiscovery.Instance
                 .Search(c =>
@@ -101,8 +152,6 @@ namespace DynamicDescriptors.Tests
 
             var directories = new AssemblyDirectoryResolver()
                 .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
-
-            TypeDiscovery.Initialize(directories);
 
             var types = TypeDiscovery.Instance
                 .Search(c =>
@@ -126,11 +175,6 @@ namespace DynamicDescriptors.Tests
 
             var autoloadTypes = true;
 
-            var directories = new AssemblyDirectoryResolver()
-                .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
-
-            TypeDiscovery.Initialize(directories);
-
             var types = TypeDiscovery.Instance
                 .Search(c =>
                     c.InContext(ConstantsCore.Plugin)
@@ -148,11 +192,6 @@ namespace DynamicDescriptors.Tests
         [Fact]
         public void FilterTest6()
         {
-
-            var directories = new AssemblyDirectoryResolver()
-                .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
-
-            TypeDiscovery.Initialize(directories);
 
             var types = TypeDiscovery.Instance
                 .Search(c =>
@@ -174,10 +213,6 @@ namespace DynamicDescriptors.Tests
         public void GetLoadedAsseembliesTest()
         {
 
-            var directories = new AssemblyDirectoryResolver()
-                .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
-            TypeDiscovery.Initialize(directories);
-
             var dic = TypeDiscovery.Instance.GetLoadedAssemblies().ToList();
 
             foreach (var item in AppDomain.CurrentDomain.GetAssemblies())
@@ -192,11 +227,6 @@ namespace DynamicDescriptors.Tests
         [Fact]
         public void GetAllAsseembliesTest()
         {
-
-
-            var directories = new AssemblyDirectoryResolver()
-                .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
-            TypeDiscovery.Initialize(directories);
 
             var dic = TypeDiscovery.Instance.GetAllAssemblies();
 

@@ -13,13 +13,38 @@ namespace Bb.ComponentModel
     {
 
 
+        static TypeDiscoveryExtension()
+        {
+            _systemDirectory = AssemblyDirectoryResolver.SystemDirectory.FullName;
+        }
+
+        /// <summary>
+        /// Return true if the assembly is an assembly system
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static bool IsAssemblySystem(this Assembly self)
+        {
+            
+            if (self.IsDynamic || string.IsNullOrEmpty(self.Location) || self.Location.StartsWith(_systemDirectory))
+                return true;
+
+            var name = self.GetName().Name;
+
+            if (name.StartsWith("System.") || name.StartsWith("Microsoft."))
+                return true;
+
+            return false;
+
+        }
+
         /// <summary>
         /// return true if specified type is static
         /// </summary>
         /// <returns></returns>
         public static bool IsStatic(this Type self)
         {
-            return self.IsClass && self.IsSealed && self.IsAbstract; ;
+            return self.IsClass && self.IsSealed && self.IsAbstract;
         }
 
 
@@ -36,7 +61,7 @@ namespace Bb.ComponentModel
                 foreach (var item in self.GetFields(flags))
                     if (func(item))
                         return true;
-            
+
             return false;
 
         }
@@ -196,7 +221,7 @@ namespace Bb.ComponentModel
             {
                 return baseType.IsAssignableFrom(type)
                         && TypeDescriptor.GetAttributes(type).ToList().Any(c => c.GetType() == typeFilter);
-                        
+
             });
 
         }
@@ -262,6 +287,8 @@ namespace Bb.ComponentModel
             foreach (Attribute attribute in attributes)
                 yield return attribute;
         }
+
+        private static string _systemDirectory;
 
     }
 
