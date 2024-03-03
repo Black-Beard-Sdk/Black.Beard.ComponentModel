@@ -400,7 +400,11 @@ namespace Bb.ComponentModel
         public IEnumerable<FileInfo> ResolveAssemblyFilenames(AssemblyName assemblyName)
         {
             foreach (var directory in this.GetDirectories())
-                yield return assemblyName.ResolveAssemblyFilename(directory);
+            {
+                var ass = assemblyName.ResolveAssemblyFilename(directory);
+                if (ass != null)
+                    yield return ass;
+            }
         }
 
         /// <summary>

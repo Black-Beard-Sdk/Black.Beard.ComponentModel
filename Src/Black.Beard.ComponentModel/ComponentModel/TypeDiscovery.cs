@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -113,14 +114,27 @@ namespace Bb.ComponentModel
         private Assembly AssemblyLoad(AssemblyName item)
         {
 
-            var ass = Assembly.Load(item);
-            ComponentModelActivityProvider.Set(c =>
+            try
             {
-                c.SetCustomProperty("added_ass" + _loadedByFile.Count().ToString(), item.FullName);
-            });
 
-            AddAssembly(ass);
-            return ass;
+                var ass = Assembly.Load(item);
+                if (ComponentModelActivityProvider.WithTelemetry)
+                    ComponentModelActivityProvider.AddProperty("added_ass" + _loadedByFile.Count().ToString(), item.FullName);
+
+                AddAssembly(ass);
+                return ass;
+
+            }
+            catch (Exception ex)
+            {
+
+                Trace.TraceError($"Failed to resolve {item.Name}");
+                if (ComponentModelActivityProvider.WithTelemetry)
+                    ComponentModelActivityProvider.AddProperty("failed_ass" + _loadedByFile.Count().ToString(), item.FullName);
+
+                return null;
+            }
+         
         }
 
         private Assembly AssemblyLoad(string item)
@@ -680,18 +694,18 @@ namespace Bb.ComponentModel
             var n = new AssemblyName(args.Name);
 
             foreach (var filename in Paths.ResolveAssemblyFilenames(n))
-            {
+                if (filename != null && filename.Exists)
+                {
+                    Assembly assembly;
 
-                Assembly assembly;
+                    if (!IsLoadedByFile(filename))
+                        assembly = AssemblyLoad(filename.FullName);
+                    else
+                        assembly = _loadedByFile[filename.FullName];
 
-                if (!IsLoadedByFile(filename))
-                    assembly = AssemblyLoad(filename.FullName);
-                else
-                    assembly = _loadedByFile[filename.FullName];
+                    return assembly;
 
-                return assembly;
-
-            }
+                }
 
             var str = $"the assembly '{args.Name}' can't be resolved'";
 

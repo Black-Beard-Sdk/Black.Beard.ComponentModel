@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace Bb.Diagnostics
 {
@@ -74,6 +75,21 @@ namespace Bb.Diagnostics
             return types;
 
         }
+
+
+        public static string GetActivityName(Type type)
+        {
+            var name = type.Name;
+            if (name.EndsWith("Provider"))
+                name = name.Substring(0, name.Length - "Provider".Length);
+            return name;
+        }
+
+        public static Version GetActivityVersion(Type type)
+        {
+            return type.Assembly.GetName().Version ?? new Version("1.0.0");
+        }
+
 
     }
 

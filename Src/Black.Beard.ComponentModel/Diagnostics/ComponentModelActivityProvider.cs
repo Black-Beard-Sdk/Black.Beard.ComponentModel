@@ -1,6 +1,10 @@
-﻿using System;
+﻿// Ignore Spelling: Metrology
+
+using Bb.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace Bb.Diagnostics
@@ -29,13 +33,13 @@ namespace Bb.Diagnostics
         public static Activity? CreateActivity(string name, ActivityKind kind)
         {
 
-            if (!_withTelemetry)
+            if (!WithTelemetry)
                 return null;
 
-            _current = Source.CreateActivity(name, kind);
-            _withTelemetry = _current != null;
+            var current = Source.CreateActivity(name, kind);
+            WithTelemetry = current != null;
 
-            return _current;
+            return current;
 
         }
 
@@ -58,16 +62,13 @@ namespace Bb.Diagnostics
         public static Activity? CreateActivity(string name, ActivityKind kind, ActivityContext parentContext, IEnumerable<KeyValuePair<string, object?>>? tags = null, IEnumerable<ActivityLink>? links = null, ActivityIdFormat idFormat = ActivityIdFormat.Unknown)
         {
 
-            if (!_withTelemetry)
+            if (!WithTelemetry)
                 return null;
 
-            if (ComponentModelActivityProvider._current != null)
-                throw new InvalidOperationException("Activity already exists");
+            var current = Source.CreateActivity(name, kind, parentContext, tags, links, idFormat);
+            WithTelemetry = current != null;
 
-            _current = Source.CreateActivity(name, kind, parentContext, tags, links, idFormat);
-            _withTelemetry = _current != null;
-
-            return _current;
+            return current;
 
         }
 
@@ -89,16 +90,13 @@ namespace Bb.Diagnostics
         public static Activity? CreateActivity(string name, ActivityKind kind, string parentId, IEnumerable<KeyValuePair<string, object?>>? tags = null, IEnumerable<ActivityLink>? links = null, ActivityIdFormat idFormat = ActivityIdFormat.Unknown)
         {
 
-            if (!_withTelemetry)
+            if (!WithTelemetry)
                 return null;
 
-            if (ComponentModelActivityProvider._current != null)
-                throw new InvalidOperationException("Activity already exists");
+            var current = Source.CreateActivity(name, kind, parentId, tags, links, idFormat);
+            WithTelemetry = current != null;
 
-            _current = Source.CreateActivity(name, kind, parentId, tags, links, idFormat);
-            _withTelemetry = _current != null;
-
-            return _current;
+            return current;
 
         }
 
@@ -113,16 +111,13 @@ namespace Bb.Diagnostics
         public static Activity? StartActivity([CallerMemberName] string name = "", ActivityKind kind = ActivityKind.Internal)
         {
 
-            if (!_withTelemetry)
+            if (!WithTelemetry)
                 return null;
 
-            if (ComponentModelActivityProvider._current != null)
-                throw new InvalidOperationException("Activity already exists");
+            var current = Source.StartActivity(name, kind);
+            WithTelemetry = current != null;
 
-            _current = Source.StartActivity(name, kind);
-            _withTelemetry = _current != null;
-
-            return _current;
+            return current;
 
         }
 
@@ -141,16 +136,13 @@ namespace Bb.Diagnostics
         public static Activity? StartActivity(string name, ActivityKind kind, ActivityContext parentContext, IEnumerable<KeyValuePair<string, object?>>? tags = null, IEnumerable<ActivityLink>? links = null, DateTimeOffset startTime = default)
         {
 
-            if (!_withTelemetry)
+            if (!WithTelemetry)
                 return null;
 
-            if (ComponentModelActivityProvider._current != null)
-                throw new InvalidOperationException("Activity already exists");
+            var current = Source.StartActivity(name, kind, parentContext, tags, links, startTime);
+            WithTelemetry = current != null;
 
-            _current = Source.StartActivity(name, kind, parentContext, tags, links, startTime);
-            _withTelemetry = _current != null;
-
-            return _current;
+            return current;
 
         }
 
@@ -169,16 +161,13 @@ namespace Bb.Diagnostics
         public static Activity? StartActivity(string name, ActivityKind kind, string parentId, IEnumerable<KeyValuePair<string, object?>>? tags = null, IEnumerable<ActivityLink>? links = null, DateTimeOffset startTime = default)
         {
 
-            if (!_withTelemetry)
+            if (!WithTelemetry)
                 return null;
 
-            if (ComponentModelActivityProvider._current != null)
-                throw new InvalidOperationException("Activity already exists");
+            var current = Source.StartActivity(name, kind, parentId, tags, links, startTime);
+            WithTelemetry = current != null;
 
-            _current = Source.StartActivity(name, kind, parentId, tags, links, startTime);
-            _withTelemetry = _current != null;
-
-            return _current;
+            return current;
 
         }
 
@@ -197,16 +186,13 @@ namespace Bb.Diagnostics
         public static Activity? StartActivity(ActivityKind kind, ActivityContext parentContext = default, IEnumerable<KeyValuePair<string, object?>>? tags = null, IEnumerable<ActivityLink>? links = null, DateTimeOffset startTime = default, [CallerMemberName] string name = "")
         {
 
-            if (!_withTelemetry)
+            if (!WithTelemetry)
                 return null;
 
-            if (ComponentModelActivityProvider._current != null)
-                throw new InvalidOperationException("Activity already exists");
+            var current = Source.StartActivity(kind, parentContext, tags, links, startTime, name);
+            WithTelemetry = current != null;
 
-            _current = Source.StartActivity(kind, parentContext, tags, links, startTime, name);
-            _withTelemetry = _current != null;
-
-            return _current;
+            return current;
 
         }
 
@@ -222,9 +208,66 @@ namespace Bb.Diagnostics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Set(Action<Activity> action)
         {
-            if (_withTelemetry && action != null)
-                if (_current != null)
-                    action(_current);
+            if (WithTelemetry && action != null)
+            {
+                var current = Activity.Current;
+                if (current != null)
+                    action(current);
+            }
+        }
+
+        /// <summary>
+        /// Add custom property to the current Activity object for the current execution context.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public static void AddProperty(string key, object value)
+        {
+            if (WithTelemetry)
+            {
+                var current = Activity.Current;
+                if (current != null)
+                    current.SetCustomProperty(key, value);
+            }
+        }
+
+        /// <summary>
+        /// Add custom property to the current Activity object for the current execution context.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public static void AddBaggage(string key, string value)
+        {
+            if (WithTelemetry)
+            {
+                var current = Activity.Current;
+                if (current != null)
+                    current.AddBaggage(key, value);
+            }
+        }
+
+        /// <summary>
+        /// Add custom event to the current Activity object for the current execution context.
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="tags"></param>
+        public static void AddEvent(string eventName, params (string key, string value)[] tags)
+        {
+            if (WithTelemetry)
+            {
+                var current = Activity.Current;
+                if (current != null)
+                {
+
+                    var _tags = new ActivityTagsCollection();
+
+                    foreach (var item in tags)
+                        _tags.Add(item.key, item.value);
+
+                    current.AddEvent(new ActivityEvent(eventName, default, _tags));
+
+                }
+            }
         }
 
         #endregion Append infos
@@ -234,22 +277,16 @@ namespace Bb.Diagnostics
         /// </summary>
         static ComponentModelActivityProvider()
         {
-            Name = nameof(ComponentModelActivityProvider);
-            Name = Name.Substring(0, Name.Length - "Provider".Length);
-            Version = typeof(ComponentModelActivityProvider).Assembly.GetName().Version;
+            Name = DiagnosticProviderExtensions.GetActivityName(typeof(ComponentModelActivityProvider));
+            Version = DiagnosticProviderExtensions.GetActivityVersion(typeof(ComponentModelActivityProvider));
             Source = new ActivitySource(Name, Version?.ToString());
         }
 
         internal static ActivitySource Source;
         public static readonly string Name;
         public static readonly Version Version;
-        private static bool _withTelemetry = true;
-
-        public static Activity Current { get; private set; }
-
-        [ThreadStatic]
-        private static Activity _current;
-
+        public static bool WithTelemetry = true;
 
     }
+
 }
