@@ -33,7 +33,7 @@ namespace Bb.Diagnostics
                 return null;
 
             _current = Source.CreateActivity(name, kind);
-            _withTelemetry = _current == null;
+            _withTelemetry = _current != null;
 
             return _current;
 
@@ -65,7 +65,7 @@ namespace Bb.Diagnostics
                 throw new InvalidOperationException("Activity already exists");
 
             _current = Source.CreateActivity(name, kind, parentContext, tags, links, idFormat);
-            _withTelemetry = _current == null;
+            _withTelemetry = _current != null;
 
             return _current;
 
@@ -96,7 +96,7 @@ namespace Bb.Diagnostics
                 throw new InvalidOperationException("Activity already exists");
 
             _current = Source.CreateActivity(name, kind, parentId, tags, links, idFormat);
-            _withTelemetry = _current == null;
+            _withTelemetry = _current != null;
 
             return _current;
 
@@ -120,7 +120,7 @@ namespace Bb.Diagnostics
                 throw new InvalidOperationException("Activity already exists");
 
             _current = Source.StartActivity(name, kind);
-            _withTelemetry = _current == null;
+            _withTelemetry = _current != null;
 
             return _current;
 
@@ -148,7 +148,7 @@ namespace Bb.Diagnostics
                 throw new InvalidOperationException("Activity already exists");
 
             _current = Source.StartActivity(name, kind, parentContext, tags, links, startTime);
-            _withTelemetry = _current == null;
+            _withTelemetry = _current != null;
 
             return _current;
 
@@ -176,7 +176,7 @@ namespace Bb.Diagnostics
                 throw new InvalidOperationException("Activity already exists");
 
             _current = Source.StartActivity(name, kind, parentId, tags, links, startTime);
-            _withTelemetry = _current == null;
+            _withTelemetry = _current != null;
 
             return _current;
 
@@ -204,7 +204,7 @@ namespace Bb.Diagnostics
                 throw new InvalidOperationException("Activity already exists");
 
             _current = Source.StartActivity(kind, parentContext, tags, links, startTime, name);
-            _withTelemetry = _current == null;
+            _withTelemetry = _current != null;
 
             return _current;
 
