@@ -45,7 +45,7 @@ namespace Bb.ComponentModel
             var a = this.GetAssemblies();   //.OrderBy(c => c.FullName).ToList();
 
             foreach (var assembly in a)
-                AddAssembly(assembly);            
+                AddAssembly(assembly);
 
         }
 
@@ -134,7 +134,7 @@ namespace Bb.ComponentModel
 
                 return null;
             }
-         
+
         }
 
         private Assembly AssemblyLoad(string item)
@@ -157,9 +157,9 @@ namespace Bb.ComponentModel
                     {
                         Trace.TraceInformation($"Assembly {ass} is loaded from {location}");
                         _loadedByFile.Add(location, ass);
+                        Paths.AddDirectoryFromFiles(location);
                     }
 
-            Paths.AddDirectoryFromFiles(location);
 
             if (!_assemblyNames.TryGetValue(name.Name, out var dic))
                 lock (_lock2)
@@ -287,7 +287,6 @@ namespace Bb.ComponentModel
                 {
                     AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
                 }
-
 
         }
 
@@ -905,10 +904,11 @@ namespace Bb.ComponentModel
         /// <summary>
         ///     Load in memory all the assemblies from the directory bin.
         /// </summary>
-        public void LoadAssembliesFromFolders()
+        public void LoadAssembliesFromFolders(IEnumerable<DirectoryInfo> dirs)
         {
-            foreach (var path in Paths.GetDirectories())
-                LoadAssembliesFrom(path);
+            foreach (var path in dirs)
+                if (!Paths.IsInSystemDirectory(path))
+                    LoadAssembliesFrom(path);
         }
 
         /// <summary>

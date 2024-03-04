@@ -19,7 +19,7 @@ namespace ComponentModels.Tests.TypeDiscoveries
         public void Constructor_Factory1()
         {
 
-            TypeDiscovery.Instance.LoadAssembliesFromFolders();
+            TypeDiscovery.Instance.LoadAssembliesFromFolders(AssemblyDirectoryResolver.Instance.GetDirectories());
 
             TypeDiscovery.Instance.EnsureAllAssembliesAreLoaded();
             TypeDiscovery.Instance.EnsureAllAssembliesAreLoaded();

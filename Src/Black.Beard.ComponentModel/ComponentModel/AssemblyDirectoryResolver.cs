@@ -283,6 +283,10 @@ namespace Bb.ComponentModel
         /// </summary>
         public static DirectoryInfo SystemDirectory => _sSystemDirectory ?? (_sSystemDirectory = new FileInfo(typeof(object).Assembly.Location).Directory);
 
+        public static DirectoryInfo EntryDirectory => _sEntryDirectory ?? (_sEntryDirectory = new FileInfo(Assembly.GetEntryAssembly().Location).Directory);
+
+                
+
         #region Get Paths
 
         /// <summary>
@@ -432,6 +436,22 @@ namespace Bb.ComponentModel
             return this;
         }
 
+        public bool IsInSystemDirectory(DirectoryInfo path)
+        {
+
+            var pathEntry = EntryDirectory.FullName;
+            var pathSystem = SystemDirectory.FullName;
+
+            if (pathEntry == pathSystem)
+                return false;
+
+            if (path.FullName == pathSystem)
+                return true;
+
+            return false;
+
+        }
+
         #endregion Get assembly files
 
 
@@ -444,6 +464,7 @@ namespace Bb.ComponentModel
         public bool ThrowExceptionIfNotFound { get; set; } = false;
 
         private static DirectoryInfo _sSystemDirectory;
+        private static DirectoryInfo _sEntryDirectory;
         private static readonly object _lock = new object();
         private readonly HashSet<string> _paths;
         private readonly HashSet<string> _excludedFiles;

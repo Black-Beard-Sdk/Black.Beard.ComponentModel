@@ -4,6 +4,7 @@ using Bb.ComponentModel.Attributes;
 using Bb.Diagnostics;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Xunit;
 
@@ -13,6 +14,21 @@ namespace DynamicDescriptors.Tests
 
     public sealed class ReflexionTest
     {
+
+
+        [Fact]
+        public void TestIsSystemDirectory()
+        {
+            var test = AssemblyDirectoryResolver.Instance.IsInSystemDirectory(new FileInfo(typeof(ReflexionTest).Assembly.Location).Directory);
+            Assert.False(test);
+        }
+
+        [Fact]
+        public void TestIsSystemDirectory2()
+        {
+            var test = AssemblyDirectoryResolver.Instance.IsInSystemDirectory(new FileInfo(typeof(object).Assembly.Location).Directory);
+            Assert.True(test);
+        }
 
 
         [Fact]
@@ -60,14 +76,14 @@ namespace DynamicDescriptors.Tests
         [Fact]
         public void ResolveActivitySource2()
         {
-                                                                  
+
             ActivitySource.AddActivityListener(new ActivityListener()
             {
                 ShouldListenTo = (activitySource) =>
                 {
                     return true;
                 },
-                ActivityStarted = (activity) => 
+                ActivityStarted = (activity) =>
                 {
                     Console.WriteLine(activity.OperationName);
                 },
