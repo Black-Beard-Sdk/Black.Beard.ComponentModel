@@ -260,11 +260,11 @@ namespace Bb.ComponentModel
         {
 
             var hash = new HashSet<string>();
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
             using (var _ = ComponentModelActivityProvider.StartActivity("loading assemblies"))
                 try
                 {
+                    AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
                     var assemblies = assembly.GetReferencedAssemblies();
                     foreach (AssemblyName ass in assemblies)
@@ -285,9 +285,7 @@ namespace Bb.ComponentModel
                 }
                 finally
                 {
-
                     AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
-
                 }
 
 
@@ -707,13 +705,17 @@ namespace Bb.ComponentModel
 
                 }
 
-            var str = $"the assembly '{args.Name}' can't be resolved'";
-
-            Console.Write(str);
+            if (AssemblyNotResolved != null)
+                return AssemblyNotResolved(args);
 
             return null;
 
         }
+
+        /// <summary>
+        /// Intercept the event when an assembly is not resolved
+        /// </summary>
+        public Func<ResolveEventArgs, Assembly> AssemblyNotResolved { get; set; }
 
         /// <summary>
         /// 
