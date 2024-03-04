@@ -436,6 +436,11 @@ namespace Bb.ComponentModel
             return this;
         }
 
+        /// <summary>
+        /// Return true if the directory is System directory
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public bool IsInSystemDirectory(DirectoryInfo path)
         {
 
@@ -450,6 +455,17 @@ namespace Bb.ComponentModel
 
             return false;
 
+        }
+
+        /// <summary>
+        /// Return true if the directory is entry directory
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public bool IsInEntryDirectory(DirectoryInfo path)
+        {
+            var pathEntry = EntryDirectory.FullName;
+            return path.FullName == pathEntry;
         }
 
         #endregion Get assembly files
