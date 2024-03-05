@@ -18,6 +18,68 @@ namespace Bb.ComponentModel
             _systemDirectory = AssemblyDirectoryResolver.SystemDirectory.FullName;
         }
 
+
+        /// <summary>
+        /// return a list of type that assignable from the specified type
+        /// </summary>
+        /// <param name="typeFilter">type of base</param>
+        /// <returns></returns>
+        public static IEnumerable<Type> GetTypesAssignableFrom(this Type typeFilter)
+        {
+            return TypeDiscovery.Instance.GetTypesAssignableFrom(typeFilter);
+        }
+
+
+        /// <summary>
+        /// return a list of type that contains the specified attribute
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="fileFilter"></param>
+        /// <returns></returns>
+        public static IEnumerable<Type> GetTypes(this Assembly self, Func<Type, bool> fileFilter)
+        {
+            return TypeDiscovery.Instance.GetTypes(self, fileFilter);
+        }
+
+
+        /// <summary>
+        /// return a list of assemblies
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="fileFilter"></param>
+        /// <returns></returns>
+        public static IEnumerable<Assembly> GetAssembliesFromFolder(this DirectoryInfo self, Func<FileInfo, bool> fileFilter)
+        {
+
+            Assembly assembly = null;
+
+            if (fileFilter == null)
+            {
+
+                foreach (var item in self.GetFiles("*.dll", SearchOption.AllDirectories))
+                {
+                    try
+                    {
+                        assembly = AssemblyLoader.Instance.LoadAssembly(item, null);
+                    }
+                    catch (Exception) { }
+
+                    yield return assembly;
+
+                }
+
+            }
+            else
+            {
+                foreach (var item in self.GetFiles("*.dll", SearchOption.AllDirectories))
+                    if (fileFilter(item))
+                    {
+                        yield return Assembly.LoadFile(item.FullName);
+                    }
+            }
+        }
+
+
         /// <summary>
         /// Return true if the assembly is an assembly system
         /// </summary>
@@ -25,7 +87,7 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public static bool IsAssemblySystem(this Assembly self)
         {
-            
+
             if (self.IsDynamic || string.IsNullOrEmpty(self.Location) || self.Location.StartsWith(_systemDirectory))
                 return true;
 
@@ -138,6 +200,7 @@ namespace Bb.ComponentModel
 
         }
 
+
         /// <summary>
         /// return a list file that contains the assembly name
         /// </summary>
@@ -145,6 +208,7 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public static IEnumerable<FileInfo> ResolveAssemblyFilename(this AssemblyName self)
         {
+
             var path = TypeDiscovery.Instance.Paths;
             foreach (var item in path.GetPaths())
             {

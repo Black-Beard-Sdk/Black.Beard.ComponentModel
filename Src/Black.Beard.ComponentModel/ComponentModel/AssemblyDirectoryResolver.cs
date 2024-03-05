@@ -3,15 +3,16 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Net.WebRequestMethods;
 
 namespace Bb.ComponentModel
 {
+
 
 
     /// <summary>
@@ -267,7 +268,6 @@ namespace Bb.ComponentModel
 
         #endregion Add directories
 
-
         /// <summary>
         /// Gets the system directories.
         /// </summary>
@@ -285,7 +285,7 @@ namespace Bb.ComponentModel
 
         public static DirectoryInfo EntryDirectory => _sEntryDirectory ?? (_sEntryDirectory = new FileInfo(Assembly.GetEntryAssembly().Location).Directory);
 
-                
+
 
         #region Get Paths
 
@@ -304,7 +304,8 @@ namespace Bb.ComponentModel
                         AddDirectories(TypeDiscovery.Instance.GetDirectoryPathFromAssemblies());
                     }
 
-            foreach (var item in _paths)
+            var paths = _paths.ToList();
+            foreach (var item in paths)
                 yield return item;
 
         }
@@ -435,6 +436,31 @@ namespace Bb.ComponentModel
                 _excludedFiles.Add(item.FullName);
             return this;
         }
+
+
+        /// <summary>
+        /// return true id the specified assembly is in System
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public bool IsInSystemDirectory(Assembly assembly)
+        {
+            if (assembly.IsDynamic)
+                return false;   
+
+            return IsInSystemDirectory(new FileInfo(assembly.Location).Directory);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public bool IsInSystemDirectory(FileInfo file)
+        {
+            return IsInSystemDirectory(file?.Directory);
+        }
+
 
         /// <summary>
         /// Return true if the directory is System directory

@@ -21,12 +21,13 @@ namespace Bb.ComponentModel
     public class TypeDiscovery
     {
 
+
         #region Initialize
 
-        private TypeDiscovery()
+        public TypeDiscovery(AssemblyDirectoryResolver folders = null)
         {
 
-            Paths = AssemblyDirectoryResolver.Instance;
+            Paths = folders ?? AssemblyDirectoryResolver.Instance;
 
             ExcludedAssemblies = new List<string>();
             FilterAssembly = c => true;
@@ -39,13 +40,6 @@ namespace Bb.ComponentModel
 
             //OnRegisterException = e => Logger.Error(e);
             HideAssemblyLoadException = true;
-
-            AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad;
-
-            var a = this.GetAssemblies();   //.OrderBy(c => c.FullName).ToList();
-
-            foreach (var assembly in a)
-                AddAssembly(assembly);
 
         }
 
@@ -102,7 +96,6 @@ namespace Bb.ComponentModel
         }
 
 
-
         /// <summary>
         /// Gets the paths folder list for resolver types.
         /// </summary>
@@ -110,69 +103,6 @@ namespace Bb.ComponentModel
         /// <see cref="AssemblyDirectoryResolver"/> 
         /// </value>
         public AssemblyDirectoryResolver Paths { get; }
-
-        private Assembly AssemblyLoad(AssemblyName item)
-        {
-
-            try
-            {
-
-                var ass = Assembly.Load(item);
-                if (ComponentModelActivityProvider.WithTelemetry)
-                    ComponentModelActivityProvider.AddProperty("added_ass" + _loadedByFile.Count().ToString(), item.FullName);
-
-                AddAssembly(ass);
-                return ass;
-
-            }
-            catch (Exception ex)
-            {
-
-                Trace.TraceError($"Failed to resolve {item.Name}");
-                if (ComponentModelActivityProvider.WithTelemetry)
-                    ComponentModelActivityProvider.AddProperty("failed_ass" + _loadedByFile.Count().ToString(), item.FullName);
-
-                return null;
-            }
-
-        }
-
-        private Assembly AssemblyLoad(string item)
-        {
-            var ass = Assembly.LoadFile(item);
-            AddAssembly(ass);
-            return ass;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void AddAssembly(Assembly ass)
-        {
-
-            var location = ass.Location;
-            var name = ass.GetName();
-
-            if (!_loadedByFile.ContainsKey(location))
-                lock (_lock2)
-                    if (!_loadedByFile.ContainsKey(location))
-                    {
-                        Trace.TraceInformation($"Assembly {ass} is loaded from {location}");
-                        _loadedByFile.Add(location, ass);
-                        Paths.AddDirectoryFromFiles(location);
-                    }
-
-
-            if (!_assemblyNames.TryGetValue(name.Name, out var dic))
-                lock (_lock2)
-                    if (!_assemblyNames.TryGetValue(name.Name, out dic))
-                        _assemblyNames.Add(name.Name, dic = new HashSet<string>());
-
-            dic.Add(name.Version.ToString());
-        }
-
-        private void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
-        {
-            AddAssembly(args.LoadedAssembly);
-        }
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -187,39 +117,6 @@ namespace Bb.ComponentModel
             return _loadedByFile.ContainsKey(filename.FullName);
         }
 
-        /// <summary>
-        /// Return true if assembly is already loaded
-        /// </summary>
-        /// <param name="name">assemblyName</param>
-        /// <param name="acceptAllversions">if false don't try to match the version</param>
-        /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool IsLoadedByAssemblyByName(AssemblyName name, bool acceptAllversions)
-        {
-
-            if (!_assemblyNames.TryGetValue(name.Name, out var dic))
-                return false;
-
-            if (acceptAllversions)
-                return true;
-
-            return dic.Contains(name.Version.ToString());
-
-        }
-
-        /// <summary>
-        /// Determines whether assembly name is loaded.
-        /// </summary>
-        /// <param name="assemblyName">Name of the assembly.</param>
-        /// <param name="acceptAllVersion">if set to <c>true</c> [accept all version].</param>
-        /// <returns>
-        ///   <c>true</c> if is loaded otherwise, <c>false</c>.
-        /// </returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool IsLoadedByAssemblyByName(string assemblyName, bool acceptAllVersion)
-        {
-            return IsLoadedByAssemblyByName(AssemblyName.GetAssemblyName(assemblyName), acceptAllVersion);
-        }
 
         /// <summary>
         /// try to load all referenced assemblies
@@ -231,21 +128,12 @@ namespace Bb.ComponentModel
             using (var _ = ComponentModelActivityProvider.StartActivity("loading assemblies"))
                 lock (_lock3)
                 {
-                    AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-                    try
-                    {
-                        HashSet<string> _hash = new HashSet<string>();
-                        foreach (var ass in Assemblies())
-                            if (_hash.Add(ass.FullName))
-                            {
-                                EnsureAssemblyIsLoadedWithReferences(ass, acceptAllVersion, true, _hash);
-                            }
-
-                    }
-                    finally
-                    {
-                        AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
-                    }
+                    HashSet<string> _hash = new HashSet<string>();
+                    foreach (var ass in Assemblies())
+                        if (_hash.Add(ass.FullName))
+                        {
+                            EnsureAssemblyIsLoadedWithReferences(ass, acceptAllVersion, true, _hash);
+                        }
                 }
 
         }
@@ -260,20 +148,17 @@ namespace Bb.ComponentModel
         {
 
             var hash = new HashSet<string>();
-
-            using (var _ = ComponentModelActivityProvider.StartActivity("loading assemblies"))
-                try
+            if (!Paths.IsInSystemDirectory(assembly))
+                using (var _ = ComponentModelActivityProvider.StartActivity("loading assemblies"))
                 {
-                    AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-
                     var assemblies = assembly.GetReferencedAssemblies();
                     foreach (AssemblyName ass in assemblies)
                         if (hash.Add(ass.FullName))
                         {
 
                             Assembly refAssembly;
-                            if (IsLoadedByAssemblyByName(ass, acceptAllVersion))
-                                refAssembly = AssemblyLoad(ass);
+                            if (AssemblyLoader.Instance.IsLoadedByAssemblyByName(ass, acceptAllVersion))
+                                refAssembly = AssemblyLoader.Instance.LoadAssemblyName(ass);
                             else
                                 refAssembly = GetAssembly(ass);
 
@@ -281,41 +166,37 @@ namespace Bb.ComponentModel
                                 EnsureAssemblyIsLoadedWithReferences(refAssembly, acceptAllVersion, recursively, hash);
 
                         }
-
                 }
-                finally
-                {
-                    AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
-                }
-
         }
 
 
         private void EnsureAssemblyIsLoadedWithReferences(Assembly ass, bool acceptAllVersion, bool recursively, HashSet<string> hash)
         {
 
-            AssemblyName[] assemblies = ass.GetReferencedAssemblies();
-
-            foreach (var item in assemblies)
+            if (!Paths.IsInSystemDirectory(ass))
             {
+                AssemblyName[] assemblies = ass.GetReferencedAssemblies();
 
-                Assembly assembly = null;
+                foreach (AssemblyName item in assemblies)
+                {
 
-                if (!IsLoadedByAssemblyByName(item, acceptAllVersion))
-                    try
-                    {
-                        assembly = AssemblyLoad(item);
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-                else
-                    assembly = GetAssembly(item, acceptAllVersion);
+                    Assembly assembly = null;
+                    if (!AssemblyLoader.Instance.IsLoadedByAssemblyByName(item, acceptAllVersion))
+                        try
+                        {
+                            assembly = AssemblyLoader.Instance.LoadAssemblyName(item);
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                    else
+                        assembly = GetAssembly(item, acceptAllVersion);
 
-                if (recursively && assembly != null)
-                    if (hash.Add(assembly.FullName))
-                        EnsureAssemblyIsLoadedWithReferences(assembly, acceptAllVersion, recursively, hash);
+                    if (recursively && assembly != null)
+                        if (hash.Add(assembly.FullName))
+                            EnsureAssemblyIsLoadedWithReferences(assembly, acceptAllVersion, recursively, hash);
 
+                }
             }
 
         }
@@ -525,7 +406,7 @@ namespace Bb.ComponentModel
         /// <typeparam name="T"></typeparam>
         /// <param name="filterOnAttribute">filter to apply on the attributes</param>
         /// <returns></returns>
-        public IEnumerable<Type> GetTypesWithAttributes<T>(Type typeBase, Func<T, bool> filterOnAttribute) where T : Attribute
+        public IEnumerable<Type> GetTypesWithAttributes<T>(Type baseType, Func<T, bool> filterOnAttribute) where T : Attribute
         {
 
             var assemblies = Assemblies().ToArray();
@@ -533,7 +414,7 @@ namespace Bb.ComponentModel
             var list = Collect(type =>
             {
 
-                if (typeBase == null || typeBase.IsAssignableFrom(type))
+                if (baseType == null || baseType.IsAssignableFrom(type))
                 {
 
                     var attributes = TypeDescriptor.GetAttributes(type).OfType<T>().ToArray();
@@ -564,77 +445,67 @@ namespace Bb.ComponentModel
         public Type ResolveByName(string targetType)
         {
 
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
             Type typeResult = null;
-            try
+
+            typeResult = Type.GetType(targetType);
+
+            if (typeResult == null)
             {
-                typeResult = Type.GetType(targetType);
+                var targetype = targetType.Split(',');
+                if (targetype.Length == 1)
+                    return null;
 
-                if (typeResult == null)
+                var assemblyName = targetype[0].Trim();
+                var typeName = targetype[1].Trim();
+
+                Assembly assembly = null;
+
+                #region resolve assembly
+
+                var result = new List<Type>();
+                var assemblies = Assemblies().ToArray();
+                foreach (var item in assemblies)
                 {
-                    var targetype = targetType.Split(',');
-                    if (targetype.Length == 1)
-                        return null;
 
-                    var assemblyName = targetype[0].Trim();
-                    var typeName = targetype[1].Trim();
-
-                    Assembly assembly = null;
-
-                    #region resolve assembly
-
-                    var result = new List<Type>();
-                    var assemblies = Assemblies().ToArray();
-                    foreach (var item in assemblies)
+                    string name = item.GetName().Name;
+                    if (name == assemblyName)
                     {
-
-                        string name = item.GetName().Name;
-                        if (name == assemblyName)
-                        {
-                            assembly = item;
-                            break;
-                        }
+                        assembly = item;
+                        break;
                     }
+                }
 
-                    if (assembly == null)
-                        throw new DllNotFoundException(assemblyName);
+                if (assembly == null)
+                    throw new DllNotFoundException(assemblyName);
 
-                    #endregion resolve assembly
+                #endregion resolve assembly
 
-                    foreach (Type type in assembly.ExportedTypes)
+                foreach (Type type in assembly.ExportedTypes)
+                {
+                    string ns = type.Namespace + "." + type.Name;
+                    if (ns == typeName)
                     {
-                        string ns = type.Namespace + "." + type.Name;
-                        if (ns == typeName)
-                        {
-                            typeResult = type;
-                            break;
-                        }
+                        typeResult = type;
+                        break;
                     }
-
                 }
 
             }
-            finally
-            {
-                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
-            }
-
             return typeResult;
 
         }
 
         /// <summary>
-        ///     return a list of type that assignable from the specified type
+        /// return a list of type that assignable from the specified type
         /// </summary>
         /// <param name="typeFilter"></param>
         /// <returns></returns>
-        public IEnumerable<Type> GetTypes(Type typeFilter)
+        public IEnumerable<Type> GetTypesAssignableFrom(Type typeFilter)
         {
             var assemblies = Assemblies().ToArray();
             foreach (var item in Collect(type => typeFilter.IsAssignableFrom(type) && type != typeFilter, assemblies))
                 yield return item;
         }
-
 
         /// <summary>
         /// Gets the exposed types for the specified context.
@@ -685,60 +556,6 @@ namespace Bb.ComponentModel
 
         #region Load assemblies
 
-        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-        {
-
-            var n = new AssemblyName(args.Name);
-
-            foreach (var filename in Paths.ResolveAssemblyFilenames(n))
-                if (filename != null && filename.Exists)
-                {
-                    Assembly assembly;
-
-                    if (!IsLoadedByFile(filename))
-                        assembly = AssemblyLoad(filename.FullName);
-                    else
-                        assembly = _loadedByFile[filename.FullName];
-
-                    return assembly;
-
-                }
-
-            if (AssemblyNotResolved != null)
-                return AssemblyNotResolved(args);
-
-            return null;
-
-        }
-
-        /// <summary>
-        /// Intercept the event when an assembly is not resolved
-        /// </summary>
-        public Func<ResolveEventArgs, Assembly> AssemblyNotResolved { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fileAssembly">filename of the assembly</param>
-        /// <param name="withPdb">if true, test if the pdb exist and load it</param>
-        /// <returns></returns>
-        public Assembly AddAssemblyFile(string fileAssembly, bool withPdb)
-        {
-
-            var file = new System.IO.FileInfo(fileAssembly);
-
-            if (withPdb)
-            {
-                FileInfo filePdb = new FileInfo(Path.Combine(file.Directory.FullName, Path.GetFileNameWithoutExtension(file.Name)) + ".pdb");
-                filePdb.Refresh();
-                if (filePdb.Exists)
-                    return LoadAssembly(file, filePdb);
-
-            }
-
-            return LoadAssembly(file, null);
-
-        }
 
         /// <summary>
         /// Get assembly by assembly name. load this if not yet loaded.
@@ -747,20 +564,12 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public Assembly AddAssemblyname(AssemblyName assemblyName, bool acceptAllVersion)
         {
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-            try
-            {
 
-                if (!IsLoadedByAssemblyByName(assemblyName, acceptAllVersion))
-                    return AssemblyLoad(assemblyName);
+            if (!AssemblyLoader.Instance.IsLoadedByAssemblyByName(assemblyName, acceptAllVersion))
+                return AssemblyLoader.Instance.LoadAssemblyName(assemblyName);
 
-                return GetAssembly(assemblyName);
+            return GetAssembly(assemblyName);
 
-            }
-            finally
-            {
-                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
-            }
         }
 
         /// <summary>
@@ -770,119 +579,16 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public Assembly AddAssemblyname(string assemblyName, bool acceptAllVersion)
         {
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-            try
-            {
 
-                var name = AssemblyName.GetAssemblyName(assemblyName);
+            var name = AssemblyName.GetAssemblyName(assemblyName);
 
-                if (!IsLoadedByAssemblyByName(name, acceptAllVersion))
-                    return AssemblyLoad(assemblyName);
+            if (!AssemblyLoader.Instance.IsLoadedByAssemblyByName(name, acceptAllVersion))
+                return AssemblyLoader.Instance.LoadAssembly(assemblyName);
 
-                return GetAssembly(name);
-
-            }
-            finally
-            {
-                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
-            }
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Assembly LoadAssembly(FileInfo fileAssembly, FileInfo filePdb)
-        {
-
-            Assembly assembly = null;
-
-            fileAssembly.Refresh();
-            if (!IsLoadedByFile(fileAssembly.FullName) && fileAssembly.Exists)
-            {
-
-                var name1 = Path.GetFileNameWithoutExtension(fileAssembly.Name);
-                assembly = GetLoadedAssembly(name1);
-
-                if (assembly == null)
-                    assembly = LoadAssembly_Impl(fileAssembly, filePdb);
-
-            }
-            else
-                assembly = AssemblyLoad(fileAssembly.FullName);
-
-            return assembly;
+            return GetAssembly(name);
 
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private Assembly LoadAssembly_Impl(FileInfo fileAssembly, FileInfo filePdb)
-        {
-
-            Assembly assembly = null;
-
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-
-            if (IsLoadedByFile(fileAssembly.FullName))
-                foreach (var item in GetAssemblies())
-                    if (item.Location == fileAssembly.FullName)
-                        return item;
-
-            var name1 = Path.GetFileNameWithoutExtension(fileAssembly.Name);
-
-            if (filePdb == null)
-            {
-                var path = Path.Combine(fileAssembly.Directory.FullName, name1) + ".pdb";
-                var filePdbBuilded = new FileInfo(path);
-                filePdb = filePdbBuilded.Exists ? filePdbBuilded : null;
-            }
-
-            try
-            {
-
-                if (IsLoadedByAssemblyByName(name1, false))
-                {
-                    try
-                    {
-                        bool test()
-                        {
-                            if (filePdb != null)
-                            {
-                                filePdb.Refresh();
-                                return filePdb.Exists;
-                            }
-                            return false;
-                        };
-
-                        if (filePdb == null && test())
-                            assembly = AssemblyLoad(fileAssembly.FullName);
-
-                        else
-                        {
-                            Trace.WriteLine($"Loading assembly {fileAssembly.FullName}");
-                            var data = File.ReadAllBytes(fileAssembly.FullName);
-                            if (filePdb != null)
-                            {
-                                var pdbData = File.ReadAllBytes(filePdb.FullName);
-                                assembly = Assembly.Load(data, pdbData);
-                            }
-                            else
-                                assembly = Assembly.Load(data);
-
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        OnRegisterException(e);
-                        Trace.WriteLine(e, TraceLevel.Error.ToString());
-                    }
-                }
-            }
-
-            finally
-            {
-                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
-            }
-
-            return assembly;
-        }
 
         private Assembly GetLoadedAssembly(string filename)
         {
@@ -920,33 +626,24 @@ namespace Bb.ComponentModel
 
             int result = 0;
 
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            var files = Paths.GetAssemblies(directory, c => FilterFilename(c));
+            foreach (var file in files)
+                if (!IsLoadedByFile(file.FullName))
+                {
 
-            try
-            {
-                var files = Paths.GetAssemblies(directory, c => FilterFilename(c));
-                foreach (var file in files)
-                    if (!IsLoadedByFile(file.FullName))
+                    Assembly ass = null;
+                    try
                     {
-
-                        Assembly ass = null;
-                        try
-                        {
-                            ass = AssemblyLoad(file.FullName);
-                            result += ass.ExportedTypes.Count();
-                        }
-                        catch (Exception e)
-                        {
-                            OnRegisterException(e);
-                            Trace.TraceError(e.ToString());
-                        }
-
+                        ass = AssemblyLoader.Instance.LoadAssembly(file);
+                        result += ass.ExportedTypes.Count();
                     }
-            }
-            finally
-            {
-                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
-            }
+                    catch (Exception e)
+                    {
+                        OnRegisterException(e);
+                        Trace.TraceError(e.ToString());
+                    }
+
+                }
 
             return result;
 
@@ -959,42 +656,35 @@ namespace Bb.ComponentModel
         public int LoadAssembliesFrom(DirectoryInfo directory)
         {
 
+            var instance = AssemblyLoader.Instance;
             int result = 0;
 
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            var files = Paths.GetAssemblies(directory, c => FilterFilename(c));
+            foreach (var file in files)
+                if (!IsLoadedByFile(file.FullName))
+                {
 
-            try
-            {
-                var files = Paths.GetAssemblies(directory, c => FilterFilename(c));
-                foreach (var file in files)
-                    if (!IsLoadedByFile(file.FullName))
+                    Assembly ass = null;
+                    try
                     {
-
-                        Assembly ass = null;
-                        try
-                        {
-                            ass = AssemblyLoad(file.FullName);
+                        ass = instance.LoadAssembly(file);
+                        if (ass != null)
                             result += ass.ExportedTypes.Count();
-                        }
-                        catch (Exception e)
-                        {
-                            OnRegisterException(e);
-                            Trace.TraceError(e.ToString());
-                        }
-
                     }
-            }
-            finally
-            {
-                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
-            }
+                    catch (Exception e)
+                    {
+                        OnRegisterException(e);
+                        Trace.TraceError(e.ToString());
+                    }
+
+                }
 
             return result;
 
         }
 
         /// <summary>
-        /// Get assembly if allready loaded
+        /// Get assembly if already loaded
         /// </summary>
         /// <param name="name"></param>
         /// <param name="AcceptAllVersion"></param>
@@ -1023,6 +713,7 @@ namespace Bb.ComponentModel
 
         }
 
+
         /// <summary>
         ///     Registers the specified assemblies.
         /// </summary>
@@ -1030,22 +721,14 @@ namespace Bb.ComponentModel
         private IEnumerable<Type> Collect(Func<Type, bool> typeFilter, params Assembly[] assemblies)
         {
 
-            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-            try
+            foreach (var item in assemblies)
             {
-                foreach (var item in assemblies)
-                {
 
-                    Trace.TraceInformation(item.FullName);
+                Trace.TraceInformation(item.FullName);
 
-                    var list = Resolve(item, typeFilter);
-                    foreach (var type in list)
-                        yield return type;
-                }
-            }
-            finally
-            {
-                AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
+                var list = GetTypes(item, typeFilter);
+                foreach (var type in list)
+                    yield return type;
             }
 
         }
@@ -1054,7 +737,7 @@ namespace Bb.ComponentModel
         ///     Register all exported type in the specified assembly
         /// </summary>
         /// <param name="ass"></param>
-        private List<Type> Resolve(Assembly ass, Func<Type, bool> typeFilter)
+        public List<Type> GetTypes(Assembly ass, Func<Type, bool> typeFilter)
         {
             var result = new List<Type>();
 
@@ -1306,10 +989,8 @@ namespace Bb.ComponentModel
         /// </summary>
         public readonly Func<IEnumerable<Assembly>> Assemblies;
         private static readonly object _lock = new object();
-        private static readonly object _lock2 = new object();
         private static readonly object _lock3 = new object();
         private static TypeDiscovery _instance;
-        private Dictionary<string, HashSet<string>> _assemblyNames = new Dictionary<string, HashSet<string>>();
         private Dictionary<string, Assembly> _loadedByFile = new Dictionary<string, Assembly>();
 
 

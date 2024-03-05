@@ -128,7 +128,7 @@ namespace Bb.ComponentModel
         /// </exception>
         public void Load(bool failedOnloadError = true)
         {
-            this.Assembly = TypeDiscovery.Instance.LoadAssembly(this.AssemblyLocation, null);
+            this.Assembly = AssemblyLoader.Instance.LoadAssembly(this.AssemblyLocation, null);
             if (Assembly != null)
             {
 
