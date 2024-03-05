@@ -51,13 +51,13 @@ namespace Bb.ComponentModel
         public static IEnumerable<Assembly> GetAssembliesFromFolder(this DirectoryInfo self, Func<FileInfo, bool> fileFilter)
         {
 
-            Assembly assembly = null;
-
             if (fileFilter == null)
-            {
+                fileFilter = x => true;
 
-                foreach (var item in self.GetFiles("*.dll", SearchOption.AllDirectories))
+            foreach (var item in self.GetFiles("*.dll", SearchOption.AllDirectories))
+                if (fileFilter(item))
                 {
+                    Assembly assembly = null;
                     try
                     {
                         assembly = AssemblyLoader.Instance.LoadAssembly(item, null);
@@ -65,18 +65,8 @@ namespace Bb.ComponentModel
                     catch (Exception) { }
 
                     yield return assembly;
-
                 }
 
-            }
-            else
-            {
-                foreach (var item in self.GetFiles("*.dll", SearchOption.AllDirectories))
-                    if (fileFilter(item))
-                    {
-                        yield return Assembly.LoadFile(item.FullName);
-                    }
-            }
         }
 
 
