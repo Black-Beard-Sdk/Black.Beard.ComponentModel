@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.Loader;
 
 namespace Bb.ComponentModel
 {
@@ -17,7 +18,7 @@ namespace Bb.ComponentModel
 
         static AssemblyLoader()
         {
-            AssemblyLoader._instance = new AssemblyLoader();
+            AssemblyLoader._instance = new AssemblyLoader();         
         }
 
         private AssemblyLoader()
@@ -29,17 +30,26 @@ namespace Bb.ComponentModel
             AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad;
 
             var list = AppDomain.CurrentDomain.GetAssemblies().ToList();
+
             foreach (var item in list)
                 AddAssembly(item, null);
-
         }
 
         #endregion ctors
 
+        /// <summary>
+        /// Return the list of loaded assemblies
+        /// </summary>
+        public IEnumerable<Assembly> Assemblies => AssemblyLoadContext.CurrentContextualReflectionContext.Assemblies;
 
+        /// <summary>
+        /// Return the <see cref="AssemblyDirectoryResolver"/>
+        /// </summary>
         public AssemblyDirectoryResolver Paths { get; set; }
 
-
+        /// <summary>
+        /// return the instance of the <see cref="AssemblyLoader"/>
+        /// </summary>
         public static AssemblyLoader Instance => _instance;
 
 
@@ -49,67 +59,62 @@ namespace Bb.ComponentModel
         public Func<ResolveEventArgs, Assembly> AssemblyNotResolved { get; set; }
 
 
+        /// <summary>
+        /// Load assembly by the specified assembly name
+        /// </summary>
+        /// <param name="assemblyName"></param>
+        /// <returns></returns>
+        public Assembly LoadAssemblyName(string assemblyName)
+        {
+
+            try
+            {
+                var ass = Assembly.Load(assemblyName);
+                if (ComponentModelActivityProvider.WithTelemetry)
+                    ComponentModelActivityProvider.AddProperty("added_ass" + _loadedByFile.Count().ToString(), assemblyName);
+                AddAssembly(ass, null);
+                return ass;
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError($"Failed to resolve {assemblyName}");
+                if (ComponentModelActivityProvider.WithTelemetry)
+                    ComponentModelActivityProvider.AddProperty("failed_ass" + _loadedByFile.Count().ToString(), assemblyName);
+            }
+
+            return null;
+
+        }
+
+        /// <summary>
+        /// Load assembly name
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public Assembly LoadAssemblyName(AssemblyName item)
         {
 
             try
             {
-
                 var ass = Assembly.Load(item);
                 if (ComponentModelActivityProvider.WithTelemetry)
                     ComponentModelActivityProvider.AddProperty("added_ass" + _loadedByFile.Count().ToString(), item.FullName);
                 AddAssembly(ass, null);
+                
                 return ass;
 
             }
             catch (Exception ex)
             {
-
                 Trace.TraceError($"Failed to resolve {item.Name}");
                 if (ComponentModelActivityProvider.WithTelemetry)
                     ComponentModelActivityProvider.AddProperty("failed_ass" + _loadedByFile.Count().ToString(), item.FullName);
-                return null;
-
             }
 
-        }
-
-
-
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void AddAssembly(Assembly ass, string location)
-        {
-
-            if (ass.IsDynamic)
-                return;
-
-            if (string.IsNullOrWhiteSpace(location))
-                location = ass.Location;
-
-            if (!_loadedByFile.ContainsKey(location))
-                lock (_lock2)
-                    if (!_loadedByFile.ContainsKey(location))
-                    {
-                        Trace.TraceInformation($"Assembly {ass} is loaded from {location}");
-                        _loadedByFile.Add(location, ass);
-                        Paths.AddDirectoryFromFiles(location);
-                    }
-
-            var name = ass.GetName();
-
-            if (!_assemblyNames.TryGetValue(name.Name, out var dic))
-                lock (_lock2)
-                    if (!_assemblyNames.TryGetValue(name.Name, out dic))
-                        _assemblyNames.Add(name.Name, dic = new HashSet<string>() { name.Version.ToString() });
+            return null;
 
         }
 
-
-        private void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
-        {
-            AddAssembly(args.LoadedAssembly, null);
-        }
 
         /// <summary>
         /// Try to get assembly in the list of loaded assemblies
@@ -170,26 +175,16 @@ namespace Bb.ComponentModel
         }
 
         /// <summary>
-        /// 
+        /// Load assembly by the specified filename
         /// </summary>
         /// <param name="fileAssembly">filename of the assembly</param>
-        /// <param name="withPdb">if true, test if the pdb exist and load it</param>
+        /// <param name="withPdb">if true, load the pdb if exists</param>
         /// <returns></returns>
         public Assembly LoadAssembly(string fileAssembly, bool withPdb)
         {
 
             var file = new System.IO.FileInfo(fileAssembly);
-
-            if (withPdb)
-            {
-                FileInfo filePdb = new FileInfo(Path.Combine(file.Directory.FullName, Path.GetFileNameWithoutExtension(file.Name)) + ".pdb");
-                filePdb.Refresh();
-                if (filePdb.Exists)
-                    return LoadAssembly(file, filePdb);
-
-            }
-
-            return LoadAssembly(file, null);
+            return LoadAssembly(file, withPdb);
 
         }
 
@@ -221,6 +216,89 @@ namespace Bb.ComponentModel
 
             return assembly;
 
+        }
+
+        /// <summary>
+        ///     The on register exception
+        /// </summary>
+        public static Action<Exception> OnRegisterException { get; set; }
+
+
+
+        /// <summary>
+        /// Return true if assembly is already loaded
+        /// </summary>
+        /// <param name="name">assemblyName</param>
+        /// <param name="acceptAllversions">if false don't try to match the version</param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsLoadedByAssemblyByName(AssemblyName name, bool acceptAllversions)
+        {
+
+            if (!_assemblyNames.TryGetValue(name.Name, out var dic))
+                return false;
+
+            if (acceptAllversions)
+                return true;
+
+            return dic.Contains(name.Version.ToString());
+
+        }
+
+
+        /// <summary>
+        /// Determines whether assembly name is loaded.
+        /// </summary>
+        /// <param name="assemblyName">Name of the assembly.</param>
+        /// <param name="acceptAllVersion">if set to <c>true</c> [accept all version].</param>
+        /// <returns>
+        ///   <c>true</c> if is loaded otherwise, <c>false</c>.
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsLoadedByAssemblyByName(string assemblyName, bool acceptAllVersion)
+        {
+
+            if (assemblyName.EndsWith(".resources"))
+            {
+                var oo = assemblyName.Substring(0, assemblyName.Length - 10);
+                var result = IsLoadedByAssemblyByName(oo, acceptAllVersion);
+                if (result)
+                    return true;
+            }
+
+            try
+            {
+                var name = AssemblyName.GetAssemblyName(assemblyName);
+                return IsLoadedByAssemblyByName(name, acceptAllVersion);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return false;
+
+        }
+
+
+
+        /// <summary>
+        /// Load assembly by the specified filename
+        /// </summary>
+        /// <param name="fileAssembly">file of the assembly</param>
+        /// <param name="withPdb">if true, load the pdb if exists</param>
+        /// <returns></returns>
+        private Assembly LoadAssembly(FileInfo file, bool withPdb)
+        {
+            if (withPdb)
+            {
+                FileInfo filePdb = new FileInfo(Path.Combine(file.Directory.FullName, Path.GetFileNameWithoutExtension(file.Name)) + ".pdb");
+                filePdb.Refresh();
+                if (filePdb.Exists)
+                    return LoadAssembly(file, filePdb);
+
+            }
+
+            return LoadAssembly(file, null);
         }
 
         private Assembly GetLoadedAssembly(string filename)
@@ -307,67 +385,38 @@ namespace Bb.ComponentModel
 
         }
 
-        /// <summary>
-        ///     The on register exception
-        /// </summary>
-        public static Action<Exception> OnRegisterException { get; set; }
-
-
-
-        /// <summary>
-        /// Return true if assembly is already loaded
-        /// </summary>
-        /// <param name="name">assemblyName</param>
-        /// <param name="acceptAllversions">if false don't try to match the version</param>
-        /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool IsLoadedByAssemblyByName(AssemblyName name, bool acceptAllversions)
+        private void AddAssembly(Assembly ass, string location)
         {
+
+            if (ass.IsDynamic)
+                return;
+
+            if (string.IsNullOrWhiteSpace(location))
+                location = ass.Location;
+
+            if (!_loadedByFile.ContainsKey(location))
+                lock (_lock2)
+                    if (!_loadedByFile.ContainsKey(location))
+                    {
+                        Trace.TraceInformation($"Assembly {ass} is loaded from {location}");
+                        _loadedByFile.Add(location, ass);
+                        Paths.AddDirectoryFromFiles(location);
+                    }
+
+            var name = ass.GetName();
 
             if (!_assemblyNames.TryGetValue(name.Name, out var dic))
-                return false;
-
-            if (acceptAllversions)
-                return true;
-
-            return dic.Contains(name.Version.ToString());
+                lock (_lock2)
+                    if (!_assemblyNames.TryGetValue(name.Name, out dic))
+                        _assemblyNames.Add(name.Name, dic = new HashSet<string>() { name.Version.ToString() });
 
         }
 
-
-        /// <summary>
-        /// Determines whether assembly name is loaded.
-        /// </summary>
-        /// <param name="assemblyName">Name of the assembly.</param>
-        /// <param name="acceptAllVersion">if set to <c>true</c> [accept all version].</param>
-        /// <returns>
-        ///   <c>true</c> if is loaded otherwise, <c>false</c>.
-        /// </returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool IsLoadedByAssemblyByName(string assemblyName, bool acceptAllVersion)
+        private void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
         {
-
-            if (assemblyName.EndsWith(".resources"))
-            {
-                var oo = assemblyName.Substring(0, assemblyName.Length - 10);
-                var result = IsLoadedByAssemblyByName(oo, acceptAllVersion);
-                if (result)
-                    return true;
-            }
-
-            try
-            {
-                var name = AssemblyName.GetAssemblyName(assemblyName);
-                return IsLoadedByAssemblyByName(name, acceptAllVersion);
-            }
-            catch (Exception ex)
-            {
-            }
-
-            return false;
-
+            AddAssembly(args.LoadedAssembly, null);
         }
-
 
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
@@ -394,7 +443,6 @@ namespace Bb.ComponentModel
             return null;
 
         }
-
 
         private Dictionary<string, HashSet<string>> _assemblyNames = new Dictionary<string, HashSet<string>>();
         private volatile object _lock2 = new object();
