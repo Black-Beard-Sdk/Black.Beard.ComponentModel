@@ -342,7 +342,7 @@ namespace Bb.ComponentModel
                 filePdb = filePdbBuilded.Exists ? filePdbBuilded : null;
             }
 
-            if (IsLoadedByAssemblyByName(name1, false))
+            if (!IsLoadedByAssemblyByName(name1, false))
             {
                 try
                 {
