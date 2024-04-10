@@ -4,11 +4,20 @@ namespace Bb.ComponentModel.Attributes
 {
 
 
-    [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    /// <summary>
+    /// Meta property attribute
+    /// </summary>
+    [System.AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     public sealed class MetaPropertyAttribute : Attribute
     {
 
-        public MetaPropertyAttribute(string context, string name, string value)
+        /// <summary>
+        /// Constructor that create a new <see cref="MetaPropertyAttribute"/>
+        /// </summary>
+        /// <param name="context">context using</param>
+        /// <param name="name">name of the property</param>
+        /// <param name="value">Value property</param>
+        public MetaPropertyAttribute(string context, string name, object value)
         {
             this.Context = context;
             this.Name = name;
@@ -35,17 +44,6 @@ namespace Bb.ComponentModel.Attributes
         /// </summary>
         public Type Type { get; set; }
 
-
-    }
-
-    [System.AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false, AllowMultiple = true)]
-    sealed class EnumerationProviderAttribute : Attribute
-    {
-
-        public EnumerationProviderAttribute(Type typeProvider)
-        {
-
-        }
 
     }
 

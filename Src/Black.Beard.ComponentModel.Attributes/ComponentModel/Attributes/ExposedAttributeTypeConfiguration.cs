@@ -1,5 +1,6 @@
 ﻿namespace Bb.ComponentModel.Attributes
 {
+
     public class ExposedAttributeTypeConfiguration
     {
 
