@@ -44,3 +44,19 @@ You can resolve the types of the arguments like that
 ```CSHARP
 var types = ObjectCreator.ResolveTypesOfArguments("t2", 1);
 ```
+
+
+You can create an instance of a class with the factory
+```CSHARP
+
+    var factory2 = ObjectCreatorByIoc.GetActivator<TestByIoc1>();
+    var factory1 = ObjectCreatorByIoc.GetActivator<TestByIoc2>();
+
+    var serviceProvider = new CustomIServiceProvider();
+    serviceProvider.Add(factory1);
+    serviceProvider.Add(factory2);
+
+    var instance = factory1.CallInstance(serviceProvider);
+
+```
+

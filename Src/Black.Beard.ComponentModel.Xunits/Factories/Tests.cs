@@ -27,6 +27,8 @@ namespace ComponentModels.Tests.Factories
 
             var srv = (TestByIoc1)serviceProvider.GetService(typeof(TestByIoc1));
 
+            var instance = factory1.CallInstance(serviceProvider);
+
             // Test1 result = (TestByIoc1)factory.Call(null, "t1", 1);
             //result.Arg1.Should().Be("t1");
         }

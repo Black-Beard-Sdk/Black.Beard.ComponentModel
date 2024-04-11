@@ -58,6 +58,36 @@ namespace Bb.ComponentModel
         /// </summary>
         public Func<ResolveEventArgs, Assembly> AssemblyNotResolved { get; set; }
 
+        /// <summary>
+        /// Ensures that all referenced the assembly are loaded.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        /// <param name="acceptAllVersion">if set to <c>true</c> [accept all version].</param>
+        /// <param name="recursively">if set to <c>true</c> [recursively].</param>
+        public void EnsureAssemblyIsLoaded(Assembly assembly, bool acceptAllVersion = true, bool recursively = false)
+        {
+
+            var hash = new HashSet<string>();
+            if (!Paths.IsInSystemDirectory(assembly))
+                using (var _ = ComponentModelActivityProvider.StartActivity("loading assemblies"))
+                {
+                    var assemblies = assembly.GetReferencedAssemblies();
+                    foreach (AssemblyName ass in assemblies)
+                        if (hash.Add(ass.FullName))
+                        {
+
+                            Assembly refAssembly;
+                            if (AssemblyLoader.Instance.IsLoadedByAssemblyByName(ass, acceptAllVersion))
+                                refAssembly = AssemblyLoader.Instance.LoadAssemblyName(ass);
+                            else
+                                refAssembly = TypeDiscovery.Instance.GetAssembly(ass);
+
+                            if (recursively && refAssembly != null)
+                             TypeDiscovery.Instance.EnsureAssemblyIsLoadedWithReferences(refAssembly, acceptAllVersion, recursively, hash);
+
+                        }
+                }
+        }
 
         /// <summary>
         /// Load assembly by the specified assembly name
