@@ -9,8 +9,8 @@ namespace Bb.ComponentModel.DataAnnotations
     public sealed class ListItem<T> : ListItem
     {
 
-        internal ListItem(Func<ListItem, object, bool> comparer, object instance) 
-            : base(comparer, instance)
+        internal ListItem(IListProvider source, object instance) 
+            : base(source, instance)
         {
             
         }
@@ -23,6 +23,7 @@ namespace Bb.ComponentModel.DataAnnotations
             get => (T)base.Tag;
             set => base.Tag = value;
         }
+
 
     }
     

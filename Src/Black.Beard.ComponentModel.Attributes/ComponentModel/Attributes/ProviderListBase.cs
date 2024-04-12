@@ -20,7 +20,7 @@ namespace Bb.ComponentModel.Attributes
         /// Instance of the object that contains the property
         /// </summary>
         public object Instance { get; set; }
-
+   
         /// <summary>
         /// Gets the items list.
         /// </summary>
@@ -36,7 +36,7 @@ namespace Bb.ComponentModel.Attributes
         protected virtual ListItem<T> CreateItem(T instance, string display, object value, Action<ListItem<T>> initializer = null)
         {
 
-            var result = new ListItem<T>(Compare, instance)
+            var result = new ListItem<T>(this, instance)
             {
                 Display = display,
                 Value = value,
@@ -53,12 +53,6 @@ namespace Bb.ComponentModel.Attributes
 
         }
 
-        IEnumerable<ListItem> IListProvider.GetItems()
-        {
-            foreach (var item in GetItems())
-                yield return item;
-        }
-
         protected object GetValue()
         {
             if (_value == null && Instance != null && Property != null)
@@ -66,20 +60,20 @@ namespace Bb.ComponentModel.Attributes
             return _value;
         }
 
-        protected virtual bool Compare(ListItem item1, object item2)
+        public virtual bool Compare(ListItem left, object right)
         {
 
-            if (item1 == null && item2 != null)
+            if (left == null && right != null)
                 return false;
 
-            if (item1 != null && item2 == null)
+            if (left != null && right == null)
                 return false;
 
-            if (item2 is ListItem item)
-                return Compare1(item1, item);
+            if (right is ListItem item)
+                return Compare1(left, item);
 
-            if (item2 is T a)
-                if (item1.Tag != null && a.Equals(item1.Tag))
+            if (right is T a)
+                if (left.Tag != null && a.Equals(left.Tag))
                     return true;
 
             return false;
@@ -97,6 +91,30 @@ namespace Bb.ComponentModel.Attributes
 
             return false;
 
+        }
+
+
+        IEnumerable<ListItem> IListProvider.GetItems()
+        {
+            foreach (var item in GetItems())
+                yield return item;
+        }
+
+
+        object IListProvider.GetOriginalValue(ListItem item)
+        {
+            return ResolveOriginalValue((ListItem<T>)item);
+        }
+
+
+        /// <summary>
+        /// Return the new value that must to be set in the property
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        protected virtual object ResolveOriginalValue(ListItem<T> item)
+        {
+            return item.Tag;
         }
 
         private object _value;

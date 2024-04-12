@@ -34,36 +34,4 @@ namespace Bb.ComponentModel.Attributes
     }
 
 
-
-    public class TestProviderList : ProviderListBase<CultureInfo>
-    {
-
-        /// <summary>
-        /// Get the list of items
-        /// </summary>
-        /// <returns></returns>
-        public override IEnumerable<ListItem<CultureInfo>> GetItems()
-        {
-
-            List<ListItem<CultureInfo>> result = new List<ListItem<CultureInfo>>();
-
-            var items = CultureInfo.GetCultures(CultureTypes.AllCultures);
-
-            foreach (var item in items)
-            {
-                var tag = item;
-                var display = item.EnglishName;
-                var key = item.IetfLanguageTag;
-
-                result.Add(CreateItem(tag, display, key, a =>
-                {
-                    a.Name = item.Name;
-                }));
-            }
-            return result;
-
-        }
-
-    }
-
 }

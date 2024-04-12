@@ -29,6 +29,18 @@ namespace Bb.ComponentModel.DataAnnotations
         /// <returns></returns>
         IEnumerable<ListItem> GetItems();
 
+
+        /// <summary>
+        /// Return the new value that can be set in the property
+        /// </summary>
+        /// <param name="item">ListItem source</param>
+        /// <returns></returns>
+        object GetOriginalValue(ListItem item);
+
+
+        bool Compare(ListItem left, object right);
+
+
     }
 
 }

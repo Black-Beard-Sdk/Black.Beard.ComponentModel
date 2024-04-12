@@ -44,6 +44,9 @@ namespace Black.Beard.ComponentModel.Xunits.ProviderList
             Assert.False(t4);
             Assert.False(t5);
 
+            var a = f.GetOriginalValue();
+
+
         }
 
     }
@@ -56,9 +59,14 @@ namespace Black.Beard.ComponentModel.Xunits.ProviderList
         [ListProvider(typeof(CultureProviderList))]
         public CultureInfo Culture { get; set; }
 
-
     }
 
+    public enum Enum1
+    {
+        Value1,
+        Value2,
+        Value3,
+    }
 
 
 }

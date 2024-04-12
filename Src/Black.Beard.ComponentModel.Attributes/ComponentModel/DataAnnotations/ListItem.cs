@@ -9,11 +9,18 @@ namespace Bb.ComponentModel.DataAnnotations
     public class ListItem
     {
 
-        internal ListItem(Func<ListItem, object, bool> comparer, object instance)
+        internal ListItem(IListProvider source, object instance)
         {
-            this._compareListItems = comparer;
+            this.Source = source;
             this.Tag = instance;
         }
+
+        #region Properties
+
+        /// <summary>
+        /// Gets the source Provider that generated the current item.
+        /// </summary>
+        public IListProvider Source { get; }
 
         /// <summary>
         /// Gets or sets the name. (it is the key)
@@ -46,6 +53,10 @@ namespace Bb.ComponentModel.DataAnnotations
 
         public virtual object Tag { get; protected set; }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
         /// Gets or sets the string display
         /// </summary>
@@ -68,18 +79,28 @@ namespace Bb.ComponentModel.DataAnnotations
             if (other == null)
                 return false;
 
-            return this._compareListItems(this, other);
+            return this.Source.Compare(this, other);
 
         }
 
-
+        /// <summary>
+        /// return true if the value is equal to the value of the object
+        /// </summary>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public bool Compare(object right)
         {
-            return _compareListItems(this, right);
+            return Source.Compare(this, right);
         }
 
-
-        private Func<ListItem, object, bool> _compareListItems;
+        /// <summary>
+        /// Return the new value that can be set in the property
+        /// </summary>
+        /// <returns></returns>
+        public object GetOriginalValue()
+        {
+            return Source.GetOriginalValue(this);
+        }
 
         /// <summary>
         /// return the hash code of the value
@@ -89,7 +110,10 @@ namespace Bb.ComponentModel.DataAnnotations
         {
             return Value?.GetHashCode() ?? this.GetHashCode();
         }
-                   
+
+        #endregion Methods
+
+
     }
 
 
