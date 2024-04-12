@@ -1,4 +1,6 @@
-﻿namespace Bb.ComponentModel.DataAnnotations
+﻿using System;
+
+namespace Bb.ComponentModel.DataAnnotations
 {
 
     /// <summary>
@@ -6,6 +8,12 @@
     /// </summary>
     public class ListItem
     {
+
+        internal ListItem(Func<ListItem, object, bool> comparer, object instance)
+        {
+            this._compareListItems = comparer;
+            this.Tag = instance;
+        }
 
         /// <summary>
         /// Gets or sets the name. (it is the key)
@@ -23,6 +31,22 @@
         public object Value { get; set; }
 
         /// <summary>
+        /// Gets or sets the item is disabled.
+        /// </summary>
+        public bool Disabled { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets the item is selected.
+        /// </summary>
+        public bool Selected { get; set; } = false;
+
+
+        public object Icon { get; set; }
+
+
+        public virtual object Tag { get; protected set; }
+
+        /// <summary>
         /// Gets or sets the string display
         /// </summary>
         /// <returns></returns>
@@ -32,15 +56,30 @@
         }
 
         /// <summary>
-        /// retur true if the value is equal to the value of the object
+        /// return true if the value is equal to the value of the object
         /// </summary>
         /// <param name="o"></param>
         /// <returns></returns>
         public override bool Equals(object o)
         {
+
             var other = o as ListItem;
-            return other?.Value == Value;
+
+            if (other == null)
+                return false;
+
+            return this._compareListItems(this, other);
+
         }
+
+
+        public bool Compare(object right)
+        {
+            return _compareListItems(this, right);
+        }
+
+
+        private Func<ListItem, object, bool> _compareListItems;
 
         /// <summary>
         /// return the hash code of the value
@@ -48,9 +87,10 @@
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return Value.GetHashCode();
+            return Value?.GetHashCode() ?? this.GetHashCode();
         }
-
+                   
     }
+
 
 }

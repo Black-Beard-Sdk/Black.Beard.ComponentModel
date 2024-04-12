@@ -3,6 +3,7 @@
 namespace Bb.TypeDescriptors
 {
 
+
     /// <summary>
     /// Provides internal precondition helper methods.
     /// </summary>

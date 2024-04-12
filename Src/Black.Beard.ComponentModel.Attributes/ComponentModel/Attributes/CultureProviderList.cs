@@ -1,38 +1,66 @@
 ﻿using Bb.ComponentModel.DataAnnotations;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
+using System.Xml.Linq;
 
 namespace Bb.ComponentModel.Attributes
 {
-    public class CultureProviderList : IListProvider
+
+
+    public class CultureProviderList : ProviderListBase<CultureInfo>
     {
-
-        /// <summary>
-        /// Property descriptor
-        /// </summary>
-        public PropertyDescriptor Property { get; set; }
-
-        /// <summary>
-        /// Instance of the object that contains the property
-        /// </summary>
-        public object Instance { get; set; }
-
-        /// <summary>
-        /// Service provider
-        /// </summary>
-        public IServiceProvider ServiceProvider { get; set; }
 
         /// <summary>
         /// Get the list of items
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ListItem> GetItems()
+        public override IEnumerable<ListItem<CultureInfo>> GetItems()
         {
-            var items = CultureInfo.GetCultures(CultureTypes.FrameworkCultures);
+
+            List<ListItem<CultureInfo>> result = new List<ListItem<CultureInfo>>();
+
+            var items = CultureInfo.GetCultures(CultureTypes.AllCultures);
+
             foreach (var item in items)
-                yield return new ListItem() { Display = item.DisplayName, Name = item.EnglishName, Value = item.IetfLanguageTag };
+                result.Add(CreateItem(item, item.EnglishName, item.IetfLanguageTag , a =>
+                {
+                    a.Name = item.Name;
+                }));
+
+            return result;
+
+        }
+
+    }
+
+
+
+    public class TestProviderList : ProviderListBase<CultureInfo>
+    {
+
+        /// <summary>
+        /// Get the list of items
+        /// </summary>
+        /// <returns></returns>
+        public override IEnumerable<ListItem<CultureInfo>> GetItems()
+        {
+
+            List<ListItem<CultureInfo>> result = new List<ListItem<CultureInfo>>();
+
+            var items = CultureInfo.GetCultures(CultureTypes.AllCultures);
+
+            foreach (var item in items)
+            {
+                var tag = item;
+                var display = item.EnglishName;
+                var key = item.IetfLanguageTag;
+
+                result.Add(CreateItem(tag, display, key, a =>
+                {
+                    a.Name = item.Name;
+                }));
+            }
+            return result;
 
         }
 

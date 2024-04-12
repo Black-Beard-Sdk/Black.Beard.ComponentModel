@@ -42,6 +42,16 @@ namespace Bb.ComponentModel.Factories
         /// <summary>
         /// Creates a new instance of T with the specified arguments.
         /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public T Invoke(IServiceProvider serviceProvider)
+        {
+            return Call(null, serviceProvider);
+        }
+
+        /// <summary>
+        /// Creates a new instance of T with the specified arguments.
+        /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns></returns>
         [System.Diagnostics.DebuggerStepThrough]
@@ -64,6 +74,7 @@ namespace Bb.ComponentModel.Factories
             return _delegate(arg1);
 
         }
+
 
         /// <summary>
         /// Creates a new instance of T with the specified arguments.
@@ -100,9 +111,28 @@ namespace Bb.ComponentModel.Factories
         }
 
         /// <summary>
+        /// Set attribute to looking for inject instance
+        /// </summary>
+        /// <typeparam name="T1">Type of attribute to looking for</typeparam>
+        public void SetInjectionAttribute<T1>()
+            where T1 : Attribute
+        {
+            ObjectCreatorByIoc.SetInjectionAttribute<T1>();
+        }
+
+        /// <summary>
+        /// Clear attribute to looking for inject instance
+        /// </summary>
+        public static void ClearAttribute()
+        {
+            ObjectCreatorByIoc.ClearSetInjectionAttribute();
+        }
+
+        /// <summary>
         /// return false if the delegate is null
         /// </summary>
         public override bool IsEmpty => _delegate == null;
+
 
         private ObjectCreatorByIoc<T> _delegate { get; }
         private readonly Dictionary<string, T> _dic;

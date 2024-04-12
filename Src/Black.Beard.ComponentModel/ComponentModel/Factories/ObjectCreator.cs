@@ -46,9 +46,9 @@ namespace Bb.ComponentModel.Factories
 
 
         /// <summary>
-        /// Gets an customed activator factory for the specified ctor.
+        /// Gets an customized activator factory for the specified ctor.
         /// </summary>
-        /// <typeparam name="T">is the type that containt the constructor with the specified arguments types</typeparam>
+        /// <typeparam name="T">is the type that contains the constructor with the specified arguments types</typeparam>
         /// <param name="types">arguments types of the constructor</param>
         /// <returns></returns>
         public static Factory<T> GetActivatorByArguments<T>(params Type[] types)
@@ -59,10 +59,10 @@ namespace Bb.ComponentModel.Factories
 
 
         /// <summary>
-        /// Gets an customed activator factory for the specified ctor.
-        /// Note if the the generic is diferent of the declaring type of the ctor do a cast and is injected in the method.
+        /// Gets an customized activator factory for the specified ctor.
+        /// Note if the generic is different of the declaring type of the ctor do a cast and is injected in the method.
         /// </summary>
-        /// <typeparam name="T">is the type that containt the constructor with the specified arguments types</typeparam>
+        /// <typeparam name="T">is the type that contains the constructor with the specified arguments types</typeparam>
         /// <param name="type">type must see from external method call</param>
         /// <param name="types">arguments types of the constructor</param>
         /// <returns></returns>
@@ -79,10 +79,10 @@ namespace Bb.ComponentModel.Factories
         }
 
         /// <summary>
-        /// Gets an customed activator factory for the specified ctor.
-        /// Note if the the generic is diferent of the declaring type of the ctor do a cast and is injected in the method.
+        /// Gets an customized activator factory for the specified ctor.
+        /// Note if the generic is different of the declaring type of the ctor do a cast and is injected in the method.
         /// </summary>
-        /// <typeparam name="T">is the type that containt the constructor with the specified arguments types</typeparam>
+        /// <typeparam name="T">is the type that contains the constructor with the specified arguments types</typeparam>
         /// <param name="ctor">The ctor.</param>
         /// <returns></returns>
         public static Factory<T> GetActivator<T>(ConstructorInfo methodBase, MethodDescription description)
@@ -95,10 +95,10 @@ namespace Bb.ComponentModel.Factories
 
 
         /// <summary>
-        /// Gets an customed method call factory for the specified ctor.
-        /// Note if the the generic is diferent of the declaring type of the ctor do a cast and is injected in the method.
+        /// Gets an customized method call factory for the specified ctor.
+        /// Note if the generic is different of the declaring type of the ctor do a cast and is injected in the method.
         /// </summary>
-        /// <typeparam name="T">is the type that containt the method</typeparam>
+        /// <typeparam name="T">is the type that contains the method</typeparam>
         /// <param name="ctor">The ctor.</param>
         /// <returns></returns>
         public static Factory<T> GetCallMethod<T>(MethodBase methodBase, MethodDescription description)
@@ -144,8 +144,8 @@ namespace Bb.ComponentModel.Factories
         }
 
         /// <summary>
-        /// Gets an customed activator factory for the specified ctor.
-        /// Note if the the generic is diferent of the declaring type of the ctor a cast is injected in the method.
+        /// Gets an customized activator factory for the specified ctor.
+        /// Note if the generic is different of the declaring type of the ctor a cast is injected in the method.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="ctor">The ctor.</param>

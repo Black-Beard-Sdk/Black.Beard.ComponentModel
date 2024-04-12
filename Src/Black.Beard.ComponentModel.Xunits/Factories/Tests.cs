@@ -27,17 +27,25 @@ namespace ComponentModels.Tests.Factories
 
             var srv = (TestByIoc1)serviceProvider.GetService(typeof(TestByIoc1));
 
-            var instance = factory1.CallInstance(serviceProvider);
+            var instance = factory1.Invoke(serviceProvider);
 
             // Test1 result = (TestByIoc1)factory.Call(null, "t1", 1);
             //result.Arg1.Should().Be("t1");
+
+            factory1.SetInjectionAttribute<InjectAttribute>();
+            var factory3 = ObjectCreatorByIoc.GetActivator<TestByIoc3>();
+
+            var oo = factory3.Invoke(serviceProvider);
+
+            (oo.Provider == serviceProvider).Should().BeTrue();
+
         }
 
         [Fact]
         public void Constructor_Factory1()
         {
             var factory = ObjectCreator.GetActivatorByTypeAndArguments<object>(typeof(Test1), typeof(string), typeof(int));
-            Test1 result = (Test1)factory.Call(null, "t1", 1);
+            Test1 result = (Test1)factory.Call("t1", 1);
             result.Arg1.Should().Be("t1");
         }
 
@@ -46,7 +54,7 @@ namespace ComponentModels.Tests.Factories
         public void Constructor_Factory2()
         {
             var factory = ObjectCreator.GetActivatorByArguments<Test1>(typeof(string), typeof(int));
-            Test1 result = factory.Call(null, "t2", 1);
+            Test1 result = factory.Call("t2", 1);
             result.Arg1.Should().Be("t2");
         }
 
@@ -55,7 +63,7 @@ namespace ComponentModels.Tests.Factories
         {
             var types = ObjectCreator.ResolveTypesOfArguments("t2", 1);
             var factory = ObjectCreator.GetActivatorByArguments<Test1>(types);
-            Test1 result = factory.Call(null, "t2", 1);
+            Test1 result = factory.Call("t2", 1);
             result.Arg1.Should().Be("t2");
         }
 
@@ -72,7 +80,12 @@ namespace ComponentModels.Tests.Factories
 
             public object? GetService(Type serviceType)
             {
+                
+                if (serviceType == typeof(IServiceProvider))
+                    return this;
+
                 return _dic[serviceType].CallInstance(this);
+
             }
 
             public void Add(Factory factory)
@@ -104,6 +117,26 @@ namespace ComponentModels.Tests.Factories
     }
 
 
+    public class Test3
+    {
+
+        public Test3()
+        {
+
+        }
+
+      
+    }
+
+
+    public class InjectAttribute : Attribute
+    {
+
+
+
+    }
+
+
     public class TestByIoc1
     {
 
@@ -115,6 +148,7 @@ namespace ComponentModels.Tests.Factories
         public TestByIoc2 Child { get; }
 
     }
+
 
     public class TestByIoc2 : IInitialize
     {
@@ -132,5 +166,19 @@ namespace ComponentModels.Tests.Factories
 
     }
 
+
+    public class TestByIoc3
+    {
+
+        public TestByIoc3()
+        {
+
+        }        
+
+        [Inject]
+        public IServiceProvider Provider { get; set; }
+
+
+    }
 
 }

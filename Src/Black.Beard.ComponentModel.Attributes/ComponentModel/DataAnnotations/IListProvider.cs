@@ -14,11 +14,6 @@ namespace Bb.ComponentModel.DataAnnotations
     {
 
         /// <summary>
-        /// Gets or sets the service provider.
-        /// </summary>
-        IServiceProvider ServiceProvider { get; set; }
-
-        /// <summary>
         /// Gets or sets the instance. for th property
         /// </summary>
         object Instance { get; set; }
