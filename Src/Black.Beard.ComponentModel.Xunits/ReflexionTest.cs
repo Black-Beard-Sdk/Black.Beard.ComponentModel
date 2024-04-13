@@ -1,12 +1,18 @@
 ﻿using Bb;
 using Bb.ComponentModel;
 using Bb.ComponentModel.Attributes;
+using Bb.ComponentModel.Factories;
+using Bb.ComponentModel.Loaders;
 using Bb.Diagnostics;
+using ComponentModels.Tests.Factories;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 using Xunit;
+using static ComponentModels.Tests.Factories.Tests;
 
 namespace DynamicDescriptors.Tests
 {
@@ -169,19 +175,19 @@ namespace DynamicDescriptors.Tests
             var directories = new AssemblyDirectoryResolver()
                 .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
 
-            var types = TypeDiscovery.Instance
-                .Search(c =>
-                    c.InContext(ConstantsCore.Plugin)
-                    .ExcludeAbstractTypes(false)
-                    .ExcludeGenericTypes(false)
-                    .Implements(typeof(IInjectBuilder))
-                , true)
-                .ToList()
+
+            var instance = new UITest();
+
+            var serviceProvider = new CustomIServiceProvider()
+                .Add<TestClass3>()
                 ;
 
-            Assert.True(types.Count >= 2);
+            var loader = new InjectionLoader<UITest>(serviceProvider, ConstantsCore.Plugin + "Test");
 
-            types.Single(c => c.FullName == typeof(TestClass).FullName);
+            loader.LoadModules(c =>
+            {
+
+            }).Execute(instance);     
 
         }
 
@@ -246,7 +252,7 @@ namespace DynamicDescriptors.Tests
 
             var dic = TypeDiscovery.Instance.GetAllAssemblies();
 
-            foreach (var item in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var item in AppDomain.CurrentDomain.GetAssemblies().Where(c => c.GetName() .Name != "System.Private.CoreLib"))
                 if (dic.ContainsKey(item.FullName))
                     Assert.True(dic[item.FullName].Value);
                 else
@@ -256,6 +262,36 @@ namespace DynamicDescriptors.Tests
         }
 
     }
+
+    [ExposeClass(Context = ConstantsCore.Plugin + "Test")]
+    public class TestClass3 : IInjectBuilder<UITest>
+    {
+
+        public string FriendlyName => GetType().Name;
+
+        public Type Type => typeof(UITest);
+
+        public bool CanExecute(UITest context)
+        {
+            return true;
+        }
+
+        public bool CanExecute(object context)
+        {
+            return CanExecute((UITest)context);
+        }
+
+        public object Execute(UITest context)
+        {
+            return null;
+        }
+
+        public object Run(object context)
+        {
+            return Run((UITest)context);
+        }
+    }
+
 
     [ExposeClass(Context = ConstantsCore.Plugin)]
     public class TestClass : SubTestClass, ITest
@@ -277,6 +313,8 @@ namespace DynamicDescriptors.Tests
 
         public Type Type => throw new NotImplementedException();
 
+        public string FriendlyName => GetType().Name;
+
         public bool CanExecute(object context)
         {
             throw new NotImplementedException();
@@ -292,6 +330,8 @@ namespace DynamicDescriptors.Tests
     public abstract class SubTestClass2 : IInjectBuilder
     {
 
+        public string FriendlyName => GetType().Name;
+
         public abstract Type Type { get; }
 
         public abstract bool CanExecute(object context);
@@ -306,5 +346,12 @@ namespace DynamicDescriptors.Tests
         string Name { get; set; }
 
     }
+
+
+    public class UITest
+    {
+
+    }
+
 
 }

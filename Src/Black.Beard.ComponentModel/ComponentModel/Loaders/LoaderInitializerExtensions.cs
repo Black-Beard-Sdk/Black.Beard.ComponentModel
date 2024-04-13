@@ -6,6 +6,8 @@ using System.Linq;
 
 namespace Bb.ComponentModel.Loaders
 {
+
+
     public static class LoaderInitializerExtensions
     {
 
@@ -112,7 +114,7 @@ namespace Bb.ComponentModel.Loaders
                     }
 
                 if (srv == null)
-                    if (Activator.CreateInstance(type, self.ServiceProvider) is IApplicationBuilderInitializer<T> srv1)
+                    if (Activator.CreateInstance(type) is IApplicationBuilderInitializer<T> srv1)
                         srv = srv1;
 
                 if (initializer != null)

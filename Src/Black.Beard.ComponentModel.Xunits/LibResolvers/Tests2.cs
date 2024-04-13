@@ -48,6 +48,8 @@ namespace ComponentModels.Tests.LibResolvers
 
             public Type Type => typeof(MyContext);
 
+            public string FriendlyName => GetType().Name;
+
             public bool CanExecute(MyContext context)
             {
                 return true;
@@ -60,10 +62,10 @@ namespace ComponentModels.Tests.LibResolvers
 
             public object Run(object context)
             {
-                return Run((MyContext)context);
+                return Execute((MyContext)context);
             }
 
-            public object Run(MyContext context)
+            public object Execute(MyContext context)
             {
                 context.Test = true;
                 // do action

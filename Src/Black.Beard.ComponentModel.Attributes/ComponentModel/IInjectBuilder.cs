@@ -14,6 +14,12 @@ namespace Bb.ComponentModel
     {
 
         /// <summary>
+        /// Friendly name of the builder
+        /// </summary>
+        string FriendlyName { get; }
+
+
+        /// <summary>
         /// Execute the initializing process with <see cref="object"/>
         /// </summary>
         /// <param name="context">specified context <see cref="object"/></param>

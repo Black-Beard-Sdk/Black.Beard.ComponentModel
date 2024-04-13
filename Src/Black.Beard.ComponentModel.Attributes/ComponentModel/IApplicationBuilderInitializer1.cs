@@ -1,4 +1,6 @@
-﻿namespace Bb.ComponentModel.Loaders
+﻿using System;
+
+namespace Bb.ComponentModel.Loaders
 {
 
 
@@ -19,6 +21,11 @@
         /// return true if the builder has been Initialized
         /// </summary>
         bool Executed { get; set; }
+
+        /// <summary>
+        /// Return the type of service that should be passed by argument
+        /// </summary>
+        Type Type { get; }
 
     }
 

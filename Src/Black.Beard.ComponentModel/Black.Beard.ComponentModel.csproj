@@ -33,9 +33,10 @@
 	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositoryByFolder.cs" />
 	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositoryByName.cs" />
 	  <Compile Include="ComponentModel\Loaders\IApplicationBuilderInitializer.cs" />
-	  <Compile Include="ComponentModel\Loaders\IApplicationBuilderInitializer1.cs" />
 	  <Compile Include="ComponentModel\Loaders\InitializationLoader.cs" />
+	  <Compile Include="ComponentModel\Loaders\InjectionLoader.cs" />
 	  <Compile Include="ComponentModel\Loaders\LoaderInitializerExtensions.cs" />
+	  <Compile Include="ComponentModel\Loaders\LoaderInjectionExtensions.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

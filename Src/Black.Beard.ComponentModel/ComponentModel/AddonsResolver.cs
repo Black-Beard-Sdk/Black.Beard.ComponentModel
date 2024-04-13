@@ -644,6 +644,16 @@ namespace Bb.ComponentModel
 
         }
 
+        internal object ExcludeAbstractTypes(object excludeAbstractTypes)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal object ExcludeGenericTypes(object excludeGenericTypes)
+        {
+            throw new NotImplementedException();
+        }
+
 
         #endregion Apply filters
 

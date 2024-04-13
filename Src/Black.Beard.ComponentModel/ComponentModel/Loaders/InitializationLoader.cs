@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Bb.ComponentModel.Attributes;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Bb.ComponentModel.Loaders
 {
+
 
     /// <summary>
     /// Loader of application builder
@@ -23,8 +27,6 @@ namespace Bb.ComponentModel.Loaders
 
 
         public IServiceProvider ServiceProvider { get; set; }
-
-
 
         public InitializationLoader<T> WithServices(IServiceProvider serviceProvider)
         {

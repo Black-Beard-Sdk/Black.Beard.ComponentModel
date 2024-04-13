@@ -17,24 +17,15 @@ namespace ComponentModels.Tests.Factories
         [Fact]
         public void Constructor_FactoryByIoc()
         {
-
-            var factory2 = ObjectCreatorByIoc.GetActivator<TestByIoc1>();
-            var factory1 = ObjectCreatorByIoc.GetActivator<TestByIoc2>();
-
-            var serviceProvider = new CustomIServiceProvider();
-            serviceProvider.Add(factory1);
-            serviceProvider.Add(factory2);
+            
+            var serviceProvider = new CustomIServiceProvider()
+                .Add<TestByIoc1>()
+                .Add<TestByIoc2>();
 
             var srv = (TestByIoc1)serviceProvider.GetService(typeof(TestByIoc1));
 
-            var instance = factory1.Invoke(serviceProvider);
-
-            // Test1 result = (TestByIoc1)factory.Call(null, "t1", 1);
-            //result.Arg1.Should().Be("t1");
-
-            factory1.SetInjectionAttribute<InjectAttribute>();
+            ObjectCreatorByIoc.SetInjectionAttribute<InjectAttribute>();
             var factory3 = ObjectCreatorByIoc.GetActivator<TestByIoc3>();
-
             var oo = factory3.Invoke(serviceProvider);
 
             (oo.Provider == serviceProvider).Should().BeTrue();
@@ -88,9 +79,16 @@ namespace ComponentModels.Tests.Factories
 
             }
 
-            public void Add(Factory factory)
+            public CustomIServiceProvider Add<T>()
+                where T : class
+            {
+                return Add(ObjectCreatorByIoc.GetActivator<T>());
+            }
+
+            public CustomIServiceProvider Add(Factory factory)
             {
                 _dic.Add(factory.ExposedType, factory);
+                return this;
             }
 
             private readonly Dictionary<Type, Factory> _dic;

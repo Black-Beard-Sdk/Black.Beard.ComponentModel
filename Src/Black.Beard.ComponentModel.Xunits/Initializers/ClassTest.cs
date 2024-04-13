@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using static Black.Beard.ComponentModel.Xunits.Initializers.ClassTest;
 
 namespace Black.Beard.ComponentModel.Xunits.Initializers
 {
@@ -54,28 +55,32 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
         }
 
-        [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IApplicationBuilderInitializer<BuilderTest>), LifeCycle =IocScopeEnum.Transiant)]
-        public class InitializerTest : IApplicationBuilderInitializer<BuilderTest>
+    }
+
+
+
+    [ExposeClass(ConstantsCore.Initialization)]
+    public class InitializerTest : IApplicationBuilderInitializer<BuilderTest>
+    {
+
+        public string FriendlyName { get => GetType().Name; }
+
+        public int OrderPriority => 1;
+
+        public bool CanExecute(BuilderTest builder, InitializationLoader<BuilderTest> initializer)
         {
-            
-            public string FriendlyName { get => GetType().Name; }
-
-            public int OrderPriority => 1;
-
-            public bool CanExecute(BuilderTest builder, InitializationLoader<BuilderTest> initializer)
-            {
-                return true;
-            }
-
-            public void Execute(BuilderTest builder)
-            {
-                builder.Ran = true;
-            }
-
-            public bool Executed { get; set; }
-
+            return true;
         }
 
+        public void Execute(BuilderTest builder)
+        {
+            builder.Ran = true;
+        }
+
+        public bool Executed { get; set; }
+
+        public Type Type => typeof(BuilderTest);
 
     }
+
 }
