@@ -62,10 +62,6 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
             public int OrderPriority => 1;
 
-            public bool Initialized { get ; set; }
-
-            public bool Configured { get; set; }
-
             public bool CanExecute(BuilderTest builder, InitializationLoader<BuilderTest> initializer)
             {
                 return true;
@@ -75,6 +71,8 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
             {
                 builder.Ran = true;
             }
+
+            public bool Executed { get; set; }
 
         }
 

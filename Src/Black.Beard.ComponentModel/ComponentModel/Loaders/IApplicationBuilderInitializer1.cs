@@ -18,7 +18,7 @@
         /// <summary>
         /// return true if the builder has been Initialized
         /// </summary>
-        bool Initialized { get; set; }
+        bool Executed { get; set; }
 
     }
 
