@@ -20,11 +20,6 @@
         /// </summary>
         bool Initialized { get; set; }
 
-        /// <summary>
-        /// return true if the builder has been configured 
-        /// </summary>
-        bool Configured { get; set; }
-
     }
 
 

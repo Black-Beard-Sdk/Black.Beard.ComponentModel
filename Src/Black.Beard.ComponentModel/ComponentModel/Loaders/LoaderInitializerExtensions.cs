@@ -38,26 +38,26 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="builder">builder to initialize</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static InitializationLoader<T> Initialize<T>(this InitializationLoader<T> self, T builder)
+        public static InitializationLoader<T> Execute<T>(this InitializationLoader<T> self, T builder)
         {
 
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
 
 
-            List<IApplicationBuilderInitializer<T>> items = self.InstancesBuilders.OrderBy(c => c.OrderPriority).ToList();
+            List<IApplicationBuilderInitializer<T>> items = self.Instances.OrderBy(c => c.OrderPriority).ToList();
             List<IApplicationBuilderInitializer<T>> list_to_remove = new List<IApplicationBuilderInitializer<T>>();
 
             while (items.Count > 0)
             {
 
                 foreach (IApplicationBuilderInitializer<T> item in items)
-                    if (item.CanInitialize(builder, self))
+                    if (item.CanExecute(builder, self))
                     {
                         var name = item.FriendlyName ?? item.GetType().FullName;
                         Trace.WriteLine($"builder '{name}' initialize", TraceLevel.Info.ToString());
-                        item.Initialize(builder);
-                        self.Initialized.Add(name);
+                        item.Execute(builder);
+                        self.Executed.Add(name);
                         list_to_remove.Add(item);
                     }
 
@@ -69,47 +69,6 @@ namespace Bb.ComponentModel.Loaders
 
             return self;
         }
-
-
-        /// <summary>
-        /// Configure the builder with all application builder found
-        /// </summary>
-        /// <typeparam name="T">Builder type</typeparam>
-        /// <param name="self">repository of builder initializer</param>
-        /// <param name="builder">builder to initialize</param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public static InitializationLoader<T> Configure<T>(this InitializationLoader<T> self, T builder)
-        {
-
-            if (builder == null)
-                throw new ArgumentNullException(nameof(builder));
-
-            List<IApplicationBuilderInitializer<T>> items = self.InstancesBuilders.OrderBy(c => c.OrderPriority).ToList();
-            List<IApplicationBuilderInitializer<T>> list_to_remove = new List<IApplicationBuilderInitializer<T>>();
-
-            while (items.Count > 0)
-            {
-
-                foreach (IApplicationBuilderInitializer<T> item in items)
-                    if (item.CanConfigure(builder, self))
-                    {
-                        var name = item.FriendlyName ?? item.GetType().FullName;
-                        Trace.WriteLine($"builder '{name}' initialize", TraceLevel.Info.ToString());
-                        item.Configure(builder);
-                        self.Configured.Add(name);
-                        list_to_remove.Add(item);
-                    }
-
-                foreach (var item in list_to_remove)
-                    items.Remove(item);
-
-            }
-
-            return self;
-
-        }
-
 
 
         private static InitializationLoader<T> CollecteInitializationTypes<T>(this InitializationLoader<T> self)
@@ -124,7 +83,7 @@ namespace Bb.ComponentModel.Loaders
                 if (_types.Add(service.Key))
                 {
                     Trace.WriteLine($"builder '{service}' found and loaded", TraceLevel.Info.ToString());
-                    self.Builders.Add(service.Key);
+                    self.Types.Add(service.Key);
                     toRemove.Add(service);
                 }
 
@@ -136,7 +95,7 @@ namespace Bb.ComponentModel.Loaders
         private static InitializationLoader<T> LoadAbstractLoaders<T>(this InitializationLoader<T> self, Action<IApplicationBuilderInitializer<T>> initializer)
         {
 
-            foreach (var type in self.Builders)
+            foreach (var type in self.Types)
             {
 
                 if (Activator.CreateInstance(type) is not IApplicationBuilderInitializer<T> srv)
@@ -145,7 +104,7 @@ namespace Bb.ComponentModel.Loaders
                 if (initializer != null)
                     initializer(srv);
 
-                self.InstancesBuilders.Add(srv);
+                self.Instances.Add(srv);
 
             }
 

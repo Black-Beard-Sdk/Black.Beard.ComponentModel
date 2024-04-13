@@ -16,10 +16,9 @@ namespace Bb.ComponentModel.Loaders
         /// </summary>
         public InitializationLoader()
         {
-            Builders = new List<Type>();
-            InstancesBuilders = new List<IApplicationBuilderInitializer<T>>();
-            Initialized = new HashSet<string>();
-            Configured = new HashSet<string>();
+            Types = new List<Type>();
+            Instances = new List<IApplicationBuilderInitializer<T>>();
+            Executed = new HashSet<string>();
         }
 
         /// <summary>
@@ -41,22 +40,17 @@ namespace Bb.ComponentModel.Loaders
         /// <summary>
         /// List of types builder found
         /// </summary>
-        public List<Type> Builders { get; }
+        public List<Type> Types { get; }
 
         /// <summary>
         /// List of builder instances
         /// </summary>
-        public List<IApplicationBuilderInitializer<T>> InstancesBuilders { get; }
+        public List<IApplicationBuilderInitializer<T>> Instances { get; }
 
         /// <summary>
         /// List of builder instances initialized
         /// </summary>
-        public HashSet<string> Initialized { get; }
-
-        /// <summary>
-        /// List of builder instances configured
-        /// </summary>
-        public HashSet<string> Configured { get; }
+        public HashSet<string> Executed { get; }
 
     }
 

@@ -2,7 +2,9 @@
 using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Loaders;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using ICSharpCode.Decompiler.Semantics;
+using NJsonSchema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,19 +25,21 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
             var loader = new InitializationLoader<BuilderTest>()
                 .LoadModules()
-                .Initialize(builder)
-                .Configure(builder)
+                .Execute(builder)
                 ;
 
-            builder.Initialized.Should().BeTrue();
-            builder.Configured.Should().BeTrue();
-            loader.Initialized.Count.Should().Be(1);
-            loader.Configured.Count.Should().Be(1);
-
+            builder.Ran.Should().BeTrue();
+            builder.Ran.Should().BeTrue();
+            loader.Executed.Count.Should().Be(1);
 
         }
 
-
+        [Fact]
+        public void GenerateSchema()
+        {
+            var schema = JsonSchema.FromType<ExposedAssemblyRepositories>();
+            var schemaData = schema.ToJson();
+        }
 
         public class BuilderTest
         {
@@ -45,9 +49,8 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
              
             }
 
-            public bool Initialized { get; set; }
+            public bool Ran { get; set; }
 
-            public bool Configured { get; set; }
 
         }
 
@@ -63,25 +66,14 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
             public bool Configured { get; set; }
 
-
-            public bool CanConfigure(BuilderTest builder, InitializationLoader<BuilderTest> initializer)
+            public bool CanExecute(BuilderTest builder, InitializationLoader<BuilderTest> initializer)
             {
                 return true;
             }
 
-            public bool CanInitialize(BuilderTest builder, InitializationLoader<BuilderTest> initializer)
+            public void Execute(BuilderTest builder)
             {
-                return true;
-            }
-
-            public void Configure(BuilderTest builder)
-            {
-                builder.Configured = true;
-            }
-
-            public void Initialize(BuilderTest builder)
-            {
-                builder.Initialized = true;
+                builder.Ran = true;
             }
 
         }

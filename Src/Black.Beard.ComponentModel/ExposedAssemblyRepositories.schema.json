@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ExposedAssemblyRepositories",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "ByFolder": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExposedAssemblyRepositoryByFolder"
+      }
+    },
+    "ByName": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/ExposedAssemblyRepositoryByName"
+      }
+    }
+  },
+  "definitions": {
+    "ExposedAssemblyRepositoryByFolder": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExposedAssemblyRepositoryByName"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Path": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "Recursively": {
+              "type": "boolean"
+            },
+            "FileFilter": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "ExposedAssemblyRepositoryByName": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExposedAssemblyRepository"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "AssemblyName": {
+              "type": [
+                "null",
+                "string"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "ExposedAssemblyRepository": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false
+    }
+  }
+}
