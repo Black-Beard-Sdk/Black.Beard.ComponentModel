@@ -98,8 +98,22 @@ namespace Bb.ComponentModel.Loaders
             foreach (var type in self.Types)
             {
 
-                if (Activator.CreateInstance(type) is not IApplicationBuilderInitializer<T> srv)
-                    throw new InvalidCastException(type.FullName);
+                IApplicationBuilderInitializer<T> srv = null;
+
+                if (self.ServiceProvider != null)
+                    try
+                    {
+                        srv = (IApplicationBuilderInitializer<T>)self.ServiceProvider.GetService(type);
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.TraceError(ex.Message);
+                        throw;
+                    }
+
+                if (srv == null)
+                    if (Activator.CreateInstance(type, self.ServiceProvider) is IApplicationBuilderInitializer<T> srv1)
+                        srv = srv1;
 
                 if (initializer != null)
                     initializer(srv);

@@ -21,6 +21,17 @@ namespace Bb.ComponentModel.Loaders
             Executed = new HashSet<string>();
         }
 
+
+        public IServiceProvider ServiceProvider { get; set; }
+
+
+
+        public InitializationLoader<T> WithServices(IServiceProvider serviceProvider)
+        {
+            ServiceProvider = serviceProvider;
+            return this;    
+        }
+
         /// <summary>
         /// Set the assemblies to load
         /// </summary>
