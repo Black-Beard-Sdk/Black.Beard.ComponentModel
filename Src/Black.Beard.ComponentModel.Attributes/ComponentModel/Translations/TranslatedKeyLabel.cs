@@ -7,6 +7,7 @@ using System.Text;
 namespace Bb.ComponentModel.Translations
 {
 
+
     /// <summary>
     /// "p:path, k:key, l:en-us, d:default value"
     /// </summary>
@@ -17,6 +18,17 @@ namespace Bb.ComponentModel.Translations
         public TranslatedKeyLabel()
         {
             this.Datas = new Dictionary<CultureInfo, DataTranslation>();
+        }
+        public TranslatedKeyLabel(string key)
+        {
+            this.Path = string.Empty;
+            this.DefaultDisplay = this.Key = key;
+        }
+
+        public TranslatedKeyLabel(string path, string key)
+        {
+            this.Path = path;
+            this.DefaultDisplay = this.Key = key;
         }
 
         public TranslatedKeyLabel(string? path, string key, string defaultDisplay, CultureInfo? culture = null)
@@ -52,14 +64,6 @@ namespace Bb.ComponentModel.Translations
             if (!string.IsNullOrEmpty(Key))
                 list.Add("k:" + Key);
 
-            //if (!string.IsNullOrEmpty(DefaultDisplay))
-            //    list.Add("d:" + DefaultDisplay);
-
-            //foreach (var item in this.Datas)
-            //{
-            //    list.Add("");
-            //}
-
             StringBuilder sb = new StringBuilder();
             string comma = string.Empty;
             foreach (var item in list)
@@ -80,7 +84,7 @@ namespace Bb.ComponentModel.Translations
 
         public static bool IsValid(string key)
         {
-            
+
             if (!string.IsNullOrEmpty(key))
             {
                 var k = key.Replace(" ", "");
@@ -98,7 +102,7 @@ namespace Bb.ComponentModel.Translations
             if (!string.IsNullOrEmpty(key))
             {
                 var k = key.Replace(" ", "");
-                if ( k.Contains("d:") && k.Contains("l:") && k.Contains("k:"))
+                if (k.Contains("d:") && k.Contains("l:") && k.Contains("k:"))
                 {
                     keyLabel = TranslatedKeyLabel.Parse(key);
                     return keyLabel != null;
