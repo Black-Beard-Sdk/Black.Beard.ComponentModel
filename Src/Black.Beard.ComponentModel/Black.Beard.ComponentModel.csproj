@@ -10,8 +10,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="ComponentModel\Loaders\**" />
 	  <Compile Remove="ComponentModel\PEReaders\**" />
+	  <EmbeddedResource Remove="ComponentModel\Loaders\**" />
 	  <EmbeddedResource Remove="ComponentModel\PEReaders\**" />
+	  <None Remove="ComponentModel\Loaders\**" />
 	  <None Remove="ComponentModel\PEReaders\**" />
 	</ItemGroup>
 
@@ -22,6 +25,17 @@
 		<Compile Remove="ComponentModel\MethodDiscoveryAssembly.cs" />
 		<Compile Remove="ComponentModel\ObjectCreator.cs" />
 		<Compile Remove="ComponentModel\WalkerFilter.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositories.cs" />
+	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepository.cs" />
+	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositoryByFolder.cs" />
+	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositoryByName.cs" />
+	  <Compile Include="ComponentModel\Loaders\IApplicationBuilderInitializer.cs" />
+	  <Compile Include="ComponentModel\Loaders\IApplicationBuilderInitializer1.cs" />
+	  <Compile Include="ComponentModel\Loaders\InitializationLoader.cs" />
+	  <Compile Include="ComponentModel\Loaders\LoaderInitializerExtensions.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

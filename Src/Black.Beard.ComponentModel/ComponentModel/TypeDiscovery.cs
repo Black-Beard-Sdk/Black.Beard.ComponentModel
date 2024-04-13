@@ -586,37 +586,37 @@ namespace Bb.ComponentModel
                     LoadAssembliesFrom(path);
         }
 
-        /// <summary>
-        ///     Load in memory all the assemblies from the specified with directory.
-        /// </summary>
-        /// <returns></returns>
-        public int LoadAssembliesFrom(string directory)
-        {
+        ///// <summary>
+        /////     Load in memory all the assemblies from the specified with directory.
+        ///// </summary>
+        ///// <returns></returns>
+        //public int LoadAssembliesFrom(string directory)
+        //{
 
-            int result = 0;
+        //    int result = 0;
 
-            var files = Paths.GetAssemblies(directory, c => FilterFilename(c));
-            foreach (var file in files)
-                if (!IsLoadedByFile(file.FullName))
-                {
+        //    var files = Paths.GetAssemblies(directory, c => FilterFilename(c));
+        //    foreach (var file in files)
+        //        if (!IsLoadedByFile(file.FullName))
+        //        {
 
-                    Assembly ass = null;
-                    try
-                    {
-                        ass = AssemblyLoader.Instance.LoadAssembly(file);
-                        result += ass.ExportedTypes.Count();
-                    }
-                    catch (Exception e)
-                    {
-                        OnRegisterException(e);
-                        Trace.TraceError(e.ToString());
-                    }
+        //            Assembly ass = null;
+        //            try
+        //            {
+        //                ass = AssemblyLoader.Instance.LoadAssembly(file);
+        //                result += ass.ExportedTypes.Count();
+        //            }
+        //            catch (Exception e)
+        //            {
+        //                OnRegisterException(e);
+        //                Trace.TraceError(e.ToString());
+        //            }
 
-                }
+        //        }
 
-            return result;
+        //    return result;
 
-        }
+        //}
 
         /// <summary>
         ///     Load in memory all the assemblies from the specified with directory.
@@ -632,7 +632,6 @@ namespace Bb.ComponentModel
             foreach (var file in files)
                 if (!IsLoadedByFile(file.FullName))
                 {
-
                     Assembly ass = null;
                     try
                     {
@@ -645,7 +644,6 @@ namespace Bb.ComponentModel
                         OnRegisterException(e);
                         Trace.TraceError(e.ToString());
                     }
-
                 }
 
             return result;
