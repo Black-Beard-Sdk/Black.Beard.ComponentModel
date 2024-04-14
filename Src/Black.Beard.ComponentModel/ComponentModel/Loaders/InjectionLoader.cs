@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bb.ComponentModel.Factories;
+using System;
 using System.Collections.Generic;
 
 namespace Bb.ComponentModel.Loaders
@@ -16,7 +17,7 @@ namespace Bb.ComponentModel.Loaders
         public InjectionLoader(IServiceProvider serviceProvider, string context)
         {
             this.Context = context;
-            ServiceProvider = serviceProvider;
+            ServiceProvider = new LocalServiceProvider(serviceProvider) {  AutoAdd = true };
             Types = new List<Type>();
             Instances = new List<IInjectBuilder<T>>();
             Executed = new HashSet<string>();
@@ -24,7 +25,7 @@ namespace Bb.ComponentModel.Loaders
 
         public string Context { get; }
 
-        public IServiceProvider ServiceProvider { get; }
+        public LocalServiceProvider ServiceProvider { get; }
 
         /// <summary>
         /// List of types builder found

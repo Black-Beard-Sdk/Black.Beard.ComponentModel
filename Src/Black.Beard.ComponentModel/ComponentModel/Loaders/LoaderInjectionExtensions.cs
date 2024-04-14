@@ -44,8 +44,10 @@ namespace Bb.ComponentModel.Loaders
             ;
 
             foreach (var type in types)
+            {
+                self.ServiceProvider.Add<IInjectBuilder<T>>(type.Type);
                 self.Types.Add(type.Type);
-
+            }
             return self;
 
         }
@@ -66,7 +68,7 @@ namespace Bb.ComponentModel.Loaders
                 {
                     Trace.TraceError(ex.Message);
                     throw;
-                }
+                }                
 
                 if (initializer != null)
                     initializer(srv);

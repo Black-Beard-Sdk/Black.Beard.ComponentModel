@@ -178,9 +178,7 @@ namespace DynamicDescriptors.Tests
 
             var instance = new UITest();
 
-            var serviceProvider = new CustomIServiceProvider()
-                .Add<TestClass3>()
-                ;
+            var serviceProvider = new LocalServiceProvider();
 
             var loader = new InjectionLoader<UITest>(serviceProvider, ConstantsCore.Plugin + "Test");
 

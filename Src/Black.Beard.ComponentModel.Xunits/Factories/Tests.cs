@@ -18,7 +18,7 @@ namespace ComponentModels.Tests.Factories
         public void Constructor_FactoryByIoc()
         {
             
-            var serviceProvider = new CustomIServiceProvider()
+            var serviceProvider = new LocalServiceProvider()
                 .Add<TestByIoc1>()
                 .Add<TestByIoc2>();
 
@@ -57,44 +57,6 @@ namespace ComponentModels.Tests.Factories
             Test1 result = factory.Call("t2", 1);
             result.Arg1.Should().Be("t2");
         }
-
-
-
-
-        public class CustomIServiceProvider : IServiceProvider
-        {
-
-            public CustomIServiceProvider()
-            {
-                this._dic = new Dictionary<Type, Factory>();
-            }
-
-            public object? GetService(Type serviceType)
-            {
-                
-                if (serviceType == typeof(IServiceProvider))
-                    return this;
-
-                return _dic[serviceType].CallInstance(this);
-
-            }
-
-            public CustomIServiceProvider Add<T>()
-                where T : class
-            {
-                return Add(ObjectCreatorByIoc.GetActivator<T>());
-            }
-
-            public CustomIServiceProvider Add(Factory factory)
-            {
-                _dic.Add(factory.ExposedType, factory);
-                return this;
-            }
-
-            private readonly Dictionary<Type, Factory> _dic;
-
-        }
-
 
     }
 
