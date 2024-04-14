@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
 using System.Text;
+using System.Transactions;
+using System.Xml.Linq;
 
 namespace Bb.ComponentModel.Translations
 {
@@ -15,44 +19,126 @@ namespace Bb.ComponentModel.Translations
     public class TranslatedKeyLabel
     {
 
-        public TranslatedKeyLabel()
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TranslatedKeyLabel"/> class.
+        /// </summary>
+        private TranslatedKeyLabel()
         {
-            this.Datas = new Dictionary<CultureInfo, DataTranslation>();
-        }
-        public TranslatedKeyLabel(string key)
-        {
-            this.Path = string.Empty;
-            this.DefaultDisplay = this.Key = key;
+            this.Translations = new Dictionary<CultureInfo, DataTranslation>();
         }
 
-        public TranslatedKeyLabel(string path, string key)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TranslatedKeyLabel"/> class.
+        /// </summary>
+        /// <param name="defaultDisplay">use for create key</param>
+        public TranslatedKeyLabel(string defaultDisplay)
+            : this(null, defaultDisplay, defaultDisplay)
         {
-            this.Path = path;
-            this.DefaultDisplay = this.Key = key;
+
+            if (ModeDebug)
+                Trace(this, string.Empty);
+
+
         }
 
-        public TranslatedKeyLabel(string? path, string key, string defaultDisplay, CultureInfo? culture = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TranslatedKeyLabel"/> class.
+        /// </summary>
+        /// <param name="path">group of translation key</param>
+        /// <param name="defaultDisplay">default display</param>
+        public TranslatedKeyLabel(string path, string defaultDisplay)
+            : this(path, defaultDisplay, defaultDisplay)
         {
-            this.Datas = new Dictionary<CultureInfo, DataTranslation>();
+
+            if (ModeDebug)
+                Trace(this, string.Empty);
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TranslatedKeyLabel"/> class.
+        /// </summary>
+        /// <param name="path">context for group key</param>
+        /// <param name="defaultDisplay">default display</param>
+        /// <param name="key">key of translation</param>
+        /// <param name="culture">default culture</param>
+        public TranslatedKeyLabel(string? path, string defaultDisplay, string key, CultureInfo? culture = null)
+        {
             this.Path = path;
-            this.Key = key;
             this.DefaultDisplay = defaultDisplay;
-            if (culture != null)
-                this.Datas.Add(culture, new DataTranslation(this) { Culture = culture, Value = defaultDisplay });
+            this.Key = key ?? defaultDisplay;
+            this.DefaultCulture = culture ?? CultureInfo.InvariantCulture;
+
+            this.Translations = new Dictionary<CultureInfo, DataTranslation>
+            {
+                { this.DefaultCulture, new DataTranslation(this) { Culture = this.DefaultCulture, Value = defaultDisplay } }
+            };
+
+            if (defaultDisplay == null)
+            {
+                IsNotValidKey = true;
+                if (ModeDebug)
+                    Trace(this, string.Empty);
+            }
+
         }
 
-        public static TranslatedKeyLabel EmptyKey { get; } = new TranslatedKeyLabel(string.Empty, string.Empty, string.Empty);
+        /// <summary>
+        /// Default key
+        /// </summary>
+        public static TranslatedKeyLabel EmptyKey { get; } = new TranslatedKeyLabel();
 
+        /// <summary>
+        /// Contract of the translation key
+        /// </summary>
         public string? Path { get; private set; }
 
+        /// <summary>
+        /// Translation key
+        /// </summary>
         public string? Key { get; private set; }
 
-        public Dictionary<CultureInfo, DataTranslation> Datas { get; }
+        /// <summary>
+        /// Other translation
+        /// </summary>
+        public Dictionary<CultureInfo, DataTranslation> Translations { get; }
 
-        public string? DefaultDisplay { get; private set; }
+        /// <summary>
+        /// return a translation for a culture
+        /// </summary>
+        /// <param name="culture">asked culture</param>
+        /// <returns><see cref="DataTranslation"/></returns>
+        public DataTranslation this[CultureInfo culture]
+        {
+            get
+            {
+                if (this.Translations.TryGetValue(culture, out DataTranslation translation))
+                    return translation;
 
+                return new DataTranslation(this) { Culture = culture, Value = this.DefaultDisplay };
+            }
+        }
+
+        /// <summary>
+        /// Default display
+        /// </summary>
+        public string? DefaultDisplay { get; set; }
+
+        /// <summary>
+        /// Default culture
+        /// </summary>
+        public CultureInfo DefaultCulture { get; set; }
+
+        /// <summary>
+        /// Return true if the key is not valid
+        /// </summary>
         public bool IsNotValidKey { get; private set; }
 
+        /// <summary>
+        /// return a valid translation key for the current instance
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
 
@@ -63,6 +149,16 @@ namespace Bb.ComponentModel.Translations
 
             if (!string.IsNullOrEmpty(Key))
                 list.Add("k:" + Key);
+
+            if (DefaultCulture != null)
+                list.Add("l:" + DefaultCulture.IetfLanguageTag);
+
+            if (!string.IsNullOrEmpty(DefaultDisplay))
+                list.Add("d:" + DefaultDisplay);
+
+            foreach (var item in Translations)
+                if (item.Key != DefaultCulture)
+                    list.Add(item.Key.IetfLanguageTag + ":" + item.Value.Value);
 
             StringBuilder sb = new StringBuilder();
             string comma = string.Empty;
@@ -76,43 +172,61 @@ namespace Bb.ComponentModel.Translations
             return sb.ToString();
         }
 
+
         public static implicit operator TranslatedKeyLabel(string key)
         {
             return TranslatedKeyLabel.Parse(key) ?? TranslatedKeyLabel.EmptyKey;
         }
 
+        public static implicit operator string(TranslatedKeyLabel key)
+        {
+            return key.ToString();
+        }
 
+
+        /// <summary>
+        /// Evaluate if the key is valid
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static bool IsValid(string key)
         {
 
             if (!string.IsNullOrEmpty(key))
             {
-                var k = key.Replace(" ", "");
-                return k.Contains("d:") && k.Contains("l:") && k.Contains("k:");
+                var keyLabel = Parse(key);
+                return !keyLabel.IsNotValidKey;
             }
 
             return false;
 
         }
 
-        public static bool IsValid(string key, out TranslatedKeyLabel keyLabel)
+        /// <summary>
+        /// Try to convert text in translation key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="keyLabel"></param>
+        /// <returns></returns>
+        public static bool TryConvert(string key, out TranslatedKeyLabel keyLabel)
         {
 
-            keyLabel = null;
             if (!string.IsNullOrEmpty(key))
             {
-                var k = key.Replace(" ", "");
-                if (k.Contains("d:") && k.Contains("l:") && k.Contains("k:"))
-                {
-                    keyLabel = TranslatedKeyLabel.Parse(key);
-                    return keyLabel != null;
-                }
+                keyLabel = Parse(key);
+                return !keyLabel.IsNotValidKey;
             }
 
+            keyLabel = null;
             return false;
 
         }
 
+        /// <summary>
+        /// Evaluate to key
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object? obj)
         {
 
@@ -128,18 +242,32 @@ namespace Bb.ComponentModel.Translations
             return this.ToString().GetHashCode();
         }
 
+        /// <summary>
+        /// If true the invalid keys can be intercepted with DebugTrace method
+        /// </summary>
+        public static bool ModeDebug { get; set; } = false;
 
+        /// <summary>
+        /// Intercept failed parsing of key
+        /// </summary>
+        public static Action<TranslatedKeyLabel, string, string> DebugTrace { get; set; }
+
+
+        /// <summary>
+        /// Parse a key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static TranslatedKeyLabel? Parse(string key)
         {
 
             if (string.IsNullOrEmpty(key))
                 return null;
 
+            CultureInfo culture;
+            bool isValid = false;
             TranslatedKeyLabel keyLabel = new TranslatedKeyLabel();
-            bool t = false;
             var lexer = new Lexer(key);
-
-            Dictionary<string, DataTranslation> _items = new Dictionary<string, DataTranslation>();
 
             while (lexer.Next())
             {
@@ -150,75 +278,106 @@ namespace Bb.ComponentModel.Translations
                 if (index2 > -1)
                 {
 
-                    t = true;
-                    string index = string.Empty;
                     var name = subKey.Trim().Substring(0, index2).ToLower();
-                    var value = subKey.Trim().Substring(index2 + 1).Trim();
-                    DataTranslation data;
-
-                    if (name.Length > 1)
-                    {
-                        index = name.Substring(1);
-                        name = name.Substring(0, 1);
-                    }
+                    var value = subKey.Trim().Substring(index2 + 1).TrimStart();
 
                     switch (name)
                     {
-
                         case "p":
+                        case "path":
                             keyLabel.Path = value;
+                            isValid = true;
                             break;
 
                         case "k":
+                        case "key":
                             keyLabel.Key = value;
+                            isValid = true;
                             break;
 
                         case "l":
-                            var c = CultureInfo.GetCultureInfo(value);
-                            if (!_items.TryGetValue(index, out data))
-                                _items.Add(index, (data = new DataTranslation(keyLabel) { Culture = c }));
+                        case "language":
+                            if (TryGetCulture(value, out culture))
+                            {
+                                keyLabel.DefaultCulture = culture;
+                                isValid = true;
+                            }
                             else
-                                data.Culture = c;
+                            {
+                                keyLabel.IsNotValidKey = true;
+                            }
                             break;
 
                         case "d":
-                            if (!_items.TryGetValue(index, out data))
-                                _items.Add(index, (data = new DataTranslation(keyLabel) { Value = value }));
-                            else
-                                data.Value = value;
-                            if (string.IsNullOrEmpty(index))
-                                keyLabel.DefaultDisplay = value;
+                        case "display":
+                        case "defaultdisplay":
+                            keyLabel.DefaultDisplay = value;
+                            isValid = true;
                             break;
 
                         default:
-                            break;
-                    }
+                            if (TryGetCulture(name, out culture))
+                            {
+                                isValid = true;
+                                var translation = new DataTranslation(keyLabel) { Value = value, Culture = culture };
+                                if (!keyLabel.Translations.ContainsKey(culture))
+                                    keyLabel.Translations.Add(culture, translation);
+                                else
+                                    keyLabel.Translations[culture] = translation;
 
+                                if (culture == keyLabel.DefaultCulture)
+                                    keyLabel.DefaultDisplay = value;
+                            }
+                            else
+                            {
+                                keyLabel.IsNotValidKey = true;
+                            }
+                            break;
+
+                    }
                 }
 
             }
 
-            foreach (var item in _items)
+            if (!isValid)
             {
-                var i = item.Value;
-                if (i.Culture != CultureInfo.InvariantCulture && !string.IsNullOrEmpty(i.Value))
-                    keyLabel.Datas.Add(i.Culture, i);
-            }
-
-            if (t)
-            {
-                if (string.IsNullOrEmpty(keyLabel.Key) && !string.IsNullOrEmpty(keyLabel.DefaultDisplay))
-                    keyLabel.Key = keyLabel.DefaultDisplay;
-                return keyLabel;
-            }
-
-            if (string.IsNullOrEmpty(keyLabel.DefaultDisplay))
-            {
-                keyLabel.DefaultDisplay = key;
+                keyLabel.DefaultDisplay = keyLabel.Key = key;
                 keyLabel.IsNotValidKey = true;
             }
 
+            else if (string.IsNullOrEmpty(keyLabel.Key) && !string.IsNullOrEmpty(keyLabel.DefaultDisplay))
+                keyLabel.Key = keyLabel.DefaultDisplay;
+
+            else if (!string.IsNullOrEmpty(keyLabel.Key) && string.IsNullOrEmpty(keyLabel.DefaultDisplay))
+                keyLabel.DefaultDisplay = keyLabel.Key;
+
+            if (keyLabel.DefaultCulture != null && !keyLabel.Translations.ContainsKey(keyLabel.DefaultCulture))
+                keyLabel.Translations.Add(keyLabel.DefaultCulture, new DataTranslation(keyLabel) { Value = keyLabel.DefaultDisplay, Culture = keyLabel.DefaultCulture });
+
+            if (keyLabel.IsNotValidKey && ModeDebug)
+            {
+                Trace(keyLabel, key);
+
+            }
+
             return keyLabel;
+
+        }
+
+
+        private static bool TryGetCulture(string cultureName, out CultureInfo culture)
+        {
+            culture = CultureInfo.InvariantCulture;
+            try
+            {
+                culture = CultureInfo.GetCultureInfo(cultureName);
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+
+            return false;
 
         }
 
@@ -233,11 +392,17 @@ namespace Bb.ComponentModel.Translations
             public bool Next()
             {
 
-                var n = _payload.IndexOf(',', index);
+                var n = GetNext(out bool escape);
+
                 if (n > -1)
                 {
                     SubKey = _payload.Substring(index, n - index).Trim();
                     index = n + 1;
+                    if (escape)
+                    {
+                        SubKey = SubKey.Replace(@"\,", @",");
+                        SubKey = SubKey.Replace(@"\\", @"\");
+                    }
                     return true;
                 }
                 else if (index > 0 && _payload.IndexOf(':', index) > -1)
@@ -251,6 +416,25 @@ namespace Bb.ComponentModel.Translations
 
             }
 
+            private int GetNext(out bool escape)
+            {
+
+                escape = false;
+                bool escaped = false;
+
+                for (int i = index; i < _payload.Length; i++)
+                    if (_payload[i] == ',' && !escaped)
+                        return i;
+
+                    else if (escaped = _payload[i] == '\\')
+                    {
+                        escape = true;
+                    }
+
+                return -1;
+
+            }
+
             private string _payload;
             int index = 0;
 
@@ -258,6 +442,32 @@ namespace Bb.ComponentModel.Translations
             public string SubKey { get; private set; }
 
         }
+
+        private static void Trace(TranslatedKeyLabel key, string raw)
+        {
+
+            if (DebugTrace != null)
+            {
+
+                var trace = new StackTrace();
+                for (int i = 0; i < trace.FrameCount; i++)
+                {
+
+                    var frame = trace.GetFrame(i);
+                    var m = frame.GetMethod();
+                    if (m?.DeclaringType != typeof(TranslatedKeyLabel))
+                    {
+                        DebugTrace(key, raw, m.ToString());
+                        return;
+                    }
+
+                }
+
+            }
+
+
+        }
+
 
     }
 

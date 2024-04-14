@@ -9,22 +9,36 @@ namespace Bb.ComponentModel.Translations
     public class DataTranslation
     {
 
-        public DataTranslation(TranslatedKeyLabel parent)
+        internal DataTranslation(TranslatedKeyLabel parent)
         {
             this._parent = parent;
         }
 
+        /// <summary>
+        /// Contract of the translation key
+        /// </summary>
         public string Path { get => _parent.Path; }
 
+        /// <summary>
+        /// Translation key
+        /// </summary>
         public string Key { get => _parent.Key; }
 
+        /// <summary>
+        /// Culture of the translation
+        /// </summary>
         public CultureInfo Culture { get; set; } = CultureInfo.InvariantCulture;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Value { get; set; } = string.Empty;
 
+        /// <summary>
+        /// return the default value of the parent
+        /// </summary>
         public string DefaultValueValue { get => _parent.DefaultDisplay; }
 
-        private readonly TranslatedKeyLabel _parent;
 
         public override string ToString()
         {
@@ -38,7 +52,7 @@ namespace Bb.ComponentModel.Translations
                 list.Add("k:" + _parent.Key);
 
             if (Culture != null)
-                list.Add("c:" + Value);
+                list.Add("l:" + Culture.IetfLanguageTag);
 
             if (!string.IsNullOrEmpty(Value))
                 list.Add("d:" + Value);
@@ -56,6 +70,9 @@ namespace Bb.ComponentModel.Translations
             return sb.ToString();
 
         }
+
+        private readonly TranslatedKeyLabel _parent;
+
 
     }
 

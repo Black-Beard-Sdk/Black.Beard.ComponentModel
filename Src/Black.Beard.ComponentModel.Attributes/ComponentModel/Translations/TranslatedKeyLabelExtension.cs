@@ -8,6 +8,8 @@ using System.Reflection;
 
 namespace Bb.ComponentModel.Translations
 {
+
+
     public static class TranslatedKeyLabelExtension
     {
 
@@ -33,7 +35,11 @@ namespace Bb.ComponentModel.Translations
         }
 
 
-
+        /// <summary>
+        /// Return the translation of the key if the member contains <see cref="TranslationKeyAttribute"/>
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
         public static IEnumerable<TranslatedKeyLabel> GetFrom(this MemberInfo info)
         {
 
@@ -45,14 +51,25 @@ namespace Bb.ComponentModel.Translations
 
         }
 
+        /// <summary>
+        /// return true if the key is a valid translation key
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static bool IsValidTranslationKey(this string self)
         {
             return TranslatedKeyLabel.IsValid(self);
         }
 
-        public static bool IsValidTranslationKey(this string self, out TranslatedKeyLabel key)
+        /// <summary>
+        /// return true if the key is a valid translation key
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static bool TryConvertInTranslationKey(this string self, out TranslatedKeyLabel key)
         {
-            return TranslatedKeyLabel.IsValid(self, out key);
+            return TranslatedKeyLabel.TryConvert(self, out key);
         }
 
 
