@@ -34,7 +34,7 @@ namespace ComponentModels.Tests.LibResolvers
             foreach (var item in items)
             {
                 var instance = (IInjectBuilder)Activator.CreateInstance(item.Key);
-                instance.Run(ctx);
+                instance.Execute(ctx);
             }
 
             ctx.Test.Should().BeTrue();
@@ -60,7 +60,7 @@ namespace ComponentModels.Tests.LibResolvers
                 return CanExecute((MyContext)context);
             }
 
-            public object Run(object context)
+            public object Execute(object context)
             {
                 return Execute((MyContext)context);
             }

@@ -24,7 +24,7 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="context">specified context <see cref="object"/></param>
         /// <returns></returns>
-        object Run(object context);
+        object Execute(object context);
 
         /// <summary>
         /// Return true if the process can be run

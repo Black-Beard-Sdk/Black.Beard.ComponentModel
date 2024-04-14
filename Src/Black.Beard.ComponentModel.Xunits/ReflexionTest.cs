@@ -284,9 +284,9 @@ namespace DynamicDescriptors.Tests
             return null;
         }
 
-        public object Run(object context)
+        public object Execute(object context)
         {
-            return Run((UITest)context);
+            return Execute((object)(UITest)context);
         }
     }
 
@@ -318,7 +318,7 @@ namespace DynamicDescriptors.Tests
             throw new NotImplementedException();
         }
 
-        public object Run(object context)
+        public object Execute(object context)
         {
             throw new NotImplementedException();
         }
@@ -334,7 +334,7 @@ namespace DynamicDescriptors.Tests
 
         public abstract bool CanExecute(object context);
 
-        public abstract object Run(object context);
+        public abstract object Execute(object context);
 
     }
 
