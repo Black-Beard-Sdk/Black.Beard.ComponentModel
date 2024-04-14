@@ -76,12 +76,21 @@ namespace Bb.ComponentModel.Attributes
                 if (left.Tag != null && a.Equals(left.Tag))
                     return true;
 
+            if (left.Tag.Equals(right))
+                return true;
+
+            if (left.Value.Equals(right))
+                return true;
+
             return false;
 
         }
 
         private bool Compare1(ListItem item1, ListItem item2)
         {
+
+            if (item1 == item2)
+                return true;
 
             if (item1.Tag.Equals(item2.Tag))
                 return true;
@@ -93,19 +102,16 @@ namespace Bb.ComponentModel.Attributes
 
         }
 
-
         IEnumerable<ListItem> IListProvider.GetItems()
         {
             foreach (var item in GetItems())
                 yield return item;
         }
 
-
         object IListProvider.GetOriginalValue(ListItem item)
         {
             return ResolveOriginalValue((ListItem<T>)item);
         }
-
 
         /// <summary>
         /// Return the new value that must to be set in the property
