@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using System.Data.SqlTypes;
 
 namespace Bb.ComponentModel.Observables
 {
@@ -23,15 +24,20 @@ namespace Bb.ComponentModel.Observables
         {
 
             var assemblyName = type.FullName + "_Proxy";
-            var fileName = assemblyName + ".dll";
             var name = new AssemblyName(assemblyName);
             var assembly = AssemblyBuilder.DefineDynamicAssembly(name, AssemblyBuilderAccess.Run);
             var module = assembly.DefineDynamicModule(assemblyName);
-            var typeBuilder = module.DefineType(type.Name + "Proxy",
-                TypeAttributes.Class | TypeAttributes.Public, type);
+            var typeBuilder = module.DefineType(type.Name + "Proxy", TypeAttributes.Class | TypeAttributes.Public, type);
             typeBuilder.DefineDefaultConstructor(MethodAttributes.Public);
-            var raiseEventMethod = ImplementPropertyChanged(typeBuilder, typeof(PropertyChangedEventHandler));
+
+            var raiseEventMethod = ImplementPropertyChanged(typeBuilder,
+                typeof(INotifyPropertyChanged),
+                "PropertyChanged",
+                typeof(PropertyChangedEventHandler),
+                typeof(PropertyChangedEventArgs));
+
             var propertyInfos = type.GetProperties().Where(p => p.CanRead && p.CanWrite);
+
             foreach (var item in propertyInfos)
             {
                 var baseMethod = item.GetGetMethod();
@@ -55,6 +61,7 @@ namespace Bb.ComponentModel.Observables
                 il.Emit(OpCodes.Ret);
                 typeBuilder.DefineMethodOverride(setAccessor, baseMethod);
             }
+
             var typeResult = typeBuilder.CreateType();
 
             return typeResult;
@@ -62,30 +69,30 @@ namespace Bb.ComponentModel.Observables
         }
 
 
-        private static MethodBuilder ImplementPropertyChanged(TypeBuilder typeBuilder, Type eventHandlerType)
+        private static MethodBuilder ImplementPropertyChanged(TypeBuilder typeBuilder
+            , Type interfaceType, string eventFieldName, Type eventHandlerType, Type eventArgType)
         {
-            typeBuilder.AddInterfaceImplementation(typeof(INotifyPropertyChanged));
-            var field = typeBuilder.DefineField("PropertyChanged", eventHandlerType, FieldAttributes.Private);
-            var eventInfo = typeBuilder.DefineEvent("PropertyChanged", EventAttributes.None, eventHandlerType);
-            //var methodBuilder = ImplementOnPropertyChangedHelper(typeBuilder, field, eventInfo);
-            var methodBuilder = ImplementOnPropertyChanged(typeBuilder, field, eventInfo, eventHandlerType);
-            ImplementAddEvent(typeBuilder, field, eventInfo, eventHandlerType);
-            ImplementRemoveEvent(typeBuilder, field, eventInfo, eventHandlerType);
+            typeBuilder.AddInterfaceImplementation(interfaceType);
+            var field = typeBuilder.DefineField(eventFieldName, eventHandlerType, FieldAttributes.Private);
+            var eventInfo = typeBuilder.DefineEvent(eventFieldName, EventAttributes.None, eventHandlerType);
+            var methodBuilder = ImplementOnPropertyChanged(typeBuilder, field, eventInfo, eventFieldName, eventHandlerType, eventArgType);
+            ImplementAddEvent(typeBuilder, field, eventInfo, interfaceType, eventFieldName, eventHandlerType);
+            ImplementRemoveEvent(typeBuilder, field, eventInfo, interfaceType, eventFieldName, eventHandlerType);
             return methodBuilder;
         }
 
 
 
-        private static MethodBuilder ImplementOnPropertyChanged(TypeBuilder typeBuilder, FieldBuilder field,
-            EventBuilder eventInfo, Type eventHandlerType)
+        private static MethodBuilder ImplementOnPropertyChanged(TypeBuilder typeBuilder, FieldBuilder field, EventBuilder eventInfo
+            , string eventFieldName, Type eventHandlerType, Type eventArgType)
         {
-            var methodBuilder = typeBuilder.DefineMethod("OnPropertyChanged",
+            var methodBuilder = typeBuilder.DefineMethod($"On{eventFieldName}",
                 MethodAttributes.Family | MethodAttributes.Virtual | MethodAttributes.HideBySig |
                 MethodAttributes.NewSlot, typeof(void),
                 new[] { typeof(string) });
             var generator = methodBuilder.GetILGenerator();
             var returnLabel = generator.DefineLabel();
-            var propertyArgsCtor = typeof(PropertyChangedEventArgs).GetConstructor(new[] { typeof(string) });
+            var propertyArgsCtor = eventArgType.GetConstructor(new[] { typeof(string) });
             generator.DeclareLocal(eventHandlerType);
             generator.Emit(OpCodes.Ldarg_0);
             generator.Emit(OpCodes.Ldfld, field);
@@ -104,14 +111,14 @@ namespace Bb.ComponentModel.Observables
         }
 
 
-        private static void ImplementAddEvent(TypeBuilder typeBuilder, FieldBuilder field, EventBuilder eventInfo, Type eventHandlerType)
+        private static void ImplementAddEvent(TypeBuilder typeBuilder, FieldBuilder field, EventBuilder eventInfo
+            , Type interfaceType, string eventFieldName, Type eventHandlerType)
         {
-            var ibaseMethod = typeof(INotifyPropertyChanged).GetMethod("add_PropertyChanged");
-            var addMethod = typeBuilder.DefineMethod("add_PropertyChanged",
+            var ibaseMethod = interfaceType.GetMethod($"add_{eventFieldName}");
+            var addMethod = typeBuilder.DefineMethod($"add_{eventFieldName}",
                 ibaseMethod.Attributes ^ MethodAttributes.Abstract,
                 ibaseMethod.CallingConvention,
-                ibaseMethod.ReturnType,
-                new[] { typeof(PropertyChangedEventHandler) });
+                ibaseMethod.ReturnType, new[] { eventHandlerType });
             var generator = addMethod.GetILGenerator();
             var combine = typeof(Delegate).GetMethod("Combine", new[] { typeof(Delegate), typeof(Delegate) });
             generator.Emit(OpCodes.Ldarg_0);
@@ -125,10 +132,11 @@ namespace Bb.ComponentModel.Observables
             eventInfo.SetAddOnMethod(addMethod);
         }
 
-        private static void ImplementRemoveEvent(TypeBuilder typeBuilder, FieldBuilder field, EventBuilder eventInfo, Type eventHandlerType)
+        private static void ImplementRemoveEvent(TypeBuilder typeBuilder, FieldBuilder field, EventBuilder eventInfo
+            , Type interfaceType, string eventFieldName, Type eventHandlerType)
         {
-            var ibaseMethod = typeof(INotifyPropertyChanged).GetMethod("remove_PropertyChanged");
-            var removeMethod = typeBuilder.DefineMethod("remove_PropertyChanged",
+            var ibaseMethod = interfaceType.GetMethod($"remove_{eventFieldName}");
+            var removeMethod = typeBuilder.DefineMethod($"remove_{eventFieldName}",
                 ibaseMethod.Attributes ^ MethodAttributes.Abstract,
                 ibaseMethod.CallingConvention,
                 ibaseMethod.ReturnType, new[] { eventHandlerType });
