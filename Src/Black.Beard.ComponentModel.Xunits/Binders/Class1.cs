@@ -19,7 +19,7 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
             var target = new ObjectTarget();
 
             var config = new PropertyBinder<ObjectSource, ObjectTarget>()
-                .Bind(c => c.Name, (d, e) => d.Name = e );
+                .Bind(c => c.Name, (d, e) => d.Name = e);
 
             var observe = config.Observe(source, target);
 
@@ -37,9 +37,9 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
 
         public class ObjectSource : INotifyPropertyChanged, IDisposed
         {
-            
+
             public event PropertyChangedEventHandler PropertyChanged;
-            public event EventHandler<DisposedEventArgs> Disposed;
+            public event DisposedEventHandler Disposed;
 
             public void OnPropertyChanged(string propertyName)
             {
@@ -52,7 +52,7 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
                     Disposed?.Invoke(this, new DisposedEventArgs() { Instance = this });
             }
 
-            public string Name 
+            public string Name
             {
                 get
                 {
@@ -68,7 +68,7 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
                 }
             }
 
-            public int Age 
+            public int Age
             {
                 get => _age;
                 set

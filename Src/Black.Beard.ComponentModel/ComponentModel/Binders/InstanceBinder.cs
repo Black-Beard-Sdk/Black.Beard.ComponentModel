@@ -42,7 +42,7 @@ namespace Bb.ComponentModel.Binders
 
         }
 
-        public event EventHandler<DisposedEventArgs> Disposed;
+        public event DisposedEventHandler Disposed;
 
 
         /// <summary>

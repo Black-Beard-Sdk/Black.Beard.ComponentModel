@@ -1,11 +1,18 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Bb.ComponentModel
 {
+
+
+    public delegate void DisposedEventHandler(object? sender, DisposedEventArgs e);
+
+
+
     public interface IDisposed : IDisposable
     {
 
-        event EventHandler<DisposedEventArgs> Disposed;
+        event DisposedEventHandler Disposed;
 
     }
 
