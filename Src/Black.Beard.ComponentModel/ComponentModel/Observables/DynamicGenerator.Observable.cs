@@ -15,7 +15,19 @@ namespace Bb.ComponentModel.Observables
         {
 
 
-            var propertyInfos = type.GetProperties().Where(p => p.CanWrite && p.GetAccessors().Length == 2).ToArray();
+            var propertyInfos = type.GetProperties().Where(p =>
+            {
+
+                if (p.CanWrite)
+                {
+                    var accessors = p.GetAccessors()
+                    .Where(c => c.IsVirtual && !c.IsAbstract && c.GetParameters().Length == 1).ToArray();
+                    return accessors.Length > 0;
+                }
+
+                return false;
+
+            }).ToArray();
 
             if (propertyInfos.Length > 0)
             {
@@ -23,7 +35,7 @@ namespace Bb.ComponentModel.Observables
                 var raiseEventMethod = ImplementPropertyChanged(
                     typeBuilder,
                     typeof(INotifyPropertyChanged), "PropertyChanged",
-                    typeof(PropertyChangedEventHandler), 
+                    typeof(PropertyChangedEventHandler),
                     typeof(PropertyChangedEventArgs)
                 );
 
@@ -47,20 +59,23 @@ namespace Bb.ComponentModel.Observables
             foreach (var item in propertyInfos)
             {
 
-                if (item.CanRead && item.GetGetMethod().IsVirtual)
+                if (item.CanRead)
                 {
 
                     var baseMethodGet = item.GetGetMethod();
-                    var getAccessor = typeBuilder.DefineMethod(baseMethodGet.Name, baseMethodGet.Attributes, item.PropertyType, null);
+                    if (baseMethodGet != null && baseMethodGet.IsVirtual)
+                    {
 
-                    il = getAccessor.GetILGenerator();
-                    il.Emit(OpCodes.Ldarg_0);
-                    il.EmitCall(OpCodes.Call, baseMethodGet, null);
-                    il.Emit(OpCodes.Ret);
-                    typeBuilder.DefineMethodOverride(getAccessor, baseMethodGet);
+                        var getAccessor = typeBuilder.DefineMethod(baseMethodGet.Name, baseMethodGet.Attributes, item.PropertyType, null);
 
+                        il = getAccessor.GetILGenerator();
+                        il.Emit(OpCodes.Ldarg_0);
+                        il.EmitCall(OpCodes.Call, baseMethodGet, null);
+                        il.Emit(OpCodes.Ret);
+                        typeBuilder.DefineMethodOverride(getAccessor, baseMethodGet);
+
+                    }
                 }
-
                 var baseMethodSet = item.GetSetMethod();
                 var setAccessor = typeBuilder.DefineMethod(baseMethodSet.Name, baseMethodSet.Attributes, voidType, new[] { item.PropertyType });
 

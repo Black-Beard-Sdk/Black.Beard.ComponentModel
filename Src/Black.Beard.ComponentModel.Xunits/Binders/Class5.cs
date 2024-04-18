@@ -20,7 +20,7 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
                 throw new Exception("Intercept failed");
             var newType = result.Type;
 
-            var args = new object[] { "gael", 51 };
+            var args = new object[] { "gael", 51, "Paris" };
 
             var instance = (ObjectSource)Activator.CreateInstance(newType, args);
 
@@ -32,7 +32,7 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
                     observed = true;
                 };
 
-            instance.Age = 52;
+            instance.Town = "Provins";
             Assert.True(observed);
 
 
@@ -63,16 +63,19 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
         {
 
 
-            public ObjectSource(string name, int age)
+            public ObjectSource(string name, int age, string town)
             {
                 this.Name = name;
                 this.Age = age;
+                this.Town = town;
             }
 
 
             public virtual string Name { get; set; }
 
             public virtual int Age { get; set; }
+
+            public virtual string Town { private get; set; }
 
         }
 
