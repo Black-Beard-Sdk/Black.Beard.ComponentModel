@@ -68,7 +68,7 @@ namespace Bb.ComponentModel.Binders
                     disposed2.Disposed -= Target_Disposed;
 
                 if (Disposed != null)
-                    Disposed(this, new DisposedEventArgs() { Instance = this });
+                    Disposed(this, EventArgs.Empty);
 
                 IsDisposed = true;
 

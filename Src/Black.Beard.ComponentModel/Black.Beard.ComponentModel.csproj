@@ -12,10 +12,13 @@
 	<ItemGroup>
 	  <Compile Remove="ComponentModel\Loaders\**" />
 	  <Compile Remove="ComponentModel\PEReaders\**" />
+	  <Compile Remove="Exceptions\**" />
 	  <EmbeddedResource Remove="ComponentModel\Loaders\**" />
 	  <EmbeddedResource Remove="ComponentModel\PEReaders\**" />
+	  <EmbeddedResource Remove="Exceptions\**" />
 	  <None Remove="ComponentModel\Loaders\**" />
 	  <None Remove="ComponentModel\PEReaders\**" />
+	  <None Remove="Exceptions\**" />
 	</ItemGroup>
 
 	<ItemGroup>

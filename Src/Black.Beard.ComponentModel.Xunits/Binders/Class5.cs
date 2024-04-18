@@ -9,7 +9,7 @@ using System.Linq;
 namespace Black.Beard.ComponentModel.Xunits.Binders
 {
 
-    public class class2
+    public class class5
     {
 
         [Fact]
@@ -20,58 +20,60 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
                 throw new Exception("Intercept failed");
             var newType = result.Type;
 
-            var instance = (ObjectSource)Activator.CreateInstance(newType);
+            var args = new object[] { "gael", 51 };
 
-            var e = newType.GetEvents().ToList();
+            var instance = (ObjectSource)Activator.CreateInstance(newType, args);
 
-            e[0].RaiseMethod.Invoke(instance, new object[] { "" });
-            e[1].RaiseMethod.Invoke(instance, new object[] { });
 
-            bool propertyIntercepted = false;
-            bool disposeIntercepted = false;
-
+            bool observed = false;
             if (instance is INotifyPropertyChanged a)
                 a.PropertyChanged += (s, e) =>
                 {
-                    propertyIntercepted = true;
+                    observed = true;
                 };
 
+            instance.Age = 52;
+            Assert.True(observed);
+
+
+            bool disposeIntercepted = false;
             if (instance is IDisposed b)
                 b.Disposed += (s, e) =>
                 {
                     disposeIntercepted = true;
                 };
 
-
-            var pp = instance.Name;
-            instance.Name = "toto";
-            Assert.True(propertyIntercepted);
-
-
             if (instance is IDisposable c)
                 c.Dispose();
 
             Assert.True(disposeIntercepted);
 
-
-
         }
 
+        //public class ObjectSource2 : ObjectSource
+        //{
+        //    public ObjectSource2(string name, int age) 
+        //        : base(name, age)
+        //    {
+        //    }
+        //}
 
-        public class ObjectSource : IDisposable
+
+        public class ObjectSource
         {
 
 
-            public virtual void Dispose()
+            public ObjectSource(string name, int age)
             {
-                IsDisposed = true;
+                this.Name = name;
+                this.Age = age;
             }
+
 
             public virtual string Name { get; set; }
 
             public virtual int Age { get; set; }
 
-            public bool IsDisposed { get; private set; }
         }
 
 

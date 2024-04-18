@@ -4,30 +4,23 @@ using System.ComponentModel;
 namespace Bb.ComponentModel
 {
 
-
-    public delegate void DisposedEventHandler(object? sender, DisposedEventArgs e);
-
+    /// <summary>
+    /// Represents the method that will handle the <see cref="IDisposed"/>
+    //  event raised when instance is disposed.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e"></param>
+    public delegate void DisposedEventHandler(object? sender, EventArgs e);
 
 
     public interface IDisposed : IDisposable
     {
 
-        event DisposedEventHandler Disposed;
+        /// <summary>
+        ///     Occurs when the instance is disposed.
+        /// </summary>
+        event DisposedEventHandler? Disposed;
 
     }
-
-
-    public class DisposedEventArgs : EventArgs
-    {
-
-        public DisposedEventArgs()
-        {
-
-        }
-
-        public IDisposable Instance { get; set; }
-
-    }
-
 
 }

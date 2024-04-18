@@ -9,7 +9,7 @@ using System.Linq;
 namespace Black.Beard.ComponentModel.Xunits.Binders
 {
 
-    public class class2
+    public class class3
     {
 
         [Fact]
@@ -50,22 +50,27 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
 
             if (instance is IDisposable c)
                 c.Dispose();
-
             Assert.True(disposeIntercepted);
 
 
-
         }
-
 
         public class ObjectSource : IDisposable
         {
 
 
-            public virtual void Dispose()
+            public void Dispose()
+            {
+                Dispose(true);
+            }
+
+
+            public virtual void Dispose(bool disposing)
             {
                 IsDisposed = true;
             }
+
+
 
             public virtual string Name { get; set; }
 

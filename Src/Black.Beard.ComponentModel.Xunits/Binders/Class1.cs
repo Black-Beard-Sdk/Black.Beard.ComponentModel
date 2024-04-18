@@ -38,8 +38,7 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
         public class ObjectSource : INotifyPropertyChanged, IDisposed
         {
 
-            public event PropertyChangedEventHandler PropertyChanged;
-            public event DisposedEventHandler Disposed;
+
 
             public void OnPropertyChanged(string propertyName)
             {
@@ -49,7 +48,7 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
             public void Dispose()
             {
                 if (Disposed != null)
-                    Disposed?.Invoke(this, new DisposedEventArgs() { Instance = this });
+                    Disposed?.Invoke(this, EventArgs.Empty);
             }
 
             public string Name
@@ -81,6 +80,10 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
                     }
                 }
             }
+
+
+            public event PropertyChangedEventHandler PropertyChanged;
+            public event DisposedEventHandler Disposed;
 
             private string _name;
             private int _age;
