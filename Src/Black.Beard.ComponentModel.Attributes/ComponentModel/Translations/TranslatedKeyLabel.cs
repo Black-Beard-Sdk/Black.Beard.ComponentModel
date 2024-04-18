@@ -43,6 +43,26 @@ namespace Bb.ComponentModel.Translations
         }
 
         /// <summary>
+        /// Translate the current key
+        /// </summary>
+        /// <param name="service">service that translate keys</param>
+        /// <returns></returns>
+        public string Translate(ITranslateHost service)
+        {
+            return service.TranslationService.Translate(this);
+        }
+
+        /// <summary>
+        /// Translate the current key
+        /// </summary>
+        /// <param name="service"></param>
+        /// <returns></returns>
+        public string Translate(ITranslateService service)
+        {
+            return service.Translate(this);
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="TranslatedKeyLabel"/> class.
         /// </summary>
         /// <param name="path">group of translation key</param>

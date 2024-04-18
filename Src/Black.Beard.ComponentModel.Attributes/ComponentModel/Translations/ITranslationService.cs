@@ -9,6 +9,16 @@ namespace Bb.ComponentModel.Translations
     /// <summary>
     /// Contract for translation service
     /// </summary>
+    public interface ITranslateHost
+    {
+
+        ITranslateService TranslationService { get; }
+
+    }
+
+    /// <summary>
+    /// Contract for translation service
+    /// </summary>
     public interface ITranslateService
     {
 
@@ -35,10 +45,10 @@ namespace Bb.ComponentModel.Translations
         /// <summary>
         /// Container for store the keys
         /// </summary>
-        public object Container { get; set; }
-
+        public ITranslateContainer Container { get; set; }
 
     }
+
 
 }
 
