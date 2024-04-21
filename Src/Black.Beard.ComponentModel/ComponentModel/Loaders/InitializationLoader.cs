@@ -18,13 +18,15 @@ namespace Bb.ComponentModel.Loaders
         /// <summary>
         /// Initializes a new instance of the <see cref="InitializationLoader{T}"/> class.
         /// </summary>
-        public InitializationLoader()
+        public InitializationLoader(string context)
         {
             Types = new List<Type>();
             Instances = new List<IApplicationBuilderInitializer<T>>();
             Executed = new HashSet<string>();
+            Context = context;
         }
 
+        public string Context { get; }
 
         public IServiceProvider ServiceProvider { get; set; }
 

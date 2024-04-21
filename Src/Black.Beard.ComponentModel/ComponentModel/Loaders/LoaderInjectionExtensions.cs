@@ -32,22 +32,14 @@ namespace Bb.ComponentModel.Loaders
         private static InjectionLoader<T> CollecteInitializationTypes<T>(this InjectionLoader<T> self)
         {
 
+            var _allBuilders = TypeDiscovery.Instance.GetExposedTypes(self.Context);
 
-            List<TypeMatched> types = TypeDiscovery.Instance
-                .Search(c =>
-                    c.InContext(self.Context)
-                    .ExcludeAbstractTypes(self.ExcludeAbstractTypes)
-                    .ExcludeGenericTypes(self.ExcludeGenericTypes)
-                    .Implements(typeof(IInjectBuilder))
-                , true)
-                .ToList()
-            ;
-
-            foreach (var type in types)
+            foreach (var service in _allBuilders.Where(c => typeof(IInjectBuilder<T>).IsAssignableFrom(c.Key)))
             {
-                self.ServiceProvider.Add<IInjectBuilder<T>>(type.Type);
-                self.Types.Add(type.Type);
+                Trace.WriteLine($"Inject '{service}' found and loaded", TraceLevel.Info.ToString());
+                self.ServiceProvider.Add<IInjectBuilder<T>>(service.Key);
             }
+
             return self;
 
         }

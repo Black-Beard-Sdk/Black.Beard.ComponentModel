@@ -608,7 +608,9 @@ namespace Bb.ComponentModel
             if (list.Add(baseTypeToEvaluate))
             {
 
-                foreach (var item2 in baseTypeToEvaluate.DirectBaseTypes)
+                var types = baseTypeToEvaluate.GetAllBaseTypes();
+
+                foreach (var item2 in types)
                 {
 
                     if (item2.FullName == baseTypeToFind.FullName)

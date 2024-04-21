@@ -76,7 +76,7 @@ You must add the package resolve the exposed types
 ```
 
 
-## autodiscover types in assemblies load only assemblies not yet loaded that match with the filters
+## Autodiscover types in assemblies load only assemblies not yet loaded that match with the filters
 
 ```CSHARP
 
@@ -93,7 +93,6 @@ You must add the package resolve the exposed types
     var types = TypeDiscovery.Instance
         .Search(c =>
             c.InContext(ConstantsCore.Plugin)
-            .Implements(typeof(IInjectBuilder))
         , autoloadTypes)
         .ToList()
         ;

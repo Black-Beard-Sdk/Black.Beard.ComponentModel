@@ -75,17 +75,14 @@ namespace Bb.ComponentModel.Loaders
         private static InitializationLoader<T> CollecteInitializationTypes<T>(this InitializationLoader<T> self)
         {
 
-            var _allBuilders = TypeDiscovery.Instance.GetExposedTypes(ConstantsCore.Initialization);
-            var toRemove = new List<KeyValuePair<Type, HashSet<ExposeClassAttribute>>>();
+            var _allBuilders = TypeDiscovery.Instance.GetExposedTypes(self.Context);
             var _types = new HashSet<Type>();
-
 
             foreach (var service in _allBuilders.Where(c => typeof(IApplicationBuilderInitializer<T>).IsAssignableFrom(c.Key)))
                 if (_types.Add(service.Key))
                 {
                     Trace.WriteLine($"builder '{service}' found and loaded", TraceLevel.Info.ToString());
                     self.Types.Add(service.Key);
-                    toRemove.Add(service);
                 }
 
             return self;

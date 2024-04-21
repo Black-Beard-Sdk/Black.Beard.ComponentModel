@@ -36,7 +36,6 @@ namespace DynamicDescriptors.Tests
             Assert.True(test);
         }
 
-
         [Fact]
         public void ResolveDirectory()
         {
@@ -51,14 +50,12 @@ namespace DynamicDescriptors.Tests
 
         }
 
-
         [Fact]
         public void FilterStatic()
         {
             var types = TypeDiscovery.Instance.GetStaticTypes().Any();
             Assert.True(types);
         }
-
 
         //[Fact]
         //public void ResolveMeterSource()
@@ -69,7 +66,6 @@ namespace DynamicDescriptors.Tests
         //    ComponentModelMetricProvider.Counter.Add(1);
         //}
 
-
         [Fact]
         public void ResolveActivitySource()
         {
@@ -77,7 +73,6 @@ namespace DynamicDescriptors.Tests
             var test = names.Any();
             Assert.True(test);
         }
-
 
         [Fact]
         public void ResolveActivitySource2()
@@ -128,7 +123,6 @@ namespace DynamicDescriptors.Tests
 
         }
 
-
         [Fact]
         public void FilterTest2()
         {
@@ -146,7 +140,6 @@ namespace DynamicDescriptors.Tests
             types.Single(c => c.FullName == typeof(TestClass).FullName);
 
         }
-
 
         [Fact]
         public void FilterTest3()
@@ -174,7 +167,6 @@ namespace DynamicDescriptors.Tests
 
             var directories = new AssemblyDirectoryResolver()
                 .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
-
 
             var instance = new UITest();
 
@@ -228,7 +220,6 @@ namespace DynamicDescriptors.Tests
 
         }
 
-
         [Fact]
         public void GetLoadedAsseembliesTest()
         {
@@ -242,7 +233,6 @@ namespace DynamicDescriptors.Tests
                     Assert.True(false, $"assembly {item.FullName} not found");
 
         }
-
 
         [Fact]
         public void GetAllAsseembliesTest()
@@ -262,32 +252,14 @@ namespace DynamicDescriptors.Tests
     }
 
     [ExposeClass(Context = ConstantsCore.Plugin + "Test")]
-    public class TestClass3 : IInjectBuilder<UITest>
+    public class TestClass3 : InjectBuilder<UITest>
     {
 
-        public string FriendlyName => GetType().Name;
-
-        public Type Type => typeof(UITest);
-
-        public bool CanExecute(UITest context)
-        {
-            return true;
-        }
-
-        public bool CanExecute(object context)
-        {
-            return CanExecute((UITest)context);
-        }
-
-        public object Execute(UITest context)
+        public override object Execute(UITest context)
         {
             return null;
         }
 
-        public object Execute(object context)
-        {
-            return Execute((object)(UITest)context);
-        }
     }
 
 

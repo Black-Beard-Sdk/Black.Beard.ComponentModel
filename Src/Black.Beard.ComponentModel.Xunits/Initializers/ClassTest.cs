@@ -24,7 +24,7 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
             var builder = new BuilderTest();
 
-            var loader = new InitializationLoader<BuilderTest>()
+            var loader = new InitializationLoader<BuilderTest>( ConstantsCore.Initialization)
                 .LoadModules()
                 .Execute(builder)
                 ;
