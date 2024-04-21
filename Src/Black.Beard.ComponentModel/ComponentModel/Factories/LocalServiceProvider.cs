@@ -11,6 +11,7 @@ namespace Bb.ComponentModel.Factories
         {
             this._parent = parent;
             this._dic = new Dictionary<Type, Factory>();
+            this._instances = new Dictionary<Type, object>();
         }
 
         public bool AutoAdd { get; set; }
@@ -27,6 +28,9 @@ namespace Bb.ComponentModel.Factories
 
             if (serviceType == typeof(IServiceProvider))
                 return this;
+
+            if (_instances.TryGetValue(serviceType, out var instance))
+                return instance;
 
             if (_dic.TryGetValue(serviceType, out var factory))
                 return factory.CallInstance(this);
@@ -54,6 +58,12 @@ namespace Bb.ComponentModel.Factories
             return Add(ObjectCreatorByIoc.GetActivator<T>(type));
         }
 
+        public LocalServiceProvider Add(Type type, object instance)
+        {
+            _instances.Add(type, instance);
+            return this;
+        }
+
         public LocalServiceProvider Add(Factory factory)
         {
             _dic.Add(factory.ExposedType, factory);
@@ -62,6 +72,7 @@ namespace Bb.ComponentModel.Factories
 
         private readonly IServiceProvider _parent;
         private readonly Dictionary<Type, Factory> _dic;
+        private readonly Dictionary<Type, object> _instances;
 
     }
 }
