@@ -35,22 +35,6 @@ namespace Bb.ComponentModel.Loaders
         }
 
         /// <summary>
-        /// Set the assemblies to load
-        /// </summary>
-        /// <param name="assemblies"></param>
-        /// <returns></returns>
-        public InitializationLoader<T> InitializeAssemblies(ExposedAssemblyRepositories assemblies)
-        {
-            AssembliesToLoad = assemblies;
-            return this;
-        }
-
-        /// <summary>
-        /// Strategy for loading assemblies
-        /// </summary>
-        public ExposedAssemblyRepositories AssembliesToLoad { get; private set; }
-
-        /// <summary>
         /// List of types builder found
         /// </summary>
         public List<Type> Types { get; }

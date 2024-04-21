@@ -12,6 +12,7 @@ namespace Bb.ComponentModel.Loaders
     public static class LoaderInitializerExtensions
     {
 
+
         /// <summary>
         /// Load assemblies and initialize the loader
         /// </summary>
@@ -20,9 +21,6 @@ namespace Bb.ComponentModel.Loaders
         /// <returns></returns>
         public static InitializationLoader<T> LoadModules<T>(this InitializationLoader<T> self, Action<IApplicationBuilderInitializer<T>> initializer = null)
         {
-
-            if (self.AssembliesToLoad != null)
-                self.AssembliesToLoad.Load();
 
             self.CollecteInitializationTypes()
                 .LoadAbstractLoaders(initializer)
