@@ -21,13 +21,11 @@ namespace Bb.ComponentModel.Loaders
         /// <returns></returns>
         public static InitializationLoader<T> LoadModules<T>(this InitializationLoader<T> self, Action<IApplicationBuilderInitializer<T>> initializer = null)
         {
-
-            self.CollecteInitializationTypes()
-                .LoadAbstractLoaders(initializer)
-            ;
-
+            self.Types.AddRange(InjectionExtensions.CollectTypes<IApplicationBuilderInitializer<T>>(self.Context));
+            foreach (var item in self.Types)
+                self.ServiceProvider.Add<IApplicationBuilderInitializer<T>>(item);
+            self.Instances.AddRange(InjectionExtensions.LoadAbstractLoaders(self.Types, initializer, self.ServiceProvider));
             return self;
-
         }
 
 
@@ -72,57 +70,61 @@ namespace Bb.ComponentModel.Loaders
         }
 
 
-        private static InitializationLoader<T> CollecteInitializationTypes<T>(this InitializationLoader<T> self)
-        {
+        //private static InitializationLoader<T> CollecteInitializationTypes<T>(this InitializationLoader<T> self)
+        //{
 
-            var _allBuilders = TypeDiscovery.Instance.GetExposedTypes(self.Context);
-            var _types = new HashSet<Type>();
+        //    var _allBuilders = TypeDiscovery.Instance.GetExposedTypes(self.Context);
+        //    var _types = new HashSet<Type>();
 
-            foreach (var service in _allBuilders.Where(c => typeof(IApplicationBuilderInitializer<T>).IsAssignableFrom(c.Key)))
-                if (_types.Add(service.Key))
-                {
-                    Trace.WriteLine($"builder '{service}' found and loaded", TraceLevel.Info.ToString());
-                    self.Types.Add(service.Key);
-                }
+        //    foreach (var service in _allBuilders)
+        //        if (_types.Add(service.Key))
+        //        {
+        //            if (typeof(IApplicationBuilderInitializer<T>).IsAssignableFrom(service.Key))
+        //            {
+        //                Trace.TraceInformation($"'{service}' found for {typeof(InitializationLoader<T>).Name}", TraceLevel.Info.ToString());
+        //                self.ServiceProvider.Add<IInjectBuilder<T>>(service.Key);
+        //                self.Types.Add(service.Key);
+        //            }
+        //        }
 
-            return self;
+        //    return self;
 
-        }
+        //}
 
 
-        private static InitializationLoader<T> LoadAbstractLoaders<T>(this InitializationLoader<T> self, Action<IApplicationBuilderInitializer<T>> initializer)
-        {
+        //private static InitializationLoader<T> LoadAbstractLoaders<T>(this InitializationLoader<T> self, Action<IApplicationBuilderInitializer<T>> initializer)
+        //{
 
-            foreach (var type in self.Types)
-            {
+        //    foreach (var type in self.Types)
+        //    {
 
-                IApplicationBuilderInitializer<T> srv = null;
+        //        IApplicationBuilderInitializer<T> srv = null;
 
-                if (self.ServiceProvider != null)
-                    try
-                    {
-                        srv = (IApplicationBuilderInitializer<T>)self.ServiceProvider.GetService(type);
-                    }
-                    catch (Exception ex)
-                    {
-                        Trace.TraceError(ex.Message);
-                        throw;
-                    }
+        //        if (self.ServiceProvider != null)
+        //            try
+        //            {
+        //                srv = (IApplicationBuilderInitializer<T>)self.ServiceProvider.GetService(type);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                Trace.TraceError(ex.Message);
+        //                throw;
+        //            }
 
-                if (srv == null)
-                    if (Activator.CreateInstance(type) is IApplicationBuilderInitializer<T> srv1)
-                        srv = srv1;
+        //        if (srv == null)
+        //            if (Activator.CreateInstance(type) is IApplicationBuilderInitializer<T> srv1)
+        //                srv = srv1;
 
-                if (initializer != null)
-                    initializer(srv);
+        //        if (initializer != null)
+        //            initializer(srv);
 
-                self.Instances.Add(srv);
+        //        self.Instances.Add(srv);
 
-            }
+        //    }
 
-            return self;
+        //    return self;
 
-        }
+        //}
 
 
 

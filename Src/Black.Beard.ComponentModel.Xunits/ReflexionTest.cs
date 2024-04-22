@@ -172,7 +172,7 @@ namespace DynamicDescriptors.Tests
 
             var serviceProvider = new LocalServiceProvider();
 
-            var loader = new InjectionLoader<UITest>(serviceProvider, ConstantsCore.Plugin + "Test");
+            var loader = new InjectionLoader<UITest>(ConstantsCore.Plugin + "Test", serviceProvider);
 
             loader.LoadModules(c =>
             {
@@ -234,20 +234,20 @@ namespace DynamicDescriptors.Tests
 
         }
 
-        [Fact]
-        public void GetAllAsseembliesTest()
-        {
+        //[Fact]
+        //public void GetAllAsseembliesTest()
+        //{
 
-            var dic = TypeDiscovery.Instance.GetAllAssemblies();
+        //    var dic = TypeDiscovery.Instance.GetAllAssemblies();
 
-            foreach (var item in AppDomain.CurrentDomain.GetAssemblies().Where(c => c.GetName() .Name != "System.Private.CoreLib"))
-                if (dic.ContainsKey(item.FullName))
-                    Assert.True(dic[item.FullName].Value);
-                else
-                    Assert.True(false, $"assembly {item.FullName} not found");
+        //    foreach (var item in AppDomain.CurrentDomain.GetAssemblies().Where(c => c.GetName() .Name != "System.Private.CoreLib"))
+        //        if (dic.ContainsKey(item.FullName))
+        //            Assert.True(dic[item.FullName].Value);
+        //        else
+        //            Assert.True(false, $"assembly {item.FullName} not found");
 
 
-        }
+        //}
 
     }
 

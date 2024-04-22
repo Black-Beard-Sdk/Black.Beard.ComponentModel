@@ -1,4 +1,5 @@
 ﻿using Bb.ComponentModel.Attributes;
+using Bb.ComponentModel.Factories;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,21 +19,22 @@ namespace Bb.ComponentModel.Loaders
         /// <summary>
         /// Initializes a new instance of the <see cref="InitializationLoader{T}"/> class.
         /// </summary>
-        public InitializationLoader(string context)
+        public InitializationLoader(string context, IServiceProvider serviceProvider  = null)
         {
             Types = new List<Type>();
             Instances = new List<IApplicationBuilderInitializer<T>>();
             Executed = new HashSet<string>();
             Context = context;
+            ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
         }
 
         public string Context { get; }
 
-        public IServiceProvider ServiceProvider { get; set; }
+        public LocalServiceProvider ServiceProvider { get; private set; }
 
         public InitializationLoader<T> WithServices(IServiceProvider serviceProvider)
         {
-            ServiceProvider = serviceProvider;
+            ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
             return this;    
         }
 

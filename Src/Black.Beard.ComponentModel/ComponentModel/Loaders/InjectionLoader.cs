@@ -14,7 +14,7 @@ namespace Bb.ComponentModel.Loaders
         /// <summary>
         /// Initializes a new instance of the <see cref="InitializationLoader{T}"/> class.
         /// </summary>
-        public InjectionLoader(IServiceProvider serviceProvider, string context)
+        public InjectionLoader( string context, IServiceProvider serviceProvider  = null)
         {
             this.Context = context;
             ServiceProvider = new LocalServiceProvider(serviceProvider) {  AutoAdd = true };
@@ -25,7 +25,13 @@ namespace Bb.ComponentModel.Loaders
 
         public string Context { get; }
 
-        public LocalServiceProvider ServiceProvider { get; }
+        public InjectionLoader<T> WithServices(IServiceProvider serviceProvider)
+        {
+            ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
+            return this;
+        }
+
+        public LocalServiceProvider ServiceProvider { get; private set; }
 
         /// <summary>
         /// List of types builder found
