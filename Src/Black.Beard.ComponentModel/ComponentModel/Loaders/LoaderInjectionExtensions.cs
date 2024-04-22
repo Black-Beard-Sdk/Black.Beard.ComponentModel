@@ -19,8 +19,8 @@ namespace Bb.ComponentModel.Loaders
         public static InjectionLoader<T> LoadModules<T>(this InjectionLoader<T> self, Action<IInjectBuilder<T>> initializer = null)
         {
             self.Types.AddRange(InjectionExtensions.CollectTypes<IInjectBuilder<T>>(self.Context));
-            foreach (var item in self.Types)
-                self.ServiceProvider.Add<IInjectBuilder<T>>(item);
+            //foreach (var item in self.Types)
+            //    self.ServiceProvider.Add<IInjectBuilder<T>>(item);
             self.Instances.AddRange(InjectionExtensions.LoadAbstractLoaders(self.Types, initializer, self.ServiceProvider));
             return self;
         }

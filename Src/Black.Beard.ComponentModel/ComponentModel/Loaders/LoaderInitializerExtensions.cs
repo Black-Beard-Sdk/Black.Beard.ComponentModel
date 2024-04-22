@@ -22,8 +22,8 @@ namespace Bb.ComponentModel.Loaders
         public static InitializationLoader<T> LoadModules<T>(this InitializationLoader<T> self, Action<IApplicationBuilderInitializer<T>> initializer = null)
         {
             self.Types.AddRange(InjectionExtensions.CollectTypes<IApplicationBuilderInitializer<T>>(self.Context));
-            foreach (var item in self.Types)
-                self.ServiceProvider.Add<IApplicationBuilderInitializer<T>>(item);
+            //foreach (var item in self.Types)
+            //    self.ServiceProvider.Add<IApplicationBuilderInitializer<T>>(item);
             self.Instances.AddRange(InjectionExtensions.LoadAbstractLoaders(self.Types, initializer, self.ServiceProvider));
             return self;
         }
