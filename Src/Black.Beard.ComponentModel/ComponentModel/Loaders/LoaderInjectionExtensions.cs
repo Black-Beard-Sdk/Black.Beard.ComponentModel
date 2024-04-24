@@ -7,8 +7,36 @@ using System.Linq;
 namespace Bb.ComponentModel.Loaders
 {
 
+
     public static class LoaderInjectionExtensions
     {
+
+
+        /// <summary>
+        /// create instance and initialize service from service provider
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="serviceProvider"></param>
+        /// <param name="context"></param>
+        /// <param name="initializer"></param>
+        /// <returns></returns>
+        public static T GetInitializedService<T>(this IServiceProvider serviceProvider, string context, Action<InjectionLoader<T>> initializer = null)
+        {
+
+            var instance = (T)serviceProvider.GetService(typeof(T));
+            if (instance != null)
+            {
+                var loader = new InjectionLoader<T>(context, serviceProvider)
+                    .LoadModules()
+                    .Execute(instance)
+                    ;
+
+            }
+
+            return instance;
+
+        }
+
 
         /// <summary>
         /// Load assemblies and initialize the loader
