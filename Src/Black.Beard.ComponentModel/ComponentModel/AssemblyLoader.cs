@@ -73,7 +73,9 @@ namespace Bb.ComponentModel
                 {
                     var assemblies = assembly.GetReferencedAssemblies();
                     foreach (AssemblyName ass in assemblies)
-                        if (hash.Add(ass.FullName))
+                    {
+                        var filename = ass.FullName;
+                        if (!string.IsNullOrEmpty(filename) && hash.Add(filename))
                         {
 
                             Assembly refAssembly;
@@ -83,9 +85,10 @@ namespace Bb.ComponentModel
                                 refAssembly = TypeDiscovery.Instance.GetAssembly(ass);
 
                             if (recursively && refAssembly != null)
-                             TypeDiscovery.Instance.EnsureAssemblyIsLoadedWithReferences(refAssembly, acceptAllVersion, recursively, hash);
+                                TypeDiscovery.Instance.EnsureAssemblyIsLoadedWithReferences(refAssembly, acceptAllVersion, recursively, hash);
 
                         }
+                    }
                 }
         }
 
@@ -227,6 +230,9 @@ namespace Bb.ComponentModel
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Assembly LoadAssembly(FileInfo fileAssembly, FileInfo filePdb = null)
         {
+
+            if (!string.IsNullOrEmpty(fileAssembly.Name))
+                throw new ArgumentNullException(nameof(fileAssembly.Name));
 
             if (!fileAssembly.Exists)
                 throw new FileNotFoundException(fileAssembly.FullName);

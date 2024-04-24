@@ -45,7 +45,9 @@ namespace Bb.ComponentModel
             else
                 _paths = new HashSet<string>(paths);
 
-            AddDirectories(AppDomain.CurrentDomain.BaseDirectory);
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            if (!string.IsNullOrEmpty(path))
+                AddDirectories(path);
 
             var dir = FolderBinResolver.GetBinPaths().ToList();
             AddDirectories(dir);

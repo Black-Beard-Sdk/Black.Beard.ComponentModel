@@ -69,9 +69,26 @@ namespace Bb.ComponentModel
             foreach (var item in assemblies)
                 if (!item.IsDynamic)
                 {
-                    var dir = new FileInfo(item.Location).Directory;
-                    if (_h.Add(dir.FullName))
-                        yield return dir;
+                    var filename = item.Location;
+                    if (!string.IsNullOrEmpty(filename))
+                    {
+
+                        FileInfo file = null;
+                        DirectoryInfo dir = null;
+
+                        try
+                        {
+                            file = new FileInfo(filename);
+                            dir = file.Directory;
+                        }
+                        catch (Exception)
+                        {
+                        }
+
+                        if (dir != null && _h.Add(dir.FullName))
+                            yield return dir;
+
+                    }
                 }
 
         }
@@ -81,8 +98,11 @@ namespace Bb.ComponentModel
         /// return the corelib bin path
         /// </summary>
         /// <returns></returns>
-        public static DirectoryInfo GetCoreLibPath()
+        public static DirectoryInfo? GetCoreLibPath()
         {
+            var filename = typeof(DateTime).Assembly.Location;
+            if (string.IsNullOrEmpty(filename))
+                return null;
             var file = new FileInfo(typeof(DateTime).Assembly.Location);
             return file.Directory;
         }
