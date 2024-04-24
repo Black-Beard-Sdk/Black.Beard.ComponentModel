@@ -11,7 +11,8 @@
         public const string Cast = "Cast";
         public const string PerfMon = "PerfMon";
 
-
+        public const string Service = "Service";
+        public const string Model = "Model";
 
     }
 
