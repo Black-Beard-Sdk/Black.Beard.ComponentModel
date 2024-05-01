@@ -199,6 +199,44 @@ namespace Bb.ComponentModel.Accessors
         }
 
         /// <summary>
+        /// Gets the attribute's list.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<T> GetAttributes<T>()
+            where T : Attribute        
+        {
+            var attributes = GetAttributes();
+            return attributes.OfType<T>().ToList();
+        }
+
+        /// <summary>
+        /// Gets the attribute's list.
+        /// </summary>
+        /// <returns></returns>
+        public bool IfAttributes<T>(out List<T> attributes)
+            where T : Attribute
+        {
+            var attri = GetAttributes();
+            attributes = attri.OfType<T>().ToList();
+            return attributes.Any();
+        }
+
+        /// <summary>
+        /// Gets the attribute
+        /// </summary>
+        /// <returns></returns>
+        public bool IfAttribute<T>(out T attribute)
+            where T : Attribute
+        {
+            var attri = GetAttributes();
+            var o = attri.OfType<T>().ToList();
+            if (o.Count > 1)
+                throw new InvalidOperationException("Multiple attributes found");
+            attribute = o.FirstOrDefault();
+            return attribute != null;
+        }
+
+        /// <summary>
         /// Gets the validated value.
         /// </summary>
         /// <param name="instance">The instance.</param>
@@ -393,50 +431,6 @@ namespace Bb.ComponentModel.Accessors
 
         #endregion Attributes / validations
 
-
-        //#region Serialize /Unserialize
-
-        ///// <summary>
-        ///// Serializes the specified member for instance.
-        ///// </summary>
-        ///// <param name="instance">The instance.</param>
-        ///// <returns></returns>
-        //public string Serialize(object instance)
-        //{
-        //    return MyConverter.Serialize(GetValue(instance));
-        //}
-
-        ///// <summary>
-        ///// Unserializes the value int the specified instance.
-        ///// </summary>
-        ///// <param name="instance">The instance.</param>
-        ///// <param name="value">The value.</param>
-        ///// <exception cref="System.InvalidCastException"></exception>
-        //public void Unserialize(object instance, string value)
-        //{
-        //    try
-        //    {
-        //        dynamic result = MyConverter.Unserialize(value, Type);
-        //        SetValue(instance, result);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new InvalidCastException(string.Format("invalid cast in the property '{0}'. The value '{1}' can't be casted in '{2}'", Name, value, Type.Name), e);
-        //    }
-        //}
-
-        //#endregion
-
-
-        ///// <summary>
-        ///// Determines whether [is].
-        ///// </summary>
-        ///// <typeparam name="T1">The type of the 1.</typeparam>
-        ///// <returns></returns>
-        //public bool Is<T1>()
-        //{
-        //    return Type.IsAssignableFrom(typeof(T1));
-        //}
 
         #region private
 
