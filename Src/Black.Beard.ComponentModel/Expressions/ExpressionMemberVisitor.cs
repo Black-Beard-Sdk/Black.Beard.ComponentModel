@@ -12,7 +12,7 @@ namespace Bb.Expressions
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
-        public static string GetPropertyNam(Expression e)
+        public static string GetPropertyName(Expression e)
         {
             var visitor = new ExpressionMemberVisitor();
             visitor.Visit(e);
