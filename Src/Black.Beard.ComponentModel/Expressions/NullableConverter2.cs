@@ -13,7 +13,7 @@ namespace Bb.Expressions
             return new bool?(value);
         }
 
-        [CLSCompliant(false)]
+
         public static bool? ToBoolean(sbyte value)
         {
             return new bool?(Convert.ToBoolean(value));
@@ -34,7 +34,7 @@ namespace Bb.Expressions
             return new bool?(Convert.ToBoolean(value));
         }
 
-        [CLSCompliant(false)]
+
         public static bool? ToBoolean(ushort value)
         {
             return new bool?(Convert.ToBoolean(value));
@@ -45,7 +45,7 @@ namespace Bb.Expressions
             return new bool?(Convert.ToBoolean(value));
         }
 
-        [CLSCompliant(false)]
+
         public static bool? ToBoolean(uint value)
         {
             return new bool?(Convert.ToBoolean(value));
@@ -56,7 +56,7 @@ namespace Bb.Expressions
             return new bool?(Convert.ToBoolean(value));
         }
 
-        [CLSCompliant(false)]
+
         public static bool? ToBoolean(ulong value)
         {
             return new bool?(Convert.ToBoolean(value));
@@ -86,85 +86,85 @@ namespace Bb.Expressions
 
         #region ToByte               
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(bool value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(sbyte value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(char value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(byte value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(short value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(ushort value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(int value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(uint value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(long value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(ulong value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(float value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(double value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(decimal value)
         {
             return new sbyte?(Convert.ToSByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static sbyte? ToSByte(DateTime value)
         {
             return new sbyte?(Convert.ToSByte(value));
@@ -184,7 +184,7 @@ namespace Bb.Expressions
             return new char?(Convert.ToChar(value));
         }
 
-        [CLSCompliant(false)]
+
         public static char? ToChar(sbyte value)
         {
             return new char?(Convert.ToChar(value));
@@ -200,7 +200,7 @@ namespace Bb.Expressions
             return new char?(Convert.ToChar(value));
         }
 
-        [CLSCompliant(false)]
+
         public static char? ToChar(ushort value)
         {
             return new char?(Convert.ToChar(value));
@@ -208,13 +208,13 @@ namespace Bb.Expressions
 
         public static char? ToChar(int value) => ToChar((uint)value);
 
-        [CLSCompliant(false)]
+
         public static char? ToChar(uint value)
         {
             return new char?(Convert.ToChar(value));
         }
 
-        [CLSCompliant(false)]
+
         public static char? ToChar(ulong value)
         {
             return new char?(Convert.ToChar(value));
@@ -254,7 +254,7 @@ namespace Bb.Expressions
             return new short?(Convert.ToInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static short? ToInt16(sbyte value)
         {
             return new short?(Convert.ToInt16(value));
@@ -265,7 +265,7 @@ namespace Bb.Expressions
             return new short?(Convert.ToInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static short? ToInt16(ushort value)
         {
             return new short?(Convert.ToInt16(value));
@@ -276,7 +276,7 @@ namespace Bb.Expressions
             return new short?(Convert.ToInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static short? ToInt16(uint value)
         {
             return new short?(Convert.ToInt16(value));
@@ -292,7 +292,7 @@ namespace Bb.Expressions
             return new short?(Convert.ToInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static short? ToInt16(ulong value)
         {
             return new short?(Convert.ToInt16(value));
@@ -327,7 +327,6 @@ namespace Bb.Expressions
             return new DateTime?(Convert.ToDateTime(value));
         }
 
-        [CLSCompliant(false)]
         public static DateTime? ToDateTime(sbyte value)
         {
             return new DateTime?(Convert.ToDateTime(value));
@@ -343,7 +342,6 @@ namespace Bb.Expressions
             return new DateTime?(Convert.ToDateTime(value));
         }
 
-        [CLSCompliant(false)]
         public static DateTime? ToDateTime(ushort value)
         {
             return new DateTime?(Convert.ToDateTime(value));
@@ -354,7 +352,6 @@ namespace Bb.Expressions
             return new DateTime?(Convert.ToDateTime(value));
         }
 
-        [CLSCompliant(false)]
         public static DateTime? ToDateTime(uint value)
         {
             return new DateTime?(Convert.ToDateTime(value));
@@ -365,7 +362,7 @@ namespace Bb.Expressions
             return new DateTime?(Convert.ToDateTime(value));
         }
 
-        [CLSCompliant(false)]
+
         public static DateTime? ToDateTime(ulong value)
         {
             return new DateTime?(Convert.ToDateTime(value));
@@ -400,7 +397,7 @@ namespace Bb.Expressions
 
         #region ToDecimal
 
-        [CLSCompliant(false)]
+
         public static decimal? ToDecimal(sbyte value)
         {
             return new decimal?(Convert.ToDecimal(value));
@@ -421,7 +418,7 @@ namespace Bb.Expressions
             return new decimal?(Convert.ToDecimal(value));
         }
 
-        [CLSCompliant(false)]
+
         public static decimal? ToDecimal(ushort value)
         {
             return new decimal?(Convert.ToDecimal(value));
@@ -432,7 +429,7 @@ namespace Bb.Expressions
             return new decimal?(Convert.ToDecimal(value));
         }
 
-        [CLSCompliant(false)]
+
         public static decimal? ToDecimal(uint value)
         {
             return new decimal?(Convert.ToDecimal(value));
@@ -443,7 +440,7 @@ namespace Bb.Expressions
             return new decimal?(Convert.ToDecimal(value));
         }
 
-        [CLSCompliant(false)]
+
         public static decimal? ToDecimal(ulong value)
         {
             return new decimal?(Convert.ToDecimal(value));
@@ -478,7 +475,7 @@ namespace Bb.Expressions
 
         #region ToDouble
 
-        [CLSCompliant(false)]
+
         public static double? ToDouble(sbyte value)
         {
             return new double?(Convert.ToDouble(value));
@@ -499,7 +496,7 @@ namespace Bb.Expressions
             return new double?(Convert.ToDouble(value));
         }
 
-        [CLSCompliant(false)]
+
         public static double? ToDouble(ushort value)
         {
             return new double?(Convert.ToDouble(value));
@@ -510,7 +507,7 @@ namespace Bb.Expressions
             return new double?(Convert.ToDouble(value));
         }
 
-        [CLSCompliant(false)]
+
         public static double? ToDouble(uint value)
         {
             return new double?(Convert.ToDouble(value));
@@ -521,7 +518,7 @@ namespace Bb.Expressions
             return new double?(Convert.ToDouble(value));
         }
 
-        [CLSCompliant(false)]
+
         public static double? ToDouble(ulong value)
         {
             return new double?(Convert.ToDouble(value));
@@ -566,7 +563,7 @@ namespace Bb.Expressions
             return new int?(Convert.ToInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static int? ToInt32(sbyte value)
         {
             return new int?(Convert.ToInt32(value));
@@ -582,13 +579,13 @@ namespace Bb.Expressions
             return new int?(Convert.ToInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static int? ToInt32(ushort value)
         {
             return new int?(Convert.ToInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static int? ToInt32(uint value)
         {
             return new int?(Convert.ToInt32(value));
@@ -604,7 +601,7 @@ namespace Bb.Expressions
             return new int?(Convert.ToInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static int? ToInt32(ulong value)
         {
             return new int?(Convert.ToInt32(value));
@@ -644,7 +641,7 @@ namespace Bb.Expressions
             return new long?(Convert.ToInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static long? ToInt64(sbyte value)
         {
             return new long?(Convert.ToInt64(value));
@@ -660,7 +657,7 @@ namespace Bb.Expressions
             return new long?(Convert.ToInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static long? ToInt64(ushort value)
         {
             return new long?(Convert.ToInt64(value));
@@ -671,13 +668,13 @@ namespace Bb.Expressions
             return new long?(Convert.ToInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static long? ToInt64(uint value)
         {
             return new long?(Convert.ToInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static long? ToInt64(ulong value)
         {
             return new long?(Convert.ToInt64(value));
@@ -722,7 +719,7 @@ namespace Bb.Expressions
             return new byte?(Convert.ToByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static byte? ToByte(sbyte value)
         {
             return new byte?(Convert.ToByte(value));
@@ -733,7 +730,7 @@ namespace Bb.Expressions
             return new byte?(Convert.ToByte(value));
         }
 
-        [CLSCompliant(false)]
+
         public static byte? ToByte(ushort value)
         {
             return new byte?(Convert.ToByte(value));
@@ -741,7 +738,7 @@ namespace Bb.Expressions
 
         public static byte? ToByte(int value) => ToByte((uint)value);
 
-        [CLSCompliant(false)]
+
         public static byte? ToByte(uint value)
         {
             return new byte?(Convert.ToByte(value));
@@ -749,7 +746,7 @@ namespace Bb.Expressions
 
         public static byte? ToByte(long value) => ToByte((ulong)value);
 
-        [CLSCompliant(false)]
+
         public static byte? ToByte(ulong value)
         {
             return new byte?(Convert.ToByte(value));
@@ -778,7 +775,7 @@ namespace Bb.Expressions
 
         #region ToSingle
 
-        [CLSCompliant(false)]
+
         public static float? ToSingle(sbyte value)
         {
             return new float?(Convert.ToSingle(value));
@@ -799,7 +796,7 @@ namespace Bb.Expressions
             return new float?(Convert.ToSingle(value));
         }
 
-        [CLSCompliant(false)]
+
         public static float? ToSingle(ushort value)
         {
             return new float?(Convert.ToSingle(value));
@@ -810,7 +807,7 @@ namespace Bb.Expressions
             return new float?(Convert.ToSingle(value));
         }
 
-        [CLSCompliant(false)]
+
         public static float? ToSingle(uint value)
         {
             return new float?(Convert.ToSingle(value));
@@ -821,7 +818,7 @@ namespace Bb.Expressions
             return new float?(Convert.ToSingle(value));
         }
 
-        [CLSCompliant(false)]
+
         public static float? ToSingle(ulong value)
         {
             return new float?(Convert.ToSingle(value));
@@ -856,82 +853,82 @@ namespace Bb.Expressions
 
         #region ToUInt16
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(bool value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(char value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(sbyte value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(byte value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(short value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(int value) => ToUInt16((uint)value);
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(ushort value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(uint value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(long value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(ulong value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(float value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(double value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(decimal value)
         {
             return new ushort?(Convert.ToUInt16(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ushort? ToUInt16(DateTime value)
         {
             return new ushort?(Convert.ToUInt16(value));
@@ -941,85 +938,85 @@ namespace Bb.Expressions
 
         #region ToUInt32
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(bool value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(char value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(sbyte value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(byte value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(short value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(ushort value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(int value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(uint value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(long value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(ulong value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(float value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(double value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(decimal value)
         {
             return new uint?(Convert.ToUInt32(value));
         }
 
-        [CLSCompliant(false)]
+
         public static uint? ToUInt32(DateTime value)
         {
             return new uint?(Convert.ToUInt32(value));
@@ -1029,90 +1026,100 @@ namespace Bb.Expressions
 
         #region ToUInt64
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(bool value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(char value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(sbyte value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(byte value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(short value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(ushort value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(int value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(uint value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(long value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(ulong value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(float value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(double value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(decimal value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
-        [CLSCompliant(false)]
+
         public static ulong? ToUInt64(DateTime value)
         {
             return new ulong?(Convert.ToUInt64(value));
         }
 
         #endregion ToUInt64
+
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static DateTimeOffset ToDateTimeOffset(this DateTime value)
+        {
+            return new DateTimeOffset(value);
+        }
 
     }
 

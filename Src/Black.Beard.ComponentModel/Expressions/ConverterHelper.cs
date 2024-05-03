@@ -38,20 +38,37 @@ namespace Bb.Expressions
                 "ToUInt32",
                 "ToUInt64",
                 "ChangeType",
+                "ToDateTimeOffset",
             };
 
             var ms = typeof(Convert).GetMethods(BindingFlags.Static | BindingFlags.Public);
-
-            foreach (var item in ms)
-                if (_names.Contains(item.Name))
-                {
-                    var p = item.GetParameters();
-                    if ((p.Length == 1 || p.Length == 2) && p[0].ParameterType != item.ReturnType)
-                        Register(p[0].ParameterType, item.ReturnType, item);
-                }
+            AppendConverters(ms);
 
             ms = typeof(NullableConverter).GetMethods(BindingFlags.Static | BindingFlags.Public);
+            AppendConverters(ms);
+
+            ms = typeof(ConvertMore).GetMethods(BindingFlags.Static | BindingFlags.Public);
+            AppendConverters(ms);
+
+        }
+
+        /// <summary>
+        /// Add a method name to the list of methods to be used for conversion
+        /// </summary>
+        /// <param name="name"></param>
+        public static void AddMethodName(string name)
+        {
+            _names.Add(name);
+        }
+
+        /// <summary>
+        /// Add a method to the list of methods to be used for conversion
+        /// </summary>
+        /// <param name="ms"></param>
+        public static void AppendConverters(params MethodInfo[] ms)
+        {
             foreach (var item in ms)
+                if (item.Attributes.HasFlag(MethodAttributes.Public) & item.Attributes.HasFlag(MethodAttributes.Static))
                 {
                     var p = item.GetParameters();
                     if ((p.Length == 1 || p.Length == 2) && p[0].ParameterType != item.ReturnType)
@@ -304,7 +321,7 @@ namespace Bb.Expressions
         private static Dictionary<Type, Dictionary<Type, Func<object, object>>> _dic = new Dictionary<Type, Dictionary<Type, Func<object, object>>>();
         private static Dictionary<Type, Dictionary<Type, MethodBase>> _dicConverters = new Dictionary<Type, Dictionary<Type, MethodBase>>();
         private static readonly HashSet<string> _names;
-    
+
     }
 
 }
