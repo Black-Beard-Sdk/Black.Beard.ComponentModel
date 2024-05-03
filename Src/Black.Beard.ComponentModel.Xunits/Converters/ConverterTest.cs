@@ -8,6 +8,7 @@ using ICSharpCode.Decompiler.Semantics;
 using NJsonSchema;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -178,6 +179,19 @@ namespace Black.Beard.Converters
             ulong expected = 240302102536925;
 
             Assert.Equal(expected, i);
+
+        }
+
+
+        [Fact]
+        public void Test20()
+        {
+
+
+            var date = new DateTimeOffset(2020, 1, 3, 10, 00, 00, new TimeSpan(2, 0, 0));
+            var txt = date.ToString(CultureInfo.CurrentCulture);
+
+            txt.ToObject(typeof(DateTimeOffset)).Should().Be(date);
 
         }
 

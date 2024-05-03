@@ -8,78 +8,78 @@ namespace Bb.Expressions
 
         #region ToBoolean
 
-        public static bool ToBoolean(bool? value)
+        public static bool ToBoolean(this bool? value)
         {
             return value.HasValue ? value.Value : false;
         }
 
-        
-        public static bool ToBoolean(sbyte? value)
+
+        public static bool ToBoolean(this sbyte? value)
         {
             return value.HasValue ? value.Value != 0 : false;
         }
 
-        public static bool ToBoolean(char? value)
+        public static bool ToBoolean(this char? value)
         {
             if (value.HasValue)
                 return ((IConvertible)value.Value).ToBoolean(null);
             return false;
         }
 
-        public static bool ToBoolean(byte? value)
+        public static bool ToBoolean(this byte? value)
         {
             return value.HasValue ? value.Value != 0 : false;
         }
 
-        public static bool ToBoolean(short? value)
+        public static bool ToBoolean(this short? value)
         {
             return value.HasValue ? value.Value != 0 : false;
         }
 
-        
-        public static bool ToBoolean(ushort? value)
+
+        public static bool ToBoolean(this ushort? value)
         {
             return value.HasValue ? value.Value != 0 : false;
         }
 
-        public static bool ToBoolean(int? value)
+        public static bool ToBoolean(this int? value)
         {
             return value.HasValue ? value.Value != 0 : false;
         }
 
-        
-        public static bool ToBoolean(uint? value)
+
+        public static bool ToBoolean(this uint? value)
         {
             return value.HasValue ? value.Value != 0 : false;
         }
 
-        public static bool ToBoolean(long? value)
+        public static bool ToBoolean(this long? value)
         {
             return value.HasValue ? value.Value != 0 : false;
         }
 
-        
-        public static bool ToBoolean(ulong? value)
+
+        public static bool ToBoolean(this ulong? value)
         {
             return value.HasValue ? value.Value != 0 : false;
         }
 
-        public static bool ToBoolean(float? value)
+        public static bool ToBoolean(this float? value)
         {
             return value.HasValue ? value.Value != 0 : false;
         }
 
-        public static bool ToBoolean(double? value)
+        public static bool ToBoolean(this double? value)
         {
             return value != 0;
         }
 
-        public static bool ToBoolean(decimal? value)
+        public static bool ToBoolean(this decimal? value)
         {
             return value.HasValue ? value.Value != 0 : false;
         }
 
-        public static bool ToBoolean(DateTime? value)
+        public static bool ToBoolean(this DateTime? value)
         {
             if (value.HasValue)
                 return ((IConvertible)value.Value).ToBoolean(null);
@@ -90,86 +90,86 @@ namespace Bb.Expressions
 
         #region ToByte               
 
-        
-        public static sbyte ToSByte(bool? value)
+
+        public static sbyte ToSByte(this bool? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(sbyte? value)
+
+        public static sbyte ToSByte(this sbyte? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(char? value)
+
+        public static sbyte ToSByte(this char? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(byte? value)
+
+        public static sbyte ToSByte(this byte? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(short? value)
+
+        public static sbyte ToSByte(this short? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(ushort? value)
+
+        public static sbyte ToSByte(this ushort? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(int? value)
+
+        public static sbyte ToSByte(this int? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(uint? value)
+
+        public static sbyte ToSByte(this uint? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(long? value)
+
+        public static sbyte ToSByte(this long? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(ulong? value)
+
+        public static sbyte ToSByte(this ulong? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(float? value)
+
+        public static sbyte ToSByte(this float? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(double? value)
+
+        public static sbyte ToSByte(this double? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(decimal? value)
+
+        public static sbyte ToSByte(this decimal? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
 
-        
-        public static sbyte ToSByte(DateTime? value)
+
+        public static sbyte ToSByte(this DateTime? value)
         {
             return value.HasValue ? Convert.ToSByte(value.Value) : (sbyte)0;
         }
@@ -178,76 +178,72 @@ namespace Bb.Expressions
 
         #region ToChar
 
-        public static char ToChar(bool? value)
+        public static char ToChar(this bool? value)
         {
             if (value.HasValue)
                 return ((IConvertible)value.Value).ToChar(null);
             return '\0';
         }
 
-        public static char ToChar(char? value)
+        public static char ToChar(this char? value)
         {
             return value.HasValue ? value.Value : '\0';
         }
 
-        
-        public static char ToChar(sbyte? value)
+        public static char ToChar(this sbyte? value)
         {
             if (value.HasValue)
                 Convert.ToChar(value.Value);
             return '\0';
         }
 
-        public static char ToChar(byte? value)
+        public static char ToChar(this byte? value)
         {
             if (value.HasValue)
                 Convert.ToChar(value.Value);
             return '\0';
         }
 
-        public static char ToChar(short? value)
+        public static char ToChar(this short? value)
         {
             if (value.HasValue)
                 Convert.ToChar(value.Value);
             return '\0';
         }
 
-        
-        public static char ToChar(ushort? value)
+        public static char ToChar(this ushort? value)
         {
             if (value.HasValue)
                 Convert.ToChar(value.Value);
             return '\0';
         }
 
-        public static char ToChar(int? value) => value.HasValue ? Convert.ToChar(value.Value) : (char)0;
+        public static char ToChar(this int? value) => value.HasValue ? Convert.ToChar(value.Value) : (char)0;
 
-        
-        public static char ToChar(uint? value)
+        public static char ToChar(this uint? value)
         {
             if (value.HasValue)
                 Convert.ToChar(value.Value);
             return '\0';
         }
 
-        public static char ToChar(long? value) => value.HasValue ? Convert.ToChar(value.Value) : (char)0;
+        public static char ToChar(this long? value) => value.HasValue ? Convert.ToChar(value.Value) : (char)0;
 
-        
-        public static char ToChar(ulong? value)
+        public static char ToChar(this ulong? value)
         {
             if (value.HasValue)
                 Convert.ToChar(value.Value);
             return '\0';
         }
 
-        public static char ToChar(float? value)
+        public static char ToChar(this float? value)
         {
             if (value.HasValue)
                 return ((IConvertible)value.Value).ToChar(null);
             return '\0';
         }
 
-        public static char ToChar(double? value)
+        public static char ToChar(this double? value)
         {
             if (value.HasValue)
                 return ((IConvertible)value.Value).ToChar(null);
@@ -255,14 +251,14 @@ namespace Bb.Expressions
             return '\0';
         }
 
-        public static char ToChar(decimal? value)
+        public static char ToChar(this decimal? value)
         {
             if (value.HasValue)
                 return ((IConvertible)value.Value).ToChar(null);
             return '\0';
         }
 
-        public static char ToChar(DateTime? value)
+        public static char ToChar(this DateTime? value)
         {
             if (value.HasValue)
                 return ((IConvertible)value.Value).ToChar(null);
@@ -273,76 +269,72 @@ namespace Bb.Expressions
 
         #region ToInt16
 
-        public static short ToInt16(bool? value)
+        public static short ToInt16(this bool? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        public static short ToInt16(char? value)
+        public static short ToInt16(this char? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        
-        public static short ToInt16(sbyte? value)
+        public static short ToInt16(this sbyte? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        public static short ToInt16(byte? value)
+        public static short ToInt16(this byte? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        
-        public static short ToInt16(ushort? value)
+        public static short ToInt16(this ushort? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        public static short ToInt16(int? value)
+        public static short ToInt16(this int? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        
-        public static short ToInt16(uint? value)
+        public static short ToInt16(this uint? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        public static short ToInt16(short? value)
+        public static short ToInt16(this short? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        public static short ToInt16(long? value)
+        public static short ToInt16(this long? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        
-        public static short ToInt16(ulong? value)
+        public static short ToInt16(this ulong? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        public static short ToInt16(float? value)
+        public static short ToInt16(this float? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        public static short ToInt16(double? value)
+        public static short ToInt16(this double? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        public static short ToInt16(decimal? value)
+        public static short ToInt16(this decimal? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
 
-        public static short ToInt16(DateTime? value)
+        public static short ToInt16(this DateTime? value)
         {
             return value.HasValue ? Convert.ToInt16(value.Value) : (short)0;
         }
@@ -351,76 +343,72 @@ namespace Bb.Expressions
 
         #region ToDateTime
 
-        public static DateTime ToDateTime(DateTime? value)
+        public static DateTime ToDateTime(this DateTime? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        
-        public static DateTime ToDateTime(sbyte? value)
+        public static DateTime ToDateTime(this sbyte? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        public static DateTime ToDateTime(byte? value)
+        public static DateTime ToDateTime(this byte? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        public static DateTime ToDateTime(short? value)
+        public static DateTime ToDateTime(this short? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        
-        public static DateTime ToDateTime(ushort? value)
+        public static DateTime ToDateTime(this ushort? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        public static DateTime ToDateTime(int? value)
+        public static DateTime ToDateTime(this int? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        
-        public static DateTime ToDateTime(uint? value)
+        public static DateTime ToDateTime(this uint? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        public static DateTime ToDateTime(long? value)
+        public static DateTime ToDateTime(this long? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        
-        public static DateTime ToDateTime(ulong? value)
+        public static DateTime ToDateTime(this ulong? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        public static DateTime ToDateTime(bool? value)
+        public static DateTime ToDateTime(this bool? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        public static DateTime ToDateTime(char? value)
+        public static DateTime ToDateTime(this char? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        public static DateTime ToDateTime(float? value)
+        public static DateTime ToDateTime(this float? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        public static DateTime ToDateTime(double? value)
+        public static DateTime ToDateTime(this double? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
 
-        public static DateTime ToDateTime(decimal? value)
+        public static DateTime ToDateTime(this decimal? value)
         {
             return value.HasValue ? Convert.ToDateTime(value.Value) : DateTime.MinValue;
         }
@@ -443,7 +431,7 @@ namespace Bb.Expressions
         /// <returns></returns>
         public static DateTime ToDateTime(this DateTimeOffset? value)
         {
-            
+
             if (!value.HasValue)
                 return DateTime.MinValue;
 
@@ -456,76 +444,72 @@ namespace Bb.Expressions
 
         #region ToDecimal
 
-        
-        public static decimal ToDecimal(sbyte? value)
+        public static decimal ToDecimal(this sbyte? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        public static decimal ToDecimal(byte? value)
+        public static decimal ToDecimal(this byte? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        public static decimal ToDecimal(char? value)
+        public static decimal ToDecimal(this char? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        public static decimal ToDecimal(short? value)
+        public static decimal ToDecimal(this short? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        
-        public static decimal ToDecimal(ushort? value)
+        public static decimal ToDecimal(this ushort? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        public static decimal ToDecimal(int? value)
+        public static decimal ToDecimal(this int? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        
-        public static decimal ToDecimal(uint? value)
+        public static decimal ToDecimal(this uint? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        public static decimal ToDecimal(long? value)
+        public static decimal ToDecimal(this long? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        
-        public static decimal ToDecimal(ulong? value)
+        public static decimal ToDecimal(this ulong? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        public static decimal ToDecimal(float? value)
+        public static decimal ToDecimal(this float? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        public static decimal ToDecimal(double? value)
+        public static decimal ToDecimal(this double? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        public static decimal ToDecimal(decimal? value)
+        public static decimal ToDecimal(this decimal? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        public static decimal ToDecimal(bool? value)
+        public static decimal ToDecimal(this bool? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
 
-        public static decimal ToDecimal(DateTime? value)
+        public static decimal ToDecimal(this DateTime? value)
         {
             return value.HasValue ? Convert.ToDecimal(value.Value) : 0;
         }
@@ -533,77 +517,73 @@ namespace Bb.Expressions
         #endregion ToDecimal
 
         #region ToDouble
-              
-        
-        public static double ToDouble(sbyte? value)
+
+        public static double ToDouble(this sbyte? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        public static double ToDouble(byte? value)
+        public static double ToDouble(this byte? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        public static double ToDouble(short? value)
+        public static double ToDouble(this short? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        public static double ToDouble(char? value)
+        public static double ToDouble(this char? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        
-        public static double ToDouble(ushort? value)
+        public static double ToDouble(this ushort? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        public static double ToDouble(int? value)
+        public static double ToDouble(this int? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        
-        public static double ToDouble(uint? value)
+        public static double ToDouble(this uint? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        public static double ToDouble(long? value)
+        public static double ToDouble(this long? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        
-        public static double ToDouble(ulong? value)
+        public static double ToDouble(this ulong? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        public static double ToDouble(float? value)
+        public static double ToDouble(this float? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        public static double ToDouble(double? value)
+        public static double ToDouble(this double? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        public static double ToDouble(decimal? value)
+        public static double ToDouble(this decimal? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        public static double ToDouble(bool? value)
+        public static double ToDouble(this bool? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
 
-        public static double ToDouble(DateTime? value)
+        public static double ToDouble(this DateTime? value)
         {
             return value.HasValue ? Convert.ToDouble(value.Value) : 0;
         }
@@ -612,76 +592,72 @@ namespace Bb.Expressions
 
         #region ToInt32
 
-        public static int ToInt32(bool? value)
+        public static int ToInt32(this bool? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        public static int ToInt32(char? value)
+        public static int ToInt32(this char? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        
-        public static int ToInt32(sbyte? value)
+        public static int ToInt32(this sbyte? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        public static int ToInt32(byte? value)
+        public static int ToInt32(this byte? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        public static int ToInt32(short? value)
+        public static int ToInt32(this short? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        
-        public static int ToInt32(ushort? value)
+        public static int ToInt32(this ushort? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        
-        public static int ToInt32(uint? value)
+        public static int ToInt32(this uint? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        public static int ToInt32(int? value)
+        public static int ToInt32(this int? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        public static int ToInt32(long? value)
+        public static int ToInt32(this long? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        
-        public static int ToInt32(ulong? value)
+        public static int ToInt32(this ulong? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        public static int ToInt32(float? value)
+        public static int ToInt32(this float? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        public static int ToInt32(double? value)
+        public static int ToInt32(this double? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        public static int ToInt32(decimal? value)
+        public static int ToInt32(this decimal? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
 
-        public static int ToInt32(DateTime? value)
+        public static int ToInt32(this DateTime? value)
         {
             return value.HasValue ? Convert.ToInt32(value.Value) : 0;
         }
@@ -690,87 +666,81 @@ namespace Bb.Expressions
 
         #region ToInt64
 
-        public static long ToInt64(bool? value)
+        public static long ToInt64(this bool? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        public static long ToInt64(char? value)
+        public static long ToInt64(this char? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        
-        public static long ToInt64(sbyte? value)
+        public static long ToInt64(this sbyte? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        public static long ToInt64(byte? value)
+        public static long ToInt64(this byte? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        public static long ToInt64(short? value)
+        public static long ToInt64(this short? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        
-        public static long ToInt64(ushort? value)
+        public static long ToInt64(this ushort? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        public static long ToInt64(int? value)
+        public static long ToInt64(this int? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        
-        public static long ToInt64(uint? value)
+        public static long ToInt64(this uint? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        
-        public static long ToInt64(ulong? value)
+        public static long ToInt64(this ulong? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        public static long ToInt64(long? value)
+        public static long ToInt64(this long? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        public static long ToInt64(float? value)
+        public static long ToInt64(this float? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        public static long ToInt64(double? value)
+        public static long ToInt64(this double? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        public static long ToInt64(decimal? value)
+        public static long ToInt64(this decimal? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        public static long ToInt64(DateTime? value)
+        public static long ToInt64(this DateTime? value)
         {
             return value.HasValue ? Convert.ToInt64(value.Value) : 0;
         }
 
-        
         public static ulong ToUInt64(bool? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
         public static ulong ToUInt64(char? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
@@ -780,73 +750,70 @@ namespace Bb.Expressions
 
         #region ToByte
 
-        public static byte ToByte(bool? value)
+        public static byte ToByte(this bool? value)
         {
             return value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
         }
 
-        public static byte ToByte(char? value)
+        public static byte ToByte(this char? value)
         {
             return value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
         }
 
-        
-        public static byte ToByte(sbyte? value)
+        public static byte ToByte(this sbyte? value)
         {
             return value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
         }
 
-        public static byte ToByte(short? value)
+        public static byte ToByte(this short? value)
         {
             return value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
         }
 
-        
-        public static byte ToByte(ushort? value)
+        public static byte ToByte(this ushort? value)
         {
             return value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
         }
 
-        public static byte ToByte(int? value) => value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
+        public static byte ToByte(this int? value) => value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
 
-        
-        public static byte ToByte(uint? value)
+        public static byte ToByte(this uint? value)
         {
             return value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
         }
 
-        public static byte ToByte(long? value) => value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
+        public static byte ToByte(this long? value) => value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
 
-        
-        public static byte ToByte(ulong? value)
+        public static byte ToByte(this ulong? value)
         {
             return value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
         }
 
-        public static byte ToByte(float? value)
+        public static byte ToByte(this float? value)
         {
             return value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
         }
 
-        public static byte ToByte(double? value)
+        public static byte ToByte(this double? value)
         {
             return value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
         }
 
-        public static byte ToByte(decimal? value)
+        public static byte ToByte(this decimal? value)
         {
             return value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
         }
 
-        public static byte ToByte(DateTime? value)
+        public static byte ToByte(this DateTime? value)
         {
             return value.HasValue ? Convert.ToByte(value.Value) : (byte)0;
         }
+
         #endregion ToSByte
 
         #region ToSingle
 
-        
+
         public static float ToSingle(sbyte? value)
         {
             return value.HasValue ? Convert.ToSingle(value.Value) : 0;
@@ -867,7 +834,7 @@ namespace Bb.Expressions
             return value.HasValue ? Convert.ToSingle(value.Value) : 0;
         }
 
-        
+
         public static float ToSingle(ushort? value)
         {
             return value.HasValue ? Convert.ToSingle(value.Value) : 0;
@@ -878,7 +845,7 @@ namespace Bb.Expressions
             return value.HasValue ? Convert.ToSingle(value.Value) : 0;
         }
 
-        
+
         public static float ToSingle(uint? value)
         {
             return value.HasValue ? Convert.ToSingle(value.Value) : 0;
@@ -889,7 +856,7 @@ namespace Bb.Expressions
             return value.HasValue ? Convert.ToSingle(value.Value) : 0;
         }
 
-        
+
         public static float ToSingle(ulong? value)
         {
             return value.HasValue ? Convert.ToSingle(value.Value) : 0;
@@ -945,13 +912,13 @@ namespace Bb.Expressions
             return value.HasValue ? Convert.ToString(value.Value) : null;
         }
 
-        
+
         public static string ToString(sbyte? value)
         {
             return value.HasValue ? Convert.ToString(value.Value) : null;
         }
 
-        
+
         public static string ToString(sbyte? value, IFormatProvider? provider)
         {
             return value.HasValue ? Convert.ToString(value.Value) : null;
@@ -977,13 +944,13 @@ namespace Bb.Expressions
             return value.HasValue ? Convert.ToString(value.Value) : null;
         }
 
-        
+
         public static string ToString(ushort? value)
         {
             return value.HasValue ? Convert.ToString(value.Value) : null;
         }
 
-        
+
         public static string ToString(ushort? value, IFormatProvider? provider)
         {
             return value.HasValue ? Convert.ToString(value.Value) : null;
@@ -999,13 +966,13 @@ namespace Bb.Expressions
             return value.HasValue ? Convert.ToString(value.Value) : null;
         }
 
-        
+
         public static string ToString(uint? value)
         {
             return value.HasValue ? Convert.ToString(value.Value) : null;
         }
 
-        
+
         public static string ToString(uint? value, IFormatProvider? provider)
         {
             return value.HasValue ? Convert.ToString(value.Value) : null;
@@ -1021,13 +988,13 @@ namespace Bb.Expressions
             return value.HasValue ? Convert.ToString(value.Value) : null;
         }
 
-        
+
         public static string ToString(ulong? value)
         {
             return value.HasValue ? Convert.ToString(value.Value) : null;
         }
 
-        
+
         public static string ToString(ulong? value, IFormatProvider? provider)
         {
             return value.HasValue ? Convert.ToString(value.Value) : null;
@@ -1077,82 +1044,82 @@ namespace Bb.Expressions
 
         #region ToUInt16
 
-        
+
         public static ushort ToUInt16(bool? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(char? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(sbyte? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(byte? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(short? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(int? value) => value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
 
-        
+
         public static ushort ToUInt16(ushort? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(uint? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(long? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(ulong? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(float? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(double? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(decimal? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
         }
 
-        
+
         public static ushort ToUInt16(DateTime? value)
         {
             return value.HasValue ? Convert.ToUInt16(value.Value) : (ushort)0;
@@ -1162,85 +1129,85 @@ namespace Bb.Expressions
 
         #region ToUInt32
 
-        
+
         public static uint ToUInt32(bool? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(char? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(sbyte? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(byte? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(short? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(ushort? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(int? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(uint? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(long? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(ulong? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(float? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(double? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(decimal? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
         }
 
-        
+
         public static uint ToUInt32(DateTime? value)
         {
             return value.HasValue ? Convert.ToUInt32(value.Value) : 0;
@@ -1249,73 +1216,73 @@ namespace Bb.Expressions
         #endregion ToUInt32
 
         #region ToUInt64
-        
+
         public static ulong ToUInt64(sbyte? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
+
         public static ulong ToUInt64(byte? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
+
         public static ulong ToUInt64(short? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
+
         public static ulong ToUInt64(ushort? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
+
         public static ulong ToUInt64(int? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
+
         public static ulong ToUInt64(uint? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
+
         public static ulong ToUInt64(long? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
+
         public static ulong ToUInt64(ulong? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
+
         public static ulong ToUInt64(float? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
+
         public static ulong ToUInt64(double? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
+
         public static ulong ToUInt64(decimal? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
         }
 
-        
+
         public static ulong ToUInt64(DateTime? value)
         {
             return value.HasValue ? Convert.ToUInt64(value.Value) : 0;
@@ -1323,12 +1290,80 @@ namespace Bb.Expressions
 
         #endregion ToUInt64
 
-        public static DateTimeOffset ToDateTimeOffset(DateTime? value)
+        #region ToDateTimeOffset
+
+        public static DateTimeOffset ToDateTimeOffset(this DateTime? value)
         {
             return value.HasValue ? new DateTimeOffset(value.Value) : DateTimeOffset.MinValue;
         }
+        public static DateTimeOffset ToDateTimeOffset(this sbyte? value)
+        {
+            return value.HasValue ? new DateTimeOffset(Convert.ToDateTime(value)) : DateTimeOffset.MinValue;
+        }
 
-     
+        public static DateTimeOffset ToDateTimeOffset(this byte? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this short? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this ushort? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this int? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this uint? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this long? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this ulong? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this bool? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this char? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this float? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this double? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this decimal? value)
+        {
+            return value.HasValue ? new  DateTimeOffset(Convert.ToDateTime(value.Value)) : DateTimeOffset.MinValue;
+        }
+
+        #endregion ToDateTimeOffset
+
+
     }
 
 }

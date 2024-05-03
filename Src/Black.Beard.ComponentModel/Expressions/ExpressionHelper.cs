@@ -285,7 +285,7 @@ namespace Bb.Expressions
                 if (targetType.IsAssignableFrom(sourceType))
                     result = Expression.Convert(self, targetType);
 
-                else if (sourceType.IsAssignableFrom(targetType))
+                else if (sourceType.IsAssignableFrom(targetType)) 
                     result = Expression.Convert(self, targetType);
 
                 else

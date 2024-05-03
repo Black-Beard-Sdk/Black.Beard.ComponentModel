@@ -1,6 +1,7 @@
 ﻿using Bb.Expressions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -113,6 +114,7 @@ namespace Bb.Expressions
             return result;
 
         }
+
 
         /// <summary>
         /// Resolve the method to convert sourceType to targetType
@@ -319,6 +321,7 @@ namespace Bb.Expressions
         }
 
         private static Dictionary<Type, Dictionary<Type, Func<object, object>>> _dic = new Dictionary<Type, Dictionary<Type, Func<object, object>>>();
+        private static Dictionary<Type, Dictionary<Type, Func<object, CultureInfo, object>>> _dic2 = new Dictionary<Type, Dictionary<Type, Func<object, CultureInfo, object>>>();
         private static Dictionary<Type, Dictionary<Type, MethodBase>> _dicConverters = new Dictionary<Type, Dictionary<Type, MethodBase>>();
         private static readonly HashSet<string> _names;
 

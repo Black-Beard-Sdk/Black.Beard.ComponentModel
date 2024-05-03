@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,8 +8,27 @@ using System.Threading.Tasks;
 namespace Bb.Expressions
 {
 
+
     public static class ConvertMore
     {
+
+        /// <summary>
+        /// Culture used by default if the parameter is not specified
+        /// </summary>
+        public static CultureInfo CultureInfo { get; set; } = CultureInfo.InvariantCulture;
+
+
+        /// <summary>
+        /// Convert a string to DateTimeOffset
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="cultureInfo"><see cref="CultureInfo"/>. By default ConvertMore.CultureInfois used</param>
+        /// <returns></returns>
+        public static DateTimeOffset ToDateTimeOffset(this string value, CultureInfo cultureInfo = null)
+        {
+            var result = DateTimeOffset.Parse(value, cultureInfo ?? ConvertMore.CultureInfo ?? CultureInfo.InvariantCulture);
+            return result;
+        }
 
         /// <summary>
         /// Convert a DateTimeOffset to a DateTime
@@ -17,10 +37,74 @@ namespace Bb.Expressions
         /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this DateTime value)
         {
-
             return new DateTimeOffset(value);
-
         }
+
+        public static DateTimeOffset ToDateTimeOffset(this sbyte value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this byte value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this short value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this ushort value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this int value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this uint value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this long value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this ulong value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this bool value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this char value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this float value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this double value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
+        public static DateTimeOffset ToDateTimeOffset(this decimal value)
+        {
+            return new DateTimeOffset(Convert.ToDateTime(value));
+        }
+
 
         /// <summary>
         /// Convert a DateTime to a DateTimeOffset
@@ -32,6 +116,7 @@ namespace Bb.Expressions
             var value2 = value.ToUniversalTime();
             return value2.UtcDateTime;
         }
+
 
     }
 
