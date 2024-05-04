@@ -46,20 +46,24 @@ namespace Bb.ComponentModel.Translations
         /// Translate the current key
         /// </summary>
         /// <param name="service">service that translate keys</param>
-        /// <returns></returns>
-        public string Translate(ITranslateHost service)
+        /// <param name="arguments">translation keys arguments. (if the result of the translation contains "{\d}", a String.Format is apply with specified arguments</param>
+        /// <example>"Do you want to delete item {0}"</example>
+        /// /// <returns></returns>
+        public string Translate(ITranslateHost service, params TranslatedKeyLabel[] arguments)
         {
-            return service.TranslationService.Translate(this);
+            return service.TranslationService.Translate(this, arguments);
         }
 
         /// <summary>
         /// Translate the current key
         /// </summary>
         /// <param name="service"></param>
+        /// <param name="arguments">translation keys arguments. (if the result of the translation contains "{\d}", a String.Format is apply with specified arguments</param>
+        /// <example>"Do you want to delete item {0}"</example>
         /// <returns></returns>
-        public string Translate(ITranslateService service)
+        public string Translate(ITranslateService service, params TranslatedKeyLabel[] arguments)
         {
-            return service.Translate(this);
+            return service.Translate(this, arguments);
         }
 
         /// <summary>
@@ -112,12 +116,12 @@ namespace Bb.ComponentModel.Translations
         /// <summary>
         /// Contract of the translation key
         /// </summary>
-        public string? Path { get; private set; }
+        public string Path { get; private set; }
 
         /// <summary>
         /// Translation key
         /// </summary>
-        public string? Key { get; private set; }
+        public string Key { get; private set; }
 
         /// <summary>
         /// Other translation
@@ -143,7 +147,7 @@ namespace Bb.ComponentModel.Translations
         /// <summary>
         /// Default display
         /// </summary>
-        public string? DefaultDisplay { get; set; }
+        public string DefaultDisplay { get; set; }
 
         /// <summary>
         /// Default culture
