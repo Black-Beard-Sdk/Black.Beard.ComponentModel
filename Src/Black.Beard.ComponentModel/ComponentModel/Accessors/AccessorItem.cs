@@ -194,7 +194,7 @@ namespace Bb.ComponentModel.Accessors
         public IEnumerable<Attribute> GetAttributes()
         {
             if (_attributes == null)
-                _attributes = TypeDescriptor.GetAttributes(Member).OfType<Attribute>().ToList();
+                _attributes = Member.GetCustomAttributes().OfType<Attribute>().ToList();
             return _attributes;
         }
 

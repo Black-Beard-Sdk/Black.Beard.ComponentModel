@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,20 @@ namespace Bb.Expressions
         /// </summary>
         public static CultureInfo CultureInfo { get; set; } = CultureInfo.InvariantCulture;
 
+
+        #region ToGuid
+
+        public static Guid ToGuid(this string value)
+        {
+            var result = Guid.Parse(value);
+            return result;
+        }
+
+
+        #endregion ToGuid
+
+
+        #region ToDateTimeOffset
 
         /// <summary>
         /// Convert a string to DateTimeOffset
@@ -105,6 +120,8 @@ namespace Bb.Expressions
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        #endregion ToDateTimeOffset
+
 
         /// <summary>
         /// Convert a DateTime to a DateTimeOffset
@@ -115,6 +132,12 @@ namespace Bb.Expressions
         {
             var value2 = value.ToUniversalTime();
             return value2.UtcDateTime;
+        }
+
+        public static string ToString(this Guid value)
+        {
+            var result = value.ToString();
+            return result;
         }
 
 

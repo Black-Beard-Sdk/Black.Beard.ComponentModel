@@ -1120,6 +1120,17 @@ namespace Bb.Expressions
 
         #endregion ToDateTimeOffset
 
+        #region ToGuid
+        
+        public static Guid? ToGuid(this string value)
+        {
+            Guid? result = Guid.Parse(value);
+            return result;
+        }
+
+
+        #endregion ToGuid
+
     }
 
 }
