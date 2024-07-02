@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 namespace Bb.ComponentModel.Loaders
 {
+
+
     /// <summary>
     /// Loader of application builder
     /// </summary>
@@ -53,6 +55,5 @@ namespace Bb.ComponentModel.Loaders
         public bool ExcludeGenericTypes { get; internal set; } = true;
 
     }
-
 
 }

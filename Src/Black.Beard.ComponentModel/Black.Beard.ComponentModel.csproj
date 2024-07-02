@@ -38,6 +38,7 @@
 	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositoryByName.cs" />
 	  <Compile Include="ComponentModel\Loaders\IApplicationBuilderInitializer.cs" />
 	  <Compile Include="ComponentModel\Loaders\InitializationLoader.cs" />
+	  <Compile Include="ComponentModel\Loaders\Initializer.cs" />
 	  <Compile Include="ComponentModel\Loaders\InjectionExtensions.cs" />
 	  <Compile Include="ComponentModel\Loaders\InjectionLoader.cs" />
 	  <Compile Include="ComponentModel\Loaders\LoaderInitializerExtensions.cs" />
