@@ -17,6 +17,26 @@ namespace Bb.ComponentModel.Loaders
         /// </summary>
         /// <typeparam name="T">Type of object must by resolved by discovery</typeparam>
         /// <param name="self">instance to initialize</param>
+        /// <param name="serviceProvider"><see cref="IServiceProvider"/></param>
+        /// <param name="context">by default the value is "Initialization"</param>
+        /// <param name="action">action to execute for every loader</param>
+        /// <returns></returns>
+        public static T Initialize<T>(this T self, IServiceProvider serviceProvider, string? context = null, Action<IApplicationBuilderInitializer<T>> action = null)
+        {
+
+            var loader = new InitializationLoader<T>(context ?? ConstantsCore.Initialization, serviceProvider)
+                .LoadModules(action)
+                .Execute(self);
+
+            return self;
+
+        }
+
+        /// <summary>
+        /// Initialize an instance with class that will be discovered
+        /// </summary>
+        /// <typeparam name="T">Type of object must by resolved by discovery</typeparam>
+        /// <param name="self">instance to initialize</param>
         /// <param name="context">by default the value is "Initialization"</param>
         /// <param name="action">action to execute on every loader</param>
         /// <returns></returns>
