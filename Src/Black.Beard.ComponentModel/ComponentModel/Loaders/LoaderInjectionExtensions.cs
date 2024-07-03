@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 
 namespace Bb.ComponentModel.Loaders
 {
@@ -11,8 +12,50 @@ namespace Bb.ComponentModel.Loaders
     /// <summary>
     /// Initialize an instance with class that will be discovered
     /// </summary>
+    // <example>
+    /// 
+    /// Create a class that will be discovered
+    /// <code lang="Csharp">
+    /// [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder<MyClass>), LifeCycle = IocScopeEnum.Transiant)]
+    /// public class TestInitializer : IInjectBuilder<MyClass>
+    /// {
+    /// 
+    ///     public string FriendlyName => typeof(TestInitializer).Name;
+    /// 
+    ///     public Type Type => typeof(MyClass);
+    /// 
+    ///     public bool CanExecute(MyClass context) => context.CanExecuteModule(FriendlyName);
+    /// 
+    ///     public bool CanExecute(object context) => CanExecute((MyClass)context);
+    /// 
+    ///     public object Execute(object context) => Execute((MyClass)context);
+    /// 
+    ///     public object Execute(MyClass context)
+    ///     {
+    ///         // execute your code here
+    ///         return null;
+    ///     }
+    /// 
+    /// }
+    /// </code>
+    /// 
+    /// Run the initializer
+    /// <code lang="Csharp">
+    /// </code>
+    ///     
+    ///     new TestInitializer().Initialize();
+    ///     ((IServiceProvider)provider).GetInitializedService(typeof(TestInitializer)).Initialize();
+    /// 
+    /// </example>
     public static class LoaderInjectionExtensions
     {
+
+        static LoaderInjectionExtensions()
+        {
+            _method = typeof(LoaderInjectionExtensions).GetMethods()
+                   .Where(c => c.Name == nameof(LoaderInjectionExtensions.Initialize))
+                   .First(c => c.IsGenericMethod);
+        }
 
 
         /// <summary>
@@ -24,7 +67,7 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="context">by default the value is "Initialization"</param>
         /// <param name="action">action to execute for every loader</param>
         /// <returns></returns>
-        public static T Initialize<T>(this T self, IServiceProvider serviceProvider, string? context = null, Action<IInjectBuilder<T>> action = null)
+        public static T Initialize<T>(this T self, IServiceProvider serviceProvider = null, string? context = null, Action<IInjectBuilder<T>> action = null)
         {
 
             var loader = new InjectionLoader<T>(context ?? ConstantsCore.Initialization, serviceProvider)
@@ -34,11 +77,12 @@ namespace Bb.ComponentModel.Loaders
             return self;
 
         }
+      
 
         /// <summary>
         /// create instance and initialize service from service provider
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">type of the service asked</typeparam>
         /// <param name="serviceProvider"></param>
         /// <param name="context"></param>
         /// <param name="initializer"></param>
@@ -47,13 +91,31 @@ namespace Bb.ComponentModel.Loaders
         {
 
             var instance = (T)serviceProvider.GetService(typeof(T));
+
+            if (instance != null)
+                instance.Initialize(serviceProvider, context, initializer);
+
+            return instance;
+
+        }
+
+        /// <summary>
+        /// create instance and initialize service from service provider
+        /// </summary>
+        /// <typeparam name="T">type of the service asked</typeparam>
+        /// <param name="serviceProvider"></param>
+        /// <param name="context"></param>
+        /// <param name="initializer"></param>
+        /// <returns></returns>
+        public static object GetInitializedService(this IServiceProvider serviceProvider, Type type, string context, Action<IInjectBuilder> initializer = null)
+        {
+
+            var instance = serviceProvider.GetService(type);
+            
             if (instance != null)
             {
-                var loader = new InjectionLoader<T>(context, serviceProvider)
-                    .LoadModules(initializer)
-                    .Execute(instance)
-                    ;
-
+                var method = _method.MakeGenericMethod(type);
+                method.Invoke(instance, new object[] { serviceProvider, context, initializer });
             }
 
             return instance;
@@ -102,6 +164,8 @@ namespace Bb.ComponentModel.Loaders
             return self;
 
         }
+
+        private static MethodInfo _method;
 
 
     }

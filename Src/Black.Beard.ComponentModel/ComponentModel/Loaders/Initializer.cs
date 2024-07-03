@@ -155,7 +155,10 @@ namespace Bb.ComponentModel.Loaders
             return r;
         }
 
-        public static Initializer Last { get; }
+        /// <summary>
+        /// return the last initializer instance
+        /// </summary>
+        public static Initializer Last { get; private set; }
 
 
         #region IServiceProvider
