@@ -10,16 +10,50 @@ namespace Bb.ComponentModel.Loaders
     /// Loader of application builder
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    /// <example>
+    /// 
+    /// Create a class that will be discovered
+    /// <code lang="Csharp">
+    /// [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder<Initializer>), LifeCycle = IocScopeEnum.Transiant)]
+    /// public class NLogInitializer : IInjectBuilder<Initializer>
+    /// {
+    /// 
+    ///     public string FriendlyName => typeof(NLogInitializer).Name;
+    /// 
+    ///     public Type Type => typeof(Initializer);
+    /// 
+    ///     public bool CanExecute(Initializer context) => context.CanExecuteModule(FriendlyName);
+    /// 
+    ///     public bool CanExecute(object context) => CanExecute((Initializer)context);
+    /// 
+    ///     public object Execute(object context) => Execute((Initializer)context);
+    /// 
+    ///     public object Execute(Initializer context)
+    ///     {
+    ///         // execute your code here
+    ///         return null;
+    ///     }
+    /// 
+    /// }
+    /// </code>
+    /// 
+    /// Initialize the instance
+    /// <code lang="Csharp">
+    ///     var loader = new InjectionLoader<T>(context, serviceProvider)
+    ///         .LoadModules()
+    ///         .Execute(instance);
+    /// </code>
+    /// </example>
     public class InjectionLoader<T>
     {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InitializationLoader{T}"/> class.
         /// </summary>
-        public InjectionLoader( string context, IServiceProvider serviceProvider  = null)
+        public InjectionLoader(string context, IServiceProvider serviceProvider = null)
         {
             this.Context = context;
-            ServiceProvider = new LocalServiceProvider(serviceProvider) {  AutoAdd = true };
+            ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
             Types = new List<Type>();
             Instances = new List<IInjectBuilder<T>>();
             Executed = new HashSet<string>();
@@ -51,7 +85,7 @@ namespace Bb.ComponentModel.Loaders
         public HashSet<string> Executed { get; }
 
         public bool ExcludeAbstractTypes { get; set; } = true;
-        
+
         public bool ExcludeGenericTypes { get; internal set; } = true;
 
     }

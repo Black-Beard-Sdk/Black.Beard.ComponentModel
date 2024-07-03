@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bb.ComponentModel
 {
-    
+
     /// <summary>
     /// Generic interface for Initialize service
     /// </summary>
@@ -38,42 +33,6 @@ namespace Bb.ComponentModel
         /// Return the type of service that should be passed by argument
         /// </summary>
         Type Type { get; }
-
-
-    }
-
-
-
-    public abstract class InjectBuilder<T> : IInjectBuilder<T>
-    {
-
-        public InjectBuilder()
-        {
-
-        }
-
-        public Type Type => typeof(T);
-
-
-        public string FriendlyName => GetType().Name;
-
-        public virtual bool CanExecute(T service)
-        {
-            return true;
-        }
-
-
-        public bool CanExecute(object context)
-        {
-            return CanExecute((T)context);
-        }
-
-        public abstract object Execute(T service);
-
-        public object Execute(object context)
-        {
-            return Execute((T)context);
-        }
 
 
     }

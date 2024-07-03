@@ -6,6 +6,45 @@ using System.Reflection;
 
 namespace Bb.ComponentModel.Loaders
 {
+
+
+    /// <summary>
+    /// Initialize the application
+    /// </summary>
+    /// <example>
+    /// 
+    /// Create a class that will be discovered
+    /// <code lang="Csharp">
+    /// [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder<Initializer>), LifeCycle = IocScopeEnum.Transiant)]
+    /// public class NLogInitializer : IInjectBuilder<Initializer>
+    /// {
+    /// 
+    ///     public string FriendlyName => typeof(NLogInitializer).Name;
+    /// 
+    ///     public Type Type => typeof(Initializer);
+    /// 
+    ///     public bool CanExecute(Initializer context) => context.CanExecuteModule(FriendlyName);
+    /// 
+    ///     public bool CanExecute(object context) => CanExecute((Initializer)context);
+    /// 
+    ///     public object Execute(object context) => Execute((Initializer)context);
+    /// 
+    ///     public object Execute(Initializer context)
+    ///     {
+    ///         // execute your code here
+    ///         return null;
+    ///     }
+    /// 
+    /// }
+    /// </code>
+    /// 
+    /// Run the initializer
+    /// <code lang="Csharp">
+    /// </code>
+    ///     
+    ///     Initializer.Initialize(args);
+    /// 
+    /// </example>
     public class Initializer
     {
 

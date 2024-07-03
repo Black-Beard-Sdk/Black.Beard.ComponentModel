@@ -17,11 +17,11 @@ namespace Bb.ComponentModel.Attributes
 
         public string ConfigurationKey { get; set; }
 
-        public string TypeSerialisation { get; set; }
+        public string TypeSerialization { get; set; }
 
-        public const string TypeSerialisationToJson = "json";
-        public const string TypeSerialisationToXml = "xml";
-        public const string TypeSerialisationToYml = "yml";
+        public const string TypeSerializationToJson = "json";
+        public const string TypeSerializationToXml = "xml";
+        public const string TypeSerializationToYml = "yml";
 
     }
 

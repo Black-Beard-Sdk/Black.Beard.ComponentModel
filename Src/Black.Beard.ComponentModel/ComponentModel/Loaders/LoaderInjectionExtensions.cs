@@ -8,6 +8,9 @@ namespace Bb.ComponentModel.Loaders
 {
 
 
+    /// <summary>
+    /// Initialize an instance with class that will be discovered
+    /// </summary>
     public static class LoaderInjectionExtensions
     {
 
@@ -71,8 +74,8 @@ namespace Bb.ComponentModel.Loaders
                 if (item.CanExecute(builder))
                 {
                     var name = item.FriendlyName ?? item.GetType().FullName;
-                    Trace.WriteLine($"builder '{name}' initialize", TraceLevel.Info.ToString());
                     item.Execute(builder);
+                    Trace.WriteLine($"add-on '{name}' initialized", TraceLevel.Info.ToString());
                     self.Executed.Add(name);
                 }
 

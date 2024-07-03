@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using static Black.Beard.ComponentModel.Xunits.Initializers.ClassTest;
+//using static Black.Beard.ComponentModel.Xunits.Initializers.ClassTest;
 
 namespace Black.Beard.Converters
 

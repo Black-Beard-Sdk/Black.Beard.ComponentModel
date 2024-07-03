@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Bb.ComponentModel.Attributes;
+using System.Linq;
 
 namespace Bb.ComponentModel.Loaders
 {
@@ -26,7 +28,7 @@ namespace Bb.ComponentModel.Loaders
                     }
                 }
 
-            return result;
+            return result.OrderByPriority().ToList();
 
         }
 
