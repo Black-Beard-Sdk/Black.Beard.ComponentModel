@@ -45,7 +45,7 @@ namespace Bb.ComponentModel.Loaders
     ///     Initializer.Initialize(args);
     /// 
     /// </example>
-    public class Initializer
+    public class Initializer : IServiceProvider
     {
 
         static Initializer()
@@ -54,10 +54,10 @@ namespace Bb.ComponentModel.Loaders
         }
 
         /// <summary>
-        /// Discover all initialiser and execute them for initializing the application
+        /// Discover all initializer and execute them for initializing the application
         /// </summary>
         /// <param name="args"></param>
-        public static void Initialize(params string[] args)
+        public static Initializer Initialize(params string[] args)
         {
 
             Initializer initializer;
@@ -68,6 +68,8 @@ namespace Bb.ComponentModel.Loaders
                 initializer = Creator(Environment.GetCommandLineArgs());
 
             initializer.Initialize();
+
+            return initializer;
 
         }
 
@@ -88,10 +90,11 @@ namespace Bb.ComponentModel.Loaders
         protected Initializer(params string[] args)
         {
             _args = Parse(args);
+            Initializer.Last = this;
         }
 
         /// <summary>
-        /// evaluate if the module must be evaluated
+        /// return true if the module must be evaluated
         /// </summary>
         /// <param name="friendlyName"></param>
         /// <returns></returns>
@@ -152,8 +155,72 @@ namespace Bb.ComponentModel.Loaders
             return r;
         }
 
+        public static Initializer Last { get; }
 
 
+        #region IServiceProvider
+
+        /// <summary>
+        /// Get asked service
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <returns>return the service</returns>
+        public object? GetService(Type serviceType)
+        {
+            return _serviceProvider.GetService(serviceType);
+        }
+
+        /// <summary>
+        /// Get asked service
+        /// </summary>
+        /// <typeparam name="T">type to append</param>
+        /// <returns>return the service</returns>
+        public LocalServiceProvider Add<T>()
+            where T : class
+        {
+            return _serviceProvider.Add<T>();
+        }
+
+        /// <summary>
+        /// Add a factory in the service provider
+        /// </summary>
+        /// <typeparam name="T">type to append for resolve</typeparam>
+        /// <type name="type">implementation of the service</typeparam>
+        /// <returns><see cref="LocalServiceProvider"/></returns>
+        public LocalServiceProvider Add<T>(Type type)
+            where T : class
+        {
+            return _serviceProvider.Add<T>(type);
+        }
+
+        /// <summary>
+        /// Add a factory in the service provider
+        /// </summary>
+        /// <type name="type">type to append for resolve</typeparam>
+        /// <type name="instance">instance of the service</typeparam>
+        /// <returns><see cref="LocalServiceProvider"/></returns>
+        public Initializer Add(Type type, object instance)
+        {
+            _serviceProvider.Add(type, instance);
+            return this;
+        }
+
+        /// <summary>
+        /// Add a factory in the service provider
+        /// </summary>
+        /// <type name="factory">factory to append</typeparam>
+        /// <returns><see cref="LocalServiceProvider"/></returns>
+
+        public Initializer Add(Factory factory)
+        {
+            _serviceProvider.Add(factory.ExposedType, factory);
+            return this;
+        }
+
+        #endregion IServiceProvider
+
+
+        #region private
 
         private void Initialize()
         {
@@ -218,6 +285,11 @@ namespace Bb.ComponentModel.Loaders
         }
 
         private readonly Dictionary<string, string> _args;
+
+
+        private LocalServiceProvider _serviceProvider = new LocalServiceProvider();
+
+        #endregion private
 
 
     }

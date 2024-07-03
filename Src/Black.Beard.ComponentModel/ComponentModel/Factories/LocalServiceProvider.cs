@@ -16,6 +16,11 @@ namespace Bb.ComponentModel.Factories
 
         public bool AutoAdd { get; set; }
 
+        /// <summary>
+        /// Get asked service
+        /// </summary>
+        /// <param name="serviceType">type to append</param>
+        /// <returns>return the service</returns>
         public object? GetService(Type serviceType)
         {
 
@@ -46,24 +51,46 @@ namespace Bb.ComponentModel.Factories
 
         }
 
+        /// <summary>
+        /// Add a factory in the service provider
+        /// </summary>
+        /// <typeparam name="T">type to append</typeparam>
+        /// <returns><see cref="LocalServiceProvider"/></returns>
         public LocalServiceProvider Add<T>()
             where T : class
         {
             return Add(ObjectCreatorByIoc.GetActivator<T>());
         }
 
+        /// <summary>
+        /// Add a factory in the service provider
+        /// </summary>
+        /// <typeparam name="T">type to append for resolve</typeparam>
+        /// <type name="type">implementation of the service</typeparam>
+        /// <returns><see cref="LocalServiceProvider"/></returns>
         public LocalServiceProvider Add<T>(Type type)
             where T : class
         {
             return Add(ObjectCreatorByIoc.GetActivator<T>(type));
         }
 
+        /// <summary>
+        /// Add a factory in the service provider
+        /// </summary>
+        /// <type name="type">type to append for resolve</typeparam>
+        /// <type name="instance">instance of the service</typeparam>
+        /// <returns><see cref="LocalServiceProvider"/></returns>
         public LocalServiceProvider Add(Type type, object instance)
         {
             _instances.Add(type, instance);
             return this;
         }
 
+        /// <summary>
+        /// Add a factory in the service provider
+        /// </summary>
+        /// <type name="factory">factory to append</typeparam>
+        /// <returns><see cref="LocalServiceProvider"/></returns>
         public LocalServiceProvider Add(Factory factory)
         {
             _dic.Add(factory.ExposedType, factory);
