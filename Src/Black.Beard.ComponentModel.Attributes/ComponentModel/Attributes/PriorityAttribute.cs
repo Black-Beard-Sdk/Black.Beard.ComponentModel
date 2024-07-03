@@ -7,7 +7,7 @@ namespace Bb.ComponentModel.Attributes
 
 
     [System.AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    sealed class PriorityAttribute : Attribute, IComparable<PriorityAttribute>
+    public sealed class PriorityAttribute : Attribute, IComparable<PriorityAttribute>
     {
 
         // This is a positional argument
