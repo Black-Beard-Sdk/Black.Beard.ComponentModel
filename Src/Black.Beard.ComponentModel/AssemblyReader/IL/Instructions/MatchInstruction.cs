@@ -107,6 +107,7 @@ namespace ICSharpCode.Decompiler.IL
 		public MatchInstruction(ILVariable variable, ILInstruction testedOperand)
 			: this(variable, method: null, testedOperand)
 		{
+
 		}
 
 		/// <summary>

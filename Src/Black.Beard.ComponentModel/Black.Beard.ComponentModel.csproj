@@ -13,12 +13,15 @@
 	  <Compile Remove="ComponentModel\Loaders\**" />
 	  <Compile Remove="ComponentModel\PEReaders\**" />
 	  <Compile Remove="Exceptions\**" />
+	  <Compile Remove="_TypeDescriptors\**" />
 	  <EmbeddedResource Remove="ComponentModel\Loaders\**" />
 	  <EmbeddedResource Remove="ComponentModel\PEReaders\**" />
 	  <EmbeddedResource Remove="Exceptions\**" />
+	  <EmbeddedResource Remove="_TypeDescriptors\**" />
 	  <None Remove="ComponentModel\Loaders\**" />
 	  <None Remove="ComponentModel\PEReaders\**" />
 	  <None Remove="Exceptions\**" />
+	  <None Remove="_TypeDescriptors\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -31,17 +34,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Include="ComponentModel\Loaders\ApplicationInitializerBase.cs" />
 	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositories.cs" />
 	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepository.cs" />
 	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositoryByFolder.cs" />
 	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositoryByName.cs" />
-	  <Compile Include="ComponentModel\Loaders\IApplicationBuilderInitializer.cs" />
-	  <Compile Include="ComponentModel\Loaders\InitializationLoader.cs" />
 	  <Compile Include="ComponentModel\Loaders\Initializer.cs" />
 	  <Compile Include="ComponentModel\Loaders\InjectionExtensions.cs" />
 	  <Compile Include="ComponentModel\Loaders\InjectionLoader.cs" />
-	  <Compile Include="ComponentModel\Loaders\LoaderInitializerExtensions.cs" />
 	  <Compile Include="ComponentModel\Loaders\LoaderInjectionExtensions.cs" />
 	</ItemGroup>
 

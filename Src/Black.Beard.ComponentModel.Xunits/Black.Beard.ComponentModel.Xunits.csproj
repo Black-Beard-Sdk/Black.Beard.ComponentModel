@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DynamicProperties\DictionaryPropertyDescriptorTests.cs" />
+    <Compile Remove="DynamicProperties\DictionaryTypeDescriptorTests.cs" />
+    <Compile Remove="DynamicProperties\DynamicDescriptorTests.cs" />
+    <Compile Remove="DynamicProperties\DynamicPropertyDescriptorComparerTests.cs" />
+    <Compile Remove="DynamicProperties\DynamicPropertyDescriptorTests.cs" />
+    <Compile Remove="DynamicProperties\DynamicTypeDescriptorTests.cs" />
+    <Compile Remove="DynamicProperties\ReflectTests.cs" />
+    <Compile Remove="ProviderList\UnitTest.cs" />
+    <Compile Remove="Tests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.5.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="NJsonSchema" Version="11.0.0" />
@@ -24,6 +36,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Black.Beard.ComponentModel\Black.Beard.ComponentModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ProviderList\" />
   </ItemGroup>
 
 </Project>

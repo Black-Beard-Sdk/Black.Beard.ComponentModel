@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace Bb.TypeDescriptors
+namespace Bb.Helpers
 {
     /// <summary>
     /// A <see cref="StringConverter"/> that provides a collection of standard values.
@@ -99,6 +99,7 @@ namespace Bb.TypeDescriptors
                 ? new StandardValuesCollection(_valuesFactory.Invoke())
                 : EmptyStandardValuesCollection;
         }
+
     }
 
 }

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Bb.TypeDescriptors
 {
     /// <summary>
     /// An implementation of <see cref="IComparer{T}"/> for <see cref="DynamicPropertyDescriptorComparer"/> instances.
     /// </summary>
-    public sealed class DynamicPropertyDescriptorComparer : IComparer<DynamicPropertyDescriptor>
+    public sealed class DynamicPropertyDescriptorComparer : IComparer<PropertyDescriptor>
     {
+
         /// <summary>
         /// The <see cref="StringComparer"/> to use to compare property names when unable to use property order.
         /// </summary>
@@ -23,8 +25,12 @@ namespace Bb.TypeDescriptors
         /// A value that is less than zero if x is less than y, zero if x equals y,
         /// or greater than zero if x is greater than y.
         /// </returns>
-        public int Compare(DynamicPropertyDescriptor x, DynamicPropertyDescriptor y)
+        public int Compare(PropertyDescriptor instancex, PropertyDescriptor instancey)
         {
+
+            var x = instancex as IDynamicComparerProperty;
+            var y = instancey as IDynamicComparerProperty;
+
             if (x == null)
             {
                 if (y == null)

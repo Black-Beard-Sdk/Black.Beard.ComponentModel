@@ -2,144 +2,50 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace Bb.TypeDescriptors
 {
 
-    /// <summary>
-    /// A runtime-customizable implementation of <see cref="ICustomTypeDescriptor"/>.
-    /// </summary>
-    public sealed partial class DynamicTypeDescriptor : CustomTypeDescriptor, ICustomTypeDescriptor, INotifyPropertyChanged
+
+    class DynamicTypeDescriptor : CustomTypeDescriptor, INotifyPropertyChanged
     {
 
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DynamicTypeDescriptor"/> class.
-        /// </summary>
-        /// <param name="parent">The parent custom type descriptor.</param>
-        public DynamicTypeDescriptor(ICustomTypeDescriptor parent)
-            : base(Preconditions.CheckNotNull(parent, nameof(parent)))
+        public DynamicTypeDescriptor(ICustomTypeDescriptor parent, object instance, ConfigurationDescriptorSelector configuration)
+            : base(parent)
         {
-
-            _dynamicProperties = new List<DynamicPropertyDescriptor>();
             _comparer = new DynamicPropertyDescriptorComparer();
-
-            foreach (PropertyDescriptor propertyDescriptor in base.GetProperties())
-            {
-
-                var items = ComponentModel.Accessors.AccessorItem.Get(propertyDescriptor.ComponentType);
-                var accessor = items[propertyDescriptor.Name];
-
-                DynamicPropertyDescriptor dynamicPropertyDescriptor = new DynamicPropertyDescriptor(propertyDescriptor, accessor);
-                dynamicPropertyDescriptor.AddValueChanged(this, (s, e) => OnPropertyChanged(propertyDescriptor.Name));
-                _dynamicProperties.Add(dynamicPropertyDescriptor);
-            }
-
+            this._instance = instance;
+            _configurationSelector = configuration;
         }
 
-        /// <summary>
-        /// Returns a collection of property descriptors for the object represented by this type
-        /// descriptor.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="PropertyDescriptorCollection"/> containing the property descriptions
-        /// for the object represented by this type descriptor.
-        /// </returns>
+
         public override PropertyDescriptorCollection GetProperties()
         {
-            return GetProperties(null);
+
+            var initialList = base.GetProperties();
+
+            if (_configurationSelector != null)
+                return BuildNewListOfProperty(BuidExistingProperties(initialList));
+
+            return initialList;
+
         }
 
-        /// <summary>
-        /// Returns a collection of property descriptors for the object represented by this type
-        /// descriptor.
-        /// </summary>
-        /// <param name="attributes">
-        /// An array of attributes to use as a filter. This can be null.
-        /// </param>
-        /// <returns>
-        /// A <see cref="PropertyDescriptorCollection"/> containing the property descriptions
-        /// for the object represented by this type descriptor.
-        /// </returns>
+
         public override PropertyDescriptorCollection GetProperties(Attribute[] attributes)
         {
 
-            List<DynamicPropertyDescriptor> properties = new List<DynamicPropertyDescriptor>();
+            var initialList = base.GetProperties(attributes);
 
-            foreach (DynamicPropertyDescriptor property in _dynamicProperties)
-                if (attributes == null || property.Attributes.Contains(attributes))
-                    if (property.Active)
-                        properties.Add(property);
+            if (_configurationSelector != null)
+                return BuildNewListOfProperty(BuidExistingProperties(initialList));
 
-            properties.Sort(_comparer);
-
-            return new PropertyDescriptorCollection(properties.ToArray());
-        }
-
-        /// <summary>
-        /// Returns the specified dynamic property descriptor for the object represented by this
-        /// type descriptor.
-        /// </summary>
-        /// <param name="propertyName">The name of the property.</param>
-        /// <returns>
-        /// The specified dynamic property descriptor for the object represented by this type
-        /// descriptor.
-        /// </returns>
-        public DynamicPropertyDescriptor GetDynamicProperty(string propertyName)
-        {
-
-            foreach (DynamicPropertyDescriptor property in _dynamicProperties)
-                if (String.Equals(property.Name, propertyName))
-                    return property;
-
-            return null;
-        }
-
-        /// <summary>
-        /// Returns the specified dynamic property descriptor for the object represented by this
-        /// type descriptor.
-        /// </summary>
-        /// <typeparam name="TSource">Type containing the property.</typeparam>
-        /// <typeparam name="TProperty">Type of the property.</typeparam>
-        /// <param name="propertyExpression">
-        /// An expression representing a function mapping an instance of type TSource to a
-        /// property of type TProperty.
-        /// </param>
-        /// <returns>
-        /// The specified dynamic property descriptor for the object represented by this type
-        /// descriptor.
-        /// </returns>
-        public DynamicPropertyDescriptor GetDynamicProperty<TSource, TProperty>(Expression<Func<TSource, TProperty>> propertyExpression)
-        {
-
-            //ComponentModel.Accessors.AccessorItem.Get
-
-            string propertyName = Reflect.GetPropertyName(propertyExpression);
-            return GetDynamicProperty(propertyName);
+            return initialList;
 
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the sequence containing all dynamic
-        /// property descriptors for the object represented by this type descriptor.
-        /// </summary>
-        /// <returns>
-        /// An enumerator that iterates through the sequence containing all dynamic property
-        /// descriptors for the object represented by this type descriptor.
-        /// </returns>
-        public IEnumerable<DynamicPropertyDescriptor> GetDynamicProperties()
-        {
-            // This should return all dynamic properties, even those that are inactive.
-
-            return _dynamicProperties
-                .OrderBy(o => o.PropertyOrder ?? Int32.MaxValue)
-                .ToArray();
-        }
 
         /// <summary>
         /// Raises the <see cref="PropertyChanged"/> event.
@@ -151,16 +57,85 @@ namespace Bb.TypeDescriptors
         }
 
 
-        /// <summary>
-        /// A list containing the properties associated with this type descriptor.
-        /// </summary>
-        private readonly IList<DynamicPropertyDescriptor> _dynamicProperties;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private Dictionary<string, PropertyDescriptor> BuidExistingProperties(PropertyDescriptorCollection initialList)
+        {
 
+            _toExcluded = _configurationSelector.ExcludedProperties;
+
+            var customFields = initialList
+                .Cast<PropertyDescriptor>()
+                .Where(c => !_toExcluded.Contains(c.Name))
+                .ToDictionary(c => c.Name);
+
+            IEnumerable<ConfigurationDescriptor> u = _configurationSelector.Get(_instance);
+            foreach (var item in u)
+                if (item.ComponentType.IsInstanceOfType(_instance))
+                    foreach (var property in item.ExistingProperties.Where(c => !_toExcluded.Contains(c.Key)))
+                    {
+
+                        DynamicExistingPropertyDescriptor dynamicPropertyDescriptor = null;
+
+                        if (customFields.TryGetValue(property.Key, out var propertyDescriptor))
+                        {
+
+                            dynamicPropertyDescriptor = propertyDescriptor as DynamicExistingPropertyDescriptor;
+
+                            if (dynamicPropertyDescriptor == null)
+                            {
+                                var items = ComponentModel.Accessors.PropertyAccessor.GetProperties(item.ComponentType);
+                                var accessor = items[property.Key];
+                                dynamicPropertyDescriptor = new DynamicExistingPropertyDescriptor(propertyDescriptor, accessor);
+                                dynamicPropertyDescriptor.AddValueChanged(this, (s, e) => OnPropertyChanged(propertyDescriptor.Name));
+                                customFields[property.Key] = dynamicPropertyDescriptor;
+                            }
+
+                            dynamicPropertyDescriptor.Apply(property.Value, item.Filter);
+
+                        }
+
+                    }
+
+            return customFields;
+
+        }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private PropertyDescriptorCollection BuildNewListOfProperty(Dictionary<string, PropertyDescriptor> customFields)
+        {
+
+            foreach (var item in _configurationSelector.Get(_instance))
+                if (item.ComponentType.IsInstanceOfType(_instance))
+                    foreach (var property in item.NewProperties.Where(c => !_toExcluded.Contains(c.Name)))
+                    {
+                        if (!customFields.ContainsKey(property.Name))
+                            customFields.Add(property.Name, property);
+                        else
+                            customFields[property.Name] = property;
+                    }
+
+            var list = customFields.Values.ToList();
+            list.Sort(_comparer);
+
+            return new PropertyDescriptorCollection(list.ToArray());
+
+        }
+
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private ConfigurationDescriptorSelector _configurationSelector;
+        private object _instance;
+        private IEnumerable<string> _toExcluded;
         /// <summary>
         /// Comparer to use when sorting a list of dynamic property descriptors.
         /// </summary>
-        private readonly IComparer<DynamicPropertyDescriptor> _comparer;
+        private readonly IComparer<PropertyDescriptor> _comparer;
 
     }
+
 
 }
