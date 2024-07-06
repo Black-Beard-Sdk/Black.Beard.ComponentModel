@@ -101,7 +101,7 @@ namespace Bb.ComponentDescriptors
 
         }
 
-        internal void ValidationHasChanged<T>(IComponentFieldBase<T> componentFieldBase)
+        public void ValidationHasChanged<T>(IComponentFieldBase<T> componentFieldBase)
         {
 
             if (UiPropertyValidationHasChanged != null)
