@@ -96,12 +96,6 @@ namespace Bb.ComponentDescriptors
 
         }
 
-        public Action<IComponentFieldBase> UIPropertyValidationHasChanged { get; set; }
-
-        public Action<PropertyObjectDescriptor> PropertyValidationHasChanged { get; set; }
-
-        public Action<PropertyObjectDescriptor> PropertyHasChanged { get; set; }
-
         public void PropertyChange()
         {
             Parent.HasChanged(this);
@@ -142,16 +136,6 @@ namespace Bb.ComponentDescriptors
             return result.IsValid;
         }
 
-        public Type Type { get; internal set; }
-
-        private readonly StrategyMapper _strategy;
-
-        public string StrategyName { get; }
-
-        public string ErrorText { get; internal set; }
-
-        public bool InError { get; internal set; }
-
         public string GetDisplay()
         {
             return Parent.TranslateService.Translate(Display);
@@ -166,6 +150,23 @@ namespace Bb.ComponentDescriptors
         {
             return Parent.TranslateService.Translate(Category);
         }
+
+
+        public Action<IComponentFieldBase> UIPropertyValidationHasChanged { get; set; }
+
+        public Action<PropertyObjectDescriptor> PropertyValidationHasChanged { get; set; }
+
+        public Action<PropertyObjectDescriptor> PropertyHasChanged { get; set; }
+
+        public Type Type { get; set; }
+
+        private readonly StrategyMapper _strategy;
+
+        public string StrategyName { get; }
+
+        public string ErrorText { get; set; }
+
+        public bool InError { get; set; }
 
         public Type SubType { get; set; }
 
