@@ -154,7 +154,7 @@ namespace Bb.Diagnostics
         /// <param name="parentId">The parent Id to initialize the created Activity object with.</param>
         /// <param name="tags">The optional tags list to initialize the created Activity object with.</param>
         /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created Activity object with.</param>
-        /// <param name="startTime">The optional start timestamp to set on the created Activity object.</param>
+        /// <param name="startTime">The optional start timestamps to set on the created Activity object.</param>
         /// <returns>The created <see cref="Activity"/> object or null if there is no any listener.</returns>
         /// <exception cref="InvalidOperationException">If the Activity already exists.</exception>"
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

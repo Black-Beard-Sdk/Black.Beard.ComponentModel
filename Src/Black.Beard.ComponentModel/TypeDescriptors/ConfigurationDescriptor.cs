@@ -7,8 +7,7 @@ using System.Linq.Expressions;
 namespace Bb.TypeDescriptors
 {
 
-
-    public class ConfigurationDescriptor<T> : ConfigurationDescriptor
+        public class ConfigurationDescriptor<T> : ConfigurationDescriptor
     {
 
         public ConfigurationDescriptor() : base(typeof(T))
@@ -62,8 +61,7 @@ namespace Bb.TypeDescriptors
                 AddedProperty = false
             };
 
-            if (initializer != null)
-                initializer(property);
+            initializer?.Invoke(property);
 
             AddProperties(property);
 
@@ -88,8 +86,7 @@ namespace Bb.TypeDescriptors
                 AddedProperty = true,
             };
 
-            if (initializer != null)
-                initializer(property);
+            initializer?.Invoke(property);
 
             AddProperties(property);
 
@@ -151,17 +148,17 @@ namespace Bb.TypeDescriptors
         public IEnumerable<string> ExcludedProperties => _excludedProperties;
 
 
-        public PropertyDescriptor[] NewProperties => _customsArray ?? (_customsArray = _customs.ToArray());
+        public PropertyDescriptor[] NewProperties => _customsArray ??= _customs.ToArray();
 
-        public IDictionary<string, ConfigurationPropertyDescriptor> ExistingProperties => _customsArray2 ?? (_customsArray2 = _existings.ToDictionary(c => c.Name));
+        public IDictionary<string, ConfigurationPropertyDescriptor> ExistingProperties => _customsArray2 ??= _existings.ToDictionary(c => c.Name);
 
         public Type ComponentType { get; }
 
         public Func<object, bool> Filter { get; internal set; }
 
-        private List<PropertyDescriptor> _customs;
-        private List<ConfigurationPropertyDescriptor> _existings;
-        private HashSet<string> _excludedProperties;
+        private readonly List<PropertyDescriptor> _customs;
+        private readonly List<ConfigurationPropertyDescriptor> _existings;
+        private readonly HashSet<string> _excludedProperties;
         private PropertyDescriptor[] _customsArray;
         private IDictionary<string, ConfigurationPropertyDescriptor> _customsArray2;
 

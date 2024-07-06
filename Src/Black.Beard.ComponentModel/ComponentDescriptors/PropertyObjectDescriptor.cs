@@ -107,8 +107,7 @@ namespace Bb.ComponentDescriptors
             EditorType = strategy.ComponentView;
             KindView = strategy.PropertyKingView;
 
-            if (strategy.Initializer != null)
-                strategy.Initializer(_strategy, this);
+            strategy.Initializer?.Invoke(_strategy, this);
 
             var i = strategy.AttributeInitializers;
             if (i != null)

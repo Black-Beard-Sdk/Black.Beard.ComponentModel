@@ -15,7 +15,7 @@ namespace Bb.ComponentDescriptors
         public static DiagnosticValidator Validate(this object self, ITranslateService translator = null)
         {
 
-            DiagnosticValidator validator = new DiagnosticValidator();
+            var validator = new DiagnosticValidator();
             var properties = TypeDescriptor.GetProperties(self);
             foreach (PropertyDescriptor property in properties)
                 if (property.ToEvaluate())

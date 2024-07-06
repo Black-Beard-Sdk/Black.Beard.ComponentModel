@@ -104,11 +104,9 @@ namespace Bb.ComponentDescriptors
         public void ValidationHasChanged<T>(IComponentFieldBase<T> componentFieldBase)
         {
 
-            if (UiPropertyValidationHasChanged != null)
-                UiPropertyValidationHasChanged(componentFieldBase);
+            UiPropertyValidationHasChanged?.Invoke(componentFieldBase);
 
-            if (PropertyValidationHasChanged != null)
-                PropertyValidationHasChanged(componentFieldBase.Property);
+            PropertyValidationHasChanged?.Invoke(componentFieldBase.Property);
 
         }
 
@@ -144,14 +142,13 @@ namespace Bb.ComponentDescriptors
 
         internal void HasChanged(PropertyObjectDescriptor propertyObjectDescriptor)
         {
-            if (PropertyHasChanged != null)
-                PropertyHasChanged(propertyObjectDescriptor);
+            PropertyHasChanged?.Invoke(propertyObjectDescriptor);
         }
 
         public DiagnosticValidator Validate()
         {
 
-            DiagnosticValidator validator = new DiagnosticValidator();
+            var validator = new DiagnosticValidator();
 
             foreach (var item in _items)
                 if (item.Enabled && !item.Validate(out var result))
@@ -164,7 +161,6 @@ namespace Bb.ComponentDescriptors
         public Action<PropertyObjectDescriptor> PropertyHasChanged { get; set; }
 
     }
-
 
 
 }

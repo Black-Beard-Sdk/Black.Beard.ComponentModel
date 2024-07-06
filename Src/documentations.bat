@@ -1,0 +1,1 @@
+xcopy .\..\Docs\*.md ..\..\Black.Beard.ComponentModel.wiki\Docs\
