@@ -16,11 +16,11 @@ namespace Bb.ComponentDescriptors
             Type type,
             ITranslateService translateService,
             IServiceProvider serviceProvider,
-            string StrategyName,
+            string strategyName,
             Func<PropertyDescriptor, bool> propertyDescriptorFilter = null,
             Func<PropertyObjectDescriptor, bool> propertyFilter = null)
         {
-            this.StrategyName = StrategyName;
+            this.StrategyName = strategyName;
             Instance = instance;
             _type = type;
             TranslateService = translateService;

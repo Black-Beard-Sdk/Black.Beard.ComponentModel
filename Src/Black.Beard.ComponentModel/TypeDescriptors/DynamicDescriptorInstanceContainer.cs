@@ -12,12 +12,21 @@ namespace Bb.TypeDescriptors
     public class DynamicDescriptorInstanceContainer : IDynamicDescriptorInstance
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DynamicDescriptorInstanceContainer"/> class.
+        /// </summary>
+        /// <param name="parent"></param>
         public DynamicDescriptorInstanceContainer(object parent)
         {
             this._instance = parent;
             _properties = new Dictionary<string, object>();
         }
 
+        /// <summary>
+        /// return the value of the property in string format
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public string GetPropertyToString(string name)
         {
 
@@ -32,6 +41,11 @@ namespace Bb.TypeDescriptors
             return value.Serialize(false);
         }
 
+        /// <summary>
+        /// return the value of the property specified by the name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public object GetProperty(string name)
         {
             if (_properties.TryGetValue(name, out object value))
@@ -44,6 +58,11 @@ namespace Bb.TypeDescriptors
             return null;
         }
 
+        /// <summary>
+        /// Set the value of the property specified by the name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
         public void SetProperty(string name, object value)
         {
 

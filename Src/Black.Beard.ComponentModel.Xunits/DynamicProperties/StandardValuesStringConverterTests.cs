@@ -8,6 +8,8 @@ using Xunit;
 
 namespace DynamicDescriptors.Tests.DynamicProperties
 {
+
+
     public sealed class StandardValuesStringConverterTests
     {
         [Fact]
@@ -42,10 +44,12 @@ namespace DynamicDescriptors.Tests.DynamicProperties
             var converter = new StandardValuesStringConverter(values);
 
             divisor = 2;
-            ConvertTo(converter).Should().ContainInOrder(new string[] { "2", "4", "6", "8", "10" });
+            var value = ConvertTo(converter);
+            value.Should().ContainInOrder(new string[] { "2", "4", "6", "8", "10" });
 
             divisor = 3;
-            ConvertTo(converter).Should().ContainInOrder(new string[] { "3", "6", "9" });
+            value = ConvertTo(converter);
+            value.Should().ContainInOrder(new string[] { "3", "6", "9" });
         }
 
 

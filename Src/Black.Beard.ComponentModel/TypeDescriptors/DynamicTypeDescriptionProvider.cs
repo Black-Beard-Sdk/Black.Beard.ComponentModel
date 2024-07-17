@@ -8,12 +8,6 @@ namespace Bb.TypeDescriptors
     /// <summary>
     /// Provides supplemental metadata to the System.ComponentModel.TypeDescriptor.
     /// </summary>
-    /// <typeparam name="T">type of the model</typeparam>
-    /// <example>
-    /// <code lang="csharp">
-    /// DynamicTypeDescriptionProvider<Title>.Initialize();
-    /// </code>
-    /// </example>
     public class DynamicTypeDescriptionProvider : TypeDescriptionProvider
     {
 
@@ -48,6 +42,42 @@ namespace Bb.TypeDescriptors
             Configuration.Merge(conf);
         }
 
+        /// <summary>
+        /// Access to global instance of the <see cref="ConfigurationDescriptorRepository"/> class.
+        /// </summary>
+        /// <example>
+        /// <code lang="csharp">
+        /// 
+        /// var config = DynamicTypeDescriptionProvider.Configuration;
+        /// 
+        /// // add dynamic configuration for type descriptor
+        /// config.Add&lt;Column&gt;(c =>
+        /// {
+        ///     // add first property
+        ///     c.AddProperty("AutoIncrement", typeof(bool), i =>
+        ///     {
+        ///         i.IsBrowsable(true)
+        ///         .Description("Auto increment")
+        ///         ;
+        ///     })
+        ///     // add second property
+        ///     .AddProperty("IncrementStart", typeof(int), i =>
+        ///     {
+        ///     i.IsBrowsable(true)
+        ///     .Description("Auto start")
+        ///     .DefaultValue(1);
+        ///     });
+        /// }, d => // the previous bloc is append only if the filter return true
+        /// {
+        ///     var type = d.GetColumnType();
+        ///     if (type != null)
+        ///         return type.Category == ColumbTypeCategory.Integer;
+        ///     return false;
+        /// 
+        /// });
+        /// 
+        /// </code>
+        /// </example>
         public static ConfigurationDescriptorRepository Configuration => _configuration;
 
         private static ConfigurationDescriptorRepository _configuration = new ConfigurationDescriptorRepository();
@@ -59,13 +89,19 @@ namespace Bb.TypeDescriptors
     /// </summary>
     /// <typeparam name="T">type of the model</typeparam>
     /// <example>
+    /// Manually
     /// <code lang="csharp">
-    /// TypeDescriptor.AddProvider(new DynamicTypeDescriptionProvider<Title>(conf), title);
+    /// DynamicTypeDescriptionProvider&lt;Title&gt;.Initialize();
     /// </code>
     /// </example>
     /// <example>
     /// <code lang="csharp">
-    /// [TypeDescriptionProvider(typeof(DynamicTypeDescriptionProvider<Title>))]
+    /// TypeDescriptor.AddProvider(new DynamicTypeDescriptionProvider&lt;Title&gt;(conf), title);
+    /// </code>
+    /// </example>
+    /// <example>
+    /// <code lang="csharp">
+    /// [TypeDescriptionProvider(typeof(DynamicTypeDescriptionProvider&lt;Title&gt;))]
     /// </code>
     /// </example>
     public class DynamicTypeDescriptionProvider<T> : DynamicTypeDescriptionProvider

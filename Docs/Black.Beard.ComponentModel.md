@@ -924,6 +924,11 @@
 - [DynamicCompoundAssign](#T-ICSharpCode-Decompiler-IL-DynamicCompoundAssign 'ICSharpCode.Decompiler.IL.DynamicCompoundAssign')
 - [DynamicConvertInstruction](#T-ICSharpCode-Decompiler-IL-DynamicConvertInstruction 'ICSharpCode.Decompiler.IL.DynamicConvertInstruction')
   - [Type](#P-ICSharpCode-Decompiler-IL-DynamicConvertInstruction-Type 'ICSharpCode.Decompiler.IL.DynamicConvertInstruction.Type')
+- [DynamicDescriptorInstanceContainer](#T-Bb-TypeDescriptors-DynamicDescriptorInstanceContainer 'Bb.TypeDescriptors.DynamicDescriptorInstanceContainer')
+  - [#ctor(parent)](#M-Bb-TypeDescriptors-DynamicDescriptorInstanceContainer-#ctor-System-Object- 'Bb.TypeDescriptors.DynamicDescriptorInstanceContainer.#ctor(System.Object)')
+  - [GetProperty(name)](#M-Bb-TypeDescriptors-DynamicDescriptorInstanceContainer-GetProperty-System-String- 'Bb.TypeDescriptors.DynamicDescriptorInstanceContainer.GetProperty(System.String)')
+  - [GetPropertyToString(name)](#M-Bb-TypeDescriptors-DynamicDescriptorInstanceContainer-GetPropertyToString-System-String- 'Bb.TypeDescriptors.DynamicDescriptorInstanceContainer.GetPropertyToString(System.String)')
+  - [SetProperty(name,value)](#M-Bb-TypeDescriptors-DynamicDescriptorInstanceContainer-SetProperty-System-String,System-Object- 'Bb.TypeDescriptors.DynamicDescriptorInstanceContainer.SetProperty(System.String,System.Object)')
 - [DynamicExistingPropertyDescriptor](#T-Bb-TypeDescriptors-DynamicExistingPropertyDescriptor 'Bb.TypeDescriptors.DynamicExistingPropertyDescriptor')
   - [#ctor(descriptor)](#M-Bb-TypeDescriptors-DynamicExistingPropertyDescriptor-#ctor-System-ComponentModel-PropertyDescriptor,Bb-ComponentModel-Accessors-AccessorItem- 'Bb.TypeDescriptors.DynamicExistingPropertyDescriptor.#ctor(System.ComponentModel.PropertyDescriptor,Bb.ComponentModel.Accessors.AccessorItem)')
   - [_active](#F-Bb-TypeDescriptors-DynamicExistingPropertyDescriptor-_active 'Bb.TypeDescriptors.DynamicExistingPropertyDescriptor._active')
@@ -989,6 +994,7 @@
 - [DynamicSetMemberInstruction](#T-ICSharpCode-Decompiler-IL-DynamicSetMemberInstruction 'ICSharpCode.Decompiler.IL.DynamicSetMemberInstruction')
 - [DynamicTypeDescriptionProvider](#T-Bb-TypeDescriptors-DynamicTypeDescriptionProvider 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider')
   - [#ctor()](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-#ctor-System-ComponentModel-TypeDescriptionProvider- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.#ctor(System.ComponentModel.TypeDescriptionProvider)')
+  - [Configuration](#P-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Configuration 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.Configuration')
   - [GetTypeDescriptor(objectType,instance)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-GetTypeDescriptor-System-Type,System-Object- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.GetTypeDescriptor(System.Type,System.Object)')
 - [DynamicTypeDescriptionProvider\`1](#T-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider`1')
   - [#ctor()](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-#ctor 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider`1.#ctor')
@@ -13832,6 +13838,74 @@ ILAst representation of a cast inside a dynamic expression (maps to Binder.Conve
 
 Returns the type operand.
 
+<a name='T-Bb-TypeDescriptors-DynamicDescriptorInstanceContainer'></a>
+## DynamicDescriptorInstanceContainer `type`
+
+##### Namespace
+
+Bb.TypeDescriptors
+
+<a name='M-Bb-TypeDescriptors-DynamicDescriptorInstanceContainer-#ctor-System-Object-'></a>
+### #ctor(parent) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [DynamicDescriptorInstanceContainer](#T-Bb-TypeDescriptors-DynamicDescriptorInstanceContainer 'Bb.TypeDescriptors.DynamicDescriptorInstanceContainer') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| parent | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
+
+<a name='M-Bb-TypeDescriptors-DynamicDescriptorInstanceContainer-GetProperty-System-String-'></a>
+### GetProperty(name) `method`
+
+##### Summary
+
+return the value of the property specified by the name
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+
+<a name='M-Bb-TypeDescriptors-DynamicDescriptorInstanceContainer-GetPropertyToString-System-String-'></a>
+### GetPropertyToString(name) `method`
+
+##### Summary
+
+return the value of the property in string format
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+
+<a name='M-Bb-TypeDescriptors-DynamicDescriptorInstanceContainer-SetProperty-System-String,System-Object-'></a>
+### SetProperty(name,value) `method`
+
+##### Summary
+
+Set the value of the property specified by the name
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
+
 <a name='T-Bb-TypeDescriptors-DynamicExistingPropertyDescriptor'></a>
 ## DynamicExistingPropertyDescriptor `type`
 
@@ -14510,6 +14584,10 @@ ILAst representation of a property set method call inside a dynamic expression (
 
 Bb.TypeDescriptors
 
+##### Summary
+
+Provides supplemental metadata to the System.ComponentModel.TypeDescriptor.
+
 <a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-#ctor-System-ComponentModel-TypeDescriptionProvider-'></a>
 ### #ctor() `constructor`
 
@@ -14520,6 +14598,43 @@ Initializes a new instance of the [DynamicTypeDescriptionProvider](#T-Bb-TypeDes
 ##### Parameters
 
 This constructor has no parameters.
+
+<a name='P-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Configuration'></a>
+### Configuration `property`
+
+##### Summary
+
+Access to global instance of the [ConfigurationDescriptorRepository](#T-Bb-TypeDescriptors-ConfigurationDescriptorRepository 'Bb.TypeDescriptors.ConfigurationDescriptorRepository') class.
+
+##### Example
+
+```csharp
+var config = DynamicTypeDescriptionProvider.Configuration;
+// add dynamic configuration for type descriptor
+config.Add&lt;Column&gt;(c =&gt;
+{
+    // add first property
+    c.AddProperty("AutoIncrement", typeof(bool), i =&gt;
+    {
+        i.IsBrowsable(true)
+        .Description("Auto increment")
+        ;
+    })
+    // add second property
+    .AddProperty("IncrementStart", typeof(int), i =&gt;
+    {
+    i.IsBrowsable(true)
+    .Description("Auto start")
+    .DefaultValue(1);
+    });
+}, d =&gt; // the previous bloc is append only if the filter return true
+{
+    var type = d.GetColumnType();
+    if (type != null)
+        return type.Category == ColumbTypeCategory.Integer;
+    return false;
+});
+```
 
 <a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-GetTypeDescriptor-System-Type,System-Object-'></a>
 ### GetTypeDescriptor(objectType,instance) `method`
@@ -14545,6 +14660,24 @@ An System.ComponentModel.ICustomTypeDescriptor that can provide metadata for the
 ##### Namespace
 
 Bb.TypeDescriptors
+
+##### Summary
+
+Provides supplemental metadata to the System.ComponentModel.TypeDescriptor.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | type of the model |
+
+##### Example
+
+Manually
+
+```csharp
+DynamicTypeDescriptionProvider&lt;Title&gt;.Initialize();
+```
 
 <a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-#ctor'></a>
 ### #ctor() `constructor`

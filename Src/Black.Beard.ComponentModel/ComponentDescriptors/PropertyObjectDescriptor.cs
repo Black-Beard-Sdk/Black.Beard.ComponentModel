@@ -2,16 +2,23 @@
 using Bb.TypeDescriptors;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Bb.ComponentDescriptors
 {
 
 
-
+    [DebuggerDisplay("{Name} : {Type}")]
     public class PropertyObjectDescriptor
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PropertyObjectDescriptor"/> class.
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="parent"></param>
+        /// <param name="strategyKey"></param>
         public PropertyObjectDescriptor(PropertyDescriptor property, ObjectDescriptor parent, string strategyKey)
         {
 
@@ -57,23 +64,35 @@ namespace Bb.ComponentDescriptors
 
         }
 
+        /// <summary>
+        /// return true if the property is in the list and a strategy is defined
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public static bool Create(string name, Type type, out object result)
         {
 
             result = null;
 
             var _strategy = StrategyMapper.Get(name);
-
-            if (_strategy.TryGetValueByType(type, out var strategies))
+            if (_strategy != null)
             {
-                result = strategies?.CreateInstance();
-                return true;
+                if (_strategy.TryGetValueByType(type, out var strategies))
+                {
+                    result = strategies?.CreateInstance();
+                    return true;
+                }
             }
 
             return false;
 
         }
 
+        /// <summary>
+        /// return the value of the property for the current instance
+        /// </summary>
         public object Value
         {
             get
@@ -96,6 +115,9 @@ namespace Bb.ComponentDescriptors
 
         }
 
+        /// <summary>
+        /// Refresh
+        /// </summary>
         public void PropertyChange()
         {
             Parent.HasChanged(this);
@@ -123,57 +145,103 @@ namespace Bb.ComponentDescriptors
 
         }
 
+        /// <summary>
+        /// Validate the property in the instance
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public bool Validate(out DiagnosticValidatorItem result)
         {
             result = PropertyDescriptor.ValidateValue(Value, Parent.TranslateService);
             return result.IsValid;
         }
 
+        /// <summary>
+        /// Return true if Validation of the property in the instance is valid
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public bool Validate(object value, out DiagnosticValidatorItem result)
         {
             result = PropertyDescriptor.ValidateValue(value, Parent.TranslateService);
             return result.IsValid;
         }
 
+        /// <summary>
+        /// Return the translated display
+        /// </summary>
+        /// <returns></returns>
         public string GetDisplay()
         {
             return Parent.TranslateService.Translate(Display);
         }
 
+        /// <summary>
+        /// Return the translated description
+        /// </summary>
+        /// <returns></returns>
         public string GetDescription()
         {
             return Parent.TranslateService.Translate(Description);
         }
 
+        /// <summary>
+        /// Return the translated category
+        /// </summary>
+        /// <returns></returns>
         public string GetCategory()
         {
             return Parent.TranslateService.Translate(Category);
         }
 
-
+        /// <summary>
+        /// Action to execute after validation UI status is changed
+        /// </summary>
         public Action<IComponentFieldBase> UIPropertyValidationHasChanged { get; set; }
 
+        /// <summary>
+        /// Action to execute after validation status is changed
+        /// </summary>
         public Action<PropertyObjectDescriptor> PropertyValidationHasChanged { get; set; }
 
         public Action<PropertyObjectDescriptor> PropertyHasChanged { get; set; }
 
+        /// <summary>
+        /// Name of the property
+        /// </summary>
+        public string Name { get; }
+
+        /// <summary>
+        /// Type of the property
+        /// </summary>
         public Type Type { get; set; }
 
-        private readonly StrategyMapper _strategy;
-
+        /// <summary>
+        /// Global strategy name
+        /// </summary>
         public string StrategyName { get; }
 
+        /// <summary>
+        /// Validation error text
+        /// </summary>
         public string ErrorText { get; set; }
 
+        /// <summary>
+        /// Return true if the validaiton is failed
+        /// </summary>
         public bool InError { get; set; }
+
 
         public Type SubType { get; set; }
 
-        public string Name { get; }
         public ObjectDescriptor Parent { get; }
 
         public bool IsValid { get; private set; }
 
+        /// <summary>
+        /// PropertyDescriptor
+        /// </summary>
         public PropertyDescriptor PropertyDescriptor { get; set; }
 
         public TranslatedKeyLabel Display { get; set; }
@@ -217,6 +285,9 @@ namespace Bb.ComponentDescriptors
         public StringType Mask { get; set; }
 
         public bool Enabled { get; set; }
+
+
+        private readonly StrategyMapper _strategy;
 
     }
 
