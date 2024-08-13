@@ -3,7 +3,7 @@
 namespace Bb.Expressions
 {
 
-    public static partial class NullableConverter
+    public static partial class ConverterHelperNullable
     {
 
         #region ToBoolean

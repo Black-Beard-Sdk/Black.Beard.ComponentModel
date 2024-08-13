@@ -1,25 +1,16 @@
-﻿using Bb.ComponentModel;
-using Bb.ComponentModel.Attributes;
-using Bb.ComponentModel.Loaders;
-using Bb.Expressions;
+﻿using Bb.Expressions;
 using FluentAssertions;
-using FluentAssertions.Execution;
-using ICSharpCode.Decompiler.Semantics;
-using NJsonSchema;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
-//using static Black.Beard.ComponentModel.Xunits.Initializers.ClassTest;
 
 namespace Black.Beard.Converters
 
 {
-    public class ConverterTest
+    public class ConverterDateTimeOffsetTest
     {
+
+
 
         [Fact]
         public void Test1()
@@ -53,7 +44,7 @@ namespace Black.Beard.Converters
 
             DateTimeOffset date = new DateTimeOffset(2024, 3, 2, 10, 25, 36, new TimeSpan(2, 0, 0));
 
-            var i = date.ToLongIndex( true, Bb.Expressions.DateTimeLimit.Month);
+            var i = date.ToLongIndex(true, Bb.Expressions.DateTimeLimit.Month);
 
             // 20 240 302 102 536
             ulong expected = 2403;
@@ -166,22 +157,6 @@ namespace Black.Beard.Converters
             Assert.Equal(expected, i);
 
         }
-
-        [Fact]
-        public void Test12()
-        {
-
-            DateTime date = new DateTime(2024, 3, 2, 10, 25, 36, 925);
-
-            var i = date.ToLongIndex();
-
-            // 240 302 102 536
-            ulong expected = 240302102536925;
-
-            Assert.Equal(expected, i);
-
-        }
-
 
         [Fact]
         public void Test20()

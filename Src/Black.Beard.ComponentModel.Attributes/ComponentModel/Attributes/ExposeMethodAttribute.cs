@@ -21,10 +21,33 @@ namespace Bb.ComponentModel.Attributes
             this.DisplayName = displayName;
         }
 
-        public string DisplayName { get; set; }
+        public ExposeMethodAttribute(string context, string displayName)
+            : this (displayName)
+        {
+            this.Context = context;
+        }
 
-        public string Context { get; set; }
+        public ExposeMethodAttribute(string context, MethodType kind, string displayName)
+            : this(context, displayName)
+        {
+            this.Kind = kind;
+        }
 
+        public string DisplayName { get; }
+
+        public string Context { get; }
+
+        public MethodType Kind { get; }
+         
     }
+
+    public enum MethodType
+    {
+        Other,
+        Add,
+        Del,
+        New,
+    }
+
 
 }

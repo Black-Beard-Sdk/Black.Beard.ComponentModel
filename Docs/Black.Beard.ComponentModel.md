@@ -738,19 +738,33 @@
   - [ZeroExtend](#F-ICSharpCode-Decompiler-IL-ConversionKind-ZeroExtend 'ICSharpCode.Decompiler.IL.ConversionKind.ZeroExtend')
 - [ConversionResolveResult](#T-ICSharpCode-Decompiler-Semantics-ConversionResolveResult 'ICSharpCode.Decompiler.Semantics.ConversionResolveResult')
   - [CheckForOverflow](#F-ICSharpCode-Decompiler-Semantics-ConversionResolveResult-CheckForOverflow 'ICSharpCode.Decompiler.Semantics.ConversionResolveResult.CheckForOverflow')
-- [ConvertMore](#T-Bb-Expressions-ConvertMore 'Bb.Expressions.ConvertMore')
-  - [CultureInfo](#P-Bb-Expressions-ConvertMore-CultureInfo 'Bb.Expressions.ConvertMore.CultureInfo')
-  - [ToDateTime(value)](#M-Bb-Expressions-ConvertMore-ToDateTime-System-DateTimeOffset- 'Bb.Expressions.ConvertMore.ToDateTime(System.DateTimeOffset)')
-  - [ToDateTimeOffset(value,cultureInfo)](#M-Bb-Expressions-ConvertMore-ToDateTimeOffset-System-String,System-Globalization-CultureInfo- 'Bb.Expressions.ConvertMore.ToDateTimeOffset(System.String,System.Globalization.CultureInfo)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConvertMore-ToDateTimeOffset-System-DateTime- 'Bb.Expressions.ConvertMore.ToDateTimeOffset(System.DateTime)')
+- [ConverterContext](#T-Bb-Converters-ConverterContext 'Bb.Converters.ConverterContext')
+  - [DefaultCultureInfo](#P-Bb-Converters-ConverterContext-DefaultCultureInfo 'Bb.Converters.ConverterContext.DefaultCultureInfo')
 - [ConverterHelper](#T-Bb-Expressions-ConverterHelper 'Bb.Expressions.ConverterHelper')
   - [#cctor()](#M-Bb-Expressions-ConverterHelper-#cctor 'Bb.Expressions.ConverterHelper.#cctor')
-  - [AddMethod(sourceType,targetType,methodConverter)](#M-Bb-Expressions-ConverterHelper-AddMethod-System-Type,System-Type,System-Reflection-MethodBase- 'Bb.Expressions.ConverterHelper.AddMethod(System.Type,System.Type,System.Reflection.MethodBase)')
-  - [AddMethodName(name)](#M-Bb-Expressions-ConverterHelper-AddMethodName-System-String- 'Bb.Expressions.ConverterHelper.AddMethodName(System.String)')
-  - [AppendConverters(ms)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Reflection-MethodInfo[]- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Reflection.MethodInfo[])')
-  - [GetConvertMethod(sourceType,targetType)](#M-Bb-Expressions-ConverterHelper-GetConvertMethod-System-Type,System-Type- 'Bb.Expressions.ConverterHelper.GetConvertMethod(System.Type,System.Type)')
-  - [ResolveConverter(type,toOverride)](#M-Bb-Expressions-ConverterHelper-ResolveConverter-System-Type,System-Func{System-Reflection-MethodInfo,System-Boolean}- 'Bb.Expressions.ConverterHelper.ResolveConverter(System.Type,System.Func{System.Reflection.MethodInfo,System.Boolean})')
-  - [ToObject(self,targetType)](#M-Bb-Expressions-ConverterHelper-ToObject-System-Object,System-Type- 'Bb.Expressions.ConverterHelper.ToObject(System.Object,System.Type)')
+  - [AppendConverters(type,replaceExisting,bindings)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Type,System-Nullable{System-Boolean},System-Reflection-BindingFlags,System-Func{System-Reflection-MethodInfo,System-Boolean}- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Type,System.Nullable{System.Boolean},System.Reflection.BindingFlags,System.Func{System.Reflection.MethodInfo,System.Boolean})')
+  - [AppendConverters(replaceExisting,ms)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Nullable{System-Boolean},System-Reflection-MethodInfo[]- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Nullable{System.Boolean},System.Reflection.MethodInfo[])')
+  - [AppendConverters(ms)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Reflection-ConstructorInfo[]- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Reflection.ConstructorInfo[])')
+  - [GetFunction(sourceType,targetType)](#M-Bb-Expressions-ConverterHelper-GetFunction-System-Type,System-Type- 'Bb.Expressions.ConverterHelper.GetFunction(System.Type,System.Type)')
+  - [GetMethodToConvert(sourceType,targetType,method)](#M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type,Bb-Converters-MethodConverter@- 'Bb.Expressions.ConverterHelper.GetMethodToConvert(System.Type,System.Type,Bb.Converters.MethodConverter@)')
+  - [GetMethodToConvert(sourceType,targetType)](#M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type- 'Bb.Expressions.ConverterHelper.GetMethodToConvert(System.Type,System.Type)')
+  - [Methods(filter)](#M-Bb-Expressions-ConverterHelper-Methods-System-Predicate{Bb-Converters-MethodTypeConverter}- 'Bb.Expressions.ConverterHelper.Methods(System.Predicate{Bb.Converters.MethodTypeConverter})')
+  - [Register(newMethod)](#M-Bb-Expressions-ConverterHelper-Register-Bb-Converters-MethodConverter- 'Bb.Expressions.ConverterHelper.Register(Bb.Converters.MethodConverter)')
+  - [Reset(type)](#M-Bb-Expressions-ConverterHelper-Reset-System-Type- 'Bb.Expressions.ConverterHelper.Reset(System.Type)')
+  - [ToDateTime(value)](#M-Bb-Expressions-ConverterHelper-ToDateTime-System-DateTimeOffset- 'Bb.Expressions.ConverterHelper.ToDateTime(System.DateTimeOffset)')
+  - [ToDateTimeOffset(value,cultureInfo)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-String,System-Globalization-CultureInfo- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.String,System.Globalization.CultureInfo)')
+  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-DateTime- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.DateTime)')
+  - [ToObject(self,targetType)](#M-Bb-Expressions-ConverterHelper-ToObject-System-Object,System-Type,Bb-Converters-ConverterContext- 'Bb.Expressions.ConverterHelper.ToObject(System.Object,System.Type,Bb.Converters.ConverterContext)')
+  - [ToObject\`\`1(self)](#M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object- 'Bb.Expressions.ConverterHelper.ToObject``1(System.Object)')
+- [ConverterHelperNullable](#T-Bb-Expressions-ConverterHelperNullable 'Bb.Expressions.ConverterHelperNullable')
+  - [ToDateTime(value)](#M-Bb-Expressions-ConverterHelperNullable-ToDateTime-System-DateTimeOffset- 'Bb.Expressions.ConverterHelperNullable.ToDateTime(System.DateTimeOffset)')
+  - [ToDateTime(value)](#M-Bb-Expressions-ConverterHelperNullable-ToDateTime-System-Nullable{System-DateTimeOffset}- 'Bb.Expressions.ConverterHelperNullable.ToDateTime(System.Nullable{System.DateTimeOffset})')
+  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelperNullable-ToDateTimeOffset-System-DateTime- 'Bb.Expressions.ConverterHelperNullable.ToDateTimeOffset(System.DateTime)')
+  - [ToDateTimeOffset(value,cultureInfo)](#M-Bb-Expressions-ConverterHelperNullable-ToDateTimeOffset-System-String,System-Globalization-CultureInfo- 'Bb.Expressions.ConverterHelperNullable.ToDateTimeOffset(System.String,System.Globalization.CultureInfo)')
+- [Converter\`1](#T-Bb-Converters-Converter`1 'Bb.Converters.Converter`1')
+  - [Format](#P-Bb-Converters-Converter`1-Format 'Bb.Converters.Converter`1.Format')
+- [Converter\`2](#T-Bb-Converters-Converter`2 'Bb.Converters.Converter`2')
+  - [Culture](#P-Bb-Converters-Converter`2-Culture 'Bb.Converters.Converter`2.Culture')
 - [CopyPropagation](#T-ICSharpCode-Decompiler-IL-Transforms-CopyPropagation 'ICSharpCode.Decompiler.IL.Transforms.CopyPropagation')
 - [Cost](#T-ICSharpCode-Decompiler-CSharp-Transforms-AddCheckedBlocks-Cost 'ICSharpCode.Decompiler.CSharp.Transforms.AddCheckedBlocks.Cost')
   - [WrapInCheckedExpr()](#M-ICSharpCode-Decompiler-CSharp-Transforms-AddCheckedBlocks-Cost-WrapInCheckedExpr 'ICSharpCode.Decompiler.CSharp.Transforms.AddCheckedBlocks.Cost.WrapInCheckedExpr')
@@ -1053,7 +1067,7 @@
   - [CallStatic(self,arguments)](#M-Bb-Expressions-ExpressionHelper-CallStatic-System-Reflection-MethodInfo,System-Linq-Expressions-Expression[]- 'Bb.Expressions.ExpressionHelper.CallStatic(System.Reflection.MethodInfo,System.Linq.Expressions.Expression[])')
   - [CanBeConverted(targetType,sourceType)](#M-Bb-Expressions-ExpressionHelper-CanBeConverted-System-Type,System-Type- 'Bb.Expressions.ExpressionHelper.CanBeConverted(System.Type,System.Type)')
   - [Coalesce(left,right)](#M-Bb-Expressions-ExpressionHelper-Coalesce-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.Coalesce(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
-  - [ConvertIfDifferent(self,targetType)](#M-Bb-Expressions-ExpressionHelper-ConvertIfDifferent-System-Linq-Expressions-Expression,System-Type- 'Bb.Expressions.ExpressionHelper.ConvertIfDifferent(System.Linq.Expressions.Expression,System.Type)')
+  - [ConvertIfDifferent(self,targetType)](#M-Bb-Expressions-ExpressionHelper-ConvertIfDifferent-System-Linq-Expressions-Expression,System-Type,System-Linq-Expressions-ParameterExpression- 'Bb.Expressions.ExpressionHelper.ConvertIfDifferent(System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression)')
   - [CreateObject(type,args)](#M-Bb-Expressions-ExpressionHelper-CreateObject-System-Type,System-Linq-Expressions-Expression[]- 'Bb.Expressions.ExpressionHelper.CreateObject(System.Type,System.Linq.Expressions.Expression[])')
   - [CreateObject(ctor,args)](#M-Bb-Expressions-ExpressionHelper-CreateObject-System-Reflection-ConstructorInfo,System-Linq-Expressions-Expression[]- 'Bb.Expressions.ExpressionHelper.CreateObject(System.Reflection.ConstructorInfo,System.Linq.Expressions.Expression[])')
   - [Decrement(left)](#M-Bb-Expressions-ExpressionHelper-Decrement-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.Decrement(System.Linq.Expressions.Expression)')
@@ -2100,6 +2114,20 @@
   - [ShowMetadataTokens](#P-ICSharpCode-Decompiler-Disassembler-MethodBodyDisassembler-ShowMetadataTokens 'ICSharpCode.Decompiler.Disassembler.MethodBodyDisassembler.ShowMetadataTokens')
   - [ShowMetadataTokensInBase10](#P-ICSharpCode-Decompiler-Disassembler-MethodBodyDisassembler-ShowMetadataTokensInBase10 'ICSharpCode.Decompiler.Disassembler.MethodBodyDisassembler.ShowMetadataTokensInBase10')
   - [ShowSequencePoints](#P-ICSharpCode-Decompiler-Disassembler-MethodBodyDisassembler-ShowSequencePoints 'ICSharpCode.Decompiler.Disassembler.MethodBodyDisassembler.ShowSequencePoints')
+- [MethodConverter](#T-Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter')
+  - [Case](#P-Bb-Converters-MethodConverter-Case 'Bb.Converters.MethodConverter.Case')
+  - [IsGenericConverter](#P-Bb-Converters-MethodConverter-IsGenericConverter 'Bb.Converters.MethodConverter.IsGenericConverter')
+  - [IsStatic](#P-Bb-Converters-MethodConverter-IsStatic 'Bb.Converters.MethodConverter.IsStatic')
+  - [Method](#P-Bb-Converters-MethodConverter-Method 'Bb.Converters.MethodConverter.Method')
+  - [Parameter0](#P-Bb-Converters-MethodConverter-Parameter0 'Bb.Converters.MethodConverter.Parameter0')
+  - [Parameter1](#P-Bb-Converters-MethodConverter-Parameter1 'Bb.Converters.MethodConverter.Parameter1')
+  - [ReplaceExistings](#P-Bb-Converters-MethodConverter-ReplaceExistings 'Bb.Converters.MethodConverter.ReplaceExistings')
+  - [SourceType](#P-Bb-Converters-MethodConverter-SourceType 'Bb.Converters.MethodConverter.SourceType')
+  - [TargetType](#P-Bb-Converters-MethodConverter-TargetType 'Bb.Converters.MethodConverter.TargetType')
+  - [ToAdd](#P-Bb-Converters-MethodConverter-ToAdd 'Bb.Converters.MethodConverter.ToAdd')
+  - [Equals(obj)](#M-Bb-Converters-MethodConverter-Equals-System-Object- 'Bb.Converters.MethodConverter.Equals(System.Object)')
+  - [GetHashCode()](#M-Bb-Converters-MethodConverter-GetHashCode 'Bb.Converters.MethodConverter.GetHashCode')
+  - [ToString()](#M-Bb-Converters-MethodConverter-ToString 'Bb.Converters.MethodConverter.ToString')
 - [MethodDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-MethodDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.MethodDeclaration')
   - [PrivateImplementationType](#P-ICSharpCode-Decompiler-CSharp-Syntax-MethodDeclaration-PrivateImplementationType 'ICSharpCode.Decompiler.CSharp.Syntax.MethodDeclaration.PrivateImplementationType')
 - [MethodDiscovery](#T-Bb-ComponentModel-MethodDiscovery 'Bb.ComponentModel.MethodDiscovery')
@@ -2118,6 +2146,12 @@
 - [MethodListWithDeclaringType](#T-ICSharpCode-Decompiler-CSharp-Resolver-MethodListWithDeclaringType 'ICSharpCode.Decompiler.CSharp.Resolver.MethodListWithDeclaringType')
   - [DeclaringType](#P-ICSharpCode-Decompiler-CSharp-Resolver-MethodListWithDeclaringType-DeclaringType 'ICSharpCode.Decompiler.CSharp.Resolver.MethodListWithDeclaringType.DeclaringType')
 - [MethodSemanticsLookup](#T-ICSharpCode-Decompiler-Metadata-MethodSemanticsLookup 'ICSharpCode.Decompiler.Metadata.MethodSemanticsLookup')
+- [MethodTypeConverter](#T-Bb-Converters-MethodTypeConverter 'Bb.Converters.MethodTypeConverter')
+  - [#ctor(type)](#M-Bb-Converters-MethodTypeConverter-#ctor-System-Type- 'Bb.Converters.MethodTypeConverter.#ctor(System.Type)')
+  - [SourceType](#P-Bb-Converters-MethodTypeConverter-SourceType 'Bb.Converters.MethodTypeConverter.SourceType')
+  - [AddFunction(targetType,func)](#M-Bb-Converters-MethodTypeConverter-AddFunction-System-Type,System-Func{System-Object,Bb-Converters-ConverterContext,System-Object}- 'Bb.Converters.MethodTypeConverter.AddFunction(System.Type,System.Func{System.Object,Bb.Converters.ConverterContext,System.Object})')
+  - [Functions()](#M-Bb-Converters-MethodTypeConverter-Functions 'Bb.Converters.MethodTypeConverter.Functions')
+  - [TryGetFunction(targetType,result)](#M-Bb-Converters-MethodTypeConverter-TryGetFunction-System-Type,System-Func{System-Object,Bb-Converters-ConverterContext,System-Object}@- 'Bb.Converters.MethodTypeConverter.TryGetFunction(System.Type,System.Func{System.Object,Bb.Converters.ConverterContext,System.Object}@)')
 - [MinimalCorlib](#T-ICSharpCode-Decompiler-TypeSystem-Implementation-MinimalCorlib 'ICSharpCode.Decompiler.TypeSystem.Implementation.MinimalCorlib')
   - [Instance](#F-ICSharpCode-Decompiler-TypeSystem-Implementation-MinimalCorlib-Instance 'ICSharpCode.Decompiler.TypeSystem.Implementation.MinimalCorlib.Instance')
 - [Mode](#T-ICSharpCode-Decompiler-IL-Transforms-NullPropagationTransform-Mode 'ICSharpCode.Decompiler.IL.Transforms.NullPropagationTransform.Mode')
@@ -2131,10 +2165,10 @@
 - [MultiDictionary\`2](#T-ICSharpCode-Decompiler-Util-MultiDictionary`2 'ICSharpCode.Decompiler.Util.MultiDictionary`2')
   - [Count](#P-ICSharpCode-Decompiler-Util-MultiDictionary`2-Count 'ICSharpCode.Decompiler.Util.MultiDictionary`2.Count')
   - [RemoveAll()](#M-ICSharpCode-Decompiler-Util-MultiDictionary`2-RemoveAll-`0- 'ICSharpCode.Decompiler.Util.MultiDictionary`2.RemoveAll(`0)')
-- [MyConverter](#T-Bb-ComponentModel-Accessors-MyConverter 'Bb.ComponentModel.Accessors.MyConverter')
-  - [Default](#F-Bb-ComponentModel-Accessors-MyConverter-Default 'Bb.ComponentModel.Accessors.MyConverter.Default')
-  - [Serialize(value)](#M-Bb-ComponentModel-Accessors-MyConverter-Serialize-System-Object- 'Bb.ComponentModel.Accessors.MyConverter.Serialize(System.Object)')
-  - [Unserialize(value,type)](#M-Bb-ComponentModel-Accessors-MyConverter-Unserialize-System-String,System-Type- 'Bb.ComponentModel.Accessors.MyConverter.Unserialize(System.String,System.Type)')
+- [MyConverter](#T-Bb-Converters-MyConverter 'Bb.Converters.MyConverter')
+  - [Default](#F-Bb-Converters-MyConverter-Default 'Bb.Converters.MyConverter.Default')
+  - [Serialize(value)](#M-Bb-Converters-MyConverter-Serialize-System-Object- 'Bb.Converters.MyConverter.Serialize(System.Object)')
+  - [Unserialize(value,type)](#M-Bb-Converters-MyConverter-Unserialize-System-String,System-Type- 'Bb.Converters.MyConverter.Unserialize(System.String,System.Type)')
 - [NInt](#T-ICSharpCode-Decompiler-TypeSystem-ReflectionHelper-NInt 'ICSharpCode.Decompiler.TypeSystem.ReflectionHelper.NInt')
 - [NUInt](#T-ICSharpCode-Decompiler-TypeSystem-ReflectionHelper-NUInt 'ICSharpCode.Decompiler.TypeSystem.ReflectionHelper.NUInt')
 - [NameLookupMode](#T-ICSharpCode-Decompiler-CSharp-Resolver-NameLookupMode 'ICSharpCode.Decompiler.CSharp.Resolver.NameLookupMode')
@@ -2206,11 +2240,6 @@
   - [TryNullPropagation()](#M-ICSharpCode-Decompiler-IL-Transforms-NullPropagationTransform-TryNullPropagation-ICSharpCode-Decompiler-IL-ILVariable,ICSharpCode-Decompiler-IL-ILInstruction,ICSharpCode-Decompiler-IL-ILInstruction,ICSharpCode-Decompiler-IL-Transforms-NullPropagationTransform-Mode- 'ICSharpCode.Decompiler.IL.Transforms.NullPropagationTransform.TryNullPropagation(ICSharpCode.Decompiler.IL.ILVariable,ICSharpCode.Decompiler.IL.ILInstruction,ICSharpCode.Decompiler.IL.ILInstruction,ICSharpCode.Decompiler.IL.Transforms.NullPropagationTransform.Mode)')
 - [NullReferenceExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-NullReferenceExpression 'ICSharpCode.Decompiler.CSharp.Syntax.NullReferenceExpression')
 - [NullabilityAnnotatedType](#T-ICSharpCode-Decompiler-TypeSystem-Implementation-NullabilityAnnotatedType 'ICSharpCode.Decompiler.TypeSystem.Implementation.NullabilityAnnotatedType')
-- [NullableConverter](#T-Bb-Expressions-NullableConverter 'Bb.Expressions.NullableConverter')
-  - [ToDateTime(value)](#M-Bb-Expressions-NullableConverter-ToDateTime-System-DateTimeOffset- 'Bb.Expressions.NullableConverter.ToDateTime(System.DateTimeOffset)')
-  - [ToDateTime(value)](#M-Bb-Expressions-NullableConverter-ToDateTime-System-Nullable{System-DateTimeOffset}- 'Bb.Expressions.NullableConverter.ToDateTime(System.Nullable{System.DateTimeOffset})')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-NullableConverter-ToDateTimeOffset-System-DateTime- 'Bb.Expressions.NullableConverter.ToDateTimeOffset(System.DateTime)')
-  - [ToDateTimeOffset(value,cultureInfo)](#M-Bb-Expressions-NullableConverter-ToDateTimeOffset-System-String,System-Globalization-CultureInfo- 'Bb.Expressions.NullableConverter.ToDateTimeOffset(System.String,System.Globalization.CultureInfo)')
 - [NullableLiftingTransform](#T-ICSharpCode-Decompiler-IL-Transforms-NullableLiftingTransform 'ICSharpCode.Decompiler.IL.Transforms.NullableLiftingTransform')
   - [DoLift()](#M-ICSharpCode-Decompiler-IL-Transforms-NullableLiftingTransform-DoLift-ICSharpCode-Decompiler-IL-ILInstruction- 'ICSharpCode.Decompiler.IL.Transforms.NullableLiftingTransform.DoLift(ICSharpCode.Decompiler.IL.ILInstruction)')
   - [Lift()](#M-ICSharpCode-Decompiler-IL-Transforms-NullableLiftingTransform-Lift-ICSharpCode-Decompiler-IL-ILInstruction,ICSharpCode-Decompiler-IL-ILInstruction,ICSharpCode-Decompiler-IL-ILInstruction,ICSharpCode-Decompiler-IL-ILInstruction- 'ICSharpCode.Decompiler.IL.Transforms.NullableLiftingTransform.Lift(ICSharpCode.Decompiler.IL.ILInstruction,ICSharpCode.Decompiler.IL.ILInstruction,ICSharpCode.Decompiler.IL.ILInstruction,ICSharpCode.Decompiler.IL.ILInstruction)')
@@ -11840,21 +11869,193 @@ The [Conversion](#F-ICSharpCode-Decompiler-Semantics-ConversionResolveResult-Con
 
 For numeric conversions, specifies whether overflow checking is enabled.
 
-<a name='T-Bb-Expressions-ConvertMore'></a>
-## ConvertMore `type`
+<a name='T-Bb-Converters-ConverterContext'></a>
+## ConverterContext `type`
 
 ##### Namespace
 
-Bb.Expressions
+Bb.Converters
 
-<a name='P-Bb-Expressions-ConvertMore-CultureInfo'></a>
-### CultureInfo `property`
+<a name='P-Bb-Converters-ConverterContext-DefaultCultureInfo'></a>
+### DefaultCultureInfo `property`
 
 ##### Summary
 
 Culture used by default if the parameter is not specified
 
-<a name='M-Bb-Expressions-ConvertMore-ToDateTime-System-DateTimeOffset-'></a>
+<a name='T-Bb-Expressions-ConverterHelper'></a>
+## ConverterHelper `type`
+
+##### Namespace
+
+Bb.Expressions
+
+##### Summary
+
+Referential of method for conversion between types
+
+<a name='M-Bb-Expressions-ConverterHelper-#cctor'></a>
+### #cctor() `method`
+
+##### Summary
+
+Constructor
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-Expressions-ConverterHelper-AppendConverters-System-Type,System-Nullable{System-Boolean},System-Reflection-BindingFlags,System-Func{System-Reflection-MethodInfo,System-Boolean}-'></a>
+### AppendConverters(type,replaceExisting,bindings) `method`
+
+##### Summary
+
+/// Add methods to the list of methods to be used for conversion
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | type where the method can be found |
+| replaceExisting | [System.Nullable{System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{System.Boolean}') | if true, replace existing methods |
+| bindings | [System.Reflection.BindingFlags](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.BindingFlags 'System.Reflection.BindingFlags') |  |
+
+<a name='M-Bb-Expressions-ConverterHelper-AppendConverters-System-Nullable{System-Boolean},System-Reflection-MethodInfo[]-'></a>
+### AppendConverters(replaceExisting,ms) `method`
+
+##### Summary
+
+Add methods to the list of methods to be used for conversion
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| replaceExisting | [System.Nullable{System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{System.Boolean}') | if true, replace existing methods |
+| ms | [System.Reflection.MethodInfo[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodInfo[] 'System.Reflection.MethodInfo[]') |  |
+
+<a name='M-Bb-Expressions-ConverterHelper-AppendConverters-System-Reflection-ConstructorInfo[]-'></a>
+### AppendConverters(ms) `method`
+
+##### Summary
+
+Add methods to the list of methods to be used for conversion
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| ms | [System.Reflection.ConstructorInfo[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.ConstructorInfo[] 'System.Reflection.ConstructorInfo[]') |  |
+
+<a name='M-Bb-Expressions-ConverterHelper-GetFunction-System-Type,System-Type-'></a>
+### GetFunction(sourceType,targetType) `method`
+
+##### Summary
+
+Get the function to convert sourceType to targetType
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| sourceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Source type |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
+
+<a name='M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type,Bb-Converters-MethodConverter@-'></a>
+### GetMethodToConvert(sourceType,targetType,method) `method`
+
+##### Summary
+
+Try to get the method to convert sourceType to targetType
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| sourceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| method | [Bb.Converters.MethodConverter@](#T-Bb-Converters-MethodConverter@ 'Bb.Converters.MethodConverter@') |  |
+
+<a name='M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type-'></a>
+### GetMethodToConvert(sourceType,targetType) `method`
+
+##### Summary
+
+Get the method to convert sourceType to targetType
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| sourceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Source type |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
+
+<a name='M-Bb-Expressions-ConverterHelper-Methods-System-Predicate{Bb-Converters-MethodTypeConverter}-'></a>
+### Methods(filter) `method`
+
+##### Summary
+
+Return all source types that can be converted to targetType
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| filter | [System.Predicate{Bb.Converters.MethodTypeConverter}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Predicate 'System.Predicate{Bb.Converters.MethodTypeConverter}') | filter for bypass items |
+
+<a name='M-Bb-Expressions-ConverterHelper-Register-Bb-Converters-MethodConverter-'></a>
+### Register(newMethod) `method`
+
+##### Summary
+
+Register a new method to convert sourceType to targetType
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMethod | [Bb.Converters.MethodConverter](#T-Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter') |  |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.Exception](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Exception 'System.Exception') | Method not allowed if the Property ToAdd is false |
+
+##### Remarks
+
+If a method already existing in the referential and the property ReplaceExisting is false, the method is not append
+
+<a name='M-Bb-Expressions-ConverterHelper-Reset-System-Type-'></a>
+### Reset(type) `method`
+
+##### Summary
+
+Remove specified type
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | specified type to remove |
+
+<a name='M-Bb-Expressions-ConverterHelper-ToDateTime-System-DateTimeOffset-'></a>
 ### ToDateTime(value) `method`
 
 ##### Summary
@@ -11871,7 +12072,7 @@ Convert a DateTime to a DateTimeOffset
 | ---- | ---- | ----------- |
 | value | [System.DateTimeOffset](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTimeOffset 'System.DateTimeOffset') |  |
 
-<a name='M-Bb-Expressions-ConvertMore-ToDateTimeOffset-System-String,System-Globalization-CultureInfo-'></a>
+<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-String,System-Globalization-CultureInfo-'></a>
 ### ToDateTimeOffset(value,cultureInfo) `method`
 
 ##### Summary
@@ -11887,9 +12088,9 @@ Convert a string to DateTimeOffset
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
-| cultureInfo | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | [CultureInfo](#P-Bb-Expressions-ConvertMore-CultureInfo 'Bb.Expressions.ConvertMore.CultureInfo'). By default ConvertMore.CultureInfois used |
+| cultureInfo | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | [CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo'). By default ConvertMore.CultureInfois used |
 
-<a name='M-Bb-Expressions-ConvertMore-ToDateTimeOffset-System-DateTime-'></a>
+<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-DateTime-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -11906,75 +12107,60 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
 
-<a name='T-Bb-Expressions-ConverterHelper'></a>
-## ConverterHelper `type`
+<a name='M-Bb-Expressions-ConverterHelper-ToObject-System-Object,System-Type,Bb-Converters-ConverterContext-'></a>
+### ToObject(self,targetType) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
+
+<a name='M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object-'></a>
+### ToObject\`\`1(self) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Target type |
+
+<a name='T-Bb-Expressions-ConverterHelperNullable'></a>
+## ConverterHelperNullable `type`
 
 ##### Namespace
 
 Bb.Expressions
 
-##### Summary
-
-build lambda and compile for ActionResult
-
-<a name='M-Bb-Expressions-ConverterHelper-#cctor'></a>
-### #cctor() `method`
+<a name='M-Bb-Expressions-ConverterHelperNullable-ToDateTime-System-DateTimeOffset-'></a>
+### ToDateTime(value) `method`
 
 ##### Summary
 
-Constructor
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-Bb-Expressions-ConverterHelper-AddMethod-System-Type,System-Type,System-Reflection-MethodBase-'></a>
-### AddMethod(sourceType,targetType,methodConverter) `method`
-
-##### Summary
-
-Append method to the convert sourceType to targetType
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| sourceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
-| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
-| methodConverter | [System.Reflection.MethodBase](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodBase 'System.Reflection.MethodBase') |  |
-
-<a name='M-Bb-Expressions-ConverterHelper-AddMethodName-System-String-'></a>
-### AddMethodName(name) `method`
-
-##### Summary
-
-Add a method name to the list of methods to be used for conversion
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
-
-<a name='M-Bb-Expressions-ConverterHelper-AppendConverters-System-Reflection-MethodInfo[]-'></a>
-### AppendConverters(ms) `method`
-
-##### Summary
-
-Add a method to the list of methods to be used for conversion
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| ms | [System.Reflection.MethodInfo[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodInfo[] 'System.Reflection.MethodInfo[]') |  |
-
-<a name='M-Bb-Expressions-ConverterHelper-GetConvertMethod-System-Type,System-Type-'></a>
-### GetConvertMethod(sourceType,targetType) `method`
-
-##### Summary
-
-Get the method to convert sourceType to targetType
+Convert a DateTime to a DateTimeOffset
 
 ##### Returns
 
@@ -11984,29 +12170,14 @@ Get the method to convert sourceType to targetType
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sourceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
-| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| value | [System.DateTimeOffset](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTimeOffset 'System.DateTimeOffset') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ResolveConverter-System-Type,System-Func{System-Reflection-MethodInfo,System-Boolean}-'></a>
-### ResolveConverter(type,toOverride) `method`
-
-##### Summary
-
-Resolve the method to convert sourceType to targetType
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
-| toOverride | [System.Func{System.Reflection.MethodInfo,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Reflection.MethodInfo,System.Boolean}') |  |
-
-<a name='M-Bb-Expressions-ConverterHelper-ToObject-System-Object,System-Type-'></a>
-### ToObject(self,targetType) `method`
+<a name='M-Bb-Expressions-ConverterHelperNullable-ToDateTime-System-Nullable{System-DateTimeOffset}-'></a>
+### ToDateTime(value) `method`
 
 ##### Summary
 
-Convert a value to another type
+Convert a DateTime to a DateTimeOffset
 
 ##### Returns
 
@@ -12016,8 +12187,77 @@ Convert a value to another type
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| value | [System.Nullable{System.DateTimeOffset}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{System.DateTimeOffset}') |  |
+
+<a name='M-Bb-Expressions-ConverterHelperNullable-ToDateTimeOffset-System-DateTime-'></a>
+### ToDateTimeOffset(value) `method`
+
+##### Summary
+
+Convert a DateTime to DateTimeOffset
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | DateTime |
+
+<a name='M-Bb-Expressions-ConverterHelperNullable-ToDateTimeOffset-System-String,System-Globalization-CultureInfo-'></a>
+### ToDateTimeOffset(value,cultureInfo) `method`
+
+##### Summary
+
+Convert a DateTimeOffset to a DateTimeOffset
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| cultureInfo | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | [CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo'). By default ConvertMore.CultureInfois used |
+
+<a name='T-Bb-Converters-Converter`1'></a>
+## Converter\`1 `type`
+
+##### Namespace
+
+Bb.Converters
+
+##### Summary
+
+Converter from T to string
+
+ Set converts to string
+ Get converts from string
+
+<a name='P-Bb-Converters-Converter`1-Format'></a>
+### Format `property`
+
+##### Summary
+
+Custom Format to be applied on bidirectional way.
+
+<a name='T-Bb-Converters-Converter`2'></a>
+## Converter\`2 `type`
+
+##### Namespace
+
+Bb.Converters
+
+<a name='P-Bb-Converters-Converter`2-Culture'></a>
+### Culture `property`
+
+##### Summary
+
+The culture info being used for decimal points, date and time format, etc.
 
 <a name='T-ICSharpCode-Decompiler-IL-Transforms-CopyPropagation'></a>
 ## CopyPropagation `type`
@@ -15444,7 +15684,7 @@ return Coalesce expression '??'
 | left | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | Left expression |
 | right | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | right expression |
 
-<a name='M-Bb-Expressions-ExpressionHelper-ConvertIfDifferent-System-Linq-Expressions-Expression,System-Type-'></a>
+<a name='M-Bb-Expressions-ExpressionHelper-ConvertIfDifferent-System-Linq-Expressions-Expression,System-Type,System-Linq-Expressions-ParameterExpression-'></a>
 ### ConvertIfDifferent(self,targetType) `method`
 
 ##### Summary
@@ -27891,6 +28131,130 @@ Show metadata tokens for instructions with token operands in base 10.
 
 Show sequence points if debug information is loaded in Cecil.
 
+<a name='T-Bb-Converters-MethodConverter'></a>
+## MethodConverter `type`
+
+##### Namespace
+
+Bb.Converters
+
+<a name='P-Bb-Converters-MethodConverter-Case'></a>
+### Case `property`
+
+##### Summary
+
+Gets the case of the converter.
+
+<a name='P-Bb-Converters-MethodConverter-IsGenericConverter'></a>
+### IsGenericConverter `property`
+
+##### Summary
+
+Gets a value indicating whether this method is a generic converter.
+
+<a name='P-Bb-Converters-MethodConverter-IsStatic'></a>
+### IsStatic `property`
+
+##### Summary
+
+Gets a value indicating whether this method is static.
+
+<a name='P-Bb-Converters-MethodConverter-Method'></a>
+### Method `property`
+
+##### Summary
+
+Gets the method to use.
+
+<a name='P-Bb-Converters-MethodConverter-Parameter0'></a>
+### Parameter0 `property`
+
+##### Summary
+
+Parameter 0
+
+<a name='P-Bb-Converters-MethodConverter-Parameter1'></a>
+### Parameter1 `property`
+
+##### Summary
+
+Parameter 1
+
+<a name='P-Bb-Converters-MethodConverter-ReplaceExistings'></a>
+### ReplaceExistings `property`
+
+##### Summary
+
+If true, the converter will replace existing converters
+
+<a name='P-Bb-Converters-MethodConverter-SourceType'></a>
+### SourceType `property`
+
+##### Summary
+
+Managed type to convert
+
+<a name='P-Bb-Converters-MethodConverter-TargetType'></a>
+### TargetType `property`
+
+##### Summary
+
+Managed target type to convert.
+
+<a name='P-Bb-Converters-MethodConverter-ToAdd'></a>
+### ToAdd `property`
+
+##### Summary
+
+If true, the converter can be added to the list of converters
+
+<a name='M-Bb-Converters-MethodConverter-Equals-System-Object-'></a>
+### Equals(obj) `method`
+
+##### Summary
+
+Determines whether the specified object is equal to the current object.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| obj | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
+
+<a name='M-Bb-Converters-MethodConverter-GetHashCode'></a>
+### GetHashCode() `method`
+
+##### Summary
+
+Returns the hash code for this instance.
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-Converters-MethodConverter-ToString'></a>
+### ToString() `method`
+
+##### Summary
+
+Returns a string that represents the current object.
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-ICSharpCode-Decompiler-CSharp-Syntax-MethodDeclaration'></a>
 ## MethodDeclaration `type`
 
@@ -28120,6 +28484,84 @@ ICSharpCode.Decompiler.Metadata
 
 Lookup structure that, for an accessor, can find the associated property/event.
 
+<a name='T-Bb-Converters-MethodTypeConverter'></a>
+## MethodTypeConverter `type`
+
+##### Namespace
+
+Bb.Converters
+
+##### Summary
+
+Manage the conversion functions for a type
+
+<a name='M-Bb-Converters-MethodTypeConverter-#ctor-System-Type-'></a>
+### #ctor(type) `constructor`
+
+##### Summary
+
+create a new instance of [MethodTypeConverter](#T-Bb-Converters-MethodTypeConverter 'Bb.Converters.MethodTypeConverter')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | managed source type |
+
+<a name='P-Bb-Converters-MethodTypeConverter-SourceType'></a>
+### SourceType `property`
+
+##### Summary
+
+Managed source type
+
+<a name='M-Bb-Converters-MethodTypeConverter-AddFunction-System-Type,System-Func{System-Object,Bb-Converters-ConverterContext,System-Object}-'></a>
+### AddFunction(targetType,func) `method`
+
+##### Summary
+
+Add a conversion function
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| func | [System.Func{System.Object,Bb.Converters.ConverterContext,System.Object}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Object,Bb.Converters.ConverterContext,System.Object}') |  |
+
+<a name='M-Bb-Converters-MethodTypeConverter-Functions'></a>
+### Functions() `method`
+
+##### Summary
+
+Return the list of generated conversion functions
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-Converters-MethodTypeConverter-TryGetFunction-System-Type,System-Func{System-Object,Bb-Converters-ConverterContext,System-Object}@-'></a>
+### TryGetFunction(targetType,result) `method`
+
+##### Summary
+
+Try to get the conversion function for the target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| result | [System.Func{System.Object,Bb.Converters.ConverterContext,System.Object}@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Object,Bb.Converters.ConverterContext,System.Object}@') |  |
+
 <a name='T-ICSharpCode-Decompiler-TypeSystem-Implementation-MinimalCorlib'></a>
 ## MinimalCorlib `type`
 
@@ -28232,25 +28674,25 @@ Returns true if at least one entry was removed.
 
 This method has no parameters.
 
-<a name='T-Bb-ComponentModel-Accessors-MyConverter'></a>
+<a name='T-Bb-Converters-MyConverter'></a>
 ## MyConverter `type`
 
 ##### Namespace
 
-Bb.ComponentModel.Accessors
+Bb.Converters
 
 ##### Summary
 
 My Converter
 
-<a name='F-Bb-ComponentModel-Accessors-MyConverter-Default'></a>
+<a name='F-Bb-Converters-MyConverter-Default'></a>
 ### Default `constants`
 
 ##### Summary
 
 The default value
 
-<a name='M-Bb-ComponentModel-Accessors-MyConverter-Serialize-System-Object-'></a>
+<a name='M-Bb-Converters-MyConverter-Serialize-System-Object-'></a>
 ### Serialize(value) `method`
 
 ##### Summary
@@ -28267,7 +28709,7 @@ Serializes the specified value in string.
 | ---- | ---- | ----------- |
 | value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The value. |
 
-<a name='M-Bb-ComponentModel-Accessors-MyConverter-Unserialize-System-String,System-Type-'></a>
+<a name='M-Bb-Converters-MyConverter-Unserialize-System-String,System-Type-'></a>
 ### Unserialize(value,type) `method`
 
 ##### Summary
@@ -29038,82 +29480,6 @@ ICSharpCode.Decompiler.TypeSystem.Implementation
 
 A decorator that annotates the nullability status for a type.
 Note: ArrayType does not use a decorator, but has direct support for nullability.
-
-<a name='T-Bb-Expressions-NullableConverter'></a>
-## NullableConverter `type`
-
-##### Namespace
-
-Bb.Expressions
-
-<a name='M-Bb-Expressions-NullableConverter-ToDateTime-System-DateTimeOffset-'></a>
-### ToDateTime(value) `method`
-
-##### Summary
-
-Convert a DateTime to a DateTimeOffset
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| value | [System.DateTimeOffset](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTimeOffset 'System.DateTimeOffset') |  |
-
-<a name='M-Bb-Expressions-NullableConverter-ToDateTime-System-Nullable{System-DateTimeOffset}-'></a>
-### ToDateTime(value) `method`
-
-##### Summary
-
-Convert a DateTime to a DateTimeOffset
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| value | [System.Nullable{System.DateTimeOffset}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{System.DateTimeOffset}') |  |
-
-<a name='M-Bb-Expressions-NullableConverter-ToDateTimeOffset-System-DateTime-'></a>
-### ToDateTimeOffset(value) `method`
-
-##### Summary
-
-Convert a DateTime to DateTimeOffset
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| value | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | DateTime |
-
-<a name='M-Bb-Expressions-NullableConverter-ToDateTimeOffset-System-String,System-Globalization-CultureInfo-'></a>
-### ToDateTimeOffset(value,cultureInfo) `method`
-
-##### Summary
-
-Convert a DateTimeOffset to a DateTimeOffset
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
-| cultureInfo | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | [CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo'). By default ConvertMore.CultureInfois used |
 
 <a name='T-ICSharpCode-Decompiler-IL-Transforms-NullableLiftingTransform'></a>
 ## NullableLiftingTransform `type`

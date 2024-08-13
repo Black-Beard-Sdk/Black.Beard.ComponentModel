@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Bb.Converters;
+using System;
 using System.Globalization;
 
 namespace Bb.Expressions
 {
 
-    public static partial class NullableConverter
+    public static partial class ConverterHelperNullable
     {
 
         #region ToBoolean
@@ -1049,7 +1050,7 @@ namespace Bb.Expressions
         /// <returns></returns>
         public static DateTimeOffset? ToDateTimeOffset(this string value, CultureInfo cultureInfo = null)
         {
-            var result = DateTimeOffset.Parse(value, cultureInfo ?? ConvertMore.CultureInfo ?? CultureInfo.InvariantCulture);
+            var result = DateTimeOffset.Parse(value, cultureInfo ?? ConverterContext.DefaultCultureInfo ?? CultureInfo.InvariantCulture);
             return result;
         }
 
