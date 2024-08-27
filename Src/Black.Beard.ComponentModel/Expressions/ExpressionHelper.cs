@@ -13,7 +13,6 @@ using System.Text;
 namespace Bb.Expressions
 {
 
-
     public static class ExpressionHelper
     {
 
@@ -263,8 +262,8 @@ namespace Bb.Expressions
             }
             catch (Exception)
             {
-                var method = ConverterHelper.GetMethodToConvert(sourceType, targetType);
-                if (method != null)
+                var result = ConverterHelper.GetMethodToConvert(sourceType, targetType, out var method);
+                if (result)
                     return 2;
             }
 
@@ -381,12 +380,14 @@ namespace Bb.Expressions
 
             if (typeEnum != targetType)
             {
+
                 self = self.Convert(typeEnum, method, context);
 
                 if (!ConverterHelper.GetMethodToConvert(typeEnum, targetType, out method))
                 {
 
                 }
+
             }
 
             return self;

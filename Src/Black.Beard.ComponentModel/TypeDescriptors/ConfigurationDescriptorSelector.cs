@@ -35,7 +35,7 @@ namespace Bb.TypeDescriptors
         /// <returns></returns>
         public virtual IEnumerable<ConfigurationDescriptor> Get(object instance)
         {
-            var items = List.ToList();
+            var items = List.Where(c => c.ComponentType.IsInstanceOfType(instance)).ToList();
             return items;
         }
 
@@ -55,6 +55,15 @@ namespace Bb.TypeDescriptors
                         result.Add(p);
                 return result;
             }
+        }
+
+
+        public ConfigurationDescriptorSelector Clone()
+        {
+            var result = new ConfigurationDescriptorSelector();
+            foreach (var item in _list)
+                result.Add(item.Clone());
+            return result;
         }
 
 

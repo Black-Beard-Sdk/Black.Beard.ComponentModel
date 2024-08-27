@@ -7,7 +7,8 @@ using System.Linq.Expressions;
 namespace Bb.TypeDescriptors
 {
 
-        public class ConfigurationDescriptor<T> : ConfigurationDescriptor
+
+    public class ConfigurationDescriptor<T> : ConfigurationDescriptor
     {
 
         public ConfigurationDescriptor() : base(typeof(T))
@@ -15,7 +16,6 @@ namespace Bb.TypeDescriptors
 
 
         }
-
 
         public ConfigurationDescriptor<T> Property(Expression<Func<T, object>> name, Action<ConfigurationPropertyDescriptor> initializer = null)
         {
@@ -155,6 +155,25 @@ namespace Bb.TypeDescriptors
         public Type ComponentType { get; }
 
         public Func<object, bool> Filter { get; internal set; }
+
+
+        public ConfigurationDescriptor Clone()
+        {
+
+            var result = new ConfigurationDescriptor(ComponentType)
+            {
+                Filter = Filter,
+            };
+
+            foreach (var item in _existings)
+                result.AddProperties(item);
+
+            foreach (DynamicPropertyDescriptor item in _customs)
+                result.AddProperties(item._configuration.Clone());
+
+            return result;
+        }
+
 
         private readonly List<PropertyDescriptor> _customs;
         private readonly List<ConfigurationPropertyDescriptor> _existings;

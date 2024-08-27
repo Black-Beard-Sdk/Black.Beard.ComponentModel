@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,51 +11,17 @@ using Bb.Converters;
 namespace Bb.Expressions
 {
 
-    public static class ReflexionHelper
-    {
-
-
-        public static MethodInfo GetMethodByName(this Type self, string name)
-        {
-            return self.GetMethods(BindingFlags.Static | BindingFlags.NonPublic).Single(c => c.Name == name);
-        }
-
-        public static MethodInfo GetMethodByName(this Type self, string name, params Type[] parameterTypes)
-        {
-            return self.GetMethod(name, 0, BindingFlags.Static | BindingFlags.NonPublic, null, parameterTypes, null);
-        }
-
-        public static MethodInfo GetMethodByName(this Type self, string name, int genericCount, params Type[] parameterTypes)
-        {
-            return self.GetMethod(name, genericCount, BindingFlags.Static | BindingFlags.NonPublic, null, parameterTypes, null);
-        }
-
-        public static MethodInfo[] GetMethod(this Type self, Func<MethodInfo, bool> filter)
-        {
-            return self.GetMethods(BindingFlags.Static | BindingFlags.NonPublic).Where(filter).ToArray();
-        }
-
-        public static MethodInfo[] GetMethod(this Type self)
-        {
-            return self.GetMethods(BindingFlags.Static | BindingFlags.NonPublic);
-        }
-
-    }
-
 
     /// <summary>
     /// Referential of method for conversion between types
     /// </summary>
     public static partial class ConverterHelper
-    {
-
-    
+    {    
 
         private static MethodInfo[] GetMethod()
         {
             return typeof(ConverterHelper).GetMethods(BindingFlags.Static | BindingFlags.NonPublic);
         }
-
 
         /// <summary>
         /// Constructor
@@ -115,7 +82,7 @@ namespace Bb.Expressions
             if (self != null)
             {
 
-                var function = GetFunction(self.GetType(), targetType);
+                var function = GetFunctionForConvert(self.GetType(), targetType);
 
                 if (function != null)
                 {
@@ -138,7 +105,7 @@ namespace Bb.Expressions
         /// <param name="sourceType">Source type</param>
         /// <param name="targetType">Target type</param>
         /// <returns></returns>
-        public static Func<object, ConverterContext, object> GetFunction(this Type sourceType, Type targetType)
+        public static Func<object, ConverterContext, object> GetFunctionForConvert(this Type sourceType, Type targetType)
         {
 
             if (!_dicConverters.TryGetValue(sourceType, out var dic2))
@@ -178,7 +145,7 @@ namespace Bb.Expressions
         }
 
         /// <summary>
-        /// Try to get the method to convert sourceType to targetType
+        /// Try to resolve the method to convert sourceType to targetType
         /// </summary>
         /// <param name="sourceType"></param>
         /// <param name="targetType"></param>
@@ -235,7 +202,7 @@ namespace Bb.Expressions
         }
 
         /// <summary>
-        /// /// Add methods to the list of methods to be used for conversion
+        /// /// Add methods in the list of method to be used for conversion
         /// </summary>
         /// <param name="type">type where the method can be found</param>
         /// <param name="replaceExisting">if true, replace existing methods</param>

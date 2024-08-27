@@ -27,7 +27,7 @@ namespace Bb.Expressions
 
             var source = self.ToArray();
             U[] target = new U[source.Length];
-            var function = GetFunction(typeof(T), typeof(U));
+            var function = GetFunctionForConvert(typeof(T), typeof(U));
 
             if (function == null)
                 throw new InvalidCastException($"Cannot convert {typeof(T).Name} to {typeof(U).Name}");

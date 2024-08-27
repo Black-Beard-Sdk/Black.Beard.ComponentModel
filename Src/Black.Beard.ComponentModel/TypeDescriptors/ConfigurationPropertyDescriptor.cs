@@ -23,6 +23,12 @@ namespace Bb.TypeDescriptors
             return this;
         }
 
+        public ConfigurationPropertyDescriptor AddAttributes(IEnumerable<Attribute> attributes)
+        {
+            this._attributes.AddRange(attributes);
+            return this;
+        }
+
         public bool AddedProperty { get; internal set; }
 
         public string Name { get; set; }
@@ -121,6 +127,37 @@ namespace Bb.TypeDescriptors
             }
 
         }
+
+
+        /// <summary>
+        /// Clone the property descriptor
+        /// </summary>
+        /// <returns></returns>
+        public ConfigurationPropertyDescriptor Clone()
+        {
+
+            var result = new ConfigurationPropertyDescriptor()
+            {
+                Name = this.Name,
+                Type = this.Type,
+                ComponentType = this.ComponentType,
+                CanResetValue = this.CanResetValue,
+                IsReadOnly = this.IsReadOnly,
+                SetValue = this.SetValue,
+                GetValue = this.GetValue,
+                ShouldSerializeValue = this.ShouldSerializeValue,
+                Description = this.Description,
+                DisplayName = this.DisplayName,
+                Category = this.Category,
+                PropertyOrder = this.PropertyOrder,
+                AddedProperty = this.AddedProperty,
+            }
+            .AddAttributes(this._attributes);
+
+            return result;
+
+        }
+
 
         public Attribute[] Attributes => _attributes.ToArray();
 

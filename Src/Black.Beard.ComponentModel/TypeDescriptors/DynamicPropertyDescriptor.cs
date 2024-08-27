@@ -66,7 +66,7 @@ namespace Bb.TypeDescriptors
 
         internal Func<object, bool> _filter = null;
 
-        private readonly ConfigurationPropertyDescriptor _configuration;
+        internal readonly ConfigurationPropertyDescriptor _configuration;
 
     }
 

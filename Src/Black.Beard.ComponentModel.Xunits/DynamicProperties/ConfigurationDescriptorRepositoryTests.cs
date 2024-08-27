@@ -7,14 +7,14 @@ namespace DynamicDescriptors.Tests.DynamicProperties
 {
     public sealed class ConfigurationDescriptorRepositoryTests
     {
+
         [Fact]
-        public void AddPRopertyIf()
+        public void AddPropertyIfOnInstance()
         {
 
+            var instance = new ExampleType() { Type = "Make1" };
 
-            var config = DynamicTypeDescriptionProvider.Configuration;
-
-            config.Add<ExampleType>(c =>
+            var provider = DynamicTypeDescriptionProvider.Configure(instance, c =>
             {
 
                 c.AddProperty("Index", typeof(int), p =>
@@ -27,37 +27,73 @@ namespace DynamicDescriptors.Tests.DynamicProperties
                 return f.Type == "Make1";
             });
 
-            var instance = new ExampleType() { Type = "Make1" };
 
 
             var p = TypeDescriptor.GetProperties(instance);
             var property = p["Index"];
             property.GetValue(instance).Should().Be(3);
 
+            property = p["Type"];
+            property.GetValue(instance).Should().Be("Make1");
+
+
+            p = TypeDescriptor.GetProperties(instance);
+            property = p["Index"];
+            property.Should().Be(3);
+
+            provider.Dispose(); 
+
         }
 
 
-        public class ExampleType : IDynamicDescriptorInstance
+        [Fact]
+        public void AddPropertyIfOnType()
         {
 
-            public ExampleType()
+            var provider = DynamicTypeDescriptionProvider<ExampleType>.InstanceType.Configure(c =>
             {
-                this._container = new DynamicDescriptorInstanceContainer(this);
-            }
 
-            public string Type { get; set; }
+                c.AddProperty("Index", typeof(int), p =>
+                {
+                    p.DefaultValue(3);
+                });
 
-            public object GetProperty(string name) => this._container.GetProperty(name);
+            }, f =>
+            {
+                return f.Type == "Make1";
+            });
 
-            public void SetProperty(string name, object value) => this._container.SetProperty(name, value);
+            var p = TypeDescriptor.GetProperties(typeof(ExampleType));
 
+            provider.Dispose();
 
-            private readonly DynamicDescriptorInstanceContainer _container;
+            var instance = new ExampleType() { Type = "Make1" };
+            var property = p["Index"];
+            property.Should().BeNull();
+
 
         }
+
 
     }
 
+    public class ExampleType : IDynamicDescriptorInstance
+    {
+
+        public ExampleType()
+        {
+            this._container = new DynamicDescriptorInstanceContainer(this);
+        }
+
+        public string Type { get; set; }
+
+        public object GetProperty(string name) => this._container.GetProperty(name);
+
+        public void SetProperty(string name, object value) => this._container.SetProperty(name, value);
+
+        private readonly DynamicDescriptorInstanceContainer _container;
+
+    }
 
 
 

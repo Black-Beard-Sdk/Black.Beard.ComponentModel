@@ -8,7 +8,7 @@ namespace Bb.TypeDescriptors
 {
 
 
-    class DynamicTypeDescriptor : CustomTypeDescriptor, INotifyPropertyChanged
+    public class DynamicTypeDescriptor : CustomTypeDescriptor, INotifyPropertyChanged
     {
 
 
@@ -68,33 +68,31 @@ namespace Bb.TypeDescriptors
                 .Where(c => !_toExcluded.Contains(c.Name))
                 .ToDictionary(c => c.Name);
 
-            IEnumerable<ConfigurationDescriptor> u = _configurationSelector.Get(_instance);
-            foreach (var item in u)
-                if (item.ComponentType.IsInstanceOfType(_instance))
-                    foreach (var property in item.ExistingProperties.Where(c => !_toExcluded.Contains(c.Key)))
+            foreach (var configuration in _configurationSelector.Get(_instance))
+                foreach (var property in configuration.ExistingProperties.Where(c => !_toExcluded.Contains(c.Key)))
+                {
+
+                    DynamicExistingPropertyDescriptor dynamicPropertyDescriptor = null;
+
+                    if (customFields.TryGetValue(property.Key, out var propertyDescriptor))
                     {
 
-                        DynamicExistingPropertyDescriptor dynamicPropertyDescriptor = null;
+                        dynamicPropertyDescriptor = propertyDescriptor as DynamicExistingPropertyDescriptor;
 
-                        if (customFields.TryGetValue(property.Key, out var propertyDescriptor))
+                        if (dynamicPropertyDescriptor == null)
                         {
-
-                            dynamicPropertyDescriptor = propertyDescriptor as DynamicExistingPropertyDescriptor;
-
-                            if (dynamicPropertyDescriptor == null)
-                            {
-                                var items = ComponentModel.Accessors.PropertyAccessor.GetProperties(item.ComponentType);
-                                var accessor = items[property.Key];
-                                dynamicPropertyDescriptor = new DynamicExistingPropertyDescriptor(propertyDescriptor, accessor);
-                                dynamicPropertyDescriptor.AddValueChanged(this, (s, e) => OnPropertyChanged(propertyDescriptor.Name));
-                                customFields[property.Key] = dynamicPropertyDescriptor;
-                            }
-
-                            dynamicPropertyDescriptor.Apply(property.Value, item.Filter);
-
+                            var items = ComponentModel.Accessors.PropertyAccessor.GetProperties(configuration.ComponentType);
+                            var accessor = items[property.Key];
+                            dynamicPropertyDescriptor = new DynamicExistingPropertyDescriptor(propertyDescriptor, accessor);
+                            dynamicPropertyDescriptor.AddValueChanged(this, (s, e) => OnPropertyChanged(propertyDescriptor.Name));
+                            customFields[property.Key] = dynamicPropertyDescriptor;
                         }
 
+                        dynamicPropertyDescriptor.Apply(property.Value, configuration.Filter);
+
                     }
+
+                }
 
             return customFields;
 
@@ -105,20 +103,21 @@ namespace Bb.TypeDescriptors
         private PropertyDescriptorCollection BuildNewListOfProperty(Dictionary<string, PropertyDescriptor> customFields)
         {
 
-            foreach (var item in _configurationSelector.Get(_instance))
-                if (item.ComponentType.IsInstanceOfType(_instance))
-                    foreach (var property in item.NewProperties.Where(c => !_toExcluded.Contains(c.Name)))
-                    {
-                        if (!customFields.ContainsKey(property.Name))
-                            customFields.Add(property.Name, property);
-                        else
-                            customFields[property.Name] = property;
-                    }
+            foreach (var configuration in _configurationSelector.Get(_instance))
+                foreach (var property in configuration.NewProperties.Where(c => !_toExcluded.Contains(c.Name)))
+                {
+                    if (!customFields.ContainsKey(property.Name))
+                        customFields.Add(property.Name, property);
+                    else
+                        customFields[property.Name] = property;
+                }
 
             var list = customFields.Values.ToList();
             list.Sort(_comparer);
 
-            return new PropertyDescriptorCollection(list.ToArray());
+            var result = new PropertyDescriptorCollection(list.ToArray());
+
+            return result;
 
         }
 

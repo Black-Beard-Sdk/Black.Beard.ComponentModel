@@ -613,17 +613,13 @@
   - [AddProperty(name,type,initializer)](#M-Bb-TypeDescriptors-ConfigurationDescriptor-AddProperty-System-String,System-Type,System-Action{Bb-TypeDescriptors-ConfigurationPropertyDescriptor}- 'Bb.TypeDescriptors.ConfigurationDescriptor.AddProperty(System.String,System.Type,System.Action{Bb.TypeDescriptors.ConfigurationPropertyDescriptor})')
   - [Property(name,type,initializer)](#M-Bb-TypeDescriptors-ConfigurationDescriptor-Property-System-String,System-Action{Bb-TypeDescriptors-ConfigurationPropertyDescriptor}- 'Bb.TypeDescriptors.ConfigurationDescriptor.Property(System.String,System.Action{Bb.TypeDescriptors.ConfigurationPropertyDescriptor})')
   - [RemoveProperties(names)](#M-Bb-TypeDescriptors-ConfigurationDescriptor-RemoveProperties-System-String[]- 'Bb.TypeDescriptors.ConfigurationDescriptor.RemoveProperties(System.String[])')
-- [ConfigurationDescriptorRepository](#T-Bb-TypeDescriptors-ConfigurationDescriptorRepository 'Bb.TypeDescriptors.ConfigurationDescriptorRepository')
-  - [Add(componentType,configure,filter)](#M-Bb-TypeDescriptors-ConfigurationDescriptorRepository-Add-System-Type,System-Action{Bb-TypeDescriptors-ConfigurationDescriptor},System-Func{System-Object,System-Boolean}- 'Bb.TypeDescriptors.ConfigurationDescriptorRepository.Add(System.Type,System.Action{Bb.TypeDescriptors.ConfigurationDescriptor},System.Func{System.Object,System.Boolean})')
-  - [Add(configuration)](#M-Bb-TypeDescriptors-ConfigurationDescriptorRepository-Add-Bb-TypeDescriptors-ConfigurationDescriptor- 'Bb.TypeDescriptors.ConfigurationDescriptorRepository.Add(Bb.TypeDescriptors.ConfigurationDescriptor)')
-  - [Add\`\`1(configure,filter)](#M-Bb-TypeDescriptors-ConfigurationDescriptorRepository-Add``1-System-Action{Bb-TypeDescriptors-ConfigurationDescriptor{``0}},System-Func{``0,System-Boolean}- 'Bb.TypeDescriptors.ConfigurationDescriptorRepository.Add``1(System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{``0}},System.Func{``0,System.Boolean})')
-  - [GetTypeDescriptorConfiguration(instance)](#M-Bb-TypeDescriptors-ConfigurationDescriptorRepository-GetTypeDescriptorConfiguration-System-Object- 'Bb.TypeDescriptors.ConfigurationDescriptorRepository.GetTypeDescriptorConfiguration(System.Object)')
-  - [GetTypeDescriptorConfiguration(objectType)](#M-Bb-TypeDescriptors-ConfigurationDescriptorRepository-GetTypeDescriptorConfiguration-System-Type- 'Bb.TypeDescriptors.ConfigurationDescriptorRepository.GetTypeDescriptorConfiguration(System.Type)')
 - [ConfigurationDescriptorSelector](#T-Bb-TypeDescriptors-ConfigurationDescriptorSelector 'Bb.TypeDescriptors.ConfigurationDescriptorSelector')
   - [#ctor()](#M-Bb-TypeDescriptors-ConfigurationDescriptorSelector-#ctor 'Bb.TypeDescriptors.ConfigurationDescriptorSelector.#ctor')
   - [List](#P-Bb-TypeDescriptors-ConfigurationDescriptorSelector-List 'Bb.TypeDescriptors.ConfigurationDescriptorSelector.List')
   - [Add(configuration)](#M-Bb-TypeDescriptors-ConfigurationDescriptorSelector-Add-Bb-TypeDescriptors-ConfigurationDescriptor- 'Bb.TypeDescriptors.ConfigurationDescriptorSelector.Add(Bb.TypeDescriptors.ConfigurationDescriptor)')
   - [Get(instance)](#M-Bb-TypeDescriptors-ConfigurationDescriptorSelector-Get-System-Object- 'Bb.TypeDescriptors.ConfigurationDescriptorSelector.Get(System.Object)')
+- [ConfigurationPropertyDescriptor](#T-Bb-TypeDescriptors-ConfigurationPropertyDescriptor 'Bb.TypeDescriptors.ConfigurationPropertyDescriptor')
+  - [Clone()](#M-Bb-TypeDescriptors-ConfigurationPropertyDescriptor-Clone 'Bb.TypeDescriptors.ConfigurationPropertyDescriptor.Clone')
 - [ConfigurationPropertyDescriptorExtension](#T-Bb-TypeDescriptors-ConfigurationPropertyDescriptorExtension 'Bb.TypeDescriptors.ConfigurationPropertyDescriptorExtension')
   - [CanResetValue(self,value)](#M-Bb-TypeDescriptors-ConfigurationPropertyDescriptorExtension-CanResetValue-Bb-TypeDescriptors-ConfigurationPropertyDescriptor,System-Boolean- 'Bb.TypeDescriptors.ConfigurationPropertyDescriptorExtension.CanResetValue(Bb.TypeDescriptors.ConfigurationPropertyDescriptor,System.Boolean)')
   - [Category(self,value)](#M-Bb-TypeDescriptors-ConfigurationPropertyDescriptorExtension-Category-Bb-TypeDescriptors-ConfigurationPropertyDescriptor,System-String- 'Bb.TypeDescriptors.ConfigurationPropertyDescriptorExtension.Category(Bb.TypeDescriptors.ConfigurationPropertyDescriptor,System.String)')
@@ -745,7 +741,7 @@
   - [AppendConverters(type,replaceExisting,bindings)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Type,System-Nullable{System-Boolean},System-Reflection-BindingFlags,System-Func{System-Reflection-MethodInfo,System-Boolean}- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Type,System.Nullable{System.Boolean},System.Reflection.BindingFlags,System.Func{System.Reflection.MethodInfo,System.Boolean})')
   - [AppendConverters(replaceExisting,ms)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Nullable{System-Boolean},System-Reflection-MethodInfo[]- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Nullable{System.Boolean},System.Reflection.MethodInfo[])')
   - [AppendConverters(ms)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Reflection-ConstructorInfo[]- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Reflection.ConstructorInfo[])')
-  - [GetFunction(sourceType,targetType)](#M-Bb-Expressions-ConverterHelper-GetFunction-System-Type,System-Type- 'Bb.Expressions.ConverterHelper.GetFunction(System.Type,System.Type)')
+  - [GetFunctionForConvert(sourceType,targetType)](#M-Bb-Expressions-ConverterHelper-GetFunctionForConvert-System-Type,System-Type- 'Bb.Expressions.ConverterHelper.GetFunctionForConvert(System.Type,System.Type)')
   - [GetMethodToConvert(sourceType,targetType,method)](#M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type,Bb-Converters-MethodConverter@- 'Bb.Expressions.ConverterHelper.GetMethodToConvert(System.Type,System.Type,Bb.Converters.MethodConverter@)')
   - [GetMethodToConvert(sourceType,targetType)](#M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type- 'Bb.Expressions.ConverterHelper.GetMethodToConvert(System.Type,System.Type)')
   - [Methods(filter)](#M-Bb-Expressions-ConverterHelper-Methods-System-Predicate{Bb-Converters-MethodTypeConverter}- 'Bb.Expressions.ConverterHelper.Methods(System.Predicate{Bb.Converters.MethodTypeConverter})')
@@ -1007,11 +1003,19 @@
 - [DynamicSetIndexInstruction](#T-ICSharpCode-Decompiler-IL-DynamicSetIndexInstruction 'ICSharpCode.Decompiler.IL.DynamicSetIndexInstruction')
 - [DynamicSetMemberInstruction](#T-ICSharpCode-Decompiler-IL-DynamicSetMemberInstruction 'ICSharpCode.Decompiler.IL.DynamicSetMemberInstruction')
 - [DynamicTypeDescriptionProvider](#T-Bb-TypeDescriptors-DynamicTypeDescriptionProvider 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider')
-  - [#ctor()](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-#ctor-System-ComponentModel-TypeDescriptionProvider- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.#ctor(System.ComponentModel.TypeDescriptionProvider)')
-  - [Configuration](#P-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Configuration 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.Configuration')
+  - [#ctor(defaultTypeProvider,configuration)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-#ctor-System-Object,System-ComponentModel-TypeDescriptionProvider,Bb-TypeDescriptors-ConfigurationDescriptorSelector- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.#ctor(System.Object,System.ComponentModel.TypeDescriptionProvider,Bb.TypeDescriptors.ConfigurationDescriptorSelector)')
+  - [Configure\`\`1(instance,configure,filter)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Configure``1-``0,System-Action{Bb-TypeDescriptors-ConfigurationDescriptor{``0}},System-Func{``0,System-Boolean}- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.Configure``1(``0,System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{``0}},System.Func{``0,System.Boolean})')
+  - [Dispose(disposing)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Dispose-System-Boolean- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.Dispose(System.Boolean)')
+  - [Dispose()](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Dispose 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.Dispose')
   - [GetTypeDescriptor(objectType,instance)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-GetTypeDescriptor-System-Type,System-Object- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.GetTypeDescriptor(System.Type,System.Object)')
+  - [Merge(configuration)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Merge-Bb-TypeDescriptors-ConfigurationDescriptorSelector- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.Merge(Bb.TypeDescriptors.ConfigurationDescriptorSelector)')
 - [DynamicTypeDescriptionProvider\`1](#T-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider`1')
-  - [#ctor()](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-#ctor 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider`1.#ctor')
+  - [#ctor(defaultTypeProvider,configuration)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-#ctor-System-ComponentModel-TypeDescriptionProvider,Bb-TypeDescriptors-ConfigurationDescriptorSelector- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider`1.#ctor(System.ComponentModel.TypeDescriptionProvider,Bb.TypeDescriptors.ConfigurationDescriptorSelector)')
+  - [#ctor()](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-#ctor-System-ComponentModel-TypeDescriptionProvider- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider`1.#ctor(System.ComponentModel.TypeDescriptionProvider)')
+  - [InstanceType](#P-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-InstanceType 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider`1.InstanceType')
+  - [Configure(configure,filter)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-Configure-`0,System-Action{Bb-TypeDescriptors-ConfigurationDescriptor{`0}},System-Func{`0,System-Boolean}- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider`1.Configure(`0,System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{`0}},System.Func{`0,System.Boolean})')
+  - [Configure(configure,filter)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-Configure-System-Action{Bb-TypeDescriptors-ConfigurationDescriptor{`0}},System-Func{`0,System-Boolean}- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider`1.Configure(System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{`0}},System.Func{`0,System.Boolean})')
+  - [RemoveType()](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-RemoveType 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider`1.RemoveType')
 - [DynamicTypeDescriptor](#T-Bb-TypeDescriptors-DynamicTypeDescriptor 'Bb.TypeDescriptors.DynamicTypeDescriptor')
   - [_comparer](#F-Bb-TypeDescriptors-DynamicTypeDescriptor-_comparer 'Bb.TypeDescriptors.DynamicTypeDescriptor._comparer')
   - [OnPropertyChanged(propertyName)](#M-Bb-TypeDescriptors-DynamicTypeDescriptor-OnPropertyChanged-System-String- 'Bb.TypeDescriptors.DynamicTypeDescriptor.OnPropertyChanged(System.String)')
@@ -10597,107 +10601,6 @@ remove properties from the configuration descriptor and mark the property as exc
 | ---- | ---- | ----------- |
 | names | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') |  |
 
-<a name='T-Bb-TypeDescriptors-ConfigurationDescriptorRepository'></a>
-## ConfigurationDescriptorRepository `type`
-
-##### Namespace
-
-Bb.TypeDescriptors
-
-##### Summary
-
-Configuration descriptor repository.
-
-<a name='M-Bb-TypeDescriptors-ConfigurationDescriptorRepository-Add-System-Type,System-Action{Bb-TypeDescriptors-ConfigurationDescriptor},System-Func{System-Object,System-Boolean}-'></a>
-### Add(componentType,configure,filter) `method`
-
-##### Summary
-
-Add a configuration for a specific type.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| componentType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
-| configure | [System.Action{Bb.TypeDescriptors.ConfigurationDescriptor}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.TypeDescriptors.ConfigurationDescriptor}') |  |
-| filter | [System.Func{System.Object,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Object,System.Boolean}') |  |
-
-<a name='M-Bb-TypeDescriptors-ConfigurationDescriptorRepository-Add-Bb-TypeDescriptors-ConfigurationDescriptor-'></a>
-### Add(configuration) `method`
-
-##### Summary
-
-Append the configuration to the list of configurations.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| configuration | [Bb.TypeDescriptors.ConfigurationDescriptor](#T-Bb-TypeDescriptors-ConfigurationDescriptor 'Bb.TypeDescriptors.ConfigurationDescriptor') |  |
-
-<a name='M-Bb-TypeDescriptors-ConfigurationDescriptorRepository-Add``1-System-Action{Bb-TypeDescriptors-ConfigurationDescriptor{``0}},System-Func{``0,System-Boolean}-'></a>
-### Add\`\`1(configure,filter) `method`
-
-##### Summary
-
-Add a configuration for a specific type.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| configure | [System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{``0}}') |  |
-| filter | [System.Func{\`\`0,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{``0,System.Boolean}') |  |
-
-##### Generic Types
-
-| Name | Description |
-| ---- | ----------- |
-| T |  |
-
-<a name='M-Bb-TypeDescriptors-ConfigurationDescriptorRepository-GetTypeDescriptorConfiguration-System-Object-'></a>
-### GetTypeDescriptorConfiguration(instance) `method`
-
-##### Summary
-
-Get the configuration for a specific instance.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | instance to map |
-
-<a name='M-Bb-TypeDescriptors-ConfigurationDescriptorRepository-GetTypeDescriptorConfiguration-System-Type-'></a>
-### GetTypeDescriptorConfiguration(objectType) `method`
-
-##### Summary
-
-Get the configuration for a specific type.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| objectType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | type to resolve |
-
 <a name='T-Bb-TypeDescriptors-ConfigurationDescriptorSelector'></a>
 ## ConfigurationDescriptorSelector `type`
 
@@ -10756,6 +10659,28 @@ Get the configuration descriptor for a specific instance
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
+
+<a name='T-Bb-TypeDescriptors-ConfigurationPropertyDescriptor'></a>
+## ConfigurationPropertyDescriptor `type`
+
+##### Namespace
+
+Bb.TypeDescriptors
+
+<a name='M-Bb-TypeDescriptors-ConfigurationPropertyDescriptor-Clone'></a>
+### Clone() `method`
+
+##### Summary
+
+Clone the property descriptor
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-Bb-TypeDescriptors-ConfigurationPropertyDescriptorExtension'></a>
 ## ConfigurationPropertyDescriptorExtension `type`
@@ -11910,7 +11835,7 @@ This method has no parameters.
 
 ##### Summary
 
-/// Add methods to the list of methods to be used for conversion
+/// Add methods in the list of method to be used for conversion
 
 ##### Parameters
 
@@ -11947,8 +11872,8 @@ Add methods to the list of methods to be used for conversion
 | ---- | ---- | ----------- |
 | ms | [System.Reflection.ConstructorInfo[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.ConstructorInfo[] 'System.Reflection.ConstructorInfo[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-GetFunction-System-Type,System-Type-'></a>
-### GetFunction(sourceType,targetType) `method`
+<a name='M-Bb-Expressions-ConverterHelper-GetFunctionForConvert-System-Type,System-Type-'></a>
+### GetFunctionForConvert(sourceType,targetType) `method`
 
 ##### Summary
 
@@ -11970,7 +11895,7 @@ Get the function to convert sourceType to targetType
 
 ##### Summary
 
-Try to get the method to convert sourceType to targetType
+Try to resolve the method to convert sourceType to targetType
 
 ##### Returns
 
@@ -14828,8 +14753,8 @@ Bb.TypeDescriptors
 
 Provides supplemental metadata to the System.ComponentModel.TypeDescriptor.
 
-<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-#ctor-System-ComponentModel-TypeDescriptionProvider-'></a>
-### #ctor() `constructor`
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-#ctor-System-Object,System-ComponentModel-TypeDescriptionProvider,Bb-TypeDescriptors-ConfigurationDescriptorSelector-'></a>
+### #ctor(defaultTypeProvider,configuration) `constructor`
 
 ##### Summary
 
@@ -14837,51 +14762,78 @@ Initializes a new instance of the [DynamicTypeDescriptionProvider](#T-Bb-TypeDes
 
 ##### Parameters
 
-This constructor has no parameters.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| defaultTypeProvider | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
+| configuration | [System.ComponentModel.TypeDescriptionProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.TypeDescriptionProvider 'System.ComponentModel.TypeDescriptionProvider') |  |
 
-<a name='P-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Configuration'></a>
-### Configuration `property`
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Configure``1-``0,System-Action{Bb-TypeDescriptors-ConfigurationDescriptor{``0}},System-Func{``0,System-Boolean}-'></a>
+### Configure\`\`1(instance,configure,filter) `method`
 
 ##### Summary
 
-Access to global instance of the [ConfigurationDescriptorRepository](#T-Bb-TypeDescriptors-ConfigurationDescriptorRepository 'Bb.TypeDescriptors.ConfigurationDescriptorRepository') class.
+Configure the TypeDescriptor for specific instance with the configuration.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instance | [\`\`0](#T-``0 '``0') | instance to configure |
+| configure | [System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{``0}}') | method to configure |
+| filter | [System.Func{\`\`0,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{``0,System.Boolean}') | filter to apply the configuration |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | type of the instance |
 
 ##### Example
 
 ```csharp
-var config = DynamicTypeDescriptionProvider.Configuration;
-// add dynamic configuration for type descriptor
-config.Add&lt;Column&gt;(c =&gt;
+var provider = DynamicTypeDescriptionProvider.Configure(instance, c =&gt;
 {
-    // add first property
-    c.AddProperty("AutoIncrement", typeof(bool), i =&gt;
+    c.AddProperty("Index", typeof(int), p =&gt;
     {
-        i.IsBrowsable(true)
-        .Description("Auto increment")
-        ;
-    })
-    // add second property
-    .AddProperty("IncrementStart", typeof(int), i =&gt;
-    {
-    i.IsBrowsable(true)
-    .Description("Auto start")
-    .DefaultValue(1);
+        p.DefaultValue(3);
     });
-}, d =&gt; // the previous bloc is append only if the filter return true
-{
-    var type = d.GetColumnType();
-    if (type != null)
-        return type.Category == ColumbTypeCategory.Integer;
-    return false;
-});
+};
 ```
+
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Dispose-System-Boolean-'></a>
+### Dispose(disposing) `method`
+
+##### Summary
+
+Dispose the instance of the [DynamicTypeDescriptionProvider](#T-Bb-TypeDescriptors-DynamicTypeDescriptionProvider 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| disposing | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
+
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Dispose'></a>
+### Dispose() `method`
+
+##### Summary
+
+Dispose the instance of the [DynamicTypeDescriptionProvider](#T-Bb-TypeDescriptors-DynamicTypeDescriptionProvider 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider') class.
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-GetTypeDescriptor-System-Type,System-Object-'></a>
 ### GetTypeDescriptor(objectType,instance) `method`
 
 ##### Summary
 
-An System.ComponentModel.ICustomTypeDescriptor that can provide metadata for the type.
+An [ICustomTypeDescriptor](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.ICustomTypeDescriptor 'System.ComponentModel.ICustomTypeDescriptor') that can provide metadata for the type.
 
 ##### Returns
 
@@ -14893,6 +14845,19 @@ An System.ComponentModel.ICustomTypeDescriptor that can provide metadata for the
 | ---- | ---- | ----------- |
 | objectType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
 | instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
+
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Merge-Bb-TypeDescriptors-ConfigurationDescriptorSelector-'></a>
+### Merge(configuration) `method`
+
+##### Summary
+
+Merge the configuration descriptor selector with the current instance.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| configuration | [Bb.TypeDescriptors.ConfigurationDescriptorSelector](#T-Bb-TypeDescriptors-ConfigurationDescriptorSelector 'Bb.TypeDescriptors.ConfigurationDescriptorSelector') |  |
 
 <a name='T-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1'></a>
 ## DynamicTypeDescriptionProvider\`1 `type`
@@ -14916,10 +14881,24 @@ Provides supplemental metadata to the System.ComponentModel.TypeDescriptor.
 Manually
 
 ```csharp
-DynamicTypeDescriptionProvider&lt;Title&gt;.Initialize();
+DynamicTypeDescriptionProvider&lt;Title&gt;.Instance();
 ```
 
-<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-#ctor'></a>
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-#ctor-System-ComponentModel-TypeDescriptionProvider,Bb-TypeDescriptors-ConfigurationDescriptorSelector-'></a>
+### #ctor(defaultTypeProvider,configuration) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [DynamicTypeDescriptionProvider](#T-Bb-TypeDescriptors-DynamicTypeDescriptionProvider 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| defaultTypeProvider | [System.ComponentModel.TypeDescriptionProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.TypeDescriptionProvider 'System.ComponentModel.TypeDescriptionProvider') |  |
+| configuration | [Bb.TypeDescriptors.ConfigurationDescriptorSelector](#T-Bb-TypeDescriptors-ConfigurationDescriptorSelector 'Bb.TypeDescriptors.ConfigurationDescriptorSelector') |  |
+
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-#ctor-System-ComponentModel-TypeDescriptionProvider-'></a>
 ### #ctor() `constructor`
 
 ##### Summary
@@ -14929,6 +14908,76 @@ Initializes a new instance of the [DynamicTypeDescriptionProvider](#T-Bb-TypeDes
 ##### Parameters
 
 This constructor has no parameters.
+
+<a name='P-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-InstanceType'></a>
+### InstanceType `property`
+
+##### Summary
+
+Access to global instance of the [DynamicTypeDescriptionProvider](#T-Bb-TypeDescriptors-DynamicTypeDescriptionProvider 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider') class.
+
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-Configure-`0,System-Action{Bb-TypeDescriptors-ConfigurationDescriptor{`0}},System-Func{`0,System-Boolean}-'></a>
+### Configure(configure,filter) `method`
+
+##### Summary
+
+Add a configuration for a specific type.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| configure | [\`0](#T-`0 '`0') |  |
+| filter | [System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{`0}}') |  |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-Configure-System-Action{Bb-TypeDescriptors-ConfigurationDescriptor{`0}},System-Func{`0,System-Boolean}-'></a>
+### Configure(configure,filter) `method`
+
+##### Summary
+
+Add a configuration for a specific type.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| configure | [System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{`0}}') |  |
+| filter | [System.Func{\`0,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Boolean}') |  |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-RemoveType'></a>
+### RemoveType() `method`
+
+##### Summary
+
+Remove the TypeDescriptorProvider for type.
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-Bb-TypeDescriptors-DynamicTypeDescriptor'></a>
 ## DynamicTypeDescriptor `type`

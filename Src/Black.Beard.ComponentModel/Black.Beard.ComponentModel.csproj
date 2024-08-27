@@ -34,6 +34,7 @@
 		<Compile Remove="ComponentModel\MethodDiscoveryAssembly.cs" />
 		<Compile Remove="ComponentModel\ObjectCreator.cs" />
 		<Compile Remove="ComponentModel\WalkerFilter.cs" />
+		<Compile Remove="TypeDescriptors\MyCustomTypeConverter.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

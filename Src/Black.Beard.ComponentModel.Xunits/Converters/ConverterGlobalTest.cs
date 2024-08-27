@@ -1,7 +1,10 @@
-﻿using Bb.Converters;
+﻿using Bb.ComponentModel.Factories;
+using Bb.Converters;
 using Bb.Expressions;
+using Bb.TypeDescriptors;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -107,7 +110,7 @@ namespace Black.Beard.Converters
         //}
 
         [Fact]
-        public void Test3()
+        public void MultiTest()
         {
             
             var v = GetTests();
@@ -157,6 +160,67 @@ namespace Black.Beard.Converters
 
         }
 
+        //[Fact]
+        //public void MultiTestWithTypeConverters()
+        //{
+
+        //    var v = GetTests();
+
+        //    foreach (var item in v)
+        //    {
+
+        //        var value = item.Value;
+        //        dynamic result = null;
+
+        //        try
+        //        {
+
+        //            var type = typeof(MyCustomTypeConverter<>).MakeGenericType(item.Key.Item2);
+        //            var converter = (TypeConverter)Activator.CreateInstance(type);
+
+        //            result = converter.ConvertFrom(value.Item1);
+
+        //            result = converter.ConvertTo(value.Item1, item.Key.Item2);
+
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+
+        //            //string a1 = value.Item1.ToString();
+        //            //string a2 = value.Item2.ToString();
+
+        //            //if (value.Item1 is string)
+        //            //    a1 = $"\"{a1}\"";
+
+        //            //if (value.Item2 is string)
+        //            //    a2 = $"\"{a2}\"";
+
+        //            //var t = "Undefined";
+        //            //if (result != null)
+        //            //    t = result.GetType().Name;
+        //            //Debug.WriteLine($"Error to convert {item.Key.Item1.Name} to {item.Key.Item2.Name}. " + ex.Message);
+        //            //Debug.WriteLine($"Method used : " + ConverterHelper.GetMethodToConvert(item.Key.Item1, item.Key.Item2));
+
+        //        }
+
+        //    }
+
+
+        //}
+
+        //[Fact]
+        //public void MultiTestWithTypeConverters1()
+        //{
+
+        //    var v = GetTests();
+
+        //    var converter = TypeDescriptor.GetConverter(typeof(Enum2));
+
+        //    var t1 = converter.CanConvertFrom(typeof(int));
+        //    var t2 = converter.CanConvertTo(typeof(Enum2));
+
+        //}
 
         private Dictionary<(Type, Type), (dynamic, dynamic, ConverterContext, Func<dynamic, dynamic, bool>)> GetTests()
         {
@@ -475,7 +539,6 @@ namespace Black.Beard.Converters
 
         }
 
-
         protected static HashSet<(Type, Type)> GetCrossItems(params Type[] types)
         {
 
@@ -524,6 +587,7 @@ namespace Black.Beard.Converters
         Value3
     }
 
+    //[TypeConverter(typeof(MyCustomTypeConverter<Enum2>))]
     public enum Enum2 : UInt16
     {
         Value1,
