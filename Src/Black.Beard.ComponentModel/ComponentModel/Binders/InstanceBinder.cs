@@ -5,6 +5,7 @@ using Bb.ComponentModel.Accessors;
 namespace Bb.ComponentModel.Binders
 {
 
+
     public class InstanceBinder<TSource, TTarget> : IDisposed
         where TSource : class
     {
@@ -26,7 +27,6 @@ namespace Bb.ComponentModel.Binders
         /// <param name="target"></param>
         public void Bind(TSource source, TTarget target)
         {
-
 
             this._source = source as INotifyPropertyChanged;
             this._source.PropertyChanged += _source_PropertyChanged;

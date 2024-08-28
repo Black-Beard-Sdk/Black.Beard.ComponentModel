@@ -1005,6 +1005,7 @@
 - [DynamicTypeDescriptionProvider](#T-Bb-TypeDescriptors-DynamicTypeDescriptionProvider 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider')
   - [#ctor(defaultTypeProvider,configuration)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-#ctor-System-Object,System-ComponentModel-TypeDescriptionProvider,Bb-TypeDescriptors-ConfigurationDescriptorSelector- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.#ctor(System.Object,System.ComponentModel.TypeDescriptionProvider,Bb.TypeDescriptors.ConfigurationDescriptorSelector)')
   - [Configure\`\`1(instance,configure,filter)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Configure``1-``0,System-Action{Bb-TypeDescriptors-ConfigurationDescriptor{``0}},System-Func{``0,System-Boolean}- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.Configure``1(``0,System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{``0}},System.Func{``0,System.Boolean})')
+  - [Configure\`\`1(configure,filter)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Configure``1-System-Action{Bb-TypeDescriptors-ConfigurationDescriptor{``0}},System-Func{``0,System-Boolean}- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.Configure``1(System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{``0}},System.Func{``0,System.Boolean})')
   - [Dispose(disposing)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Dispose-System-Boolean- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.Dispose(System.Boolean)')
   - [Dispose()](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Dispose 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.Dispose')
   - [GetTypeDescriptor(objectType,instance)](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-GetTypeDescriptor-System-Type,System-Object- 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider.GetTypeDescriptor(System.Type,System.Object)')
@@ -1018,6 +1019,8 @@
   - [RemoveType()](#M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider`1-RemoveType 'Bb.TypeDescriptors.DynamicTypeDescriptionProvider`1.RemoveType')
 - [DynamicTypeDescriptor](#T-Bb-TypeDescriptors-DynamicTypeDescriptor 'Bb.TypeDescriptors.DynamicTypeDescriptor')
   - [_comparer](#F-Bb-TypeDescriptors-DynamicTypeDescriptor-_comparer 'Bb.TypeDescriptors.DynamicTypeDescriptor._comparer')
+  - [GetProperties()](#M-Bb-TypeDescriptors-DynamicTypeDescriptor-GetProperties 'Bb.TypeDescriptors.DynamicTypeDescriptor.GetProperties')
+  - [GetProperties(attributes)](#M-Bb-TypeDescriptors-DynamicTypeDescriptor-GetProperties-System-Attribute[]- 'Bb.TypeDescriptors.DynamicTypeDescriptor.GetProperties(System.Attribute[])')
   - [OnPropertyChanged(propertyName)](#M-Bb-TypeDescriptors-DynamicTypeDescriptor-OnPropertyChanged-System-String- 'Bb.TypeDescriptors.DynamicTypeDescriptor.OnPropertyChanged(System.String)')
 - [DynamicUnaryOperatorInstruction](#T-ICSharpCode-Decompiler-IL-DynamicUnaryOperatorInstruction 'ICSharpCode.Decompiler.IL.DynamicUnaryOperatorInstruction')
 - [EmptyStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-EmptyStatement 'ICSharpCode.Decompiler.CSharp.Syntax.EmptyStatement')
@@ -2498,6 +2501,8 @@
   - [GetProperties(componentType,withSubType)](#M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperties-System-Type,System-Boolean- 'Bb.ComponentModel.Accessors.PropertyAccessor.GetProperties(System.Type,System.Boolean)')
   - [GetProperty(componentType,name)](#M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperty-System-Type,System-String- 'Bb.ComponentModel.Accessors.PropertyAccessor.GetProperty(System.Type,System.String)')
 - [PropertyBinder\`2](#T-Bb-ComponentModel-Binders-PropertyBinder`2 'Bb.ComponentModel.Binders.PropertyBinder`2')
+  - [#ctor()](#M-Bb-ComponentModel-Binders-PropertyBinder`2-#ctor 'Bb.ComponentModel.Binders.PropertyBinder`2.#ctor')
+  - [Bind\`\`1(expression,action)](#M-Bb-ComponentModel-Binders-PropertyBinder`2-Bind``1-System-Linq-Expressions-Expression{System-Func{`0,``0}},System-Action{`1,``0}- 'Bb.ComponentModel.Binders.PropertyBinder`2.Bind``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Action{`1,``0})')
   - [Observe(source,target)](#M-Bb-ComponentModel-Binders-PropertyBinder`2-Observe-`0,`1- 'Bb.ComponentModel.Binders.PropertyBinder`2.Observe(`0,`1)')
 - [PropertyDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-PropertyDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.PropertyDeclaration')
   - [PrivateImplementationType](#P-ICSharpCode-Decompiler-CSharp-Syntax-PropertyDeclaration-PrivateImplementationType 'ICSharpCode.Decompiler.CSharp.Syntax.PropertyDeclaration.PrivateImplementationType')
@@ -14784,7 +14789,7 @@ Configure the TypeDescriptor for specific instance with the configuration.
 | ---- | ---- | ----------- |
 | instance | [\`\`0](#T-``0 '``0') | instance to configure |
 | configure | [System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{``0}}') | method to configure |
-| filter | [System.Func{\`\`0,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{``0,System.Boolean}') | filter to apply the configuration |
+| filter | [System.Func{\`\`0,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{``0,System.Boolean}') | filter to apply the configuration if result is true |
 
 ##### Generic Types
 
@@ -14801,7 +14806,43 @@ var provider = DynamicTypeDescriptionProvider.Configure(instance, c =&gt;
     {
         p.DefaultValue(3);
     });
-};
+}, f =&gt; true);
+```
+
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Configure``1-System-Action{Bb-TypeDescriptors-ConfigurationDescriptor{``0}},System-Func{``0,System-Boolean}-'></a>
+### Configure\`\`1(configure,filter) `method`
+
+##### Summary
+
+Configure the TypeDescriptor for specified type with the configuration.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| configure | [System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.TypeDescriptors.ConfigurationDescriptor{``0}}') | method to configure |
+| filter | [System.Func{\`\`0,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{``0,System.Boolean}') | filter to apply the configuration if result is true |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | type of the instance |
+
+##### Example
+
+```csharp
+var provider = DynamicTypeDescriptionProvider.Configure&lt;Column&gt;(c =&gt;
+{
+    c.AddProperty("Index", typeof(int), p =&gt;
+    {
+        p.DefaultValue(3);
+    });
+}, f =&gt; true);
 ```
 
 <a name='M-Bb-TypeDescriptors-DynamicTypeDescriptionProvider-Dispose-System-Boolean-'></a>
@@ -14986,12 +15027,48 @@ This method has no parameters.
 
 Bb.TypeDescriptors
 
+##### Summary
+
+Dynamic type descriptor
+
 <a name='F-Bb-TypeDescriptors-DynamicTypeDescriptor-_comparer'></a>
 ### _comparer `constants`
 
 ##### Summary
 
 Comparer to use when sorting a list of dynamic property descriptors.
+
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptor-GetProperties'></a>
+### GetProperties() `method`
+
+##### Summary
+
+returns the properties for the instance
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-TypeDescriptors-DynamicTypeDescriptor-GetProperties-System-Attribute[]-'></a>
+### GetProperties(attributes) `method`
+
+##### Summary
+
+returns the properties for the instance
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| attributes | [System.Attribute[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Attribute[] 'System.Attribute[]') |  |
 
 <a name='M-Bb-TypeDescriptors-DynamicTypeDescriptor-OnPropertyChanged-System-String-'></a>
 ### OnPropertyChanged(propertyName) `method`
@@ -32225,12 +32302,76 @@ Gets the specified component type.
 
 Bb.ComponentModel.Binders
 
+##### Summary
+
+Property class observer for follow changes of the source instance
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| TSource | Source type |
+| TTarget | Target type |
+
+##### Example
+
+```csharp
+    var source = new ObjectSource();
+    var target = new ObjectTarget();
+    
+    var config = new PropertyBinder&lt;ObjectSource, ObjectTarget&gt;()
+        .Bind(c =&gt; c.Name, (d, e) =&gt; d.Name = e);
+    
+    var observe = config.Observe(source, target);
+    
+    source.Name = "toto";
+    Assert.Equal("toto", target.Name);
+    
+    source.Dispose();
+    Assert.True(observe.IsDisposed);
+```
+
+<a name='M-Bb-ComponentModel-Binders-PropertyBinder`2-#ctor'></a>
+### #ctor() `constructor`
+
+##### Summary
+
+Initializes a new instance of the [PropertyBinder\`2](#T-Bb-ComponentModel-Binders-PropertyBinder`2 'Bb.ComponentModel.Binders.PropertyBinder`2') class.
+
+##### Parameters
+
+This constructor has no parameters.
+
+<a name='M-Bb-ComponentModel-Binders-PropertyBinder`2-Bind``1-System-Linq-Expressions-Expression{System-Func{`0,``0}},System-Action{`1,``0}-'></a>
+### Bind\`\`1(expression,action) `method`
+
+##### Summary
+
+Method to bind a property
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| expression | [System.Linq.Expressions.Expression{System.Func{\`0,\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression{System.Func{`0,``0}}') |  |
+| action | [System.Action{\`1,\`\`0}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{`1,``0}') |  |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| TValue |  |
+
 <a name='M-Bb-ComponentModel-Binders-PropertyBinder`2-Observe-`0,`1-'></a>
 ### Observe(source,target) `method`
 
 ##### Summary
 
-Observe the source and for update the target
+Observe the source and update the target if the source change
 
 ##### Returns
 

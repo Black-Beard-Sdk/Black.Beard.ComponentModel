@@ -7,7 +7,9 @@ using System.Runtime.CompilerServices;
 namespace Bb.TypeDescriptors
 {
 
-
+    /// <summary>
+    /// Dynamic type descriptor
+    /// </summary>
     public class DynamicTypeDescriptor : CustomTypeDescriptor, INotifyPropertyChanged
     {
 
@@ -20,7 +22,10 @@ namespace Bb.TypeDescriptors
             _configurationSelector = configuration;
         }
 
-
+        /// <summary>
+        /// returns the properties for the instance
+        /// </summary>
+        /// <returns></returns>
         public override PropertyDescriptorCollection GetProperties()
         {
 
@@ -33,7 +38,11 @@ namespace Bb.TypeDescriptors
 
         }
 
-
+        /// <summary>
+        /// returns the properties for the instance
+        /// </summary>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
         public override PropertyDescriptorCollection GetProperties(Attribute[] attributes)
         {
 

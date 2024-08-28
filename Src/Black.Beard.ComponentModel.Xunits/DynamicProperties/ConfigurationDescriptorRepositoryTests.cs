@@ -50,7 +50,7 @@ namespace DynamicDescriptors.Tests.DynamicProperties
         public void AddPropertyIfOnType()
         {
 
-            var provider = DynamicTypeDescriptionProvider<ExampleType>.InstanceType.Configure(c =>
+            var provider = DynamicTypeDescriptionProvider.Configure<ExampleType>(c =>
             {
 
                 c.AddProperty("Index", typeof(int), p =>
@@ -61,7 +61,7 @@ namespace DynamicDescriptors.Tests.DynamicProperties
             }, f =>
             {
                 return f.Type == "Make1";
-            });
+            });            
 
             var p = TypeDescriptor.GetProperties(typeof(ExampleType));
 

@@ -23,7 +23,6 @@ namespace Black.Beard.ComponentModel.Xunits.Binders
 
             var observe = config.Observe(source, target);
 
-
             source.Name = "toto";
             Assert.Equal("toto", target.Name);
 
