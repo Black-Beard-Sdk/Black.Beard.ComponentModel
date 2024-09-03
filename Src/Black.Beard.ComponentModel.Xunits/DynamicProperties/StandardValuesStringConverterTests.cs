@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bb.Helpers;
-using Bb.TypeDescriptors;
 using FluentAssertions;
 using Xunit;
 

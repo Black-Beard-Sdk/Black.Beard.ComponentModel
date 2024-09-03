@@ -14,16 +14,19 @@
 	  <Compile Remove="ComponentModel\Loaders\**" />
 	  <Compile Remove="ComponentModel\PEReaders\**" />
 	  <Compile Remove="Exceptions\**" />
+	  <Compile Remove="TypeDescriptors\**" />
 	  <Compile Remove="_TypeDescriptors\**" />
 	  <EmbeddedResource Remove="ComponentDescriptors\**" />
 	  <EmbeddedResource Remove="ComponentModel\Loaders\**" />
 	  <EmbeddedResource Remove="ComponentModel\PEReaders\**" />
 	  <EmbeddedResource Remove="Exceptions\**" />
+	  <EmbeddedResource Remove="TypeDescriptors\**" />
 	  <EmbeddedResource Remove="_TypeDescriptors\**" />
 	  <None Remove="ComponentDescriptors\**" />
 	  <None Remove="ComponentModel\Loaders\**" />
 	  <None Remove="ComponentModel\PEReaders\**" />
 	  <None Remove="Exceptions\**" />
+	  <None Remove="TypeDescriptors\**" />
 	  <None Remove="_TypeDescriptors\**" />
 	</ItemGroup>
 
@@ -34,7 +37,6 @@
 		<Compile Remove="ComponentModel\MethodDiscoveryAssembly.cs" />
 		<Compile Remove="ComponentModel\ObjectCreator.cs" />
 		<Compile Remove="ComponentModel\WalkerFilter.cs" />
-		<Compile Remove="TypeDescriptors\MyCustomTypeConverter.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using Bb.ComponentModel;
-using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Translations;
-using Bb.TypeDescriptors;
 using FluentAssertions;
 using Xunit;
 
