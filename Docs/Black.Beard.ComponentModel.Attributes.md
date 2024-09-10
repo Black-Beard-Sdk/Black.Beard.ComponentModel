@@ -16,6 +16,9 @@
 - [DependOfAttribute](#T-Bb-ComponentModel-Attributes-DependOfAttribute 'Bb.ComponentModel.Attributes.DependOfAttribute')
   - [#ctor(type)](#M-Bb-ComponentModel-Attributes-DependOfAttribute-#ctor-System-Type- 'Bb.ComponentModel.Attributes.DependOfAttribute.#ctor(System.Type)')
 - [EnumerationProviderAttribute](#T-Bb-ComponentModel-Attributes-EnumerationProviderAttribute 'Bb.ComponentModel.Attributes.EnumerationProviderAttribute')
+- [EvaluatorEventArgs\`1](#T-Bb-EvaluatorEventArgs`1 'Bb.EvaluatorEventArgs`1')
+  - [#ctor(evaluator)](#M-Bb-EvaluatorEventArgs`1-#ctor-System-Func{`0,System-Object,System-Boolean}- 'Bb.EvaluatorEventArgs`1.#ctor(System.Func{`0,System.Object,System.Boolean})')
+  - [Evaluate](#P-Bb-EvaluatorEventArgs`1-Evaluate 'Bb.EvaluatorEventArgs`1.Evaluate')
 - [ExposeClassAttribute](#T-Bb-ComponentModel-Attributes-ExposeClassAttribute 'Bb.ComponentModel.Attributes.ExposeClassAttribute')
   - [#ctor()](#M-Bb-ComponentModel-Attributes-ExposeClassAttribute-#ctor 'Bb.ComponentModel.Attributes.ExposeClassAttribute.#ctor')
   - [#ctor(context)](#M-Bb-ComponentModel-Attributes-ExposeClassAttribute-#ctor-System-String- 'Bb.ComponentModel.Attributes.ExposeClassAttribute.#ctor(System.String)')
@@ -41,6 +44,8 @@
   - [OrderPriority](#P-Bb-ComponentModel-Loaders-IApplicationBuilderInitializer-OrderPriority 'Bb.ComponentModel.Loaders.IApplicationBuilderInitializer.OrderPriority')
   - [Type](#P-Bb-ComponentModel-Loaders-IApplicationBuilderInitializer-Type 'Bb.ComponentModel.Loaders.IApplicationBuilderInitializer.Type')
 - [IBusyService](#T-Bb-IBusyService 'Bb.IBusyService')
+- [IFocusedService\`1](#T-Bb-IFocusedService`1 'Bb.IFocusedService`1')
+  - [FocusChange(test,sender)](#M-Bb-IFocusedService`1-FocusChange-System-Func{`0,System-Object,System-Boolean},System-Object- 'Bb.IFocusedService`1.FocusChange(System.Func{`0,System.Object,System.Boolean},System.Object)')
 - [IInjectBuilder](#T-Bb-ComponentModel-IInjectBuilder 'Bb.ComponentModel.IInjectBuilder')
   - [FriendlyName](#P-Bb-ComponentModel-IInjectBuilder-FriendlyName 'Bb.ComponentModel.IInjectBuilder.FriendlyName')
   - [Type](#P-Bb-ComponentModel-IInjectBuilder-Type 'Bb.ComponentModel.IInjectBuilder.Type')
@@ -257,6 +262,43 @@ Bb.ComponentModel.Attributes
 ##### Summary
 
 Enumeration provider attribute
+
+<a name='T-Bb-EvaluatorEventArgs`1'></a>
+## EvaluatorEventArgs\`1 `type`
+
+##### Namespace
+
+Bb
+
+##### Summary
+
+Event arguments for evaluator
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='M-Bb-EvaluatorEventArgs`1-#ctor-System-Func{`0,System-Object,System-Boolean}-'></a>
+### #ctor(evaluator) `constructor`
+
+##### Summary
+
+Initialize the evaluator event arguments
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| evaluator | [System.Func{\`0,System.Object,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object,System.Boolean}') |  |
+
+<a name='P-Bb-EvaluatorEventArgs`1-Evaluate'></a>
+### Evaluate `property`
+
+##### Summary
+
+Gets the evaluator
 
 <a name='T-Bb-ComponentModel-Attributes-ExposeClassAttribute'></a>
 ## ExposeClassAttribute `type`
@@ -489,6 +531,31 @@ Bb
 ##### Summary
 
 Busy service
+
+<a name='T-Bb-IFocusedService`1'></a>
+## IFocusedService\`1 `type`
+
+##### Namespace
+
+Bb
+
+##### Summary
+
+Project the focused object on target object
+
+<a name='M-Bb-IFocusedService`1-FocusChange-System-Func{`0,System-Object,System-Boolean},System-Object-'></a>
+### FocusChange(test,sender) `method`
+
+##### Summary
+
+Project the object on focus
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| test | [System.Func{\`0,System.Object,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object,System.Boolean}') | Test to evaluate before change the focus |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
 
 <a name='T-Bb-ComponentModel-IInjectBuilder'></a>
 ## IInjectBuilder `type`

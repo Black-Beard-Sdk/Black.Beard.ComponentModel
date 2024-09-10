@@ -17,8 +17,9 @@ namespace Bb
         /// <summary>
         /// Project the object on focus
         /// </summary>
+        /// <param name="test">Test to evaluate before change the focus</param>
         /// <param name="sender"></param>
-        void FocusChange(object sender);
+        void FocusChange(Func<T, object, bool> test, object sender);
 
     }
 
