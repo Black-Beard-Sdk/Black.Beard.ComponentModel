@@ -45,7 +45,7 @@
   - [Type](#P-Bb-ComponentModel-Loaders-IApplicationBuilderInitializer-Type 'Bb.ComponentModel.Loaders.IApplicationBuilderInitializer.Type')
 - [IBusyService](#T-Bb-IBusyService 'Bb.IBusyService')
 - [IFocusedService\`1](#T-Bb-IFocusedService`1 'Bb.IFocusedService`1')
-  - [FocusChange(test,sender)](#M-Bb-IFocusedService`1-FocusChange-System-Func{`0,System-Object,System-Boolean},System-Object- 'Bb.IFocusedService`1.FocusChange(System.Func{`0,System.Object,System.Boolean},System.Object)')
+  - [FocusChange(sender,test)](#M-Bb-IFocusedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean}- 'Bb.IFocusedService`1.FocusChange(System.Object,System.Func{`0,System.Object,System.Boolean})')
 - [IInjectBuilder](#T-Bb-ComponentModel-IInjectBuilder 'Bb.ComponentModel.IInjectBuilder')
   - [FriendlyName](#P-Bb-ComponentModel-IInjectBuilder-FriendlyName 'Bb.ComponentModel.IInjectBuilder.FriendlyName')
   - [Type](#P-Bb-ComponentModel-IInjectBuilder-Type 'Bb.ComponentModel.IInjectBuilder.Type')
@@ -59,6 +59,8 @@
   - [Property](#P-Bb-ComponentModel-DataAnnotations-IListProvider-Property 'Bb.ComponentModel.DataAnnotations.IListProvider.Property')
   - [GetItems()](#M-Bb-ComponentModel-DataAnnotations-IListProvider-GetItems 'Bb.ComponentModel.DataAnnotations.IListProvider.GetItems')
   - [GetOriginalValue(item)](#M-Bb-ComponentModel-DataAnnotations-IListProvider-GetOriginalValue-Bb-ComponentModel-DataAnnotations-ListItem- 'Bb.ComponentModel.DataAnnotations.IListProvider.GetOriginalValue(Bb.ComponentModel.DataAnnotations.ListItem)')
+- [IProjectedService\`1](#T-Bb-IProjectedService`1 'Bb.IProjectedService`1')
+  - [FocusChange(sender,test)](#M-Bb-IProjectedService`1-FocusChange-System-Func{`0,System-Object},System-Func{`0,System-Object,System-Boolean}- 'Bb.IProjectedService`1.FocusChange(System.Func{`0,System.Object},System.Func{`0,System.Object,System.Boolean})')
 - [ITranslateContainer](#T-Bb-ComponentModel-Translations-ITranslateContainer 'Bb.ComponentModel.Translations.ITranslateContainer')
   - [Add(key)](#M-Bb-ComponentModel-Translations-ITranslateContainer-Add-Bb-ComponentModel-Translations-TranslatedKeyLabel- 'Bb.ComponentModel.Translations.ITranslateContainer.Add(Bb.ComponentModel.Translations.TranslatedKeyLabel)')
   - [Get(key,culture)](#M-Bb-ComponentModel-Translations-ITranslateContainer-Get-Bb-ComponentModel-Translations-TranslatedKeyLabel,System-Globalization-CultureInfo- 'Bb.ComponentModel.Translations.ITranslateContainer.Get(Bb.ComponentModel.Translations.TranslatedKeyLabel,System.Globalization.CultureInfo)')
@@ -543,8 +545,8 @@ Bb
 
 Project the focused object on target object
 
-<a name='M-Bb-IFocusedService`1-FocusChange-System-Func{`0,System-Object,System-Boolean},System-Object-'></a>
-### FocusChange(test,sender) `method`
+<a name='M-Bb-IFocusedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean}-'></a>
+### FocusChange(sender,test) `method`
 
 ##### Summary
 
@@ -554,8 +556,8 @@ Project the object on focus
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | object source |
 | test | [System.Func{\`0,System.Object,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object,System.Boolean}') | Test to evaluate before change the focus |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
 
 <a name='T-Bb-ComponentModel-IInjectBuilder'></a>
 ## IInjectBuilder `type`
@@ -717,6 +719,31 @@ Return the new value that can be set in the property
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | item | [Bb.ComponentModel.DataAnnotations.ListItem](#T-Bb-ComponentModel-DataAnnotations-ListItem 'Bb.ComponentModel.DataAnnotations.ListItem') | ListItem source |
+
+<a name='T-Bb-IProjectedService`1'></a>
+## IProjectedService\`1 `type`
+
+##### Namespace
+
+Bb
+
+##### Summary
+
+Project the focused object on target object
+
+<a name='M-Bb-IProjectedService`1-FocusChange-System-Func{`0,System-Object},System-Func{`0,System-Object,System-Boolean}-'></a>
+### FocusChange(sender,test) `method`
+
+##### Summary
+
+Project the object on focus
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| sender | [System.Func{\`0,System.Object}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object}') | object source |
+| test | [System.Func{\`0,System.Object,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object,System.Boolean}') | Test to evaluate before change the focus |
 
 <a name='T-Bb-ComponentModel-Translations-ITranslateContainer'></a>
 ## ITranslateContainer `type`

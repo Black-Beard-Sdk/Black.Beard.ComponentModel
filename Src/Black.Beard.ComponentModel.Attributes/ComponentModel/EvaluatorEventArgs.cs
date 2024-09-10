@@ -14,7 +14,7 @@ namespace Bb
         /// Initialize the evaluator event arguments
         /// </summary>
         /// <param name="evaluator"></param>
-        public EvaluatorEventArgs(Func<T, object, bool> evaluator)
+        public EvaluatorEventArgs(Func<T, object, bool>? evaluator)
         {
             Evaluate = evaluator;
         }
@@ -22,7 +22,7 @@ namespace Bb
         /// <summary>
         /// Gets the evaluator
         /// </summary>
-        public Func<T, object , bool> Evaluate { get; }
+        public Func<T, object , bool>? Evaluate { get; }
 
     }
 
