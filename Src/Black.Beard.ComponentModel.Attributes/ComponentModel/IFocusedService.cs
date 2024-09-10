@@ -3,11 +3,21 @@
 namespace Bb
 {
 
-    public interface IFocusedService
+    /// <summary>
+    /// Project the focused object on target object
+    /// </summary>
+    public interface IFocusedService<T>
     {
 
-        event EventHandler<EventArgs> FocusChanged;
+        /// <summary>
+        /// Listen the focus change
+        /// </summary>
+        event EventHandler<EvaluatorEventArgs<T>> FocusChanged;
 
+        /// <summary>
+        /// Project the object on focus
+        /// </summary>
+        /// <param name="sender"></param>
         void FocusChange(object sender);
 
     }
