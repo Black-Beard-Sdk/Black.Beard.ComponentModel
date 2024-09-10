@@ -17,10 +17,26 @@ namespace Bb
         /// <summary>
         /// Project the object on focus
         /// </summary>
+        /// <param name="sender">object source</param>
         /// <param name="test">Test to evaluate before change the focus</param>
-        /// <param name="sender"></param>
-        void FocusChange(Func<T, object, bool> test, object sender);
+        void FocusChange(object sender, Func<T, object, bool> test);
 
     }
 
+    /// <summary>
+    /// Project the focused object on target object
+    /// </summary>
+    public interface IProjectedService<T>
+    {
+
+        void Register(T service);
+
+        /// <summary>
+        /// Project the object on focus
+        /// </summary>
+        /// <param name="sender">object source</param>
+        /// <param name="test">Test to evaluate before change the focus</param>
+        void FocusChange(Func<T, object> action, Func<T, object, bool> test);
+
+    }
 }
