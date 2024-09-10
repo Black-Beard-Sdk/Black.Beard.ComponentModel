@@ -14,15 +14,26 @@ namespace Bb
         /// Initialize the evaluator event arguments
         /// </summary>
         /// <param name="evaluator"></param>
-        public EvaluatorEventArgs(Func<T, object, bool>? evaluator)
+        public EvaluatorEventArgs(Func<T, object, bool>? evaluator, Action<T, object>? action)
         {
-            Evaluate = evaluator;
+            _evaluate = evaluator;
+            _execute = action;
         }
 
-        /// <summary>
-        /// Gets the evaluator
-        /// </summary>
-        public Func<T, object , bool>? Evaluate { get; }
+        public bool Evaluate(T target, object value)
+        {
+            
+            var result = _evaluate == null || _evaluate(target, value);
+
+            if (result)
+                _execute?.Invoke(target, value);
+
+            return result;
+
+        }
+
+        private readonly Func<T, object, bool> _evaluate;
+        private readonly Action<T, object> _execute;
 
     }
 
