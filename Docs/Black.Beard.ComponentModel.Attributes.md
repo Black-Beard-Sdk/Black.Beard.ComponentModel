@@ -17,8 +17,7 @@
   - [#ctor(type)](#M-Bb-ComponentModel-Attributes-DependOfAttribute-#ctor-System-Type- 'Bb.ComponentModel.Attributes.DependOfAttribute.#ctor(System.Type)')
 - [EnumerationProviderAttribute](#T-Bb-ComponentModel-Attributes-EnumerationProviderAttribute 'Bb.ComponentModel.Attributes.EnumerationProviderAttribute')
 - [EvaluatorEventArgs\`1](#T-Bb-EvaluatorEventArgs`1 'Bb.EvaluatorEventArgs`1')
-  - [#ctor(evaluator)](#M-Bb-EvaluatorEventArgs`1-#ctor-System-Func{`0,System-Object,System-Boolean}- 'Bb.EvaluatorEventArgs`1.#ctor(System.Func{`0,System.Object,System.Boolean})')
-  - [Evaluate](#P-Bb-EvaluatorEventArgs`1-Evaluate 'Bb.EvaluatorEventArgs`1.Evaluate')
+  - [#ctor(evaluator)](#M-Bb-EvaluatorEventArgs`1-#ctor-System-Func{`0,System-Object,System-Boolean},System-Action{`0,System-Object}- 'Bb.EvaluatorEventArgs`1.#ctor(System.Func{`0,System.Object,System.Boolean},System.Action{`0,System.Object})')
 - [ExposeClassAttribute](#T-Bb-ComponentModel-Attributes-ExposeClassAttribute 'Bb.ComponentModel.Attributes.ExposeClassAttribute')
   - [#ctor()](#M-Bb-ComponentModel-Attributes-ExposeClassAttribute-#ctor 'Bb.ComponentModel.Attributes.ExposeClassAttribute.#ctor')
   - [#ctor(context)](#M-Bb-ComponentModel-Attributes-ExposeClassAttribute-#ctor-System-String- 'Bb.ComponentModel.Attributes.ExposeClassAttribute.#ctor(System.String)')
@@ -46,6 +45,7 @@
 - [IBusyService](#T-Bb-IBusyService 'Bb.IBusyService')
 - [IFocusedService\`1](#T-Bb-IFocusedService`1 'Bb.IFocusedService`1')
   - [FocusChange(sender,test)](#M-Bb-IFocusedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean}- 'Bb.IFocusedService`1.FocusChange(System.Object,System.Func{`0,System.Object,System.Boolean})')
+  - [FocusChange(sender,test,action)](#M-Bb-IFocusedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean},System-Action{`0,System-Object}- 'Bb.IFocusedService`1.FocusChange(System.Object,System.Func{`0,System.Object,System.Boolean},System.Action{`0,System.Object})')
 - [IInjectBuilder](#T-Bb-ComponentModel-IInjectBuilder 'Bb.ComponentModel.IInjectBuilder')
   - [FriendlyName](#P-Bb-ComponentModel-IInjectBuilder-FriendlyName 'Bb.ComponentModel.IInjectBuilder.FriendlyName')
   - [Type](#P-Bb-ComponentModel-IInjectBuilder-Type 'Bb.ComponentModel.IInjectBuilder.Type')
@@ -60,7 +60,7 @@
   - [GetItems()](#M-Bb-ComponentModel-DataAnnotations-IListProvider-GetItems 'Bb.ComponentModel.DataAnnotations.IListProvider.GetItems')
   - [GetOriginalValue(item)](#M-Bb-ComponentModel-DataAnnotations-IListProvider-GetOriginalValue-Bb-ComponentModel-DataAnnotations-ListItem- 'Bb.ComponentModel.DataAnnotations.IListProvider.GetOriginalValue(Bb.ComponentModel.DataAnnotations.ListItem)')
 - [IProjectedService\`1](#T-Bb-IProjectedService`1 'Bb.IProjectedService`1')
-  - [FocusChange(sender,test)](#M-Bb-IProjectedService`1-FocusChange-System-Func{`0,System-Object},System-Func{`0,System-Object,System-Boolean}- 'Bb.IProjectedService`1.FocusChange(System.Func{`0,System.Object},System.Func{`0,System.Object,System.Boolean})')
+  - [FocusChange(sender,test)](#M-Bb-IProjectedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean}- 'Bb.IProjectedService`1.FocusChange(System.Object,System.Func{`0,System.Object,System.Boolean})')
 - [ITranslateContainer](#T-Bb-ComponentModel-Translations-ITranslateContainer 'Bb.ComponentModel.Translations.ITranslateContainer')
   - [Add(key)](#M-Bb-ComponentModel-Translations-ITranslateContainer-Add-Bb-ComponentModel-Translations-TranslatedKeyLabel- 'Bb.ComponentModel.Translations.ITranslateContainer.Add(Bb.ComponentModel.Translations.TranslatedKeyLabel)')
   - [Get(key,culture)](#M-Bb-ComponentModel-Translations-ITranslateContainer-Get-Bb-ComponentModel-Translations-TranslatedKeyLabel,System-Globalization-CultureInfo- 'Bb.ComponentModel.Translations.ITranslateContainer.Get(Bb.ComponentModel.Translations.TranslatedKeyLabel,System.Globalization.CultureInfo)')
@@ -282,7 +282,7 @@ Event arguments for evaluator
 | ---- | ----------- |
 | T |  |
 
-<a name='M-Bb-EvaluatorEventArgs`1-#ctor-System-Func{`0,System-Object,System-Boolean}-'></a>
+<a name='M-Bb-EvaluatorEventArgs`1-#ctor-System-Func{`0,System-Object,System-Boolean},System-Action{`0,System-Object}-'></a>
 ### #ctor(evaluator) `constructor`
 
 ##### Summary
@@ -294,13 +294,6 @@ Initialize the evaluator event arguments
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | evaluator | [System.Func{\`0,System.Object,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object,System.Boolean}') |  |
-
-<a name='P-Bb-EvaluatorEventArgs`1-Evaluate'></a>
-### Evaluate `property`
-
-##### Summary
-
-Gets the evaluator
 
 <a name='T-Bb-ComponentModel-Attributes-ExposeClassAttribute'></a>
 ## ExposeClassAttribute `type`
@@ -559,6 +552,21 @@ Project the object on focus
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | object source |
 | test | [System.Func{\`0,System.Object,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object,System.Boolean}') | Test to evaluate before change the focus |
 
+<a name='M-Bb-IFocusedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean},System-Action{`0,System-Object}-'></a>
+### FocusChange(sender,test,action) `method`
+
+##### Summary
+
+Project the object on focus
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | object source |
+| test | [System.Func{\`0,System.Object,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object,System.Boolean}') | Test to evaluate before change the focus |
+| action | [System.Action{\`0,System.Object}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{`0,System.Object}') | method to execute |
+
 <a name='T-Bb-ComponentModel-IInjectBuilder'></a>
 ## IInjectBuilder `type`
 
@@ -731,7 +739,7 @@ Bb
 
 Project the focused object on target object
 
-<a name='M-Bb-IProjectedService`1-FocusChange-System-Func{`0,System-Object},System-Func{`0,System-Object,System-Boolean}-'></a>
+<a name='M-Bb-IProjectedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean}-'></a>
 ### FocusChange(sender,test) `method`
 
 ##### Summary
@@ -742,7 +750,7 @@ Project the object on focus
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Func{\`0,System.Object}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object}') | object source |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | object source |
 | test | [System.Func{\`0,System.Object,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object,System.Boolean}') | Test to evaluate before change the focus |
 
 <a name='T-Bb-ComponentModel-Translations-ITranslateContainer'></a>

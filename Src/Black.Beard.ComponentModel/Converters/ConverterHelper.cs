@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Buffers;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -202,6 +200,16 @@ namespace Bb.Expressions
         }
 
         /// <summary>
+        /// Append new method to register
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="replaceExisting"></param>
+        public static void AppendConverter(this Delegate method, bool replaceExisting = true)
+        {
+            AppendConverters(replaceExisting, method.Method);
+        }
+
+        /// <summary>
         /// /// Add methods in the list of method to be used for conversion
         /// </summary>
         /// <param name="type">type where the method can be found</param>
@@ -263,15 +271,10 @@ namespace Bb.Expressions
 
             bool replace = false;
 
-
-            if (newMethod.SourceType == typeof(Single))
-            {
-                if (newMethod.TargetType == typeof(char))
-                {
-
-                }
-            }
-
+            //if (newMethod.SourceType == typeof(Single))
+            //    if (newMethod.TargetType == typeof(char))
+            //    {
+            //    }
 
             if (newMethod.ToAdd == false)
                 throw new Exception("Method not allowed");

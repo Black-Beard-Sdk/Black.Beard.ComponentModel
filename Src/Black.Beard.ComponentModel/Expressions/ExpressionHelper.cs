@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using ICSharpCode.Decompiler.TypeSystem;
-using System.Xml.Linq;
 using Bb.Converters;
 using System.Text;
 
@@ -255,6 +253,10 @@ namespace Bb.Expressions
             if (sourceType == targetType)
                 return 0;
 
+            var result = ConverterHelper.GetMethodToConvert(sourceType, targetType, out var method);
+            if (result)
+                return 2;
+
             try
             {
                 var e = Expression.Convert(Expression.Parameter(sourceType), targetType);
@@ -262,9 +264,9 @@ namespace Bb.Expressions
             }
             catch (Exception)
             {
-                var result = ConverterHelper.GetMethodToConvert(sourceType, targetType, out var method);
-                if (result)
-                    return 2;
+                //var result = ConverterHelper.GetMethodToConvert(sourceType, targetType, out var method);
+                //if (result)
+                //    return 2;
             }
 
             return -1;

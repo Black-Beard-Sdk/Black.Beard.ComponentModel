@@ -715,6 +715,7 @@
   - [DefaultCultureInfo](#P-Bb-Converters-ConverterContext-DefaultCultureInfo 'Bb.Converters.ConverterContext.DefaultCultureInfo')
 - [ConverterHelper](#T-Bb-Expressions-ConverterHelper 'Bb.Expressions.ConverterHelper')
   - [#cctor()](#M-Bb-Expressions-ConverterHelper-#cctor 'Bb.Expressions.ConverterHelper.#cctor')
+  - [AppendConverter(method,replaceExisting)](#M-Bb-Expressions-ConverterHelper-AppendConverter-System-Delegate,System-Boolean- 'Bb.Expressions.ConverterHelper.AppendConverter(System.Delegate,System.Boolean)')
   - [AppendConverters(type,replaceExisting,bindings)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Type,System-Nullable{System-Boolean},System-Reflection-BindingFlags,System-Func{System-Reflection-MethodInfo,System-Boolean}- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Type,System.Nullable{System.Boolean},System.Reflection.BindingFlags,System.Func{System.Reflection.MethodInfo,System.Boolean})')
   - [AppendConverters(replaceExisting,ms)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Nullable{System-Boolean},System-Reflection-MethodInfo[]- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Nullable{System.Boolean},System.Reflection.MethodInfo[])')
   - [AppendConverters(ms)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Reflection-ConstructorInfo[]- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Reflection.ConstructorInfo[])')
@@ -2035,6 +2036,9 @@
   - [ShowMetadataTokensInBase10](#P-ICSharpCode-Decompiler-Disassembler-MethodBodyDisassembler-ShowMetadataTokensInBase10 'ICSharpCode.Decompiler.Disassembler.MethodBodyDisassembler.ShowMetadataTokensInBase10')
   - [ShowSequencePoints](#P-ICSharpCode-Decompiler-Disassembler-MethodBodyDisassembler-ShowSequencePoints 'ICSharpCode.Decompiler.Disassembler.MethodBodyDisassembler.ShowSequencePoints')
 - [MethodConverter](#T-Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter')
+  - [#ctor(delegate)](#M-Bb-Converters-MethodConverter-#ctor-System-Delegate- 'Bb.Converters.MethodConverter.#ctor(System.Delegate)')
+  - [#ctor(method)](#M-Bb-Converters-MethodConverter-#ctor-System-Reflection-ConstructorInfo- 'Bb.Converters.MethodConverter.#ctor(System.Reflection.ConstructorInfo)')
+  - [#ctor(method)](#M-Bb-Converters-MethodConverter-#ctor-System-Reflection-MethodInfo- 'Bb.Converters.MethodConverter.#ctor(System.Reflection.MethodInfo)')
   - [Case](#P-Bb-Converters-MethodConverter-Case 'Bb.Converters.MethodConverter.Case')
   - [IsGenericConverter](#P-Bb-Converters-MethodConverter-IsGenericConverter 'Bb.Converters.MethodConverter.IsGenericConverter')
   - [IsStatic](#P-Bb-Converters-MethodConverter-IsStatic 'Bb.Converters.MethodConverter.IsStatic')
@@ -2048,6 +2052,9 @@
   - [Equals(obj)](#M-Bb-Converters-MethodConverter-Equals-System-Object- 'Bb.Converters.MethodConverter.Equals(System.Object)')
   - [GetHashCode()](#M-Bb-Converters-MethodConverter-GetHashCode 'Bb.Converters.MethodConverter.GetHashCode')
   - [ToString()](#M-Bb-Converters-MethodConverter-ToString 'Bb.Converters.MethodConverter.ToString')
+  - [op_Implicit(delegate)](#M-Bb-Converters-MethodConverter-op_Implicit-System-Delegate-~Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter.op_Implicit(System.Delegate)~Bb.Converters.MethodConverter')
+  - [op_Implicit(method)](#M-Bb-Converters-MethodConverter-op_Implicit-System-Reflection-MethodInfo-~Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter.op_Implicit(System.Reflection.MethodInfo)~Bb.Converters.MethodConverter')
+  - [op_Implicit(method)](#M-Bb-Converters-MethodConverter-op_Implicit-System-Reflection-ConstructorInfo-~Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter.op_Implicit(System.Reflection.ConstructorInfo)~Bb.Converters.MethodConverter')
 - [MethodDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-MethodDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.MethodDeclaration')
   - [PrivateImplementationType](#P-ICSharpCode-Decompiler-CSharp-Syntax-MethodDeclaration-PrivateImplementationType 'ICSharpCode.Decompiler.CSharp.Syntax.MethodDeclaration.PrivateImplementationType')
 - [MethodDiscovery](#T-Bb-ComponentModel-MethodDiscovery 'Bb.ComponentModel.MethodDiscovery')
@@ -2468,6 +2475,9 @@
   - [ToTypeReference(type)](#M-ICSharpCode-Decompiler-TypeSystem-ReflectionHelper-ToTypeReference-System-Type- 'ICSharpCode.Decompiler.TypeSystem.ReflectionHelper.ToTypeReference(System.Type)')
   - [ToTypeReference(typeCode)](#M-ICSharpCode-Decompiler-TypeSystem-ReflectionHelper-ToTypeReference-System-TypeCode- 'ICSharpCode.Decompiler.TypeSystem.ReflectionHelper.ToTypeReference(System.TypeCode)')
 - [ReflectionNameParseException](#T-ICSharpCode-Decompiler-TypeSystem-ReflectionNameParseException 'ICSharpCode.Decompiler.TypeSystem.ReflectionNameParseException')
+- [ReflexionHelper](#T-Bb-Expressions-ReflexionHelper 'Bb.Expressions.ReflexionHelper')
+  - [GetMethodList(self)](#M-Bb-Expressions-ReflexionHelper-GetMethodList-System-Type- 'Bb.Expressions.ReflexionHelper.GetMethodList(System.Type)')
+  - [GetMethods(self,filter)](#M-Bb-Expressions-ReflexionHelper-GetMethods-System-Type,System-Func{System-Reflection-MethodInfo,System-Boolean}- 'Bb.Expressions.ReflexionHelper.GetMethods(System.Type,System.Func{System.Reflection.MethodInfo,System.Boolean})')
 - [RemoveCLSCompliantAttribute](#T-ICSharpCode-Decompiler-CSharp-Transforms-RemoveCLSCompliantAttribute 'ICSharpCode.Decompiler.CSharp.Transforms.RemoveCLSCompliantAttribute')
 - [RemoveCompilerGeneratedAssemblyAttributes](#T-ICSharpCode-Decompiler-CSharp-Transforms-RemoveCompilerGeneratedAssemblyAttributes 'ICSharpCode.Decompiler.CSharp.Transforms.RemoveCompilerGeneratedAssemblyAttributes')
 - [RemoveDeadVariableInit](#T-ICSharpCode-Decompiler-IL-Transforms-RemoveDeadVariableInit 'ICSharpCode.Decompiler.IL.Transforms.RemoveDeadVariableInit')
@@ -11392,6 +11402,20 @@ Constructor
 ##### Parameters
 
 This method has no parameters.
+
+<a name='M-Bb-Expressions-ConverterHelper-AppendConverter-System-Delegate,System-Boolean-'></a>
+### AppendConverter(method,replaceExisting) `method`
+
+##### Summary
+
+Append new method to register
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| method | [System.Delegate](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Delegate 'System.Delegate') |  |
+| replaceExisting | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
 
 <a name='M-Bb-Expressions-ConverterHelper-AppendConverters-System-Type,System-Nullable{System-Boolean},System-Reflection-BindingFlags,System-Func{System-Reflection-MethodInfo,System-Boolean}-'></a>
 ### AppendConverters(type,replaceExisting,bindings) `method`
@@ -26981,6 +27005,49 @@ Show sequence points if debug information is loaded in Cecil.
 
 Bb.Converters
 
+##### Summary
+
+package data for conversion
+
+<a name='M-Bb-Converters-MethodConverter-#ctor-System-Delegate-'></a>
+### #ctor(delegate) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [MethodConverter](#T-Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| delegate | [System.Delegate](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Delegate 'System.Delegate') | method to use for convert |
+
+<a name='M-Bb-Converters-MethodConverter-#ctor-System-Reflection-ConstructorInfo-'></a>
+### #ctor(method) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [MethodConverter](#T-Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| method | [System.Reflection.ConstructorInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.ConstructorInfo 'System.Reflection.ConstructorInfo') |  |
+
+<a name='M-Bb-Converters-MethodConverter-#ctor-System-Reflection-MethodInfo-'></a>
+### #ctor(method) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [MethodConverter](#T-Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| method | [System.Reflection.MethodInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodInfo 'System.Reflection.MethodInfo') |  |
+
 <a name='P-Bb-Converters-MethodConverter-Case'></a>
 ### Case `property`
 
@@ -27097,6 +27164,45 @@ Returns a string that represents the current object.
 ##### Parameters
 
 This method has no parameters.
+
+<a name='M-Bb-Converters-MethodConverter-op_Implicit-System-Delegate-~Bb-Converters-MethodConverter'></a>
+### op_Implicit(delegate) `method`
+
+##### Summary
+
+implicit conversion from [](#!-delegate 'delegate') to [MethodConverter](#T-Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| delegate | [System.Delegate)~Bb.Converters.MethodConverter](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Delegate)~Bb.Converters.MethodConverter 'System.Delegate)~Bb.Converters.MethodConverter') |  |
+
+<a name='M-Bb-Converters-MethodConverter-op_Implicit-System-Reflection-MethodInfo-~Bb-Converters-MethodConverter'></a>
+### op_Implicit(method) `method`
+
+##### Summary
+
+Implicit conversion from [MethodInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodInfo 'System.Reflection.MethodInfo') to [MethodConverter](#T-Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| method | [System.Reflection.MethodInfo)~Bb.Converters.MethodConverter](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodInfo)~Bb.Converters.MethodConverter 'System.Reflection.MethodInfo)~Bb.Converters.MethodConverter') |  |
+
+<a name='M-Bb-Converters-MethodConverter-op_Implicit-System-Reflection-ConstructorInfo-~Bb-Converters-MethodConverter'></a>
+### op_Implicit(method) `method`
+
+##### Summary
+
+Implicit conversion from [ConstructorInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.ConstructorInfo 'System.Reflection.ConstructorInfo') to [MethodConverter](#T-Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| method | [System.Reflection.ConstructorInfo)~Bb.Converters.MethodConverter](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.ConstructorInfo)~Bb.Converters.MethodConverter 'System.Reflection.ConstructorInfo)~Bb.Converters.MethodConverter') |  |
 
 <a name='T-ICSharpCode-Decompiler-CSharp-Syntax-MethodDeclaration'></a>
 ## MethodDeclaration `type`
@@ -31766,6 +31872,48 @@ ICSharpCode.Decompiler.TypeSystem
 ##### Summary
 
 Represents an error while parsing a reflection name.
+
+<a name='T-Bb-Expressions-ReflexionHelper'></a>
+## ReflexionHelper `type`
+
+##### Namespace
+
+Bb.Expressions
+
+<a name='M-Bb-Expressions-ReflexionHelper-GetMethodList-System-Type-'></a>
+### GetMethodList(self) `method`
+
+##### Summary
+
+return methods
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+
+<a name='M-Bb-Expressions-ReflexionHelper-GetMethods-System-Type,System-Func{System-Reflection-MethodInfo,System-Boolean}-'></a>
+### GetMethods(self,filter) `method`
+
+##### Summary
+
+Return method list
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| filter | [System.Func{System.Reflection.MethodInfo,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Reflection.MethodInfo,System.Boolean}') |  |
 
 <a name='T-ICSharpCode-Decompiler-CSharp-Transforms-RemoveCLSCompliantAttribute'></a>
 ## RemoveCLSCompliantAttribute `type`

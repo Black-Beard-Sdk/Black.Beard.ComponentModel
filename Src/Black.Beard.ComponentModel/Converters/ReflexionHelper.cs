@@ -23,12 +23,23 @@ namespace Bb.Expressions
             return self.GetMethod(name, genericCount, BindingFlags.Static | BindingFlags.NonPublic, null, parameterTypes, null);
         }
 
-        public static MethodInfo[] GetMethod(this Type self, Func<MethodInfo, bool> filter)
+        /// <summary>
+        /// Return method list
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public static MethodInfo[] GetMethods(this Type self, Func<MethodInfo, bool> filter)
         {
             return self.GetMethods(BindingFlags.Static | BindingFlags.NonPublic).Where(filter).ToArray();
         }
 
-        public static MethodInfo[] GetMethod(this Type self)
+        /// <summary>
+        /// return methods
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static MethodInfo[] GetMethodList(this Type self)
         {
             return self.GetMethods(BindingFlags.Static | BindingFlags.NonPublic);
         }

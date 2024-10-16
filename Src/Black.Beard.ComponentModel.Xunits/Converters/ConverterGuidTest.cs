@@ -1,9 +1,5 @@
 ﻿using Bb.Expressions;
-using Newtonsoft.Json.Serialization;
 using System;
-using System.Data;
-using System.Reflection;
-using System.Text;
 using Xunit;
 
 namespace Black.Beard.Converters
@@ -53,6 +49,7 @@ namespace Black.Beard.Converters
 
 
     }
+
 
 
 }

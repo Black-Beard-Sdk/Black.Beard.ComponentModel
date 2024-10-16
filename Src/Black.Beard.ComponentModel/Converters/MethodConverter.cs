@@ -9,14 +9,36 @@ using System.Text;
 namespace Bb.Converters
 {
 
+    /// <summary>
+    /// package data for conversion
+    /// </summary>
     public class MethodConverter
     {
 
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MethodConverter"/> class.
+        /// </summary>
+        /// <param name="delegate">method to use for convert</param>
+        public MethodConverter(Delegate @delegate)
+            : this(@delegate.Method)
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MethodConverter"/> class.
+        /// </summary>
+        /// <param name="method"></param>
         public MethodConverter(ConstructorInfo method)
             : this(method, method.DeclaringType)
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MethodConverter"/> class.
+        /// </summary>
+        /// <param name="method"></param>
         public MethodConverter(MethodInfo method)
             : this(method, method.ReturnType)
         {
@@ -110,9 +132,6 @@ namespace Bb.Converters
 
         }
 
-        private HashSet<Type> _sourceExcludes = new HashSet<Type>() { typeof(ReadOnlySpan<>), typeof(void) };
-        private HashSet<Type> _targetExcludes = new HashSet<Type>() { typeof(void) };
-
         /// <summary>
         /// Gets the method to use.
         /// </summary>
@@ -193,6 +212,38 @@ namespace Bb.Converters
         {
             return Method.GetHashCode();
         }
+
+        /// <summary>
+        /// implicit conversion from <see cref="delegate"/> to <see cref="MethodConverter"/>
+        /// </summary>
+        /// <param name="delegate"></param>
+
+        public static implicit operator MethodConverter(Delegate @delegate)
+        {
+            return new MethodConverter(@delegate);
+        }
+
+        /// <summary>
+        /// Implicit conversion from <see cref="MethodInfo"/> to <see cref="MethodConverter"/>
+        /// </summary>
+        /// <param name="method"></param>
+        public static implicit operator MethodConverter(MethodInfo method)
+        {
+            return new MethodConverter(method);
+        }
+
+        /// <summary>
+        /// Implicit conversion from <see cref="ConstructorInfo"/> to <see cref="MethodConverter"/>
+        /// </summary>
+        /// <param name="method"></param>
+        public static implicit operator MethodConverter(ConstructorInfo method)
+        {
+            return new MethodConverter(method);
+        }
+
+
+        private HashSet<Type> _sourceExcludes = new HashSet<Type>() { typeof(ReadOnlySpan<>), typeof(void) };
+        private HashSet<Type> _targetExcludes = new HashSet<Type>() { typeof(void) };
 
     }
 
