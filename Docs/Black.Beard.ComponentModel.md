@@ -50,7 +50,7 @@
   - [Type](#P-Bb-ComponentModel-Accessors-AccessorItem-Type 'Bb.ComponentModel.Accessors.AccessorItem.Type')
   - [TypeEnum](#P-Bb-ComponentModel-Accessors-AccessorItem-TypeEnum 'Bb.ComponentModel.Accessors.AccessorItem.TypeEnum')
   - [ContainsAttribute\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1 'Bb.ComponentModel.Accessors.AccessorItem.ContainsAttribute``1')
-  - [ConvertAndSetValue(instance,value)](#M-Bb-ComponentModel-Accessors-AccessorItem-ConvertAndSetValue-System-Object,System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.ConvertAndSetValue(System.Object,System.Object)')
+  - [ConvertBeforeSettingValue(instance,value)](#M-Bb-ComponentModel-Accessors-AccessorItem-ConvertBeforeSettingValue-System-Object,System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.ConvertBeforeSettingValue(System.Object,System.Object)')
   - [GetAttributes()](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes')
   - [GetAttributes\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes``1')
   - [GetPropertiesImpl(componentType,strategy)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetPropertiesImpl-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.AccessorItem.GetPropertiesImpl(System.Type,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
@@ -1082,6 +1082,8 @@
   - [CallInstance(args)](#M-Bb-ComponentModel-Factories-Factory`1-CallInstance-System-Object[]- 'Bb.ComponentModel.Factories.Factory`1.CallInstance(System.Object[])')
   - [Reset(args)](#M-Bb-ComponentModel-Factories-Factory`1-Reset 'Bb.ComponentModel.Factories.Factory`1.Reset')
 - [FakeMember](#T-ICSharpCode-Decompiler-TypeSystem-Implementation-FakeMember 'ICSharpCode.Decompiler.TypeSystem.Implementation.FakeMember')
+- [FieldAccessor](#T-Bb-ComponentModel-Accessors-FieldAccessor 'Bb.ComponentModel.Accessors.FieldAccessor')
+  - [#ctor(componentType,field)](#M-Bb-ComponentModel-Accessors-FieldAccessor-#ctor-System-Type,System-Reflection-FieldInfo,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.FieldAccessor.#ctor(System.Type,System.Reflection.FieldInfo,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
 - [FindResultType](#T-ICSharpCode-Decompiler-IL-Transforms-ILInlining-FindResultType 'ICSharpCode.Decompiler.IL.Transforms.ILInlining.FindResultType')
   - [Continue](#F-ICSharpCode-Decompiler-IL-Transforms-ILInlining-FindResultType-Continue 'ICSharpCode.Decompiler.IL.Transforms.ILInlining.FindResultType.Continue')
   - [Deconstruction](#F-ICSharpCode-Decompiler-IL-Transforms-ILInlining-FindResultType-Deconstruction 'ICSharpCode.Decompiler.IL.Transforms.ILInlining.FindResultType.Deconstruction')
@@ -2421,8 +2423,6 @@
   - [ProjectName](#P-ICSharpCode-Decompiler-Solution-ProjectItem-ProjectName 'ICSharpCode.Decompiler.Solution.ProjectItem.ProjectName')
 - [PropertyAccessor](#T-Bb-ComponentModel-Accessors-PropertyAccessor 'Bb.ComponentModel.Accessors.PropertyAccessor')
   - [#ctor(componentType,property)](#M-Bb-ComponentModel-Accessors-PropertyAccessor-#ctor-System-Type,System-Reflection-PropertyInfo,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.PropertyAccessor.#ctor(System.Type,System.Reflection.PropertyInfo,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
-  - [GetProperties(componentType,withSubType)](#M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperties-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.PropertyAccessor.GetProperties(System.Type,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
-  - [GetProperty(componentType,name)](#M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperty-System-Type,System-String,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.PropertyAccessor.GetProperty(System.Type,System.String,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
 - [PropertyBinder\`2](#T-Bb-ComponentModel-Binders-PropertyBinder`2 'Bb.ComponentModel.Binders.PropertyBinder`2')
   - [#ctor()](#M-Bb-ComponentModel-Binders-PropertyBinder`2-#ctor 'Bb.ComponentModel.Binders.PropertyBinder`2.#ctor')
   - [Bind\`\`1(expression,action)](#M-Bb-ComponentModel-Binders-PropertyBinder`2-Bind``1-System-Linq-Expressions-Expression{System-Func{`0,``0}},System-Action{`1,``0}- 'Bb.ComponentModel.Binders.PropertyBinder`2.Bind``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Action{`1,``0})')
@@ -3640,8 +3640,8 @@ This method has no parameters.
 | ---- | ----------- |
 | T |  |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ConvertAndSetValue-System-Object,System-Object-'></a>
-### ConvertAndSetValue(instance,value) `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ConvertBeforeSettingValue-System-Object,System-Object-'></a>
+### ConvertBeforeSettingValue(instance,value) `method`
 
 ##### Summary
 
@@ -16026,6 +16026,32 @@ ICSharpCode.Decompiler.TypeSystem.Implementation
 ##### Summary
 
 Base class for fake members.
+
+<a name='T-Bb-ComponentModel-Accessors-FieldAccessor'></a>
+## FieldAccessor `type`
+
+##### Namespace
+
+Bb.ComponentModel.Accessors
+
+##### Summary
+
+Field Accessor 
+Field Accessor
+
+<a name='M-Bb-ComponentModel-Accessors-FieldAccessor-#ctor-System-Type,System-Reflection-FieldInfo,Bb-ComponentModel-Accessors-AccessorStrategyEnum-'></a>
+### #ctor(componentType,field) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [PropertyAccessor](#T-Bb-ComponentModel-Accessors-PropertyAccessor 'Bb.ComponentModel.Accessors.PropertyAccessor') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| componentType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type of the component. |
+| field | [System.Reflection.FieldInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.FieldInfo 'System.Reflection.FieldInfo') | The property. |
 
 <a name='T-ICSharpCode-Decompiler-IL-Transforms-ILInlining-FindResultType'></a>
 ## FindResultType `type`
@@ -31094,42 +31120,6 @@ Initializes a new instance of the [PropertyAccessor](#T-Bb-ComponentModel-Access
 | ---- | ---- | ----------- |
 | componentType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type of the component. |
 | property | [System.Reflection.PropertyInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.PropertyInfo 'System.Reflection.PropertyInfo') | The property. |
-
-<a name='M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperties-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum-'></a>
-### GetProperties(componentType,withSubType) `method`
-
-##### Summary
-
-Gets the specified component type.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| componentType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type of the component. |
-| withSubType | [Bb.ComponentModel.Accessors.AccessorStrategyEnum](#T-Bb-ComponentModel-Accessors-AccessorStrategyEnum 'Bb.ComponentModel.Accessors.AccessorStrategyEnum') | if set to `true` [with sub type]. |
-
-<a name='M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperty-System-Type,System-String,Bb-ComponentModel-Accessors-AccessorStrategyEnum-'></a>
-### GetProperty(componentType,name) `method`
-
-##### Summary
-
-Gets the specified component type.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| componentType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type of the component. |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name. |
 
 <a name='T-Bb-ComponentModel-Binders-PropertyBinder`2'></a>
 ## PropertyBinder\`2 `type`

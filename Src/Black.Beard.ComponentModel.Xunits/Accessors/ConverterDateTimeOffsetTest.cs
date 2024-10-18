@@ -82,12 +82,37 @@ namespace Black.Beard.Accessors
         }
 
 
+        [Fact]
+        public void Test4()
+        {
+
+            string expected = Guid.NewGuid().ToString();
+
+            var cls = new Cls2() { };
+
+            var list = typeof(Cls2).GetAccessors(AccessorStrategyEnum.Direct);
+
+            list[nameof(Cls2.Name)].SetValue(cls, expected);
+            var value = list[nameof(Cls1.Name)].GetValue(cls);
+
+            Assert.Equal(expected.ToString(), value);
+
+        }
+
+
     }
 
     public class Cls1
     {
 
         public string Name { get; set; }
+
+    }
+
+    public class Cls2
+    {
+
+        public string Name;
 
     }
 

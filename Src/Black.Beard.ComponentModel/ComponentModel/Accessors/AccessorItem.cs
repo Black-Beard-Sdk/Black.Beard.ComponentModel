@@ -212,6 +212,10 @@ namespace Bb.ComponentModel.Accessors
                             if (!list.ContainsKey(item.Name))
                                 list.Add(new PropertyAccessor(componentType, item, strategy));
 
+                        foreach (FieldInfo item in AccessorList.GetFields(componentType))
+                            if (!list.ContainsKey(item.Name))
+                                list.Add(new FieldAccessor(componentType, item, strategy));
+
                         _accessors.Add(componentType, list);
 
                     }
