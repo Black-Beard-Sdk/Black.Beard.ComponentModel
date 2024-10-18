@@ -1,9 +1,30 @@
-﻿using System;
+﻿using Bb.Expressions;
+using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Bb.ComponentModel.Accessors
 {
+
+
+    public static class AccessorExtensions
+    {
+
+
+        /// <summary>
+        /// Returns the property accessor list.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="strategy"></param>
+        /// <returns></returns>
+        public static AccessorList GetAccessors(this Type type, AccessorStrategyEnum strategy = AccessorStrategyEnum.Direct)
+        {
+            return PropertyAccessor.GetProperties(type, strategy);
+        }
+    
+    }
+
+
     /// <summary>
     /// Property Accessor 
     /// </summary>
@@ -16,8 +37,8 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <param name="componentType">Type of the component.</param>
         /// <param name="property">The property.</param>
-        internal PropertyAccessor(Type componentType, PropertyInfo property)
-            : base(MemberTypeEnum.Property)
+        internal PropertyAccessor(Type componentType, PropertyInfo property, AccessorStrategyEnum strategy)
+            : base(MemberTypeEnum.Property, strategy)
         {
 
             this.Member = property;
@@ -31,22 +52,15 @@ namespace Bb.ComponentModel.Accessors
 
             if (property.CanRead)
             {
-                var sourceParameterExpr = Expression.Parameter(typeof(object), "i");
+                switch (strategy)
+                {
+                    case AccessorStrategyEnum.ConvertSettingIfDifferent:
+                    case AccessorStrategyEnum.Direct:
+                    default:
+                        this.GetValue = GetDirect(componentType, property);
+                        break;
+                }
 
-                this.GetValue =
-                Expression.Lambda<Func<object, object>>
-                (
-                    Expression.Convert
-                    (
-                        Expression.Property
-                        (
-                            this.IsStatic ? null : Expression.Convert(sourceParameterExpr, componentType),
-                            property
-                        ),
-                        typeof(object)
-                    ),
-                    sourceParameterExpr
-                ).Compile();
             }
 
             #endregion
@@ -55,30 +69,103 @@ namespace Bb.ComponentModel.Accessors
 
             if (property.CanWrite)
             {
+                switch (strategy)
+                {
 
-                var targetObjectParameter = Expression.Parameter(typeof(object), "i");
-                var convertedObjectParameter = Expression.ConvertChecked(targetObjectParameter, componentType);
-                var valueParameter = Expression.Parameter(typeof(object), "value");
-                var convertedValueParameter = Expression.ConvertChecked(valueParameter, property.PropertyType);
-                var propertyExpression = Expression.Property(this.IsStatic ? null : convertedObjectParameter, property);
+                    case AccessorStrategyEnum.ConvertSettingIfDifferent:
+                        SetValue = SetConvertIfDifferentDirect(componentType, property);
+                        break;
 
-                SetValue =
-                Expression.Lambda<Action<object, object>>
-                (
-                    Expression.Assign
-                    (
-                        propertyExpression,
-                        convertedValueParameter
-                    ),
-                    targetObjectParameter,
-                    valueParameter
-                ).Compile();
-
+                    case AccessorStrategyEnum.Direct:
+                    default:
+                        SetValue = SetDirect(componentType, property);
+                        break;
+                }
             }
 
             #endregion
 
         }
+
+        #region Generators
+
+        private Action<object, object> SetDirect(Type componentType, PropertyInfo property)
+        {
+
+            var targetObjectParameter = Expression.Parameter(typeof(object), "i");
+            var convertedObjectParameter = Expression.ConvertChecked(targetObjectParameter, componentType);
+            var valueParameter = Expression.Parameter(typeof(object), "value");
+            var convertedValueParameter = Expression.ConvertChecked(valueParameter, property.PropertyType);
+            var propertyExpression = Expression.Property(this.IsStatic ? null : convertedObjectParameter, property);
+
+            var e = Expression.Lambda<Action<object, object>>
+            (
+                Expression.Assign
+                (
+                    propertyExpression,
+                    convertedValueParameter
+                ),
+                targetObjectParameter,
+                valueParameter
+            );
+
+            return e.Compile();
+
+        }
+
+        private Action<object, object> SetConvertIfDifferentDirect(Type componentType, PropertyInfo property)
+        {
+
+            Delegate converterMethod = ConverterHelper.ConvertTo;
+
+            var targetObjectParameter = Expression.Parameter(typeof(object), "i");
+            var convertedObjectParameter = Expression.ConvertChecked(targetObjectParameter, componentType);
+            var valueParameter = Expression.Parameter(typeof(object), "value");
+            var propertyExpression = Expression.Property(this.IsStatic ? null : convertedObjectParameter, property);
+            var converter = Expression.Call(converterMethod.Method, valueParameter, property.PropertyType.AsConstant());
+
+            var e = Expression.Lambda<Action<object, object>>
+            (
+                Expression.Assign
+                (
+                    propertyExpression,
+                    Expression.Convert(converter, property.PropertyType)
+                ),
+                targetObjectParameter,
+                valueParameter
+            );
+
+            return e.Compile();
+
+        }
+
+        private Func<object, object> GetDirect(Type componentType, PropertyInfo property)
+        {
+
+            var sourceParameterExpr = Expression.Parameter(typeof(object), "i");
+
+            var e = Expression.Lambda<Func<object, object>>
+            (
+                Expression.Convert
+                (
+                    Expression.Property
+                    (
+                        this.IsStatic ? null : Expression.Convert(sourceParameterExpr, componentType),
+                        property
+                    ),
+                    typeof(object)
+                ),
+                sourceParameterExpr
+
+            );
+
+            return e.Compile();
+
+        }
+
+        #endregion Generators
+
+
 
         /// <summary>
         /// Gets the specified component type.
@@ -86,29 +173,29 @@ namespace Bb.ComponentModel.Accessors
         /// <param name="componentType">Type of the component.</param>
         /// <param name="name">The name.</param>
         /// <returns></returns>
-        public static PropertyAccessor GetProperty(Type componentType, string name)
+        public static PropertyAccessor GetProperty(Type componentType, string name, AccessorStrategyEnum strategy = AccessorStrategyEnum.Direct)
         {
             AccessorList list = null;
             PropertyAccessor accessor = null;
 
-            list = Get(componentType, string.IsNullOrEmpty(name));
+            list = GetPropertiesImpl(componentType, strategy);
 
             if (list.ContainsKey(name))
                 accessor = list[name] as PropertyAccessor;
 
-            else
-                lock (list._lock)
-                {
-                    if (list.ContainsKey(name))
-                        accessor = list[name] as PropertyAccessor;
-                    else
-                    {
-                        var property = componentType.GetProperty(name);
-                        if (property != null)
-                            list.Add((accessor = new PropertyAccessor(componentType, property)));
+            //else
+            //    lock (list._lock)
+            //    {
+            //        if (list.ContainsKey(name))
+            //            accessor = list[name] as PropertyAccessor;
+            //        else
+            //        {
+            //            var property = componentType.GetProperty(name);
+            //            if (property != null)
+            //                list.Add((accessor = new PropertyAccessor(componentType, property, strategy)));
 
-                    }
-                }
+            //        }
+            //    }
 
             return accessor;
 
@@ -120,43 +207,24 @@ namespace Bb.ComponentModel.Accessors
         /// <param name="componentType">Type of the component.</param>
         /// <param name="withSubType">if set to <c>true</c> [with sub type].</param>
         /// <returns></returns>
-        public static AccessorList GetProperties(Type componentType, bool withSubType = false)
+        public static AccessorList GetProperties(Type componentType, AccessorStrategyEnum strategy = AccessorStrategyEnum.Direct)
         {
-
-            AccessorList list = null;
-
-            if (_accessors.ContainsKey(componentType))
-                list = _accessors[componentType];
-
-            else
-            {
-                lock (_lock)
-                {
-
-                    if (_accessors.ContainsKey(componentType))
-                        list = _accessors[componentType];
-
-                    else
-                    {
-
-                        list = new AccessorList();
-
-                        foreach (PropertyInfo item in AccessorList.GetProperties(componentType))
-                            if (withSubType || item.DeclaringType == componentType && !list.ContainsKey(item.Name))
-                                list.Add(new PropertyAccessor(componentType, item));
-
-                        _accessors.Add(componentType, list);
-
-                    }
-                }
-            }
-
+            AccessorList list = GetPropertiesImpl(componentType, strategy);
             return list;
-
         }
 
 
     }
 
+    public enum AccessorStrategyEnum
+    {
+
+        /// <summary>
+        /// direct copy of the value in the property
+        /// </summary>
+        Direct,
+        ConvertSettingIfDifferent,
+
+    }
 
 }

@@ -18,23 +18,16 @@ namespace Bb.ComponentModel.Accessors
     {
 
         /// <summary>
-        /// The _accessors
-        /// </summary>
-        protected static Dictionary<Type, AccessorList> _accessors = new Dictionary<Type, AccessorList>();
-        /// <summary>
-        /// The _lock
-        /// </summary>
-        protected static volatile object _lock = new object();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AccessorItem"/> class.
         /// </summary>
         /// <param name="memberTypeEnum">The member type enum.</param>
-        protected AccessorItem(MemberTypeEnum memberTypeEnum)
+        protected AccessorItem(MemberTypeEnum memberTypeEnum, AccessorStrategyEnum strategy)
         {
             // TODO: Complete member initialization
             this.TypeEnum = memberTypeEnum;
+            this.Strategy = strategy;
         }
+
 
         #region Properties
 
@@ -44,7 +37,12 @@ namespace Bb.ComponentModel.Accessors
         /// <value>
         /// The type enum.
         /// </value>
-        public MemberTypeEnum TypeEnum { get; protected set; }
+        public MemberTypeEnum TypeEnum { get; }
+
+        /// <summary>
+        /// Gets the strategy accessor.
+        /// </summary>
+        public AccessorStrategyEnum Strategy { get; }
 
         /// <summary>
         /// Gets a value indicating whether [can write].
@@ -79,14 +77,47 @@ namespace Bb.ComponentModel.Accessors
         public Func<object, object> GetValue { get; protected set; }
 
         /// <summary>
-        /// Gets the typed value.
+        /// Gets the typed value converted in specified type.
         /// </summary>
-        /// <typeparam name="T1">The type of the 1.</typeparam>
-        /// <param name="item">The item.</param>
+        /// <typeparam name="T1">The type of the returned value.</typeparam>
+        /// <param name="instance">The instance.</param>
         /// <returns></returns>
-        public T1 GetTypedValue<T1>(object item)
+        public T1 GetTypedValue<T1>(object instance)
         {
-            return (T1)GetValue(item);
+
+            var result = GetValue(instance);
+            if (result is T1 t)
+                return t;
+
+            if (result != null)
+            {
+                var t2 = (T1)Expressions.ConverterHelper.ConvertTo(result, typeof(T1));
+                return t2;
+            }
+
+            return default;
+            
+        }
+
+        /// <summary>
+        /// Convert value before setting it.
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <param name="value"></param>
+        public void ConvertBeforeSettingValue(object instance, object value)
+        {
+
+            if (value == null)
+            {
+                SetValue(instance, null);
+                return;
+            }
+
+            if (value.GetType() != this.Type)
+                value = Expressions.ConverterHelper.ConvertTo(value, this.Type);
+
+            SetValue(instance, value);
+
         }
 
         /// <summary>
@@ -149,12 +180,17 @@ namespace Bb.ComponentModel.Accessors
         /// Gets the specified component type.
         /// </summary>
         /// <param name="componentType">Type of the component.</param>
-        /// <param name="withPropertiesEmbeddedInSubType">if set to <c>true</c> [with sub type].</param>
+        /// <param name="strategy">strategy to use</param>
         /// <returns></returns>
-        internal static AccessorList Get(Type componentType, bool withPropertiesEmbeddedInSubType = false)
+        internal static AccessorList GetPropertiesImpl(Type componentType, AccessorStrategyEnum strategy)
         {
 
             AccessorList list = null;
+
+            if (!_strategyPropertiesAccessors.TryGetValue(strategy, out var _accessors))
+                lock (_lock)
+                    if (!_strategyPropertiesAccessors.TryGetValue(strategy, out _accessors))
+                        _strategyPropertiesAccessors.Add(strategy, _accessors = new Dictionary<Type, AccessorList>());
 
             if (_accessors.ContainsKey(componentType))
                 list = _accessors[componentType];
@@ -173,8 +209,8 @@ namespace Bb.ComponentModel.Accessors
                         list = new AccessorList();
 
                         foreach (PropertyInfo item in AccessorList.GetProperties(componentType))
-                            if (withPropertiesEmbeddedInSubType || item.DeclaringType == componentType && !list.ContainsKey(item.Name))
-                                list.Add(new PropertyAccessor(componentType, item));
+                            if (!list.ContainsKey(item.Name))
+                                list.Add(new PropertyAccessor(componentType, item, strategy));
 
                         _accessors.Add(componentType, list);
 
@@ -202,7 +238,7 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <returns></returns>
         public IEnumerable<T> GetAttributes<T>()
-            where T : Attribute        
+            where T : Attribute
         {
             var attributes = GetAttributes();
             return attributes.OfType<T>().ToList();
@@ -439,6 +475,16 @@ namespace Bb.ComponentModel.Accessors
         string _displayDesciption = null;
         private bool? _required = null;
         private dynamic _defaultValue = null;
+
+
+        /// <summary>
+        /// The _accessors
+        /// </summary>
+        private static Dictionary<AccessorStrategyEnum, Dictionary<Type, AccessorList>> _strategyPropertiesAccessors = new Dictionary<AccessorStrategyEnum, Dictionary<Type, AccessorList>>();
+        /// <summary>
+        /// The _lock
+        /// </summary>
+        private static volatile object _lock = new object();
 
         #endregion private
 

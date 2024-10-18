@@ -30,7 +30,7 @@ namespace Bb.ComponentModel.Binders
 
             this._source = source as INotifyPropertyChanged;
             this._source.PropertyChanged += _source_PropertyChanged;
-            _sourceReader = AccessorItem.Get(typeof(TSource));
+            _sourceReader = AccessorItem.GetPropertiesImpl(typeof(TSource), AccessorStrategyEnum.Direct);
             if (_source is IDisposed disposed1)
                 disposed1.Disposed += Source_Disposed;
 

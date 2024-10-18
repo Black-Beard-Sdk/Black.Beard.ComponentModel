@@ -25,10 +25,12 @@
   - [Union()](#M-ICSharpCode-Decompiler-TypeSystem-AccessibilityExtensions-Union-ICSharpCode-Decompiler-TypeSystem-Accessibility,ICSharpCode-Decompiler-TypeSystem-Accessibility- 'ICSharpCode.Decompiler.TypeSystem.AccessibilityExtensions.Union(ICSharpCode.Decompiler.TypeSystem.Accessibility,ICSharpCode.Decompiler.TypeSystem.Accessibility)')
 - [Accessor](#T-ICSharpCode-Decompiler-CSharp-Syntax-Accessor 'ICSharpCode.Decompiler.CSharp.Syntax.Accessor')
   - [Keyword](#P-ICSharpCode-Decompiler-CSharp-Syntax-Accessor-Keyword 'ICSharpCode.Decompiler.CSharp.Syntax.Accessor.Keyword')
+- [AccessorExtensions](#T-Bb-ComponentModel-Accessors-AccessorExtensions 'Bb.ComponentModel.Accessors.AccessorExtensions')
+  - [GetAccessors(type,strategy)](#M-Bb-ComponentModel-Accessors-AccessorExtensions-GetAccessors-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.AccessorExtensions.GetAccessors(System.Type,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
 - [AccessorItem](#T-Bb-ComponentModel-Accessors-AccessorItem 'Bb.ComponentModel.Accessors.AccessorItem')
-  - [#ctor(memberTypeEnum)](#M-Bb-ComponentModel-Accessors-AccessorItem-#ctor-Bb-ComponentModel-Accessors-MemberTypeEnum- 'Bb.ComponentModel.Accessors.AccessorItem.#ctor(Bb.ComponentModel.Accessors.MemberTypeEnum)')
-  - [_accessors](#F-Bb-ComponentModel-Accessors-AccessorItem-_accessors 'Bb.ComponentModel.Accessors.AccessorItem._accessors')
+  - [#ctor(memberTypeEnum)](#M-Bb-ComponentModel-Accessors-AccessorItem-#ctor-Bb-ComponentModel-Accessors-MemberTypeEnum,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.AccessorItem.#ctor(Bb.ComponentModel.Accessors.MemberTypeEnum,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
   - [_lock](#F-Bb-ComponentModel-Accessors-AccessorItem-_lock 'Bb.ComponentModel.Accessors.AccessorItem._lock')
+  - [_strategyPropertiesAccessors](#F-Bb-ComponentModel-Accessors-AccessorItem-_strategyPropertiesAccessors 'Bb.ComponentModel.Accessors.AccessorItem._strategyPropertiesAccessors')
   - [CanRead](#P-Bb-ComponentModel-Accessors-AccessorItem-CanRead 'Bb.ComponentModel.Accessors.AccessorItem.CanRead')
   - [CanWrite](#P-Bb-ComponentModel-Accessors-AccessorItem-CanWrite 'Bb.ComponentModel.Accessors.AccessorItem.CanWrite')
   - [Category](#P-Bb-ComponentModel-Accessors-AccessorItem-Category 'Bb.ComponentModel.Accessors.AccessorItem.Category')
@@ -43,14 +45,16 @@
   - [Name](#P-Bb-ComponentModel-Accessors-AccessorItem-Name 'Bb.ComponentModel.Accessors.AccessorItem.Name')
   - [Required](#P-Bb-ComponentModel-Accessors-AccessorItem-Required 'Bb.ComponentModel.Accessors.AccessorItem.Required')
   - [SetValue](#P-Bb-ComponentModel-Accessors-AccessorItem-SetValue 'Bb.ComponentModel.Accessors.AccessorItem.SetValue')
+  - [Strategy](#P-Bb-ComponentModel-Accessors-AccessorItem-Strategy 'Bb.ComponentModel.Accessors.AccessorItem.Strategy')
   - [Tag](#P-Bb-ComponentModel-Accessors-AccessorItem-Tag 'Bb.ComponentModel.Accessors.AccessorItem.Tag')
   - [Type](#P-Bb-ComponentModel-Accessors-AccessorItem-Type 'Bb.ComponentModel.Accessors.AccessorItem.Type')
   - [TypeEnum](#P-Bb-ComponentModel-Accessors-AccessorItem-TypeEnum 'Bb.ComponentModel.Accessors.AccessorItem.TypeEnum')
   - [ContainsAttribute\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1 'Bb.ComponentModel.Accessors.AccessorItem.ContainsAttribute``1')
-  - [Get(componentType,withPropertiesEmbeddedInSubType)](#M-Bb-ComponentModel-Accessors-AccessorItem-Get-System-Type,System-Boolean- 'Bb.ComponentModel.Accessors.AccessorItem.Get(System.Type,System.Boolean)')
+  - [ConvertAndSetValue(instance,value)](#M-Bb-ComponentModel-Accessors-AccessorItem-ConvertAndSetValue-System-Object,System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.ConvertAndSetValue(System.Object,System.Object)')
   - [GetAttributes()](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes')
   - [GetAttributes\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes``1')
-  - [GetTypedValue\`\`1(item)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetTypedValue``1-System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.GetTypedValue``1(System.Object)')
+  - [GetPropertiesImpl(componentType,strategy)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetPropertiesImpl-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.AccessorItem.GetPropertiesImpl(System.Type,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
+  - [GetTypedValue\`\`1(instance)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetTypedValue``1-System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.GetTypedValue``1(System.Object)')
   - [GetValidatedValue(instance,attributes)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetValidatedValue-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.GetValidatedValue(System.Object,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
   - [GetValidationException(model,_a)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetValidationException-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.GetValidationException(System.Object,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
   - [IfAttribute\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-``0@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttribute``1(``0@)')
@@ -74,6 +78,8 @@
   - [TryGetValue(name,member)](#M-Bb-ComponentModel-Accessors-AccessorList-TryGetValue-System-String,Bb-ComponentModel-Accessors-AccessorItem@- 'Bb.ComponentModel.Accessors.AccessorList.TryGetValue(System.String,Bb.ComponentModel.Accessors.AccessorItem@)')
   - [Validate(instance)](#M-Bb-ComponentModel-Accessors-AccessorList-Validate-System-Object- 'Bb.ComponentModel.Accessors.AccessorList.Validate(System.Object)')
   - [ValidateMember(value,member,attributes)](#M-Bb-ComponentModel-Accessors-AccessorList-ValidateMember-System-Object,System-Reflection-MemberInfo,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorList.ValidateMember(System.Object,System.Reflection.MemberInfo,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
+- [AccessorStrategyEnum](#T-Bb-ComponentModel-Accessors-AccessorStrategyEnum 'Bb.ComponentModel.Accessors.AccessorStrategyEnum')
+  - [Direct](#F-Bb-ComponentModel-Accessors-AccessorStrategyEnum-Direct 'Bb.ComponentModel.Accessors.AccessorStrategyEnum.Direct')
 - [AddCheckedBlocks](#T-ICSharpCode-Decompiler-CSharp-Transforms-AddCheckedBlocks 'ICSharpCode.Decompiler.CSharp.Transforms.AddCheckedBlocks')
 - [AddXmlDocumentationTransform](#T-ICSharpCode-Decompiler-CSharp-Transforms-AddXmlDocumentationTransform 'ICSharpCode.Decompiler.CSharp.Transforms.AddXmlDocumentationTransform')
 - [AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')
@@ -2414,9 +2420,9 @@
   - [FilePath](#P-ICSharpCode-Decompiler-Solution-ProjectItem-FilePath 'ICSharpCode.Decompiler.Solution.ProjectItem.FilePath')
   - [ProjectName](#P-ICSharpCode-Decompiler-Solution-ProjectItem-ProjectName 'ICSharpCode.Decompiler.Solution.ProjectItem.ProjectName')
 - [PropertyAccessor](#T-Bb-ComponentModel-Accessors-PropertyAccessor 'Bb.ComponentModel.Accessors.PropertyAccessor')
-  - [#ctor(componentType,property)](#M-Bb-ComponentModel-Accessors-PropertyAccessor-#ctor-System-Type,System-Reflection-PropertyInfo- 'Bb.ComponentModel.Accessors.PropertyAccessor.#ctor(System.Type,System.Reflection.PropertyInfo)')
-  - [GetProperties(componentType,withSubType)](#M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperties-System-Type,System-Boolean- 'Bb.ComponentModel.Accessors.PropertyAccessor.GetProperties(System.Type,System.Boolean)')
-  - [GetProperty(componentType,name)](#M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperty-System-Type,System-String- 'Bb.ComponentModel.Accessors.PropertyAccessor.GetProperty(System.Type,System.String)')
+  - [#ctor(componentType,property)](#M-Bb-ComponentModel-Accessors-PropertyAccessor-#ctor-System-Type,System-Reflection-PropertyInfo,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.PropertyAccessor.#ctor(System.Type,System.Reflection.PropertyInfo,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
+  - [GetProperties(componentType,withSubType)](#M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperties-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.PropertyAccessor.GetProperties(System.Type,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
+  - [GetProperty(componentType,name)](#M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperty-System-Type,System-String,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.PropertyAccessor.GetProperty(System.Type,System.String,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
 - [PropertyBinder\`2](#T-Bb-ComponentModel-Binders-PropertyBinder`2 'Bb.ComponentModel.Binders.PropertyBinder`2')
   - [#ctor()](#M-Bb-ComponentModel-Binders-PropertyBinder`2-#ctor 'Bb.ComponentModel.Binders.PropertyBinder`2.#ctor')
   - [Bind\`\`1(expression,action)](#M-Bb-ComponentModel-Binders-PropertyBinder`2-Bind``1-System-Linq-Expressions-Expression{System-Func{`0,``0}},System-Action{`1,``0}- 'Bb.ComponentModel.Binders.PropertyBinder`2.Bind``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Action{`1,``0})')
@@ -3416,6 +3422,31 @@ get/set/add/remove
 
 Gets the 'get'/'set'/'init'/'add'/'remove' keyword
 
+<a name='T-Bb-ComponentModel-Accessors-AccessorExtensions'></a>
+## AccessorExtensions `type`
+
+##### Namespace
+
+Bb.ComponentModel.Accessors
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorExtensions-GetAccessors-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum-'></a>
+### GetAccessors(type,strategy) `method`
+
+##### Summary
+
+Returns the property accessor list.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| strategy | [Bb.ComponentModel.Accessors.AccessorStrategyEnum](#T-Bb-ComponentModel-Accessors-AccessorStrategyEnum 'Bb.ComponentModel.Accessors.AccessorStrategyEnum') |  |
+
 <a name='T-Bb-ComponentModel-Accessors-AccessorItem'></a>
 ## AccessorItem `type`
 
@@ -3427,7 +3458,7 @@ Bb.ComponentModel.Accessors
 
 Base accessor
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-#ctor-Bb-ComponentModel-Accessors-MemberTypeEnum-'></a>
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-#ctor-Bb-ComponentModel-Accessors-MemberTypeEnum,Bb-ComponentModel-Accessors-AccessorStrategyEnum-'></a>
 ### #ctor(memberTypeEnum) `constructor`
 
 ##### Summary
@@ -3440,19 +3471,19 @@ Initializes a new instance of the [AccessorItem](#T-Bb-ComponentModel-Accessors-
 | ---- | ---- | ----------- |
 | memberTypeEnum | [Bb.ComponentModel.Accessors.MemberTypeEnum](#T-Bb-ComponentModel-Accessors-MemberTypeEnum 'Bb.ComponentModel.Accessors.MemberTypeEnum') | The member type enum. |
 
-<a name='F-Bb-ComponentModel-Accessors-AccessorItem-_accessors'></a>
-### _accessors `constants`
-
-##### Summary
-
-The _accessors
-
 <a name='F-Bb-ComponentModel-Accessors-AccessorItem-_lock'></a>
 ### _lock `constants`
 
 ##### Summary
 
 The _lock
+
+<a name='F-Bb-ComponentModel-Accessors-AccessorItem-_strategyPropertiesAccessors'></a>
+### _strategyPropertiesAccessors `constants`
+
+##### Summary
+
+The _accessors
 
 <a name='P-Bb-ComponentModel-Accessors-AccessorItem-CanRead'></a>
 ### CanRead `property`
@@ -3560,6 +3591,13 @@ Gets a value indicating whether this [IAccessorItem](#T-IAccessorItem 'IAccessor
 
 Gets or sets the set value method.
 
+<a name='P-Bb-ComponentModel-Accessors-AccessorItem-Strategy'></a>
+### Strategy `property`
+
+##### Summary
+
+Gets the strategy accessor.
+
 <a name='P-Bb-ComponentModel-Accessors-AccessorItem-Tag'></a>
 ### Tag `property`
 
@@ -3602,23 +3640,19 @@ This method has no parameters.
 | ---- | ----------- |
 | T |  |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-Get-System-Type,System-Boolean-'></a>
-### Get(componentType,withPropertiesEmbeddedInSubType) `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ConvertAndSetValue-System-Object,System-Object-'></a>
+### ConvertAndSetValue(instance,value) `method`
 
 ##### Summary
 
-Gets the specified component type.
-
-##### Returns
-
-
+Convert value before setting it.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| componentType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type of the component. |
-| withPropertiesEmbeddedInSubType | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | if set to `true` [with sub type]. |
+| instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
+| value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes'></a>
 ### GetAttributes() `method`
@@ -3650,12 +3684,12 @@ Gets the attribute's list.
 
 This method has no parameters.
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetTypedValue``1-System-Object-'></a>
-### GetTypedValue\`\`1(item) `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetPropertiesImpl-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum-'></a>
+### GetPropertiesImpl(componentType,strategy) `method`
 
 ##### Summary
 
-Gets the typed value.
+Gets the specified component type.
 
 ##### Returns
 
@@ -3665,13 +3699,31 @@ Gets the typed value.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| item | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The item. |
+| componentType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type of the component. |
+| strategy | [Bb.ComponentModel.Accessors.AccessorStrategyEnum](#T-Bb-ComponentModel-Accessors-AccessorStrategyEnum 'Bb.ComponentModel.Accessors.AccessorStrategyEnum') | strategy to use |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetTypedValue``1-System-Object-'></a>
+### GetTypedValue\`\`1(instance) `method`
+
+##### Summary
+
+Gets the typed value converted in specified type.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The instance. |
 
 ##### Generic Types
 
 | Name | Description |
 | ---- | ----------- |
-| T1 | The type of the 1. |
+| T1 | The type of the returned value. |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetValidatedValue-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}-'></a>
 ### GetValidatedValue(instance,attributes) `method`
@@ -4013,6 +4065,20 @@ Validates the specified dob.
 | value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The value to validate. |
 | member | [System.Reflection.MemberInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MemberInfo 'System.Reflection.MemberInfo') | The member. |
 | attributes | [System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}') | The attributes. |
+
+<a name='T-Bb-ComponentModel-Accessors-AccessorStrategyEnum'></a>
+## AccessorStrategyEnum `type`
+
+##### Namespace
+
+Bb.ComponentModel.Accessors
+
+<a name='F-Bb-ComponentModel-Accessors-AccessorStrategyEnum-Direct'></a>
+### Direct `constants`
+
+##### Summary
+
+direct copy of the value in the property
 
 <a name='T-ICSharpCode-Decompiler-CSharp-Transforms-AddCheckedBlocks'></a>
 ## AddCheckedBlocks `type`
@@ -31015,7 +31081,7 @@ Bb.ComponentModel.Accessors
 
 Property Accessor
 
-<a name='M-Bb-ComponentModel-Accessors-PropertyAccessor-#ctor-System-Type,System-Reflection-PropertyInfo-'></a>
+<a name='M-Bb-ComponentModel-Accessors-PropertyAccessor-#ctor-System-Type,System-Reflection-PropertyInfo,Bb-ComponentModel-Accessors-AccessorStrategyEnum-'></a>
 ### #ctor(componentType,property) `constructor`
 
 ##### Summary
@@ -31029,7 +31095,7 @@ Initializes a new instance of the [PropertyAccessor](#T-Bb-ComponentModel-Access
 | componentType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type of the component. |
 | property | [System.Reflection.PropertyInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.PropertyInfo 'System.Reflection.PropertyInfo') | The property. |
 
-<a name='M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperties-System-Type,System-Boolean-'></a>
+<a name='M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperties-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum-'></a>
 ### GetProperties(componentType,withSubType) `method`
 
 ##### Summary
@@ -31045,9 +31111,9 @@ Gets the specified component type.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | componentType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type of the component. |
-| withSubType | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | if set to `true` [with sub type]. |
+| withSubType | [Bb.ComponentModel.Accessors.AccessorStrategyEnum](#T-Bb-ComponentModel-Accessors-AccessorStrategyEnum 'Bb.ComponentModel.Accessors.AccessorStrategyEnum') | if set to `true` [with sub type]. |
 
-<a name='M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperty-System-Type,System-String-'></a>
+<a name='M-Bb-ComponentModel-Accessors-PropertyAccessor-GetProperty-System-Type,System-String,Bb-ComponentModel-Accessors-AccessorStrategyEnum-'></a>
 ### GetProperty(componentType,name) `method`
 
 ##### Summary

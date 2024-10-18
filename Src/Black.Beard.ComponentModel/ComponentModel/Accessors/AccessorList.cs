@@ -197,9 +197,18 @@ namespace Bb.ComponentModel.Accessors
             {
                 foreach (var item in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
                     yield return item;
-
                 type = type.BaseType;
+            }
+        }
 
+        internal static IEnumerable<FieldInfo> GetFields(Type componentType)
+        {
+            var type = componentType;
+            while (type != null && type != typeof(object))
+            {
+                foreach (var item in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+                    yield return item;
+                type = type.BaseType;
             }
         }
 

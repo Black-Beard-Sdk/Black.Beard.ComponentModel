@@ -66,6 +66,14 @@ namespace Bb.Expressions
             return (T)ToObject(self, typeof(T));
         }
 
+
+        public static object ConvertTo(this object self, Type targetType)
+        {
+
+            return self.ToObject(targetType, null);
+
+        }
+
         /// <summary>
         /// Convert a value to specified target type
         /// </summary>
