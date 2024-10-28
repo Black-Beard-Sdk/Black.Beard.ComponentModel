@@ -13,6 +13,34 @@ namespace Bb.Expressions
 
     public static partial class ConverterHelper
     {
+        
+        
+        #region ToBoolean
+
+        /// <summary>
+        /// Convert a string to boolean
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static bool ToBoolean(string self)
+        {
+            var v1 = self.Trim().ToLower();
+            var value = v1.Equals("true") || v1.Equals("1") || v1.Equals("vrai");
+            return value;
+        }
+
+        /// <summary>
+        /// Convert a string to boolean
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static bool ToBoolean(int self)
+        {
+            var value = self !> 0;
+            return value;
+        }
+        
+        #endregion ToBoolean
 
 
         #region Array
@@ -133,12 +161,11 @@ namespace Bb.Expressions
 
         #region ToGuid
 
-        //public static Guid ToGuid(this string value)
-        //{
-        //    var result = Guid.Parse(value);
-        //    return result;
-        //}
-
+        /// <summary>
+        /// Convert a string to Guid
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Guid ToGuid(this char[] value)
         {
             var result = Guid.Parse(value);
@@ -150,6 +177,11 @@ namespace Bb.Expressions
 
         #region ToByte
 
+        /// <summary>
+        /// Convert a string to byte
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static byte ToByte(this char[] value)
         {
             if (value.Length == 0)
@@ -157,6 +189,11 @@ namespace Bb.Expressions
             return (byte)value[0];
         }
 
+        /// <summary>
+        /// Convert a string to byte
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static byte ToByte(this Byte[] value)
         {
             if (value.Length == 0)
@@ -164,6 +201,11 @@ namespace Bb.Expressions
             return value[0];
         }
 
+        /// <summary>
+        /// Convert a string to byte
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static byte ToByte(this Single self)
         {
             return (byte)((int)self);
@@ -174,6 +216,11 @@ namespace Bb.Expressions
 
         #region ToSByte
 
+        /// <summary>
+        /// Convert a string to sbyte
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static sbyte ToSByte(this char[] value)
         {
             if (value.Length == 0)
@@ -181,6 +228,11 @@ namespace Bb.Expressions
             return (sbyte)value[0];
         }
 
+        /// <summary>
+        /// Convert a string to sbyte
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static sbyte ToSByte(this Byte[] value)
         {
             if (value.Length == 0)
@@ -188,6 +240,11 @@ namespace Bb.Expressions
             return (sbyte)value[0];
         }
 
+        /// <summary>
+        /// Convert a string to sbyte
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static sbyte ToSByte(this sbyte[] value)
         {
             if (value.Length == 0)
@@ -201,6 +258,11 @@ namespace Bb.Expressions
 
         #region ToByteArray
 
+        /// <summary>
+        /// Convert a string to byte array
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Byte[] ToByteArray(this string value)
         {
             if (value == null)
@@ -208,6 +270,11 @@ namespace Bb.Expressions
             return ConverterContext.DefaultEncoding.GetBytes(value, 0, value.Length);
         }
 
+        /// <summary>
+        /// Convert a string to byte array
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static byte[] ToByteArray(this char[] value)
         {
             string.Concat(value).ToByteArray();
@@ -217,46 +284,57 @@ namespace Bb.Expressions
             return r;
         }
 
+        /// <summary>
+        /// Convert a string to byte array
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static byte[] ToByteArray(this char value)
         {
             return new byte[] { (byte)value };
         }
 
+        /// <summary>
+        /// Convert a string to byte array
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static byte[] ToByteArray(this Int32 value)
         {
             return new byte[] { (byte)value };
         }
-
-        //public static byte[] ToByteArray(this sbyte value)
-        //{
-        //    return new byte[] { (byte)value };
-        //}
-
-        //public static byte[] ToByteArray(this Single self)
-        //{
-        //    return new byte[] { (byte)((int)self) };
-        //}
+     
 
         #endregion ToByteArray
 
 
         #region ToCharArray
 
-        //public static char[] ToCharArray(this char value)
-        //{
-        //    return new char[] { value };
-        //}
-
+        /// <summary>
+        /// Convert a string to char array
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static char[] ToCharArray(this Int32 value)
         {
             return new char[] { (char)value };
         }
 
+        /// <summary>
+        /// Convert a string to char array
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static char[] ToCharArray(this Guid value)
         {
             return value.ToString().ToCharArray();
         }
 
+        /// <summary>
+        /// Convert a string to char array
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static char[] ToCharArray(this Byte[] value)
         {
             string.Concat(value).ToByteArray();
@@ -281,31 +359,61 @@ namespace Bb.Expressions
 
         #region ToChar
 
+        /// <summary>
+        /// Convert a string to char
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static char ToChar(this Single self)
         {
             return (char)((int)self);
         }
 
+        /// <summary>
+        /// Convert a string to char
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static char ToChar(this double self)
         {
             return (char)((int)self);
         }
 
+        /// <summary>
+        /// Convert a string to char
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static char ToChar(this Boolean self)
         {
             return self ? '1' : '0';
         }
 
+        /// <summary>
+        /// Convert a string to char
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static char ToChar(this decimal self)
         {
             return (char)((int)self);
         }
 
+        /// <summary>
+        /// Convert a string to char
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static char ToChar(this Int32 self)
         {
             return (char)self;
         }
 
+        /// <summary>
+        /// Convert a string to char
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static char ToChar(this Byte[] value)
         {
             if (value.Length == 0)
@@ -313,6 +421,11 @@ namespace Bb.Expressions
             return (char)value[0];
         }
 
+        /// <summary>
+        /// Convert a string to char
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static char ToChar(this sbyte[] value)
         {
             if (value.Length == 0)
@@ -320,6 +433,11 @@ namespace Bb.Expressions
             return (char)value[0];
         }
 
+        /// <summary>
+        /// Convert a string to char
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static char ToChar(this char[] value)
         {
             if (value.Length == 0)
@@ -332,6 +450,11 @@ namespace Bb.Expressions
 
         #region ToDateTimeOffset
 
+        /// <summary>
+        /// Convert a string to DateTimeOffset
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffser(this TimeSpan value)
         {
             return new DateTimeOffset(new DateTime(0, 0, 0, value.Hours, value.Minutes, value.Seconds, value.Milliseconds));
@@ -359,66 +482,131 @@ namespace Bb.Expressions
             return new DateTimeOffset(value);
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this sbyte value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this byte value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this short value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this ushort value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this int value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this uint value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this long value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this ulong value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this bool value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this char value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this float value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this double value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to a DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static DateTimeOffset ToDateTimeOffset(this decimal value)
         {
             return new DateTimeOffset(Convert.ToDateTime(value));
@@ -450,11 +638,21 @@ namespace Bb.Expressions
 
         #region ToTimeSpan
 
+        /// <summary>
+        /// Convert a DateTime to TimeSpan
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static TimeSpan ToTimeSpan(this DateTime value)
         {
             return value.TimeOfDay;
         }
 
+        /// <summary>
+        /// Convert a DateTimeOffset to TimeSpan
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static TimeSpan ToTimeSpan(this DateTimeOffset value)
         {
             return value.TimeOfDay;
@@ -465,17 +663,32 @@ namespace Bb.Expressions
 
         #region ToString
 
+        /// <summary>
+        /// Convert a DateTime to string
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static string ToString(this Guid value)
         {
             var result = value.ToString();
             return result;
         }
 
+        /// <summary>
+        /// Convert a DateTime to string
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static string ToString(this char[] self)
         {
             return string.Concat(self);
         }
 
+        /// <summary>
+        /// Convert a DateTime to string
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
         public static string ToString(this Byte[] self)
         {
             var e = ConverterContext.DefaultEncoding ?? Encoding.UTF8;
@@ -487,16 +700,31 @@ namespace Bb.Expressions
 
         #region ToInt16
 
+        /// <summary>
+        /// Convert a string to Int16
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Int16 ToInt16(this float value)
         {
             return (Int16)value;
         }
 
+        /// <summary>
+        /// Convert a string to Int16
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Int16 ToInt16(this double value)
         {
             return (Int16)value;
         }
 
+        /// <summary>
+        /// Convert a string to Int16
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Int16 ToInt16(this char value)
         {
             return (Int16)(int)value;
@@ -507,16 +735,31 @@ namespace Bb.Expressions
 
         #region ToInt32
 
+        /// <summary>
+        /// Convert a string to Int32
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Int32 ToInt32(this float value)
         {
             return (Int32)value; 
         }
 
+        /// <summary>
+        /// Convert a string to Int32
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Int32 ToInt32(this double value)
         {
             return (Int32)value; 
         }
 
+        /// <summary>
+        /// Convert a string to Int32
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Int32 ToInt32(this char value)
         {
             return (Int32)(int)value;
@@ -527,16 +770,31 @@ namespace Bb.Expressions
 
         #region ToInt64
 
+        /// <summary>
+        /// Convert a string to Int64
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Int64 ToInt64(this float value)
         {
             return (Int64)value;
         }
 
+        /// <summary>
+        /// Convert a string to Int64
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Int64 ToInt64(this double value)
         {
             return (Int64)value;
         }
 
+        /// <summary>
+        /// Convert a string to Int64
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Int64 ToInt64(this char value)
         {
             return (Int64)(int)value;
@@ -547,6 +805,11 @@ namespace Bb.Expressions
 
         #region ToSingle
 
+        /// <summary>
+        /// Convert a string to Single
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Single ToSingle(this char value)
         {
             return (Single)(int)value;
@@ -557,6 +820,11 @@ namespace Bb.Expressions
 
         #region ToDouble
 
+        /// <summary>
+        /// Convert a string to Double
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static Double ToDouble(this char value)
         {
             return (Double)(int)value;
@@ -567,6 +835,11 @@ namespace Bb.Expressions
 
         #region ToDecimal
 
+        /// <summary>
+        /// Convert a string to Decimal
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static decimal ToDecimal(this char value)
         {
             return (decimal)(int)value;
@@ -574,115 +847,6 @@ namespace Bb.Expressions
 
         #endregion ToDecimal
 
-    }
-
-    public static class ConvertMore
-    {
-
-        /// <summary>
-        /// Convert a DateTime to ulong for indexation
-        /// </summary>
-        /// <param name="value">DateTime to convert</param>
-        /// <param name="yearOnTwoDigit">if true, the year is use on two digit 
-        ///     if false : 2024-03-02 
-        ///     if true  :   24-03-02
-        /// </param>
-        /// <param name="limit">specify the limit of the index</param>
-        /// <example>
-        /// <code lang="csharp>
-        ///     DateTime date = new DateTime(2024, 3, 2, 10, 25, 36);
-        ///     var i = date.ToLongIndex(true, Bb.Expressions.DateTimeKind.Second);
-        ///     ulong expected = 240302082536;
-        ///     Assert.Equal(expected, i);
-        /// </code>
-        /// </example>   
-        /// <returns></returns>
-        public static ulong ToLongIndex(this DateTime self, bool yearOnTwoDigit = true, DateTimeLimit limit = DateTimeLimit.None)
-        {
-
-            ulong v = (ulong)self.Year;                     // 2024
-            if (yearOnTwoDigit)
-                v -= 2000;                                  // 24
-
-            v *= 100;                                       // 2400                        
-            v += (ulong)self.Month;                         // 2403
-
-            if (limit > DateTimeLimit.Month)
-            {
-
-                v *= 100;                                   // 240300
-                v += (ulong)self.Day;                       // 240302
-
-                if (limit > DateTimeLimit.Day)
-                {
-
-                    v *= 100;                               // 24030200
-                    v += (ulong)self.Hour;                  // 24030208
-
-                    if (limit > DateTimeLimit.Hour)
-                    {
-
-                        v *= 100;                               // 2403020800
-                        v += (ulong)self.Minute;                // 2403020825
-
-                        if (limit > DateTimeLimit.Minute)
-                        {
-
-                            v *= 100;                           // 240302082500
-                            v += (uint)self.Second;             // 240302082536
-
-                            if (limit > DateTimeLimit.Second)
-                            {
-                                v *= 1000;                      // 240302082500000
-                                v += (uint)self.Millisecond;    // 240302082536925
-                            }
-
-                        }
-
-                    }
-                }
-
-            }
-
-            return v;
-
-        }
-
-        /// <summary>
-        /// Convert a DateTime to ulong for indexation
-        /// </summary>
-        /// <param name="value">DateTime offset to convert</param>
-        /// <param name="yearOnTwoDigit">if true, the year is used on two digit 
-        ///     if false : 2024-03-02 
-        ///     if true  :   24-03-02
-        /// </param>
-        /// <param name="limit">specify the limit of the index</param>
-        /// <returns></returns>
-        /// <example>
-        /// <code lang="csharp>
-        /// DateTimeOffset date = new DateTimeOffset(2024, 3, 2, 10, 25, 36, new TimeSpan(2, 0, 0));
-        /// var i = date.ToLongIndex(true, Bb.Expressions.DateTimeKind.Second);
-        /// ulong expected = 240302082536;
-        /// Assert.Equal(expected, i);
-        /// </code>
-        /// </example>        
-        public static ulong ToLongIndex(this DateTimeOffset self, bool yearOnTwoDigit = true, DateTimeLimit limit = DateTimeLimit.None)
-        {
-            return self.UtcDateTime.ToLongIndex(yearOnTwoDigit, limit);
-        }
-
-
-    }
-
-    public enum DateTimeLimit
-    {
-        None = 5,
-        Month = 0,
-        Day = 1,
-        Hour = 2,
-        Minute = 3,
-        Second = 4,
-        MilliSecond = 5,
     }
 
 
