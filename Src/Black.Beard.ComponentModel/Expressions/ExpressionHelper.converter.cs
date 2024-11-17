@@ -78,7 +78,7 @@ namespace Bb.Expressions
         public static Expression GetTypeExpression(this Expression e)
         {
 
-            if (e.Type.MemberType == MemberTypes.TypeInfo)
+            if (e.Type.FullName == "System.RuntimeType")
                 return e;
 
             return e.Call(e.Type, nameof(Type.GetType));
