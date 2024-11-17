@@ -11,185 +11,9 @@ using System.Text;
 namespace Bb.Expressions
 {
 
-    public static class ExpressionHelper
+    public static partial class ExpressionHelper
     {
-
-        /// <summary>
-        /// Return the property name of the expression
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="expression">expression that contains the property member</param>
-        /// <returns>return the property name</returns>
-        public static string GetPropertyName(this Expression expression)
-        {
-            return ExpressionMemberVisitor.GetPropertyName(expression);
-        }
-
-        /// <summary>
-        /// create an expression that assign a value to a target
-        /// </summary>
-        /// <param name="left">left expression that must be assigned</param>
-        /// <param name="right">value expression to assign</param>
-        /// <returns></returns>
-        public static BinaryExpression AssignFrom(this Expression left, Expression right)
-        {
-            return Expression.Assign(left, right.ConvertIfDifferent(left.ResolveType()));
-        }
-
-        /// <summary>
-        /// create a member expression from property
-        /// </summary>
-        /// <param name="self">declaring type expression</param>
-        /// <param name="propertyName">property name</param>
-        /// <returns></returns>
-        /// <exception cref="MissingMemberException"></exception>
-        public static MemberExpression Property(this Expression self, string propertyName)
-        {
-            var properties = self.Type.GetProperties();
-            var property = properties.Where(c => c.Name == propertyName).FirstOrDefault();
-
-            if (property is null)
-                throw new MissingMemberException(propertyName);
-
-            return Property(self, property);
-        }
-
-        /// <summary>
-        /// create a member expression from property
-        /// </summary>
-        /// <param name="self">declaring type expression</param>
-        /// <param name="propertyName">property name</param>
-        /// <param name="binding">filter for resolve property</param>
-        /// <returns></returns>
-        /// <exception cref="MissingMemberException"></exception>
-        public static MemberExpression Property(this Expression self, string propertyName, BindingFlags binding)
-        {
-
-            var property = self.Type.GetProperty(propertyName, binding);
-
-            if (property is null)
-                throw new MissingMemberException(propertyName);
-
-            return Property(self, property);
-        }
-
-        /// <summary>
-        /// create a member expression from property
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="property">property</param>
-        /// <returns></returns>
-        /// <exception cref="NullReferenceException"></exception>
-        public static MemberExpression Property(this Expression self, PropertyInfo property)
-        {
-            if (property is null)
-                throw new NullReferenceException(nameof(property));
-
-            return Expression.Property(self, property);
-        }
-
-        /// <summary>
-        /// Create a call method expression
-        /// </summary>
-        /// <param name="self">declaring instance expression</param>
-        /// <param name="methodName">method name</param>
-        /// <param name="arguments">arguments of the method</param>
-        /// <returns></returns>
-        /// <exception cref="MissingMemberException"></exception>
-        /// <exception cref="DuplicatedArgumentNameException"></exception>
-        public static MethodCallExpression Call(this Expression self, string methodName, params Expression[] arguments)
-        {
-
-            var methods = self.Type.GetMethods().ToList();
-            methods = methods.Where(c => c.Name == methodName).ToList();
-
-            if (methods.Count == 0)
-                throw new MissingMemberException(methodName);
-
-            methods = methods.Where(c => c.GetParameters().Length == arguments.Length).ToList();
-            if (methods.Count == 0)
-                throw new MissingMemberException($"no method {methodName} match with specified arguments");
-
-            if (methods.Count > 1)
-                throw new DuplicatedArgumentNameException(methodName);
-
-            var method = methods[0];
-
-            var parameters = method.GetParameters()
-              .ToArray();
-
-            List<Expression> _args = new List<Expression>(arguments.Length);
-
-            for (int i = 0; i < arguments.Length; i++)
-            {
-                var argument = arguments[i];
-                var parameter = parameters[i];
-
-                _args.Add(argument.ConvertIfDifferent(parameter.ParameterType));
-
-            }
-
-
-            return Expression.Call(self, method, _args.ToArray());
-
-        }
-
-        /// <summary>
-        /// Create a call method expression
-        /// </summary>
-        /// <param name="self">declaring instance expression</param>
-        /// <param name="methodTarget">method member</param>
-        /// <param name="arguments">arguments of the method</param>
-        /// <returns></returns>
-        public static MethodCallExpression Call(this Expression self, MethodInfo methodTarget, params Expression[] arguments)
-        {
-
-            var parameters = methodTarget.GetParameters()
-              .ToArray();
-
-            List<Expression> _args = new List<Expression>(arguments.Length);
-
-            for (int i = 0; i < arguments.Length; i++)
-            {
-                var argument = arguments[i];
-                var parameter = parameters[i];
-
-                _args.Add(argument.ConvertIfDifferent(parameter.ParameterType));
-
-            }
-
-            return Expression.Call(self, methodTarget, _args.ToArray());
-
-        }
-
-        /// <summary>
-        /// Create a call method expression
-        /// </summary>
-        /// <param name="self">method</param>
-        /// <param name="arguments">argument of the method</param>
-        /// <returns></returns>
-        public static MethodCallExpression Call(this MethodInfo self, params Expression[] arguments)
-        {
-
-            var parameters = self.GetParameters()
-              .ToArray();
-
-            List<Expression> _args = new List<Expression>(arguments.Length);
-
-            for (int i = 0; i < arguments.Length; i++)
-            {
-                var argument = arguments[i];
-                var parameter = parameters[i];
-                if (argument != null && parameter != null)
-                    _args.Add(argument.ConvertIfDifferent(parameter.ParameterType));
-                else
-                    return null;
-
-            }
-
-            return Expression.Call(null, self, _args.ToArray());
-
-        }
+            
 
         /// <summary>
         /// Throw an exception
@@ -217,11 +41,9 @@ namespace Bb.Expressions
         /// <returns></returns>
         public static Type ResolveType(this Expression self)
         {
-
             return self.NodeType == ExpressionType.Lambda
                 ? (self as LambdaExpression).ReturnType
                 : self.Type;
-
         }
 
         /// <summary>
@@ -234,306 +56,6 @@ namespace Bb.Expressions
         {
             return Expression.ArrayAccess(self, index);
         }
-
-
-        #region Converters
-
-        /// <summary>
-        /// evaluate if the types can be converted.
-        /// 0 if the types are the same
-        /// 1 if the source type can be converted in target type
-        /// 2 if a method for convert the source type in target type exists
-        /// </summary>
-        /// <param name="targetType">target type</param>
-        /// <param name="sourceType">source type</param>
-        /// <returns></returns>
-        public static int CanBeConverted(this Type targetType, Type sourceType)
-        {
-
-            if (sourceType == targetType)
-                return 0;
-
-            var result = ConverterHelper.GetMethodToConvert(sourceType, targetType, out var method);
-            if (result)
-                return 2;
-
-            try
-            {
-                var e = Expression.Convert(Expression.Parameter(sourceType), targetType);
-                return 1;
-            }
-            catch (Exception)
-            {
-                //var result = ConverterHelper.GetMethodToConvert(sourceType, targetType, out var method);
-                //if (result)
-                //    return 2;
-            }
-
-            return -1;
-
-        }
-
-        /// <summary>
-        /// return an expression of conversion if target type are different
-        /// </summary>
-        /// <param name="self">source expression to convert</param>
-        /// <param name="targetType">target type</param>
-        /// <returns></returns>
-        public static Expression ConvertIfDifferent(this Expression self, Type targetType, ParameterExpression? context = null)
-        {
-
-            Expression result = null;
-            Type sourceType = self.ResolveType();
-
-            if (sourceType != targetType)
-                result = self.Convert(sourceType, targetType, context);
-
-            else
-                result = self;
-
-            if (result == null)
-                throw new InvalidCastException($"no method for manage conversion of {sourceType} to {targetType}. please use ConverterHelper for register a custom method");
-
-            return result;
-
-        }
-
-        private static Expression Convert(this Expression self, Type sourceType, Type targetType, ParameterExpression context)
-        {
-
-            Expression result = null;
-            MethodConverter method = null;
-
-            if (targetType.IsAssignableFrom(sourceType) || sourceType.IsAssignableFrom(targetType))
-                result = Expression.Convert(self, targetType);
-
-            else if (!ConverterHelper.GetMethodToConvert(sourceType, targetType, out method))   // Find a registered method to convert
-            {                                                                                   // method not found
-
-                if (targetType.IsConstructedGenericType)                                        // generic
-                    self.ConvertToGeneric(sourceType, targetType, context, ref method);
-
-                else if (targetType.IsArray && targetType.GetArrayRank() == 1)                  // array of 1 rank
-                    self = self.ConvertToArray(sourceType, targetType, context, ref method);
-
-                else if (sourceType.IsEnum || targetType.IsEnum)                                // Target is enum
-                    self = self.ConvertEnum(sourceType, targetType, context, ref method);
-
-                else
-                {
-
-                }
-
-            }
-
-            if (method != null)
-                result = self.Convert(sourceType, method, context);
-
-            return result;
-
-        }
-
-        private static Expression ConvertEnum(this Expression self, Type sourceType, Type targetType, ParameterExpression context, ref MethodConverter method)
-        {
-
-            if (sourceType.IsEnum && !targetType.IsEnum)
-                self = self.ConvertFromEnum(sourceType, targetType, context, ref method);
-
-            else if (!sourceType.IsEnum && targetType.IsEnum)
-                self = self.ConvertToEnum(sourceType, targetType, context, ref method);
-
-            else if (sourceType.IsEnum && targetType.IsEnum)
-                self = self.ConvertEnumToEnum(sourceType, targetType, context, ref method);
-
-            return self;
-
-        }
-
-        private static Expression ConvertToEnum(this Expression self, Type sourceType, Type targetType, ParameterExpression context, ref MethodConverter method)
-        {
-
-            var typeEnum = targetType.GetFields(BindingFlags.Public | BindingFlags.Instance)[0].FieldType;
-            if (typeEnum != sourceType && sourceType != typeof(string))
-                self = self.Convert(sourceType, typeEnum, context);
-            else
-                typeEnum = sourceType;
-
-            if (ConverterHelper.MethodToEnum.TryGetValue(typeEnum, out var m))
-                method = new MethodConverter(m.MakeGenericMethod(targetType));
-
-            else
-            {
-
-            }
-
-            return self;
-
-        }
-
-        private static Expression ConvertFromEnum(this Expression self, Type sourceType, Type targetType, ParameterExpression context, ref MethodConverter method)
-        {
-
-            var typeEnum = targetType == typeof(string)
-                ? typeof(string)
-                : sourceType.GetFields(BindingFlags.Public | BindingFlags.Instance)[0].FieldType;
-
-            if (ConverterHelper.MethodFromEnum.TryGetValue(typeEnum, out var m))
-                method = new MethodConverter(m.MakeGenericMethod(sourceType));
-
-            if (typeEnum != targetType)
-            {
-
-                self = self.Convert(typeEnum, method, context);
-
-                if (!ConverterHelper.GetMethodToConvert(typeEnum, targetType, out method))
-                {
-
-                }
-
-            }
-
-            return self;
-
-        }
-
-        private static Expression ConvertEnumToEnum(this Expression self, Type sourceType, Type targetType, ParameterExpression context, ref MethodConverter method)
-        {
-            var tt = targetType.GetFields(BindingFlags.Public | BindingFlags.Instance)[0].FieldType;
-            self = self.ConvertFromEnum(sourceType, tt, context, ref method);
-            self = self.Convert(sourceType, method, context);
-            self = self.ConvertToEnum(tt, targetType, context, ref method);
-            return self;
-        }
-
-        private static Expression Convert(this Expression self, Type sourceType, MethodConverter me, ParameterExpression? context)
-        {
-
-            Expression result = null;
-
-            var parameters = me.Method.GetParameters();
-            Expression[] arguments = new Expression[parameters.Length];
-
-            for (int index = 0; index < arguments.Length; index++)
-                SetArgument(self, sourceType, parameters, arguments, index, me, context);
-
-            if (me.Method is MethodInfo m)
-                result = Expression.Call(m.IsStatic ? null : self, m, arguments);
-
-            else if (me.Method is ConstructorInfo ctor)
-                result = Expression.New(ctor, arguments);
-
-            return result;
-        }
-
-        private static Expression ConvertToArray(this Expression self, Type sourceType, Type targetType, ParameterExpression context, ref MethodConverter method)
-        {
-
-            var targetElementType = targetType.GetElementType();
-
-            if (sourceType.IsArray && sourceType.GetArrayRank() == 1)
-            {
-                var sourceElementType = sourceType.GetElementType();
-                method = new MethodConverter(ConverterHelper.MethodConvertArray.MakeGenericMethod(sourceElementType, targetElementType));
-            }
-
-            else
-            {
-
-                method = sourceType != targetElementType
-                ? ConverterHelper.GetMethodToConvert(sourceType, targetElementType)
-                : null;
-
-                if (method != null)
-                    self = Convert(self, sourceType, method, context);
-
-                method = new MethodConverter(ConverterHelper.MethodToArray.MakeGenericMethod(targetElementType));
-
-            }
-
-            return self;
-
-        }
-
-        private static Expression ConvertToGeneric(this Expression self, Type sourceType, Type targetType, ParameterExpression context, ref MethodConverter method)
-        {
-
-            var p = targetType.GetGenericArguments();
-            if (p.Length == 1)
-            {
-                Type elementType = p[0];
-                method = ConverterHelper.GetMethodToConvert(sourceType, elementType);
-                if (method != null)
-                {
-                    self = self.Convert(sourceType, method, context);
-                    method = ConverterHelper.GetMethodToConvert(elementType, targetType);
-                    if (method == null)
-                    {
-
-                    }
-                }
-                return self;
-
-            }
-            else
-            {
-
-            }
-
-            return null;
-
-        }
-
-        private static void SetArgument(Expression self, Type initialType, ParameterInfo[] parameters, Expression[] arguments, int index, MethodConverter me, ParameterExpression? context)
-        {
-
-            var parameterType = parameters[index].ParameterType;
-            var name0 = parameters[index].Name;
-
-            if (parameterType == initialType)    // Take directly the source
-                arguments[index] = self;
-
-            else if (typeof(ConverterContext).IsAssignableFrom(parameterType))
-                arguments[index] = context;
-
-            else if (typeof(IFormatProvider).IsAssignableFrom(parameterType))
-            {
-
-                if (context != null)
-                    arguments[index] = context.Property("Culture");
-
-                else
-                    arguments[index] = Expression.Constant(ConverterContext.DefaultCultureInfo ?? CultureInfo.InvariantCulture);
-
-            }
-
-            else if (typeof(Encoding).IsAssignableFrom(parameterType))
-            {
-
-                if (context != null)
-                    arguments[index] = context.Property("Encoding");
-
-                else
-                    arguments[index] = Expression.Constant(ConverterContext.DefaultEncoding ?? Encoding.UTF8);
-
-            }
-
-            else if (parameterType.IsAssignableFrom(me.SourceType))     // use converter for assign the initial value
-                arguments[index] = ConvertIfDifferent(self, parameterType);
-
-            else if (parameterType == typeof(Type))
-                arguments[index] = Expression.Constant(me.TargetType);
-
-            else if (parameterType == typeof(Int32) && name0 == "toBase")
-                arguments[1] = Expression.Constant(10);
-
-            else
-            {
-
-            }
-
-        }
-
-        #endregion Converters
 
         /// <summary>
         /// return a binary expression that compare the left and right expression
@@ -557,11 +79,15 @@ namespace Bb.Expressions
             return Expression.TypeIs(left, type);
         }
 
-        public static LoopExpression TypeIs(this Expression body)
+        /// <summary>
+        /// Create a loop with bloc
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        public static LoopExpression Loop(this Expression body)
         {
             return Expression.Loop(body);
         }
-
 
         #region Binary expressions
 
@@ -1025,6 +551,20 @@ namespace Bb.Expressions
         #endregion Unary expression
 
 
+
+
+
+        /// <summary>
+        /// create an expression that assign a value to a target
+        /// </summary>
+        /// <param name="left">left expression that must be assigned</param>
+        /// <param name="right">value expression to assign</param>
+        /// <returns></returns>
+        public static BinaryExpression AssignFrom(this Expression left, Expression right)
+        {
+            return Expression.Assign(left, right.ConvertIfDifferent(left.ResolveType()));
+        }
+
         /// <summary>
         /// return a new array expression
         /// </summary>
@@ -1099,6 +639,18 @@ namespace Bb.Expressions
 
 
 
+
+
+        /// <summary>
+        /// Return a constant expression with type
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static ConstantExpression TypeAsConstant(this Type self)
+        {
+            return Expression.Constant(self);
+        }
+
         /// <summary>
         /// return a constant expression
         /// </summary>
@@ -1124,33 +676,6 @@ namespace Bb.Expressions
                 self = System.Convert.ChangeType(self, type);
 
             return Expression.Constant(self, type);
-
-        }
-
-        /// <summary>
-        /// Make a call to a static method
-        /// </summary>
-        /// <param name="self">method member info</param>
-        /// <param name="arguments">argument of the call expression</param>
-        /// <returns></returns>
-        public static MethodCallExpression CallStatic(this MethodInfo self, params Expression[] arguments)
-        {
-
-            var parameters = self.GetParameters()
-              .ToArray();
-
-            List<Expression> _args = new List<Expression>(arguments.Length);
-
-            for (int i = 0; i < arguments.Length; i++)
-            {
-                var argument = arguments[i];
-                var parameter = parameters[i];
-
-                _args.Add(argument.ConvertIfDifferent(parameter.ParameterType));
-
-            }
-
-            return Expression.Call(self, _args.ToArray());
 
         }
 

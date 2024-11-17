@@ -1046,8 +1046,13 @@
   - [AsConstant(self,type)](#M-Bb-Expressions-ExpressionHelper-AsConstant-System-Object,System-Type- 'Bb.Expressions.ExpressionHelper.AsConstant(System.Object,System.Type)')
   - [AssignFrom(left,right)](#M-Bb-Expressions-ExpressionHelper-AssignFrom-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.AssignFrom(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [Call(self,methodName,arguments)](#M-Bb-Expressions-ExpressionHelper-Call-System-Linq-Expressions-Expression,System-String,System-Linq-Expressions-Expression[]- 'Bb.Expressions.ExpressionHelper.Call(System.Linq.Expressions.Expression,System.String,System.Linq.Expressions.Expression[])')
+  - [Call(self,type,methodName,arguments)](#M-Bb-Expressions-ExpressionHelper-Call-System-Linq-Expressions-Expression,System-Type,System-String,System-Linq-Expressions-Expression[]- 'Bb.Expressions.ExpressionHelper.Call(System.Linq.Expressions.Expression,System.Type,System.String,System.Linq.Expressions.Expression[])')
   - [Call(self,methodTarget,arguments)](#M-Bb-Expressions-ExpressionHelper-Call-System-Linq-Expressions-Expression,System-Reflection-MethodInfo,System-Linq-Expressions-Expression[]- 'Bb.Expressions.ExpressionHelper.Call(System.Linq.Expressions.Expression,System.Reflection.MethodInfo,System.Linq.Expressions.Expression[])')
   - [Call(self,arguments)](#M-Bb-Expressions-ExpressionHelper-Call-System-Reflection-MethodInfo,System-Linq-Expressions-Expression[]- 'Bb.Expressions.ExpressionHelper.Call(System.Reflection.MethodInfo,System.Linq.Expressions.Expression[])')
+  - [CallIsAssignableFrom(left,right)](#M-Bb-Expressions-ExpressionHelper-CallIsAssignableFrom-System-Type,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.CallIsAssignableFrom(System.Type,System.Linq.Expressions.Expression)')
+  - [CallIsAssignableFrom(left,right)](#M-Bb-Expressions-ExpressionHelper-CallIsAssignableFrom-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.CallIsAssignableFrom(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
+  - [CallIsAssignableTo(left,right)](#M-Bb-Expressions-ExpressionHelper-CallIsAssignableTo-System-Type,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.CallIsAssignableTo(System.Type,System.Linq.Expressions.Expression)')
+  - [CallIsAssignableTo(left,right)](#M-Bb-Expressions-ExpressionHelper-CallIsAssignableTo-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.CallIsAssignableTo(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [CallStatic(self,arguments)](#M-Bb-Expressions-ExpressionHelper-CallStatic-System-Reflection-MethodInfo,System-Linq-Expressions-Expression[]- 'Bb.Expressions.ExpressionHelper.CallStatic(System.Reflection.MethodInfo,System.Linq.Expressions.Expression[])')
   - [CanBeConverted(targetType,sourceType)](#M-Bb-Expressions-ExpressionHelper-CanBeConverted-System-Type,System-Type- 'Bb.Expressions.ExpressionHelper.CanBeConverted(System.Type,System.Type)')
   - [Coalesce(left,right)](#M-Bb-Expressions-ExpressionHelper-Coalesce-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.Coalesce(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
@@ -1061,12 +1066,17 @@
   - [Equal(left,right)](#M-Bb-Expressions-ExpressionHelper-Equal-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.Equal(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [ExclusiveOr(left,right)](#M-Bb-Expressions-ExpressionHelper-ExclusiveOr-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.ExclusiveOr(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [ExclusiveOrAssign(left,right)](#M-Bb-Expressions-ExpressionHelper-ExclusiveOrAssign-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.ExclusiveOrAssign(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
+  - [Field(self,fieldName)](#M-Bb-Expressions-ExpressionHelper-Field-System-Linq-Expressions-Expression,System-String- 'Bb.Expressions.ExpressionHelper.Field(System.Linq.Expressions.Expression,System.String)')
+  - [Field(self,fieldName,binding)](#M-Bb-Expressions-ExpressionHelper-Field-System-Linq-Expressions-Expression,System-String,System-Reflection-BindingFlags- 'Bb.Expressions.ExpressionHelper.Field(System.Linq.Expressions.Expression,System.String,System.Reflection.BindingFlags)')
+  - [Field(self,field)](#M-Bb-Expressions-ExpressionHelper-Field-System-Linq-Expressions-Expression,System-Reflection-FieldInfo- 'Bb.Expressions.ExpressionHelper.Field(System.Linq.Expressions.Expression,System.Reflection.FieldInfo)')
+  - [GetFieldName(expression)](#M-Bb-Expressions-ExpressionHelper-GetFieldName-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.GetFieldName(System.Linq.Expressions.Expression)')
   - [GetPropertyName(expression)](#M-Bb-Expressions-ExpressionHelper-GetPropertyName-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.GetPropertyName(System.Linq.Expressions.Expression)')
   - [GreaterThan(left,right)](#M-Bb-Expressions-ExpressionHelper-GreaterThan-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.GreaterThan(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [GreaterThanOrEqual(left,right)](#M-Bb-Expressions-ExpressionHelper-GreaterThanOrEqual-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.GreaterThanOrEqual(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [Increment(left)](#M-Bb-Expressions-ExpressionHelper-Increment-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.Increment(System.Linq.Expressions.Expression)')
   - [IsFalse(left)](#M-Bb-Expressions-ExpressionHelper-IsFalse-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.IsFalse(System.Linq.Expressions.Expression)')
   - [IsTrue(left)](#M-Bb-Expressions-ExpressionHelper-IsTrue-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.IsTrue(System.Linq.Expressions.Expression)')
+  - [Loop(body)](#M-Bb-Expressions-ExpressionHelper-Loop-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.Loop(System.Linq.Expressions.Expression)')
   - [Modulo(left,right)](#M-Bb-Expressions-ExpressionHelper-Modulo-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.Modulo(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [ModuloAssign(left,right)](#M-Bb-Expressions-ExpressionHelper-ModuloAssign-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.ModuloAssign(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [Multiply(left,right)](#M-Bb-Expressions-ExpressionHelper-Multiply-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.Multiply(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
@@ -1095,6 +1105,7 @@
   - [SubtractAssign(left,right)](#M-Bb-Expressions-ExpressionHelper-SubtractAssign-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.SubtractAssign(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [Throw(type,args)](#M-Bb-Expressions-ExpressionHelper-Throw-System-Type,System-Linq-Expressions-Expression[]- 'Bb.Expressions.ExpressionHelper.Throw(System.Type,System.Linq.Expressions.Expression[])')
   - [TypeAs(left,type)](#M-Bb-Expressions-ExpressionHelper-TypeAs-System-Linq-Expressions-Expression,System-Type- 'Bb.Expressions.ExpressionHelper.TypeAs(System.Linq.Expressions.Expression,System.Type)')
+  - [TypeAsConstant(self)](#M-Bb-Expressions-ExpressionHelper-TypeAsConstant-System-Type- 'Bb.Expressions.ExpressionHelper.TypeAsConstant(System.Type)')
   - [TypeEqual(left,type)](#M-Bb-Expressions-ExpressionHelper-TypeEqual-System-Linq-Expressions-Expression,System-Type- 'Bb.Expressions.ExpressionHelper.TypeEqual(System.Linq.Expressions.Expression,System.Type)')
   - [TypeIs(left,type)](#M-Bb-Expressions-ExpressionHelper-TypeIs-System-Linq-Expressions-Expression,System-Type- 'Bb.Expressions.ExpressionHelper.TypeIs(System.Linq.Expressions.Expression,System.Type)')
 - [ExpressionMemberVisitor](#T-Bb-Expressions-ExpressionMemberVisitor 'Bb.Expressions.ExpressionMemberVisitor')
@@ -15527,6 +15538,33 @@ Create a call method expression
 | [System.MissingMemberException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.MissingMemberException 'System.MissingMemberException') |  |
 | [Bb.Exceptions.DuplicatedArgumentNameException](#T-Bb-Exceptions-DuplicatedArgumentNameException 'Bb.Exceptions.DuplicatedArgumentNameException') |  |
 
+<a name='M-Bb-Expressions-ExpressionHelper-Call-System-Linq-Expressions-Expression,System-Type,System-String,System-Linq-Expressions-Expression[]-'></a>
+### Call(self,type,methodName,arguments) `method`
+
+##### Summary
+
+Create a call method expression
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | declaring instance expression |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | type that contains the method |
+| methodName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | method name |
+| arguments | [System.Linq.Expressions.Expression[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression[] 'System.Linq.Expressions.Expression[]') | arguments of the method |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.MissingMemberException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.MissingMemberException 'System.MissingMemberException') |  |
+| [Bb.Exceptions.DuplicatedArgumentNameException](#T-Bb-Exceptions-DuplicatedArgumentNameException 'Bb.Exceptions.DuplicatedArgumentNameException') |  |
+
 <a name='M-Bb-Expressions-ExpressionHelper-Call-System-Linq-Expressions-Expression,System-Reflection-MethodInfo,System-Linq-Expressions-Expression[]-'></a>
 ### Call(self,methodTarget,arguments) `method`
 
@@ -15551,7 +15589,7 @@ Create a call method expression
 
 ##### Summary
 
-Create a call method expression
+Create a call for static method
 
 ##### Returns
 
@@ -15563,6 +15601,78 @@ Create a call method expression
 | ---- | ---- | ----------- |
 | self | [System.Reflection.MethodInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodInfo 'System.Reflection.MethodInfo') | method |
 | arguments | [System.Linq.Expressions.Expression[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression[] 'System.Linq.Expressions.Expression[]') | argument of the method |
+
+<a name='M-Bb-Expressions-ExpressionHelper-CallIsAssignableFrom-System-Type,System-Linq-Expressions-Expression-'></a>
+### CallIsAssignableFrom(left,right) `method`
+
+##### Summary
+
+Evaluate the left expression can be assigned from right expression
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| left | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | left type expression |
+| right | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | right type expression |
+
+<a name='M-Bb-Expressions-ExpressionHelper-CallIsAssignableFrom-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression-'></a>
+### CallIsAssignableFrom(left,right) `method`
+
+##### Summary
+
+Evaluate the left expression can be assigned from right expression
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| left | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | left type expression |
+| right | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | right type expression |
+
+<a name='M-Bb-Expressions-ExpressionHelper-CallIsAssignableTo-System-Type,System-Linq-Expressions-Expression-'></a>
+### CallIsAssignableTo(left,right) `method`
+
+##### Summary
+
+Evaluate the left expression can be assigned to right expression
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| left | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | left type expression |
+| right | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | right type expression |
+
+<a name='M-Bb-Expressions-ExpressionHelper-CallIsAssignableTo-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression-'></a>
+### CallIsAssignableTo(left,right) `method`
+
+##### Summary
+
+Evaluate the left expression can be assigned to right expression
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| left | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | left type expression |
+| right | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | right type expression |
 
 <a name='M-Bb-Expressions-ExpressionHelper-CallStatic-System-Reflection-MethodInfo,System-Linq-Expressions-Expression[]-'></a>
 ### CallStatic(self,arguments) `method`
@@ -15805,6 +15915,102 @@ return ExclusiveOrAssign expression '||='
 | left | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | Left expression |
 | right | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | right expression |
 
+<a name='M-Bb-Expressions-ExpressionHelper-Field-System-Linq-Expressions-Expression,System-String-'></a>
+### Field(self,fieldName) `method`
+
+##### Summary
+
+create a member expression from field
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | declaring type expression |
+| fieldName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | property name |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.MissingMemberException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.MissingMemberException 'System.MissingMemberException') |  |
+
+<a name='M-Bb-Expressions-ExpressionHelper-Field-System-Linq-Expressions-Expression,System-String,System-Reflection-BindingFlags-'></a>
+### Field(self,fieldName,binding) `method`
+
+##### Summary
+
+create a member expression from property
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | declaring type expression |
+| fieldName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | property name |
+| binding | [System.Reflection.BindingFlags](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.BindingFlags 'System.Reflection.BindingFlags') | filter for resolve property |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.MissingMemberException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.MissingMemberException 'System.MissingMemberException') |  |
+
+<a name='M-Bb-Expressions-ExpressionHelper-Field-System-Linq-Expressions-Expression,System-Reflection-FieldInfo-'></a>
+### Field(self,field) `method`
+
+##### Summary
+
+create a member expression from property
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') |  |
+| field | [System.Reflection.FieldInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.FieldInfo 'System.Reflection.FieldInfo') | property |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.NullReferenceException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.NullReferenceException 'System.NullReferenceException') |  |
+
+<a name='M-Bb-Expressions-ExpressionHelper-GetFieldName-System-Linq-Expressions-Expression-'></a>
+### GetFieldName(expression) `method`
+
+##### Summary
+
+Return the field name of the expression
+
+##### Returns
+
+return the property name
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| expression | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | expression that contains the property member |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
 <a name='M-Bb-Expressions-ExpressionHelper-GetPropertyName-System-Linq-Expressions-Expression-'></a>
 ### GetPropertyName(expression) `method`
 
@@ -15914,6 +16120,23 @@ return a unary expression that evaluate if the left expression is true
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | left | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | left expression |
+
+<a name='M-Bb-Expressions-ExpressionHelper-Loop-System-Linq-Expressions-Expression-'></a>
+### Loop(body) `method`
+
+##### Summary
+
+Create a loop with bloc
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| body | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') |  |
 
 <a name='M-Bb-Expressions-ExpressionHelper-Modulo-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression-'></a>
 ### Modulo(left,right) `method`
@@ -16272,15 +16495,15 @@ create a member expression from property
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| self | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | declaring type expression |
-| propertyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | property name |
-| binding | [System.Reflection.BindingFlags](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.BindingFlags 'System.Reflection.BindingFlags') | filter for resolve property |
+| self | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') |  |
+| propertyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | property |
+| binding | [System.Reflection.BindingFlags](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.BindingFlags 'System.Reflection.BindingFlags') | filter for resolve field |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.MissingMemberException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.MissingMemberException 'System.MissingMemberException') |  |
+| [System.NullReferenceException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.NullReferenceException 'System.NullReferenceException') |  |
 
 <a name='M-Bb-Expressions-ExpressionHelper-Property-System-Linq-Expressions-Expression,System-Reflection-PropertyInfo-'></a>
 ### Property(self,property) `method`
@@ -16436,6 +16659,23 @@ return a unary expression that convert the left expression in the target type
 | ---- | ---- | ----------- |
 | left | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | left expression |
 | type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | type to convert |
+
+<a name='M-Bb-Expressions-ExpressionHelper-TypeAsConstant-System-Type-'></a>
+### TypeAsConstant(self) `method`
+
+##### Summary
+
+Return a constant expression with type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
 
 <a name='M-Bb-Expressions-ExpressionHelper-TypeEqual-System-Linq-Expressions-Expression,System-Type-'></a>
 ### TypeEqual(left,type) `method`
