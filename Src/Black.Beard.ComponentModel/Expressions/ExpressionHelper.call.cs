@@ -247,15 +247,7 @@ namespace Bb.Expressions
                 var parameter = parameters[i];
 
                 if (argument != null && parameter != null)
-                {
-
-                    if (parameter.ParameterType == typeof(Type))
-                        argument = argument.GetTypeExpression();
-
-                    else
-                        argument = argument.ConvertIfDifferent(parameter.ParameterType);
-
-                }
+                    argument = argument.ConvertIfDifferent(parameter.ParameterType);
                 else
                     return null;
 
