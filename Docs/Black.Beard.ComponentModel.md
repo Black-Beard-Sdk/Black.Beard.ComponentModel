@@ -1069,6 +1069,8 @@
   - [Field(self,fieldName)](#M-Bb-Expressions-ExpressionHelper-Field-System-Linq-Expressions-Expression,System-String- 'Bb.Expressions.ExpressionHelper.Field(System.Linq.Expressions.Expression,System.String)')
   - [Field(self,fieldName,binding)](#M-Bb-Expressions-ExpressionHelper-Field-System-Linq-Expressions-Expression,System-String,System-Reflection-BindingFlags- 'Bb.Expressions.ExpressionHelper.Field(System.Linq.Expressions.Expression,System.String,System.Reflection.BindingFlags)')
   - [Field(self,field)](#M-Bb-Expressions-ExpressionHelper-Field-System-Linq-Expressions-Expression,System-Reflection-FieldInfo- 'Bb.Expressions.ExpressionHelper.Field(System.Linq.Expressions.Expression,System.Reflection.FieldInfo)')
+  - [GetBestMethod(arguments,methods)](#M-Bb-Expressions-ExpressionHelper-GetBestMethod-System-Linq-Expressions-Expression[],System-Collections-Generic-List{System-Reflection-MethodInfo}- 'Bb.Expressions.ExpressionHelper.GetBestMethod(System.Linq.Expressions.Expression[],System.Collections.Generic.List{System.Reflection.MethodInfo})')
+  - [GetBestMethod(types,methods)](#M-Bb-Expressions-ExpressionHelper-GetBestMethod-System-Type[],System-Collections-Generic-List{System-Reflection-MethodInfo}- 'Bb.Expressions.ExpressionHelper.GetBestMethod(System.Type[],System.Collections.Generic.List{System.Reflection.MethodInfo})')
   - [GetFieldName(expression)](#M-Bb-Expressions-ExpressionHelper-GetFieldName-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.GetFieldName(System.Linq.Expressions.Expression)')
   - [GetPropertyName(expression)](#M-Bb-Expressions-ExpressionHelper-GetPropertyName-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.GetPropertyName(System.Linq.Expressions.Expression)')
   - [GreaterThan(left,right)](#M-Bb-Expressions-ExpressionHelper-GreaterThan-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.GreaterThan(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
@@ -1089,6 +1091,7 @@
   - [Or(left,right)](#M-Bb-Expressions-ExpressionHelper-Or-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.Or(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [OrAssign(left,right)](#M-Bb-Expressions-ExpressionHelper-OrAssign-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.OrAssign(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [OrElse(left,right)](#M-Bb-Expressions-ExpressionHelper-OrElse-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.OrElse(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
+  - [OrderMethods(methods,type)](#M-Bb-Expressions-ExpressionHelper-OrderMethods-System-Collections-Generic-List{System-Reflection-MethodInfo},System-Type- 'Bb.Expressions.ExpressionHelper.OrderMethods(System.Collections.Generic.List{System.Reflection.MethodInfo},System.Type)')
   - [PostDecrementAssign(left)](#M-Bb-Expressions-ExpressionHelper-PostDecrementAssign-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.PostDecrementAssign(System.Linq.Expressions.Expression)')
   - [PostIncrementAssign(left)](#M-Bb-Expressions-ExpressionHelper-PostIncrementAssign-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.PostIncrementAssign(System.Linq.Expressions.Expression)')
   - [Power(left,right)](#M-Bb-Expressions-ExpressionHelper-Power-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.Power(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
@@ -1101,6 +1104,8 @@
   - [ResolveType(self)](#M-Bb-Expressions-ExpressionHelper-ResolveType-System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.ResolveType(System.Linq.Expressions.Expression)')
   - [RightShift(left,right)](#M-Bb-Expressions-ExpressionHelper-RightShift-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.RightShift(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [RightShiftAssign(left,right)](#M-Bb-Expressions-ExpressionHelper-RightShiftAssign-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.RightShiftAssign(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
+  - [SortBestMethod(arguments,methods)](#M-Bb-Expressions-ExpressionHelper-SortBestMethod-System-Linq-Expressions-Expression[],System-Collections-Generic-List{System-Reflection-MethodInfo}- 'Bb.Expressions.ExpressionHelper.SortBestMethod(System.Linq.Expressions.Expression[],System.Collections.Generic.List{System.Reflection.MethodInfo})')
+  - [SortBestMethod(types,methods)](#M-Bb-Expressions-ExpressionHelper-SortBestMethod-System-Type[],System-Collections-Generic-List{System-Reflection-MethodInfo}- 'Bb.Expressions.ExpressionHelper.SortBestMethod(System.Type[],System.Collections.Generic.List{System.Reflection.MethodInfo})')
   - [Subtract(left,right)](#M-Bb-Expressions-ExpressionHelper-Subtract-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.Subtract(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [SubtractAssign(left,right)](#M-Bb-Expressions-ExpressionHelper-SubtractAssign-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression- 'Bb.Expressions.ExpressionHelper.SubtractAssign(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)')
   - [Throw(type,args)](#M-Bb-Expressions-ExpressionHelper-Throw-System-Type,System-Linq-Expressions-Expression[]- 'Bb.Expressions.ExpressionHelper.Throw(System.Type,System.Linq.Expressions.Expression[])')
@@ -15988,6 +15993,42 @@ create a member expression from property
 | ---- | ----------- |
 | [System.NullReferenceException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.NullReferenceException 'System.NullReferenceException') |  |
 
+<a name='M-Bb-Expressions-ExpressionHelper-GetBestMethod-System-Linq-Expressions-Expression[],System-Collections-Generic-List{System-Reflection-MethodInfo}-'></a>
+### GetBestMethod(arguments,methods) `method`
+
+##### Summary
+
+Return the best method that match withe parameters
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| arguments | [System.Linq.Expressions.Expression[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression[] 'System.Linq.Expressions.Expression[]') | expression to passes |
+| methods | [System.Collections.Generic.List{System.Reflection.MethodInfo}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{System.Reflection.MethodInfo}') | methods to evaluate |
+
+<a name='M-Bb-Expressions-ExpressionHelper-GetBestMethod-System-Type[],System-Collections-Generic-List{System-Reflection-MethodInfo}-'></a>
+### GetBestMethod(types,methods) `method`
+
+##### Summary
+
+Return the best method that match withe parameters
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| types | [System.Type[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type[] 'System.Type[]') | type to match |
+| methods | [System.Collections.Generic.List{System.Reflection.MethodInfo}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{System.Reflection.MethodInfo}') | methods to evaluate |
+
 <a name='M-Bb-Expressions-ExpressionHelper-GetFieldName-System-Linq-Expressions-Expression-'></a>
 ### GetFieldName(expression) `method`
 
@@ -16352,6 +16393,24 @@ return OrElse expression '||'
 | left | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | Left expression |
 | right | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | right expression |
 
+<a name='M-Bb-Expressions-ExpressionHelper-OrderMethods-System-Collections-Generic-List{System-Reflection-MethodInfo},System-Type-'></a>
+### OrderMethods(methods,type) `method`
+
+##### Summary
+
+Order methods by declaring type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| methods | [System.Collections.Generic.List{System.Reflection.MethodInfo}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{System.Reflection.MethodInfo}') | method to sort |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | first type |
+
 <a name='M-Bb-Expressions-ExpressionHelper-PostDecrementAssign-System-Linq-Expressions-Expression-'></a>
 ### PostDecrementAssign(left) `method`
 
@@ -16581,6 +16640,42 @@ return RightShiftAssign expression '>>='
 | ---- | ---- | ----------- |
 | left | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | Left expression |
 | right | [System.Linq.Expressions.Expression](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression') | right expression |
+
+<a name='M-Bb-Expressions-ExpressionHelper-SortBestMethod-System-Linq-Expressions-Expression[],System-Collections-Generic-List{System-Reflection-MethodInfo}-'></a>
+### SortBestMethod(arguments,methods) `method`
+
+##### Summary
+
+Sort the best method that match withe parameters
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| arguments | [System.Linq.Expressions.Expression[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression[] 'System.Linq.Expressions.Expression[]') | expression to passes |
+| methods | [System.Collections.Generic.List{System.Reflection.MethodInfo}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{System.Reflection.MethodInfo}') | methods to evaluate |
+
+<a name='M-Bb-Expressions-ExpressionHelper-SortBestMethod-System-Type[],System-Collections-Generic-List{System-Reflection-MethodInfo}-'></a>
+### SortBestMethod(types,methods) `method`
+
+##### Summary
+
+Sort the best method that match withe parameters
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| types | [System.Type[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type[] 'System.Type[]') | type to match |
+| methods | [System.Collections.Generic.List{System.Reflection.MethodInfo}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{System.Reflection.MethodInfo}') | methods to evaluate |
 
 <a name='M-Bb-Expressions-ExpressionHelper-Subtract-System-Linq-Expressions-Expression,System-Linq-Expressions-Expression-'></a>
 ### Subtract(left,right) `method`

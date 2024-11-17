@@ -60,26 +60,9 @@ namespace Bb.Expressions
                 methods = methods.OrderMethods(type);
                 if (methods.Count > 1)
                 {
-
-                    var tt = arguments.Select(c => c.Type).ToArray();
-
-                    foreach (var method in methods)
-                    {
-
-                        var parameters = method.GetParameters();
-
-                        for (int i = 0; i < parameters.Length; i++)
-                        {
-                            var parameter = parameters[i];
-                            var argument = arguments[i];
-
-                            if (parameter.ParameterType != argument.Type)
-                                break;
-
-                        }
-
-                    }
-
+                    var m = GetBestMethod(arguments, methods);
+                    if (m != null)
+                        return Call(self, m, arguments);
                     throw new DuplicatedArgumentNameException(methodName);
                 }
 
@@ -89,7 +72,109 @@ namespace Bb.Expressions
 
         }
 
-        private static List<MethodInfo> OrderMethods(this List<MethodInfo> methods, Type type)
+        /// <summary>
+        /// Sort the best method that match withe parameters 
+        /// </summary>
+        /// <param name="arguments">expression to passes</param>
+        /// <param name="methods">methods to evaluate</param>
+        /// <returns></returns>
+        public static List<MethodInfo> SortBestMethod(Expression[] arguments, List<MethodInfo> methods)
+        {
+            var types = arguments.Select(c => c.Type).ToArray();
+            return SortBestMethod(types, methods);
+        }
+
+        /// <summary>
+        /// Sort the best method that match withe parameters
+        /// </summary>
+        /// <param name="types">type to match</param>
+        /// <param name="methods">methods to evaluate</param>
+        /// <returns></returns>
+        public static List<MethodInfo> SortBestMethod(Type[] types, List<MethodInfo> methods)
+        {
+
+            var s = new List<(int, MethodInfo)>(methods.Count);
+
+            foreach (var method in methods)
+            {
+                var score = Evaluate(types, method);
+                if (score > 0)
+                    s.Add((score, method));
+            }
+
+            return s.OrderBy(c => c.Item1).Select(c => c.Item2).ToList();
+
+        }
+
+        /// <summary>
+        /// Return the best method that match withe parameters
+        /// </summary>
+        /// <param name="arguments">expression to passes</param>
+        /// <param name="methods">methods to evaluate</param>
+        /// <returns></returns>
+        public static MethodInfo GetBestMethod(Expression[] arguments, List<MethodInfo> methods)
+        {
+            var types = arguments.Select(c => c.Type).ToArray();
+            return GetBestMethod(types, methods);
+        }
+
+        /// <summary>
+        /// Return the best method that match withe parameters
+        /// </summary>
+        /// <param name="types">type to match</param>
+        /// <param name="methods">methods to evaluate</param>
+        /// <returns></returns>
+        public static MethodInfo GetBestMethod(Type[] types, List<MethodInfo> methods)
+        {
+
+            var s = new List<(int, MethodInfo)>(methods.Count);
+
+            foreach (var method in methods)
+            {
+                var score = Evaluate(types, method);
+                if (score == 0)
+                    return method;
+                if (score > 0)
+                    s.Add((score, method));
+            }
+
+            return s.OrderBy(c => c.Item1).First().Item2;
+
+        }
+
+        private static int Evaluate(Type[] arguments, MethodInfo method)
+        {
+
+            var parameters = method.GetParameters();
+            int[] ints = new int[parameters.Length];
+
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                var parameter = parameters[i].ParameterType;
+                var argument = arguments[i];
+
+                if (parameter == argument)
+                    ints[i] = 0;
+
+                else if (parameter.IsAssignableFrom(argument))
+                    ints[i] = 100;
+
+                else if (parameter != argument)
+                    return -1;
+
+            }
+
+            return ints.Sum();
+
+        }
+
+        /// <summary>
+        /// Order methods by declaring type
+        /// </summary>
+        /// <param name="methods">method to sort</param>
+        /// <param name="type">first type</param>
+        /// <returns></returns>
+        public static List<MethodInfo> OrderMethods(this List<MethodInfo> methods, Type type)
         {
 
             var currentType = type;
