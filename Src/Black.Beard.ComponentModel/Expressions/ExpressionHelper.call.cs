@@ -55,9 +55,56 @@ namespace Bb.Expressions
                 throw new MissingMemberException($"no method {methodName} match with specified arguments");
 
             if (methods.Count > 1)
-                throw new DuplicatedArgumentNameException(methodName);
+            {
+
+                methods = methods.OrderMethods(type);
+                if (methods.Count > 1)
+                {
+
+                    var tt = arguments.Select(c => c.Type).ToArray();
+
+                    foreach (var method in methods)
+                    {
+
+                        var parameters = method.GetParameters();
+
+                        for (int i = 0; i < parameters.Length; i++)
+                        {
+                            var parameter = parameters[i];
+                            var argument = arguments[i];
+
+                            if (parameter.ParameterType != argument.Type)
+                                break;
+
+                        }
+
+                    }
+
+                    throw new DuplicatedArgumentNameException(methodName);
+                }
+
+            }
 
             return Call(self, methods[0], arguments);
+
+        }
+
+        private static List<MethodInfo> OrderMethods(this List<MethodInfo> methods, Type type)
+        {
+
+            var currentType = type;
+            while (currentType != null)
+            {
+                var _methods = methods.Where(c => c.DeclaringType == currentType).ToList();
+                if (_methods.Count == 1)
+                {
+                    return _methods;
+                    break;
+                }
+                currentType = currentType.BaseType;
+            }
+
+            return methods;
 
         }
 
@@ -119,8 +166,8 @@ namespace Bb.Expressions
 
                     if (parameter.ParameterType == typeof(Type))
                         argument = argument.GetTypeExpression();
-                    
-                    else 
+
+                    else
                         argument = argument.ConvertIfDifferent(parameter.ParameterType);
 
                 }

@@ -12,10 +12,26 @@ namespace ComponentModels.Tests.Expressions
         public void TestCallMethod()
         {
 
-            var Cls = new   Cls1() {  Name = Guid.NewGuid().ToString() };
+            var Cls = new Cls1() { Name = Guid.NewGuid().ToString() };
 
             var p = Expression.Parameter(typeof(Cls1), "p");
             var f1 = p.Call(typeof(Cls1), nameof(Cls1.GetName));
+            var f = Expression.Lambda<Func<Cls1, string>>(f1, p).Compile();
+
+            var result = f.Invoke(Cls);
+            Assert.Equal(Cls.Name, result);
+
+        }
+
+        [Fact]
+        public void TestCallMethod2()
+        {
+
+            var Cls = new Cls1() { Name = Guid.NewGuid().ToString() };
+
+            var p = Expression.Parameter(typeof(Cls2), "p");
+            var a1 = Expression.Parameter(typeof(Cls2), "a1");
+            var f1 = p.Call(typeof(Cls2), nameof(Cls2.GetName), a1);
             var f = Expression.Lambda<Func<Cls1, string>>(f1, p).Compile();
 
             var result = f.Invoke(Cls);
@@ -39,24 +55,69 @@ namespace ComponentModels.Tests.Expressions
             Assert.False(result);
         }
 
+        [Fact]
+        public void TestCallMethodReolveDuplicateMethods()
+        {
+            var pl = Expression.Parameter(typeof(object), "l");
+            var f1 = pl.GetTypeExpression();
+            var f = Expression.Lambda<Func<object, Type>>(f1, pl).Compile();
+
+
+            var Cls = new Cls2() { Name = Guid.NewGuid().ToString() };
+            var result = f.Invoke(Cls);
+            Assert.Equal(typeof(Cls2), result);
+
+        }
+
     }
 
 
     public class Cls2 : Cls1
     {
 
+        public override string GetName()
+        {
+            return this.Name;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
+
+
+        public string GetName(string arg1)
+        {
+            return this.Name;
+        }
+
+        public string GetName(Cls2 arg1)
+        {
+            return this.Name;
+        }
+
+        public string GetName(Cls1 arg1)
+        {
+            return this.Name;
+        }
+
     }
 
-        public class Cls1
+    public class Cls1
     {
 
-        
+
         public string Name { get; set; }
 
 
-        public string GetName()
+        public virtual string GetName()
         {
             return this.Name;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
         }
 
 

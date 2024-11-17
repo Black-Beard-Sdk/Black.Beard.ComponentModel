@@ -81,7 +81,7 @@ namespace Bb.Expressions
             if (e.Type == typeof(Type))
                 return e;
 
-            return e.Call(typeof(Type), nameof(Type.GetType));
+            return e.Call(e.Type, nameof(Type.GetType));
 
         }
 
