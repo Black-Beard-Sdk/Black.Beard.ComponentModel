@@ -78,7 +78,7 @@ namespace Bb.Expressions
         public static Expression GetTypeExpression(this Expression e)
         {
 
-            if (e.Type == typeof(Type))
+            if (e.Type.MemberType == MemberTypes.TypeInfo)
                 return e;
 
             return e.Call(e.Type, nameof(Type.GetType));

@@ -24,6 +24,20 @@ namespace ComponentModels.Tests.Expressions
         }
 
         [Fact]
+        public void TestIsAssignable()
+        {
+            var c = typeof(Cls2).AsConstant();
+            var t = c.GetTypeExpression();
+            var p = typeof(Cls1).CallIsAssignableFrom(t);
+
+            var f = Expression.Lambda<Func<bool>>(p).Compile();
+
+            var result = f();
+            Assert.True(result);
+
+        }
+
+        [Fact]
         public void TestCallMethod2()
         {
 
