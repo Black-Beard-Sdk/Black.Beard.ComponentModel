@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace Bb
     {
 
         /// <summary>
-        /// 
+        /// Initialize a new busy session
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="parentInstance"></param>
@@ -17,11 +18,32 @@ namespace Bb
             this.BusyStatus = BusyEnum.New;
             this._parent = parent;
             this.Instance = parentInstance;
-            this._action = action;
+
+            if (action != null)
+                this._actions = new List<Action<BusySession>>(5) { action };
+            else
+                this._actions = new List<Action<BusySession>>(5);
+            
             this.Title = title;
         }
 
+        /// <summary>
+        /// Append a new action to execute
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public BusySession Add(Action<BusySession> action)
+        {
+            if (action != null)
+                _actions.Add(action);
+            _actions.Add(action);
+            return this;
+        }
 
+        /// <summary>
+        /// Run the session
+        /// </summary>
+        /// <returns></returns>
         public async Task Run()
         {
             BusyStatus = BusyEnum.Started;
@@ -34,13 +56,15 @@ namespace Bb
                 BusyStatus = BusyEnum.Running;
                 try
                 {
-                
-                    _action(this);
 
-                    var n = DateTime.Now;
-                    if (n < startTime)
-                        await Task.Delay((int)startTime.Subtract(n).TotalMilliseconds);
-                
+                    foreach (var act in _actions)
+                        if (act != null)
+                            act(this);
+
+                    //var n = DateTime.Now;
+                    //if (n < startTime)
+                    //    await Task.Delay((int)startTime.Subtract(n).TotalMilliseconds);
+
                 }
                 finally
                 {
@@ -51,6 +75,12 @@ namespace Bb
             });
         }
 
+        /// <summary>
+        /// Update the message form busy session
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="percent"></param>
+        /// <returns></returns>
         public async Task Update(string? message = null, int percent = -1)
         {
 
@@ -96,6 +126,10 @@ namespace Bb
 
         }
 
+        /// <summary>
+        /// Close the session
+        /// </summary>
+        /// <returns></returns>
         public async Task Close()
         {
             BusyStatus = BusyEnum.Completed;
@@ -104,18 +138,35 @@ namespace Bb
             await _parent.Update(this);
         }
 
+        /// <summary>
+        /// Status of the busy session
+        /// </summary>
         public BusyEnum BusyStatus { get; private set; }
 
+        /// <summary>
+        /// Title of the session
+        /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Current message of the busy session
+        /// </summary>
         public string Message { get; private set; }
 
+        /// <summary>
+        /// Progress percent of the session
+        /// </summary>
         public int ProgressPercent { get; private set; }
 
+        /// <summary>
+        /// Instance processed in the session
+        /// </summary>
         public object Instance { get; }
 
-        private Action<BusySession> _action;
 
+        /// <summary>
+        /// Dispose the session
+        /// </summary>
         public void Dispose()
         {
             Task.Run(async () =>
@@ -124,9 +175,11 @@ namespace Bb
             });
         }
 
+        private List<Action<BusySession>> _actions;
         private readonly IBusyService _parent;
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
     }
 
 

@@ -5,6 +5,16 @@
 
 - [BusySession](#T-Bb-BusySession 'Bb.BusySession')
   - [#ctor(parent,parentInstance)](#M-Bb-BusySession-#ctor-Bb-IBusyService,System-String,System-Object,System-Action{Bb-BusySession}- 'Bb.BusySession.#ctor(Bb.IBusyService,System.String,System.Object,System.Action{Bb.BusySession})')
+  - [BusyStatus](#P-Bb-BusySession-BusyStatus 'Bb.BusySession.BusyStatus')
+  - [Instance](#P-Bb-BusySession-Instance 'Bb.BusySession.Instance')
+  - [Message](#P-Bb-BusySession-Message 'Bb.BusySession.Message')
+  - [ProgressPercent](#P-Bb-BusySession-ProgressPercent 'Bb.BusySession.ProgressPercent')
+  - [Title](#P-Bb-BusySession-Title 'Bb.BusySession.Title')
+  - [Add(action)](#M-Bb-BusySession-Add-System-Action{Bb-BusySession}- 'Bb.BusySession.Add(System.Action{Bb.BusySession})')
+  - [Close()](#M-Bb-BusySession-Close 'Bb.BusySession.Close')
+  - [Dispose()](#M-Bb-BusySession-Dispose 'Bb.BusySession.Dispose')
+  - [Run()](#M-Bb-BusySession-Run 'Bb.BusySession.Run')
+  - [Update(message,percent)](#M-Bb-BusySession-Update-System-String,System-Int32- 'Bb.BusySession.Update(System.String,System.Int32)')
 - [CultureProviderList](#T-Bb-ComponentModel-Attributes-CultureProviderList 'Bb.ComponentModel.Attributes.CultureProviderList')
   - [GetItems()](#M-Bb-ComponentModel-Attributes-CultureProviderList-GetItems 'Bb.ComponentModel.Attributes.CultureProviderList.GetItems')
 - [DataTranslation](#T-Bb-ComponentModel-Translations-DataTranslation 'Bb.ComponentModel.Translations.DataTranslation')
@@ -161,7 +171,7 @@ Bb
 
 ##### Summary
 
-
+Initialize a new busy session
 
 ##### Parameters
 
@@ -169,6 +179,117 @@ Bb
 | ---- | ---- | ----------- |
 | parent | [Bb.IBusyService](#T-Bb-IBusyService 'Bb.IBusyService') |  |
 | parentInstance | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+
+<a name='P-Bb-BusySession-BusyStatus'></a>
+### BusyStatus `property`
+
+##### Summary
+
+Status of the busy session
+
+<a name='P-Bb-BusySession-Instance'></a>
+### Instance `property`
+
+##### Summary
+
+Instance processed in the session
+
+<a name='P-Bb-BusySession-Message'></a>
+### Message `property`
+
+##### Summary
+
+Current message of the busy session
+
+<a name='P-Bb-BusySession-ProgressPercent'></a>
+### ProgressPercent `property`
+
+##### Summary
+
+Progress percent of the session
+
+<a name='P-Bb-BusySession-Title'></a>
+### Title `property`
+
+##### Summary
+
+Title of the session
+
+<a name='M-Bb-BusySession-Add-System-Action{Bb-BusySession}-'></a>
+### Add(action) `method`
+
+##### Summary
+
+Append a new action to execute
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| action | [System.Action{Bb.BusySession}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.BusySession}') |  |
+
+<a name='M-Bb-BusySession-Close'></a>
+### Close() `method`
+
+##### Summary
+
+Close the session
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-BusySession-Dispose'></a>
+### Dispose() `method`
+
+##### Summary
+
+Dispose the session
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-BusySession-Run'></a>
+### Run() `method`
+
+##### Summary
+
+Run the session
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-BusySession-Update-System-String,System-Int32-'></a>
+### Update(message,percent) `method`
+
+##### Summary
+
+Update the message form busy session
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| message | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| percent | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') |  |
 
 <a name='T-Bb-ComponentModel-Attributes-CultureProviderList'></a>
 ## CultureProviderList `type`
