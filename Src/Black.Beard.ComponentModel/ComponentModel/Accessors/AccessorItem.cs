@@ -239,36 +239,48 @@ namespace Bb.ComponentModel.Accessors
 
         }
 
+        public bool ResolveAttributeFromTypeDescriptor { get; set; }
+
         /// <summary>
         /// Gets the attribute's list.
         /// </summary>
+        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
         /// <returns></returns>
-        public IEnumerable<Attribute> GetAttributes()
+        public IEnumerable<Attribute> GetAttributes(bool resolveFromTypeDescriptor)
         {
-            if (_attributes == null)
-                _attributes = Member.GetCustomAttributes().OfType<Attribute>().ToList();
-            return _attributes;
+
+            if (resolveFromTypeDescriptor)
+            {
+                var _attributes = TypeDescriptor.GetAttributes(this.Member).OfType<Attribute>().ToList();
+                return _attributes;
+            }
+
+            if (_attributes1 == null)
+                _attributes1 = Member.GetCustomAttributes().OfType<Attribute>().ToList();
+            return _attributes1;
         }
 
         /// <summary>
         /// Gets the attribute's list.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<T> GetAttributes<T>()
+        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
+        public IEnumerable<T> GetAttributes<T>(bool resolveFromTypeDescriptor)
             where T : Attribute
         {
-            var attributes = GetAttributes();
+            var attributes = GetAttributes(resolveFromTypeDescriptor);
             return attributes.OfType<T>().ToList();
         }
 
         /// <summary>
         /// Gets the attribute's list.
         /// </summary>
+        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
         /// <returns></returns>
-        public bool IfAttributes<T>(out List<T> attributes)
+        public bool IfAttributes<T>(bool resolveFromTypeDescriptor, out List<T> attributes)
             where T : Attribute
         {
-            var attri = GetAttributes();
+            var attri = GetAttributes(resolveFromTypeDescriptor);
             attributes = attri.OfType<T>().ToList();
             return attributes.Any();
         }
@@ -276,11 +288,12 @@ namespace Bb.ComponentModel.Accessors
         /// <summary>
         /// Gets the attribute
         /// </summary>
+        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
         /// <returns></returns>
-        public bool IfAttribute<T>(out T attribute)
+        public bool IfAttribute<T>(bool resolveFromTypeDescriptor, out T attribute)
             where T : Attribute
         {
-            var attri = GetAttributes();
+            var attri = GetAttributes(resolveFromTypeDescriptor);
             var o = attri.OfType<T>().ToList();
             if (o.Count > 1)
                 throw new InvalidOperationException("Multiple attributes found");
@@ -293,11 +306,12 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="attributes">The attributes.</param>
+        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
         /// <returns></returns>
         public object GetValidatedValue(object instance, IEnumerable<ValidationAttribute> attributes = null)
         {
             var v1 = GetValue(instance);
-            ValidateMember(v1, true, attributes);
+            ValidateMember(v1, true, true, attributes);
             return v1;
         }
 
@@ -306,16 +320,17 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="throwException">if set to <c>true</c> [throw exception].</param>
+        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
         /// <param name="attributes">The attributes.</param>
         /// <returns></returns>
-        public ValidationException ValidateMember(object model, bool throwException, IEnumerable<ValidationAttribute> attributes = null)
+        public ValidationException ValidateMember(object model, bool throwException, bool resolveFromTypeDescriptor, IEnumerable<ValidationAttribute> attributes = null)
         {
 
             var _a = attributes;
             if (_a == null || _a.Count() == 0)
-                _a = GetAttributes().OfType<ValidationAttribute>().ToList();
+                _a = GetAttributes<ValidationAttribute>(resolveFromTypeDescriptor).ToList();
 
-            var _c = GetAttributes().ToList();
+            var _c = GetAttributes(resolveFromTypeDescriptor).ToList();
 
             //var r = value.Validate(this.Member, _a);
             ValidationException validationException = GetValidationException(model, _a);
@@ -357,11 +372,12 @@ namespace Bb.ComponentModel.Accessors
         /// Determines whether this instance contains attribute.
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
         /// <returns></returns>
-        public bool ContainsAttribute<T>()
+        public bool ContainsAttribute<T>(bool resolveFromTypeDescriptor)
             where T : Attribute
         {
-            return GetAttributes().OfType<T>().Any();
+            return GetAttributes(resolveFromTypeDescriptor).OfType<T>().Any();
         }
 
         /// <summary>
@@ -375,10 +391,10 @@ namespace Bb.ComponentModel.Accessors
                 if (string.IsNullOrEmpty(_displayName))
                 {
                     _displayName = this.Name;
-                    DisplayNameAttribute a = GetAttributes().OfType<DisplayNameAttribute>().FirstOrDefault();
+                    DisplayNameAttribute a = GetAttributes(true).OfType<DisplayNameAttribute>().FirstOrDefault();
                     if (a != null)
                         _displayName = a.DisplayName;
-                    DisplayAttribute b = GetAttributes().OfType<DisplayAttribute>().FirstOrDefault();
+                    DisplayAttribute b = GetAttributes(true).OfType<DisplayAttribute>().FirstOrDefault();
                     if (b != null)
                         _displayName = b.Name;
                 }
@@ -398,7 +414,7 @@ namespace Bb.ComponentModel.Accessors
                 if (string.IsNullOrEmpty(_displayDesciption))
                 {
                     _displayDesciption = this.Name;
-                    DescriptionAttribute a = GetAttributes().OfType<DescriptionAttribute>().FirstOrDefault();
+                    DescriptionAttribute a = GetAttributes(true).OfType<DescriptionAttribute>().FirstOrDefault();
                     if (a != null)
                         _displayDesciption = a.Description;
                 }
@@ -420,7 +436,7 @@ namespace Bb.ComponentModel.Accessors
                 if (string.IsNullOrEmpty(_category))
                 {
                     _category = string.Empty;
-                    CategoryAttribute a = GetAttributes().OfType<CategoryAttribute>().FirstOrDefault();
+                    CategoryAttribute a = GetAttributes(true).OfType<CategoryAttribute>().FirstOrDefault();
                     if (a != null)
                         _category = a.Category;
                 }
@@ -441,7 +457,7 @@ namespace Bb.ComponentModel.Accessors
             {
                 if (_defaultValue == null)
                 {
-                    DefaultValueAttribute a = GetAttributes().OfType<DefaultValueAttribute>().FirstOrDefault();
+                    DefaultValueAttribute a = GetAttributes(true).OfType<DefaultValueAttribute>().FirstOrDefault();
                     if (a != null)
                     {
                         _defaultValue = a.Value;
@@ -471,7 +487,7 @@ namespace Bb.ComponentModel.Accessors
                 if (!_required.HasValue)
                 {
                     _required = false;
-                    RequiredAttribute a = GetAttributes().OfType<RequiredAttribute>().FirstOrDefault();
+                    RequiredAttribute a = GetAttributes(true).OfType<RequiredAttribute>().FirstOrDefault();
                     if (a != null)
                         _required = true;
                 }
@@ -486,7 +502,7 @@ namespace Bb.ComponentModel.Accessors
 
         #region private
 
-        List<Attribute> _attributes;
+        List<Attribute> _attributes1;
         private string _displayName = null;
         private string _category = null;
         string _displayDesciption = null;

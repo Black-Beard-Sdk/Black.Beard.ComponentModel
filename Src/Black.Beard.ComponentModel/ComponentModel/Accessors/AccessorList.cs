@@ -219,19 +219,20 @@ namespace Bb.ComponentModel.Accessors
         public void Validate(object instance)
         {
 
-            ValidationException e = new ValidationException("Validation exception. Please see the data collection for more informations.");
+            ValidationException e 
+                = new ValidationException("Validation exception. Please see the data collection for more informations.");
 
             foreach (var item in _list)
             {
 
                 var v1 = item.Value.GetValue(instance);
                 //var e1 = item.Value.ValidateMember(v1, false);
-                var e1 = item.Value.ValidateMember(instance, false);
+                var e1 = item.Value.ValidateMember(instance, false, true);
                 if (e1 != null)
                     foreach (var item3 in e1.Data.Values)
                         e.Data.Add("exception" + (e.Data.Count + 1).ToString(), item3);
 
-                var _a = item.Value.GetAttributes().OfType<ValidationAttribute>().ToList();
+                var _a = item.Value.GetAttributes<ValidationAttribute>(true).ToList();
                 var validationException = ValidateMember(v1, item.Value.Member, _a);
 
                 if (validationException != null)

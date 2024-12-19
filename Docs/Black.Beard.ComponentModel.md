@@ -49,17 +49,17 @@
   - [Tag](#P-Bb-ComponentModel-Accessors-AccessorItem-Tag 'Bb.ComponentModel.Accessors.AccessorItem.Tag')
   - [Type](#P-Bb-ComponentModel-Accessors-AccessorItem-Type 'Bb.ComponentModel.Accessors.AccessorItem.Type')
   - [TypeEnum](#P-Bb-ComponentModel-Accessors-AccessorItem-TypeEnum 'Bb.ComponentModel.Accessors.AccessorItem.TypeEnum')
-  - [ContainsAttribute\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1 'Bb.ComponentModel.Accessors.AccessorItem.ContainsAttribute``1')
+  - [ContainsAttribute\`\`1(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1-System-Boolean- 'Bb.ComponentModel.Accessors.AccessorItem.ContainsAttribute``1(System.Boolean)')
   - [ConvertBeforeSettingValue(instance,value)](#M-Bb-ComponentModel-Accessors-AccessorItem-ConvertBeforeSettingValue-System-Object,System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.ConvertBeforeSettingValue(System.Object,System.Object)')
-  - [GetAttributes()](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes')
-  - [GetAttributes\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes``1')
+  - [GetAttributes(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes-System-Boolean- 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes(System.Boolean)')
+  - [GetAttributes\`\`1(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1-System-Boolean- 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes``1(System.Boolean)')
   - [GetPropertiesImpl(componentType,strategy)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetPropertiesImpl-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.AccessorItem.GetPropertiesImpl(System.Type,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
   - [GetTypedValue\`\`1(instance)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetTypedValue``1-System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.GetTypedValue``1(System.Object)')
-  - [GetValidatedValue(instance,attributes)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetValidatedValue-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.GetValidatedValue(System.Object,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
+  - [GetValidatedValue(instance,attributes,resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetValidatedValue-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.GetValidatedValue(System.Object,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
   - [GetValidationException(model,_a)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetValidationException-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.GetValidationException(System.Object,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
-  - [IfAttribute\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-``0@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttribute``1(``0@)')
-  - [IfAttributes\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Collections-Generic-List{``0}@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttributes``1(System.Collections.Generic.List{``0}@)')
-  - [ValidateMember(model,throwException,attributes)](#M-Bb-ComponentModel-Accessors-AccessorItem-ValidateMember-System-Object,System-Boolean,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.ValidateMember(System.Object,System.Boolean,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
+  - [IfAttribute\`\`1(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-System-Boolean,``0@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttribute``1(System.Boolean,``0@)')
+  - [IfAttributes\`\`1(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Boolean,System-Collections-Generic-List{``0}@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttributes``1(System.Boolean,System.Collections.Generic.List{``0}@)')
+  - [ValidateMember(model,throwException,resolveFromTypeDescriptor,attributes)](#M-Bb-ComponentModel-Accessors-AccessorItem-ValidateMember-System-Object,System-Boolean,System-Boolean,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.ValidateMember(System.Object,System.Boolean,System.Boolean,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
 - [AccessorList](#T-Bb-ComponentModel-Accessors-AccessorList 'Bb.ComponentModel.Accessors.AccessorList')
   - [#ctor()](#M-Bb-ComponentModel-Accessors-AccessorList-#ctor 'Bb.ComponentModel.Accessors.AccessorList.#ctor')
   - [#ctor(list)](#M-Bb-ComponentModel-Accessors-AccessorList-#ctor-System-Collections-Generic-IEnumerable{Bb-ComponentModel-Accessors-AccessorItem}- 'Bb.ComponentModel.Accessors.AccessorList.#ctor(System.Collections.Generic.IEnumerable{Bb.ComponentModel.Accessors.AccessorItem})')
@@ -3690,8 +3690,8 @@ Gets or sets the type.
 
 Gets or sets the type enum.
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1'></a>
-### ContainsAttribute\`\`1() `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1-System-Boolean-'></a>
+### ContainsAttribute\`\`1(resolveFromTypeDescriptor) `method`
 
 ##### Summary
 
@@ -3703,7 +3703,9 @@ Determines whether this instance contains attribute.
 
 ##### Parameters
 
-This method has no parameters.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
 
 ##### Generic Types
 
@@ -3725,8 +3727,8 @@ Convert value before setting it.
 | instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
 | value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes'></a>
-### GetAttributes() `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes-System-Boolean-'></a>
+### GetAttributes(resolveFromTypeDescriptor) `method`
 
 ##### Summary
 
@@ -3738,10 +3740,12 @@ Gets the attribute's list.
 
 ##### Parameters
 
-This method has no parameters.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1'></a>
-### GetAttributes\`\`1() `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1-System-Boolean-'></a>
+### GetAttributes\`\`1(resolveFromTypeDescriptor) `method`
 
 ##### Summary
 
@@ -3753,7 +3757,9 @@ Gets the attribute's list.
 
 ##### Parameters
 
-This method has no parameters.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetPropertiesImpl-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum-'></a>
 ### GetPropertiesImpl(componentType,strategy) `method`
@@ -3797,7 +3803,7 @@ Gets the typed value converted in specified type.
 | T1 | The type of the returned value. |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetValidatedValue-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}-'></a>
-### GetValidatedValue(instance,attributes) `method`
+### GetValidatedValue(instance,attributes,resolveFromTypeDescriptor) `method`
 
 ##### Summary
 
@@ -3828,8 +3834,8 @@ Gets the validation exception.
 | model | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The model. |
 | _a | [System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}') | The validationAttributes. |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-``0@-'></a>
-### IfAttribute\`\`1() `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-System-Boolean,``0@-'></a>
+### IfAttribute\`\`1(resolveFromTypeDescriptor) `method`
 
 ##### Summary
 
@@ -3841,10 +3847,12 @@ Gets the attribute
 
 ##### Parameters
 
-This method has no parameters.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Collections-Generic-List{``0}@-'></a>
-### IfAttributes\`\`1() `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Boolean,System-Collections-Generic-List{``0}@-'></a>
+### IfAttributes\`\`1(resolveFromTypeDescriptor) `method`
 
 ##### Summary
 
@@ -3856,10 +3864,12 @@ Gets the attribute's list.
 
 ##### Parameters
 
-This method has no parameters.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ValidateMember-System-Object,System-Boolean,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}-'></a>
-### ValidateMember(model,throwException,attributes) `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ValidateMember-System-Object,System-Boolean,System-Boolean,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}-'></a>
+### ValidateMember(model,throwException,resolveFromTypeDescriptor,attributes) `method`
 
 ##### Summary
 
@@ -3875,6 +3885,7 @@ Validates the member.
 | ---- | ---- | ----------- |
 | model | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The model. |
 | throwException | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | if set to `true` [throw exception]. |
+| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
 | attributes | [System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}') | The attributes. |
 
 <a name='T-Bb-ComponentModel-Accessors-AccessorList'></a>
