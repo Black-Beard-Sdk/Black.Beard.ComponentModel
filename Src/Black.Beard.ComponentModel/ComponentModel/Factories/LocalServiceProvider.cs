@@ -1,5 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Bb.ComponentModel.Factories

@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Reflection;
-using System.Xml.Linq;
 
 namespace Bb.Diagnostics
 {

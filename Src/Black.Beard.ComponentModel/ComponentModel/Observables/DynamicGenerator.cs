@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Reflection.Emit;
 using System.Reflection;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection.PortableExecutable;
 using System.Collections.Generic;
 
 namespace Bb.ComponentModel.Observables

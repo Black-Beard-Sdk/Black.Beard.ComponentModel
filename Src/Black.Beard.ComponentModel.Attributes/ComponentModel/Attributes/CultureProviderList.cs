@@ -1,7 +1,6 @@
 ﻿using Bb.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Xml.Linq;
 
 namespace Bb.ComponentModel.Attributes
 {

@@ -1,7 +1,4 @@
-﻿using Bb.ComponentModel.Attributes;
-using System;
-using System.Globalization;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 
 namespace Bb.ComponentModel.Translations
 {

@@ -2,7 +2,6 @@
 using System.Reflection.Emit;
 using System.Reflection;
 using System.Linq;
-using ICSharpCode.Decompiler.TypeSystem.Implementation;
 
 namespace Bb.ComponentModel.Observables
 {
