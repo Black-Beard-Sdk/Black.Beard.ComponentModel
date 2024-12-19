@@ -25,7 +25,6 @@ namespace Black.Beard.Accessors
 
         }
 
-
         [Fact]
         public void Test1()
         {
@@ -62,7 +61,6 @@ namespace Black.Beard.Accessors
 
         }
 
-
         [Fact]
         public void Test3()
         {
@@ -81,7 +79,6 @@ namespace Black.Beard.Accessors
 
         }
 
-
         [Fact]
         public void Test4()
         {
@@ -93,12 +90,39 @@ namespace Black.Beard.Accessors
             var list = typeof(Cls2).GetAccessors(AccessorStrategyEnum.Direct);
 
             list[nameof(Cls2.Name)].SetValue(cls, expected);
-            var value = list[nameof(Cls1.Name)].GetValue(cls);
+            var value = list[nameof(Cls2.Name)].GetValue(cls);
 
             Assert.Equal(expected.ToString(), value);
 
         }
 
+        [Fact]
+        public void Test5()
+        {
+
+            string expected = Guid.NewGuid().ToString();
+
+            var cls = new Cls3() { };
+
+            var list = typeof(Cls3).GetAccessors(AccessorStrategyEnum.Direct);
+            var item = list[nameof(Cls3.Name)];
+            Assert.Null(item.SetValue);
+
+        }
+
+        [Fact]
+        public void Test6()
+        {
+
+            string expected = Guid.NewGuid().ToString();
+
+            var cls = new Cls4() { };
+
+            var list = typeof(Cls4).GetAccessors(AccessorStrategyEnum.Direct);
+            var item = list[nameof(Cls3.Name)];
+            Assert.Null(item);
+
+        }
 
     }
 
@@ -116,5 +140,25 @@ namespace Black.Beard.Accessors
 
     }
 
+    public class Cls3
+    {
+
+        public string Name { get; }
+
+    }
+
+    public class Cls4
+    {
+
+        public string this[string item]
+        {
+            get { return _name; }
+            set { _name = null; }
+        }
+
+
+        private string _name = null;
+
+    }
 
 }

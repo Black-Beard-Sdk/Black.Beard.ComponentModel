@@ -61,10 +61,6 @@ namespace Bb
                         if (act != null)
                             act(this);
 
-                    //var n = DateTime.Now;
-                    //if (n < startTime)
-                    //    await Task.Delay((int)startTime.Subtract(n).TotalMilliseconds);
-
                 }
                 finally
                 {

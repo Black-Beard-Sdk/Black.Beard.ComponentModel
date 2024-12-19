@@ -96,7 +96,7 @@ namespace Bb.ComponentModel.Accessors
             }
 
             return default;
-            
+
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace Bb.ComponentModel.Accessors
                         list = new AccessorList();
 
                         foreach (PropertyInfo item in AccessorList.GetProperties(componentType))
-                            if (!list.ContainsKey(item.Name))
+                            if (!list.ContainsKey(item.Name) && IsAccepted(item))
                                 list.Add(new PropertyAccessor(componentType, item, strategy));
 
                         foreach (FieldInfo item in AccessorList.GetFields(componentType))
@@ -223,6 +223,19 @@ namespace Bb.ComponentModel.Accessors
             }
 
             return list;
+
+        }
+
+        private static bool IsAccepted(PropertyInfo item)
+        {
+
+            if (item.GetIndexParameters().Length > 0)
+                return false;
+
+            if (item.GetMethod == null && item.SetMethod == null)
+                return false;
+
+            return true;
 
         }
 
