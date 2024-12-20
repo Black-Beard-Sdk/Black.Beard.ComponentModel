@@ -10,27 +10,44 @@ namespace Bb.Converters
     {
 
 
+        /// <summary>
+        /// initialize a new instance of <see cref="ConverterContext"/>
+        /// </summary>
+        /// <param name="cultureInfo"></param>
         public ConverterContext(CultureInfo cultureInfo)
             : this(cultureInfo, ConverterContext.DefaultEncoding)
         {
 
         }
 
+        /// <summary>
+        /// initialize a new instance of <see cref="ConverterContext"/>
+        /// </summary>
         public ConverterContext()
             : this(ConverterContext.DefaultCultureInfo, ConverterContext.DefaultEncoding)
         {
 
         }
 
+        /// <summary>
+        /// initialize a new instance of <see cref="ConverterContext"/>
+        /// </summary>
+        /// <param name="cultureInfo"></param>
+        /// <param name="encoding"></param>
         public ConverterContext(CultureInfo cultureInfo, Encoding encoding)
         {
             this.Culture = cultureInfo;
             this.Encoding = encoding;
         }
 
-
+        /// <summary>
+        /// Culture used by default if the parameter is not specified
+        /// </summary>
         public CultureInfo Culture { get; }
 
+        /// <summary>
+        /// Encoding used by default if the parameter is not specified
+        /// </summary>
         public Encoding Encoding { get; }
 
 

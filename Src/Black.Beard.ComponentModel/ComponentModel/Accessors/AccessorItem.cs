@@ -11,7 +11,7 @@ namespace Bb.ComponentModel.Accessors
 
 
     /// <summary>
-    /// Base accessor
+    /// Accessor base
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{Name}")]
     public class AccessorItem
@@ -69,6 +69,66 @@ namespace Bb.ComponentModel.Accessors
         public bool IsClonable { get { return GetValue != null && SetValue != null; } }
 
         /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
+        public Type Type { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [is static].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [is static]; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsStatic { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets the tag.
+        /// </summary>
+        /// <value>
+        /// The tag.
+        /// </value>
+        public object Tag { get; set; }
+
+        /// <summary>
+        /// Gets or sets the member.
+        /// </summary>
+        /// <value>
+        /// The member.
+        /// </value>
+        public MemberInfo Member { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets the type of the declaring.
+        /// </summary>
+        /// <value>
+        /// The type of the declaring.
+        /// </value>
+        public Type DeclaringType { get; protected set; }
+
+        #endregion Properties
+
+
+
+        /// <summary>
+        /// Gets or sets the set value method.
+        /// </summary>
+        /// <value>
+        /// The set value.
+        /// </value>
+        public Action<object, object> SetValue { get; protected set; }
+
+        /// <summary>
         /// Gets or sets the get value method.
         /// </summary>
         /// <value>
@@ -120,126 +180,8 @@ namespace Bb.ComponentModel.Accessors
 
         }
 
-        /// <summary>
-        /// Gets or sets the set value method.
-        /// </summary>
-        /// <value>
-        /// The set value.
-        /// </value>
-        public Action<object, object> SetValue { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        public string Name { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the type.
-        /// </summary>
-        /// <value>
-        /// The type.
-        /// </value>
-        public Type Type { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether [is static].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [is static]; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsStatic { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the tag.
-        /// </summary>
-        /// <value>
-        /// The tag.
-        /// </value>
-        public object Tag { get; set; }
-
-        /// <summary>
-        /// Gets or sets the member.
-        /// </summary>
-        /// <value>
-        /// The member.
-        /// </value>
-        public MemberInfo Member { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the type of the declaring.
-        /// </summary>
-        /// <value>
-        /// The type of the declaring.
-        /// </value>
-        public Type DeclaringType { get; protected set; }
-
-        /// <summary>
-        /// Gets the specified component type.
-        /// </summary>
-        /// <param name="componentType">Type of the component.</param>
-        /// <param name="strategy">strategy to use</param>
-        /// <returns></returns>
-        internal static AccessorList GetPropertiesImpl(Type componentType, AccessorStrategyEnum strategy)
-        {
-
-            AccessorList list = null;
-
-            if (!_strategyPropertiesAccessors.TryGetValue(strategy, out var _accessors))
-                lock (_lock)
-                    if (!_strategyPropertiesAccessors.TryGetValue(strategy, out _accessors))
-                        _strategyPropertiesAccessors.Add(strategy, _accessors = new Dictionary<Type, AccessorList>());
-
-            if (_accessors.ContainsKey(componentType))
-                list = _accessors[componentType];
-
-            else
-            {
-                lock (_lock)
-                {
-
-                    if (_accessors.ContainsKey(componentType))
-                        list = _accessors[componentType];
-
-                    else
-                    {
-
-                        list = new AccessorList();
-
-                        foreach (PropertyInfo item in AccessorList.GetProperties(componentType))
-                            if (!list.ContainsKey(item.Name) && IsAccepted(item))
-                                list.Add(new PropertyAccessor(componentType, item, strategy));
-
-                        foreach (FieldInfo item in AccessorList.GetFields(componentType))
-                            if (!list.ContainsKey(item.Name))
-                                list.Add(new FieldAccessor(componentType, item, strategy));
-
-                        _accessors.Add(componentType, list);
-
-                    }
-                }
-            }
-
-            return list;
-
-        }
-
-        private static bool IsAccepted(PropertyInfo item)
-        {
-
-            if (item.GetIndexParameters().Length > 0)
-                return false;
-
-            if (item.GetMethod == null && item.SetMethod == null)
-                return false;
-
-            return true;
-
-        }
-
-        public bool ResolveAttributeFromTypeDescriptor { get; set; }
+        #region attributes
 
         /// <summary>
         /// Gets the attribute's list.
@@ -251,7 +193,8 @@ namespace Bb.ComponentModel.Accessors
 
             if (resolveFromTypeDescriptor)
             {
-                var _attributes = TypeDescriptor.GetAttributes(this.Member).OfType<Attribute>().ToList();
+                var prop = TypeDescriptor.GetProperties(this.DeclaringType).Find(this.Name, false);
+                var _attributes = prop.Attributes.ToList().ToList();
                 return _attributes;
             }
 
@@ -268,8 +211,7 @@ namespace Bb.ComponentModel.Accessors
         public IEnumerable<T> GetAttributes<T>(bool resolveFromTypeDescriptor)
             where T : Attribute
         {
-            var attributes = GetAttributes(resolveFromTypeDescriptor);
-            return attributes.OfType<T>().ToList();
+            return GetAttributes(resolveFromTypeDescriptor).OfType<T>();
         }
 
         /// <summary>
@@ -280,9 +222,8 @@ namespace Bb.ComponentModel.Accessors
         public bool IfAttributes<T>(bool resolveFromTypeDescriptor, out List<T> attributes)
             where T : Attribute
         {
-            var attri = GetAttributes(resolveFromTypeDescriptor);
-            attributes = attri.OfType<T>().ToList();
-            return attributes.Any();
+            attributes = GetAttributes<T>(resolveFromTypeDescriptor).ToList();            
+            return attributes.Count > 0;
         }
 
         /// <summary>
@@ -293,8 +234,7 @@ namespace Bb.ComponentModel.Accessors
         public bool IfAttribute<T>(bool resolveFromTypeDescriptor, out T attribute)
             where T : Attribute
         {
-            var attri = GetAttributes(resolveFromTypeDescriptor);
-            var o = attri.OfType<T>().ToList();
+            var o = GetAttributes<T>(resolveFromTypeDescriptor).ToList();
             if (o.Count > 1)
                 throw new InvalidOperationException("Multiple attributes found");
             attribute = o.FirstOrDefault();
@@ -302,12 +242,26 @@ namespace Bb.ComponentModel.Accessors
         }
 
         /// <summary>
+        /// Determines whether this instance contains attribute.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
+        /// <returns></returns>
+        public bool ContainsAttribute<T>(bool resolveFromTypeDescriptor)
+            where T : Attribute
+        {
+            return GetAttributes<T>(resolveFromTypeDescriptor).Any();
+        }
+
+
+        #region validation
+
+        /// <summary>
         /// Gets the validated value.
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="attributes">The attributes.</param>
-        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
-        /// <returns></returns>
+        /// <returns>the value has been validated</returns>
         public object GetValidatedValue(object instance, IEnumerable<ValidationAttribute> attributes = null)
         {
             var v1 = GetValue(instance);
@@ -330,9 +284,6 @@ namespace Bb.ComponentModel.Accessors
             if (_a == null || _a.Count() == 0)
                 _a = GetAttributes<ValidationAttribute>(resolveFromTypeDescriptor).ToList();
 
-            var _c = GetAttributes(resolveFromTypeDescriptor).ToList();
-
-            //var r = value.Validate(this.Member, _a);
             ValidationException validationException = GetValidationException(model, _a);
 
             if (throwException && validationException != null)
@@ -367,18 +318,8 @@ namespace Bb.ComponentModel.Accessors
             return v1;
         }
 
+        #endregion validation
 
-        /// <summary>
-        /// Determines whether this instance contains attribute.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
-        /// <returns></returns>
-        public bool ContainsAttribute<T>(bool resolveFromTypeDescriptor)
-            where T : Attribute
-        {
-            return GetAttributes(resolveFromTypeDescriptor).OfType<T>().Any();
-        }
 
         /// <summary>
         /// Displays the name.
@@ -497,10 +438,75 @@ namespace Bb.ComponentModel.Accessors
             }
         }
 
-        #endregion Attributes / validations
+        #endregion attributes
+
+
+        /// <summary>
+        /// Gets the specified component type.
+        /// </summary>
+        /// <param name="componentType">Type of the component.</param>
+        /// <param name="strategy">strategy to use</param>
+        /// <returns></returns>
+        internal static AccessorList GetPropertiesImpl(Type componentType, AccessorStrategyEnum strategy)
+        {
+
+            AccessorList list = null;
+
+            if (!_strategyPropertiesAccessors.TryGetValue(strategy, out var _accessors))
+                lock (_lock)
+                    if (!_strategyPropertiesAccessors.TryGetValue(strategy, out _accessors))
+                        _strategyPropertiesAccessors.Add(strategy, _accessors = new Dictionary<Type, AccessorList>());
+
+            if (_accessors.ContainsKey(componentType))
+                list = _accessors[componentType];
+
+            else
+            {
+                lock (_lock)
+                {
+
+                    if (_accessors.ContainsKey(componentType))
+                        list = _accessors[componentType];
+
+                    else
+                    {
+
+                        list = new AccessorList();
+
+                        foreach (PropertyInfo item in AccessorList.GetProperties(componentType))
+                            if (!list.ContainsKey(item.Name) && IsAccepted(item))
+                                list.Add(new PropertyAccessor(componentType, item, strategy));
+
+                        foreach (FieldInfo item in AccessorList.GetFields(componentType))
+                            if (!list.ContainsKey(item.Name))
+                                list.Add(new FieldAccessor(componentType, item, strategy));
+
+                        _accessors.Add(componentType, list);
+
+                    }
+                }
+            }
+
+            return list;
+
+        }
 
 
         #region private
+
+
+        private static bool IsAccepted(PropertyInfo item)
+        {
+
+            if (item.GetIndexParameters().Length > 0)
+                return false;
+
+            if (item.GetMethod == null && item.SetMethod == null)
+                return false;
+
+            return true;
+
+        }
 
         List<Attribute> _attributes1;
         private string _displayName = null;

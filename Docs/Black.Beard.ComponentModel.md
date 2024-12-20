@@ -55,7 +55,7 @@
   - [GetAttributes\`\`1(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1-System-Boolean- 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes``1(System.Boolean)')
   - [GetPropertiesImpl(componentType,strategy)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetPropertiesImpl-System-Type,Bb-ComponentModel-Accessors-AccessorStrategyEnum- 'Bb.ComponentModel.Accessors.AccessorItem.GetPropertiesImpl(System.Type,Bb.ComponentModel.Accessors.AccessorStrategyEnum)')
   - [GetTypedValue\`\`1(instance)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetTypedValue``1-System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.GetTypedValue``1(System.Object)')
-  - [GetValidatedValue(instance,attributes,resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetValidatedValue-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.GetValidatedValue(System.Object,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
+  - [GetValidatedValue(instance,attributes)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetValidatedValue-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.GetValidatedValue(System.Object,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
   - [GetValidationException(model,_a)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetValidationException-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.GetValidationException(System.Object,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
   - [IfAttribute\`\`1(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-System-Boolean,``0@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttribute``1(System.Boolean,``0@)')
   - [IfAttributes\`\`1(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Boolean,System-Collections-Generic-List{``0}@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttributes``1(System.Boolean,System.Collections.Generic.List{``0}@)')
@@ -718,7 +718,12 @@
 - [ConversionResolveResult](#T-ICSharpCode-Decompiler-Semantics-ConversionResolveResult 'ICSharpCode.Decompiler.Semantics.ConversionResolveResult')
   - [CheckForOverflow](#F-ICSharpCode-Decompiler-Semantics-ConversionResolveResult-CheckForOverflow 'ICSharpCode.Decompiler.Semantics.ConversionResolveResult.CheckForOverflow')
 - [ConverterContext](#T-Bb-Converters-ConverterContext 'Bb.Converters.ConverterContext')
+  - [#ctor(cultureInfo)](#M-Bb-Converters-ConverterContext-#ctor-System-Globalization-CultureInfo- 'Bb.Converters.ConverterContext.#ctor(System.Globalization.CultureInfo)')
+  - [#ctor()](#M-Bb-Converters-ConverterContext-#ctor 'Bb.Converters.ConverterContext.#ctor')
+  - [#ctor(cultureInfo,encoding)](#M-Bb-Converters-ConverterContext-#ctor-System-Globalization-CultureInfo,System-Text-Encoding- 'Bb.Converters.ConverterContext.#ctor(System.Globalization.CultureInfo,System.Text.Encoding)')
+  - [Culture](#P-Bb-Converters-ConverterContext-Culture 'Bb.Converters.ConverterContext.Culture')
   - [DefaultCultureInfo](#P-Bb-Converters-ConverterContext-DefaultCultureInfo 'Bb.Converters.ConverterContext.DefaultCultureInfo')
+  - [Encoding](#P-Bb-Converters-ConverterContext-Encoding 'Bb.Converters.ConverterContext.Encoding')
 - [ConverterHelper](#T-Bb-Expressions-ConverterHelper 'Bb.Expressions.ConverterHelper')
   - [#cctor()](#M-Bb-Expressions-ConverterHelper-#cctor 'Bb.Expressions.ConverterHelper.#cctor')
   - [AppendConverter(method,replaceExisting)](#M-Bb-Expressions-ConverterHelper-AppendConverter-System-Delegate,System-Boolean- 'Bb.Expressions.ConverterHelper.AppendConverter(System.Delegate,System.Boolean)')
@@ -3527,7 +3532,7 @@ Bb.ComponentModel.Accessors
 
 ##### Summary
 
-Base accessor
+Accessor base
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-#ctor-Bb-ComponentModel-Accessors-MemberTypeEnum,Bb-ComponentModel-Accessors-AccessorStrategyEnum-'></a>
 ### #ctor(memberTypeEnum) `constructor`
@@ -3803,7 +3808,7 @@ Gets the typed value converted in specified type.
 | T1 | The type of the returned value. |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetValidatedValue-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}-'></a>
-### GetValidatedValue(instance,attributes,resolveFromTypeDescriptor) `method`
+### GetValidatedValue(instance,attributes) `method`
 
 ##### Summary
 
@@ -3811,7 +3816,7 @@ Gets the validated value.
 
 ##### Returns
 
-
+the value has been validated
 
 ##### Parameters
 
@@ -11522,12 +11527,64 @@ For numeric conversions, specifies whether overflow checking is enabled.
 
 Bb.Converters
 
+<a name='M-Bb-Converters-ConverterContext-#ctor-System-Globalization-CultureInfo-'></a>
+### #ctor(cultureInfo) `constructor`
+
+##### Summary
+
+initialize a new instance of [ConverterContext](#T-Bb-Converters-ConverterContext 'Bb.Converters.ConverterContext')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| cultureInfo | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') |  |
+
+<a name='M-Bb-Converters-ConverterContext-#ctor'></a>
+### #ctor() `constructor`
+
+##### Summary
+
+initialize a new instance of [ConverterContext](#T-Bb-Converters-ConverterContext 'Bb.Converters.ConverterContext')
+
+##### Parameters
+
+This constructor has no parameters.
+
+<a name='M-Bb-Converters-ConverterContext-#ctor-System-Globalization-CultureInfo,System-Text-Encoding-'></a>
+### #ctor(cultureInfo,encoding) `constructor`
+
+##### Summary
+
+initialize a new instance of [ConverterContext](#T-Bb-Converters-ConverterContext 'Bb.Converters.ConverterContext')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| cultureInfo | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') |  |
+| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') |  |
+
+<a name='P-Bb-Converters-ConverterContext-Culture'></a>
+### Culture `property`
+
+##### Summary
+
+Culture used by default if the parameter is not specified
+
 <a name='P-Bb-Converters-ConverterContext-DefaultCultureInfo'></a>
 ### DefaultCultureInfo `property`
 
 ##### Summary
 
 Culture used by default if the parameter is not specified
+
+<a name='P-Bb-Converters-ConverterContext-Encoding'></a>
+### Encoding `property`
+
+##### Summary
+
+Encoding used by default if the parameter is not specified
 
 <a name='T-Bb-Expressions-ConverterHelper'></a>
 ## ConverterHelper `type`
