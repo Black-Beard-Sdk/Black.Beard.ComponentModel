@@ -23,6 +23,20 @@ namespace Black.Beard.Accessors
 
         }
 
+        [Fact]
+        public void Test1()
+        {
+
+            var list1 = typeof(Cls12).GetAccessors();
+            var i = list1[nameof(Cls12.Name)];
+
+            var lst1 = i.ContainsAttribute<KeyAttribute>(true);
+            var lst2 = i.ContainsAttribute<KeyAttribute>(false);
+
+            Assert.True(lst1 && lst2);
+
+        }
+
     }
 
 
@@ -31,6 +45,14 @@ namespace Black.Beard.Accessors
 
         [Key]
         public string Name { get; set; }
+
+    }
+
+    public class Cls12
+    {
+
+        [Key]
+        public string Name;
 
     }
 

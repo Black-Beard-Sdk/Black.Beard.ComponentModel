@@ -79,7 +79,9 @@
   - [Validate(instance)](#M-Bb-ComponentModel-Accessors-AccessorList-Validate-System-Object- 'Bb.ComponentModel.Accessors.AccessorList.Validate(System.Object)')
   - [ValidateMember(value,member,attributes)](#M-Bb-ComponentModel-Accessors-AccessorList-ValidateMember-System-Object,System-Reflection-MemberInfo,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorList.ValidateMember(System.Object,System.Reflection.MemberInfo,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
 - [AccessorStrategyEnum](#T-Bb-ComponentModel-Accessors-AccessorStrategyEnum 'Bb.ComponentModel.Accessors.AccessorStrategyEnum')
+  - [ConvertIfDifferent](#F-Bb-ComponentModel-Accessors-AccessorStrategyEnum-ConvertIfDifferent 'Bb.ComponentModel.Accessors.AccessorStrategyEnum.ConvertIfDifferent')
   - [Direct](#F-Bb-ComponentModel-Accessors-AccessorStrategyEnum-Direct 'Bb.ComponentModel.Accessors.AccessorStrategyEnum.Direct')
+  - [WithFields](#F-Bb-ComponentModel-Accessors-AccessorStrategyEnum-WithFields 'Bb.ComponentModel.Accessors.AccessorStrategyEnum.WithFields')
 - [AddCheckedBlocks](#T-ICSharpCode-Decompiler-CSharp-Transforms-AddCheckedBlocks 'ICSharpCode.Decompiler.CSharp.Transforms.AddCheckedBlocks')
 - [AddXmlDocumentationTransform](#T-ICSharpCode-Decompiler-CSharp-Transforms-AddXmlDocumentationTransform 'ICSharpCode.Decompiler.CSharp.Transforms.AddXmlDocumentationTransform')
 - [AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')
@@ -4160,12 +4162,26 @@ Validates the specified dob.
 
 Bb.ComponentModel.Accessors
 
+<a name='F-Bb-ComponentModel-Accessors-AccessorStrategyEnum-ConvertIfDifferent'></a>
+### ConvertIfDifferent `constants`
+
+##### Summary
+
+Convert the argument in the target type property if different.
+
 <a name='F-Bb-ComponentModel-Accessors-AccessorStrategyEnum-Direct'></a>
 ### Direct `constants`
 
 ##### Summary
 
 direct copy of the value in the property
+
+<a name='F-Bb-ComponentModel-Accessors-AccessorStrategyEnum-WithFields'></a>
+### WithFields `constants`
+
+##### Summary
+
+Append the fields in the accessor's list
 
 <a name='T-ICSharpCode-Decompiler-CSharp-Transforms-AddCheckedBlocks'></a>
 ## AddCheckedBlocks `type`

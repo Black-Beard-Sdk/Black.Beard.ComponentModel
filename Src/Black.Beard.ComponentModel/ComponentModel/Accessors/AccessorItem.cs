@@ -191,10 +191,13 @@ namespace Bb.ComponentModel.Accessors
         public IEnumerable<Attribute> GetAttributes(bool resolveFromTypeDescriptor)
         {
 
-            if (resolveFromTypeDescriptor)
+            if (resolveFromTypeDescriptor && this.Member is PropertyInfo)
             {
-                var prop = TypeDescriptor.GetProperties(this.DeclaringType).Find(this.Name, false);
-                var _attributes = prop.Attributes.ToList().ToList();
+                var prop = TypeDescriptor.GetProperties(this.DeclaringType)
+                    .Find(this.Name, false);
+                if (prop == null)
+                    throw new InvalidOperationException($"Property {this.Name} not found in {this.DeclaringType.FullName}.");
+                var _attributes = prop.Attributes?.ToList().ToList();
                 return _attributes;
             }
 
@@ -222,7 +225,7 @@ namespace Bb.ComponentModel.Accessors
         public bool IfAttributes<T>(bool resolveFromTypeDescriptor, out List<T> attributes)
             where T : Attribute
         {
-            attributes = GetAttributes<T>(resolveFromTypeDescriptor).ToList();            
+            attributes = GetAttributes<T>(resolveFromTypeDescriptor).ToList();
             return attributes.Count > 0;
         }
 
@@ -477,9 +480,10 @@ namespace Bb.ComponentModel.Accessors
                             if (!list.ContainsKey(item.Name) && IsAccepted(item))
                                 list.Add(new PropertyAccessor(componentType, item, strategy));
 
-                        foreach (FieldInfo item in AccessorList.GetFields(componentType))
-                            if (!list.ContainsKey(item.Name))
-                                list.Add(new FieldAccessor(componentType, item, strategy));
+                        if (strategy.HasFlag(AccessorStrategyEnum.WithFields))
+                            foreach (FieldInfo item in AccessorList.GetFields(componentType))
+                                if (!list.ContainsKey(item.Name))
+                                    list.Add(new FieldAccessor(componentType, item, strategy));
 
                         _accessors.Add(componentType, list);
 
