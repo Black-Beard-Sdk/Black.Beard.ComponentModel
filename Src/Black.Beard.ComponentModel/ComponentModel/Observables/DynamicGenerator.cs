@@ -16,8 +16,8 @@ namespace Bb.ComponentModel.Observables
 
             result = new InterceptorResult
             {
-                IsObservable = false,
-                IsDisposable = false,
+                IsObservable = makeObservable,
+                IsDisposable = makeDisposable,
                 Type = type
             };
 

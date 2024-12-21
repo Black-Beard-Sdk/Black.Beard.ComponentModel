@@ -551,19 +551,16 @@ namespace Bb.ComponentModel.Accessors
         {
 
             if (!strategy.HasFlag(MemberStrategy.NotPublicFields) && !item.Attributes.HasFlag(FieldAttributes.Public))
-            {
                 if (item.Attributes.HasFlag(FieldAttributes.Private) || item.Attributes.HasFlag(FieldAttributes.PrivateScope))
                     return false;
-            }
 
             if (!strategy.HasFlag(MemberStrategy.Static))
-            {
                 return !item.IsStatic;
-            }
-            else
-            {
-                return item.IsStatic;
-            }
+
+            else if (!strategy.HasFlag(MemberStrategy.Instance))
+                return !item.IsStatic;
+
+            return true;
 
         }
 

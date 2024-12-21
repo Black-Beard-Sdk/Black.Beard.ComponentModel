@@ -1,5 +1,6 @@
 ﻿namespace Bb.ComponentModel.Accessors
 {
+
     /// <summary>
     /// /// member's type 
     /// </summary>

@@ -39,7 +39,7 @@ namespace ComponentModels.Tests.LibResolvers
         }
 
 
-        [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder))]
+        [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder<MyContext>))]
         public class InjectBuilder : IInjectBuilder<MyContext>
         {
 

@@ -75,8 +75,6 @@ namespace Bb.ComponentModel.Binders
             }
         }
 
-
-
         private void Source_Disposed(object sender, EventArgs e)
         {
             Dispose();

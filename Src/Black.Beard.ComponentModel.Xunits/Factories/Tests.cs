@@ -30,7 +30,7 @@ namespace ComponentModels.Tests.Factories
         public void Constructor_Factory1()
         {
             var factory = ObjectCreator.GetActivatorByTypeAndArguments<object>(typeof(Test1), typeof(string), typeof(int));
-            Test1 result = (Test1)factory.Call("t1", 1);
+            Test1 result = (Test1)factory.CallInstance("t1", 1);
             result.Arg1.Should().Be("t1");
         }
 
@@ -39,7 +39,7 @@ namespace ComponentModels.Tests.Factories
         public void Constructor_Factory2()
         {
             var factory = ObjectCreator.GetActivatorByArguments<Test1>(typeof(string), typeof(int));
-            Test1 result = factory.Call("t2", 1);
+            Test1 result = factory.CallByKey(null, "t2", 1);
             result.Arg1.Should().Be("t2");
         }
 
@@ -48,7 +48,7 @@ namespace ComponentModels.Tests.Factories
         {
             var types = ObjectCreator.ResolveTypesOfArguments("t2", 1);
             var factory = ObjectCreator.GetActivatorByArguments<Test1>(types);
-            Test1 result = factory.Call("t2", 1);
+            Test1 result = factory.CallByKey(null, "t2", 1);
             result.Arg1.Should().Be("t2");
         }
 

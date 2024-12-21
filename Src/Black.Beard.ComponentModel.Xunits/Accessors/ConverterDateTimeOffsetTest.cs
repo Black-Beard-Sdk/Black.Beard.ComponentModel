@@ -16,13 +16,13 @@ namespace Black.Beard.Accessors
 
             var list1 = typeof(Cls1).GetAccessors();
             var list2 = typeof(Cls1).GetAccessors();
-            Assert.Equal(list1, list1);
+            Assert.Equal(list1, list2);
 
             list1 = typeof(Cls1).GetAccessors(MemberStrategy.ConvertIfDifferent);
-            Assert.NotEqual(list1, list1);
+            Assert.NotEqual(list2, list1);
 
             list2 = typeof(Cls1).GetAccessors(MemberStrategy.ConvertIfDifferent);
-            Assert.Equal(list1, list1);
+            Assert.Equal(list1, list2);
 
         }
 
@@ -88,7 +88,7 @@ namespace Black.Beard.Accessors
 
             var cls = new Cls2() { };
 
-            var list = typeof(Cls2).GetAccessors(MemberStrategy.Direct);
+            var list = typeof(Cls2).GetAccessors();
 
             list[nameof(Cls2.Name)].SetValue(cls, expected);
             var value = list[nameof(Cls2.Name)].GetValue(cls);

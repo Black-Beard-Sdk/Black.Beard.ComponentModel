@@ -19,7 +19,7 @@ namespace Bb.ComponentModel.Factories
           : base(methodSource, paramsInfo, description, typeof(T))
         {
             this._delegate = objectActivator;
-            base.MethodCall = typeof(Factory<T>).GetMethod(nameof(Call));
+            base.MethodCall = typeof(Factory<T>).GetMethod(nameof(CallByKey));
             base.MethodReset = typeof(Factory<T>).GetMethod(nameof(Reset));
             base.MethodParameters = methodSource.GetParameters();
             Types = this.MethodParameters.Select(c => c.ParameterType).ToArray();
@@ -35,7 +35,7 @@ namespace Bb.ComponentModel.Factories
         /// <returns></returns>
         public override object CallInstance(params dynamic[] args)
         {
-            return Call(null, args);
+            return CallByKey(null, args);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Bb.ComponentModel.Factories
         /// <returns></returns>
         [System.Diagnostics.DebuggerStepThrough]
         [System.Diagnostics.DebuggerNonUserCode]
-        public T Call(string key, params dynamic[] args)
+        public T CallByKey(string key, params dynamic[] args)
         {
 
             if (this.IsCtor && args.Length == 0 && !string.IsNullOrEmpty(key))
@@ -62,6 +62,32 @@ namespace Bb.ComponentModel.Factories
             return _delegate(args);
 
         }
+
+        ///// <summary>
+        ///// Creates a new instance of T with the specified arguments.
+        ///// </summary>
+        ///// <param name="key">key for match in the repository.</param>
+        ///// <param name="args">The arguments.</param>
+        ///// <returns></returns>
+        //[System.Diagnostics.DebuggerStepThrough]
+        //[System.Diagnostics.DebuggerNonUserCode]
+        //public T Call(params dynamic[] args)
+        //{
+
+        //    if (this.IsCtor && args.Length == 0 && !string.IsNullOrEmpty(key))
+        //    {
+
+        //        if (!this._dic.TryGetValue(null, out T result))
+        //            this._dic.Add(null, result = _delegate(args));
+
+        //        return result;
+
+        //    }
+
+        //    return _delegate(args);
+
+        //}
+
 
         /// <summary>
         /// Creates a new instance of T with the specified arguments.

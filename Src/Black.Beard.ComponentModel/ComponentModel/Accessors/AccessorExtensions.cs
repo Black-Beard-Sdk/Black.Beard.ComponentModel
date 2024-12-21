@@ -2,6 +2,7 @@
 
 namespace Bb.ComponentModel.Accessors
 {
+
     public static class AccessorExtensions
     {
 
@@ -15,6 +16,7 @@ namespace Bb.ComponentModel.Accessors
         public static AccessorList GetAccessors(this Type type, MemberStrategy strategy = 
             MemberStrategy.Direct 
           | MemberStrategy.Properties 
+          | MemberStrategy.Fields
           | MemberStrategy.Instance 
           | MemberStrategy.Static)
         {

@@ -15,7 +15,7 @@
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns></returns>
-        T Call(string name, params dynamic[] args);
+        T CallByKey(string name, params dynamic[] args);
 
     }
 

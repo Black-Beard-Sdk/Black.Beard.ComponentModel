@@ -1144,8 +1144,8 @@
   - [CallInstance(args)](#M-Bb-ComponentModel-Factories-Factory-CallInstance-System-Object[]- 'Bb.ComponentModel.Factories.Factory.CallInstance(System.Object[])')
 - [FactoryByIoc\`1](#T-Bb-ComponentModel-Factories-FactoryByIoc`1 'Bb.ComponentModel.Factories.FactoryByIoc`1')
   - [IsEmpty](#P-Bb-ComponentModel-Factories-FactoryByIoc`1-IsEmpty 'Bb.ComponentModel.Factories.FactoryByIoc`1.IsEmpty')
-  - [Call(args)](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-Call-System-String,System-Object[]- 'Bb.ComponentModel.Factories.FactoryByIoc`1.Call(System.String,System.Object[])')
   - [Call(arg)](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-Call-System-String,System-IServiceProvider- 'Bb.ComponentModel.Factories.FactoryByIoc`1.Call(System.String,System.IServiceProvider)')
+  - [CallByKey(args)](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-CallByKey-System-String,System-Object[]- 'Bb.ComponentModel.Factories.FactoryByIoc`1.CallByKey(System.String,System.Object[])')
   - [CallInstance(args)](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-CallInstance-System-Object[]- 'Bb.ComponentModel.Factories.FactoryByIoc`1.CallInstance(System.Object[])')
   - [ClearAttribute()](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-ClearAttribute 'Bb.ComponentModel.Factories.FactoryByIoc`1.ClearAttribute')
   - [Invoke(args)](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-Invoke-System-IServiceProvider- 'Bb.ComponentModel.Factories.FactoryByIoc`1.Invoke(System.IServiceProvider)')
@@ -1153,7 +1153,7 @@
   - [SetInjectionAttribute\`\`1()](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-SetInjectionAttribute``1 'Bb.ComponentModel.Factories.FactoryByIoc`1.SetInjectionAttribute``1')
 - [Factory\`1](#T-Bb-ComponentModel-Factories-Factory`1 'Bb.ComponentModel.Factories.Factory`1')
   - [IsEmpty](#P-Bb-ComponentModel-Factories-Factory`1-IsEmpty 'Bb.ComponentModel.Factories.Factory`1.IsEmpty')
-  - [Call(key,args)](#M-Bb-ComponentModel-Factories-Factory`1-Call-System-String,System-Object[]- 'Bb.ComponentModel.Factories.Factory`1.Call(System.String,System.Object[])')
+  - [CallByKey(key,args)](#M-Bb-ComponentModel-Factories-Factory`1-CallByKey-System-String,System-Object[]- 'Bb.ComponentModel.Factories.Factory`1.CallByKey(System.String,System.Object[])')
   - [CallInstance(args)](#M-Bb-ComponentModel-Factories-Factory`1-CallInstance-System-Object[]- 'Bb.ComponentModel.Factories.Factory`1.CallInstance(System.Object[])')
   - [Reset(args)](#M-Bb-ComponentModel-Factories-Factory`1-Reset 'Bb.ComponentModel.Factories.Factory`1.Reset')
 - [FakeMember](#T-ICSharpCode-Decompiler-TypeSystem-Implementation-FakeMember 'ICSharpCode.Decompiler.TypeSystem.Implementation.FakeMember')
@@ -1320,7 +1320,7 @@
   - [CreateWithTypes\`\`1(types)](#M-Bb-ComponentModel-Factories-IFactoryProvider-CreateWithTypes``1-System-Type[]- 'Bb.ComponentModel.Factories.IFactoryProvider.CreateWithTypes``1(System.Type[])')
   - [Create\`\`1(args)](#M-Bb-ComponentModel-Factories-IFactoryProvider-Create``1-System-Object[]- 'Bb.ComponentModel.Factories.IFactoryProvider.Create``1(System.Object[])')
 - [IFactory\`1](#T-Bb-ComponentModel-Factories-IFactory`1 'Bb.ComponentModel.Factories.IFactory`1')
-  - [Call(args)](#M-Bb-ComponentModel-Factories-IFactory`1-Call-System-String,System-Object[]- 'Bb.ComponentModel.Factories.IFactory`1.Call(System.String,System.Object[])')
+  - [CallByKey(args)](#M-Bb-ComponentModel-Factories-IFactory`1-CallByKey-System-String,System-Object[]- 'Bb.ComponentModel.Factories.IFactory`1.CallByKey(System.String,System.Object[])')
 - [IField](#T-ICSharpCode-Decompiler-TypeSystem-IField 'ICSharpCode.Decompiler.TypeSystem.IField')
   - [IsReadOnly](#P-ICSharpCode-Decompiler-TypeSystem-IField-IsReadOnly 'ICSharpCode.Decompiler.TypeSystem.IField.IsReadOnly')
   - [IsVolatile](#P-ICSharpCode-Decompiler-TypeSystem-IField-IsVolatile 'ICSharpCode.Decompiler.TypeSystem.IField.IsVolatile')
@@ -17220,23 +17220,6 @@ Factory of T
 
 return false if the delegate is null
 
-<a name='M-Bb-ComponentModel-Factories-FactoryByIoc`1-Call-System-String,System-Object[]-'></a>
-### Call(args) `method`
-
-##### Summary
-
-Creates a new instance of T with the specified arguments.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| args | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The arguments. |
-
 <a name='M-Bb-ComponentModel-Factories-FactoryByIoc`1-Call-System-String,System-IServiceProvider-'></a>
 ### Call(arg) `method`
 
@@ -17253,6 +17236,23 @@ Creates a new instance of T with the specified arguments.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | arg | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The arguments. |
+
+<a name='M-Bb-ComponentModel-Factories-FactoryByIoc`1-CallByKey-System-String,System-Object[]-'></a>
+### CallByKey(args) `method`
+
+##### Summary
+
+Creates a new instance of T with the specified arguments.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| args | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The arguments. |
 
 <a name='M-Bb-ComponentModel-Factories-FactoryByIoc`1-CallInstance-System-Object[]-'></a>
 ### CallInstance(args) `method`
@@ -17357,8 +17357,8 @@ Factory of T
 
 return false if the delegate is null
 
-<a name='M-Bb-ComponentModel-Factories-Factory`1-Call-System-String,System-Object[]-'></a>
-### Call(key,args) `method`
+<a name='M-Bb-ComponentModel-Factories-Factory`1-CallByKey-System-String,System-Object[]-'></a>
+### CallByKey(key,args) `method`
 
 ##### Summary
 
@@ -19339,8 +19339,8 @@ I factory generic
 | ---- | ----------- |
 | T |  |
 
-<a name='M-Bb-ComponentModel-Factories-IFactory`1-Call-System-String,System-Object[]-'></a>
-### Call(args) `method`
+<a name='M-Bb-ComponentModel-Factories-IFactory`1-CallByKey-System-String,System-Object[]-'></a>
+### CallByKey(args) `method`
 
 ##### Summary
 

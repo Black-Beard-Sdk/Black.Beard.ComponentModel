@@ -231,7 +231,10 @@ namespace Bb.ComponentModel
         public Assembly LoadAssembly(FileInfo fileAssembly, FileInfo filePdb = null)
         {
 
-            if (!string.IsNullOrEmpty(fileAssembly.Name))
+            if (fileAssembly == null)
+                throw new ArgumentNullException(nameof(fileAssembly));
+
+            if (string.IsNullOrEmpty(fileAssembly.Name))
                 throw new ArgumentNullException(nameof(fileAssembly.Name));
 
             if (!fileAssembly.Exists)

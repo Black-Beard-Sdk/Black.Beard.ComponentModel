@@ -276,7 +276,19 @@ namespace Bb.Expressions
         /// <returns></returns>
         public static Expression CallIsAssignableFrom(this Expression left, Expression right)
         {
-            return left.GetTypeExpression().Call(typeof(Type), nameof(Type.IsAssignableFrom), right);
+
+            if (left.Type == typeof(void))
+                throw new InvalidOperationException("void type is not assignable");
+            if (right.Type == typeof(void))
+                throw new InvalidOperationException("void type is not assignable");
+
+            if (left.Type != typeof(Type))
+                left = left.GetTypeExpression();
+
+            if (right.Type != typeof(Type))
+                right = right.GetTypeExpression();
+
+            return left.Call(typeof(Type), nameof(Type.IsAssignableFrom), right);
         }
 
         /// <summary>

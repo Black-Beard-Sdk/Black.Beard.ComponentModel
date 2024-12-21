@@ -36,12 +36,14 @@ namespace Bb.ComponentModel.Accessors
 
             #region Set
 
-            if (!field.IsInitOnly)
+            if (!field.IsInitOnly && !field.IsLiteral)
             {
                 if (strategy.HasFlag(MemberStrategy.ConvertIfDifferent))
                     SetValue = SetConvertIfDifferentDirect(componentType, field);
-                else
+                
+                else 
                     SetValue = SetDirect(componentType, field);
+
             }
 
             #endregion

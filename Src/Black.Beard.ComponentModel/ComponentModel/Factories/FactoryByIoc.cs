@@ -56,7 +56,7 @@ namespace Bb.ComponentModel.Factories
         /// <returns></returns>
         [System.Diagnostics.DebuggerStepThrough]
         [System.Diagnostics.DebuggerNonUserCode]
-        public T Call(string key, params dynamic[] args)
+        public T CallByKey(string key, params dynamic[] args)
         {
 
             var arg1 = (IServiceProvider)args[0];
