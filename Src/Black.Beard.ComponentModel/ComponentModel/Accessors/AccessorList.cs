@@ -186,6 +186,11 @@ namespace Bb.ComponentModel.Accessors
         }
 
         /// <summary>
+        /// Gets the count of accessors.
+        /// </summary>
+        public int Count => _list.Count;
+
+        /// <summary>
         /// Gets the properties.
         /// </summary>
         /// <param name="componentType">Type of the component.</param>

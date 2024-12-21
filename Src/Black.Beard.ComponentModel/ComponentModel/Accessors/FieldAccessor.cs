@@ -7,7 +7,6 @@ namespace Bb.ComponentModel.Accessors
 {
     /// <summary>
     /// Field Accessor 
-    /// Field Accessor 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("{Name}")]
     public class FieldAccessor : AccessorItem
@@ -18,12 +17,12 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <param name="componentType">Type of the component.</param>
         /// <param name="field">The property.</param>
-        internal FieldAccessor(Type componentType, FieldInfo field, AccessorStrategyEnum strategy)
+        internal FieldAccessor(Type componentType, FieldInfo field, MemberStrategy strategy)
             : base(MemberTypeEnum.Property, strategy)
         {
 
             this.Member = field;
-            this.Name = field.Name;
+            this.Name = ResolveName(field.Name);
             this.DeclaringType = field.DeclaringType;
             //var m = field.GetMethod ?? field.SetMethod;
             this.IsStatic = field.IsStatic;
@@ -39,7 +38,7 @@ namespace Bb.ComponentModel.Accessors
 
             if (!field.IsInitOnly)
             {
-                if (strategy.HasFlag(AccessorStrategyEnum.ConvertIfDifferent))
+                if (strategy.HasFlag(MemberStrategy.ConvertIfDifferent))
                     SetValue = SetConvertIfDifferentDirect(componentType, field);
                 else
                     SetValue = SetDirect(componentType, field);

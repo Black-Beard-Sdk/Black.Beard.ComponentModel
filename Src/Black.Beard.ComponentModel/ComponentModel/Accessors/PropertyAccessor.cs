@@ -19,12 +19,12 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <param name="componentType">Type of the component.</param>
         /// <param name="property">The property.</param>
-        internal PropertyAccessor(Type componentType, PropertyInfo property, AccessorStrategyEnum strategy)
+        internal PropertyAccessor(Type componentType, PropertyInfo property, MemberStrategy strategy)
             : base(MemberTypeEnum.Property, strategy)
         {
 
             this.Member = property;
-            this.Name = property.Name;
+            this.Name = ResolveName(property.Name);
             this.DeclaringType = property.DeclaringType;
             var m = property.GetMethod ?? property.SetMethod;
             this.IsStatic = m != null ? (m.Attributes & MethodAttributes.Static) == MethodAttributes.Static : false;
@@ -42,7 +42,7 @@ namespace Bb.ComponentModel.Accessors
             if (property.CanWrite)
             {
 
-                if (strategy.HasFlag(AccessorStrategyEnum.ConvertIfDifferent))
+                if (strategy.HasFlag(MemberStrategy.ConvertIfDifferent))
                     SetValue = SetConvertIfDifferentDirect(componentType, property);
                 else
                     SetValue = SetDirect(componentType, property);

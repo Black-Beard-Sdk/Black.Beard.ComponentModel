@@ -1,4 +1,5 @@
 ﻿using Bb.ComponentModel.Accessors;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Xunit;
@@ -34,6 +35,18 @@ namespace Black.Beard.Accessors
             var lst2 = i.ContainsAttribute<KeyAttribute>(false);
 
             Assert.True(lst1 && lst2);
+
+        }
+
+        [Fact]
+        public void Test2()
+        {
+
+            var list1 = typeof(Int32).GetAccessors( MemberStrategy.Static | MemberStrategy.Fields);
+            foreach (var item in list1)
+            {
+                item.GetAttributes(true).ToList().ForEach(c => Console.WriteLine(c.GetType().Name));
+            }
 
         }
 

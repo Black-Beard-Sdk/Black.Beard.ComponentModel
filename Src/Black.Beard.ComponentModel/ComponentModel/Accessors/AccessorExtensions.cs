@@ -12,7 +12,11 @@ namespace Bb.ComponentModel.Accessors
         /// <param name="type"></param>
         /// <param name="strategy"></param>
         /// <returns></returns>
-        public static AccessorList GetAccessors(this Type type, AccessorStrategyEnum strategy = AccessorStrategyEnum.Direct)
+        public static AccessorList GetAccessors(this Type type, MemberStrategy strategy = 
+            MemberStrategy.Direct 
+          | MemberStrategy.Properties 
+          | MemberStrategy.Instance 
+          | MemberStrategy.Static)
         {
             return AccessorItem.GetPropertiesImpl(type, strategy);
         }

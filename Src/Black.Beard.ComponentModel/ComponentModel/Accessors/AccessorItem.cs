@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Bb.Converters;
 
 namespace Bb.ComponentModel.Accessors
@@ -21,7 +22,7 @@ namespace Bb.ComponentModel.Accessors
         /// Initializes a new instance of the <see cref="AccessorItem"/> class.
         /// </summary>
         /// <param name="memberTypeEnum">The member type enum.</param>
-        protected AccessorItem(MemberTypeEnum memberTypeEnum, AccessorStrategyEnum strategy)
+        protected AccessorItem(MemberTypeEnum memberTypeEnum, MemberStrategy strategy)
         {
             // TODO: Complete member initialization
             this.TypeEnum = memberTypeEnum;
@@ -42,7 +43,7 @@ namespace Bb.ComponentModel.Accessors
         /// <summary>
         /// Gets the strategy accessor.
         /// </summary>
-        public AccessorStrategyEnum Strategy { get; }
+        public MemberStrategy Strategy { get; }
 
         /// <summary>
         /// Gets a value indicating whether [can write].
@@ -191,10 +192,11 @@ namespace Bb.ComponentModel.Accessors
         public IEnumerable<Attribute> GetAttributes(bool resolveFromTypeDescriptor)
         {
 
-            if (resolveFromTypeDescriptor && this.Member is PropertyInfo)
+            if (resolveFromTypeDescriptor && this.Member is PropertyInfo s && IsAccepted(s, Strategy & ~MemberStrategy.Static))
             {
-                var prop = TypeDescriptor.GetProperties(this.DeclaringType)
-                    .Find(this.Name, false);
+                var props = TypeDescriptor.GetProperties(this.DeclaringType);
+                var prop = props.Find(this.Name, false);
+
                 if (prop == null)
                     throw new InvalidOperationException($"Property {this.Name} not found in {this.DeclaringType.FullName}.");
                 var _attributes = prop.Attributes?.ToList().ToList();
@@ -450,56 +452,73 @@ namespace Bb.ComponentModel.Accessors
         /// <param name="componentType">Type of the component.</param>
         /// <param name="strategy">strategy to use</param>
         /// <returns></returns>
-        internal static AccessorList GetPropertiesImpl(Type componentType, AccessorStrategyEnum strategy)
+        internal static AccessorList GetPropertiesImpl(Type componentType, MemberStrategy strategy)
         {
 
             AccessorList list = null;
+
+            if (strategy.HasFlag(MemberStrategy.ConvertIfDifferent))
+                strategy = strategy & ~MemberStrategy.Direct;
+
+            if (!strategy.HasFlag(MemberStrategy.Properties) && !strategy.HasFlag(MemberStrategy.Fields))
+                strategy |= MemberStrategy.Properties;
+
+            if (!strategy.HasFlag(MemberStrategy.Instance) && !strategy.HasFlag(MemberStrategy.Static))
+                strategy |= MemberStrategy.Instance;
 
             if (!_strategyPropertiesAccessors.TryGetValue(strategy, out var _accessors))
                 lock (_lock)
                     if (!_strategyPropertiesAccessors.TryGetValue(strategy, out _accessors))
                         _strategyPropertiesAccessors.Add(strategy, _accessors = new Dictionary<Type, AccessorList>());
 
-            if (_accessors.ContainsKey(componentType))
-                list = _accessors[componentType];
-
-            else
-            {
+            if (!_accessors.TryGetValue(componentType, out list))
                 lock (_lock)
-                {
-
-                    if (_accessors.ContainsKey(componentType))
-                        list = _accessors[componentType];
-
-                    else
-                    {
-
-                        list = new AccessorList();
-
-                        foreach (PropertyInfo item in AccessorList.GetProperties(componentType))
-                            if (!list.ContainsKey(item.Name) && IsAccepted(item))
-                                list.Add(new PropertyAccessor(componentType, item, strategy));
-
-                        if (strategy.HasFlag(AccessorStrategyEnum.WithFields))
-                            foreach (FieldInfo item in AccessorList.GetFields(componentType))
-                                if (!list.ContainsKey(item.Name))
-                                    list.Add(new FieldAccessor(componentType, item, strategy));
-
-                        _accessors.Add(componentType, list);
-
-                    }
-                }
-            }
+                    if (!_accessors.TryGetValue(componentType, out list))
+                        _accessors.Add(componentType, list = GenerateList(componentType, strategy));
 
             return list;
 
         }
 
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static AccessorList GenerateList(Type componentType, MemberStrategy strategy)
+        {
+
+            AccessorList list = new AccessorList();
+
+            if (strategy.HasFlag(MemberStrategy.Properties))
+                foreach (PropertyInfo item in AccessorList.GetProperties(componentType))
+                    if (!list.ContainsKey(item.Name) && IsAccepted(item, strategy))
+                        list.Add(new PropertyAccessor(componentType, item, strategy));
+
+            if (strategy.HasFlag(MemberStrategy.Fields))
+                foreach (FieldInfo item in AccessorList.GetFields(componentType))
+                    if (!list.ContainsKey(item.Name) && IsAccepted(item, strategy))
+                        list.Add(new FieldAccessor(componentType, item, strategy));
+
+            return list;
+
+        }
+
+        protected string ResolveName(string name)
+        {
+
+            var index = name.LastIndexOf('.');
+
+            if (index > -1)
+            {
+                return name.Substring(index + 1);
+            }
+
+            return name;
+        }
+
+
         #region private
 
 
-        private static bool IsAccepted(PropertyInfo item)
+        private static bool IsAccepted(PropertyInfo item, MemberStrategy strategy)
         {
 
             if (item.GetIndexParameters().Length > 0)
@@ -508,7 +527,43 @@ namespace Bb.ComponentModel.Accessors
             if (item.GetMethod == null && item.SetMethod == null)
                 return false;
 
+            if (!strategy.HasFlag(MemberStrategy.Static))
+            {
+
+                if ((item.GetMethod != null && item.GetMethod.IsStatic)
+                 || (item.SetMethod != null && item.SetMethod.IsStatic))
+                    return false;
+
+            }
+
+            if (!strategy.HasFlag(MemberStrategy.Instance))
+            {
+                if ((item.GetMethod != null && !item.GetMethod.IsStatic)
+                 || (item.SetMethod != null && !item.SetMethod.IsStatic))
+                    return false;
+            }
+
             return true;
+
+        }
+
+        private static bool IsAccepted(FieldInfo item, MemberStrategy strategy)
+        {
+
+            if (!strategy.HasFlag(MemberStrategy.NotPublicFields) && !item.Attributes.HasFlag(FieldAttributes.Public))
+            {
+                if (item.Attributes.HasFlag(FieldAttributes.Private) || item.Attributes.HasFlag(FieldAttributes.PrivateScope))
+                    return false;
+            }
+
+            if (!strategy.HasFlag(MemberStrategy.Static))
+            {
+                return !item.IsStatic;
+            }
+            else
+            {
+                return item.IsStatic;
+            }
 
         }
 
@@ -523,7 +578,7 @@ namespace Bb.ComponentModel.Accessors
         /// <summary>
         /// The _accessors
         /// </summary>
-        private static Dictionary<AccessorStrategyEnum, Dictionary<Type, AccessorList>> _strategyPropertiesAccessors = new Dictionary<AccessorStrategyEnum, Dictionary<Type, AccessorList>>();
+        private static Dictionary<MemberStrategy, Dictionary<Type, AccessorList>> _strategyPropertiesAccessors = new Dictionary<MemberStrategy, Dictionary<Type, AccessorList>>();
         /// <summary>
         /// The _lock
         /// </summary>
