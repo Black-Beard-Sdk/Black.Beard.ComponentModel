@@ -232,7 +232,7 @@ namespace Bb.ComponentModel.Accessors
 
                 var v1 = item.Value.GetValue(instance);
                 //var e1 = item.Value.ValidateMember(v1, false);
-                var e1 = item.Value.ValidateMember(instance, false, true);
+                var e1 = item.Value.ValidateMember(instance, false);
                 if (e1 != null)
                     foreach (var item3 in e1.Data.Values)
                         e.Data.Add("exception" + (e.Data.Count + 1).ToString(), item3);

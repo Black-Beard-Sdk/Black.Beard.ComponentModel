@@ -28,12 +28,13 @@
 - [AccessorExtensions](#T-Bb-ComponentModel-Accessors-AccessorExtensions 'Bb.ComponentModel.Accessors.AccessorExtensions')
   - [GetAccessors(type,strategy)](#M-Bb-ComponentModel-Accessors-AccessorExtensions-GetAccessors-System-Type,Bb-ComponentModel-Accessors-MemberStrategy- 'Bb.ComponentModel.Accessors.AccessorExtensions.GetAccessors(System.Type,Bb.ComponentModel.Accessors.MemberStrategy)')
 - [AccessorItem](#T-Bb-ComponentModel-Accessors-AccessorItem 'Bb.ComponentModel.Accessors.AccessorItem')
-  - [#ctor(memberTypeEnum)](#M-Bb-ComponentModel-Accessors-AccessorItem-#ctor-Bb-ComponentModel-Accessors-MemberTypeEnum,Bb-ComponentModel-Accessors-MemberStrategy- 'Bb.ComponentModel.Accessors.AccessorItem.#ctor(Bb.ComponentModel.Accessors.MemberTypeEnum,Bb.ComponentModel.Accessors.MemberStrategy)')
+  - [#ctor(memberTypeEnum)](#M-Bb-ComponentModel-Accessors-AccessorItem-#ctor-System-Type,Bb-ComponentModel-Accessors-MemberTypeEnum,Bb-ComponentModel-Accessors-MemberStrategy- 'Bb.ComponentModel.Accessors.AccessorItem.#ctor(System.Type,Bb.ComponentModel.Accessors.MemberTypeEnum,Bb.ComponentModel.Accessors.MemberStrategy)')
   - [_lock](#F-Bb-ComponentModel-Accessors-AccessorItem-_lock 'Bb.ComponentModel.Accessors.AccessorItem._lock')
   - [_strategyPropertiesAccessors](#F-Bb-ComponentModel-Accessors-AccessorItem-_strategyPropertiesAccessors 'Bb.ComponentModel.Accessors.AccessorItem._strategyPropertiesAccessors')
   - [CanRead](#P-Bb-ComponentModel-Accessors-AccessorItem-CanRead 'Bb.ComponentModel.Accessors.AccessorItem.CanRead')
   - [CanWrite](#P-Bb-ComponentModel-Accessors-AccessorItem-CanWrite 'Bb.ComponentModel.Accessors.AccessorItem.CanWrite')
   - [Category](#P-Bb-ComponentModel-Accessors-AccessorItem-Category 'Bb.ComponentModel.Accessors.AccessorItem.Category')
+  - [ComponentType](#P-Bb-ComponentModel-Accessors-AccessorItem-ComponentType 'Bb.ComponentModel.Accessors.AccessorItem.ComponentType')
   - [DeclaringType](#P-Bb-ComponentModel-Accessors-AccessorItem-DeclaringType 'Bb.ComponentModel.Accessors.AccessorItem.DeclaringType')
   - [DefaultValue](#P-Bb-ComponentModel-Accessors-AccessorItem-DefaultValue 'Bb.ComponentModel.Accessors.AccessorItem.DefaultValue')
   - [DisplayDescription](#P-Bb-ComponentModel-Accessors-AccessorItem-DisplayDescription 'Bb.ComponentModel.Accessors.AccessorItem.DisplayDescription')
@@ -49,17 +50,22 @@
   - [Tag](#P-Bb-ComponentModel-Accessors-AccessorItem-Tag 'Bb.ComponentModel.Accessors.AccessorItem.Tag')
   - [Type](#P-Bb-ComponentModel-Accessors-AccessorItem-Type 'Bb.ComponentModel.Accessors.AccessorItem.Type')
   - [TypeEnum](#P-Bb-ComponentModel-Accessors-AccessorItem-TypeEnum 'Bb.ComponentModel.Accessors.AccessorItem.TypeEnum')
-  - [ContainsAttribute\`\`1(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1-System-Boolean- 'Bb.ComponentModel.Accessors.AccessorItem.ContainsAttribute``1(System.Boolean)')
+  - [ContainsAttribute\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1 'Bb.ComponentModel.Accessors.AccessorItem.ContainsAttribute``1')
+  - [ContainsAttribute\`\`1(instance)](#M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1-System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.ContainsAttribute``1(System.Object)')
   - [ConvertBeforeSettingValue(instance,value)](#M-Bb-ComponentModel-Accessors-AccessorItem-ConvertBeforeSettingValue-System-Object,System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.ConvertBeforeSettingValue(System.Object,System.Object)')
-  - [GetAttributes(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes-System-Boolean- 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes(System.Boolean)')
-  - [GetAttributes\`\`1(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1-System-Boolean- 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes``1(System.Boolean)')
+  - [GetAttributes()](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes')
+  - [GetAttributes(instance)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes-System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes(System.Object)')
+  - [GetAttributes\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes``1')
+  - [GetAttributes\`\`1(instance)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1-System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes``1(System.Object)')
   - [GetPropertiesImpl(componentType,strategy)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetPropertiesImpl-System-Type,Bb-ComponentModel-Accessors-MemberStrategy- 'Bb.ComponentModel.Accessors.AccessorItem.GetPropertiesImpl(System.Type,Bb.ComponentModel.Accessors.MemberStrategy)')
   - [GetTypedValue\`\`1(instance)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetTypedValue``1-System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.GetTypedValue``1(System.Object)')
   - [GetValidatedValue(instance,attributes)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetValidatedValue-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.GetValidatedValue(System.Object,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
-  - [GetValidationException(model,_a)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetValidationException-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.GetValidationException(System.Object,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
-  - [IfAttribute\`\`1(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-System-Boolean,``0@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttribute``1(System.Boolean,``0@)')
-  - [IfAttributes\`\`1(resolveFromTypeDescriptor)](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Boolean,System-Collections-Generic-List{``0}@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttributes``1(System.Boolean,System.Collections.Generic.List{``0}@)')
-  - [ValidateMember(model,throwException,resolveFromTypeDescriptor,attributes)](#M-Bb-ComponentModel-Accessors-AccessorItem-ValidateMember-System-Object,System-Boolean,System-Boolean,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.ValidateMember(System.Object,System.Boolean,System.Boolean,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
+  - [IfAttribute\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-``0@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttribute``1(``0@)')
+  - [IfAttribute\`\`1(instance,attribute)](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-System-Object,``0@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttribute``1(System.Object,``0@)')
+  - [IfAttributes\`\`1(attributes)](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Collections-Generic-List{``0}@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttributes``1(System.Collections.Generic.List{``0}@)')
+  - [IfAttributes\`\`1(instance,attributes)](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Object,System-Collections-Generic-List{``0}@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttributes``1(System.Object,System.Collections.Generic.List{``0}@)')
+  - [ResolveName(name)](#M-Bb-ComponentModel-Accessors-AccessorItem-ResolveName-System-String- 'Bb.ComponentModel.Accessors.AccessorItem.ResolveName(System.String)')
+  - [ValidateMember(instance,throwException,attributes)](#M-Bb-ComponentModel-Accessors-AccessorItem-ValidateMember-System-Object,System-Boolean,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.ValidateMember(System.Object,System.Boolean,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
 - [AccessorList](#T-Bb-ComponentModel-Accessors-AccessorList 'Bb.ComponentModel.Accessors.AccessorList')
   - [#ctor()](#M-Bb-ComponentModel-Accessors-AccessorList-#ctor 'Bb.ComponentModel.Accessors.AccessorList.#ctor')
   - [#ctor(list)](#M-Bb-ComponentModel-Accessors-AccessorList-#ctor-System-Collections-Generic-IEnumerable{Bb-ComponentModel-Accessors-AccessorItem}- 'Bb.ComponentModel.Accessors.AccessorList.#ctor(System.Collections.Generic.IEnumerable{Bb.ComponentModel.Accessors.AccessorItem})')
@@ -3541,7 +3547,7 @@ Bb.ComponentModel.Accessors
 
 Accessor base
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-#ctor-Bb-ComponentModel-Accessors-MemberTypeEnum,Bb-ComponentModel-Accessors-MemberStrategy-'></a>
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-#ctor-System-Type,Bb-ComponentModel-Accessors-MemberTypeEnum,Bb-ComponentModel-Accessors-MemberStrategy-'></a>
 ### #ctor(memberTypeEnum) `constructor`
 
 ##### Summary
@@ -3552,7 +3558,7 @@ Initializes a new instance of the [AccessorItem](#T-Bb-ComponentModel-Accessors-
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| memberTypeEnum | [Bb.ComponentModel.Accessors.MemberTypeEnum](#T-Bb-ComponentModel-Accessors-MemberTypeEnum 'Bb.ComponentModel.Accessors.MemberTypeEnum') | The member type enum. |
+| memberTypeEnum | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | The member type enum. |
 
 <a name='F-Bb-ComponentModel-Accessors-AccessorItem-_lock'></a>
 ### _lock `constants`
@@ -3588,6 +3594,13 @@ Gets a value indicating whether [can write].
 ##### Summary
 
 Gets the category.
+
+<a name='P-Bb-ComponentModel-Accessors-AccessorItem-ComponentType'></a>
+### ComponentType `property`
+
+##### Summary
+
+Original type
 
 <a name='P-Bb-ComponentModel-Accessors-AccessorItem-DeclaringType'></a>
 ### DeclaringType `property`
@@ -3702,8 +3715,8 @@ Gets or sets the type.
 
 Gets or sets the type enum.
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1-System-Boolean-'></a>
-### ContainsAttribute\`\`1(resolveFromTypeDescriptor) `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1'></a>
+### ContainsAttribute\`\`1() `method`
 
 ##### Summary
 
@@ -3711,19 +3724,52 @@ Determines whether this instance contains attribute.
 
 ##### Returns
 
-
+true if the object contains one or more of the specified attribute
 
 ##### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
+This method has no parameters.
 
 ##### Generic Types
 
 | Name | Description |
 | ---- | ----------- |
-| T |  |
+| T | Attribute to search |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1-System-Object-'></a>
+### ContainsAttribute\`\`1(instance) `method`
+
+##### Summary
+
+Determines whether this instance contains attribute.
+
+##### Returns
+
+true if the object contains one or more of the specified attribute
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | instance to evaluate |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Attribute to search |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-ConvertBeforeSettingValue-System-Object,System-Object-'></a>
 ### ConvertBeforeSettingValue(instance,value) `method`
@@ -3739,8 +3785,73 @@ Convert value before setting it.
 | instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
 | value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes-System-Boolean-'></a>
-### GetAttributes(resolveFromTypeDescriptor) `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes'></a>
+### GetAttributes() `method`
+
+##### Summary
+
+Gets the attribute's list.
+
+##### Returns
+
+the list of attribute
+
+##### Parameters
+
+This method has no parameters.
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes-System-Object-'></a>
+### GetAttributes(instance) `method`
+
+##### Summary
+
+Gets the attribute's list.
+
+##### Returns
+
+the list of attribute
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | resolve the list of the reflexion or from type descriptor |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1'></a>
+### GetAttributes\`\`1() `method`
+
+##### Summary
+
+Gets the attribute's list.
+
+##### Returns
+
+the list of attribute
+
+##### Parameters
+
+This method has no parameters.
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1-System-Object-'></a>
+### GetAttributes\`\`1(instance) `method`
 
 ##### Summary
 
@@ -3754,24 +3865,13 @@ Gets the attribute's list.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
+| instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | instance to evaluate |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1-System-Boolean-'></a>
-### GetAttributes\`\`1(resolveFromTypeDescriptor) `method`
+##### Exceptions
 
-##### Summary
-
-Gets the attribute's list.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetPropertiesImpl-System-Type,Bb-ComponentModel-Accessors-MemberStrategy-'></a>
 ### GetPropertiesImpl(componentType,strategy) `method`
@@ -3823,7 +3923,7 @@ Gets the validated value.
 
 ##### Returns
 
-the value has been validated
+the value has been evaluated
 
 ##### Parameters
 
@@ -3832,39 +3932,73 @@ the value has been validated
 | instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The instance. |
 | attributes | [System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}') | The attributes. |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetValidationException-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}-'></a>
-### GetValidationException(model,_a) `method`
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-``0@-'></a>
+### IfAttribute\`\`1() `method`
 
 ##### Summary
 
-Gets the validation exception.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| model | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The model. |
-| _a | [System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}') | The validationAttributes. |
-
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-System-Boolean,``0@-'></a>
-### IfAttribute\`\`1(resolveFromTypeDescriptor) `method`
-
-##### Summary
-
-Gets the attribute
+Resolve the attribute
 
 ##### Returns
 
+Return the list of attribute to search
 
+##### Parameters
+
+This method has no parameters.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Attribute to search |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Multiple attributes found |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-System-Object,``0@-'></a>
+### IfAttribute\`\`1(instance,attribute) `method`
+
+##### Summary
+
+Resolve the attribute
+
+##### Returns
+
+Return the attribute to search
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
+| instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | instance to evaluate |
+| attribute | [\`\`0@](#T-``0@ '``0@') | The attribute to return. |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Boolean,System-Collections-Generic-List{``0}@-'></a>
-### IfAttributes\`\`1(resolveFromTypeDescriptor) `method`
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Attribute to search |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Multiple attributes found |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Collections-Generic-List{``0}@-'></a>
+### IfAttributes\`\`1(attributes) `method`
 
 ##### Summary
 
@@ -3878,14 +4012,26 @@ Gets the attribute's list.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
+| attributes | [System.Collections.Generic.List{\`\`0}@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{``0}@') | The attribute list to return. |
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ValidateMember-System-Object,System-Boolean,System-Boolean,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}-'></a>
-### ValidateMember(model,throwException,resolveFromTypeDescriptor,attributes) `method`
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Attribute to search |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Object,System-Collections-Generic-List{``0}@-'></a>
+### IfAttributes\`\`1(instance,attributes) `method`
 
 ##### Summary
 
-Validates the member.
+Resolve the attribute's list.
 
 ##### Returns
 
@@ -3895,10 +4041,62 @@ Validates the member.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| model | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The model. |
+| instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | instance to evaluate |
+| attributes | [System.Collections.Generic.List{\`\`0}@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{``0}@') | The attribute list to return. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Attribute to search |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ResolveName-System-String-'></a>
+### ResolveName(name) `method`
+
+##### Summary
+
+Resolve the name
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorItem-ValidateMember-System-Object,System-Boolean,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}-'></a>
+### ValidateMember(instance,throwException,attributes) `method`
+
+##### Summary
+
+Validates the member.
+
+##### Returns
+
+Return the result of the evaluation
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The model. |
 | throwException | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | if set to `true` [throw exception]. |
-| resolveFromTypeDescriptor | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | resolve the list of the reflexion or from type descriptor |
-| attributes | [System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}') | The attributes. |
+| attributes | [System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}') | The validationAttributes list to evaluate. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
 
 <a name='T-Bb-ComponentModel-Accessors-AccessorList'></a>
 ## AccessorList `type`

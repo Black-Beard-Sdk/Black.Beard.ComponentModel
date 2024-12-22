@@ -17,8 +17,8 @@ namespace Black.Beard.Accessors
             var list1 = typeof(Cls11).GetAccessors();
             var i = list1[nameof(Cls11.Name)];
 
-            var lst1 = i.ContainsAttribute<KeyAttribute>(true);
-            var lst2 = i.ContainsAttribute<KeyAttribute>(false);
+            var lst1 = i.ContainsAttribute<KeyAttribute>();
+            var lst2 = i.ContainsAttribute<KeyAttribute>(new Cls11());
 
             Assert.True(lst1 && lst2);
 
@@ -31,8 +31,8 @@ namespace Black.Beard.Accessors
             var list1 = typeof(Cls12).GetAccessors(MemberStrategy.Fields);
             var i = list1[nameof(Cls12.Name)];
 
-            var lst1 = i.ContainsAttribute<KeyAttribute>(true);
-            var lst2 = i.ContainsAttribute<KeyAttribute>(false);
+            var lst1 = i.ContainsAttribute<KeyAttribute>();
+            var lst2 = i.ContainsAttribute<KeyAttribute>(new Cls12());
 
             Assert.True(lst1 && lst2);
 
@@ -45,7 +45,7 @@ namespace Black.Beard.Accessors
             var list1 = typeof(Int32).GetAccessors(MemberStrategy.Static | MemberStrategy.Fields);
             foreach (var item in list1)
             {
-                item.GetAttributes(true).ToList().ForEach(c => Console.WriteLine(c.GetType().Name));
+                item.GetAttributes().ToList().ForEach(c => Console.WriteLine(c.GetType().Name));
             }
 
         }

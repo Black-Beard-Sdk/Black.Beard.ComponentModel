@@ -441,7 +441,7 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public bool IsInSystemDirectory(Assembly assembly)
         {
-            if (assembly.IsDynamic)
+            if (assembly.IsDynamic || string.IsNullOrEmpty(assembly.Location))
                 return false;   
 
             return IsInSystemDirectory(new FileInfo(assembly.Location).Directory);

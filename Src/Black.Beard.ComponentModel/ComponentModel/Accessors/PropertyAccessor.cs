@@ -20,7 +20,7 @@ namespace Bb.ComponentModel.Accessors
         /// <param name="componentType">Type of the component.</param>
         /// <param name="property">The property.</param>
         internal PropertyAccessor(Type componentType, PropertyInfo property, MemberStrategy strategy)
-            : base(MemberTypeEnum.Property, strategy)
+            : base(componentType, MemberTypeEnum.Property, strategy)
         {
 
             this.Member = property;

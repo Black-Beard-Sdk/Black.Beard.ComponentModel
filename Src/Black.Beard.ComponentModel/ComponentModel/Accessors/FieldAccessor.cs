@@ -18,11 +18,11 @@ namespace Bb.ComponentModel.Accessors
         /// <param name="componentType">Type of the component.</param>
         /// <param name="field">The property.</param>
         internal FieldAccessor(Type componentType, FieldInfo field, MemberStrategy strategy)
-            : base(MemberTypeEnum.Property, strategy)
+            : base(componentType, MemberTypeEnum.Property, strategy)
         {
 
             this.Member = field;
-            this.Name = ResolveName(field.Name);
+            this.Name = ResolveName(field.Name);            
             this.DeclaringType = field.DeclaringType;
             //var m = field.GetMethod ?? field.SetMethod;
             this.IsStatic = field.IsStatic;

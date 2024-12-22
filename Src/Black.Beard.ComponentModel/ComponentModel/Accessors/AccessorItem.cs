@@ -22,9 +22,10 @@ namespace Bb.ComponentModel.Accessors
         /// Initializes a new instance of the <see cref="AccessorItem"/> class.
         /// </summary>
         /// <param name="memberTypeEnum">The member type enum.</param>
-        protected AccessorItem(MemberTypeEnum memberTypeEnum, MemberStrategy strategy)
+        protected AccessorItem(Type ComponentType,MemberTypeEnum memberTypeEnum, MemberStrategy strategy)
         {
             // TODO: Complete member initialization
+            this.ComponentType = ComponentType;
             this.TypeEnum = memberTypeEnum;
             this.Strategy = strategy;
         }
@@ -78,6 +79,19 @@ namespace Bb.ComponentModel.Accessors
         public string Name { get; protected set; }
 
         /// <summary>
+        /// Gets or sets the type of the declaring.
+        /// </summary>
+        /// <value>
+        /// The type of the declaring.
+        /// </value>
+        public Type DeclaringType { get; protected set; }
+
+        /// <summary>
+        /// Original type
+        /// </summary>
+        public Type ComponentType { get; }
+
+        /// <summary>
         /// Gets or sets the type.
         /// </summary>
         /// <value>
@@ -108,14 +122,6 @@ namespace Bb.ComponentModel.Accessors
         /// The member.
         /// </value>
         public MemberInfo Member { get; protected set; }
-
-        /// <summary>
-        /// Gets or sets the type of the declaring.
-        /// </summary>
-        /// <value>
-        /// The type of the declaring.
-        /// </value>
-        public Type DeclaringType { get; protected set; }
 
         #endregion Properties
 
@@ -187,18 +193,17 @@ namespace Bb.ComponentModel.Accessors
         /// <summary>
         /// Gets the attribute's list.
         /// </summary>
-        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
-        /// <returns></returns>
-        public IEnumerable<Attribute> GetAttributes(bool resolveFromTypeDescriptor)
+        /// <returns>the list of attribute</returns>
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
+        public IEnumerable<Attribute> GetAttributes()
         {
 
-            if (resolveFromTypeDescriptor && this.Member is PropertyInfo s && IsAccepted(s, Strategy & ~MemberStrategy.Static))
+            if (this.Member is PropertyInfo s && IsAccepted(s, Strategy & ~MemberStrategy.Static))
             {
-                var props = TypeDescriptor.GetProperties(this.DeclaringType);
+                var props = TypeDescriptor.GetProperties(ComponentType);
                 var prop = props.Find(this.Name, false);
-
                 if (prop == null)
-                    throw new InvalidOperationException($"Property {this.Name} not found in {this.DeclaringType.FullName}.");
+                    throw new InvalidOperationException($"Property {this.Name} not found in {this.ComponentType.FullName}.");
                 var _attributes = prop.Attributes?.ToList().ToList();
                 return _attributes;
             }
@@ -211,35 +216,111 @@ namespace Bb.ComponentModel.Accessors
         /// <summary>
         /// Gets the attribute's list.
         /// </summary>
-        /// <returns></returns>
-        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
-        public IEnumerable<T> GetAttributes<T>(bool resolveFromTypeDescriptor)
-            where T : Attribute
+        /// <param name="instance">resolve the list of the reflexion or from type descriptor</param>
+        /// <returns>the list of attribute</returns>
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
+        public IEnumerable<Attribute> GetAttributes(object instance)
         {
-            return GetAttributes(resolveFromTypeDescriptor).OfType<T>();
+
+            if (instance != null && this.Member is PropertyInfo s && IsAccepted(s, Strategy & ~MemberStrategy.Static))
+            {
+                var props = TypeDescriptor.GetProperties(instance);
+                var prop = props.Find(this.Name, false);
+
+                if (prop == null)
+                    throw new InvalidOperationException($"Property {this.Name} not found in {this.DeclaringType.FullName}.");
+                var _attributes = prop.Attributes?.ToList().ToList();
+                return _attributes;
+            }
+
+            if (_attributes1 == null)
+                _attributes1 = Member.GetCustomAttributes().OfType<Attribute>().ToList();
+
+            return _attributes1;
         }
 
         /// <summary>
         /// Gets the attribute's list.
         /// </summary>
-        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
-        /// <returns></returns>
-        public bool IfAttributes<T>(bool resolveFromTypeDescriptor, out List<T> attributes)
+        /// <returns>the list of attribute</returns>
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
+        public IEnumerable<T> GetAttributes<T>()
             where T : Attribute
         {
-            attributes = GetAttributes<T>(resolveFromTypeDescriptor).ToList();
+            return GetAttributes().OfType<T>();
+        }
+
+        /// <summary>
+        /// Gets the attribute's list.
+        /// </summary>
+        /// <param name="instance">instance to evaluate</param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
+        public IEnumerable<T> GetAttributes<T>(object instance)
+            where T : Attribute
+        {
+            return GetAttributes(instance).OfType<T>();
+        }
+
+        /// <summary>
+        /// Gets the attribute's list.
+        /// </summary>
+        /// <typeparam name="T">Attribute to search</typeparam>
+        /// <param name="attributes">The attribute list to return.</param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
+        public bool IfAttributes<T>(out List<T> attributes)
+            where T : Attribute
+        {
+            attributes = GetAttributes<T>().ToList();
             return attributes.Count > 0;
         }
 
         /// <summary>
-        /// Gets the attribute
+        /// Resolve the attribute's list.
         /// </summary>
-        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
+        /// <typeparam name="T">Attribute to search</typeparam>
+        /// <param name="instance">instance to evaluate</param>
+        /// <param name="attributes">The attribute list to return.</param>
         /// <returns></returns>
-        public bool IfAttribute<T>(bool resolveFromTypeDescriptor, out T attribute)
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
+        public bool IfAttributes<T>(object instance, out List<T> attributes)
             where T : Attribute
         {
-            var o = GetAttributes<T>(resolveFromTypeDescriptor).ToList();
+            attributes = GetAttributes<T>(instance).ToList();
+            return attributes.Count > 0;
+        }
+
+        /// <summary>
+        /// Resolve the attribute
+        /// </summary>
+        /// <typeparam name="T">Attribute to search</typeparam>
+        /// <returns>Return the list of attribute to search</returns>
+        /// <exception cref="InvalidOperationException">Multiple attributes found</exception>
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
+        public bool IfAttribute<T>(out T attribute)
+            where T : Attribute
+        {
+            var o = GetAttributes<T>().ToList();
+            if (o.Count > 1)
+                throw new InvalidOperationException("Multiple attributes found");
+            attribute = o.FirstOrDefault();
+            return attribute != null;
+        }
+
+        /// <summary>
+        /// Resolve the attribute
+        /// </summary>
+        /// <typeparam name="T">Attribute to search</typeparam>
+        /// <param name="instance">instance to evaluate</param>
+        /// <param name="attribute">The attribute to return.</param>
+        /// <returns>Return the attribute to search</returns>
+        /// <exception cref="InvalidOperationException">Multiple attributes found</exception>
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
+        public bool IfAttribute<T>(object instance, out T attribute)
+            where T : Attribute
+        {
+            var o = GetAttributes<T>(instance).ToList();
             if (o.Count > 1)
                 throw new InvalidOperationException("Multiple attributes found");
             attribute = o.FirstOrDefault();
@@ -249,15 +330,27 @@ namespace Bb.ComponentModel.Accessors
         /// <summary>
         /// Determines whether this instance contains attribute.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
-        /// <returns></returns>
-        public bool ContainsAttribute<T>(bool resolveFromTypeDescriptor)
+        /// <typeparam name="T">Attribute to search</typeparam>
+        /// <returns>true if the object contains one or more of the specified attribute</returns>
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
+        public bool ContainsAttribute<T>()
             where T : Attribute
         {
-            return GetAttributes<T>(resolveFromTypeDescriptor).Any();
+            return GetAttributes<T>().Any();
         }
 
+        /// <summary>
+        /// Determines whether this instance contains attribute.
+        /// </summary>
+        /// <typeparam name="T">Attribute to search</typeparam>
+        /// <param name="instance">instance to evaluate</param>
+        /// <returns>true if the object contains one or more of the specified attribute</returns>
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
+        public bool ContainsAttribute<T>(object instance)
+            where T : Attribute
+        {
+            return GetAttributes<T>(instance).Any();
+        }
 
         #region validation
 
@@ -266,30 +359,31 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="attributes">The attributes.</param>
-        /// <returns>the value has been validated</returns>
+        /// <returns>the value has been evaluated</returns>
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public object GetValidatedValue(object instance, IEnumerable<ValidationAttribute> attributes = null)
         {
             var v1 = GetValue(instance);
-            ValidateMember(v1, true, true, attributes);
+            ValidateMember(v1, true, attributes);
             return v1;
         }
 
         /// <summary>
         /// Validates the member.
         /// </summary>
-        /// <param name="model">The model.</param>
+        /// <param name="instance">The model.</param>
         /// <param name="throwException">if set to <c>true</c> [throw exception].</param>
-        /// <param name="resolveFromTypeDescriptor">resolve the list of the reflexion or from type descriptor</param>
-        /// <param name="attributes">The attributes.</param>
-        /// <returns></returns>
-        public ValidationException ValidateMember(object model, bool throwException, bool resolveFromTypeDescriptor, IEnumerable<ValidationAttribute> attributes = null)
+        /// <param name="attributes">The validationAttributes list to evaluate.</param>
+        /// <returns>Return the result of the evaluation</returns>
+        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
+        public ValidationException ValidateMember(object instance, bool throwException, IEnumerable<ValidationAttribute> attributes = null)
         {
 
             var _a = attributes;
             if (_a == null || _a.Count() == 0)
-                _a = GetAttributes<ValidationAttribute>(resolveFromTypeDescriptor).ToList();
+                _a = GetAttributes<ValidationAttribute>(instance).ToList();
 
-            ValidationException validationException = GetValidationException(model, _a);
+            ValidationException validationException = GetValidationException(instance, _a);
 
             if (throwException && validationException != null)
                 throw validationException;
@@ -298,16 +392,10 @@ namespace Bb.ComponentModel.Accessors
 
         }
 
-
-        /// <summary>
-        /// Gets the validation exception.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <param name="_a">The validationAttributes.</param>
-        private ValidationException GetValidationException(object model, IEnumerable<ValidationAttribute> _a)
+        private ValidationException GetValidationException(object instance, IEnumerable<ValidationAttribute> attributes)
         {
             List<ValidationResult> results = new List<ValidationResult>();
-            bool result = Validator.TryValidateValue(this.GetValue(model), new ValidationContext(new object(), null, null), results, _a);
+            bool result = Validator.TryValidateValue(this.GetValue(instance), new ValidationContext(new object(), null, null), results, attributes);
             ValidationException v1 = null;
 
             if (!result)
@@ -316,7 +404,7 @@ namespace Bb.ComponentModel.Accessors
 
                 foreach (var item in results)
                 {
-                    ValidationException v = new ValidationException(item.ErrorMessage, null, model);
+                    ValidationException v = new ValidationException(item.ErrorMessage, null, instance);
                     v1.Data.Add("exception" + (v1.Data.Count + 1).ToString(), v);
                 }
             }
@@ -337,10 +425,10 @@ namespace Bb.ComponentModel.Accessors
                 if (string.IsNullOrEmpty(_displayName))
                 {
                     _displayName = this.Name;
-                    DisplayNameAttribute a = GetAttributes(true).OfType<DisplayNameAttribute>().FirstOrDefault();
+                    DisplayNameAttribute a = GetAttributes().OfType<DisplayNameAttribute>().FirstOrDefault();
                     if (a != null)
                         _displayName = a.DisplayName;
-                    DisplayAttribute b = GetAttributes(true).OfType<DisplayAttribute>().FirstOrDefault();
+                    DisplayAttribute b = GetAttributes().OfType<DisplayAttribute>().FirstOrDefault();
                     if (b != null)
                         _displayName = b.Name;
                 }
@@ -360,7 +448,7 @@ namespace Bb.ComponentModel.Accessors
                 if (string.IsNullOrEmpty(_displayDesciption))
                 {
                     _displayDesciption = this.Name;
-                    DescriptionAttribute a = GetAttributes(true).OfType<DescriptionAttribute>().FirstOrDefault();
+                    DescriptionAttribute a = GetAttributes().OfType<DescriptionAttribute>().FirstOrDefault();
                     if (a != null)
                         _displayDesciption = a.Description;
                 }
@@ -382,7 +470,7 @@ namespace Bb.ComponentModel.Accessors
                 if (string.IsNullOrEmpty(_category))
                 {
                     _category = string.Empty;
-                    CategoryAttribute a = GetAttributes(true).OfType<CategoryAttribute>().FirstOrDefault();
+                    CategoryAttribute a = GetAttributes().OfType<CategoryAttribute>().FirstOrDefault();
                     if (a != null)
                         _category = a.Category;
                 }
@@ -403,7 +491,7 @@ namespace Bb.ComponentModel.Accessors
             {
                 if (_defaultValue == null)
                 {
-                    DefaultValueAttribute a = GetAttributes(true).OfType<DefaultValueAttribute>().FirstOrDefault();
+                    DefaultValueAttribute a = GetAttributes().OfType<DefaultValueAttribute>().FirstOrDefault();
                     if (a != null)
                     {
                         _defaultValue = a.Value;
@@ -433,7 +521,7 @@ namespace Bb.ComponentModel.Accessors
                 if (!_required.HasValue)
                 {
                     _required = false;
-                    RequiredAttribute a = GetAttributes(true).OfType<RequiredAttribute>().FirstOrDefault();
+                    RequiredAttribute a = GetAttributes().OfType<RequiredAttribute>().FirstOrDefault();
                     if (a != null)
                         _required = true;
                 }
@@ -501,6 +589,11 @@ namespace Bb.ComponentModel.Accessors
 
         }
 
+        /// <summary>
+        /// Resolve the name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         protected string ResolveName(string name)
         {
 
@@ -552,10 +645,10 @@ namespace Bb.ComponentModel.Accessors
 
             if (!strategy.HasFlag(MemberStrategy.NotPublicFields) && !item.Attributes.HasFlag(FieldAttributes.Public))
                 if (item.Attributes.HasFlag(FieldAttributes.Private) || item.Attributes.HasFlag(FieldAttributes.PrivateScope))
-                    return false;
+                    return false;            
 
-            if (!strategy.HasFlag(MemberStrategy.Static))
-                return !item.IsStatic;
+            if (strategy.HasFlag(MemberStrategy.Static))
+                return item.IsStatic;
 
             else if (!strategy.HasFlag(MemberStrategy.Instance))
                 return !item.IsStatic;

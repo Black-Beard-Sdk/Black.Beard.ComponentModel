@@ -33,7 +33,7 @@ namespace Black.Beard.Accessors
         [Fact]
         public void DefaultTest()
         {
-            var list1 = typeof(Cls5).GetAccessors();
+            var list1 = typeof(Cls5).GetAccessors( MemberStrategy.Instance | MemberStrategy.Static | MemberStrategy.Properties);
             Assert.Equal(2, list1.Count);
             Assert.NotNull(list1[nameof(Cls5.Name)]);
             Assert.NotNull(list1[nameof(Cls5.Name2)]);
@@ -70,6 +70,7 @@ namespace Black.Beard.Accessors
             Assert.Equal(3, list1.Count);
             Assert.NotNull(list1["Name31"]);
             Assert.NotNull(list1["Name8"]);
+            Assert.NotNull(list1["<Name2>k__BackingField"]);
         }
 
         [Fact]
