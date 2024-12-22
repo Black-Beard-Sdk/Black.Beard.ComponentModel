@@ -3,9 +3,9 @@ using Xunit;
 
 namespace Black.Beard.Accessors
 {
+
     public class ExpositionTest
     {
-
 
         [Fact]
         public void FilterTypeTest1()

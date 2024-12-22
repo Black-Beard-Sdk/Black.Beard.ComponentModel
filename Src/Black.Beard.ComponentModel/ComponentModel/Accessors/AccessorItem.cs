@@ -198,19 +198,38 @@ namespace Bb.ComponentModel.Accessors
         public IEnumerable<Attribute> GetAttributes()
         {
 
-            if (this.Member is PropertyInfo s && IsAccepted(s, Strategy & ~MemberStrategy.Static))
+            List<Attribute> _attributes = null;
+            if (this.Member is PropertyInfo s)
             {
-                var props = TypeDescriptor.GetProperties(ComponentType);
-                var prop = props.Find(this.Name, false);
-                if (prop == null)
-                    throw new InvalidOperationException($"Property {this.Name} not found in {this.ComponentType.FullName}.");
-                var _attributes = prop.Attributes?.ToList().ToList();
-                return _attributes;
+
+                PropertyDescriptor prop = null;
+                if (!this.IsStatic && IsAccepted(s, Strategy & ~MemberStrategy.Static))
+                {
+
+                    var props = TypeDescriptor.GetProperties(ComponentType);
+                    prop = props.Find(this.Name, false);
+
+                    if (prop == null)
+                    {
+
+                        props = TypeDescriptor.GetProperties(DeclaringType);
+                        prop = props.Find(this.Name, false);
+
+                        if (prop == null)
+                            throw new InvalidOperationException($"Property {this.Name} not found in {this.DeclaringType.FullName}.");
+
+                    }
+
+                    _attributes = prop.Attributes?.ToList().ToList();
+
+                }
+
             }
 
-            if (_attributes1 == null)
-                _attributes1 = Member.GetCustomAttributes().OfType<Attribute>().ToList();
-            return _attributes1;
+            if (_attributes == null)
+                _attributes = Member.GetCustomAttributes().OfType<Attribute>().ToList();
+
+            return _attributes;
         }
 
         /// <summary>
@@ -222,13 +241,24 @@ namespace Bb.ComponentModel.Accessors
         public IEnumerable<Attribute> GetAttributes(object instance)
         {
 
-            if (instance != null && this.Member is PropertyInfo s && IsAccepted(s, Strategy & ~MemberStrategy.Static))
+            if (instance == null)
+                return GetAttributes();
+
+            if (this.Member is PropertyInfo s && IsAccepted(s, Strategy & ~MemberStrategy.Static))
             {
                 var props = TypeDescriptor.GetProperties(instance);
                 var prop = props.Find(this.Name, false);
 
                 if (prop == null)
-                    throw new InvalidOperationException($"Property {this.Name} not found in {this.DeclaringType.FullName}.");
+                {
+
+                    props = TypeDescriptor.GetProperties(DeclaringType);
+                    prop = props.Find(this.Name, false);
+
+                    if (prop == null)
+                        throw new InvalidOperationException($"Property {this.Name} not found in {this.DeclaringType.FullName}.");
+                }
+
                 var _attributes = prop.Attributes?.ToList().ToList();
                 return _attributes;
             }
