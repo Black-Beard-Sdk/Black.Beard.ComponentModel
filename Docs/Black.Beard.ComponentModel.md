@@ -26,7 +26,8 @@
 - [Accessor](#T-ICSharpCode-Decompiler-CSharp-Syntax-Accessor 'ICSharpCode.Decompiler.CSharp.Syntax.Accessor')
   - [Keyword](#P-ICSharpCode-Decompiler-CSharp-Syntax-Accessor-Keyword 'ICSharpCode.Decompiler.CSharp.Syntax.Accessor.Keyword')
 - [AccessorExtensions](#T-Bb-ComponentModel-Accessors-AccessorExtensions 'Bb.ComponentModel.Accessors.AccessorExtensions')
-  - [GetAccessors(type,strategy)](#M-Bb-ComponentModel-Accessors-AccessorExtensions-GetAccessors-System-Type,Bb-ComponentModel-Accessors-MemberStrategy- 'Bb.ComponentModel.Accessors.AccessorExtensions.GetAccessors(System.Type,Bb.ComponentModel.Accessors.MemberStrategy)')
+  - [GetAccessors(type,strategy,filter,memberFilter)](#M-Bb-ComponentModel-Accessors-AccessorExtensions-GetAccessors-System-Type,Bb-ComponentModel-Accessors-MemberStrategy,System-Func{System-Type,System-Boolean},System-Func{System-Reflection-MemberInfo,System-Boolean}- 'Bb.ComponentModel.Accessors.AccessorExtensions.GetAccessors(System.Type,Bb.ComponentModel.Accessors.MemberStrategy,System.Func{System.Type,System.Boolean},System.Func{System.Reflection.MemberInfo,System.Boolean})')
+  - [GetAccessors(type,filter,memberFilter)](#M-Bb-ComponentModel-Accessors-AccessorExtensions-GetAccessors-System-Type,System-Func{System-Type,System-Boolean},System-Func{System-Reflection-MemberInfo,System-Boolean}- 'Bb.ComponentModel.Accessors.AccessorExtensions.GetAccessors(System.Type,System.Func{System.Type,System.Boolean},System.Func{System.Reflection.MemberInfo,System.Boolean})')
 - [AccessorItem](#T-Bb-ComponentModel-Accessors-AccessorItem 'Bb.ComponentModel.Accessors.AccessorItem')
   - [#ctor(memberTypeEnum)](#M-Bb-ComponentModel-Accessors-AccessorItem-#ctor-System-Type,Bb-ComponentModel-Accessors-MemberTypeEnum,Bb-ComponentModel-Accessors-MemberStrategy- 'Bb.ComponentModel.Accessors.AccessorItem.#ctor(System.Type,Bb.ComponentModel.Accessors.MemberTypeEnum,Bb.ComponentModel.Accessors.MemberStrategy)')
   - [_lock](#F-Bb-ComponentModel-Accessors-AccessorItem-_lock 'Bb.ComponentModel.Accessors.AccessorItem._lock')
@@ -57,7 +58,6 @@
   - [GetAttributes(instance)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes-System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes(System.Object)')
   - [GetAttributes\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes``1')
   - [GetAttributes\`\`1(instance)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1-System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.GetAttributes``1(System.Object)')
-  - [GetPropertiesImpl(componentType,strategy)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetPropertiesImpl-System-Type,Bb-ComponentModel-Accessors-MemberStrategy- 'Bb.ComponentModel.Accessors.AccessorItem.GetPropertiesImpl(System.Type,Bb.ComponentModel.Accessors.MemberStrategy)')
   - [GetTypedValue\`\`1(instance)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetTypedValue``1-System-Object- 'Bb.ComponentModel.Accessors.AccessorItem.GetTypedValue``1(System.Object)')
   - [GetValidatedValue(instance,attributes)](#M-Bb-ComponentModel-Accessors-AccessorItem-GetValidatedValue-System-Object,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorItem.GetValidatedValue(System.Object,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
   - [IfAttribute\`\`1()](#M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-``0@- 'Bb.ComponentModel.Accessors.AccessorItem.IfAttribute``1(``0@)')
@@ -77,7 +77,7 @@
   - [ContainsKey(name)](#M-Bb-ComponentModel-Accessors-AccessorList-ContainsKey-System-String- 'Bb.ComponentModel.Accessors.AccessorList.ContainsKey(System.String)')
   - [Get(memberName)](#M-Bb-ComponentModel-Accessors-AccessorList-Get-System-String,System-Boolean- 'Bb.ComponentModel.Accessors.AccessorList.Get(System.String,System.Boolean)')
   - [GetEnumerator()](#M-Bb-ComponentModel-Accessors-AccessorList-GetEnumerator 'Bb.ComponentModel.Accessors.AccessorList.GetEnumerator')
-  - [GetProperties(componentType)](#M-Bb-ComponentModel-Accessors-AccessorList-GetProperties-System-Type- 'Bb.ComponentModel.Accessors.AccessorList.GetProperties(System.Type)')
+  - [GetProperties(componentType)](#M-Bb-ComponentModel-Accessors-AccessorList-GetProperties-System-Type,System-Func{System-Type,System-Boolean}- 'Bb.ComponentModel.Accessors.AccessorList.GetProperties(System.Type,System.Func{System.Type,System.Boolean})')
   - [Map(source,target)](#M-Bb-ComponentModel-Accessors-AccessorList-Map-System-Object,System-Object- 'Bb.ComponentModel.Accessors.AccessorList.Map(System.Object,System.Object)')
   - [Remove(propertyAccessor)](#M-Bb-ComponentModel-Accessors-AccessorList-Remove-Bb-ComponentModel-Accessors-AccessorItem- 'Bb.ComponentModel.Accessors.AccessorList.Remove(Bb.ComponentModel.Accessors.AccessorItem)')
   - [Remove(name)](#M-Bb-ComponentModel-Accessors-AccessorList-Remove-System-String- 'Bb.ComponentModel.Accessors.AccessorList.Remove(System.String)')
@@ -3518,23 +3518,44 @@ Gets the 'get'/'set'/'init'/'add'/'remove' keyword
 
 Bb.ComponentModel.Accessors
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorExtensions-GetAccessors-System-Type,Bb-ComponentModel-Accessors-MemberStrategy-'></a>
-### GetAccessors(type,strategy) `method`
+<a name='M-Bb-ComponentModel-Accessors-AccessorExtensions-GetAccessors-System-Type,Bb-ComponentModel-Accessors-MemberStrategy,System-Func{System-Type,System-Boolean},System-Func{System-Reflection-MemberInfo,System-Boolean}-'></a>
+### GetAccessors(type,strategy,filter,memberFilter) `method`
 
 ##### Summary
 
-Returns the property accessor list.
+Returns a [AccessorList](#T-Bb-ComponentModel-Accessors-AccessorList 'Bb.ComponentModel.Accessors.AccessorList') for the specified type.
 
 ##### Returns
 
-
+[AccessorList](#T-Bb-ComponentModel-Accessors-AccessorList 'Bb.ComponentModel.Accessors.AccessorList') with member accessors
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | type to evaluate |
 | strategy | [Bb.ComponentModel.Accessors.MemberStrategy](#T-Bb-ComponentModel-Accessors-MemberStrategy 'Bb.ComponentModel.Accessors.MemberStrategy') |  |
+| filter | [System.Func{System.Type,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Type,System.Boolean}') | filter to select declaring types |
+| memberFilter | [System.Func{System.Reflection.MemberInfo,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Reflection.MemberInfo,System.Boolean}') | filter to select members |
+
+<a name='M-Bb-ComponentModel-Accessors-AccessorExtensions-GetAccessors-System-Type,System-Func{System-Type,System-Boolean},System-Func{System-Reflection-MemberInfo,System-Boolean}-'></a>
+### GetAccessors(type,filter,memberFilter) `method`
+
+##### Summary
+
+Returns a [AccessorList](#T-Bb-ComponentModel-Accessors-AccessorList 'Bb.ComponentModel.Accessors.AccessorList') for the specified type.
+
+##### Returns
+
+[AccessorList](#T-Bb-ComponentModel-Accessors-AccessorList 'Bb.ComponentModel.Accessors.AccessorList') with member accessors
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | type to evaluate |
+| filter | [System.Func{System.Type,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Type,System.Boolean}') | filter to select declaring types |
+| memberFilter | [System.Func{System.Reflection.MemberInfo,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Reflection.MemberInfo,System.Boolean}') | filter to select members |
 
 <a name='T-Bb-ComponentModel-Accessors-AccessorItem'></a>
 ## AccessorItem `type`
@@ -3872,24 +3893,6 @@ Gets the attribute's list.
 | Name | Description |
 | ---- | ----------- |
 | [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
-
-<a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetPropertiesImpl-System-Type,Bb-ComponentModel-Accessors-MemberStrategy-'></a>
-### GetPropertiesImpl(componentType,strategy) `method`
-
-##### Summary
-
-Gets the specified component type.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| componentType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type of the component. |
-| strategy | [Bb.ComponentModel.Accessors.MemberStrategy](#T-Bb-ComponentModel-Accessors-MemberStrategy 'Bb.ComponentModel.Accessors.MemberStrategy') | strategy to use |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetTypedValue``1-System-Object-'></a>
 ### GetTypedValue\`\`1(instance) `method`
@@ -4243,7 +4246,7 @@ A [IEnumerator\`1](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&
 
 This method has no parameters.
 
-<a name='M-Bb-ComponentModel-Accessors-AccessorList-GetProperties-System-Type-'></a>
+<a name='M-Bb-ComponentModel-Accessors-AccessorList-GetProperties-System-Type,System-Func{System-Type,System-Boolean}-'></a>
 ### GetProperties(componentType) `method`
 
 ##### Summary

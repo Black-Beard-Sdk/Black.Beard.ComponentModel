@@ -6,6 +6,31 @@ namespace Black.Beard.Accessors
     public class ExpositionTest
     {
 
+
+        [Fact]
+        public void FilterTypeTest1()
+        {
+            var list1 = typeof(Cls56).GetAccessors(c => c != typeof(Cls55));
+            Assert.Equal(2, list1.Count);
+            Assert.NotNull(list1[nameof(Cls56.Name2)]);
+        }
+
+        [Fact]
+        public void FilterTypeTest2()
+        {
+            var list1 = typeof(Cls56).GetAccessors(c => c != typeof(Cls56));
+            Assert.Equal(2, list1.Count);
+            Assert.NotNull(list1[nameof(Cls56.Name)]);
+        }
+
+        [Fact]
+        public void FilterMemberTypeTest2()
+        {
+            var list1 = typeof(Cls56).GetAccessors(null, c => c.Name == nameof(Cls56.Name));
+            Assert.Equal(1, list1.Count);
+            Assert.NotNull(list1[nameof(Cls56.Name)]);
+        }
+
         [Fact]
         public void ConvertIfDifferentTest()
         {
@@ -106,5 +131,21 @@ namespace Black.Beard.Accessors
         private static string Name8;
 
     }
+
+
+    public class Cls56 : Cls55
+    {
+
+        public string Name2 { get; set; }
+
+    }
+
+    public class Cls55
+    {
+
+        public string Name { get; set; }
+
+    }
+
 
 }

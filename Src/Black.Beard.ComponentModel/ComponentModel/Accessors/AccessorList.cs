@@ -195,25 +195,33 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <param name="componentType">Type of the component.</param>
         /// <returns></returns>
-        internal static IEnumerable<PropertyInfo> GetProperties(Type componentType)
+        internal static IEnumerable<PropertyInfo> GetProperties(Type componentType, Func<Type, bool> typeFilter)
         {
             var type = componentType;
-            while (type != null && type != typeof(object))
+            while (type != null && type != typeof(object) && type != typeof(Type))
             {
-                foreach (var item in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
-                    yield return item;
+
+                if (typeFilter(type))
+                    foreach (var item in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+                        yield return item;
+
                 type = type.BaseType;
+
             }
         }
 
-        internal static IEnumerable<FieldInfo> GetFields(Type componentType)
+        internal static IEnumerable<FieldInfo> GetFields(Type componentType, Func<Type, bool> typeFilter)
         {
             var type = componentType;
-            while (type != null && type != typeof(object))
+            while (type != null && type != typeof(object) && type != typeof(Type))
             {
-                foreach (var item in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
-                    yield return item;
+
+                if (typeFilter(type))
+                    foreach (var item in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
+                        yield return item;
+
                 type = type.BaseType;
+
             }
         }
 
@@ -224,7 +232,7 @@ namespace Bb.ComponentModel.Accessors
         public void Validate(object instance)
         {
 
-            ValidationException e 
+            ValidationException e
                 = new ValidationException("Validation exception. Please see the data collection for more informations.");
 
             foreach (var item in _list)

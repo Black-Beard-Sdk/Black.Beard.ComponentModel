@@ -22,7 +22,7 @@ namespace Bb.ComponentModel.Accessors
         /// Initializes a new instance of the <see cref="AccessorItem"/> class.
         /// </summary>
         /// <param name="memberTypeEnum">The member type enum.</param>
-        protected AccessorItem(Type ComponentType,MemberTypeEnum memberTypeEnum, MemberStrategy strategy)
+        protected AccessorItem(Type ComponentType, MemberTypeEnum memberTypeEnum, MemberStrategy strategy)
         {
             // TODO: Complete member initialization
             this.ComponentType = ComponentType;
@@ -533,15 +533,11 @@ namespace Bb.ComponentModel.Accessors
 
         #endregion attributes
 
-
-        /// <summary>
-        /// Gets the specified component type.
-        /// </summary>
-        /// <param name="componentType">Type of the component.</param>
-        /// <param name="strategy">strategy to use</param>
-        /// <returns></returns>
-        internal static AccessorList GetPropertiesImpl(Type componentType, MemberStrategy strategy)
+        internal static AccessorList GetPropertiesImpl(Type componentType, MemberStrategy strategy, Func<Type, bool> filter, Func<MemberInfo, bool> memberFilter)
         {
+
+            if (filter == null)
+                filter = (x) => true;
 
             AccessorList list = null;
 
@@ -554,6 +550,13 @@ namespace Bb.ComponentModel.Accessors
             if (!strategy.HasFlag(MemberStrategy.Instance) && !strategy.HasFlag(MemberStrategy.Static))
                 strategy |= MemberStrategy.Instance;
 
+
+            if (memberFilter != null)
+                return GenerateList(componentType, strategy, filter, memberFilter);
+
+
+            memberFilter = (x) => true;
+
             if (!_strategyPropertiesAccessors.TryGetValue(strategy, out var _accessors))
                 lock (_lock)
                     if (!_strategyPropertiesAccessors.TryGetValue(strategy, out _accessors))
@@ -562,7 +565,7 @@ namespace Bb.ComponentModel.Accessors
             if (!_accessors.TryGetValue(componentType, out list))
                 lock (_lock)
                     if (!_accessors.TryGetValue(componentType, out list))
-                        _accessors.Add(componentType, list = GenerateList(componentType, strategy));
+                        _accessors.Add(componentType, list = GenerateList(componentType, strategy, filter, memberFilter));
 
             return list;
 
@@ -570,19 +573,19 @@ namespace Bb.ComponentModel.Accessors
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static AccessorList GenerateList(Type componentType, MemberStrategy strategy)
+        private static AccessorList GenerateList(Type componentType, MemberStrategy strategy, Func<Type, bool> typeFilter, Func<MemberInfo, bool> memberFilter)
         {
 
             AccessorList list = new AccessorList();
 
             if (strategy.HasFlag(MemberStrategy.Properties))
-                foreach (PropertyInfo item in AccessorList.GetProperties(componentType))
-                    if (!list.ContainsKey(item.Name) && IsAccepted(item, strategy))
+                foreach (PropertyInfo item in AccessorList.GetProperties(componentType, typeFilter))
+                    if (memberFilter(item) && !list.ContainsKey(item.Name) && IsAccepted(item, strategy))
                         list.Add(new PropertyAccessor(componentType, item, strategy));
 
             if (strategy.HasFlag(MemberStrategy.Fields))
-                foreach (FieldInfo item in AccessorList.GetFields(componentType))
-                    if (!list.ContainsKey(item.Name) && IsAccepted(item, strategy))
+                foreach (FieldInfo item in AccessorList.GetFields(componentType, typeFilter))
+                    if (memberFilter(item) && !list.ContainsKey(item.Name) && IsAccepted(item, strategy))
                         list.Add(new FieldAccessor(componentType, item, strategy));
 
             return list;
@@ -645,12 +648,12 @@ namespace Bb.ComponentModel.Accessors
 
             if (!strategy.HasFlag(MemberStrategy.NotPublicFields) && !item.Attributes.HasFlag(FieldAttributes.Public))
                 if (item.Attributes.HasFlag(FieldAttributes.Private) || item.Attributes.HasFlag(FieldAttributes.PrivateScope))
-                    return false;            
+                    return false;
 
-            if (strategy.HasFlag(MemberStrategy.Static))
+            if (strategy.HasFlag(MemberStrategy.Static) && !strategy.HasFlag(MemberStrategy.Instance))
                 return item.IsStatic;
 
-            else if (!strategy.HasFlag(MemberStrategy.Instance))
+            else if (strategy.HasFlag(MemberStrategy.Instance) && !strategy.HasFlag(MemberStrategy.Static))
                 return !item.IsStatic;
 
             return true;

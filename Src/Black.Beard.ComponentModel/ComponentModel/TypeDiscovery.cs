@@ -205,7 +205,7 @@ namespace Bb.ComponentModel
             {
 
                 Type[] types = null;
-                if (assembly.IsDynamic)
+                if (assembly.IsDynamic || string.IsNullOrEmpty(assembly.Location))
                     types = assembly.GetTypes();
                 else
                     types = assembly.GetExportedTypes();
@@ -918,7 +918,7 @@ namespace Bb.ComponentModel
             HashSet<string> _hash = new HashSet<string>(50);
 
             foreach (var item in Assemblies())
-                if (!item.IsDynamic)
+                if (!item.IsDynamic && !string.IsNullOrEmpty(item.Location))
                 {
                     var file = new FileInfo(item.Location);
                     file.Refresh();
