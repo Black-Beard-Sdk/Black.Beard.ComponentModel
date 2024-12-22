@@ -3757,12 +3757,6 @@ This method has no parameters.
 | ---- | ----------- |
 | T | Attribute to search |
 
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
-
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-ContainsAttribute``1-System-Object-'></a>
 ### ContainsAttribute\`\`1(instance) `method`
 
@@ -3785,12 +3779,6 @@ true if the object contains one or more of the specified attribute
 | Name | Description |
 | ---- | ----------- |
 | T | Attribute to search |
-
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-ConvertBeforeSettingValue-System-Object,System-Object-'></a>
 ### ConvertBeforeSettingValue(instance,value) `method`
@@ -3821,12 +3809,6 @@ the list of attribute
 
 This method has no parameters.
 
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
-
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes-System-Object-'></a>
 ### GetAttributes(instance) `method`
 
@@ -3844,12 +3826,6 @@ the list of attribute
 | ---- | ---- | ----------- |
 | instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | resolve the list of the reflexion or from type descriptor |
 
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
-
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1'></a>
 ### GetAttributes\`\`1() `method`
 
@@ -3864,12 +3840,6 @@ the list of attribute
 ##### Parameters
 
 This method has no parameters.
-
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetAttributes``1-System-Object-'></a>
 ### GetAttributes\`\`1(instance) `method`
@@ -3887,12 +3857,6 @@ Gets the attribute's list.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | instance to evaluate |
-
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-GetTypedValue``1-System-Object-'></a>
 ### GetTypedValue\`\`1(instance) `method`
@@ -3935,12 +3899,6 @@ the value has been evaluated
 | instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The instance. |
 | attributes | [System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}') | The attributes. |
 
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
-
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-``0@-'></a>
 ### IfAttribute\`\`1() `method`
 
@@ -3967,7 +3925,6 @@ This method has no parameters.
 | Name | Description |
 | ---- | ----------- |
 | [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Multiple attributes found |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttribute``1-System-Object,``0@-'></a>
 ### IfAttribute\`\`1(instance,attribute) `method`
@@ -3998,7 +3955,6 @@ Return the attribute to search
 | Name | Description |
 | ---- | ----------- |
 | [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Multiple attributes found |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Collections-Generic-List{``0}@-'></a>
 ### IfAttributes\`\`1(attributes) `method`
@@ -4023,12 +3979,6 @@ Gets the attribute's list.
 | ---- | ----------- |
 | T | Attribute to search |
 
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
-
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-IfAttributes``1-System-Object,System-Collections-Generic-List{``0}@-'></a>
 ### IfAttributes\`\`1(instance,attributes) `method`
 
@@ -4052,12 +4002,6 @@ Resolve the attribute's list.
 | Name | Description |
 | ---- | ----------- |
 | T | Attribute to search |
-
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
 
 <a name='M-Bb-ComponentModel-Accessors-AccessorItem-ResolveName-System-String-'></a>
 ### ResolveName(name) `method`
@@ -4094,12 +4038,6 @@ Return the result of the evaluation
 | instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The model. |
 | throwException | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | if set to `true` [throw exception]. |
 | attributes | [System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}') | The validationAttributes list to evaluate. |
-
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Property {this.Name} not found in {this.ComponentType.FullName}. |
 
 <a name='T-Bb-ComponentModel-Accessors-AccessorList'></a>
 ## AccessorList `type`

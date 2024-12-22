@@ -194,42 +194,38 @@ namespace Bb.ComponentModel.Accessors
         /// Gets the attribute's list.
         /// </summary>
         /// <returns>the list of attribute</returns>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public IEnumerable<Attribute> GetAttributes()
         {
 
             List<Attribute> _attributes = null;
+
             if (this.Member is PropertyInfo s)
             {
 
                 PropertyDescriptor prop = null;
-                if (!this.IsStatic && IsAccepted(s, Strategy & ~MemberStrategy.Static))
-                {
 
-                    var props = TypeDescriptor.GetProperties(ComponentType);
+                var props = TypeDescriptor.GetProperties(ComponentType);
+                if (props != null)
                     prop = props.Find(this.Name, false);
 
-                    if (prop == null)
-                    {
-
-                        props = TypeDescriptor.GetProperties(DeclaringType);
+                if (prop == null)
+                {
+                    props = TypeDescriptor.GetProperties(DeclaringType);
+                    if (props != null)
                         prop = props.Find(this.Name, false);
-
-                        if (prop == null)
-                            throw new InvalidOperationException($"Property {this.Name} not found in {this.DeclaringType.FullName}.");
-
-                    }
-
-                    _attributes = prop.Attributes?.ToList().ToList();
-
                 }
+
+                _attributes = prop?.Attributes?.ToList().ToList();
 
             }
 
             if (_attributes == null)
-                _attributes = Member.GetCustomAttributes().OfType<Attribute>().ToList();
+                _attributes = Member.GetCustomAttributes()
+                    .OfType<Attribute>()
+                    .ToList();
 
             return _attributes;
+
         }
 
         /// <summary>
@@ -237,43 +233,49 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <param name="instance">resolve the list of the reflexion or from type descriptor</param>
         /// <returns>the list of attribute</returns>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public IEnumerable<Attribute> GetAttributes(object instance)
         {
 
             if (instance == null)
                 return GetAttributes();
 
-            if (this.Member is PropertyInfo s && IsAccepted(s, Strategy & ~MemberStrategy.Static))
+            List<Attribute> _attributes = null;
+
+            if (!IsStatic && this.Member is PropertyInfo)
             {
+
+                PropertyDescriptor prop = null;
+
                 var props = TypeDescriptor.GetProperties(instance);
-                var prop = props.Find(this.Name, false);
+                if (props != null)
+                    prop = props.Find(this.Name, false);
 
                 if (prop == null)
                 {
-
                     props = TypeDescriptor.GetProperties(DeclaringType);
-                    prop = props.Find(this.Name, false);
-
-                    if (prop == null)
-                        throw new InvalidOperationException($"Property {this.Name} not found in {this.DeclaringType.FullName}.");
+                    if (props != null)
+                        prop = props.Find(this.Name, false);
                 }
 
-                var _attributes = prop.Attributes?.ToList().ToList();
-                return _attributes;
+                _attributes = prop?.Attributes?
+                    .ToList()
+                    .ToList();
+
             }
 
-            if (_attributes1 == null)
-                _attributes1 = Member.GetCustomAttributes().OfType<Attribute>().ToList();
+            if (_attributes == null)
+                _attributes = Member.GetCustomAttributes()
+                    .OfType<Attribute>()
+                    .ToList();
 
-            return _attributes1;
+            return _attributes;
+
         }
 
         /// <summary>
         /// Gets the attribute's list.
         /// </summary>
         /// <returns>the list of attribute</returns>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public IEnumerable<T> GetAttributes<T>()
             where T : Attribute
         {
@@ -285,7 +287,6 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <param name="instance">instance to evaluate</param>
         /// <returns></returns>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public IEnumerable<T> GetAttributes<T>(object instance)
             where T : Attribute
         {
@@ -298,7 +299,6 @@ namespace Bb.ComponentModel.Accessors
         /// <typeparam name="T">Attribute to search</typeparam>
         /// <param name="attributes">The attribute list to return.</param>
         /// <returns></returns>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public bool IfAttributes<T>(out List<T> attributes)
             where T : Attribute
         {
@@ -313,7 +313,6 @@ namespace Bb.ComponentModel.Accessors
         /// <param name="instance">instance to evaluate</param>
         /// <param name="attributes">The attribute list to return.</param>
         /// <returns></returns>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public bool IfAttributes<T>(object instance, out List<T> attributes)
             where T : Attribute
         {
@@ -327,7 +326,6 @@ namespace Bb.ComponentModel.Accessors
         /// <typeparam name="T">Attribute to search</typeparam>
         /// <returns>Return the list of attribute to search</returns>
         /// <exception cref="InvalidOperationException">Multiple attributes found</exception>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public bool IfAttribute<T>(out T attribute)
             where T : Attribute
         {
@@ -346,7 +344,6 @@ namespace Bb.ComponentModel.Accessors
         /// <param name="attribute">The attribute to return.</param>
         /// <returns>Return the attribute to search</returns>
         /// <exception cref="InvalidOperationException">Multiple attributes found</exception>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public bool IfAttribute<T>(object instance, out T attribute)
             where T : Attribute
         {
@@ -362,7 +359,6 @@ namespace Bb.ComponentModel.Accessors
         /// </summary>
         /// <typeparam name="T">Attribute to search</typeparam>
         /// <returns>true if the object contains one or more of the specified attribute</returns>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public bool ContainsAttribute<T>()
             where T : Attribute
         {
@@ -375,7 +371,6 @@ namespace Bb.ComponentModel.Accessors
         /// <typeparam name="T">Attribute to search</typeparam>
         /// <param name="instance">instance to evaluate</param>
         /// <returns>true if the object contains one or more of the specified attribute</returns>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public bool ContainsAttribute<T>(object instance)
             where T : Attribute
         {
@@ -390,7 +385,6 @@ namespace Bb.ComponentModel.Accessors
         /// <param name="instance">The instance.</param>
         /// <param name="attributes">The attributes.</param>
         /// <returns>the value has been evaluated</returns>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public object GetValidatedValue(object instance, IEnumerable<ValidationAttribute> attributes = null)
         {
             var v1 = GetValue(instance);
@@ -405,7 +399,6 @@ namespace Bb.ComponentModel.Accessors
         /// <param name="throwException">if set to <c>true</c> [throw exception].</param>
         /// <param name="attributes">The validationAttributes list to evaluate.</param>
         /// <returns>Return the result of the evaluation</returns>
-        /// <exception cref="InvalidOperationException">Property {this.Name} not found in {this.ComponentType.FullName}.</exception>"
         public ValidationException ValidateMember(object instance, bool throwException, IEnumerable<ValidationAttribute> attributes = null)
         {
 
