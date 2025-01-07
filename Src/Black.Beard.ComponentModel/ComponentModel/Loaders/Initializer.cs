@@ -54,10 +54,20 @@ namespace Bb.ComponentModel.Loaders
         }
 
         /// <summary>
-        /// Discover all initializer and execute them for initializing the application
+        /// Discover all initializer and execute
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">arguments</param>
+        /// <returns></returns>
         public static Initializer Initialize(params string[] args)
+        {
+            return Initialize(null, args);
+        }
+
+            /// <summary>
+            /// Discover all initializer and execute them for initializing the application
+            /// </summary>
+            /// <param name="args"></param>
+            public static Initializer Initialize(Action<Initializer> init = null, params string[] args)
         {
 
             Initializer initializer;
@@ -67,6 +77,7 @@ namespace Bb.ComponentModel.Loaders
             else
                 initializer = Creator(Environment.GetCommandLineArgs());
 
+            init(initializer);
             initializer.Initialize();
 
             return initializer;

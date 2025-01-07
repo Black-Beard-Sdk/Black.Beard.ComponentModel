@@ -1710,7 +1710,7 @@
   - [Last](#P-Bb-ComponentModel-Loaders-Initializer-Last 'Bb.ComponentModel.Loaders.Initializer.Last')
   - [CanExecuteModule(friendlyName)](#M-Bb-ComponentModel-Loaders-Initializer-CanExecuteModule-System-String- 'Bb.ComponentModel.Loaders.Initializer.CanExecuteModule(System.String)')
   - [GetService(serviceType)](#M-Bb-ComponentModel-Loaders-Initializer-GetService-System-Type- 'Bb.ComponentModel.Loaders.Initializer.GetService(System.Type)')
-  - [Initialize(args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.String[])')
+  - [Initialize(args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.String[])')
   - [Map\`\`1(instance)](#M-Bb-ComponentModel-Loaders-Initializer-Map``1-``0- 'Bb.ComponentModel.Loaders.Initializer.Map``1(``0)')
   - [ResolveValue(name,result)](#M-Bb-ComponentModel-Loaders-Initializer-ResolveValue-System-String,System-String@- 'Bb.ComponentModel.Loaders.Initializer.ResolveValue(System.String,System.String@)')
 - [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1')
@@ -23827,7 +23827,7 @@ return the service
 | ---- | ---- | ----------- |
 | serviceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
 
-<a name='M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-String[]-'></a>
+<a name='M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]-'></a>
 ### Initialize(args) `method`
 
 ##### Summary
@@ -23838,7 +23838,7 @@ Discover all initializer and execute them for initializing the application
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') |  |
+| args | [System.Action{Bb.ComponentModel.Loaders.Initializer}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.Initializer}') |  |
 
 <a name='M-Bb-ComponentModel-Loaders-Initializer-Map``1-``0-'></a>
 ### Map\`\`1(instance) `method`
