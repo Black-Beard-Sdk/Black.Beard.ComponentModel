@@ -3,8 +3,6 @@
 namespace Bb.ComponentModel.Attributes
 {
 
-
-
     /// <summary>
     /// specify this class contains method to expose
     /// </summary>

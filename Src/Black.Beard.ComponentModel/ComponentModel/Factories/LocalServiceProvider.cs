@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Bb.ComponentModel.Loaders;
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Bb.ComponentModel.Factories
 {
@@ -38,7 +40,7 @@ namespace Bb.ComponentModel.Factories
 
             if (_dic.TryGetValue(serviceType, out var factory))
                 return factory.CallInstance(this);
-
+            
             if (AutoAdd)
             {
                 factory = ObjectCreatorByIoc.GetActivator<object>(serviceType);

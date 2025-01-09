@@ -1,4 +1,5 @@
 ﻿using System;
+using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Factories;
 using FluentAssertions;
 using Xunit;
@@ -83,12 +84,12 @@ namespace ComponentModels.Tests.Factories
     }
 
 
-    public class InjectAttribute : Attribute
-    {
+    //public class InjectAttribute : Attribute
+    //{
 
 
 
-    }
+    //}
 
 
     public class TestByIoc1

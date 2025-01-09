@@ -1,7 +1,6 @@
 ﻿using Bb.ComponentModel;
 using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Loaders;
-using ComponentModels.Tests.Factories;
 using FluentAssertions;
 using Namotion.Reflection;
 using System;
@@ -91,6 +90,61 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
         }
 
+        [Fact]
+        public void Test4()
+        {
+
+            bool ok = false;
+            Initializer.Initialize(c =>
+            {
+
+                c.OnInitialization = d =>
+                {
+                    if (d is InitializerTest t)
+                    {
+                        t.ToInject.Should().NotBeNull();
+                        t.ToInject2.Should().NotBeNull();
+                        ok = true;
+                    }
+                };
+
+            });
+
+            ok.Should().BeTrue();
+
+        }
+
+
+        [Fact]
+        public void Test5()
+        {
+
+            bool ok = false;
+            Initializer.Initialize(c =>
+            {
+
+                c.OnInitialization = d =>
+                {
+                    if (d is InitializerTest t)
+                    {
+                        t.ToInject.Should().NotBeNull();
+                        t.ToInject2.Should().NotBeNull();
+                        ok = true;
+                    }
+                };
+
+                c.InjectRescue = (e, d) =>
+                {
+                    return null;
+                };
+
+            });
+
+            ok.Should().BeTrue();
+
+        }
+
+
         public class BuilderTest
         {
 
@@ -157,6 +211,10 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
         [Inject]
         public Test1 ToInject { get; set; }
 
+
+        [Inject(typeof(Test2))]
+        public ITest ToInject2 { get; set; }
+
     }
 
     public class Test1
@@ -165,5 +223,16 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
     }
 
+    public class Test2 : ITest
+    {
+        public string Name { get; set; }
 
+    }
+
+    public interface ITest
+    {
+
+        string Name { get; set; }
+
+    }
 }

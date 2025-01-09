@@ -80,6 +80,7 @@ namespace Bb.ComponentModel.Loaders
             Initializer initializer = Creator(args);
 
             init(initializer);
+
             initializer.Initialize();
 
             return initializer;
@@ -138,30 +139,49 @@ namespace Bb.ComponentModel.Loaders
             var propertyCollection = instance.GetType().GetProperties();
 
             foreach (var property in propertyCollection)
-            {
-
-                object value = null;
-
-                if (ResolveVariableName(property, out string variableName)
-                    && _parser.TryResolveStringValue(variableName, out string variableValue))
+                if (property.GetValue(instance) == default)
                 {
-                    try
-                    {
-                        value = ConverterHelper.ConvertToObject(variableValue, property.PropertyType);
-                    }
-                    catch (Exception e)
-                    {
-                        throw new InvalidCastException( $"var '{variableName}' can't be convert in '{property.PropertyType.Name}'." , e);
-                    }
-                }
-                if (value != null)
-                    property.SetValue(instance, value);
 
-            }
+                    object value = null;
+
+                    if (ResolveVariableName(property, out string variableName)
+                        && _parser.TryResolveStringValue(variableName, out string variableValue))
+                    {
+                        try
+                        {
+                            value = ConverterHelper.ConvertToObject(variableValue, property.PropertyType);
+                        }
+                        catch (Exception e)
+                        {
+                            throw new InvalidCastException($"var '{variableName}' can't be convert in '{property.PropertyType.Name}'.", e);
+                        }
+                    }
+                    else if (InjectRescue != null && TryToResolve(property, instance, out var value2))
+                    {
+                        property.SetValue(instance, value2);
+                    }
+
+
+                    if (value != null)
+                        property.SetValue(instance, value);
+
+                }
 
             return instance;
 
         }
+
+        private bool TryToResolve(PropertyInfo property, IInjectBuilder<Initializer> instance, out object value)
+        {
+            value = this.InjectRescue(property, instance);
+            return value != null;
+        }
+
+
+        /// <summary>
+        /// called if the system can't resolve the value
+        /// </summary>
+        public Func<PropertyInfo, IInjectBuilder<Initializer>, object> InjectRescue { get; set; }
 
         /// <summary>
         /// Add a type to the list of types that will be resolved by the injection attribute
@@ -173,7 +193,7 @@ namespace Bb.ComponentModel.Loaders
                 ObjectCreatorByIoc.SetInjectionAttribute(item);
         }
 
-        
+
         /// <summary>
         /// return the last initializer instance
         /// </summary>

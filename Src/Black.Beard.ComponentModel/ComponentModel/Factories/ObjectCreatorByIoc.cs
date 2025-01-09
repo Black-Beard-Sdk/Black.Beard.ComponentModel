@@ -1,4 +1,5 @@
-﻿using Bb.ComponentModel.Exceptions;
+﻿using Bb.ComponentModel.Attributes;
+using Bb.ComponentModel.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -177,7 +178,6 @@ namespace Bb.ComponentModel.Factories
                 argsExp[i] = Expression.Convert(arg, paramType);
             }
 
-
             // Create instance
             Expression newInstanceExp;
             if (methodBase is ConstructorInfo c)
@@ -192,18 +192,20 @@ namespace Bb.ComponentModel.Factories
             // map property to inject
             var properties = TypeDescriptor.GetProperties(methodBase.DeclaringType);
             foreach (PropertyDescriptor property in properties)
-                if (EvaluateToAdd(property))
+                if (EvaluateToAdd(property, out Type typeToInject))
                 {
 
                     Expression instance = paramResult;
                     if(!type.IsAssignableFrom(instance.Type))
                         instance = Expression.Convert(instance, type);
 
-                    var c1 = Expression.Call(param, methodGetService, Expression.Constant(property.PropertyType));
-                    var arg1 = Expression.Convert(c1, property.PropertyType);
+                    Expression c1 = Expression.Call(param, methodGetService, Expression.Constant(typeToInject));
+
+                    if (c1.Type != property.PropertyType)
+                        c1 = Expression.Convert(c1, property.PropertyType);
 
                     instance = Expression.Property(instance, property.Name);
-                    blk.Add(Expression.Assign(instance, arg1));
+                    blk.Add(Expression.Assign(instance, c1));
 
                 }
 
@@ -231,12 +233,27 @@ namespace Bb.ComponentModel.Factories
 
         }
 
-        private static bool EvaluateToAdd(PropertyDescriptor property)
+        private static bool EvaluateToAdd(PropertyDescriptor property, out Type typeToject)
         {
 
+            typeToject = property.PropertyType;
             var attributes = property.Attributes.Cast<Attribute>().ToList();
             foreach (Attribute attribute in attributes)
             {
+                if (attribute is InjectAttribute a)
+                {
+
+                    if (a.TypeToInject != null)
+                    {
+
+                        if (!property.PropertyType.IsAssignableFrom(a.TypeToInject))
+                            throw new InvalidCastException($"Property {property.Name} can't be convert in {a.TypeToInject.Name}.");
+
+                        typeToject = a.TypeToInject;
+                    }
+
+                    return true;
+                }
 
                 if (attribute.GetType().Name == "InjectAttribute")
                     return true;
