@@ -82,7 +82,7 @@ namespace Bb.ComponentModel.Accessors
         private Action<object, object> SetConvertIfDifferentDirect(Type componentType, PropertyInfo property)
         {
 
-            Delegate converterMethod = ConverterHelper.ConvertTo;
+            Delegate converterMethod = ConverterHelper.ConvertToObject;
 
             var targetObjectParameter = Expression.Parameter(typeof(object), "i");
             var convertedObjectParameter = Expression.ConvertChecked(targetObjectParameter, componentType);

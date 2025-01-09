@@ -133,7 +133,6 @@ namespace Bb.ComponentModel.Factories
         /// </summary>
         public override bool IsEmpty => _delegate == null;
 
-
         private ObjectCreatorByIoc<T> _delegate { get; }
         private readonly Dictionary<string, T> _dic;
 

@@ -52,8 +52,16 @@ namespace Bb.ComponentModel.Loaders
         /// </summary>
         public InjectionLoader(string context, IServiceProvider serviceProvider = null)
         {
+
             this.Context = context;
-            ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
+
+            if (serviceProvider is LocalServiceProvider s && s.AutoAdd)
+                ServiceProvider = s;
+           
+            else
+                ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
+
+
             Types = new List<Type>();
             Instances = new List<IInjectBuilder<T>>();
             Executed = new HashSet<string>();

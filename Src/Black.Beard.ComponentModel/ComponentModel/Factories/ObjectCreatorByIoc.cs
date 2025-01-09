@@ -8,6 +8,7 @@ using System.Reflection;
 
 namespace Bb.ComponentModel.Factories
 {
+
     /// <summary>
     /// dynamic factory
     /// </summary>
@@ -112,7 +113,21 @@ namespace Bb.ComponentModel.Factories
         public static void SetInjectionAttribute<T>()
             where T : Attribute
         {
-            _injectAttribute = typeof(T);
+            _injectAttributes.Add(typeof(T));
+        }
+
+        /// <summary>
+        /// Set attribute to looking for inject instance
+        /// </summary>
+        /// <typeparam name="T1">Type of attribute to looking for</typeparam>
+        public static void SetInjectionAttribute(Type type)
+        {
+
+            if (type == null || !typeof(Attribute).IsAssignableFrom(type))
+                throw new ArgumentException("Type must be an attribute");
+
+            _injectAttributes.Add(type);
+
         }
 
 
@@ -121,7 +136,7 @@ namespace Bb.ComponentModel.Factories
         /// </summary>
         public static void ClearSetInjectionAttribute()
         {
-            _injectAttribute = null;
+            _injectAttributes.Clear();
         }
 
 
@@ -136,6 +151,8 @@ namespace Bb.ComponentModel.Factories
         where T : class
         {
 
+            Type tt = typeof(T);
+
             Type type = methodBase.DeclaringType;
             ParameterInfo[] paramsInfo = methodBase.GetParameters();
 
@@ -143,103 +160,94 @@ namespace Bb.ComponentModel.Factories
             List<Expression> blk = new List<Expression>();
             List<ParameterExpression> parameters = new List<ParameterExpression>();
 
-            var method = typeof(IServiceProvider).GetMethod("GetService");
+            var methodGetService = typeof(IServiceProvider).GetMethod("GetService");
 
             //create a single param of type object[]
             ParameterExpression param = Expression.Parameter(typeof(IServiceProvider), "arg");
-            ParameterExpression param1 = Expression.Parameter(typeof(T), "param1");
-            parameters.Add(param1);
+            ParameterExpression paramResult = Expression.Parameter(tt, "param1");
+            parameters.Add(paramResult);
 
-            Expression[] argsExp = new Expression[paramsInfo.Length];
 
             //pick each arg from the params array and create a typed expression of them
+            Expression[] argsExp = new Expression[paramsInfo.Length];
             for (int i = 0; i < paramsInfo.Length; i++)
             {
                 Type paramType = paramsInfo[i].ParameterType;
-                var arg = Expression.Call(param, method, Expression.Constant(paramType));
-                Expression paramCastExp = Expression.Convert(arg, paramType);
-                argsExp[i] = paramCastExp;
+                var arg = Expression.Call(param, methodGetService, Expression.Constant(paramType));
+                argsExp[i] = Expression.Convert(arg, paramType);
             }
 
-            Expression newExp;
 
+            // Create instance
+            Expression newInstanceExp;
             if (methodBase is ConstructorInfo c)
-                newExp = Expression.New(c, argsExp);
+                newInstanceExp = Expression.New(c, argsExp);
             else
-                newExp = Expression.Call(null, (MethodInfo)methodBase, argsExp);
+                newInstanceExp = Expression.Call(null, (MethodInfo)methodBase, argsExp);
+            if (methodBase.DeclaringType != tt)
+                newInstanceExp = Expression.Convert(newInstanceExp, tt);
+            blk.Add(Expression.Assign(paramResult, newInstanceExp));
 
-            if (methodBase.DeclaringType != typeof(T))
-                newExp = Expression.Convert(newExp, typeof(T));
 
-            blk.Add(Expression.Assign(param1, newExp));
-
-            LambdaExpression lambda;
-
-            if (_injectAttribute != null)
-            {
-
-                List<PropertyDescriptor> _props = new List<PropertyDescriptor>();
-
-                var properties = TypeDescriptor.GetProperties(methodBase.DeclaringType);
-                foreach (PropertyDescriptor property in properties)
+            // map property to inject
+            var properties = TypeDescriptor.GetProperties(methodBase.DeclaringType);
+            foreach (PropertyDescriptor property in properties)
+                if (EvaluateToAdd(property))
                 {
 
-                    var attributes = property.Attributes.Cast<Attribute>().ToList();
-                    foreach (Attribute attribute in attributes)
-                        if (attribute.GetType() == _injectAttribute)
-                        {
-                        
-                            Expression instance = param1;
-                            if (methodBase.DeclaringType != typeof(T))
-                                instance = Expression.Convert(instance, typeof(T));
+                    Expression instance = paramResult;
+                    if(!type.IsAssignableFrom(instance.Type))
+                        instance = Expression.Convert(instance, type);
 
-                            var arg1 = Expression.Convert(Expression.Call(param, method, Expression.Constant(property.PropertyType)), property.PropertyType);
-                            
-                            if (methodBase.DeclaringType != typeof(T))
-                                instance = Expression.Convert(param1, typeof(T));
+                    var c1 = Expression.Call(param, methodGetService, Expression.Constant(property.PropertyType));
+                    var arg1 = Expression.Convert(c1, property.PropertyType);
 
-                            instance = Expression.Property(instance, property.Name);
-
-                            blk.Add(Expression.Assign(instance, arg1));
-
-                        }
+                    instance = Expression.Property(instance, property.Name);
+                    blk.Add(Expression.Assign(instance, arg1));
 
                 }
 
-            }
 
-            LabelTarget returnTarget = Expression.Label(typeof(T));
-
+            LabelTarget returnTarget = Expression.Label(tt);
             if (testInitialize)
             {
-
-
                 var method2 = typeof(IInitialize).GetMethods(BindingFlags.Instance | BindingFlags.Public).First();
-
                 ParameterExpression param2 = Expression.Parameter(typeof(IInitialize), "param2");
-
                 parameters.Add(param2);
 
-                blk.Add(Expression.Assign(param2, Expression.Convert(param1, typeof(IInitialize))));
+                blk.Add(Expression.Assign(param2, Expression.Convert(paramResult, typeof(IInitialize))));
                 blk.Add(Expression.Call(param2, method2, param));
-                //blk.Add(Expression.Label(returnTarget, param1));
 
             }
-            //else
-            //{
-            //    //create a lambda with the New expression as body and our param object[] as arg
-            //    //lambda = Expression.Lambda(typeof(ObjectCreatorByIoc<T>), newExp, param);
-            //}
 
-            blk.Add(Expression.Label(returnTarget, param1));
+            blk.Add(Expression.Label(returnTarget, paramResult));
 
-            var block = Expression.Block(typeof(T), parameters.ToArray(), blk.ToArray());
-            lambda = Expression.Lambda(typeof(ObjectCreatorByIoc<T>), block, param);
+            var block = Expression.Block(tt, parameters.ToArray(), blk.ToArray());
+            LambdaExpression lambda = Expression.Lambda(typeof(ObjectCreatorByIoc<T>), block, param);
 
             //compile it
             ObjectCreatorByIoc<T> compiled = (ObjectCreatorByIoc<T>)lambda.Compile();
             return new FactoryByIoc<T>(compiled, methodBase, paramsInfo, description);
 
+        }
+
+        private static bool EvaluateToAdd(PropertyDescriptor property)
+        {
+
+            var attributes = property.Attributes.Cast<Attribute>().ToList();
+            foreach (Attribute attribute in attributes)
+            {
+
+                if (attribute.GetType().Name == "InjectAttribute")
+                    return true;
+
+                foreach (var _injectAttribute in _injectAttributes)
+                    if (attribute.GetType() == _injectAttribute)
+                        return true;
+
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -294,7 +302,7 @@ namespace Bb.ComponentModel.Factories
 
         }
 
-        private static Type _injectAttribute;
+        private static HashSet<Type> _injectAttributes = new();
 
     }
 

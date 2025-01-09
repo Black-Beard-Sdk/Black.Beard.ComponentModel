@@ -554,6 +554,17 @@
   - [IsComImport()](#M-ICSharpCode-Decompiler-TypeSystem-ComHelper-IsComImport-ICSharpCode-Decompiler-TypeSystem-ITypeDefinition- 'ICSharpCode.Decompiler.TypeSystem.ComHelper.IsComImport(ICSharpCode.Decompiler.TypeSystem.ITypeDefinition)')
 - [CombineQueryExpressions](#T-ICSharpCode-Decompiler-CSharp-Transforms-CombineQueryExpressions 'ICSharpCode.Decompiler.CSharp.Transforms.CombineQueryExpressions')
   - [RemoveTransparentIdentifierReferences()](#M-ICSharpCode-Decompiler-CSharp-Transforms-CombineQueryExpressions-RemoveTransparentIdentifierReferences-ICSharpCode-Decompiler-CSharp-Syntax-AstNode,System-Collections-Generic-Dictionary{System-String,System-Object}- 'ICSharpCode.Decompiler.CSharp.Transforms.CombineQueryExpressions.RemoveTransparentIdentifierReferences(ICSharpCode.Decompiler.CSharp.Syntax.AstNode,System.Collections.Generic.Dictionary{System.String,System.Object})')
+- [CommandLineParser](#T-Bb-ComponentModel-Loaders-CommandLineParser 'Bb.ComponentModel.Loaders.CommandLineParser')
+  - [#ctor(args)](#M-Bb-ComponentModel-Loaders-CommandLineParser-#ctor-System-String[]- 'Bb.ComponentModel.Loaders.CommandLineParser.#ctor(System.String[])')
+  - [Contains(name)](#M-Bb-ComponentModel-Loaders-CommandLineParser-Contains-System-String- 'Bb.ComponentModel.Loaders.CommandLineParser.Contains(System.String)')
+  - [GetValueString(name)](#M-Bb-ComponentModel-Loaders-CommandLineParser-GetValueString-System-String- 'Bb.ComponentModel.Loaders.CommandLineParser.GetValueString(System.String)')
+  - [GetValue\`\`1(name)](#M-Bb-ComponentModel-Loaders-CommandLineParser-GetValue``1-System-String- 'Bb.ComponentModel.Loaders.CommandLineParser.GetValue``1(System.String)')
+  - [GetValue\`\`1(name,culture)](#M-Bb-ComponentModel-Loaders-CommandLineParser-GetValue``1-System-String,System-Globalization-CultureInfo- 'Bb.ComponentModel.Loaders.CommandLineParser.GetValue``1(System.String,System.Globalization.CultureInfo)')
+  - [GetValue\`\`1(name,culture)](#M-Bb-ComponentModel-Loaders-CommandLineParser-GetValue``1-System-String,System-Text-Encoding- 'Bb.ComponentModel.Loaders.CommandLineParser.GetValue``1(System.String,System.Text.Encoding)')
+  - [TryResolveStringValue(name,result)](#M-Bb-ComponentModel-Loaders-CommandLineParser-TryResolveStringValue-System-String,System-String@- 'Bb.ComponentModel.Loaders.CommandLineParser.TryResolveStringValue(System.String,System.String@)')
+  - [TryResolveValue\`\`1(name,result)](#M-Bb-ComponentModel-Loaders-CommandLineParser-TryResolveValue``1-System-String,``0@- 'Bb.ComponentModel.Loaders.CommandLineParser.TryResolveValue``1(System.String,``0@)')
+  - [TryResolveValue\`\`1(name,result,culture)](#M-Bb-ComponentModel-Loaders-CommandLineParser-TryResolveValue``1-System-String,System-Globalization-CultureInfo,``0@- 'Bb.ComponentModel.Loaders.CommandLineParser.TryResolveValue``1(System.String,System.Globalization.CultureInfo,``0@)')
+  - [TryResolveValue\`\`1(name,result,encoding)](#M-Bb-ComponentModel-Loaders-CommandLineParser-TryResolveValue``1-System-String,System-Text-Encoding,``0@- 'Bb.ComponentModel.Loaders.CommandLineParser.TryResolveValue``1(System.String,System.Text.Encoding,``0@)')
 - [Comment](#T-ICSharpCode-Decompiler-CSharp-Syntax-Comment 'ICSharpCode.Decompiler.CSharp.Syntax.Comment')
   - [IsDocumentation](#P-ICSharpCode-Decompiler-CSharp-Syntax-Comment-IsDocumentation 'ICSharpCode.Decompiler.CSharp.Syntax.Comment.IsDocumentation')
 - [CommentType](#T-ICSharpCode-Decompiler-CSharp-Syntax-CommentType 'ICSharpCode.Decompiler.CSharp.Syntax.CommentType')
@@ -735,6 +746,10 @@
   - [AppendConverters(type,replaceExisting,bindings)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Type,System-Nullable{System-Boolean},System-Reflection-BindingFlags,System-Func{System-Reflection-MethodInfo,System-Boolean}- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Type,System.Nullable{System.Boolean},System.Reflection.BindingFlags,System.Func{System.Reflection.MethodInfo,System.Boolean})')
   - [AppendConverters(replaceExisting,ms)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Nullable{System-Boolean},System-Reflection-MethodInfo[]- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Nullable{System.Boolean},System.Reflection.MethodInfo[])')
   - [AppendConverters(ms)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Reflection-ConstructorInfo[]- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Reflection.ConstructorInfo[])')
+  - [ConvertTo(self,targetType,culture)](#M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo- 'Bb.Expressions.ConverterHelper.ConvertTo(System.Object,System.Type,System.Globalization.CultureInfo)')
+  - [ConvertTo(self,targetType,encoding)](#M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Text-Encoding- 'Bb.Expressions.ConverterHelper.ConvertTo(System.Object,System.Type,System.Text.Encoding)')
+  - [ConvertTo(self,culture,targetType,encoding)](#M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo,System-Text-Encoding- 'Bb.Expressions.ConverterHelper.ConvertTo(System.Object,System.Type,System.Globalization.CultureInfo,System.Text.Encoding)')
+  - [ConvertToObject(self,targetType)](#M-Bb-Expressions-ConverterHelper-ConvertToObject-System-Object,System-Type- 'Bb.Expressions.ConverterHelper.ConvertToObject(System.Object,System.Type)')
   - [GetFunctionForConvert(sourceType,targetType)](#M-Bb-Expressions-ConverterHelper-GetFunctionForConvert-System-Type,System-Type- 'Bb.Expressions.ConverterHelper.GetFunctionForConvert(System.Type,System.Type)')
   - [GetMethodToConvert(sourceType,targetType,method)](#M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type,Bb-Converters-MethodConverter@- 'Bb.Expressions.ConverterHelper.GetMethodToConvert(System.Type,System.Type,Bb.Converters.MethodConverter@)')
   - [GetMethodToConvert(sourceType,targetType)](#M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type- 'Bb.Expressions.ConverterHelper.GetMethodToConvert(System.Type,System.Type)')
@@ -790,8 +805,11 @@
   - [ToInt64(value)](#M-Bb-Expressions-ConverterHelper-ToInt64-System-Single- 'Bb.Expressions.ConverterHelper.ToInt64(System.Single)')
   - [ToInt64(value)](#M-Bb-Expressions-ConverterHelper-ToInt64-System-Double- 'Bb.Expressions.ConverterHelper.ToInt64(System.Double)')
   - [ToInt64(value)](#M-Bb-Expressions-ConverterHelper-ToInt64-System-Char- 'Bb.Expressions.ConverterHelper.ToInt64(System.Char)')
-  - [ToObject(self,targetType)](#M-Bb-Expressions-ConverterHelper-ToObject-System-Object,System-Type,Bb-Converters-ConverterContext- 'Bb.Expressions.ConverterHelper.ToObject(System.Object,System.Type,Bb.Converters.ConverterContext)')
+  - [ToObject(self,targetType,context)](#M-Bb-Expressions-ConverterHelper-ToObject-System-Object,System-Type,Bb-Converters-ConverterContext- 'Bb.Expressions.ConverterHelper.ToObject(System.Object,System.Type,Bb.Converters.ConverterContext)')
   - [ToObject\`\`1(self)](#M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object- 'Bb.Expressions.ConverterHelper.ToObject``1(System.Object)')
+  - [ToObject\`\`1(self,culture)](#M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo- 'Bb.Expressions.ConverterHelper.ToObject``1(System.Object,System.Globalization.CultureInfo)')
+  - [ToObject\`\`1(self,encoding)](#M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Text-Encoding- 'Bb.Expressions.ConverterHelper.ToObject``1(System.Object,System.Text.Encoding)')
+  - [ToObject\`\`1(self,culture,encoding)](#M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo,System-Text-Encoding- 'Bb.Expressions.ConverterHelper.ToObject``1(System.Object,System.Globalization.CultureInfo,System.Text.Encoding)')
   - [ToSByte(value)](#M-Bb-Expressions-ConverterHelper-ToSByte-System-Char[]- 'Bb.Expressions.ConverterHelper.ToSByte(System.Char[])')
   - [ToSByte(value)](#M-Bb-Expressions-ConverterHelper-ToSByte-System-Byte[]- 'Bb.Expressions.ConverterHelper.ToSByte(System.Byte[])')
   - [ToSByte(value)](#M-Bb-Expressions-ConverterHelper-ToSByte-System-SByte[]- 'Bb.Expressions.ConverterHelper.ToSByte(System.SByte[])')
@@ -1708,11 +1726,15 @@
   - [Context](#P-Bb-ComponentModel-Loaders-Initializer-Context 'Bb.ComponentModel.Loaders.Initializer.Context')
   - [Creator](#P-Bb-ComponentModel-Loaders-Initializer-Creator 'Bb.ComponentModel.Loaders.Initializer.Creator')
   - [Last](#P-Bb-ComponentModel-Loaders-Initializer-Last 'Bb.ComponentModel.Loaders.Initializer.Last')
+  - [Add()](#M-Bb-ComponentModel-Loaders-Initializer-Add-Bb-ComponentModel-Factories-Factory- 'Bb.ComponentModel.Loaders.Initializer.Add(Bb.ComponentModel.Factories.Factory)')
+  - [AddInjectionAttribute(types)](#M-Bb-ComponentModel-Loaders-Initializer-AddInjectionAttribute-System-Type[]- 'Bb.ComponentModel.Loaders.Initializer.AddInjectionAttribute(System.Type[])')
+  - [Add\`\`1()](#M-Bb-ComponentModel-Loaders-Initializer-Add``1 'Bb.ComponentModel.Loaders.Initializer.Add``1')
+  - [Add\`\`1(type)](#M-Bb-ComponentModel-Loaders-Initializer-Add``1-System-Type- 'Bb.ComponentModel.Loaders.Initializer.Add``1(System.Type)')
   - [CanExecuteModule(friendlyName)](#M-Bb-ComponentModel-Loaders-Initializer-CanExecuteModule-System-String- 'Bb.ComponentModel.Loaders.Initializer.CanExecuteModule(System.String)')
   - [GetService(serviceType)](#M-Bb-ComponentModel-Loaders-Initializer-GetService-System-Type- 'Bb.ComponentModel.Loaders.Initializer.GetService(System.Type)')
-  - [Initialize(args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.String[])')
-  - [Map\`\`1(instance)](#M-Bb-ComponentModel-Loaders-Initializer-Map``1-``0- 'Bb.ComponentModel.Loaders.Initializer.Map``1(``0)')
-  - [ResolveValue(name,result)](#M-Bb-ComponentModel-Loaders-Initializer-ResolveValue-System-String,System-String@- 'Bb.ComponentModel.Loaders.Initializer.ResolveValue(System.String,System.String@)')
+  - [Initialize(args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.String[])')
+  - [Initialize(args,init)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.String[])')
+  - [Map(instance)](#M-Bb-ComponentModel-Loaders-Initializer-Map-Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}- 'Bb.ComponentModel.Loaders.Initializer.Map(Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer})')
 - [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1')
   - [#ctor()](#M-Bb-ComponentModel-Loaders-InjectionLoader`1-#ctor-System-String,System-IServiceProvider- 'Bb.ComponentModel.Loaders.InjectionLoader`1.#ctor(System.String,System.IServiceProvider)')
   - [Executed](#P-Bb-ComponentModel-Loaders-InjectionLoader`1-Executed 'Bb.ComponentModel.Loaders.InjectionLoader`1.Executed')
@@ -2310,6 +2332,7 @@
   - [GetActivator\`\`1(ctor)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1-System-Reflection-ConstructorInfo,Bb-ComponentModel-Factories-MethodDescription- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivator``1(System.Reflection.ConstructorInfo,Bb.ComponentModel.Factories.MethodDescription)')
   - [GetActivator\`\`1(ctor)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1-System-Reflection-MethodBase- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivator``1(System.Reflection.MethodBase)')
   - [GetCallMethod\`\`1(ctor)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetCallMethod``1-System-Reflection-MethodBase,Bb-ComponentModel-Factories-MethodDescription- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetCallMethod``1(System.Reflection.MethodBase,Bb.ComponentModel.Factories.MethodDescription)')
+  - [SetInjectionAttribute()](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-SetInjectionAttribute-System-Type- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.SetInjectionAttribute(System.Type)')
   - [SetInjectionAttribute\`\`1()](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-SetInjectionAttribute``1 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.SetInjectionAttribute``1')
 - [ObjectCreator\`1](#T-Bb-ComponentModel-Factories-ObjectCreator`1 'Bb.ComponentModel.Factories.ObjectCreator`1')
 - [OpCode](#T-ICSharpCode-Decompiler-IL-OpCode 'ICSharpCode.Decompiler.IL.OpCode')
@@ -9852,6 +9875,205 @@ Removes all occurrences of transparent identifiers
 
 This method has no parameters.
 
+<a name='T-Bb-ComponentModel-Loaders-CommandLineParser'></a>
+## CommandLineParser `type`
+
+##### Namespace
+
+Bb.ComponentModel.Loaders
+
+<a name='M-Bb-ComponentModel-Loaders-CommandLineParser-#ctor-System-String[]-'></a>
+### #ctor(args) `constructor`
+
+##### Summary
+
+Parse the command line arguments
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') |  |
+
+<a name='M-Bb-ComponentModel-Loaders-CommandLineParser-Contains-System-String-'></a>
+### Contains(name) `method`
+
+##### Summary
+
+return true if the variable name can be resolved.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+
+<a name='M-Bb-ComponentModel-Loaders-CommandLineParser-GetValueString-System-String-'></a>
+### GetValueString(name) `method`
+
+##### Summary
+
+Resolve a value from the command line args and environment variables
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+
+<a name='M-Bb-ComponentModel-Loaders-CommandLineParser-GetValue``1-System-String-'></a>
+### GetValue\`\`1(name) `method`
+
+##### Summary
+
+Resolve a value from the command line args and environment variables
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='M-Bb-ComponentModel-Loaders-CommandLineParser-GetValue``1-System-String,System-Globalization-CultureInfo-'></a>
+### GetValue\`\`1(name,culture) `method`
+
+##### Summary
+
+Resolve a value from the command line args and environment variables
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | culture for help conversion |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='M-Bb-ComponentModel-Loaders-CommandLineParser-GetValue``1-System-String,System-Text-Encoding-'></a>
+### GetValue\`\`1(name,culture) `method`
+
+##### Summary
+
+Resolve a value from the command line args and environment variables
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| culture | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | culture for help conversion |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='M-Bb-ComponentModel-Loaders-CommandLineParser-TryResolveStringValue-System-String,System-String@-'></a>
+### TryResolveStringValue(name,result) `method`
+
+##### Summary
+
+Resolve a value from the command line args and environment variables
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| result | [System.String@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String@ 'System.String@') |  |
+
+<a name='M-Bb-ComponentModel-Loaders-CommandLineParser-TryResolveValue``1-System-String,``0@-'></a>
+### TryResolveValue\`\`1(name,result) `method`
+
+##### Summary
+
+Resolve a value from the command line args and environment variables
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| result | [\`\`0@](#T-``0@ '``0@') |  |
+
+<a name='M-Bb-ComponentModel-Loaders-CommandLineParser-TryResolveValue``1-System-String,System-Globalization-CultureInfo,``0@-'></a>
+### TryResolveValue\`\`1(name,result,culture) `method`
+
+##### Summary
+
+Resolve a value from the command line args and environment variables
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| result | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') |  |
+| culture | [\`\`0@](#T-``0@ '``0@') | culture for help conversion |
+
+<a name='M-Bb-ComponentModel-Loaders-CommandLineParser-TryResolveValue``1-System-String,System-Text-Encoding,``0@-'></a>
+### TryResolveValue\`\`1(name,result,encoding) `method`
+
+##### Summary
+
+Resolve a value from the command line args and environment variables
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| result | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') |  |
+| encoding | [\`\`0@](#T-``0@ '``0@') | encoding for help conversion |
+
 <a name='T-ICSharpCode-Decompiler-CSharp-Syntax-Comment'></a>
 ## Comment `type`
 
@@ -11803,6 +12025,82 @@ Add methods to the list of methods to be used for conversion
 | ---- | ---- | ----------- |
 | ms | [System.Reflection.ConstructorInfo[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.ConstructorInfo[] 'System.Reflection.ConstructorInfo[]') |  |
 
+<a name='M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo-'></a>
+### ConvertTo(self,targetType,culture) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
+| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | culture for help conversion |
+
+<a name='M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Text-Encoding-'></a>
+### ConvertTo(self,targetType,encoding) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
+| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
+
+<a name='M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo,System-Text-Encoding-'></a>
+### ConvertTo(self,culture,targetType,encoding) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| culture | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | culture for help conversion |
+| targetType | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | Target type |
+| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
+
+<a name='M-Bb-Expressions-ConverterHelper-ConvertToObject-System-Object,System-Type-'></a>
+### ConvertToObject(self,targetType) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
+
 <a name='M-Bb-Expressions-ConverterHelper-GetFunctionForConvert-System-Type,System-Type-'></a>
 ### GetFunctionForConvert(sourceType,targetType) `method`
 
@@ -12746,7 +13044,7 @@ Convert a string to Int64
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
 
 <a name='M-Bb-Expressions-ConverterHelper-ToObject-System-Object,System-Type,Bb-Converters-ConverterContext-'></a>
-### ToObject(self,targetType) `method`
+### ToObject(self,targetType,context) `method`
 
 ##### Summary
 
@@ -12762,9 +13060,33 @@ Convert a value to specified target type
 | ---- | ---- | ----------- |
 | self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
 | targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
+| context | [Bb.Converters.ConverterContext](#T-Bb-Converters-ConverterContext 'Bb.Converters.ConverterContext') | conversionHelper |
 
 <a name='M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object-'></a>
 ### ToObject\`\`1(self) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+converted value
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Target type |
+
+<a name='M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo-'></a>
+### ToObject\`\`1(self,culture) `method`
 
 ##### Summary
 
@@ -12779,6 +13101,56 @@ Convert a value to specified target type
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | culture for help conversion |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Target type |
+
+<a name='M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Text-Encoding-'></a>
+### ToObject\`\`1(self,encoding) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Target type |
+
+<a name='M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo,System-Text-Encoding-'></a>
+### ToObject\`\`1(self,culture,encoding) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | culture for help conversion |
+| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
 
 ##### Generic Types
 
@@ -23759,6 +24131,37 @@ Used within [InitializerStatements](#F-ICSharpCode-Decompiler-Semantics-Invocati
 
 Bb.ComponentModel.Loaders
 
+##### Summary
+
+Initialize the application
+
+##### Example
+
+Create a class that will be discovered
+
+```Csharp
+[ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder&lt;Initializer &gt;), LifeCycle = IocScopeEnum.Transiant)]
+public class NLogInitializer : IInjectBuilder &lt;Initializer &gt;
+{
+    public string FriendlyName =&gt; typeof(NLogInitializer).Name;
+    public Type Type =&gt; typeof(Initializer);
+    public bool CanExecute(Initializer context) =&gt; context.CanExecuteModule(FriendlyName);
+    public bool CanExecute(object context) =&gt; CanExecute((Initializer)context);
+    public object Execute(object context) =&gt; Execute((Initializer)context);
+    public object Execute(Initializer context)
+    {
+        // execute your code here
+        return null;
+    }
+}
+```
+
+Run the initializer
+
+```Csharp
+    Initializer.Initialize(args);
+```
+
 <a name='M-Bb-ComponentModel-Loaders-Initializer-#ctor-System-String[]-'></a>
 ### #ctor(args) `constructor`
 
@@ -23793,6 +24196,78 @@ Override the default creator
 
 return the last initializer instance
 
+<a name='M-Bb-ComponentModel-Loaders-Initializer-Add-Bb-ComponentModel-Factories-Factory-'></a>
+### Add() `method`
+
+##### Summary
+
+Add a factory in the service provider
+
+##### Returns
+
+[LocalServiceProvider](#T-Bb-ComponentModel-Factories-LocalServiceProvider 'Bb.ComponentModel.Factories.LocalServiceProvider')
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-AddInjectionAttribute-System-Type[]-'></a>
+### AddInjectionAttribute(types) `method`
+
+##### Summary
+
+Add a type to the list of types that will be resolved by the injection attribute
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| types | [System.Type[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type[] 'System.Type[]') |  |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-Add``1'></a>
+### Add\`\`1() `method`
+
+##### Summary
+
+Get asked service
+
+##### Returns
+
+return the service
+
+##### Parameters
+
+This method has no parameters.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | type to append |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-Add``1-System-Type-'></a>
+### Add\`\`1(type) `method`
+
+##### Summary
+
+Add a factory in the service provider
+
+##### Returns
+
+[LocalServiceProvider](#T-Bb-ComponentModel-Factories-LocalServiceProvider 'Bb.ComponentModel.Factories.LocalServiceProvider')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | implementation of the service |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | type to append for resolve |
+
 <a name='M-Bb-ComponentModel-Loaders-Initializer-CanExecuteModule-System-String-'></a>
 ### CanExecuteModule(friendlyName) `method`
 
@@ -23825,10 +24300,27 @@ return the service
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| serviceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| serviceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | type of the value to reach |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-String[]-'></a>
+### Initialize(args) `method`
+
+##### Summary
+
+Discover all initializer and execute them for initializing the application
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | arguments to push in the initialization process |
 
 <a name='M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]-'></a>
-### Initialize(args) `method`
+### Initialize(args,init) `method`
 
 ##### Summary
 
@@ -23838,10 +24330,11 @@ Discover all initializer and execute them for initializing the application
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| args | [System.Action{Bb.ComponentModel.Loaders.Initializer}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.Initializer}') |  |
+| args | [System.Action{Bb.ComponentModel.Loaders.Initializer}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.Initializer}') | arguments to push in the initialization process |
+| init | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | method to configure the process of initialization |
 
-<a name='M-Bb-ComponentModel-Loaders-Initializer-Map``1-``0-'></a>
-### Map\`\`1(instance) `method`
+<a name='M-Bb-ComponentModel-Loaders-Initializer-Map-Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}-'></a>
+### Map(instance) `method`
 
 ##### Summary
 
@@ -23855,31 +24348,13 @@ Map a class with the command line args and environment variables
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| instance | [\`\`0](#T-``0 '``0') |  |
+| instance | [Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer}](#T-Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer} 'Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer}') |  |
 
 ##### Generic Types
 
 | Name | Description |
 | ---- | ----------- |
 | T |  |
-
-<a name='M-Bb-ComponentModel-Loaders-Initializer-ResolveValue-System-String,System-String@-'></a>
-### ResolveValue(name,result) `method`
-
-##### Summary
-
-Resolve a value from the command line args and environment variables
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
-| result | [System.String@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String@ 'System.String@') |  |
 
 <a name='T-Bb-ComponentModel-Loaders-InjectionLoader`1'></a>
 ## InjectionLoader\`1 `type`
@@ -30828,6 +31303,23 @@ Note if the generic is different of the declaring type of the ctor do a cast and
 | Name | Description |
 | ---- | ----------- |
 | T | is the type that contains the method |
+
+<a name='M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-SetInjectionAttribute-System-Type-'></a>
+### SetInjectionAttribute() `method`
+
+##### Summary
+
+Set attribute to looking for inject instance
+
+##### Parameters
+
+This method has no parameters.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T1 | Type of attribute to looking for |
 
 <a name='M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-SetInjectionAttribute``1'></a>
 ### SetInjectionAttribute\`\`1() `method`

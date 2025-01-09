@@ -1,7 +1,8 @@
 ﻿using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Factories;
+using Bb.Expressions;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Bb.ComponentModel.Loaders
@@ -15,8 +16,8 @@ namespace Bb.ComponentModel.Loaders
     /// 
     /// Create a class that will be discovered
     /// <code lang="Csharp">
-    /// [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder<Initializer>), LifeCycle = IocScopeEnum.Transiant)]
-    /// public class NLogInitializer : IInjectBuilder<Initializer>
+    /// [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder&lt;Initializer &gt;), LifeCycle = IocScopeEnum.Transiant)]
+    /// public class NLogInitializer : IInjectBuilder &lt;Initializer &gt;
     /// {
     /// 
     ///     public string FriendlyName => typeof(NLogInitializer).Name;
@@ -40,9 +41,8 @@ namespace Bb.ComponentModel.Loaders
     /// 
     /// Run the initializer
     /// <code lang="Csharp">
-    /// </code>
-    ///     
     ///     Initializer.Initialize(args);
+    /// </code>
     /// 
     /// </example>
     public class Initializer : IServiceProvider
@@ -54,28 +54,30 @@ namespace Bb.ComponentModel.Loaders
         }
 
         /// <summary>
-        /// Discover all initializer and execute
+        /// Discover all initializer and execute them for initializing the application
         /// </summary>
-        /// <param name="args">arguments</param>
+        /// <param name="args">arguments to push in the initialization process</param>
         /// <returns></returns>
         public static Initializer Initialize(params string[] args)
         {
-            return Initialize(null, args);
+            return Initialize((i) => { }, args);
         }
 
-            /// <summary>
-            /// Discover all initializer and execute them for initializing the application
-            /// </summary>
-            /// <param name="args"></param>
-            public static Initializer Initialize(Action<Initializer> init = null, params string[] args)
+        /// <summary>
+        /// Discover all initializer and execute them for initializing the application
+        /// </summary>
+        /// <param name="args">arguments to push in the initialization process</param>
+        /// <param name="init">method to configure the process of initialization</param>
+        public static Initializer Initialize(Action<Initializer> init, params string[] args)
         {
 
-            Initializer initializer;
+            if (init == null)
+                init = (i) => { };
 
-            if (args != null && args.Length > 0)
-                initializer = Creator(args);
-            else
-                initializer = Creator(Environment.GetCommandLineArgs());
+            if (args == null || args.Length == 0)
+                args = Environment.GetCommandLineArgs();
+
+            Initializer initializer = Creator(args);
 
             init(initializer);
             initializer.Initialize();
@@ -100,7 +102,7 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="args"></param>
         protected Initializer(params string[] args)
         {
-            _args = Parse(args);
+            _parser = new CommandLineParser(args);
             Initializer.Last = this;
         }
 
@@ -113,7 +115,7 @@ namespace Bb.ComponentModel.Loaders
         {
 
             bool result = true;
-            if (ResolveValue(friendlyName, out string variableValue))
+            if (_parser.TryResolveStringValue(friendlyName, out string variableValue))
                 result = variableValue?.ToLower() != "false";
 
             if (result)
@@ -130,42 +132,48 @@ namespace Bb.ComponentModel.Loaders
         /// <typeparam name="T"></typeparam>
         /// <param name="instance"></param>
         /// <returns></returns>
-        public T Map<T>(T instance)
+        private IInjectBuilder<Initializer> Map(IInjectBuilder<Initializer> instance)
         {
 
-            var collection = instance.GetType().GetProperties();
+            var propertyCollection = instance.GetType().GetProperties();
 
-            foreach (var item in collection)
-                if (ResolveVariableName(item, out string variableName))
-                    if (ResolveValue(variableName, out string variableValue))
+            foreach (var property in propertyCollection)
+            {
+
+                object value = null;
+
+                if (ResolveVariableName(property, out string variableName)
+                    && _parser.TryResolveStringValue(variableName, out string variableValue))
+                {
+                    try
                     {
-                        var value = Convert.ChangeType(variableValue, item.PropertyType);
-                        item.SetValue(instance, value);
+                        value = ConverterHelper.ConvertToObject(variableValue, property.PropertyType);
                     }
+                    catch (Exception e)
+                    {
+                        throw new InvalidCastException( $"var '{variableName}' can't be convert in '{property.PropertyType.Name}'." , e);
+                    }
+                }
+                if (value != null)
+                    property.SetValue(instance, value);
+
+            }
 
             return instance;
 
         }
 
         /// <summary>
-        /// Resolve a value from the command line args and environment variables
+        /// Add a type to the list of types that will be resolved by the injection attribute
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        public bool ResolveValue(string name, out string result)
+        /// <param name="types"></param>
+        public static void AddInjectionAttribute(params Type[] types)
         {
-
-            if (_args.TryGetValue(name, out result))
-                return true;
-
-            result = Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process);
-            var r = !string.IsNullOrEmpty(result);
-            var r2 = r ? "Successed" : "Failed";
-            Console.WriteLine($"Resolving {name} from configuration : {r2}");
-            return r;
+            foreach (var item in types)
+                ObjectCreatorByIoc.SetInjectionAttribute(item);
         }
 
+        
         /// <summary>
         /// return the last initializer instance
         /// </summary>
@@ -177,9 +185,9 @@ namespace Bb.ComponentModel.Loaders
         /// <summary>
         /// Get asked service
         /// </summary>
-        /// <param name="serviceType"></param>
+        /// <param name="serviceType">type of the value to reach</param>
         /// <returns>return the service</returns>
-        public object? GetService(Type serviceType)
+        public object GetService(Type serviceType)
         {
             return _serviceProvider.GetService(serviceType);
         }
@@ -187,7 +195,7 @@ namespace Bb.ComponentModel.Loaders
         /// <summary>
         /// Get asked service
         /// </summary>
-        /// <typeparam name="T">type to append</param>
+        /// <typeparam name="T">type to append</typeparam>
         /// <returns>return the service</returns>
         public LocalServiceProvider Add<T>()
             where T : class
@@ -199,7 +207,7 @@ namespace Bb.ComponentModel.Loaders
         /// Add a factory in the service provider
         /// </summary>
         /// <typeparam name="T">type to append for resolve</typeparam>
-        /// <type name="type">implementation of the service</typeparam>
+        /// <param name="type">implementation of the service</param>
         /// <returns><see cref="LocalServiceProvider"/></returns>
         public LocalServiceProvider Add<T>(Type type)
             where T : class
@@ -222,9 +230,7 @@ namespace Bb.ComponentModel.Loaders
         /// <summary>
         /// Add a factory in the service provider
         /// </summary>
-        /// <type name="factory">factory to append</typeparam>
         /// <returns><see cref="LocalServiceProvider"/></returns>
-
         public Initializer Add(Factory factory)
         {
             _serviceProvider.Add(factory.ExposedType, factory);
@@ -234,18 +240,45 @@ namespace Bb.ComponentModel.Loaders
         #endregion IServiceProvider
 
 
+        public Action<IInjectBuilder<Initializer>> OnInitialization { get; set; }
+
+
         #region private
 
         private void Initialize()
         {
 
-            var loader = new InjectionLoader<Initializer>(Context, new LocalServiceProvider())
-                .LoadModules()
+            var loader = new InjectionLoader<Initializer>(Context, this._serviceProvider)
+                .LoadModules(c =>
+                {
+
+                    Map(c);
+
+                    if (OnInitialization != null)
+                        OnInitialization(c);
+
+                })
                 .Execute(this);
 
         }
 
-        private static bool ResolveVariableName(System.Reflection.PropertyInfo property, out string name)
+        private bool ResolveMappingValue(PropertyInfo property, Type type, out object value)
+        {
+
+            value = null;
+
+            var attribute2 = property.GetCustomAttributes()
+                .Where(c => c.GetType() == type)
+                .FirstOrDefault();
+
+            if (attribute2 != null)
+                value = ConverterHelper.ConvertToObject(GetService(property.PropertyType), property.PropertyType);
+
+            return true;
+
+        }
+
+        private bool ResolveVariableName(System.Reflection.PropertyInfo property, out string name)
         {
 
             name = property.Name;
@@ -263,45 +296,11 @@ namespace Bb.ComponentModel.Loaders
             }
 
             return true;
+
         }
 
-        private static Dictionary<string, string> Parse(params string[] parts)
-        {
-            var variables = new Dictionary<string, string>();
-            for (int i = 0; i < parts.Length; i++)
-            {
-                string key = null;
-                string value = null;
-
-                // Format --key=value
-                if (parts[i].StartsWith("--"))
-                {
-                    var keyValue = parts[i].Substring(2).Split(new[] { '=' }, 2);
-                    if (keyValue.Length == 2)
-                    {
-                        key = keyValue[0];
-                        value = keyValue[1];
-                    }
-                }
-                // Format -key value
-                else if (parts[i].StartsWith("-") && i + 1 < parts.Length && !parts[i + 1].StartsWith("-"))
-                {
-                    key = parts[i].Substring(1);
-                    value = parts[++i]; // Increment i pour by passed the value already read.
-                }
-
-                if (key != null && value != null && !variables.ContainsKey(key))
-                    variables.Add(key, value);
-
-            }
-
-            return variables;
-        }
-
-        private readonly Dictionary<string, string> _args;
-
-
-        private LocalServiceProvider _serviceProvider = new LocalServiceProvider();
+        private CommandLineParser _parser;
+        private LocalServiceProvider _serviceProvider = new LocalServiceProvider() { AutoAdd = true };
 
         #endregion private
 

@@ -36,8 +36,8 @@ namespace Bb.Converters
         /// <param name="encoding"></param>
         public ConverterContext(CultureInfo cultureInfo, Encoding encoding)
         {
-            this.Culture = cultureInfo;
-            this.Encoding = encoding;
+            this.Culture = cultureInfo ?? ConverterContext.DefaultCultureInfo;
+            this.Encoding = encoding ?? ConverterContext.DefaultEncoding;
         }
 
         /// <summary>

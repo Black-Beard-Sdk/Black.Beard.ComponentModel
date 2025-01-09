@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using Bb.Converters;
 
 namespace Bb.Expressions
@@ -60,18 +62,47 @@ namespace Bb.Expressions
         /// </summary>
         /// <typeparam name="T">Target type</typeparam>
         /// <param name="self">initial value to convert</param>
-        /// <returns></returns>
+        /// <returns>converted value</returns>
         public static T ToObject<T>(this object self)
         {
             return (T)ToObject(self, typeof(T));
         }
 
-
-        public static object ConvertTo(this object self, Type targetType)
+        /// <summary>
+        /// Convert a value to specified target type
+        /// </summary>
+        /// <typeparam name="T">Target type</typeparam>
+        /// <param name="self">initial value to convert</param>
+        /// <param name="culture">culture for help conversion</param>
+        /// <returns></returns>
+        public static T ToObject<T>(this object self, CultureInfo culture)
         {
+            return (T)ToObject(self, typeof(T), new ConverterContext(culture));
+        }
 
-            return self.ToObject(targetType, null);
+        /// <summary>
+        /// Convert a value to specified target type
+        /// </summary>
+        /// <typeparam name="T">Target type</typeparam>
+        /// <param name="self">initial value to convert</param>
+        /// <param name="encoding">text encoding for help conversion</param>
+        /// <returns></returns>
+        public static T ToObject<T>(this object self, Encoding encoding)
+        {
+            return (T)ToObject(self, typeof(T), new ConverterContext(null, encoding));
+        }
 
+        /// <summary>
+        /// Convert a value to specified target type
+        /// </summary>
+        /// <typeparam name="T">Target type</typeparam>
+        /// <param name="self">initial value to convert</param>
+        /// <param name="culture">culture for help conversion</param>
+        /// <param name="encoding">text encoding for help conversion</param>
+        /// <returns></returns>
+        public static T ToObject<T>(this object self, CultureInfo culture, Encoding encoding)
+        {
+            return (T)ToObject(self, typeof(T), new ConverterContext(culture, encoding));
         }
 
         /// <summary>
@@ -79,6 +110,55 @@ namespace Bb.Expressions
         /// </summary>
         /// <param name="self">initial value to convert</param>
         /// <param name="targetType">Target type</param>
+        /// <returns></returns>
+        public static object ConvertToObject(this object self, Type targetType)
+        {
+            return self.ToObject(targetType, null);
+        }
+
+        /// <summary>
+        /// Convert a value to specified target type
+        /// </summary>
+        /// <param name="self">initial value to convert</param>
+        /// <param name="targetType">Target type</param>
+        /// <param name="culture">culture for help conversion</param>
+        /// <returns></returns>
+        public static object ConvertTo(this object self, Type targetType, CultureInfo culture)
+        {
+            return self.ToObject(targetType, new ConverterContext(culture));
+        }
+
+        /// <summary>
+        /// Convert a value to specified target type
+        /// </summary>
+        /// <param name="self">initial value to convert</param>
+        /// <param name="targetType">Target type</param>
+        /// <param name="encoding">text encoding for help conversion</param>
+        /// <returns></returns>
+        public static object ConvertTo(this object self, Type targetType, Encoding encoding)
+        {
+            return self.ToObject(targetType, new ConverterContext(null, encoding));
+        }
+
+        /// <summary>
+        /// Convert a value to specified target type
+        /// </summary>
+        /// <param name="self">initial value to convert</param>
+        /// <param name="culture">culture for help conversion</param>
+        /// <param name="targetType">Target type</param>
+        /// <param name="encoding">text encoding for help conversion</param>
+        /// <returns></returns>
+        public static object ConvertTo(this object self, Type targetType, CultureInfo culture, Encoding encoding)
+        {
+            return self.ToObject(targetType, new ConverterContext(culture, encoding));
+        }
+
+        /// <summary>
+        /// Convert a value to specified target type
+        /// </summary>
+        /// <param name="self">initial value to convert</param>
+        /// <param name="targetType">Target type</param>
+        /// <param name="context">conversionHelper</param>
         /// <returns></returns>
         public static object ToObject(this object self, Type targetType, ConverterContext? context = null)
         {

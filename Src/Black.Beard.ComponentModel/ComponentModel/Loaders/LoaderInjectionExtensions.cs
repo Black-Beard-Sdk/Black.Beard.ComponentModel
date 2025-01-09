@@ -128,7 +128,7 @@ namespace Bb.ComponentModel.Loaders
         /// <typeparam name="T"></typeparam>
         /// <param name="self"></param>
         /// <returns></returns>
-        public static InjectionLoader<T> LoadModules<T>(this InjectionLoader<T> self, Action<IInjectBuilder<T>> initializer = null)
+        public static InjectionLoader<T> LoadModules<T>(this InjectionLoader<T> self, Action<IInjectBuilder<T>> initializer)
         {
             self.Types.AddRange(InjectionExtensions.CollectTypes<IInjectBuilder<T>>(self.Context));
             //foreach (var item in self.Types)
