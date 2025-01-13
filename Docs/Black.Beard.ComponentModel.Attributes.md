@@ -88,17 +88,17 @@
   - [GetService(type)](#M-Bb-ComponentModel-IUIComponent-GetService-System-Type- 'Bb.ComponentModel.IUIComponent.GetService(System.Type)')
 - [IUISite](#T-Bb-ComponentModel-IUISite 'Bb.ComponentModel.IUISite')
   - [Parent](#P-Bb-ComponentModel-IUISite-Parent 'Bb.ComponentModel.IUISite.Parent')
-- [InjectBuilderBase](#T-Bb-ComponentModel-InjectBuilderBase 'Bb.ComponentModel.InjectBuilderBase')
-  - [FriendlyName](#P-Bb-ComponentModel-InjectBuilderBase-FriendlyName 'Bb.ComponentModel.InjectBuilderBase.FriendlyName')
-  - [Type](#P-Bb-ComponentModel-InjectBuilderBase-Type 'Bb.ComponentModel.InjectBuilderBase.Type')
-  - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilderBase-CanExecute-System-Object- 'Bb.ComponentModel.InjectBuilderBase.CanExecute(System.Object)')
-  - [Execute(context)](#M-Bb-ComponentModel-InjectBuilderBase-Execute-System-Object- 'Bb.ComponentModel.InjectBuilderBase.Execute(System.Object)')
-- [InjectBuilderBase\`1](#T-Bb-ComponentModel-InjectBuilderBase`1 'Bb.ComponentModel.InjectBuilderBase`1')
-  - [Type](#P-Bb-ComponentModel-InjectBuilderBase`1-Type 'Bb.ComponentModel.InjectBuilderBase`1.Type')
-  - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilderBase`1-CanExecute-`0- 'Bb.ComponentModel.InjectBuilderBase`1.CanExecute(`0)')
-  - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilderBase`1-CanExecute-System-Object- 'Bb.ComponentModel.InjectBuilderBase`1.CanExecute(System.Object)')
-  - [Execute(context)](#M-Bb-ComponentModel-InjectBuilderBase`1-Execute-System-Object- 'Bb.ComponentModel.InjectBuilderBase`1.Execute(System.Object)')
-  - [Execute(context)](#M-Bb-ComponentModel-InjectBuilderBase`1-Execute-`0- 'Bb.ComponentModel.InjectBuilderBase`1.Execute(`0)')
+- [InjectBuilder](#T-Bb-ComponentModel-InjectBuilder 'Bb.ComponentModel.InjectBuilder')
+  - [FriendlyName](#P-Bb-ComponentModel-InjectBuilder-FriendlyName 'Bb.ComponentModel.InjectBuilder.FriendlyName')
+  - [Type](#P-Bb-ComponentModel-InjectBuilder-Type 'Bb.ComponentModel.InjectBuilder.Type')
+  - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilder-CanExecute-System-Object- 'Bb.ComponentModel.InjectBuilder.CanExecute(System.Object)')
+  - [Execute(context)](#M-Bb-ComponentModel-InjectBuilder-Execute-System-Object- 'Bb.ComponentModel.InjectBuilder.Execute(System.Object)')
+- [InjectBuilder\`1](#T-Bb-ComponentModel-InjectBuilder`1 'Bb.ComponentModel.InjectBuilder`1')
+  - [Type](#P-Bb-ComponentModel-InjectBuilder`1-Type 'Bb.ComponentModel.InjectBuilder`1.Type')
+  - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilder`1-CanExecute-`0- 'Bb.ComponentModel.InjectBuilder`1.CanExecute(`0)')
+  - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilder`1-CanExecute-System-Object- 'Bb.ComponentModel.InjectBuilder`1.CanExecute(System.Object)')
+  - [Execute(context)](#M-Bb-ComponentModel-InjectBuilder`1-Execute-System-Object- 'Bb.ComponentModel.InjectBuilder`1.Execute(System.Object)')
+  - [Execute(context)](#M-Bb-ComponentModel-InjectBuilder`1-Execute-`0- 'Bb.ComponentModel.InjectBuilder`1.Execute(`0)')
 - [InjectorPolicyAttribute](#T-Bb-ComponentModel-Attributes-InjectorPolicyAttribute 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute')
   - [#ctor(type,lifeCycle)](#M-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-#ctor-System-Type,Bb-ComponentModel-Attributes-IocScopeEnum- 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.#ctor(System.Type,Bb.ComponentModel.Attributes.IocScopeEnum)')
   - [LifeCycle](#P-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-LifeCycle 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.LifeCycle')
@@ -1106,8 +1106,8 @@ Represents a component that can be added to a container.
 
 Gets the name of the parent component.
 
-<a name='T-Bb-ComponentModel-InjectBuilderBase'></a>
-## InjectBuilderBase `type`
+<a name='T-Bb-ComponentModel-InjectBuilder'></a>
+## InjectBuilder `type`
 
 ##### Namespace
 
@@ -1117,21 +1117,21 @@ Bb.ComponentModel
 
 Class base that implement default behavior for [IInjectBuilder](#T-Bb-ComponentModel-IInjectBuilder 'Bb.ComponentModel.IInjectBuilder')
 
-<a name='P-Bb-ComponentModel-InjectBuilderBase-FriendlyName'></a>
+<a name='P-Bb-ComponentModel-InjectBuilder-FriendlyName'></a>
 ### FriendlyName `property`
 
 ##### Summary
 
 Friendly name of the builder. by default it's the namespace + name of the class
 
-<a name='P-Bb-ComponentModel-InjectBuilderBase-Type'></a>
+<a name='P-Bb-ComponentModel-InjectBuilder-Type'></a>
 ### Type `property`
 
 ##### Summary
 
 Return the type of service that should be passed by argument
 
-<a name='M-Bb-ComponentModel-InjectBuilderBase-CanExecute-System-Object-'></a>
+<a name='M-Bb-ComponentModel-InjectBuilder-CanExecute-System-Object-'></a>
 ### CanExecute(context) `method`
 
 ##### Summary
@@ -1148,7 +1148,7 @@ Return true if the process can be run
 | ---- | ---- | ----------- |
 | context | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | specified context [Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |
 
-<a name='M-Bb-ComponentModel-InjectBuilderBase-Execute-System-Object-'></a>
+<a name='M-Bb-ComponentModel-InjectBuilder-Execute-System-Object-'></a>
 ### Execute(context) `method`
 
 ##### Summary
@@ -1165,21 +1165,21 @@ Execute the initializing process with [Object](http://msdn.microsoft.com/query/d
 | ---- | ---- | ----------- |
 | context | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | specified context [Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |
 
-<a name='T-Bb-ComponentModel-InjectBuilderBase`1'></a>
-## InjectBuilderBase\`1 `type`
+<a name='T-Bb-ComponentModel-InjectBuilder`1'></a>
+## InjectBuilder\`1 `type`
 
 ##### Namespace
 
 Bb.ComponentModel
 
-<a name='P-Bb-ComponentModel-InjectBuilderBase`1-Type'></a>
+<a name='P-Bb-ComponentModel-InjectBuilder`1-Type'></a>
 ### Type `property`
 
 ##### Summary
 
 Return the type of service that should be passed by argument
 
-<a name='M-Bb-ComponentModel-InjectBuilderBase`1-CanExecute-`0-'></a>
+<a name='M-Bb-ComponentModel-InjectBuilder`1-CanExecute-`0-'></a>
 ### CanExecute(context) `method`
 
 ##### Summary
@@ -1196,7 +1196,7 @@ Return true if the process can be ran
 | ---- | ---- | ----------- |
 | context | [\`0](#T-`0 '`0') | specified context [](#!-T 'T') |
 
-<a name='M-Bb-ComponentModel-InjectBuilderBase`1-CanExecute-System-Object-'></a>
+<a name='M-Bb-ComponentModel-InjectBuilder`1-CanExecute-System-Object-'></a>
 ### CanExecute(context) `method`
 
 ##### Summary
@@ -1213,7 +1213,7 @@ Return true if the process can be run
 | ---- | ---- | ----------- |
 | context | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | specified context [Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |
 
-<a name='M-Bb-ComponentModel-InjectBuilderBase`1-Execute-System-Object-'></a>
+<a name='M-Bb-ComponentModel-InjectBuilder`1-Execute-System-Object-'></a>
 ### Execute(context) `method`
 
 ##### Summary
@@ -1230,7 +1230,7 @@ Execute the initializing process with [Object](http://msdn.microsoft.com/query/d
 | ---- | ---- | ----------- |
 | context | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | specified context [Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |
 
-<a name='M-Bb-ComponentModel-InjectBuilderBase`1-Execute-`0-'></a>
+<a name='M-Bb-ComponentModel-InjectBuilder`1-Execute-`0-'></a>
 ### Execute(context) `method`
 
 ##### Summary
