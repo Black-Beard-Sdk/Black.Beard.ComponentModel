@@ -1172,16 +1172,6 @@ Execute the initializing process with [Object](http://msdn.microsoft.com/query/d
 
 Bb.ComponentModel
 
-##### Summary
-
-Class base that implement default behavior for [IInjectBuilder\`1](#T-Bb-ComponentModel-IInjectBuilder`1 'Bb.ComponentModel.IInjectBuilder`1')
-
-##### Generic Types
-
-| Name | Description |
-| ---- | ----------- |
-| T | context of the initialization |
-
 <a name='P-Bb-ComponentModel-InjectBuilderBase`1-Type'></a>
 ### Type `property`
 

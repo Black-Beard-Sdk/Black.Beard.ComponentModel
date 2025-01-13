@@ -1,4 +1,5 @@
 ﻿
+using Bb.ComponentModel.Attributes;
 using System;
 
 namespace Bb.ComponentModel
@@ -8,9 +9,48 @@ namespace Bb.ComponentModel
     /// Class base that implement default behavior for <see cref="IInjectBuilder{T}"/>
     /// </summary>
     /// <typeparam name="T">context of the initialization</typeparam>
+    /// <example>
+    /// 
+    ///     Sample add service in the web application
+    /// 
+    /// <code lang="C#>
+    /// 
+    ///     // In the main inser the bloc that create and initialize the WebApplication class
+    ///     WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+    ///     var provider = new LocalServiceProvider(builder.Services.BuildServiceProvider());
+    ///     builder.Initialize(provider, null, c => { });
+    ///
+    ///     var app = builder.Build();
+    ///     app.Initialize(new LocalServiceProvider(app.Services), null, c => { });
+    ///     
+    ///     // add a new class that will add service in the web application
+    ///     [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder&lt;WebApplicationBuilder&gt;), LifeCycle = IocScopeEnum.Transiant)]
+    ///     public class ConfigureWebApplicationBuilder : InjectBuilderBase&lt;WebApplicationBuilder&gt;
+    ///     {
+    ///         public object Execute(WebApplicationBuilder builder)
+    ///         {
+    ///             var services = builder.Services;
+    ///             // Add service
+    ///             return null;
+    ///         }
+    ///     }
+    /// 
+    /// 
+    /// 
+    ///     // add a new class that will configure the WebApplication service
+    ///     [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder&lt;WebApplication&gt;), LifeCycle = IocScopeEnum.Transiant)]
+    ///     public class ConfigureWebApplication : InjectBuilderBase&lt;WebApplication&gt;
+    ///     {
+    ///         public object Execute(WebApplication builder)
+    ///         {
+    ///             return null;
+    ///         }
+    ///     }
+    /// </code>
+    /// </example>
     public abstract class InjectBuilderBase<T> : InjectBuilderBase, IInjectBuilder<T>
     {
-     
+
         /// <summary>
         /// Return the type of service that should be passed by argument
         /// </summary>
