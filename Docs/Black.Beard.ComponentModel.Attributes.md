@@ -88,6 +88,13 @@
   - [GetService(type)](#M-Bb-ComponentModel-IUIComponent-GetService-System-Type- 'Bb.ComponentModel.IUIComponent.GetService(System.Type)')
 - [IUISite](#T-Bb-ComponentModel-IUISite 'Bb.ComponentModel.IUISite')
   - [Parent](#P-Bb-ComponentModel-IUISite-Parent 'Bb.ComponentModel.IUISite.Parent')
+- [InjectBuilderBase\`1](#T-Bb-ComponentModel-InjectBuilderBase`1 'Bb.ComponentModel.InjectBuilderBase`1')
+  - [FriendlyName](#P-Bb-ComponentModel-InjectBuilderBase`1-FriendlyName 'Bb.ComponentModel.InjectBuilderBase`1.FriendlyName')
+  - [Type](#P-Bb-ComponentModel-InjectBuilderBase`1-Type 'Bb.ComponentModel.InjectBuilderBase`1.Type')
+  - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilderBase`1-CanExecute-`0- 'Bb.ComponentModel.InjectBuilderBase`1.CanExecute(`0)')
+  - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilderBase`1-CanExecute-System-Object- 'Bb.ComponentModel.InjectBuilderBase`1.CanExecute(System.Object)')
+  - [Execute(context)](#M-Bb-ComponentModel-InjectBuilderBase`1-Execute-System-Object- 'Bb.ComponentModel.InjectBuilderBase`1.Execute(System.Object)')
+  - [Execute(context)](#M-Bb-ComponentModel-InjectBuilderBase`1-Execute-`0- 'Bb.ComponentModel.InjectBuilderBase`1.Execute(`0)')
 - [InjectorPolicyAttribute](#T-Bb-ComponentModel-Attributes-InjectorPolicyAttribute 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute')
   - [#ctor(type,lifeCycle)](#M-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-#ctor-System-Type,Bb-ComponentModel-Attributes-IocScopeEnum- 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.#ctor(System.Type,Bb.ComponentModel.Attributes.IocScopeEnum)')
   - [LifeCycle](#P-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-LifeCycle 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.LifeCycle')
@@ -718,7 +725,7 @@ Return the type of service that should be passed by argument
 
 ##### Summary
 
-Return true if the process can be run
+Return true if the process can be ran
 
 ##### Returns
 
@@ -763,7 +770,7 @@ specialized interface for Initialize service
 
 ##### Summary
 
-Return true if the process can be run
+Return true if the process can be ran
 
 ##### Returns
 
@@ -1094,6 +1101,105 @@ Represents a component that can be added to a container.
 ##### Summary
 
 Gets the name of the parent component.
+
+<a name='T-Bb-ComponentModel-InjectBuilderBase`1'></a>
+## InjectBuilderBase\`1 `type`
+
+##### Namespace
+
+Bb.ComponentModel
+
+##### Summary
+
+Class base that implement default behavior for [IInjectBuilder\`1](#T-Bb-ComponentModel-IInjectBuilder`1 'Bb.ComponentModel.IInjectBuilder`1')
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='P-Bb-ComponentModel-InjectBuilderBase`1-FriendlyName'></a>
+### FriendlyName `property`
+
+##### Summary
+
+Friendly name of the builder. by default it's the namespace + name of the class
+
+<a name='P-Bb-ComponentModel-InjectBuilderBase`1-Type'></a>
+### Type `property`
+
+##### Summary
+
+Return the type of service that should be passed by argument
+
+<a name='M-Bb-ComponentModel-InjectBuilderBase`1-CanExecute-`0-'></a>
+### CanExecute(context) `method`
+
+##### Summary
+
+Return true if the process can be ran
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| context | [\`0](#T-`0 '`0') | specified context [](#!-T 'T') |
+
+<a name='M-Bb-ComponentModel-InjectBuilderBase`1-CanExecute-System-Object-'></a>
+### CanExecute(context) `method`
+
+##### Summary
+
+Return true if the process can be run
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| context | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | specified context [Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |
+
+<a name='M-Bb-ComponentModel-InjectBuilderBase`1-Execute-System-Object-'></a>
+### Execute(context) `method`
+
+##### Summary
+
+Execute the initializing process with [Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object')
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| context | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | specified context [Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |
+
+<a name='M-Bb-ComponentModel-InjectBuilderBase`1-Execute-`0-'></a>
+### Execute(context) `method`
+
+##### Summary
+
+Execute the initializing process with [](#!-T 'T')
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| context | [\`0](#T-`0 '`0') | specified context [](#!-T 'T') |
 
 <a name='T-Bb-ComponentModel-Attributes-InjectorPolicyAttribute'></a>
 ## InjectorPolicyAttribute `type`

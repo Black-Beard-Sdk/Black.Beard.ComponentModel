@@ -1,5 +1,4 @@
-﻿
-namespace Bb.ComponentModel
+﻿namespace Bb.ComponentModel
 {
 
     /// <summary>
@@ -9,7 +8,7 @@ namespace Bb.ComponentModel
     {
 
         /// <summary>
-        /// Return true if the process can be run
+        /// Return true if the process can be ran
         /// </summary>
         /// <param name="context">specified context <see cref="T"/></param>
         /// <returns></returns>
@@ -22,7 +21,6 @@ namespace Bb.ComponentModel
         /// <param name="context">specified context <see cref="T"/></param>
         /// <returns></returns>
         object Execute(T context);
-
 
     }
 

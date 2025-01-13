@@ -23,7 +23,7 @@ namespace Bb.ComponentModel
         object Execute(object context);
 
         /// <summary>
-        /// Return true if the process can be run
+        /// Return true if the process can be ran
         /// </summary>
         /// <param name="context">specified context <see cref="object"/></param>
         /// <returns></returns>

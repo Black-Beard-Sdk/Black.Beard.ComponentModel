@@ -1725,6 +1725,7 @@
   - [#ctor(args)](#M-Bb-ComponentModel-Loaders-Initializer-#ctor-System-String[]- 'Bb.ComponentModel.Loaders.Initializer.#ctor(System.String[])')
   - [Context](#P-Bb-ComponentModel-Loaders-Initializer-Context 'Bb.ComponentModel.Loaders.Initializer.Context')
   - [Creator](#P-Bb-ComponentModel-Loaders-Initializer-Creator 'Bb.ComponentModel.Loaders.Initializer.Creator')
+  - [InjectRescue](#P-Bb-ComponentModel-Loaders-Initializer-InjectRescue 'Bb.ComponentModel.Loaders.Initializer.InjectRescue')
   - [Last](#P-Bb-ComponentModel-Loaders-Initializer-Last 'Bb.ComponentModel.Loaders.Initializer.Last')
   - [Add()](#M-Bb-ComponentModel-Loaders-Initializer-Add-Bb-ComponentModel-Factories-Factory- 'Bb.ComponentModel.Loaders.Initializer.Add(Bb.ComponentModel.Factories.Factory)')
   - [AddInjectionAttribute(types)](#M-Bb-ComponentModel-Loaders-Initializer-AddInjectionAttribute-System-Type[]- 'Bb.ComponentModel.Loaders.Initializer.AddInjectionAttribute(System.Type[])')
@@ -24188,6 +24189,13 @@ The context of the initialization
 ##### Summary
 
 Override the default creator
+
+<a name='P-Bb-ComponentModel-Loaders-Initializer-InjectRescue'></a>
+### InjectRescue `property`
+
+##### Summary
+
+called if the system can't resolve the value
 
 <a name='P-Bb-ComponentModel-Loaders-Initializer-Last'></a>
 ### Last `property`
