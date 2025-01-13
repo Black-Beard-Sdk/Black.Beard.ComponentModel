@@ -17,11 +17,10 @@ namespace Bb.ComponentModel
     /// 
     ///     // In the main inser the bloc that create and initialize the WebApplication class
     ///     WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-    ///     var provider = new LocalServiceProvider(builder.Services.BuildServiceProvider());
-    ///     builder.Initialize(provider, null, c => { });
+    ///     builder.Initialize(builder.Services.BuildServiceProvider(), null, c => { });
     ///
     ///     var app = builder.Build();
-    ///     app.Initialize(new LocalServiceProvider(app.Services), null, c => { });
+    ///     app.Initialize(app.Services, null, c => { });
     ///     
     ///     // add a new class that will add service in the web application
     ///     [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder&lt;WebApplicationBuilder&gt;), LifeCycle = IocScopeEnum.Transiant)]
