@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Reflection;
 
 namespace Bb.ComponentModel
@@ -11,47 +10,13 @@ namespace Bb.ComponentModel
     /// <summary>
     /// Type matched
     /// </summary>
-    public class TypeMatched
+    public class TypeMatched : AssemblyMatched
     {
 
         public TypeMatched()
         {
 
         }
-
-        /// <summary>
-        /// Gets the assembly location.
-        /// </summary>
-        /// <value>
-        /// The assembly location.
-        /// </value>
-        public FileInfo AssemblyLocation { get; internal set; }
-
-        /// <summary>
-        /// Gets the name of the assembly.
-        /// </summary>
-        /// <value>
-        /// The name of the assembly.
-        /// </value>
-        public string AssemblyName { get; internal set; }
-
-        /// <summary>
-        /// Gets the assembly version.
-        /// </summary>
-        /// <value>
-        /// The assembly version.
-        /// </value>
-        public Version AssemblyVersion { get; internal set; }
-
-        /// <summary>
-        /// Gets a value indicating whether [assembly is loaded].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [assembly is loaded]; otherwise, <c>false</c>.
-        /// </value>
-        public bool AssemblyIsLoaded => _isLoaded.HasValue
-            ? (_isLoaded.Value && _isLoaded.Value)
-            : (_isLoaded = TypeDiscovery.Instance.IsLoaded(this.AssemblyLocation)).Value;
 
         /// <summary>
         /// Gets the full name of the type.
@@ -76,14 +41,6 @@ namespace Bb.ComponentModel
         /// The name of the type.
         /// </value>
         public string TypeName { get; internal set; }
-
-        /// <summary>
-        /// Gets the assembly of the type. Call the method Load for load the assembly.
-        /// </summary>
-        /// <value>
-        /// The assembly.
-        /// </value>
-        public Assembly Assembly { get; private set; }
 
         /// <summary>
         /// Gets the <see cref="System.Type"/>. Call the method Load for load the type.
@@ -126,9 +83,10 @@ namespace Bb.ComponentModel
         ///     name requires a dependent assembly which was compiled for a version of the runtime
         ///     later than the currently loaded version.
         /// </exception>
-        public void Load(bool failedOnloadError = true)
+        public override void Load(bool failedOnloadError = true)
         {
-            this.Assembly = AssemblyLoader.Instance.LoadAssembly(this.AssemblyLocation, null);
+
+            base.Load(failedOnloadError);
             if (Assembly != null)
             {
 
@@ -146,6 +104,7 @@ namespace Bb.ComponentModel
         private bool? _isLoaded;
 
     }
+
 
     public class GenericTypeMatched
     {

@@ -104,10 +104,14 @@
   - [FilterType(filter)](#M-Bb-ComponentModel-AddonsResolver-FilterType-System-Func{Bb-ComponentModel-TypeMatched,System-Boolean}- 'Bb.ComponentModel.AddonsResolver.FilterType(System.Func{Bb.ComponentModel.TypeMatched,System.Boolean})')
   - [GetAssemblies()](#M-Bb-ComponentModel-AddonsResolver-GetAssemblies 'Bb.ComponentModel.AddonsResolver.GetAssemblies')
   - [Implements(interfaces)](#M-Bb-ComponentModel-AddonsResolver-Implements-System-Collections-Generic-IEnumerable{System-Type}- 'Bb.ComponentModel.AddonsResolver.Implements(System.Collections.Generic.IEnumerable{System.Type})')
-  - [Implements(interfaces)](#M-Bb-ComponentModel-AddonsResolver-Implements 'Bb.ComponentModel.AddonsResolver.Implements')
+  - [Implements()](#M-Bb-ComponentModel-AddonsResolver-Implements 'Bb.ComponentModel.AddonsResolver.Implements')
   - [Implements(interfaces)](#M-Bb-ComponentModel-AddonsResolver-Implements-System-Type[]- 'Bb.ComponentModel.AddonsResolver.Implements(System.Type[])')
-  - [Search()](#M-Bb-ComponentModel-AddonsResolver-Search 'Bb.ComponentModel.AddonsResolver.Search')
+  - [SearchAssemblies()](#M-Bb-ComponentModel-AddonsResolver-SearchAssemblies 'Bb.ComponentModel.AddonsResolver.SearchAssemblies')
+  - [SearchTypes()](#M-Bb-ComponentModel-AddonsResolver-SearchTypes 'Bb.ComponentModel.AddonsResolver.SearchTypes')
   - [WhereAssembly(filterAssembly)](#M-Bb-ComponentModel-AddonsResolver-WhereAssembly-System-Func{ICSharpCode-Decompiler-Metadata-PEFile,System-Boolean}- 'Bb.ComponentModel.AddonsResolver.WhereAssembly(System.Func{ICSharpCode.Decompiler.Metadata.PEFile,System.Boolean})')
+  - [WhereAssemblyReference(type)](#M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Type- 'Bb.ComponentModel.AddonsResolver.WhereAssemblyReference(System.Type)')
+  - [WhereAssemblyReference(assembly)](#M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Reflection-Assembly- 'Bb.ComponentModel.AddonsResolver.WhereAssemblyReference(System.Reflection.Assembly)')
+  - [WhereAssemblyReference(assemblyName)](#M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Reflection-AssemblyName- 'Bb.ComponentModel.AddonsResolver.WhereAssemblyReference(System.Reflection.AssemblyName)')
   - [WithBaseType(baseTypes)](#M-Bb-ComponentModel-AddonsResolver-WithBaseType-System-Collections-Generic-IEnumerable{System-Type}- 'Bb.ComponentModel.AddonsResolver.WithBaseType(System.Collections.Generic.IEnumerable{System.Type})')
   - [WithBaseType(baseTypes)](#M-Bb-ComponentModel-AddonsResolver-WithBaseType-System-Type[]- 'Bb.ComponentModel.AddonsResolver.WithBaseType(System.Type[])')
   - [WithFile(fileFilter)](#M-Bb-ComponentModel-AddonsResolver-WithFile-System-Func{System-IO-FileInfo,System-Boolean}- 'Bb.ComponentModel.AddonsResolver.WithFile(System.Func{System.IO.FileInfo,System.Boolean})')
@@ -202,6 +206,16 @@
   - [LoadAssemblyName(item)](#M-Bb-ComponentModel-AssemblyLoader-LoadAssemblyName-System-Reflection-AssemblyName- 'Bb.ComponentModel.AssemblyLoader.LoadAssemblyName(System.Reflection.AssemblyName)')
   - [TryToGet(fullname,assembly)](#M-Bb-ComponentModel-AssemblyLoader-TryToGet-System-String,System-Reflection-Assembly@- 'Bb.ComponentModel.AssemblyLoader.TryToGet(System.String,System.Reflection.Assembly@)')
   - [TryToGet(filename,assembly)](#M-Bb-ComponentModel-AssemblyLoader-TryToGet-System-IO-FileInfo,System-Reflection-Assembly@- 'Bb.ComponentModel.AssemblyLoader.TryToGet(System.IO.FileInfo,System.Reflection.Assembly@)')
+- [AssemblyMatched](#T-Bb-ComponentModel-AssemblyMatched 'Bb.ComponentModel.AssemblyMatched')
+  - [Assembly](#P-Bb-ComponentModel-AssemblyMatched-Assembly 'Bb.ComponentModel.AssemblyMatched.Assembly')
+  - [AssemblyIsLoaded](#P-Bb-ComponentModel-AssemblyMatched-AssemblyIsLoaded 'Bb.ComponentModel.AssemblyMatched.AssemblyIsLoaded')
+  - [AssemblyLocation](#P-Bb-ComponentModel-AssemblyMatched-AssemblyLocation 'Bb.ComponentModel.AssemblyMatched.AssemblyLocation')
+  - [AssemblyName](#P-Bb-ComponentModel-AssemblyMatched-AssemblyName 'Bb.ComponentModel.AssemblyMatched.AssemblyName')
+  - [AssemblyVersion](#P-Bb-ComponentModel-AssemblyMatched-AssemblyVersion 'Bb.ComponentModel.AssemblyMatched.AssemblyVersion')
+  - [FailedToLoad](#P-Bb-ComponentModel-AssemblyMatched-FailedToLoad 'Bb.ComponentModel.AssemblyMatched.FailedToLoad')
+  - [Load(failedOnloadError)](#M-Bb-ComponentModel-AssemblyMatched-Load-System-Boolean- 'Bb.ComponentModel.AssemblyMatched.Load(System.Boolean)')
+- [AssemblyReferenceExtensions](#T-Bb-ComponentModel-AssemblyReferenceExtensions 'Bb.ComponentModel.AssemblyReferenceExtensions')
+  - [EnsureIsLoaded(self,failedOnloadError)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-EnsureIsLoaded-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched},System-Boolean- 'Bb.ComponentModel.AssemblyReferenceExtensions.EnsureIsLoaded(System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched},System.Boolean)')
 - [AssignVariableNames](#T-ICSharpCode-Decompiler-IL-Transforms-AssignVariableNames 'ICSharpCode.Decompiler.IL.Transforms.AssignVariableNames')
   - [IsSupportedInstruction()](#M-ICSharpCode-Decompiler-IL-Transforms-AssignVariableNames-IsSupportedInstruction-System-Object- 'ICSharpCode.Decompiler.IL.Transforms.AssignVariableNames.IsSupportedInstruction(System.Object)')
 - [AssignmentExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-AssignmentExpression 'ICSharpCode.Decompiler.CSharp.Syntax.AssignmentExpression')
@@ -3054,11 +3068,6 @@
   - [Unknown](#F-ICSharpCode-Decompiler-TypeSystem-TypeKind-Unknown 'ICSharpCode.Decompiler.TypeSystem.TypeKind.Unknown')
   - [Void](#F-ICSharpCode-Decompiler-TypeSystem-TypeKind-Void 'ICSharpCode.Decompiler.TypeSystem.TypeKind.Void')
 - [TypeMatched](#T-Bb-ComponentModel-TypeMatched 'Bb.ComponentModel.TypeMatched')
-  - [Assembly](#P-Bb-ComponentModel-TypeMatched-Assembly 'Bb.ComponentModel.TypeMatched.Assembly')
-  - [AssemblyIsLoaded](#P-Bb-ComponentModel-TypeMatched-AssemblyIsLoaded 'Bb.ComponentModel.TypeMatched.AssemblyIsLoaded')
-  - [AssemblyLocation](#P-Bb-ComponentModel-TypeMatched-AssemblyLocation 'Bb.ComponentModel.TypeMatched.AssemblyLocation')
-  - [AssemblyName](#P-Bb-ComponentModel-TypeMatched-AssemblyName 'Bb.ComponentModel.TypeMatched.AssemblyName')
-  - [AssemblyVersion](#P-Bb-ComponentModel-TypeMatched-AssemblyVersion 'Bb.ComponentModel.TypeMatched.AssemblyVersion')
   - [DeclaringTypeFullName](#P-Bb-ComponentModel-TypeMatched-DeclaringTypeFullName 'Bb.ComponentModel.TypeMatched.DeclaringTypeFullName')
   - [FullName](#P-Bb-ComponentModel-TypeMatched-FullName 'Bb.ComponentModel.TypeMatched.FullName')
   - [GenericParameters](#P-Bb-ComponentModel-TypeMatched-GenericParameters 'Bb.ComponentModel.TypeMatched.GenericParameters')
@@ -4566,7 +4575,7 @@ Add a filter on all interfaces must be implemented
 | interfaces | [System.Collections.Generic.IEnumerable{System.Type}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Type}') |  |
 
 <a name='M-Bb-ComponentModel-AddonsResolver-Implements'></a>
-### Implements(interfaces) `method`
+### Implements() `method`
 
 ##### Summary
 
@@ -4578,9 +4587,7 @@ Add a filter on all interfaces must be implemented
 
 ##### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| interfaces | [M:Bb.ComponentModel.AddonsResolver.Implements](#T-M-Bb-ComponentModel-AddonsResolver-Implements 'M:Bb.ComponentModel.AddonsResolver.Implements') |  |
+This method has no parameters.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-Implements-System-Type[]-'></a>
 ### Implements(interfaces) `method`
@@ -4599,8 +4606,23 @@ Add a filter on all interfaces must be implemented
 | ---- | ---- | ----------- |
 | interfaces | [System.Type[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type[] 'System.Type[]') |  |
 
-<a name='M-Bb-ComponentModel-AddonsResolver-Search'></a>
-### Search() `method`
+<a name='M-Bb-ComponentModel-AddonsResolver-SearchAssemblies'></a>
+### SearchAssemblies() `method`
+
+##### Summary
+
+Apply filters and return the list of assemblies
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-SearchTypes'></a>
+### SearchTypes() `method`
 
 ##### Summary
 
@@ -4619,17 +4641,68 @@ This method has no parameters.
 
 ##### Summary
 
-
+evaluate if the assembly must be used
 
 ##### Returns
 
-
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | filterAssembly | [System.Func{ICSharpCode.Decompiler.Metadata.PEFile,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{ICSharpCode.Decompiler.Metadata.PEFile,System.Boolean}') |  |
+
+<a name='M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Type-'></a>
+### WhereAssemblyReference(type) `method`
+
+##### Summary
+
+filter on assembly name
+
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | assembly of type |
+
+<a name='M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Reflection-Assembly-'></a>
+### WhereAssemblyReference(assembly) `method`
+
+##### Summary
+
+filter on assembly name
+
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assembly | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') |  |
+
+<a name='M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Reflection-AssemblyName-'></a>
+### WhereAssemblyReference(assemblyName) `method`
+
+##### Summary
+
+filter on assembly name
+
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assemblyName | [System.Reflection.AssemblyName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.AssemblyName 'System.Reflection.AssemblyName') |  |
 
 <a name='M-Bb-ComponentModel-AddonsResolver-WithBaseType-System-Collections-Generic-IEnumerable{System-Type}-'></a>
 ### WithBaseType(baseTypes) `method`
@@ -5916,6 +5989,107 @@ Try to get assembly in the list of loaded assemblies
 | ---- | ---- | ----------- |
 | filename | [System.IO.FileInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileInfo 'System.IO.FileInfo') |  |
 | assembly | [System.Reflection.Assembly@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly@ 'System.Reflection.Assembly@') |  |
+
+<a name='T-Bb-ComponentModel-AssemblyMatched'></a>
+## AssemblyMatched `type`
+
+##### Namespace
+
+Bb.ComponentModel
+
+<a name='P-Bb-ComponentModel-AssemblyMatched-Assembly'></a>
+### Assembly `property`
+
+##### Summary
+
+Gets the assembly of the type. Call the method Load for load the assembly.
+
+<a name='P-Bb-ComponentModel-AssemblyMatched-AssemblyIsLoaded'></a>
+### AssemblyIsLoaded `property`
+
+##### Summary
+
+Gets a value indicating whether [assembly is loaded].
+
+<a name='P-Bb-ComponentModel-AssemblyMatched-AssemblyLocation'></a>
+### AssemblyLocation `property`
+
+##### Summary
+
+Gets the assembly location.
+
+<a name='P-Bb-ComponentModel-AssemblyMatched-AssemblyName'></a>
+### AssemblyName `property`
+
+##### Summary
+
+Gets the name of the assembly.
+
+<a name='P-Bb-ComponentModel-AssemblyMatched-AssemblyVersion'></a>
+### AssemblyVersion `property`
+
+##### Summary
+
+Gets the assembly version.
+
+<a name='P-Bb-ComponentModel-AssemblyMatched-FailedToLoad'></a>
+### FailedToLoad `property`
+
+##### Summary
+
+Gets a value indicating whether [failed to load].
+
+<a name='M-Bb-ComponentModel-AssemblyMatched-Load-System-Boolean-'></a>
+### Load(failedOnloadError) `method`
+
+##### Summary
+
+Try to load the assembly.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| failedOnloadError | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | if set to `true` [failed onload error]. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | name is invalid. -or- The length of name exceeds 1024 characters |
+| [System.TypeLoadException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.TypeLoadException 'System.TypeLoadException') | throwOnError is true, and the type cannot be found |
+| [System.IO.FileNotFoundException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileNotFoundException 'System.IO.FileNotFoundException') | name requires a dependent assembly that could not be found. |
+| [System.IO.FileLoadException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileLoadException 'System.IO.FileLoadException') | name requires a dependent assembly that was found but could not be loaded. -or-
+     The current assembly was loaded into the reflection-only context, and name requires
+     a dependent assembly that was not preloaded. |
+| [System.BadImageFormatException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.BadImageFormatException 'System.BadImageFormatException') | name requires a dependent assembly, but the file is not a valid assembly. -or-
+     name requires a dependent assembly which was compiled for a version of the runtime
+     later than the currently loaded version. |
+
+<a name='T-Bb-ComponentModel-AssemblyReferenceExtensions'></a>
+## AssemblyReferenceExtensions `type`
+
+##### Namespace
+
+Bb.ComponentModel
+
+<a name='M-Bb-ComponentModel-AssemblyReferenceExtensions-EnsureIsLoaded-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched},System-Boolean-'></a>
+### EnsureIsLoaded(self,failedOnloadError) `method`
+
+##### Summary
+
+Return true if the assembly reference contains the assembly name
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}') |  |
+| failedOnloadError | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
 
 <a name='T-ICSharpCode-Decompiler-IL-Transforms-AssignVariableNames'></a>
 ## AssignVariableNames `type`
@@ -39344,41 +39518,6 @@ The `System.Void` type.
 ##### Namespace
 
 Bb.ComponentModel
-
-<a name='P-Bb-ComponentModel-TypeMatched-Assembly'></a>
-### Assembly `property`
-
-##### Summary
-
-Gets the assembly of the type. Call the method Load for load the assembly.
-
-<a name='P-Bb-ComponentModel-TypeMatched-AssemblyIsLoaded'></a>
-### AssemblyIsLoaded `property`
-
-##### Summary
-
-Gets a value indicating whether [assembly is loaded].
-
-<a name='P-Bb-ComponentModel-TypeMatched-AssemblyLocation'></a>
-### AssemblyLocation `property`
-
-##### Summary
-
-Gets the assembly location.
-
-<a name='P-Bb-ComponentModel-TypeMatched-AssemblyName'></a>
-### AssemblyName `property`
-
-##### Summary
-
-Gets the name of the assembly.
-
-<a name='P-Bb-ComponentModel-TypeMatched-AssemblyVersion'></a>
-### AssemblyVersion `property`
-
-##### Summary
-
-Gets the assembly version.
 
 <a name='P-Bb-ComponentModel-TypeMatched-DeclaringTypeFullName'></a>
 ### DeclaringTypeFullName `property`

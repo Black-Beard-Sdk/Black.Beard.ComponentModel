@@ -4,15 +4,11 @@ using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Factories;
 using Bb.ComponentModel.Loaders;
 using Bb.Diagnostics;
-using ComponentModels.Tests.Factories;
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Security.AccessControl;
 using Xunit;
-using static ComponentModels.Tests.Factories.Tests;
 
 namespace DynamicDescriptors.Tests
 {
@@ -103,22 +99,33 @@ namespace DynamicDescriptors.Tests
             var directories = new AssemblyDirectoryResolver()
                 .AddDirectoryFromFiles(typeof(TestClass).Assembly.Location);
 
+            var item0 = new AddonsResolver(directories)
+                .SearchAssemblies()
+                  .FirstOrDefault();
+
+            var item01 = new AddonsResolver(directories)
+                    .WhereAssemblyReference(typeof(ExposeClassAttribute))
+                    .SearchAssemblies()
+                    .EnsureIsLoaded()
+                      //.FirstOrDefault()
+                      ;
+
 
             var item1 = new AddonsResolver(directories)
                     .InContext(ConstantsCore.Plugin)
-                    .Search()
+                    .SearchTypes()
                     .First();
 
             var item2 = new AddonsResolver(directories)
                     .InContext(ConstantsCore.Plugin)
                     .WithBaseType(typeof(SubTestClass))
-                    .Search()
+                    .SearchTypes()
                     .First();
 
             var item3 = new AddonsResolver(directories)
                     .InContext(ConstantsCore.Plugin)
                     .Implements(typeof(IInjectBuilder))
-                    .Search()
+                    .SearchTypes()
                     .First();
 
         }
@@ -177,7 +184,7 @@ namespace DynamicDescriptors.Tests
             loader.LoadModules(c =>
             {
 
-            }).Execute(instance);     
+            }).Execute(instance);
 
         }
 

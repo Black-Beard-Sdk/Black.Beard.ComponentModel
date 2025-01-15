@@ -937,7 +937,7 @@ namespace Bb.ComponentModel
 
             action(resolver);
 
-            foreach (var item in resolver.Search())
+            foreach (var item in resolver.SearchTypes())
             {
 
                 if (autoload)

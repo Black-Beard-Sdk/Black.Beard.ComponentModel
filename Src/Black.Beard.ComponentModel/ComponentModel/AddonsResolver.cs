@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Bb.ComponentModel.Attributes;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
@@ -22,7 +25,6 @@ namespace Bb.ComponentModel
             _BaseTypes = new HashSet<Type>();
 
             _excludedAssemblies = new HashSet<string>();
-            FilterAssembly = c => true;
             _excludedAssemblies = new HashSet<string>();
 
         }
@@ -101,14 +103,62 @@ namespace Bb.ComponentModel
 
         #region Assembly
 
+
         /// <summary>
-        /// 
+        /// filter on assembly name
+        /// </summary>
+        /// <param name="type">assembly of type</param>
+        /// <returns><see cref="AddonsResolver" />fluent syntax</returns>
+        public AddonsResolver WhereAssemblyReference(Type type)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            var ass = type.Assembly;
+            WhereAssemblyReference(ass);
+            return this;
+        }
+
+        /// <summary>
+        /// filter on assembly name
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <returns><see cref="AddonsResolver" />fluent syntax</returns>
+        public AddonsResolver WhereAssemblyReference(Assembly assembly)
+        {
+
+            if (assembly == null)
+                throw new ArgumentNullException(nameof(assembly));
+
+            WhereAssemblyReference(assembly.GetName());
+            return this;
+        }
+
+        /// <summary>
+        /// filter on assembly name
+        /// </summary>
+        /// <param name="assemblyName"></param>
+        /// <returns><see cref="AddonsResolver" />fluent syntax</returns>
+        public AddonsResolver WhereAssemblyReference(AssemblyName assemblyName)
+        {
+            this.WhereAssembly(c => c.AssemblyReferences.References(assemblyName));
+            return this;
+        }
+
+        /// <summary>
+        /// evaluate if the assembly must be used
         /// </summary>
         /// <param name="filterAssembly"></param>
-        /// <returns></returns>
+        /// <returns><see cref="AddonsResolver" />fluent syntax</returns>
         public AddonsResolver WhereAssembly(Func<PEFile, bool> filterAssembly)
         {
-            FilterAssembly = filterAssembly;
+            if (FilterAssembly == null)
+                FilterAssembly = filterAssembly;
+            else
+            {
+                var old = FilterAssembly;
+                FilterAssembly = c => old(c) && filterAssembly(c);
+            }
             return this;
         }
 
@@ -153,7 +203,6 @@ namespace Bb.ComponentModel
         /// <summary>
         /// Add a filter on all interfaces must be implemented
         /// </summary>
-        /// <param name="interfaces"></param>
         /// <returns></returns>
         public AddonsResolver Implements()
         {
@@ -322,7 +371,7 @@ namespace Bb.ComponentModel
         /// Apply filters and return the list of types
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<TypeMatched> Search()
+        public IEnumerable<TypeMatched> SearchTypes()
         {
 
             Filter filter = AddImplementations(AddBaseTypes(AddContext(AddRemoveAsbstract(AddRemoveGenerics()))));
@@ -355,6 +404,43 @@ namespace Bb.ComponentModel
                 }
 
         }
+
+
+        /// <summary>
+        /// Apply filters and return the list of assemblies
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<AssemblyMatched> SearchAssemblies()
+        {
+
+            Filter filter = AddImplementations(AddBaseTypes(AddContext(AddRemoveAsbstract(AddRemoveGenerics()))));
+
+            foreach (FileInfo assemblyPath in Paths.GetAssemblies(FileFilter))
+                if (_excludedAssemblies.Count == 0 || _excludedAssemblies.Contains(assemblyPath.Name))
+                {
+
+                    PEFile file = GetAssembly(assemblyPath);
+
+                    if (file != null)
+                        try
+                        {
+
+                            if (FilterAssembly == null || FilterAssembly(file))
+                            {
+                                AssemblyMatched result = BuildModelAssembly(assemblyPath, file);
+                                yield return result;
+                            }
+
+                        }
+                        finally
+                        {
+                            file.Dispose();
+                        }
+
+                }
+
+        }
+
 
         private static GenericTypeMatched BuildModel(MetadataTypeParameter genericType)
         {
@@ -408,6 +494,16 @@ namespace Bb.ComponentModel
 
         }
 
+        private static AssemblyMatched BuildModelAssembly(FileInfo assemblyPath, PEFile file)
+        {
+            return new AssemblyMatched()
+            {
+                AssemblyLocation = assemblyPath,
+                AssemblyName = file.Name,
+                AssemblyVersion = file.Version,
+            };
+
+        }
 
         /// <summary>
         /// Apply filters and return the list of types
@@ -666,6 +762,100 @@ namespace Bb.ComponentModel
 
     }
 
+
+    public static class AssemblyReferenceExtensions
+    {
+
+        /// <summary>
+        /// Return true if the assembly reference contains the assembly name
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="failedOnloadError"></param>
+        /// <returns></returns>
+        public static IEnumerable<AssemblyMatched> EnsureIsLoaded(this IEnumerable<AssemblyMatched> self, bool failedOnloadError = true)
+        {
+
+            foreach (var item in self)
+                if (!item.AssemblyIsLoaded)
+                    item.Load(failedOnloadError);
+
+            return self;
+
+        }
+
+        /// <summary>
+        /// Return true if the assembly reference contains the assembly name
+        /// </summary>
+        /// <param name="entries"><see cref="AssemblyReference">list of assembly reference</param>
+        /// <param name="assembly"><see cref="AssemblyName"/> assembly name</param>
+        /// <returns></returns>
+        public static bool References(this ImmutableArray<AssemblyReference> entries, AssemblyName assembly)
+        {
+            foreach (var entry in entries)
+                if (entry.Matches(assembly).HasFlag(AssemblyComparerFlags.Name))
+                    return true;
+            return false;
+        }
+
+        /// <summary>
+        /// return an evaluation of the assembly reference comparison.
+        /// </summary>
+        /// <param name="entry"><see cref="AssemblyReference">assembly reference</param>
+        /// <param name="assembly"><see cref="AssemblyName"/> assembly name</param>
+        /// <returns>evaluation result</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static AssemblyComparerFlags Matches(this AssemblyReference entry, AssemblyName assembly)
+        {
+
+            if (entry == null)
+                throw new ArgumentNullException(nameof(entry));
+
+            if (assembly == null)
+                throw new ArgumentNullException(nameof(assembly));
+
+            AssemblyComparerFlags result = AssemblyComparerFlags.NoMatch;
+
+            if (entry?.Name == assembly?.Name)
+            {
+
+                result = AssemblyComparerFlags.Name;
+
+                if (assembly.CultureInfo != null && !string.IsNullOrEmpty(entry.Culture))
+                {
+                    if (CultureInfo.GetCultureInfo(entry.Culture) == assembly.CultureInfo)
+                        result |= AssemblyComparerFlags.Culture;
+                }
+                else
+                    result |= AssemblyComparerFlags.Culture;
+
+
+                if (assembly.Version != null && entry.Version != null)
+                {
+                    if (entry.Version == assembly.Version)
+                        result |= AssemblyComparerFlags.Version;
+                }
+                else
+                    result |= AssemblyComparerFlags.Version;
+
+
+                var tokenLeft = entry.GetPublicKeyToken();
+                var tokenRight = assembly.GetPublicKeyToken();
+                if (tokenRight != null && tokenLeft != null)
+                {
+                    if (entry.GetPublicKeyToken().SequenceEqual(tokenRight))
+                        result |= AssemblyComparerFlags.PublicKeyToken;
+                }
+                else
+                    result |= AssemblyComparerFlags.PublicKeyToken;
+
+            }
+
+            return result;
+
+        }
+
+
+    }
 
 
 }
