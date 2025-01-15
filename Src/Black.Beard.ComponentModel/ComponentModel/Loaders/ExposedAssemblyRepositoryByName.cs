@@ -20,11 +20,6 @@ namespace Bb.ComponentModel.Loaders
         public string AssemblyName { get; set; }
 
 
-        internal override void Load()
-        {
-            AssemblyLoader.Instance.LoadAssemblyName(AssemblyName);  
-        }
-
     }
 
 

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Bb.ComponentModel.Attributes;
+using Bb.ComponentModel.Loaders;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
 using ICSharpCode.Decompiler.TypeSystem.Implementation;
@@ -17,7 +18,26 @@ namespace Bb.ComponentModel
     {
 
 
-        public AddonsResolver(AssemblyDirectoryResolver paths = null)
+        /// <summary>
+        /// Helper for creating a new instance of <see cref="AddonsResolver"/>
+        /// </summary>
+        public static AddonsResolver New { get; } = new();
+
+        /// <summary>
+        /// Initialize a new instance of <see cref="AddonsResolver"/>
+        /// </summary>
+        /// <param name="paths">path to add for analyses</param>
+        public AddonsResolver(params string[] paths)
+            : this(AssemblyDirectoryResolver.Instance)
+        {
+            Paths.AddDirectories(paths);
+        }
+
+        /// <summary>
+        /// Create a new instance of <see cref="AddonsResolver"/>
+        /// </summary>
+        /// <param name="paths">path to add for analyses</param>
+        public AddonsResolver(AssemblyDirectoryResolver? paths)
         {
 
             Paths = paths ?? AssemblyDirectoryResolver.Instance;
@@ -26,6 +46,25 @@ namespace Bb.ComponentModel
 
             _excludedAssemblies = new HashSet<string>();
             _excludedAssemblies = new HashSet<string>();
+
+        }      
+
+
+        /// <summary>
+        /// Add a list of repositories
+        /// </summary>
+        /// <param name="repositories"></param>
+        /// <returns></returns>
+        public AddonsResolver With(ExposedAssemblyRepositories repositories)
+        {
+
+            foreach (var item in repositories.ByFolder)
+                AddDirectories(item.Path);
+
+            foreach (var item in repositories.ByName)
+                AddAssemblyName(item.AssemblyName);
+
+            return this;
 
         }
 
@@ -86,7 +125,7 @@ namespace Bb.ComponentModel
         /// <summary>
         /// set excluding abstract types filter
         /// </summary>
-        /// <param name="excludeAbstract"></param>
+        /// <param name="excludeGenerics">if true, don"t append generic types</param>
         /// <returns></returns>
         public AddonsResolver ExcludeGenericTypes(bool excludeGenerics = true)
         {
@@ -103,6 +142,16 @@ namespace Bb.ComponentModel
 
         #region Assembly
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="assemblyName"></param>
+        /// <returns></returns>
+        public AddonsResolver AddAssemblyName(string assemblyName)
+        {
+            AssemblyLoader.Instance.LoadAssemblyName(assemblyName);
+            return this;
+        }
 
         /// <summary>
         /// filter on assembly name
@@ -169,7 +218,6 @@ namespace Bb.ComponentModel
 
         #endregion Assembly
 
-
         #region Context
 
         public AddonsResolver InContext(string context)
@@ -181,7 +229,6 @@ namespace Bb.ComponentModel
         public string Context { get; private set; }
 
         #endregion Context
-
 
         #region Interfaces
 
@@ -227,7 +274,6 @@ namespace Bb.ComponentModel
 
         #endregion Interfaces
 
-
         #region base types
 
         /// <summary>
@@ -267,7 +313,6 @@ namespace Bb.ComponentModel
 
         #endregion base types
 
-
         #region Files
 
         /// <summary>
@@ -297,7 +342,6 @@ namespace Bb.ComponentModel
         public Func<FileInfo, bool> FileFilter { get; private set; }
 
         #endregion Files
-
 
         #region Types
 
@@ -774,6 +818,8 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public static IEnumerable<AssemblyMatched> EnsureIsLoaded(this IEnumerable<AssemblyMatched> self, bool failedOnloadError = true)
         {
+
+            AssemblyLoader.Instance.EnsureAssemblyIsLoaded(Assembly.GetEntryAssembly(), true, false);
 
             foreach (var item in self)
                 if (!item.AssemblyIsLoaded)

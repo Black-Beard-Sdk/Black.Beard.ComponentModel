@@ -13,9 +13,6 @@
 
         }
 
-        internal abstract void Load();
-
-
     }
 
 

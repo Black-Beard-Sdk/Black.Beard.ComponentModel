@@ -18,21 +18,7 @@ namespace Bb.ComponentModel.Loaders
 
 
         public List<ExposedAssemblyRepositoryByName> ByName { get; set; }
-
-
-        public void Load()
-        {
-
-            AssemblyLoader.Instance.EnsureAssemblyIsLoaded(Assembly.GetEntryAssembly(), true, false);
-
-            foreach (var item in ByFolder)
-                item.Load();
-
-            foreach (var item in ByName)
-                item.Load();
-
-        }
-
+    
 
     }
 

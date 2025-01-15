@@ -88,19 +88,23 @@
 - [AddCheckedBlocks](#T-ICSharpCode-Decompiler-CSharp-Transforms-AddCheckedBlocks 'ICSharpCode.Decompiler.CSharp.Transforms.AddCheckedBlocks')
 - [AddXmlDocumentationTransform](#T-ICSharpCode-Decompiler-CSharp-Transforms-AddXmlDocumentationTransform 'ICSharpCode.Decompiler.CSharp.Transforms.AddXmlDocumentationTransform')
 - [AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')
+  - [#ctor(paths)](#M-Bb-ComponentModel-AddonsResolver-#ctor-System-String[]- 'Bb.ComponentModel.AddonsResolver.#ctor(System.String[])')
+  - [#ctor(paths)](#M-Bb-ComponentModel-AddonsResolver-#ctor-Bb-ComponentModel-AssemblyDirectoryResolver- 'Bb.ComponentModel.AddonsResolver.#ctor(Bb.ComponentModel.AssemblyDirectoryResolver)')
   - [ExcludeAbstracts](#P-Bb-ComponentModel-AddonsResolver-ExcludeAbstracts 'Bb.ComponentModel.AddonsResolver.ExcludeAbstracts')
   - [ExcludeGenerics](#P-Bb-ComponentModel-AddonsResolver-ExcludeGenerics 'Bb.ComponentModel.AddonsResolver.ExcludeGenerics')
   - [ExcludedAssemblies](#P-Bb-ComponentModel-AddonsResolver-ExcludedAssemblies 'Bb.ComponentModel.AddonsResolver.ExcludedAssemblies')
   - [FileFilter](#P-Bb-ComponentModel-AddonsResolver-FileFilter 'Bb.ComponentModel.AddonsResolver.FileFilter')
   - [FilterAssembly](#P-Bb-ComponentModel-AddonsResolver-FilterAssembly 'Bb.ComponentModel.AddonsResolver.FilterAssembly')
+  - [New](#P-Bb-ComponentModel-AddonsResolver-New 'Bb.ComponentModel.AddonsResolver.New')
   - [TypeFilter](#P-Bb-ComponentModel-AddonsResolver-TypeFilter 'Bb.ComponentModel.AddonsResolver.TypeFilter')
+  - [AddAssemblyName(assemblyName)](#M-Bb-ComponentModel-AddonsResolver-AddAssemblyName-System-String- 'Bb.ComponentModel.AddonsResolver.AddAssemblyName(System.String)')
   - [ClearBaseType(baseTypes)](#M-Bb-ComponentModel-AddonsResolver-ClearBaseType-System-Collections-Generic-IEnumerable{System-Type}- 'Bb.ComponentModel.AddonsResolver.ClearBaseType(System.Collections.Generic.IEnumerable{System.Type})')
   - [ClearFileFilters(filenames)](#M-Bb-ComponentModel-AddonsResolver-ClearFileFilters-System-String[]- 'Bb.ComponentModel.AddonsResolver.ClearFileFilters(System.String[])')
   - [ClearFilterType()](#M-Bb-ComponentModel-AddonsResolver-ClearFilterType 'Bb.ComponentModel.AddonsResolver.ClearFilterType')
   - [ClearWithFile()](#M-Bb-ComponentModel-AddonsResolver-ClearWithFile 'Bb.ComponentModel.AddonsResolver.ClearWithFile')
   - [ExcludeAbstractTypes(excludeAbstract)](#M-Bb-ComponentModel-AddonsResolver-ExcludeAbstractTypes-System-Boolean- 'Bb.ComponentModel.AddonsResolver.ExcludeAbstractTypes(System.Boolean)')
   - [ExcludeFile(filenames)](#M-Bb-ComponentModel-AddonsResolver-ExcludeFile-System-String[]- 'Bb.ComponentModel.AddonsResolver.ExcludeFile(System.String[])')
-  - [ExcludeGenericTypes(excludeAbstract)](#M-Bb-ComponentModel-AddonsResolver-ExcludeGenericTypes-System-Boolean- 'Bb.ComponentModel.AddonsResolver.ExcludeGenericTypes(System.Boolean)')
+  - [ExcludeGenericTypes(excludeGenerics)](#M-Bb-ComponentModel-AddonsResolver-ExcludeGenericTypes-System-Boolean- 'Bb.ComponentModel.AddonsResolver.ExcludeGenericTypes(System.Boolean)')
   - [FilterType(filter)](#M-Bb-ComponentModel-AddonsResolver-FilterType-System-Func{Bb-ComponentModel-TypeMatched,System-Boolean}- 'Bb.ComponentModel.AddonsResolver.FilterType(System.Func{Bb.ComponentModel.TypeMatched,System.Boolean})')
   - [GetAssemblies()](#M-Bb-ComponentModel-AddonsResolver-GetAssemblies 'Bb.ComponentModel.AddonsResolver.GetAssemblies')
   - [Implements(interfaces)](#M-Bb-ComponentModel-AddonsResolver-Implements-System-Collections-Generic-IEnumerable{System-Type}- 'Bb.ComponentModel.AddonsResolver.Implements(System.Collections.Generic.IEnumerable{System.Type})')
@@ -112,6 +116,7 @@
   - [WhereAssemblyReference(type)](#M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Type- 'Bb.ComponentModel.AddonsResolver.WhereAssemblyReference(System.Type)')
   - [WhereAssemblyReference(assembly)](#M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Reflection-Assembly- 'Bb.ComponentModel.AddonsResolver.WhereAssemblyReference(System.Reflection.Assembly)')
   - [WhereAssemblyReference(assemblyName)](#M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Reflection-AssemblyName- 'Bb.ComponentModel.AddonsResolver.WhereAssemblyReference(System.Reflection.AssemblyName)')
+  - [With(repositories)](#M-Bb-ComponentModel-AddonsResolver-With-Bb-ComponentModel-Loaders-ExposedAssemblyRepositories- 'Bb.ComponentModel.AddonsResolver.With(Bb.ComponentModel.Loaders.ExposedAssemblyRepositories)')
   - [WithBaseType(baseTypes)](#M-Bb-ComponentModel-AddonsResolver-WithBaseType-System-Collections-Generic-IEnumerable{System-Type}- 'Bb.ComponentModel.AddonsResolver.WithBaseType(System.Collections.Generic.IEnumerable{System.Type})')
   - [WithBaseType(baseTypes)](#M-Bb-ComponentModel-AddonsResolver-WithBaseType-System-Type[]- 'Bb.ComponentModel.AddonsResolver.WithBaseType(System.Type[])')
   - [WithFile(fileFilter)](#M-Bb-ComponentModel-AddonsResolver-WithFile-System-Func{System-IO-FileInfo,System-Boolean}- 'Bb.ComponentModel.AddonsResolver.WithFile(System.Func{System.IO.FileInfo,System.Boolean})')
@@ -1054,9 +1059,7 @@
 - [EscapeInvalidIdentifiers](#T-ICSharpCode-Decompiler-CSharp-Transforms-EscapeInvalidIdentifiers 'ICSharpCode.Decompiler.CSharp.Transforms.EscapeInvalidIdentifiers')
 - [ExposedAssemblyRepository](#T-Bb-ComponentModel-Loaders-ExposedAssemblyRepository 'Bb.ComponentModel.Loaders.ExposedAssemblyRepository')
 - [ExposedAssemblyRepositoryByFolder](#T-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByFolder 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositoryByFolder')
-  - [FileFilter](#P-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByFolder-FileFilter 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositoryByFolder.FileFilter')
   - [Path](#P-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByFolder-Path 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositoryByFolder.Path')
-  - [Recursively](#P-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByFolder-Recursively 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositoryByFolder.Recursively')
 - [ExposedAssemblyRepositoryByName](#T-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByName 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositoryByName')
   - [AssemblyName](#P-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByName-AssemblyName 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositoryByName.AssemblyName')
 - [ExposedTypes](#T-Bb-ComponentModel-ExposedTypes 'Bb.ComponentModel.ExposedTypes')
@@ -4368,6 +4371,32 @@ Adds XML documentation for member definitions.
 
 Bb.ComponentModel
 
+<a name='M-Bb-ComponentModel-AddonsResolver-#ctor-System-String[]-'></a>
+### #ctor(paths) `constructor`
+
+##### Summary
+
+Initialize a new instance of [AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| paths | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | path to add for analyses |
+
+<a name='M-Bb-ComponentModel-AddonsResolver-#ctor-Bb-ComponentModel-AssemblyDirectoryResolver-'></a>
+### #ctor(paths) `constructor`
+
+##### Summary
+
+Create a new instance of [AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| paths | [Bb.ComponentModel.AssemblyDirectoryResolver](#T-Bb-ComponentModel-AssemblyDirectoryResolver 'Bb.ComponentModel.AssemblyDirectoryResolver') | path to add for analyses |
+
 <a name='P-Bb-ComponentModel-AddonsResolver-ExcludeAbstracts'></a>
 ### ExcludeAbstracts `property`
 
@@ -4403,12 +4432,36 @@ Filter on [FileInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF
 
 Define a filter for assemblies to use in the register
 
+<a name='P-Bb-ComponentModel-AddonsResolver-New'></a>
+### New `property`
+
+##### Summary
+
+Helper for creating a new instance of [AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')
+
 <a name='P-Bb-ComponentModel-AddonsResolver-TypeFilter'></a>
 ### TypeFilter `property`
 
 ##### Summary
 
 filter on the finals types selected
+
+<a name='M-Bb-ComponentModel-AddonsResolver-AddAssemblyName-System-String-'></a>
+### AddAssemblyName(assemblyName) `method`
+
+##### Summary
+
+
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assemblyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
 
 <a name='M-Bb-ComponentModel-AddonsResolver-ClearBaseType-System-Collections-Generic-IEnumerable{System-Type}-'></a>
 ### ClearBaseType(baseTypes) `method`
@@ -4509,7 +4562,7 @@ Add filter for exclude filenames
 | filenames | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') |  |
 
 <a name='M-Bb-ComponentModel-AddonsResolver-ExcludeGenericTypes-System-Boolean-'></a>
-### ExcludeGenericTypes(excludeAbstract) `method`
+### ExcludeGenericTypes(excludeGenerics) `method`
 
 ##### Summary
 
@@ -4523,7 +4576,7 @@ set excluding abstract types filter
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| excludeAbstract | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
+| excludeGenerics | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | if true, don"t append generic types |
 
 <a name='M-Bb-ComponentModel-AddonsResolver-FilterType-System-Func{Bb-ComponentModel-TypeMatched,System-Boolean}-'></a>
 ### FilterType(filter) `method`
@@ -4703,6 +4756,23 @@ filter on assembly name
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | assemblyName | [System.Reflection.AssemblyName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.AssemblyName 'System.Reflection.AssemblyName') |  |
+
+<a name='M-Bb-ComponentModel-AddonsResolver-With-Bb-ComponentModel-Loaders-ExposedAssemblyRepositories-'></a>
+### With(repositories) `method`
+
+##### Summary
+
+Add a list of repositories
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| repositories | [Bb.ComponentModel.Loaders.ExposedAssemblyRepositories](#T-Bb-ComponentModel-Loaders-ExposedAssemblyRepositories 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositories') |  |
 
 <a name='M-Bb-ComponentModel-AddonsResolver-WithBaseType-System-Collections-Generic-IEnumerable{System-Type}-'></a>
 ### WithBaseType(baseTypes) `method`
@@ -15804,26 +15874,12 @@ Bb.ComponentModel.Loaders
 
 Load assemblies from a folder
 
-<a name='P-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByFolder-FileFilter'></a>
-### FileFilter `property`
-
-##### Summary
-
-Filter for loading assemblies
-
 <a name='P-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByFolder-Path'></a>
 ### Path `property`
 
 ##### Summary
 
 Folder path for loading assemblies
-
-<a name='P-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByFolder-Recursively'></a>
-### Recursively `property`
-
-##### Summary
-
-Load assemblies recursively
 
 <a name='T-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByName'></a>
 ## ExposedAssemblyRepositoryByName `type`

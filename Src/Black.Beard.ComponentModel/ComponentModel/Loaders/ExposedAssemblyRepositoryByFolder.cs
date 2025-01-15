@@ -20,35 +20,6 @@ namespace Bb.ComponentModel.Loaders
         /// </summary>
         public string Path { get; set; }
 
-        /// <summary>
-        /// Load assemblies recursively
-        /// </summary>
-        public bool Recursively { get; set; }
-
-        /// <summary>
-        /// Filter for loading assemblies
-        /// </summary>
-        public string FileFilter { get; set; }
-
-
-        internal override void Load()
-        {
-
-            var p = new DirectoryInfo(Path);
-            
-            SearchOption optionSearch = Recursively 
-                ? SearchOption.AllDirectories 
-                : SearchOption.TopDirectoryOnly;
-
-            if (string.IsNullOrEmpty(FileFilter))
-                FileFilter = "*.dll";
-
-            FileInfo[] list = p.GetFiles(FileFilter, optionSearch);
-
-            foreach (var f in list)
-                AssemblyLoader.Instance.LoadAssembly(f);
-
-        }
 
     }
 
