@@ -57,13 +57,16 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public AddonsResolver With(ExposedAssemblyRepositories repositories)
         {
+            if (repositories != null)
+            {
 
-            foreach (var item in repositories.ByFolder)
-                AddDirectories(item.Path);
+                foreach (var item in repositories.ByFolder)
+                    AddDirectories(item.Path);
 
-            foreach (var item in repositories.ByName)
-                AddAssemblyName(item.AssemblyName);
+                foreach (var item in repositories.ByName)
+                    AddAssemblyName(item.AssemblyName);
 
+            }
             return this;
 
         }
