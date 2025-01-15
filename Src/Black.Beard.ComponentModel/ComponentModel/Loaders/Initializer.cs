@@ -2,6 +2,7 @@
 using Bb.ComponentModel.Factories;
 using Bb.Expressions;
 using System;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Reflection;
 
@@ -85,6 +86,17 @@ namespace Bb.ComponentModel.Loaders
 
             return initializer;
 
+        }
+
+        /// <summary>
+        /// Override the default service provider
+        /// </summary>
+        /// <param name="serviceProvider"></param>
+        /// <returns></returns>
+        public Initializer With(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = new LocalServiceProvider(serviceProvider);
+            return this;
         }
 
         /// <summary>
