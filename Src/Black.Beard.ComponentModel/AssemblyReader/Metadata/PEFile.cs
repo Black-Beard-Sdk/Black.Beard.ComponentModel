@@ -28,6 +28,7 @@ using System.Reflection.PortableExecutable;
 using ICSharpCode.Decompiler.TypeSystem;
 using ICSharpCode.Decompiler.TypeSystem.Implementation;
 using ICSharpCode.Decompiler.Util;
+using static System.Net.WebRequestMethods;
 
 namespace ICSharpCode.Decompiler.Metadata
 {
@@ -44,6 +45,20 @@ namespace ICSharpCode.Decompiler.Metadata
 	/// system from multiple PEFiles. This allows the caches to be shared across multiple
 	/// decompiled type systems.
 	/// </remarks>
+	/// <example>
+	/// 
+	/// Find all method of the libraey
+	/// <code lang="C#">
+	/// using (var peFile = new ICSharpCode.Decompiler.Metadata.PEFile(assemblyPath))
+    /// {
+    ///		var metadata = peFile.Metadata;
+    ///     foreach (var handle in metadata.MethodDefinitions)
+    ///     {
+    ///			var m = peFile.Module.GetDefinition((MethodDefinitionHandle)handle);
+	///		}
+	/// }
+	/// </code>
+	/// </example>
 	[DebuggerDisplay("{FileName}")]
 	public class PEFile : IDisposable, TypeSystem.IModuleReference
 	{

@@ -37,6 +37,7 @@
 		<Compile Remove="ComponentModel\MethodDiscoveryAssembly.cs" />
 		<Compile Remove="ComponentModel\ObjectCreator.cs" />
 		<Compile Remove="ComponentModel\WalkerFilter.cs" />
+		<Compile Remove="Diagnostics\ComponentModelMetricProvider.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

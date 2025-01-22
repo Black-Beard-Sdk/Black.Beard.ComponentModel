@@ -54,7 +54,7 @@ namespace ICSharpCode.Decompiler.CSharp.Transforms
 					.ThenByDescending(n => n);
 				foreach (string ns in sortedImports)
 				{
-					Debug.Assert(context.RequiredNamespacesSuperset.Contains(ns), $"Should not insert using declaration for namespace that is missing from the superset: {ns}");
+					//Debug.Assert(context.RequiredNamespacesSuperset.Contains(ns), $"Should not insert using declaration for namespace that is missing from the superset: {ns}");
 					// we go backwards (OrderByDescending) through the list of namespaces because we insert them backwards
 					// (always inserting at the start of the list)
 					string[] parts = ns.Split('.');

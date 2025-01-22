@@ -901,7 +901,8 @@ namespace ICSharpCode.Decompiler.CSharp
 
 		/// <summary>
 		/// Decompile the specified types and/or members.
-		/// </summary>
+		/// </summary>>	Black.Beard.ComponentModel.dll!Bb.Diagnostics.ActivityExtensions.FindActivitySourceCreations(string assemblyPath) Ligne 52	C#
+
 		public SyntaxTree Decompile(params EntityHandle[] definitions)
 		{
 			return Decompile((IEnumerable<EntityHandle>)definitions);

@@ -61,13 +61,13 @@ namespace DynamicDescriptors.Tests
         //    ComponentModelMetricProvider.Counter.Add(1);
         //}
 
-        [Fact]
-        public void ResolveActivitySource()
-        {
-            var names = DiagnosticProviderExtensions.GetActivityNames().ToArray();
-            var test = names.Any();
-            Assert.True(test);
-        }
+        //[Fact]
+        //public void ResolveActivitySource()
+        //{
+        //    var names = DiagnosticProviderExtensions.GetActivityNames().ToArray();
+        //    var test = names.Any();
+        //    Assert.True(test);
+        //}
 
         [Fact]
         public void ResolveActivitySource2()

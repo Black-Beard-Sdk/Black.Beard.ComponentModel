@@ -85,6 +85,7 @@
   - [TryGetValue(name,member)](#M-Bb-ComponentModel-Accessors-AccessorList-TryGetValue-System-String,Bb-ComponentModel-Accessors-AccessorItem@- 'Bb.ComponentModel.Accessors.AccessorList.TryGetValue(System.String,Bb.ComponentModel.Accessors.AccessorItem@)')
   - [Validate(instance)](#M-Bb-ComponentModel-Accessors-AccessorList-Validate-System-Object- 'Bb.ComponentModel.Accessors.AccessorList.Validate(System.Object)')
   - [ValidateMember(value,member,attributes)](#M-Bb-ComponentModel-Accessors-AccessorList-ValidateMember-System-Object,System-Reflection-MemberInfo,System-Collections-Generic-IEnumerable{System-ComponentModel-DataAnnotations-ValidationAttribute}- 'Bb.ComponentModel.Accessors.AccessorList.ValidateMember(System.Object,System.Reflection.MemberInfo,System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute})')
+- [ActivitySourceInstance](#T-Bb-Diagnostics-ActivitySourceInstance 'Bb.Diagnostics.ActivitySourceInstance')
 - [AddCheckedBlocks](#T-ICSharpCode-Decompiler-CSharp-Transforms-AddCheckedBlocks 'ICSharpCode.Decompiler.CSharp.Transforms.AddCheckedBlocks')
 - [AddXmlDocumentationTransform](#T-ICSharpCode-Decompiler-CSharp-Transforms-AddXmlDocumentationTransform 'ICSharpCode.Decompiler.CSharp.Transforms.AddXmlDocumentationTransform')
 - [AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')
@@ -284,6 +285,150 @@
   - [MemberType()](#M-ICSharpCode-Decompiler-CSharp-Syntax-AstType-MemberType-System-String,System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-CSharp-Syntax-AstType}- 'ICSharpCode.Decompiler.CSharp.Syntax.AstType.MemberType(System.String,System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.AstType})')
   - [ToTypeReference()](#M-ICSharpCode-Decompiler-CSharp-Syntax-AstType-ToTypeReference-ICSharpCode-Decompiler-TypeSystem-InterningProvider- 'ICSharpCode.Decompiler.CSharp.Syntax.AstType.ToTypeReference(ICSharpCode.Decompiler.TypeSystem.InterningProvider)')
   - [ToTypeReference()](#M-ICSharpCode-Decompiler-CSharp-Syntax-AstType-ToTypeReference-ICSharpCode-Decompiler-CSharp-Resolver-NameLookupMode,ICSharpCode-Decompiler-TypeSystem-InterningProvider- 'ICSharpCode.Decompiler.CSharp.Syntax.AstType.ToTypeReference(ICSharpCode.Decompiler.CSharp.Resolver.NameLookupMode,ICSharpCode.Decompiler.TypeSystem.InterningProvider)')
+- [AstVisitorBase](#T-Bb-Decompilers-AstVisitorBase 'Bb.Decompilers.AstVisitorBase')
+  - [CanBeConfusedWithObjectInitializer(expr)](#M-Bb-Decompilers-AstVisitorBase-CanBeConfusedWithObjectInitializer-ICSharpCode-Decompiler-CSharp-Syntax-Expression- 'Bb.Decompilers.AstVisitorBase.CanBeConfusedWithObjectInitializer(ICSharpCode.Decompiler.CSharp.Syntax.Expression)')
+  - [IsObjectOrCollectionInitializer(node)](#M-Bb-Decompilers-AstVisitorBase-IsObjectOrCollectionInitializer-ICSharpCode-Decompiler-CSharp-Syntax-AstNode- 'Bb.Decompilers.AstVisitorBase.IsObjectOrCollectionInitializer(ICSharpCode.Decompiler.CSharp.Syntax.AstNode)')
+  - [LambdaNeedsParenthesis(lambdaExpression)](#M-Bb-Decompilers-AstVisitorBase-LambdaNeedsParenthesis-ICSharpCode-Decompiler-CSharp-Syntax-LambdaExpression- 'Bb.Decompilers.AstVisitorBase.LambdaNeedsParenthesis(ICSharpCode.Decompiler.CSharp.Syntax.LambdaExpression)')
+  - [PrintInitializerElements(elements)](#M-Bb-Decompilers-AstVisitorBase-PrintInitializerElements-ICSharpCode-Decompiler-CSharp-Syntax-AstNodeCollection{ICSharpCode-Decompiler-CSharp-Syntax-Expression}- 'Bb.Decompilers.AstVisitorBase.PrintInitializerElements(ICSharpCode.Decompiler.CSharp.Syntax.AstNodeCollection{ICSharpCode.Decompiler.CSharp.Syntax.Expression})')
+  - [VisitAccessor(accessor)](#M-Bb-Decompilers-AstVisitorBase-VisitAccessor-ICSharpCode-Decompiler-CSharp-Syntax-Accessor- 'Bb.Decompilers.AstVisitorBase.VisitAccessor(ICSharpCode.Decompiler.CSharp.Syntax.Accessor)')
+  - [VisitAnonymousMethodExpression(anonymousMethodExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitAnonymousMethodExpression-ICSharpCode-Decompiler-CSharp-Syntax-AnonymousMethodExpression- 'Bb.Decompilers.AstVisitorBase.VisitAnonymousMethodExpression(ICSharpCode.Decompiler.CSharp.Syntax.AnonymousMethodExpression)')
+  - [VisitAnonymousTypeCreateExpression(anonymousTypeCreateExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitAnonymousTypeCreateExpression-ICSharpCode-Decompiler-CSharp-Syntax-AnonymousTypeCreateExpression- 'Bb.Decompilers.AstVisitorBase.VisitAnonymousTypeCreateExpression(ICSharpCode.Decompiler.CSharp.Syntax.AnonymousTypeCreateExpression)')
+  - [VisitArrayCreateExpression(arrayCreateExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitArrayCreateExpression-ICSharpCode-Decompiler-CSharp-Syntax-ArrayCreateExpression- 'Bb.Decompilers.AstVisitorBase.VisitArrayCreateExpression(ICSharpCode.Decompiler.CSharp.Syntax.ArrayCreateExpression)')
+  - [VisitArrayInitializerExpression(arrayInitializerExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitArrayInitializerExpression-ICSharpCode-Decompiler-CSharp-Syntax-ArrayInitializerExpression- 'Bb.Decompilers.AstVisitorBase.VisitArrayInitializerExpression(ICSharpCode.Decompiler.CSharp.Syntax.ArrayInitializerExpression)')
+  - [VisitArraySpecifier(arraySpecifier)](#M-Bb-Decompilers-AstVisitorBase-VisitArraySpecifier-ICSharpCode-Decompiler-CSharp-Syntax-ArraySpecifier- 'Bb.Decompilers.AstVisitorBase.VisitArraySpecifier(ICSharpCode.Decompiler.CSharp.Syntax.ArraySpecifier)')
+  - [VisitAsExpression(asExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitAsExpression-ICSharpCode-Decompiler-CSharp-Syntax-AsExpression- 'Bb.Decompilers.AstVisitorBase.VisitAsExpression(ICSharpCode.Decompiler.CSharp.Syntax.AsExpression)')
+  - [VisitAssignmentExpression(assignmentExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitAssignmentExpression-ICSharpCode-Decompiler-CSharp-Syntax-AssignmentExpression- 'Bb.Decompilers.AstVisitorBase.VisitAssignmentExpression(ICSharpCode.Decompiler.CSharp.Syntax.AssignmentExpression)')
+  - [VisitAttribute(attribute)](#M-Bb-Decompilers-AstVisitorBase-VisitAttribute-ICSharpCode-Decompiler-CSharp-Syntax-Attribute- 'Bb.Decompilers.AstVisitorBase.VisitAttribute(ICSharpCode.Decompiler.CSharp.Syntax.Attribute)')
+  - [VisitAttributeSection(attributeSection)](#M-Bb-Decompilers-AstVisitorBase-VisitAttributeSection-ICSharpCode-Decompiler-CSharp-Syntax-AttributeSection- 'Bb.Decompilers.AstVisitorBase.VisitAttributeSection(ICSharpCode.Decompiler.CSharp.Syntax.AttributeSection)')
+  - [VisitBaseReferenceExpression(baseReferenceExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitBaseReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-BaseReferenceExpression- 'Bb.Decompilers.AstVisitorBase.VisitBaseReferenceExpression(ICSharpCode.Decompiler.CSharp.Syntax.BaseReferenceExpression)')
+  - [VisitBinaryOperatorExpression(binaryOperatorExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitBinaryOperatorExpression-ICSharpCode-Decompiler-CSharp-Syntax-BinaryOperatorExpression- 'Bb.Decompilers.AstVisitorBase.VisitBinaryOperatorExpression(ICSharpCode.Decompiler.CSharp.Syntax.BinaryOperatorExpression)')
+  - [VisitBlockStatement(blockStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitBlockStatement-ICSharpCode-Decompiler-CSharp-Syntax-BlockStatement- 'Bb.Decompilers.AstVisitorBase.VisitBlockStatement(ICSharpCode.Decompiler.CSharp.Syntax.BlockStatement)')
+  - [VisitBreakStatement(breakStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitBreakStatement-ICSharpCode-Decompiler-CSharp-Syntax-BreakStatement- 'Bb.Decompilers.AstVisitorBase.VisitBreakStatement(ICSharpCode.Decompiler.CSharp.Syntax.BreakStatement)')
+  - [VisitCSharpTokenNode(cSharpTokenNode)](#M-Bb-Decompilers-AstVisitorBase-VisitCSharpTokenNode-ICSharpCode-Decompiler-CSharp-Syntax-CSharpTokenNode- 'Bb.Decompilers.AstVisitorBase.VisitCSharpTokenNode(ICSharpCode.Decompiler.CSharp.Syntax.CSharpTokenNode)')
+  - [VisitCaseLabel(caseLabel)](#M-Bb-Decompilers-AstVisitorBase-VisitCaseLabel-ICSharpCode-Decompiler-CSharp-Syntax-CaseLabel- 'Bb.Decompilers.AstVisitorBase.VisitCaseLabel(ICSharpCode.Decompiler.CSharp.Syntax.CaseLabel)')
+  - [VisitCastExpression(castExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitCastExpression-ICSharpCode-Decompiler-CSharp-Syntax-CastExpression- 'Bb.Decompilers.AstVisitorBase.VisitCastExpression(ICSharpCode.Decompiler.CSharp.Syntax.CastExpression)')
+  - [VisitCatchClause(catchClause)](#M-Bb-Decompilers-AstVisitorBase-VisitCatchClause-ICSharpCode-Decompiler-CSharp-Syntax-CatchClause- 'Bb.Decompilers.AstVisitorBase.VisitCatchClause(ICSharpCode.Decompiler.CSharp.Syntax.CatchClause)')
+  - [VisitCheckedExpression(checkedExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitCheckedExpression-ICSharpCode-Decompiler-CSharp-Syntax-CheckedExpression- 'Bb.Decompilers.AstVisitorBase.VisitCheckedExpression(ICSharpCode.Decompiler.CSharp.Syntax.CheckedExpression)')
+  - [VisitCheckedStatement(checkedStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitCheckedStatement-ICSharpCode-Decompiler-CSharp-Syntax-CheckedStatement- 'Bb.Decompilers.AstVisitorBase.VisitCheckedStatement(ICSharpCode.Decompiler.CSharp.Syntax.CheckedStatement)')
+  - [VisitComment(comment)](#M-Bb-Decompilers-AstVisitorBase-VisitComment-ICSharpCode-Decompiler-CSharp-Syntax-Comment- 'Bb.Decompilers.AstVisitorBase.VisitComment(ICSharpCode.Decompiler.CSharp.Syntax.Comment)')
+  - [VisitComposedType(composedType)](#M-Bb-Decompilers-AstVisitorBase-VisitComposedType-ICSharpCode-Decompiler-CSharp-Syntax-ComposedType- 'Bb.Decompilers.AstVisitorBase.VisitComposedType(ICSharpCode.Decompiler.CSharp.Syntax.ComposedType)')
+  - [VisitConditionalExpression(conditionalExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitConditionalExpression-ICSharpCode-Decompiler-CSharp-Syntax-ConditionalExpression- 'Bb.Decompilers.AstVisitorBase.VisitConditionalExpression(ICSharpCode.Decompiler.CSharp.Syntax.ConditionalExpression)')
+  - [VisitConstraint(constraint)](#M-Bb-Decompilers-AstVisitorBase-VisitConstraint-ICSharpCode-Decompiler-CSharp-Syntax-Constraint- 'Bb.Decompilers.AstVisitorBase.VisitConstraint(ICSharpCode.Decompiler.CSharp.Syntax.Constraint)')
+  - [VisitConstructorDeclaration(constructorDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitConstructorDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-ConstructorDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitConstructorDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.ConstructorDeclaration)')
+  - [VisitConstructorInitializer(constructorInitializer)](#M-Bb-Decompilers-AstVisitorBase-VisitConstructorInitializer-ICSharpCode-Decompiler-CSharp-Syntax-ConstructorInitializer- 'Bb.Decompilers.AstVisitorBase.VisitConstructorInitializer(ICSharpCode.Decompiler.CSharp.Syntax.ConstructorInitializer)')
+  - [VisitContinueStatement(continueStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitContinueStatement-ICSharpCode-Decompiler-CSharp-Syntax-ContinueStatement- 'Bb.Decompilers.AstVisitorBase.VisitContinueStatement(ICSharpCode.Decompiler.CSharp.Syntax.ContinueStatement)')
+  - [VisitCustomEventDeclaration(customEventDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitCustomEventDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-CustomEventDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitCustomEventDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.CustomEventDeclaration)')
+  - [VisitDeclarationExpression(declarationExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitDeclarationExpression-ICSharpCode-Decompiler-CSharp-Syntax-DeclarationExpression- 'Bb.Decompilers.AstVisitorBase.VisitDeclarationExpression(ICSharpCode.Decompiler.CSharp.Syntax.DeclarationExpression)')
+  - [VisitDefaultValueExpression(defaultValueExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitDefaultValueExpression-ICSharpCode-Decompiler-CSharp-Syntax-DefaultValueExpression- 'Bb.Decompilers.AstVisitorBase.VisitDefaultValueExpression(ICSharpCode.Decompiler.CSharp.Syntax.DefaultValueExpression)')
+  - [VisitDelegateDeclaration(delegateDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitDelegateDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-DelegateDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitDelegateDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.DelegateDeclaration)')
+  - [VisitDestructorDeclaration(destructorDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitDestructorDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-DestructorDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitDestructorDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.DestructorDeclaration)')
+  - [VisitDirectionExpression(directionExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitDirectionExpression-ICSharpCode-Decompiler-CSharp-Syntax-DirectionExpression- 'Bb.Decompilers.AstVisitorBase.VisitDirectionExpression(ICSharpCode.Decompiler.CSharp.Syntax.DirectionExpression)')
+  - [VisitDoWhileStatement(doWhileStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitDoWhileStatement-ICSharpCode-Decompiler-CSharp-Syntax-DoWhileStatement- 'Bb.Decompilers.AstVisitorBase.VisitDoWhileStatement(ICSharpCode.Decompiler.CSharp.Syntax.DoWhileStatement)')
+  - [VisitDocumentationReference(documentationReference)](#M-Bb-Decompilers-AstVisitorBase-VisitDocumentationReference-ICSharpCode-Decompiler-CSharp-Syntax-DocumentationReference- 'Bb.Decompilers.AstVisitorBase.VisitDocumentationReference(ICSharpCode.Decompiler.CSharp.Syntax.DocumentationReference)')
+  - [VisitEmptyStatement(emptyStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitEmptyStatement-ICSharpCode-Decompiler-CSharp-Syntax-EmptyStatement- 'Bb.Decompilers.AstVisitorBase.VisitEmptyStatement(ICSharpCode.Decompiler.CSharp.Syntax.EmptyStatement)')
+  - [VisitEnumMemberDeclaration(enumMemberDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitEnumMemberDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-EnumMemberDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitEnumMemberDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.EnumMemberDeclaration)')
+  - [VisitErrorNode(errorNode)](#M-Bb-Decompilers-AstVisitorBase-VisitErrorNode-ICSharpCode-Decompiler-CSharp-Syntax-AstNode- 'Bb.Decompilers.AstVisitorBase.VisitErrorNode(ICSharpCode.Decompiler.CSharp.Syntax.AstNode)')
+  - [VisitEventDeclaration(eventDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitEventDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-EventDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitEventDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.EventDeclaration)')
+  - [VisitExpressionStatement(expressionStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitExpressionStatement-ICSharpCode-Decompiler-CSharp-Syntax-ExpressionStatement- 'Bb.Decompilers.AstVisitorBase.VisitExpressionStatement(ICSharpCode.Decompiler.CSharp.Syntax.ExpressionStatement)')
+  - [VisitExternAliasDeclaration(externAliasDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitExternAliasDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-ExternAliasDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitExternAliasDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.ExternAliasDeclaration)')
+  - [VisitFieldDeclaration(fieldDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitFieldDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-FieldDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitFieldDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.FieldDeclaration)')
+  - [VisitFixedFieldDeclaration(fixedFieldDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitFixedFieldDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-FixedFieldDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitFixedFieldDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.FixedFieldDeclaration)')
+  - [VisitFixedStatement(fixedStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitFixedStatement-ICSharpCode-Decompiler-CSharp-Syntax-FixedStatement- 'Bb.Decompilers.AstVisitorBase.VisitFixedStatement(ICSharpCode.Decompiler.CSharp.Syntax.FixedStatement)')
+  - [VisitFixedVariableInitializer(fixedVariableInitializer)](#M-Bb-Decompilers-AstVisitorBase-VisitFixedVariableInitializer-ICSharpCode-Decompiler-CSharp-Syntax-FixedVariableInitializer- 'Bb.Decompilers.AstVisitorBase.VisitFixedVariableInitializer(ICSharpCode.Decompiler.CSharp.Syntax.FixedVariableInitializer)')
+  - [VisitForStatement(forStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitForStatement-ICSharpCode-Decompiler-CSharp-Syntax-ForStatement- 'Bb.Decompilers.AstVisitorBase.VisitForStatement(ICSharpCode.Decompiler.CSharp.Syntax.ForStatement)')
+  - [VisitForeachStatement(foreachStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitForeachStatement-ICSharpCode-Decompiler-CSharp-Syntax-ForeachStatement- 'Bb.Decompilers.AstVisitorBase.VisitForeachStatement(ICSharpCode.Decompiler.CSharp.Syntax.ForeachStatement)')
+  - [VisitFunctionPointerType(functionPointerType)](#M-Bb-Decompilers-AstVisitorBase-VisitFunctionPointerType-ICSharpCode-Decompiler-CSharp-Syntax-FunctionPointerType- 'Bb.Decompilers.AstVisitorBase.VisitFunctionPointerType(ICSharpCode.Decompiler.CSharp.Syntax.FunctionPointerType)')
+  - [VisitGotoCaseStatement(gotoCaseStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitGotoCaseStatement-ICSharpCode-Decompiler-CSharp-Syntax-GotoCaseStatement- 'Bb.Decompilers.AstVisitorBase.VisitGotoCaseStatement(ICSharpCode.Decompiler.CSharp.Syntax.GotoCaseStatement)')
+  - [VisitGotoDefaultStatement(gotoDefaultStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitGotoDefaultStatement-ICSharpCode-Decompiler-CSharp-Syntax-GotoDefaultStatement- 'Bb.Decompilers.AstVisitorBase.VisitGotoDefaultStatement(ICSharpCode.Decompiler.CSharp.Syntax.GotoDefaultStatement)')
+  - [VisitGotoStatement(gotoStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitGotoStatement-ICSharpCode-Decompiler-CSharp-Syntax-GotoStatement- 'Bb.Decompilers.AstVisitorBase.VisitGotoStatement(ICSharpCode.Decompiler.CSharp.Syntax.GotoStatement)')
+  - [VisitIdentifier(identifier)](#M-Bb-Decompilers-AstVisitorBase-VisitIdentifier-ICSharpCode-Decompiler-CSharp-Syntax-Identifier- 'Bb.Decompilers.AstVisitorBase.VisitIdentifier(ICSharpCode.Decompiler.CSharp.Syntax.Identifier)')
+  - [VisitIdentifierExpression(identifierExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitIdentifierExpression-ICSharpCode-Decompiler-CSharp-Syntax-IdentifierExpression- 'Bb.Decompilers.AstVisitorBase.VisitIdentifierExpression(ICSharpCode.Decompiler.CSharp.Syntax.IdentifierExpression)')
+  - [VisitIfElseStatement(ifElseStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitIfElseStatement-ICSharpCode-Decompiler-CSharp-Syntax-IfElseStatement- 'Bb.Decompilers.AstVisitorBase.VisitIfElseStatement(ICSharpCode.Decompiler.CSharp.Syntax.IfElseStatement)')
+  - [VisitIndexerDeclaration(indexerDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitIndexerDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-IndexerDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitIndexerDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.IndexerDeclaration)')
+  - [VisitIndexerExpression(indexerExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitIndexerExpression-ICSharpCode-Decompiler-CSharp-Syntax-IndexerExpression- 'Bb.Decompilers.AstVisitorBase.VisitIndexerExpression(ICSharpCode.Decompiler.CSharp.Syntax.IndexerExpression)')
+  - [VisitInterpolatedStringExpression(interpolatedStringExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitInterpolatedStringExpression-ICSharpCode-Decompiler-CSharp-Syntax-InterpolatedStringExpression- 'Bb.Decompilers.AstVisitorBase.VisitInterpolatedStringExpression(ICSharpCode.Decompiler.CSharp.Syntax.InterpolatedStringExpression)')
+  - [VisitInterpolatedStringText(interpolatedStringText)](#M-Bb-Decompilers-AstVisitorBase-VisitInterpolatedStringText-ICSharpCode-Decompiler-CSharp-Syntax-InterpolatedStringText- 'Bb.Decompilers.AstVisitorBase.VisitInterpolatedStringText(ICSharpCode.Decompiler.CSharp.Syntax.InterpolatedStringText)')
+  - [VisitInterpolation(interpolation)](#M-Bb-Decompilers-AstVisitorBase-VisitInterpolation-ICSharpCode-Decompiler-CSharp-Syntax-Interpolation- 'Bb.Decompilers.AstVisitorBase.VisitInterpolation(ICSharpCode.Decompiler.CSharp.Syntax.Interpolation)')
+  - [VisitInvocationExpression(invocationExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitInvocationExpression-ICSharpCode-Decompiler-CSharp-Syntax-InvocationExpression- 'Bb.Decompilers.AstVisitorBase.VisitInvocationExpression(ICSharpCode.Decompiler.CSharp.Syntax.InvocationExpression)')
+  - [VisitIsExpression(isExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitIsExpression-ICSharpCode-Decompiler-CSharp-Syntax-IsExpression- 'Bb.Decompilers.AstVisitorBase.VisitIsExpression(ICSharpCode.Decompiler.CSharp.Syntax.IsExpression)')
+  - [VisitLabelStatement(labelStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitLabelStatement-ICSharpCode-Decompiler-CSharp-Syntax-LabelStatement- 'Bb.Decompilers.AstVisitorBase.VisitLabelStatement(ICSharpCode.Decompiler.CSharp.Syntax.LabelStatement)')
+  - [VisitLambdaExpression(lambdaExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitLambdaExpression-ICSharpCode-Decompiler-CSharp-Syntax-LambdaExpression- 'Bb.Decompilers.AstVisitorBase.VisitLambdaExpression(ICSharpCode.Decompiler.CSharp.Syntax.LambdaExpression)')
+  - [VisitLocalFunctionDeclarationStatement(localFunctionDeclarationStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitLocalFunctionDeclarationStatement-ICSharpCode-Decompiler-CSharp-Syntax-LocalFunctionDeclarationStatement- 'Bb.Decompilers.AstVisitorBase.VisitLocalFunctionDeclarationStatement(ICSharpCode.Decompiler.CSharp.Syntax.LocalFunctionDeclarationStatement)')
+  - [VisitLockStatement(lockStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitLockStatement-ICSharpCode-Decompiler-CSharp-Syntax-LockStatement- 'Bb.Decompilers.AstVisitorBase.VisitLockStatement(ICSharpCode.Decompiler.CSharp.Syntax.LockStatement)')
+  - [VisitMemberReferenceExpression(memberReferenceExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitMemberReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-MemberReferenceExpression- 'Bb.Decompilers.AstVisitorBase.VisitMemberReferenceExpression(ICSharpCode.Decompiler.CSharp.Syntax.MemberReferenceExpression)')
+  - [VisitMemberType(memberType)](#M-Bb-Decompilers-AstVisitorBase-VisitMemberType-ICSharpCode-Decompiler-CSharp-Syntax-MemberType- 'Bb.Decompilers.AstVisitorBase.VisitMemberType(ICSharpCode.Decompiler.CSharp.Syntax.MemberType)')
+  - [VisitMethodDeclaration(methodDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitMethodDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-MethodDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitMethodDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.MethodDeclaration)')
+  - [VisitNamedArgumentExpression(namedArgumentExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitNamedArgumentExpression-ICSharpCode-Decompiler-CSharp-Syntax-NamedArgumentExpression- 'Bb.Decompilers.AstVisitorBase.VisitNamedArgumentExpression(ICSharpCode.Decompiler.CSharp.Syntax.NamedArgumentExpression)')
+  - [VisitNamedExpression(namedExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitNamedExpression-ICSharpCode-Decompiler-CSharp-Syntax-NamedExpression- 'Bb.Decompilers.AstVisitorBase.VisitNamedExpression(ICSharpCode.Decompiler.CSharp.Syntax.NamedExpression)')
+  - [VisitNamespaceDeclaration(namespaceDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitNamespaceDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-NamespaceDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitNamespaceDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.NamespaceDeclaration)')
+  - [VisitNullNode(nullNode)](#M-Bb-Decompilers-AstVisitorBase-VisitNullNode-ICSharpCode-Decompiler-CSharp-Syntax-AstNode- 'Bb.Decompilers.AstVisitorBase.VisitNullNode(ICSharpCode.Decompiler.CSharp.Syntax.AstNode)')
+  - [VisitNullReferenceExpression(nullReferenceExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitNullReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-NullReferenceExpression- 'Bb.Decompilers.AstVisitorBase.VisitNullReferenceExpression(ICSharpCode.Decompiler.CSharp.Syntax.NullReferenceExpression)')
+  - [VisitObjectCreateExpression(objectCreateExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitObjectCreateExpression-ICSharpCode-Decompiler-CSharp-Syntax-ObjectCreateExpression- 'Bb.Decompilers.AstVisitorBase.VisitObjectCreateExpression(ICSharpCode.Decompiler.CSharp.Syntax.ObjectCreateExpression)')
+  - [VisitOperatorDeclaration(operatorDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitOperatorDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-OperatorDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitOperatorDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.OperatorDeclaration)')
+  - [VisitOutVarDeclarationExpression(outVarDeclarationExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitOutVarDeclarationExpression-ICSharpCode-Decompiler-CSharp-Syntax-OutVarDeclarationExpression- 'Bb.Decompilers.AstVisitorBase.VisitOutVarDeclarationExpression(ICSharpCode.Decompiler.CSharp.Syntax.OutVarDeclarationExpression)')
+  - [VisitParameterDeclaration(parameterDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitParameterDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-ParameterDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitParameterDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.ParameterDeclaration)')
+  - [VisitParenthesizedExpression(parenthesizedExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitParenthesizedExpression-ICSharpCode-Decompiler-CSharp-Syntax-ParenthesizedExpression- 'Bb.Decompilers.AstVisitorBase.VisitParenthesizedExpression(ICSharpCode.Decompiler.CSharp.Syntax.ParenthesizedExpression)')
+  - [VisitParenthesizedVariableDesignation(parenthesizedVariableDesignation)](#M-Bb-Decompilers-AstVisitorBase-VisitParenthesizedVariableDesignation-ICSharpCode-Decompiler-CSharp-Syntax-ParenthesizedVariableDesignation- 'Bb.Decompilers.AstVisitorBase.VisitParenthesizedVariableDesignation(ICSharpCode.Decompiler.CSharp.Syntax.ParenthesizedVariableDesignation)')
+  - [VisitPatternPlaceholder(placeholder,pattern)](#M-Bb-Decompilers-AstVisitorBase-VisitPatternPlaceholder-ICSharpCode-Decompiler-CSharp-Syntax-AstNode,ICSharpCode-Decompiler-CSharp-Syntax-PatternMatching-Pattern- 'Bb.Decompilers.AstVisitorBase.VisitPatternPlaceholder(ICSharpCode.Decompiler.CSharp.Syntax.AstNode,ICSharpCode.Decompiler.CSharp.Syntax.PatternMatching.Pattern)')
+  - [VisitPointerReferenceExpression(pointerReferenceExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitPointerReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-PointerReferenceExpression- 'Bb.Decompilers.AstVisitorBase.VisitPointerReferenceExpression(ICSharpCode.Decompiler.CSharp.Syntax.PointerReferenceExpression)')
+  - [VisitPreProcessorDirective(preProcessorDirective)](#M-Bb-Decompilers-AstVisitorBase-VisitPreProcessorDirective-ICSharpCode-Decompiler-CSharp-Syntax-PreProcessorDirective- 'Bb.Decompilers.AstVisitorBase.VisitPreProcessorDirective(ICSharpCode.Decompiler.CSharp.Syntax.PreProcessorDirective)')
+  - [VisitPrimitiveExpression(primitiveExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitPrimitiveExpression-ICSharpCode-Decompiler-CSharp-Syntax-PrimitiveExpression- 'Bb.Decompilers.AstVisitorBase.VisitPrimitiveExpression(ICSharpCode.Decompiler.CSharp.Syntax.PrimitiveExpression)')
+  - [VisitPrimitiveType(primitiveType)](#M-Bb-Decompilers-AstVisitorBase-VisitPrimitiveType-ICSharpCode-Decompiler-CSharp-Syntax-PrimitiveType- 'Bb.Decompilers.AstVisitorBase.VisitPrimitiveType(ICSharpCode.Decompiler.CSharp.Syntax.PrimitiveType)')
+  - [VisitPropertyDeclaration(propertyDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitPropertyDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-PropertyDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitPropertyDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.PropertyDeclaration)')
+  - [VisitQueryContinuationClause(queryContinuationClause)](#M-Bb-Decompilers-AstVisitorBase-VisitQueryContinuationClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryContinuationClause- 'Bb.Decompilers.AstVisitorBase.VisitQueryContinuationClause(ICSharpCode.Decompiler.CSharp.Syntax.QueryContinuationClause)')
+  - [VisitQueryExpression(queryExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitQueryExpression-ICSharpCode-Decompiler-CSharp-Syntax-QueryExpression- 'Bb.Decompilers.AstVisitorBase.VisitQueryExpression(ICSharpCode.Decompiler.CSharp.Syntax.QueryExpression)')
+  - [VisitQueryFromClause(queryFromClause)](#M-Bb-Decompilers-AstVisitorBase-VisitQueryFromClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryFromClause- 'Bb.Decompilers.AstVisitorBase.VisitQueryFromClause(ICSharpCode.Decompiler.CSharp.Syntax.QueryFromClause)')
+  - [VisitQueryGroupClause(queryGroupClause)](#M-Bb-Decompilers-AstVisitorBase-VisitQueryGroupClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryGroupClause- 'Bb.Decompilers.AstVisitorBase.VisitQueryGroupClause(ICSharpCode.Decompiler.CSharp.Syntax.QueryGroupClause)')
+  - [VisitQueryJoinClause(queryJoinClause)](#M-Bb-Decompilers-AstVisitorBase-VisitQueryJoinClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryJoinClause- 'Bb.Decompilers.AstVisitorBase.VisitQueryJoinClause(ICSharpCode.Decompiler.CSharp.Syntax.QueryJoinClause)')
+  - [VisitQueryLetClause(queryLetClause)](#M-Bb-Decompilers-AstVisitorBase-VisitQueryLetClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryLetClause- 'Bb.Decompilers.AstVisitorBase.VisitQueryLetClause(ICSharpCode.Decompiler.CSharp.Syntax.QueryLetClause)')
+  - [VisitQueryOrderClause(queryOrderClause)](#M-Bb-Decompilers-AstVisitorBase-VisitQueryOrderClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryOrderClause- 'Bb.Decompilers.AstVisitorBase.VisitQueryOrderClause(ICSharpCode.Decompiler.CSharp.Syntax.QueryOrderClause)')
+  - [VisitQueryOrdering(queryOrdering)](#M-Bb-Decompilers-AstVisitorBase-VisitQueryOrdering-ICSharpCode-Decompiler-CSharp-Syntax-QueryOrdering- 'Bb.Decompilers.AstVisitorBase.VisitQueryOrdering(ICSharpCode.Decompiler.CSharp.Syntax.QueryOrdering)')
+  - [VisitQuerySelectClause(querySelectClause)](#M-Bb-Decompilers-AstVisitorBase-VisitQuerySelectClause-ICSharpCode-Decompiler-CSharp-Syntax-QuerySelectClause- 'Bb.Decompilers.AstVisitorBase.VisitQuerySelectClause(ICSharpCode.Decompiler.CSharp.Syntax.QuerySelectClause)')
+  - [VisitQueryWhereClause(queryWhereClause)](#M-Bb-Decompilers-AstVisitorBase-VisitQueryWhereClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryWhereClause- 'Bb.Decompilers.AstVisitorBase.VisitQueryWhereClause(ICSharpCode.Decompiler.CSharp.Syntax.QueryWhereClause)')
+  - [VisitReturnStatement(returnStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitReturnStatement-ICSharpCode-Decompiler-CSharp-Syntax-ReturnStatement- 'Bb.Decompilers.AstVisitorBase.VisitReturnStatement(ICSharpCode.Decompiler.CSharp.Syntax.ReturnStatement)')
+  - [VisitSimpleType(simpleType)](#M-Bb-Decompilers-AstVisitorBase-VisitSimpleType-ICSharpCode-Decompiler-CSharp-Syntax-SimpleType- 'Bb.Decompilers.AstVisitorBase.VisitSimpleType(ICSharpCode.Decompiler.CSharp.Syntax.SimpleType)')
+  - [VisitSingleVariableDesignation(singleVariableDesignation)](#M-Bb-Decompilers-AstVisitorBase-VisitSingleVariableDesignation-ICSharpCode-Decompiler-CSharp-Syntax-SingleVariableDesignation- 'Bb.Decompilers.AstVisitorBase.VisitSingleVariableDesignation(ICSharpCode.Decompiler.CSharp.Syntax.SingleVariableDesignation)')
+  - [VisitSizeOfExpression(sizeOfExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitSizeOfExpression-ICSharpCode-Decompiler-CSharp-Syntax-SizeOfExpression- 'Bb.Decompilers.AstVisitorBase.VisitSizeOfExpression(ICSharpCode.Decompiler.CSharp.Syntax.SizeOfExpression)')
+  - [VisitStackAllocExpression(stackAllocExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitStackAllocExpression-ICSharpCode-Decompiler-CSharp-Syntax-StackAllocExpression- 'Bb.Decompilers.AstVisitorBase.VisitStackAllocExpression(ICSharpCode.Decompiler.CSharp.Syntax.StackAllocExpression)')
+  - [VisitSwitchExpression(switchExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitSwitchExpression-ICSharpCode-Decompiler-CSharp-Syntax-SwitchExpression- 'Bb.Decompilers.AstVisitorBase.VisitSwitchExpression(ICSharpCode.Decompiler.CSharp.Syntax.SwitchExpression)')
+  - [VisitSwitchExpressionSection(switchExpressionSection)](#M-Bb-Decompilers-AstVisitorBase-VisitSwitchExpressionSection-ICSharpCode-Decompiler-CSharp-Syntax-SwitchExpressionSection- 'Bb.Decompilers.AstVisitorBase.VisitSwitchExpressionSection(ICSharpCode.Decompiler.CSharp.Syntax.SwitchExpressionSection)')
+  - [VisitSwitchSection(switchSection)](#M-Bb-Decompilers-AstVisitorBase-VisitSwitchSection-ICSharpCode-Decompiler-CSharp-Syntax-SwitchSection- 'Bb.Decompilers.AstVisitorBase.VisitSwitchSection(ICSharpCode.Decompiler.CSharp.Syntax.SwitchSection)')
+  - [VisitSwitchStatement(switchStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitSwitchStatement-ICSharpCode-Decompiler-CSharp-Syntax-SwitchStatement- 'Bb.Decompilers.AstVisitorBase.VisitSwitchStatement(ICSharpCode.Decompiler.CSharp.Syntax.SwitchStatement)')
+  - [VisitSyntaxTree(syntaxTree)](#M-Bb-Decompilers-AstVisitorBase-VisitSyntaxTree-ICSharpCode-Decompiler-CSharp-Syntax-SyntaxTree- 'Bb.Decompilers.AstVisitorBase.VisitSyntaxTree(ICSharpCode.Decompiler.CSharp.Syntax.SyntaxTree)')
+  - [VisitThisReferenceExpression(thisReferenceExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitThisReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-ThisReferenceExpression- 'Bb.Decompilers.AstVisitorBase.VisitThisReferenceExpression(ICSharpCode.Decompiler.CSharp.Syntax.ThisReferenceExpression)')
+  - [VisitThrowExpression(throwExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitThrowExpression-ICSharpCode-Decompiler-CSharp-Syntax-ThrowExpression- 'Bb.Decompilers.AstVisitorBase.VisitThrowExpression(ICSharpCode.Decompiler.CSharp.Syntax.ThrowExpression)')
+  - [VisitThrowStatement(throwStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitThrowStatement-ICSharpCode-Decompiler-CSharp-Syntax-ThrowStatement- 'Bb.Decompilers.AstVisitorBase.VisitThrowStatement(ICSharpCode.Decompiler.CSharp.Syntax.ThrowStatement)')
+  - [VisitTryCatchStatement(tryCatchStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitTryCatchStatement-ICSharpCode-Decompiler-CSharp-Syntax-TryCatchStatement- 'Bb.Decompilers.AstVisitorBase.VisitTryCatchStatement(ICSharpCode.Decompiler.CSharp.Syntax.TryCatchStatement)')
+  - [VisitTupleExpression(tupleExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitTupleExpression-ICSharpCode-Decompiler-CSharp-Syntax-TupleExpression- 'Bb.Decompilers.AstVisitorBase.VisitTupleExpression(ICSharpCode.Decompiler.CSharp.Syntax.TupleExpression)')
+  - [VisitTupleType(tupleType)](#M-Bb-Decompilers-AstVisitorBase-VisitTupleType-ICSharpCode-Decompiler-CSharp-Syntax-TupleAstType- 'Bb.Decompilers.AstVisitorBase.VisitTupleType(ICSharpCode.Decompiler.CSharp.Syntax.TupleAstType)')
+  - [VisitTupleTypeElement(tupleTypeElement)](#M-Bb-Decompilers-AstVisitorBase-VisitTupleTypeElement-ICSharpCode-Decompiler-CSharp-Syntax-TupleTypeElement- 'Bb.Decompilers.AstVisitorBase.VisitTupleTypeElement(ICSharpCode.Decompiler.CSharp.Syntax.TupleTypeElement)')
+  - [VisitTypeDeclaration(typeDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitTypeDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-TypeDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitTypeDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.TypeDeclaration)')
+  - [VisitTypeOfExpression(typeOfExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitTypeOfExpression-ICSharpCode-Decompiler-CSharp-Syntax-TypeOfExpression- 'Bb.Decompilers.AstVisitorBase.VisitTypeOfExpression(ICSharpCode.Decompiler.CSharp.Syntax.TypeOfExpression)')
+  - [VisitTypeParameterDeclaration(typeParameterDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitTypeParameterDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-TypeParameterDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitTypeParameterDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.TypeParameterDeclaration)')
+  - [VisitTypeReferenceExpression(typeReferenceExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitTypeReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-TypeReferenceExpression- 'Bb.Decompilers.AstVisitorBase.VisitTypeReferenceExpression(ICSharpCode.Decompiler.CSharp.Syntax.TypeReferenceExpression)')
+  - [VisitUnaryOperatorExpression(unaryOperatorExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitUnaryOperatorExpression-ICSharpCode-Decompiler-CSharp-Syntax-UnaryOperatorExpression- 'Bb.Decompilers.AstVisitorBase.VisitUnaryOperatorExpression(ICSharpCode.Decompiler.CSharp.Syntax.UnaryOperatorExpression)')
+  - [VisitUncheckedExpression(uncheckedExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitUncheckedExpression-ICSharpCode-Decompiler-CSharp-Syntax-UncheckedExpression- 'Bb.Decompilers.AstVisitorBase.VisitUncheckedExpression(ICSharpCode.Decompiler.CSharp.Syntax.UncheckedExpression)')
+  - [VisitUncheckedStatement(uncheckedStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitUncheckedStatement-ICSharpCode-Decompiler-CSharp-Syntax-UncheckedStatement- 'Bb.Decompilers.AstVisitorBase.VisitUncheckedStatement(ICSharpCode.Decompiler.CSharp.Syntax.UncheckedStatement)')
+  - [VisitUndocumentedExpression(undocumentedExpression)](#M-Bb-Decompilers-AstVisitorBase-VisitUndocumentedExpression-ICSharpCode-Decompiler-CSharp-Syntax-UndocumentedExpression- 'Bb.Decompilers.AstVisitorBase.VisitUndocumentedExpression(ICSharpCode.Decompiler.CSharp.Syntax.UndocumentedExpression)')
+  - [VisitUnsafeStatement(unsafeStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitUnsafeStatement-ICSharpCode-Decompiler-CSharp-Syntax-UnsafeStatement- 'Bb.Decompilers.AstVisitorBase.VisitUnsafeStatement(ICSharpCode.Decompiler.CSharp.Syntax.UnsafeStatement)')
+  - [VisitUsingAliasDeclaration(usingAliasDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitUsingAliasDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-UsingAliasDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitUsingAliasDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.UsingAliasDeclaration)')
+  - [VisitUsingDeclaration(usingDeclaration)](#M-Bb-Decompilers-AstVisitorBase-VisitUsingDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-UsingDeclaration- 'Bb.Decompilers.AstVisitorBase.VisitUsingDeclaration(ICSharpCode.Decompiler.CSharp.Syntax.UsingDeclaration)')
+  - [VisitUsingStatement(usingStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitUsingStatement-ICSharpCode-Decompiler-CSharp-Syntax-UsingStatement- 'Bb.Decompilers.AstVisitorBase.VisitUsingStatement(ICSharpCode.Decompiler.CSharp.Syntax.UsingStatement)')
+  - [VisitVariableDeclarationStatement(variableDeclarationStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitVariableDeclarationStatement-ICSharpCode-Decompiler-CSharp-Syntax-VariableDeclarationStatement- 'Bb.Decompilers.AstVisitorBase.VisitVariableDeclarationStatement(ICSharpCode.Decompiler.CSharp.Syntax.VariableDeclarationStatement)')
+  - [VisitVariableInitializer(variableInitializer)](#M-Bb-Decompilers-AstVisitorBase-VisitVariableInitializer-ICSharpCode-Decompiler-CSharp-Syntax-VariableInitializer- 'Bb.Decompilers.AstVisitorBase.VisitVariableInitializer(ICSharpCode.Decompiler.CSharp.Syntax.VariableInitializer)')
+  - [VisitWhileStatement(whileStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitWhileStatement-ICSharpCode-Decompiler-CSharp-Syntax-WhileStatement- 'Bb.Decompilers.AstVisitorBase.VisitWhileStatement(ICSharpCode.Decompiler.CSharp.Syntax.WhileStatement)')
+  - [VisitYieldBreakStatement(yieldBreakStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitYieldBreakStatement-ICSharpCode-Decompiler-CSharp-Syntax-YieldBreakStatement- 'Bb.Decompilers.AstVisitorBase.VisitYieldBreakStatement(ICSharpCode.Decompiler.CSharp.Syntax.YieldBreakStatement)')
+  - [VisitYieldReturnStatement(yieldReturnStatement)](#M-Bb-Decompilers-AstVisitorBase-VisitYieldReturnStatement-ICSharpCode-Decompiler-CSharp-Syntax-YieldReturnStatement- 'Bb.Decompilers.AstVisitorBase.VisitYieldReturnStatement(ICSharpCode.Decompiler.CSharp.Syntax.YieldReturnStatement)')
+  - [WriteAttributes(attributes)](#M-Bb-Decompilers-AstVisitorBase-WriteAttributes-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-CSharp-Syntax-AttributeSection}- 'Bb.Decompilers.AstVisitorBase.WriteAttributes(System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.AttributeSection})')
+  - [WriteBlock(blockStatement)](#M-Bb-Decompilers-AstVisitorBase-WriteBlock-ICSharpCode-Decompiler-CSharp-Syntax-BlockStatement- 'Bb.Decompilers.AstVisitorBase.WriteBlock(ICSharpCode.Decompiler.CSharp.Syntax.BlockStatement)')
+  - [WriteCommaSeparatedList(list)](#M-Bb-Decompilers-AstVisitorBase-WriteCommaSeparatedList-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-CSharp-Syntax-AstNode}- 'Bb.Decompilers.AstVisitorBase.WriteCommaSeparatedList(System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.AstNode})')
+  - [WriteEmbeddedStatement(embeddedStatement,nlp)](#M-Bb-Decompilers-AstVisitorBase-WriteEmbeddedStatement-ICSharpCode-Decompiler-CSharp-Syntax-Statement,ICSharpCode-Decompiler-CSharp-OutputVisitor-NewLinePlacement- 'Bb.Decompilers.AstVisitorBase.WriteEmbeddedStatement(ICSharpCode.Decompiler.CSharp.Syntax.Statement,ICSharpCode.Decompiler.CSharp.OutputVisitor.NewLinePlacement)')
+  - [WriteIdentifier(identifier)](#M-Bb-Decompilers-AstVisitorBase-WriteIdentifier-System-String- 'Bb.Decompilers.AstVisitorBase.WriteIdentifier(System.String)')
+  - [WriteMethodBody(body)](#M-Bb-Decompilers-AstVisitorBase-WriteMethodBody-ICSharpCode-Decompiler-CSharp-Syntax-BlockStatement- 'Bb.Decompilers.AstVisitorBase.WriteMethodBody(ICSharpCode.Decompiler.CSharp.Syntax.BlockStatement)')
+  - [WriteModifiers(modifierTokens)](#M-Bb-Decompilers-AstVisitorBase-WriteModifiers-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-CSharp-Syntax-CSharpModifierToken}- 'Bb.Decompilers.AstVisitorBase.WriteModifiers(System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.CSharpModifierToken})')
+  - [WritePrivateImplementationType(privateImplementationType)](#M-Bb-Decompilers-AstVisitorBase-WritePrivateImplementationType-ICSharpCode-Decompiler-CSharp-Syntax-AstType- 'Bb.Decompilers.AstVisitorBase.WritePrivateImplementationType(ICSharpCode.Decompiler.CSharp.Syntax.AstType)')
+  - [WriteTypeArguments(typeArguments)](#M-Bb-Decompilers-AstVisitorBase-WriteTypeArguments-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-CSharp-Syntax-AstType}- 'Bb.Decompilers.AstVisitorBase.WriteTypeArguments(System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.AstType})')
+  - [WriteTypeParameters(typeParameters)](#M-Bb-Decompilers-AstVisitorBase-WriteTypeParameters-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-CSharp-Syntax-TypeParameterDeclaration}- 'Bb.Decompilers.AstVisitorBase.WriteTypeParameters(System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.TypeParameterDeclaration})')
 - [AsyncAwaitDecompiler](#T-ICSharpCode-Decompiler-IL-ControlFlow-AsyncAwaitDecompiler 'ICSharpCode.Decompiler.IL.ControlFlow.AsyncAwaitDecompiler')
   - [AnalyzeDisposeAsync()](#M-ICSharpCode-Decompiler-IL-ControlFlow-AsyncAwaitDecompiler-AnalyzeDisposeAsync 'ICSharpCode.Decompiler.IL.ControlFlow.AsyncAwaitDecompiler.AnalyzeDisposeAsync')
   - [AnalyzeMoveNext()](#M-ICSharpCode-Decompiler-IL-ControlFlow-AsyncAwaitDecompiler-AnalyzeMoveNext 'ICSharpCode.Decompiler.IL.ControlFlow.AsyncAwaitDecompiler.AnalyzeMoveNext')
@@ -995,10 +1140,7 @@
   - [SplitBlocksAtWritesToPinnedLocals()](#M-ICSharpCode-Decompiler-IL-ControlFlow-DetectPinnedRegions-SplitBlocksAtWritesToPinnedLocals-ICSharpCode-Decompiler-IL-BlockContainer- 'ICSharpCode.Decompiler.IL.ControlFlow.DetectPinnedRegions.SplitBlocksAtWritesToPinnedLocals(ICSharpCode.Decompiler.IL.BlockContainer)')
   - [UseExistingVariableForPinnedRegion()](#M-ICSharpCode-Decompiler-IL-ControlFlow-DetectPinnedRegions-UseExistingVariableForPinnedRegion-ICSharpCode-Decompiler-IL-PinnedRegion- 'ICSharpCode.Decompiler.IL.ControlFlow.DetectPinnedRegions.UseExistingVariableForPinnedRegion(ICSharpCode.Decompiler.IL.PinnedRegion)')
 - [DiagnosticProviderExtensions](#T-Bb-Diagnostics-DiagnosticProviderExtensions 'Bb.Diagnostics.DiagnosticProviderExtensions')
-  - [GetActivityNames(name)](#M-Bb-Diagnostics-DiagnosticProviderExtensions-GetActivityNames-System-String- 'Bb.Diagnostics.DiagnosticProviderExtensions.GetActivityNames(System.String)')
-  - [GetMeterName(type)](#M-Bb-Diagnostics-DiagnosticProviderExtensions-GetMeterName-System-Type- 'Bb.Diagnostics.DiagnosticProviderExtensions.GetMeterName(System.Type)')
-  - [GetMeterNames(name)](#M-Bb-Diagnostics-DiagnosticProviderExtensions-GetMeterNames-System-String- 'Bb.Diagnostics.DiagnosticProviderExtensions.GetMeterNames(System.String)')
-  - [GetTypes(name,type)](#M-Bb-Diagnostics-DiagnosticProviderExtensions-GetTypes-System-String,System-Type- 'Bb.Diagnostics.DiagnosticProviderExtensions.GetTypes(System.String,System.Type)')
+  - [GetTagCollection(tags)](#M-Bb-Diagnostics-DiagnosticProviderExtensions-GetTagCollection-System-ValueTuple{System-String,System-String}[]- 'Bb.Diagnostics.DiagnosticProviderExtensions.GetTagCollection(System.ValueTuple{System.String,System.String}[])')
 - [DirectionExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-DirectionExpression 'ICSharpCode.Decompiler.CSharp.Syntax.DirectionExpression')
 - [DoWhileStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-DoWhileStatement 'ICSharpCode.Decompiler.CSharp.Syntax.DoWhileStatement')
 - [DocumentationReference](#T-ICSharpCode-Decompiler-CSharp-Syntax-DocumentationReference 'ICSharpCode.Decompiler.CSharp.Syntax.DocumentationReference')
@@ -1753,6 +1895,7 @@
   - [Initialize(args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.String[])')
   - [Initialize(args,init)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.String[])')
   - [Map(instance)](#M-Bb-ComponentModel-Loaders-Initializer-Map-Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}- 'Bb.ComponentModel.Loaders.Initializer.Map(Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer})')
+  - [With(serviceProvider)](#M-Bb-ComponentModel-Loaders-Initializer-With-System-IServiceProvider- 'Bb.ComponentModel.Loaders.Initializer.With(System.IServiceProvider)')
 - [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1')
   - [#ctor()](#M-Bb-ComponentModel-Loaders-InjectionLoader`1-#ctor-System-String,System-IServiceProvider- 'Bb.ComponentModel.Loaders.InjectionLoader`1.#ctor(System.String,System.IServiceProvider)')
   - [Executed](#P-Bb-ComponentModel-Loaders-InjectionLoader`1-Executed 'Bb.ComponentModel.Loaders.InjectionLoader`1.Executed')
@@ -1793,6 +1936,20 @@
   - [MayUnwrapNull](#F-ICSharpCode-Decompiler-IL-InstructionFlags-MayUnwrapNull 'ICSharpCode.Decompiler.IL.InstructionFlags.MayUnwrapNull')
   - [MayWriteLocals](#F-ICSharpCode-Decompiler-IL-InstructionFlags-MayWriteLocals 'ICSharpCode.Decompiler.IL.InstructionFlags.MayWriteLocals')
   - [SideEffect](#F-ICSharpCode-Decompiler-IL-InstructionFlags-SideEffect 'ICSharpCode.Decompiler.IL.InstructionFlags.SideEffect')
+- [InterceptorAstVisitorExtension](#T-Bb-Decompilers-InterceptorAstVisitorExtension 'Bb.Decompilers.InterceptorAstVisitorExtension')
+  - [AsIdentifier(self)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-AsIdentifier-ICSharpCode-Decompiler-CSharp-Syntax-Expression- 'Bb.Decompilers.InterceptorAstVisitorExtension.AsIdentifier(ICSharpCode.Decompiler.CSharp.Syntax.Expression)')
+  - [Match(self,type)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-CSharp-Syntax-ObjectCreateExpression,System-Type- 'Bb.Decompilers.InterceptorAstVisitorExtension.Match(ICSharpCode.Decompiler.CSharp.Syntax.ObjectCreateExpression,System.Type)')
+  - [Match(self,type)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-TypeSystem-ITypeDefinition,System-Type- 'Bb.Decompilers.InterceptorAstVisitorExtension.Match(ICSharpCode.Decompiler.TypeSystem.ITypeDefinition,System.Type)')
+  - [Match(self,type)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-TypeSystem-IType,System-Type- 'Bb.Decompilers.InterceptorAstVisitorExtension.Match(ICSharpCode.Decompiler.TypeSystem.IType,System.Type)')
+  - [OnAccessor(self,action)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-OnAccessor-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-Accessor}- 'Bb.Decompilers.InterceptorAstVisitorExtension.OnAccessor(Bb.Decompilers.InterceptorAstVisitor,System.Action{ICSharpCode.Decompiler.CSharp.Syntax.Accessor})')
+  - [OnAnonymousMethodExpression(self,action)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-OnAnonymousMethodExpression-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-AnonymousMethodExpression}- 'Bb.Decompilers.InterceptorAstVisitorExtension.OnAnonymousMethodExpression(Bb.Decompilers.InterceptorAstVisitor,System.Action{ICSharpCode.Decompiler.CSharp.Syntax.AnonymousMethodExpression})')
+  - [OnAnonymousTypeCreateExpression(self,action)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-OnAnonymousTypeCreateExpression-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-AnonymousTypeCreateExpression}- 'Bb.Decompilers.InterceptorAstVisitorExtension.OnAnonymousTypeCreateExpression(Bb.Decompilers.InterceptorAstVisitor,System.Action{ICSharpCode.Decompiler.CSharp.Syntax.AnonymousTypeCreateExpression})')
+  - [OnArrayCreateExpression(self,action)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-OnArrayCreateExpression-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-ArrayCreateExpression}- 'Bb.Decompilers.InterceptorAstVisitorExtension.OnArrayCreateExpression(Bb.Decompilers.InterceptorAstVisitor,System.Action{ICSharpCode.Decompiler.CSharp.Syntax.ArrayCreateExpression})')
+  - [OnArrayInitializerExpression(self,action)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-OnArrayInitializerExpression-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-ArrayInitializerExpression}- 'Bb.Decompilers.InterceptorAstVisitorExtension.OnArrayInitializerExpression(Bb.Decompilers.InterceptorAstVisitor,System.Action{ICSharpCode.Decompiler.CSharp.Syntax.ArrayInitializerExpression})')
+  - [Reference(self,type)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-Reference-ICSharpCode-Decompiler-Metadata-PEFile,System-Type- 'Bb.Decompilers.InterceptorAstVisitorExtension.Reference(ICSharpCode.Decompiler.Metadata.PEFile,System.Type)')
+  - [ResolveSemantic(self)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-ResolveSemantic-ICSharpCode-Decompiler-CSharp-Syntax-IAnnotatable- 'Bb.Decompilers.InterceptorAstVisitorExtension.ResolveSemantic(ICSharpCode.Decompiler.CSharp.Syntax.IAnnotatable)')
+  - [ResolveSemantic\`\`1(self)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-ResolveSemantic``1-ICSharpCode-Decompiler-CSharp-Syntax-IAnnotatable- 'Bb.Decompilers.InterceptorAstVisitorExtension.ResolveSemantic``1(ICSharpCode.Decompiler.CSharp.Syntax.IAnnotatable)')
+  - [Search(self,action)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-Search-ICSharpCode-Decompiler-CSharp-Syntax-SyntaxTree,System-Action{Bb-Decompilers-InterceptorAstVisitor}- 'Bb.Decompilers.InterceptorAstVisitorExtension.Search(ICSharpCode.Decompiler.CSharp.Syntax.SyntaxTree,System.Action{Bb.Decompilers.InterceptorAstVisitor})')
 - [InterningProvider](#T-ICSharpCode-Decompiler-TypeSystem-InterningProvider 'ICSharpCode.Decompiler.TypeSystem.InterningProvider')
   - [Intern()](#M-ICSharpCode-Decompiler-TypeSystem-InterningProvider-Intern-ICSharpCode-Decompiler-TypeSystem-ISupportsInterning- 'ICSharpCode.Decompiler.TypeSystem.InterningProvider.Intern(ICSharpCode.Decompiler.TypeSystem.ISupportsInterning)')
   - [Intern()](#M-ICSharpCode-Decompiler-TypeSystem-InterningProvider-Intern-System-String- 'ICSharpCode.Decompiler.TypeSystem.InterningProvider.Intern(System.String)')
@@ -2983,7 +3140,7 @@
   - [AddAssemblyname(assemblyName)](#M-Bb-ComponentModel-TypeDiscovery-AddAssemblyname-System-Reflection-AssemblyName,System-Boolean- 'Bb.ComponentModel.TypeDiscovery.AddAssemblyname(System.Reflection.AssemblyName,System.Boolean)')
   - [AddAssemblyname(assemblyName)](#M-Bb-ComponentModel-TypeDiscovery-AddAssemblyname-System-String,System-Boolean- 'Bb.ComponentModel.TypeDiscovery.AddAssemblyname(System.String,System.Boolean)')
   - [AddDirectories(configuration)](#M-Bb-ComponentModel-TypeDiscovery-AddDirectories-System-IO-DirectoryInfo[]- 'Bb.ComponentModel.TypeDiscovery.AddDirectories(System.IO.DirectoryInfo[])')
-  - [Collect(assemblies)](#M-Bb-ComponentModel-TypeDiscovery-Collect-System-Func{System-Type,System-Boolean},System-Reflection-Assembly[]- 'Bb.ComponentModel.TypeDiscovery.Collect(System.Func{System.Type,System.Boolean},System.Reflection.Assembly[])')
+  - [Collect(typeFilter,assemblies)](#M-Bb-ComponentModel-TypeDiscovery-Collect-System-Func{System-Type,System-Boolean},System-Reflection-Assembly[]- 'Bb.ComponentModel.TypeDiscovery.Collect(System.Func{System.Type,System.Boolean},System.Reflection.Assembly[])')
   - [CreateFromWithTypes\`\`1(type,types)](#M-Bb-ComponentModel-TypeDiscovery-CreateFromWithTypes``1-System-Type,System-Type[]- 'Bb.ComponentModel.TypeDiscovery.CreateFromWithTypes``1(System.Type,System.Type[])')
   - [CreateFrom\`\`1(type,args)](#M-Bb-ComponentModel-TypeDiscovery-CreateFrom``1-System-Type,System-Object[]- 'Bb.ComponentModel.TypeDiscovery.CreateFrom``1(System.Type,System.Object[])')
   - [CreateWithTypes\`\`1(args)](#M-Bb-ComponentModel-TypeDiscovery-CreateWithTypes``1-System-Type[]- 'Bb.ComponentModel.TypeDiscovery.CreateWithTypes``1(System.Type[])')
@@ -2991,7 +3148,8 @@
   - [EnsureAllAssembliesAreLoaded(acceptAllVersion)](#M-Bb-ComponentModel-TypeDiscovery-EnsureAllAssembliesAreLoaded-System-Boolean- 'Bb.ComponentModel.TypeDiscovery.EnsureAllAssembliesAreLoaded(System.Boolean)')
   - [GetAllAssemblies()](#M-Bb-ComponentModel-TypeDiscovery-GetAllAssemblies 'Bb.ComponentModel.TypeDiscovery.GetAllAssemblies')
   - [GetAssemblies(namespaces)](#M-Bb-ComponentModel-TypeDiscovery-GetAssemblies-System-Collections-Generic-IEnumerable{System-String}- 'Bb.ComponentModel.TypeDiscovery.GetAssemblies(System.Collections.Generic.IEnumerable{System.String})')
-  - [GetAssembly(name,AcceptAllVersion)](#M-Bb-ComponentModel-TypeDiscovery-GetAssembly-System-Reflection-AssemblyName,System-Boolean- 'Bb.ComponentModel.TypeDiscovery.GetAssembly(System.Reflection.AssemblyName,System.Boolean)')
+  - [GetAssembly(name,acceptAllVersion)](#M-Bb-ComponentModel-TypeDiscovery-GetAssembly-System-String,System-Boolean- 'Bb.ComponentModel.TypeDiscovery.GetAssembly(System.String,System.Boolean)')
+  - [GetAssembly(name,acceptAllVersion)](#M-Bb-ComponentModel-TypeDiscovery-GetAssembly-System-Reflection-AssemblyName,System-Boolean- 'Bb.ComponentModel.TypeDiscovery.GetAssembly(System.Reflection.AssemblyName,System.Boolean)')
   - [GetDirectoryPathFromAssemblies()](#M-Bb-ComponentModel-TypeDiscovery-GetDirectoryPathFromAssemblies 'Bb.ComponentModel.TypeDiscovery.GetDirectoryPathFromAssemblies')
   - [GetExposedTypes(context)](#M-Bb-ComponentModel-TypeDiscovery-GetExposedTypes-System-String- 'Bb.ComponentModel.TypeDiscovery.GetExposedTypes(System.String)')
   - [GetExposedTypes(context,typeExposedFilter)](#M-Bb-ComponentModel-TypeDiscovery-GetExposedTypes-System-String,System-Func{System-Type,System-Boolean}- 'Bb.ComponentModel.TypeDiscovery.GetExposedTypes(System.String,System.Func{System.Type,System.Boolean})')
@@ -3002,7 +3160,7 @@
   - [GetStaticTypes(typeFilter)](#M-Bb-ComponentModel-TypeDiscovery-GetStaticTypes-System-Func{System-Type,System-Boolean}- 'Bb.ComponentModel.TypeDiscovery.GetStaticTypes(System.Func{System.Type,System.Boolean})')
   - [GetTypes(typeFilter)](#M-Bb-ComponentModel-TypeDiscovery-GetTypes-System-Func{System-Type,System-Boolean}- 'Bb.ComponentModel.TypeDiscovery.GetTypes(System.Func{System.Type,System.Boolean})')
   - [GetTypes(assemblyFilter,typeFilter)](#M-Bb-ComponentModel-TypeDiscovery-GetTypes-System-Func{System-Reflection-Assembly,System-Boolean},System-Func{System-Type,System-Boolean}- 'Bb.ComponentModel.TypeDiscovery.GetTypes(System.Func{System.Reflection.Assembly,System.Boolean},System.Func{System.Type,System.Boolean})')
-  - [GetTypes(ass)](#M-Bb-ComponentModel-TypeDiscovery-GetTypes-System-Reflection-Assembly,System-Func{System-Type,System-Boolean}- 'Bb.ComponentModel.TypeDiscovery.GetTypes(System.Reflection.Assembly,System.Func{System.Type,System.Boolean})')
+  - [GetTypes(ass,typeFilter)](#M-Bb-ComponentModel-TypeDiscovery-GetTypes-System-Reflection-Assembly,System-Func{System-Type,System-Boolean}- 'Bb.ComponentModel.TypeDiscovery.GetTypes(System.Reflection.Assembly,System.Func{System.Type,System.Boolean})')
   - [GetTypesAssignableFrom(typeFilter)](#M-Bb-ComponentModel-TypeDiscovery-GetTypesAssignableFrom-System-Type- 'Bb.ComponentModel.TypeDiscovery.GetTypesAssignableFrom(System.Type)')
   - [GetTypesWithAttributes(typeFilter)](#M-Bb-ComponentModel-TypeDiscovery-GetTypesWithAttributes-System-Type,System-Type- 'Bb.ComponentModel.TypeDiscovery.GetTypesWithAttributes(System.Type,System.Type)')
   - [GetTypesWithAttributes(attributeTypeFilter)](#M-Bb-ComponentModel-TypeDiscovery-GetTypesWithAttributes-System-Type- 'Bb.ComponentModel.TypeDiscovery.GetTypesWithAttributes(System.Type)')
@@ -4341,6 +4499,17 @@ Validates the specified dob.
 | value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The value to validate. |
 | member | [System.Reflection.MemberInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MemberInfo 'System.Reflection.MemberInfo') | The member. |
 | attributes | [System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationAttribute}') | The attributes. |
+
+<a name='T-Bb-Diagnostics-ActivitySourceInstance'></a>
+## ActivitySourceInstance `type`
+
+##### Namespace
+
+Bb.Diagnostics
+
+##### Summary
+
+Temporary structure to store the activity source.
 
 <a name='T-ICSharpCode-Decompiler-CSharp-Transforms-AddCheckedBlocks'></a>
 ## AddCheckedBlocks `type`
@@ -6865,6 +7034,1886 @@ The resulting type reference will read the context information from the
 For resolving type parameters, the CurrentTypeDefinition/CurrentMember is used.
 For resolving simple names, the current namespace and usings from the CurrentUsingScope
 (on CSharpTypeResolveContext only) is used.
+
+<a name='T-Bb-Decompilers-AstVisitorBase'></a>
+## AstVisitorBase `type`
+
+##### Namespace
+
+Bb.Decompilers
+
+##### Summary
+
+Base visitor for parsing C# syntax trees.
+
+<a name='M-Bb-Decompilers-AstVisitorBase-CanBeConfusedWithObjectInitializer-ICSharpCode-Decompiler-CSharp-Syntax-Expression-'></a>
+### CanBeConfusedWithObjectInitializer(expr) `method`
+
+##### Summary
+
+return true if the expression can be confused with an object initializer.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| expr | [ICSharpCode.Decompiler.CSharp.Syntax.Expression](#T-ICSharpCode-Decompiler-CSharp-Syntax-Expression 'ICSharpCode.Decompiler.CSharp.Syntax.Expression') |  |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-IsObjectOrCollectionInitializer-ICSharpCode-Decompiler-CSharp-Syntax-AstNode-'></a>
+### IsObjectOrCollectionInitializer(node) `method`
+
+##### Summary
+
+return true if the node is an object or collection initializer.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| node | [ICSharpCode.Decompiler.CSharp.Syntax.AstNode](#T-ICSharpCode-Decompiler-CSharp-Syntax-AstNode 'ICSharpCode.Decompiler.CSharp.Syntax.AstNode') |  |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-LambdaNeedsParenthesis-ICSharpCode-Decompiler-CSharp-Syntax-LambdaExpression-'></a>
+### LambdaNeedsParenthesis(lambdaExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| lambdaExpression | [ICSharpCode.Decompiler.CSharp.Syntax.LambdaExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-LambdaExpression 'ICSharpCode.Decompiler.CSharp.Syntax.LambdaExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-PrintInitializerElements-ICSharpCode-Decompiler-CSharp-Syntax-AstNodeCollection{ICSharpCode-Decompiler-CSharp-Syntax-Expression}-'></a>
+### PrintInitializerElements(elements) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| elements | [ICSharpCode.Decompiler.CSharp.Syntax.AstNodeCollection{ICSharpCode.Decompiler.CSharp.Syntax.Expression}](#T-ICSharpCode-Decompiler-CSharp-Syntax-AstNodeCollection{ICSharpCode-Decompiler-CSharp-Syntax-Expression} 'ICSharpCode.Decompiler.CSharp.Syntax.AstNodeCollection{ICSharpCode.Decompiler.CSharp.Syntax.Expression}') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitAccessor-ICSharpCode-Decompiler-CSharp-Syntax-Accessor-'></a>
+### VisitAccessor(accessor) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| accessor | [ICSharpCode.Decompiler.CSharp.Syntax.Accessor](#T-ICSharpCode-Decompiler-CSharp-Syntax-Accessor 'ICSharpCode.Decompiler.CSharp.Syntax.Accessor') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitAnonymousMethodExpression-ICSharpCode-Decompiler-CSharp-Syntax-AnonymousMethodExpression-'></a>
+### VisitAnonymousMethodExpression(anonymousMethodExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| anonymousMethodExpression | [ICSharpCode.Decompiler.CSharp.Syntax.AnonymousMethodExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-AnonymousMethodExpression 'ICSharpCode.Decompiler.CSharp.Syntax.AnonymousMethodExpression') |  |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitAnonymousTypeCreateExpression-ICSharpCode-Decompiler-CSharp-Syntax-AnonymousTypeCreateExpression-'></a>
+### VisitAnonymousTypeCreateExpression(anonymousTypeCreateExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| anonymousTypeCreateExpression | [ICSharpCode.Decompiler.CSharp.Syntax.AnonymousTypeCreateExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-AnonymousTypeCreateExpression 'ICSharpCode.Decompiler.CSharp.Syntax.AnonymousTypeCreateExpression') |  |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitArrayCreateExpression-ICSharpCode-Decompiler-CSharp-Syntax-ArrayCreateExpression-'></a>
+### VisitArrayCreateExpression(arrayCreateExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| arrayCreateExpression | [ICSharpCode.Decompiler.CSharp.Syntax.ArrayCreateExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-ArrayCreateExpression 'ICSharpCode.Decompiler.CSharp.Syntax.ArrayCreateExpression') |  |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitArrayInitializerExpression-ICSharpCode-Decompiler-CSharp-Syntax-ArrayInitializerExpression-'></a>
+### VisitArrayInitializerExpression(arrayInitializerExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| arrayInitializerExpression | [ICSharpCode.Decompiler.CSharp.Syntax.ArrayInitializerExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-ArrayInitializerExpression 'ICSharpCode.Decompiler.CSharp.Syntax.ArrayInitializerExpression') |  |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitArraySpecifier-ICSharpCode-Decompiler-CSharp-Syntax-ArraySpecifier-'></a>
+### VisitArraySpecifier(arraySpecifier) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| arraySpecifier | [ICSharpCode.Decompiler.CSharp.Syntax.ArraySpecifier](#T-ICSharpCode-Decompiler-CSharp-Syntax-ArraySpecifier 'ICSharpCode.Decompiler.CSharp.Syntax.ArraySpecifier') |  |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitAsExpression-ICSharpCode-Decompiler-CSharp-Syntax-AsExpression-'></a>
+### VisitAsExpression(asExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| asExpression | [ICSharpCode.Decompiler.CSharp.Syntax.AsExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-AsExpression 'ICSharpCode.Decompiler.CSharp.Syntax.AsExpression') |  |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitAssignmentExpression-ICSharpCode-Decompiler-CSharp-Syntax-AssignmentExpression-'></a>
+### VisitAssignmentExpression(assignmentExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assignmentExpression | [ICSharpCode.Decompiler.CSharp.Syntax.AssignmentExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-AssignmentExpression 'ICSharpCode.Decompiler.CSharp.Syntax.AssignmentExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitAttribute-ICSharpCode-Decompiler-CSharp-Syntax-Attribute-'></a>
+### VisitAttribute(attribute) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| attribute | [ICSharpCode.Decompiler.CSharp.Syntax.Attribute](#T-ICSharpCode-Decompiler-CSharp-Syntax-Attribute 'ICSharpCode.Decompiler.CSharp.Syntax.Attribute') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitAttributeSection-ICSharpCode-Decompiler-CSharp-Syntax-AttributeSection-'></a>
+### VisitAttributeSection(attributeSection) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| attributeSection | [ICSharpCode.Decompiler.CSharp.Syntax.AttributeSection](#T-ICSharpCode-Decompiler-CSharp-Syntax-AttributeSection 'ICSharpCode.Decompiler.CSharp.Syntax.AttributeSection') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitBaseReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-BaseReferenceExpression-'></a>
+### VisitBaseReferenceExpression(baseReferenceExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| baseReferenceExpression | [ICSharpCode.Decompiler.CSharp.Syntax.BaseReferenceExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-BaseReferenceExpression 'ICSharpCode.Decompiler.CSharp.Syntax.BaseReferenceExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitBinaryOperatorExpression-ICSharpCode-Decompiler-CSharp-Syntax-BinaryOperatorExpression-'></a>
+### VisitBinaryOperatorExpression(binaryOperatorExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| binaryOperatorExpression | [ICSharpCode.Decompiler.CSharp.Syntax.BinaryOperatorExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-BinaryOperatorExpression 'ICSharpCode.Decompiler.CSharp.Syntax.BinaryOperatorExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitBlockStatement-ICSharpCode-Decompiler-CSharp-Syntax-BlockStatement-'></a>
+### VisitBlockStatement(blockStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| blockStatement | [ICSharpCode.Decompiler.CSharp.Syntax.BlockStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-BlockStatement 'ICSharpCode.Decompiler.CSharp.Syntax.BlockStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitBreakStatement-ICSharpCode-Decompiler-CSharp-Syntax-BreakStatement-'></a>
+### VisitBreakStatement(breakStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| breakStatement | [ICSharpCode.Decompiler.CSharp.Syntax.BreakStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-BreakStatement 'ICSharpCode.Decompiler.CSharp.Syntax.BreakStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitCSharpTokenNode-ICSharpCode-Decompiler-CSharp-Syntax-CSharpTokenNode-'></a>
+### VisitCSharpTokenNode(cSharpTokenNode) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| cSharpTokenNode | [ICSharpCode.Decompiler.CSharp.Syntax.CSharpTokenNode](#T-ICSharpCode-Decompiler-CSharp-Syntax-CSharpTokenNode 'ICSharpCode.Decompiler.CSharp.Syntax.CSharpTokenNode') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitCaseLabel-ICSharpCode-Decompiler-CSharp-Syntax-CaseLabel-'></a>
+### VisitCaseLabel(caseLabel) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| caseLabel | [ICSharpCode.Decompiler.CSharp.Syntax.CaseLabel](#T-ICSharpCode-Decompiler-CSharp-Syntax-CaseLabel 'ICSharpCode.Decompiler.CSharp.Syntax.CaseLabel') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitCastExpression-ICSharpCode-Decompiler-CSharp-Syntax-CastExpression-'></a>
+### VisitCastExpression(castExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| castExpression | [ICSharpCode.Decompiler.CSharp.Syntax.CastExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-CastExpression 'ICSharpCode.Decompiler.CSharp.Syntax.CastExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitCatchClause-ICSharpCode-Decompiler-CSharp-Syntax-CatchClause-'></a>
+### VisitCatchClause(catchClause) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| catchClause | [ICSharpCode.Decompiler.CSharp.Syntax.CatchClause](#T-ICSharpCode-Decompiler-CSharp-Syntax-CatchClause 'ICSharpCode.Decompiler.CSharp.Syntax.CatchClause') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitCheckedExpression-ICSharpCode-Decompiler-CSharp-Syntax-CheckedExpression-'></a>
+### VisitCheckedExpression(checkedExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| checkedExpression | [ICSharpCode.Decompiler.CSharp.Syntax.CheckedExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-CheckedExpression 'ICSharpCode.Decompiler.CSharp.Syntax.CheckedExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitCheckedStatement-ICSharpCode-Decompiler-CSharp-Syntax-CheckedStatement-'></a>
+### VisitCheckedStatement(checkedStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| checkedStatement | [ICSharpCode.Decompiler.CSharp.Syntax.CheckedStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-CheckedStatement 'ICSharpCode.Decompiler.CSharp.Syntax.CheckedStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitComment-ICSharpCode-Decompiler-CSharp-Syntax-Comment-'></a>
+### VisitComment(comment) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| comment | [ICSharpCode.Decompiler.CSharp.Syntax.Comment](#T-ICSharpCode-Decompiler-CSharp-Syntax-Comment 'ICSharpCode.Decompiler.CSharp.Syntax.Comment') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitComposedType-ICSharpCode-Decompiler-CSharp-Syntax-ComposedType-'></a>
+### VisitComposedType(composedType) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| composedType | [ICSharpCode.Decompiler.CSharp.Syntax.ComposedType](#T-ICSharpCode-Decompiler-CSharp-Syntax-ComposedType 'ICSharpCode.Decompiler.CSharp.Syntax.ComposedType') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitConditionalExpression-ICSharpCode-Decompiler-CSharp-Syntax-ConditionalExpression-'></a>
+### VisitConditionalExpression(conditionalExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| conditionalExpression | [ICSharpCode.Decompiler.CSharp.Syntax.ConditionalExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-ConditionalExpression 'ICSharpCode.Decompiler.CSharp.Syntax.ConditionalExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitConstraint-ICSharpCode-Decompiler-CSharp-Syntax-Constraint-'></a>
+### VisitConstraint(constraint) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| constraint | [ICSharpCode.Decompiler.CSharp.Syntax.Constraint](#T-ICSharpCode-Decompiler-CSharp-Syntax-Constraint 'ICSharpCode.Decompiler.CSharp.Syntax.Constraint') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitConstructorDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-ConstructorDeclaration-'></a>
+### VisitConstructorDeclaration(constructorDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| constructorDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.ConstructorDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-ConstructorDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.ConstructorDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitConstructorInitializer-ICSharpCode-Decompiler-CSharp-Syntax-ConstructorInitializer-'></a>
+### VisitConstructorInitializer(constructorInitializer) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| constructorInitializer | [ICSharpCode.Decompiler.CSharp.Syntax.ConstructorInitializer](#T-ICSharpCode-Decompiler-CSharp-Syntax-ConstructorInitializer 'ICSharpCode.Decompiler.CSharp.Syntax.ConstructorInitializer') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitContinueStatement-ICSharpCode-Decompiler-CSharp-Syntax-ContinueStatement-'></a>
+### VisitContinueStatement(continueStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| continueStatement | [ICSharpCode.Decompiler.CSharp.Syntax.ContinueStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-ContinueStatement 'ICSharpCode.Decompiler.CSharp.Syntax.ContinueStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitCustomEventDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-CustomEventDeclaration-'></a>
+### VisitCustomEventDeclaration(customEventDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| customEventDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.CustomEventDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-CustomEventDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.CustomEventDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitDeclarationExpression-ICSharpCode-Decompiler-CSharp-Syntax-DeclarationExpression-'></a>
+### VisitDeclarationExpression(declarationExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| declarationExpression | [ICSharpCode.Decompiler.CSharp.Syntax.DeclarationExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-DeclarationExpression 'ICSharpCode.Decompiler.CSharp.Syntax.DeclarationExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitDefaultValueExpression-ICSharpCode-Decompiler-CSharp-Syntax-DefaultValueExpression-'></a>
+### VisitDefaultValueExpression(defaultValueExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| defaultValueExpression | [ICSharpCode.Decompiler.CSharp.Syntax.DefaultValueExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-DefaultValueExpression 'ICSharpCode.Decompiler.CSharp.Syntax.DefaultValueExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitDelegateDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-DelegateDeclaration-'></a>
+### VisitDelegateDeclaration(delegateDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| delegateDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.DelegateDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-DelegateDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.DelegateDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitDestructorDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-DestructorDeclaration-'></a>
+### VisitDestructorDeclaration(destructorDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| destructorDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.DestructorDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-DestructorDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.DestructorDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitDirectionExpression-ICSharpCode-Decompiler-CSharp-Syntax-DirectionExpression-'></a>
+### VisitDirectionExpression(directionExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| directionExpression | [ICSharpCode.Decompiler.CSharp.Syntax.DirectionExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-DirectionExpression 'ICSharpCode.Decompiler.CSharp.Syntax.DirectionExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitDoWhileStatement-ICSharpCode-Decompiler-CSharp-Syntax-DoWhileStatement-'></a>
+### VisitDoWhileStatement(doWhileStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| doWhileStatement | [ICSharpCode.Decompiler.CSharp.Syntax.DoWhileStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-DoWhileStatement 'ICSharpCode.Decompiler.CSharp.Syntax.DoWhileStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitDocumentationReference-ICSharpCode-Decompiler-CSharp-Syntax-DocumentationReference-'></a>
+### VisitDocumentationReference(documentationReference) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| documentationReference | [ICSharpCode.Decompiler.CSharp.Syntax.DocumentationReference](#T-ICSharpCode-Decompiler-CSharp-Syntax-DocumentationReference 'ICSharpCode.Decompiler.CSharp.Syntax.DocumentationReference') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitEmptyStatement-ICSharpCode-Decompiler-CSharp-Syntax-EmptyStatement-'></a>
+### VisitEmptyStatement(emptyStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| emptyStatement | [ICSharpCode.Decompiler.CSharp.Syntax.EmptyStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-EmptyStatement 'ICSharpCode.Decompiler.CSharp.Syntax.EmptyStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitEnumMemberDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-EnumMemberDeclaration-'></a>
+### VisitEnumMemberDeclaration(enumMemberDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| enumMemberDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.EnumMemberDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-EnumMemberDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.EnumMemberDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitErrorNode-ICSharpCode-Decompiler-CSharp-Syntax-AstNode-'></a>
+### VisitErrorNode(errorNode) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| errorNode | [ICSharpCode.Decompiler.CSharp.Syntax.AstNode](#T-ICSharpCode-Decompiler-CSharp-Syntax-AstNode 'ICSharpCode.Decompiler.CSharp.Syntax.AstNode') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitEventDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-EventDeclaration-'></a>
+### VisitEventDeclaration(eventDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| eventDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.EventDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-EventDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.EventDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitExpressionStatement-ICSharpCode-Decompiler-CSharp-Syntax-ExpressionStatement-'></a>
+### VisitExpressionStatement(expressionStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| expressionStatement | [ICSharpCode.Decompiler.CSharp.Syntax.ExpressionStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-ExpressionStatement 'ICSharpCode.Decompiler.CSharp.Syntax.ExpressionStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitExternAliasDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-ExternAliasDeclaration-'></a>
+### VisitExternAliasDeclaration(externAliasDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| externAliasDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.ExternAliasDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-ExternAliasDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.ExternAliasDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitFieldDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-FieldDeclaration-'></a>
+### VisitFieldDeclaration(fieldDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| fieldDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.FieldDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-FieldDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.FieldDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitFixedFieldDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-FixedFieldDeclaration-'></a>
+### VisitFixedFieldDeclaration(fixedFieldDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| fixedFieldDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.FixedFieldDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-FixedFieldDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.FixedFieldDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitFixedStatement-ICSharpCode-Decompiler-CSharp-Syntax-FixedStatement-'></a>
+### VisitFixedStatement(fixedStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| fixedStatement | [ICSharpCode.Decompiler.CSharp.Syntax.FixedStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-FixedStatement 'ICSharpCode.Decompiler.CSharp.Syntax.FixedStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitFixedVariableInitializer-ICSharpCode-Decompiler-CSharp-Syntax-FixedVariableInitializer-'></a>
+### VisitFixedVariableInitializer(fixedVariableInitializer) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| fixedVariableInitializer | [ICSharpCode.Decompiler.CSharp.Syntax.FixedVariableInitializer](#T-ICSharpCode-Decompiler-CSharp-Syntax-FixedVariableInitializer 'ICSharpCode.Decompiler.CSharp.Syntax.FixedVariableInitializer') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitForStatement-ICSharpCode-Decompiler-CSharp-Syntax-ForStatement-'></a>
+### VisitForStatement(forStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| forStatement | [ICSharpCode.Decompiler.CSharp.Syntax.ForStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-ForStatement 'ICSharpCode.Decompiler.CSharp.Syntax.ForStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitForeachStatement-ICSharpCode-Decompiler-CSharp-Syntax-ForeachStatement-'></a>
+### VisitForeachStatement(foreachStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| foreachStatement | [ICSharpCode.Decompiler.CSharp.Syntax.ForeachStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-ForeachStatement 'ICSharpCode.Decompiler.CSharp.Syntax.ForeachStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitFunctionPointerType-ICSharpCode-Decompiler-CSharp-Syntax-FunctionPointerType-'></a>
+### VisitFunctionPointerType(functionPointerType) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| functionPointerType | [ICSharpCode.Decompiler.CSharp.Syntax.FunctionPointerType](#T-ICSharpCode-Decompiler-CSharp-Syntax-FunctionPointerType 'ICSharpCode.Decompiler.CSharp.Syntax.FunctionPointerType') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitGotoCaseStatement-ICSharpCode-Decompiler-CSharp-Syntax-GotoCaseStatement-'></a>
+### VisitGotoCaseStatement(gotoCaseStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| gotoCaseStatement | [ICSharpCode.Decompiler.CSharp.Syntax.GotoCaseStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-GotoCaseStatement 'ICSharpCode.Decompiler.CSharp.Syntax.GotoCaseStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitGotoDefaultStatement-ICSharpCode-Decompiler-CSharp-Syntax-GotoDefaultStatement-'></a>
+### VisitGotoDefaultStatement(gotoDefaultStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| gotoDefaultStatement | [ICSharpCode.Decompiler.CSharp.Syntax.GotoDefaultStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-GotoDefaultStatement 'ICSharpCode.Decompiler.CSharp.Syntax.GotoDefaultStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitGotoStatement-ICSharpCode-Decompiler-CSharp-Syntax-GotoStatement-'></a>
+### VisitGotoStatement(gotoStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| gotoStatement | [ICSharpCode.Decompiler.CSharp.Syntax.GotoStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-GotoStatement 'ICSharpCode.Decompiler.CSharp.Syntax.GotoStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitIdentifier-ICSharpCode-Decompiler-CSharp-Syntax-Identifier-'></a>
+### VisitIdentifier(identifier) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| identifier | [ICSharpCode.Decompiler.CSharp.Syntax.Identifier](#T-ICSharpCode-Decompiler-CSharp-Syntax-Identifier 'ICSharpCode.Decompiler.CSharp.Syntax.Identifier') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitIdentifierExpression-ICSharpCode-Decompiler-CSharp-Syntax-IdentifierExpression-'></a>
+### VisitIdentifierExpression(identifierExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| identifierExpression | [ICSharpCode.Decompiler.CSharp.Syntax.IdentifierExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-IdentifierExpression 'ICSharpCode.Decompiler.CSharp.Syntax.IdentifierExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitIfElseStatement-ICSharpCode-Decompiler-CSharp-Syntax-IfElseStatement-'></a>
+### VisitIfElseStatement(ifElseStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| ifElseStatement | [ICSharpCode.Decompiler.CSharp.Syntax.IfElseStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-IfElseStatement 'ICSharpCode.Decompiler.CSharp.Syntax.IfElseStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitIndexerDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-IndexerDeclaration-'></a>
+### VisitIndexerDeclaration(indexerDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| indexerDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.IndexerDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-IndexerDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.IndexerDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitIndexerExpression-ICSharpCode-Decompiler-CSharp-Syntax-IndexerExpression-'></a>
+### VisitIndexerExpression(indexerExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| indexerExpression | [ICSharpCode.Decompiler.CSharp.Syntax.IndexerExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-IndexerExpression 'ICSharpCode.Decompiler.CSharp.Syntax.IndexerExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitInterpolatedStringExpression-ICSharpCode-Decompiler-CSharp-Syntax-InterpolatedStringExpression-'></a>
+### VisitInterpolatedStringExpression(interpolatedStringExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| interpolatedStringExpression | [ICSharpCode.Decompiler.CSharp.Syntax.InterpolatedStringExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-InterpolatedStringExpression 'ICSharpCode.Decompiler.CSharp.Syntax.InterpolatedStringExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitInterpolatedStringText-ICSharpCode-Decompiler-CSharp-Syntax-InterpolatedStringText-'></a>
+### VisitInterpolatedStringText(interpolatedStringText) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| interpolatedStringText | [ICSharpCode.Decompiler.CSharp.Syntax.InterpolatedStringText](#T-ICSharpCode-Decompiler-CSharp-Syntax-InterpolatedStringText 'ICSharpCode.Decompiler.CSharp.Syntax.InterpolatedStringText') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitInterpolation-ICSharpCode-Decompiler-CSharp-Syntax-Interpolation-'></a>
+### VisitInterpolation(interpolation) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| interpolation | [ICSharpCode.Decompiler.CSharp.Syntax.Interpolation](#T-ICSharpCode-Decompiler-CSharp-Syntax-Interpolation 'ICSharpCode.Decompiler.CSharp.Syntax.Interpolation') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitInvocationExpression-ICSharpCode-Decompiler-CSharp-Syntax-InvocationExpression-'></a>
+### VisitInvocationExpression(invocationExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| invocationExpression | [ICSharpCode.Decompiler.CSharp.Syntax.InvocationExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-InvocationExpression 'ICSharpCode.Decompiler.CSharp.Syntax.InvocationExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitIsExpression-ICSharpCode-Decompiler-CSharp-Syntax-IsExpression-'></a>
+### VisitIsExpression(isExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| isExpression | [ICSharpCode.Decompiler.CSharp.Syntax.IsExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-IsExpression 'ICSharpCode.Decompiler.CSharp.Syntax.IsExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitLabelStatement-ICSharpCode-Decompiler-CSharp-Syntax-LabelStatement-'></a>
+### VisitLabelStatement(labelStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| labelStatement | [ICSharpCode.Decompiler.CSharp.Syntax.LabelStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-LabelStatement 'ICSharpCode.Decompiler.CSharp.Syntax.LabelStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitLambdaExpression-ICSharpCode-Decompiler-CSharp-Syntax-LambdaExpression-'></a>
+### VisitLambdaExpression(lambdaExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| lambdaExpression | [ICSharpCode.Decompiler.CSharp.Syntax.LambdaExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-LambdaExpression 'ICSharpCode.Decompiler.CSharp.Syntax.LambdaExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitLocalFunctionDeclarationStatement-ICSharpCode-Decompiler-CSharp-Syntax-LocalFunctionDeclarationStatement-'></a>
+### VisitLocalFunctionDeclarationStatement(localFunctionDeclarationStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| localFunctionDeclarationStatement | [ICSharpCode.Decompiler.CSharp.Syntax.LocalFunctionDeclarationStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-LocalFunctionDeclarationStatement 'ICSharpCode.Decompiler.CSharp.Syntax.LocalFunctionDeclarationStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitLockStatement-ICSharpCode-Decompiler-CSharp-Syntax-LockStatement-'></a>
+### VisitLockStatement(lockStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| lockStatement | [ICSharpCode.Decompiler.CSharp.Syntax.LockStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-LockStatement 'ICSharpCode.Decompiler.CSharp.Syntax.LockStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitMemberReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-MemberReferenceExpression-'></a>
+### VisitMemberReferenceExpression(memberReferenceExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| memberReferenceExpression | [ICSharpCode.Decompiler.CSharp.Syntax.MemberReferenceExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-MemberReferenceExpression 'ICSharpCode.Decompiler.CSharp.Syntax.MemberReferenceExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitMemberType-ICSharpCode-Decompiler-CSharp-Syntax-MemberType-'></a>
+### VisitMemberType(memberType) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| memberType | [ICSharpCode.Decompiler.CSharp.Syntax.MemberType](#T-ICSharpCode-Decompiler-CSharp-Syntax-MemberType 'ICSharpCode.Decompiler.CSharp.Syntax.MemberType') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitMethodDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-MethodDeclaration-'></a>
+### VisitMethodDeclaration(methodDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| methodDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.MethodDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-MethodDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.MethodDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitNamedArgumentExpression-ICSharpCode-Decompiler-CSharp-Syntax-NamedArgumentExpression-'></a>
+### VisitNamedArgumentExpression(namedArgumentExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| namedArgumentExpression | [ICSharpCode.Decompiler.CSharp.Syntax.NamedArgumentExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-NamedArgumentExpression 'ICSharpCode.Decompiler.CSharp.Syntax.NamedArgumentExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitNamedExpression-ICSharpCode-Decompiler-CSharp-Syntax-NamedExpression-'></a>
+### VisitNamedExpression(namedExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| namedExpression | [ICSharpCode.Decompiler.CSharp.Syntax.NamedExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-NamedExpression 'ICSharpCode.Decompiler.CSharp.Syntax.NamedExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitNamespaceDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-NamespaceDeclaration-'></a>
+### VisitNamespaceDeclaration(namespaceDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| namespaceDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.NamespaceDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-NamespaceDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.NamespaceDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitNullNode-ICSharpCode-Decompiler-CSharp-Syntax-AstNode-'></a>
+### VisitNullNode(nullNode) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| nullNode | [ICSharpCode.Decompiler.CSharp.Syntax.AstNode](#T-ICSharpCode-Decompiler-CSharp-Syntax-AstNode 'ICSharpCode.Decompiler.CSharp.Syntax.AstNode') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitNullReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-NullReferenceExpression-'></a>
+### VisitNullReferenceExpression(nullReferenceExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| nullReferenceExpression | [ICSharpCode.Decompiler.CSharp.Syntax.NullReferenceExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-NullReferenceExpression 'ICSharpCode.Decompiler.CSharp.Syntax.NullReferenceExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitObjectCreateExpression-ICSharpCode-Decompiler-CSharp-Syntax-ObjectCreateExpression-'></a>
+### VisitObjectCreateExpression(objectCreateExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| objectCreateExpression | [ICSharpCode.Decompiler.CSharp.Syntax.ObjectCreateExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-ObjectCreateExpression 'ICSharpCode.Decompiler.CSharp.Syntax.ObjectCreateExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitOperatorDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-OperatorDeclaration-'></a>
+### VisitOperatorDeclaration(operatorDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| operatorDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.OperatorDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-OperatorDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.OperatorDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitOutVarDeclarationExpression-ICSharpCode-Decompiler-CSharp-Syntax-OutVarDeclarationExpression-'></a>
+### VisitOutVarDeclarationExpression(outVarDeclarationExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| outVarDeclarationExpression | [ICSharpCode.Decompiler.CSharp.Syntax.OutVarDeclarationExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-OutVarDeclarationExpression 'ICSharpCode.Decompiler.CSharp.Syntax.OutVarDeclarationExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitParameterDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-ParameterDeclaration-'></a>
+### VisitParameterDeclaration(parameterDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| parameterDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.ParameterDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-ParameterDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.ParameterDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitParenthesizedExpression-ICSharpCode-Decompiler-CSharp-Syntax-ParenthesizedExpression-'></a>
+### VisitParenthesizedExpression(parenthesizedExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| parenthesizedExpression | [ICSharpCode.Decompiler.CSharp.Syntax.ParenthesizedExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-ParenthesizedExpression 'ICSharpCode.Decompiler.CSharp.Syntax.ParenthesizedExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitParenthesizedVariableDesignation-ICSharpCode-Decompiler-CSharp-Syntax-ParenthesizedVariableDesignation-'></a>
+### VisitParenthesizedVariableDesignation(parenthesizedVariableDesignation) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| parenthesizedVariableDesignation | [ICSharpCode.Decompiler.CSharp.Syntax.ParenthesizedVariableDesignation](#T-ICSharpCode-Decompiler-CSharp-Syntax-ParenthesizedVariableDesignation 'ICSharpCode.Decompiler.CSharp.Syntax.ParenthesizedVariableDesignation') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitPatternPlaceholder-ICSharpCode-Decompiler-CSharp-Syntax-AstNode,ICSharpCode-Decompiler-CSharp-Syntax-PatternMatching-Pattern-'></a>
+### VisitPatternPlaceholder(placeholder,pattern) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| placeholder | [ICSharpCode.Decompiler.CSharp.Syntax.AstNode](#T-ICSharpCode-Decompiler-CSharp-Syntax-AstNode 'ICSharpCode.Decompiler.CSharp.Syntax.AstNode') | item to parse |
+| pattern | [ICSharpCode.Decompiler.CSharp.Syntax.PatternMatching.Pattern](#T-ICSharpCode-Decompiler-CSharp-Syntax-PatternMatching-Pattern 'ICSharpCode.Decompiler.CSharp.Syntax.PatternMatching.Pattern') |  |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitPointerReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-PointerReferenceExpression-'></a>
+### VisitPointerReferenceExpression(pointerReferenceExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| pointerReferenceExpression | [ICSharpCode.Decompiler.CSharp.Syntax.PointerReferenceExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-PointerReferenceExpression 'ICSharpCode.Decompiler.CSharp.Syntax.PointerReferenceExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitPreProcessorDirective-ICSharpCode-Decompiler-CSharp-Syntax-PreProcessorDirective-'></a>
+### VisitPreProcessorDirective(preProcessorDirective) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| preProcessorDirective | [ICSharpCode.Decompiler.CSharp.Syntax.PreProcessorDirective](#T-ICSharpCode-Decompiler-CSharp-Syntax-PreProcessorDirective 'ICSharpCode.Decompiler.CSharp.Syntax.PreProcessorDirective') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitPrimitiveExpression-ICSharpCode-Decompiler-CSharp-Syntax-PrimitiveExpression-'></a>
+### VisitPrimitiveExpression(primitiveExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| primitiveExpression | [ICSharpCode.Decompiler.CSharp.Syntax.PrimitiveExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-PrimitiveExpression 'ICSharpCode.Decompiler.CSharp.Syntax.PrimitiveExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitPrimitiveType-ICSharpCode-Decompiler-CSharp-Syntax-PrimitiveType-'></a>
+### VisitPrimitiveType(primitiveType) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| primitiveType | [ICSharpCode.Decompiler.CSharp.Syntax.PrimitiveType](#T-ICSharpCode-Decompiler-CSharp-Syntax-PrimitiveType 'ICSharpCode.Decompiler.CSharp.Syntax.PrimitiveType') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitPropertyDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-PropertyDeclaration-'></a>
+### VisitPropertyDeclaration(propertyDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| propertyDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.PropertyDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-PropertyDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.PropertyDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitQueryContinuationClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryContinuationClause-'></a>
+### VisitQueryContinuationClause(queryContinuationClause) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| queryContinuationClause | [ICSharpCode.Decompiler.CSharp.Syntax.QueryContinuationClause](#T-ICSharpCode-Decompiler-CSharp-Syntax-QueryContinuationClause 'ICSharpCode.Decompiler.CSharp.Syntax.QueryContinuationClause') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitQueryExpression-ICSharpCode-Decompiler-CSharp-Syntax-QueryExpression-'></a>
+### VisitQueryExpression(queryExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| queryExpression | [ICSharpCode.Decompiler.CSharp.Syntax.QueryExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-QueryExpression 'ICSharpCode.Decompiler.CSharp.Syntax.QueryExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitQueryFromClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryFromClause-'></a>
+### VisitQueryFromClause(queryFromClause) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| queryFromClause | [ICSharpCode.Decompiler.CSharp.Syntax.QueryFromClause](#T-ICSharpCode-Decompiler-CSharp-Syntax-QueryFromClause 'ICSharpCode.Decompiler.CSharp.Syntax.QueryFromClause') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitQueryGroupClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryGroupClause-'></a>
+### VisitQueryGroupClause(queryGroupClause) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| queryGroupClause | [ICSharpCode.Decompiler.CSharp.Syntax.QueryGroupClause](#T-ICSharpCode-Decompiler-CSharp-Syntax-QueryGroupClause 'ICSharpCode.Decompiler.CSharp.Syntax.QueryGroupClause') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitQueryJoinClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryJoinClause-'></a>
+### VisitQueryJoinClause(queryJoinClause) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| queryJoinClause | [ICSharpCode.Decompiler.CSharp.Syntax.QueryJoinClause](#T-ICSharpCode-Decompiler-CSharp-Syntax-QueryJoinClause 'ICSharpCode.Decompiler.CSharp.Syntax.QueryJoinClause') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitQueryLetClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryLetClause-'></a>
+### VisitQueryLetClause(queryLetClause) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| queryLetClause | [ICSharpCode.Decompiler.CSharp.Syntax.QueryLetClause](#T-ICSharpCode-Decompiler-CSharp-Syntax-QueryLetClause 'ICSharpCode.Decompiler.CSharp.Syntax.QueryLetClause') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitQueryOrderClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryOrderClause-'></a>
+### VisitQueryOrderClause(queryOrderClause) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| queryOrderClause | [ICSharpCode.Decompiler.CSharp.Syntax.QueryOrderClause](#T-ICSharpCode-Decompiler-CSharp-Syntax-QueryOrderClause 'ICSharpCode.Decompiler.CSharp.Syntax.QueryOrderClause') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitQueryOrdering-ICSharpCode-Decompiler-CSharp-Syntax-QueryOrdering-'></a>
+### VisitQueryOrdering(queryOrdering) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| queryOrdering | [ICSharpCode.Decompiler.CSharp.Syntax.QueryOrdering](#T-ICSharpCode-Decompiler-CSharp-Syntax-QueryOrdering 'ICSharpCode.Decompiler.CSharp.Syntax.QueryOrdering') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitQuerySelectClause-ICSharpCode-Decompiler-CSharp-Syntax-QuerySelectClause-'></a>
+### VisitQuerySelectClause(querySelectClause) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| querySelectClause | [ICSharpCode.Decompiler.CSharp.Syntax.QuerySelectClause](#T-ICSharpCode-Decompiler-CSharp-Syntax-QuerySelectClause 'ICSharpCode.Decompiler.CSharp.Syntax.QuerySelectClause') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitQueryWhereClause-ICSharpCode-Decompiler-CSharp-Syntax-QueryWhereClause-'></a>
+### VisitQueryWhereClause(queryWhereClause) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| queryWhereClause | [ICSharpCode.Decompiler.CSharp.Syntax.QueryWhereClause](#T-ICSharpCode-Decompiler-CSharp-Syntax-QueryWhereClause 'ICSharpCode.Decompiler.CSharp.Syntax.QueryWhereClause') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitReturnStatement-ICSharpCode-Decompiler-CSharp-Syntax-ReturnStatement-'></a>
+### VisitReturnStatement(returnStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| returnStatement | [ICSharpCode.Decompiler.CSharp.Syntax.ReturnStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-ReturnStatement 'ICSharpCode.Decompiler.CSharp.Syntax.ReturnStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitSimpleType-ICSharpCode-Decompiler-CSharp-Syntax-SimpleType-'></a>
+### VisitSimpleType(simpleType) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| simpleType | [ICSharpCode.Decompiler.CSharp.Syntax.SimpleType](#T-ICSharpCode-Decompiler-CSharp-Syntax-SimpleType 'ICSharpCode.Decompiler.CSharp.Syntax.SimpleType') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitSingleVariableDesignation-ICSharpCode-Decompiler-CSharp-Syntax-SingleVariableDesignation-'></a>
+### VisitSingleVariableDesignation(singleVariableDesignation) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| singleVariableDesignation | [ICSharpCode.Decompiler.CSharp.Syntax.SingleVariableDesignation](#T-ICSharpCode-Decompiler-CSharp-Syntax-SingleVariableDesignation 'ICSharpCode.Decompiler.CSharp.Syntax.SingleVariableDesignation') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitSizeOfExpression-ICSharpCode-Decompiler-CSharp-Syntax-SizeOfExpression-'></a>
+### VisitSizeOfExpression(sizeOfExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| sizeOfExpression | [ICSharpCode.Decompiler.CSharp.Syntax.SizeOfExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-SizeOfExpression 'ICSharpCode.Decompiler.CSharp.Syntax.SizeOfExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitStackAllocExpression-ICSharpCode-Decompiler-CSharp-Syntax-StackAllocExpression-'></a>
+### VisitStackAllocExpression(stackAllocExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| stackAllocExpression | [ICSharpCode.Decompiler.CSharp.Syntax.StackAllocExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-StackAllocExpression 'ICSharpCode.Decompiler.CSharp.Syntax.StackAllocExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitSwitchExpression-ICSharpCode-Decompiler-CSharp-Syntax-SwitchExpression-'></a>
+### VisitSwitchExpression(switchExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| switchExpression | [ICSharpCode.Decompiler.CSharp.Syntax.SwitchExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-SwitchExpression 'ICSharpCode.Decompiler.CSharp.Syntax.SwitchExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitSwitchExpressionSection-ICSharpCode-Decompiler-CSharp-Syntax-SwitchExpressionSection-'></a>
+### VisitSwitchExpressionSection(switchExpressionSection) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| switchExpressionSection | [ICSharpCode.Decompiler.CSharp.Syntax.SwitchExpressionSection](#T-ICSharpCode-Decompiler-CSharp-Syntax-SwitchExpressionSection 'ICSharpCode.Decompiler.CSharp.Syntax.SwitchExpressionSection') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitSwitchSection-ICSharpCode-Decompiler-CSharp-Syntax-SwitchSection-'></a>
+### VisitSwitchSection(switchSection) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| switchSection | [ICSharpCode.Decompiler.CSharp.Syntax.SwitchSection](#T-ICSharpCode-Decompiler-CSharp-Syntax-SwitchSection 'ICSharpCode.Decompiler.CSharp.Syntax.SwitchSection') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitSwitchStatement-ICSharpCode-Decompiler-CSharp-Syntax-SwitchStatement-'></a>
+### VisitSwitchStatement(switchStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| switchStatement | [ICSharpCode.Decompiler.CSharp.Syntax.SwitchStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-SwitchStatement 'ICSharpCode.Decompiler.CSharp.Syntax.SwitchStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitSyntaxTree-ICSharpCode-Decompiler-CSharp-Syntax-SyntaxTree-'></a>
+### VisitSyntaxTree(syntaxTree) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| syntaxTree | [ICSharpCode.Decompiler.CSharp.Syntax.SyntaxTree](#T-ICSharpCode-Decompiler-CSharp-Syntax-SyntaxTree 'ICSharpCode.Decompiler.CSharp.Syntax.SyntaxTree') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitThisReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-ThisReferenceExpression-'></a>
+### VisitThisReferenceExpression(thisReferenceExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| thisReferenceExpression | [ICSharpCode.Decompiler.CSharp.Syntax.ThisReferenceExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-ThisReferenceExpression 'ICSharpCode.Decompiler.CSharp.Syntax.ThisReferenceExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitThrowExpression-ICSharpCode-Decompiler-CSharp-Syntax-ThrowExpression-'></a>
+### VisitThrowExpression(throwExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| throwExpression | [ICSharpCode.Decompiler.CSharp.Syntax.ThrowExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-ThrowExpression 'ICSharpCode.Decompiler.CSharp.Syntax.ThrowExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitThrowStatement-ICSharpCode-Decompiler-CSharp-Syntax-ThrowStatement-'></a>
+### VisitThrowStatement(throwStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| throwStatement | [ICSharpCode.Decompiler.CSharp.Syntax.ThrowStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-ThrowStatement 'ICSharpCode.Decompiler.CSharp.Syntax.ThrowStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitTryCatchStatement-ICSharpCode-Decompiler-CSharp-Syntax-TryCatchStatement-'></a>
+### VisitTryCatchStatement(tryCatchStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| tryCatchStatement | [ICSharpCode.Decompiler.CSharp.Syntax.TryCatchStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-TryCatchStatement 'ICSharpCode.Decompiler.CSharp.Syntax.TryCatchStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitTupleExpression-ICSharpCode-Decompiler-CSharp-Syntax-TupleExpression-'></a>
+### VisitTupleExpression(tupleExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| tupleExpression | [ICSharpCode.Decompiler.CSharp.Syntax.TupleExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-TupleExpression 'ICSharpCode.Decompiler.CSharp.Syntax.TupleExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitTupleType-ICSharpCode-Decompiler-CSharp-Syntax-TupleAstType-'></a>
+### VisitTupleType(tupleType) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| tupleType | [ICSharpCode.Decompiler.CSharp.Syntax.TupleAstType](#T-ICSharpCode-Decompiler-CSharp-Syntax-TupleAstType 'ICSharpCode.Decompiler.CSharp.Syntax.TupleAstType') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitTupleTypeElement-ICSharpCode-Decompiler-CSharp-Syntax-TupleTypeElement-'></a>
+### VisitTupleTypeElement(tupleTypeElement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| tupleTypeElement | [ICSharpCode.Decompiler.CSharp.Syntax.TupleTypeElement](#T-ICSharpCode-Decompiler-CSharp-Syntax-TupleTypeElement 'ICSharpCode.Decompiler.CSharp.Syntax.TupleTypeElement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitTypeDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-TypeDeclaration-'></a>
+### VisitTypeDeclaration(typeDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| typeDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.TypeDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-TypeDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.TypeDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitTypeOfExpression-ICSharpCode-Decompiler-CSharp-Syntax-TypeOfExpression-'></a>
+### VisitTypeOfExpression(typeOfExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| typeOfExpression | [ICSharpCode.Decompiler.CSharp.Syntax.TypeOfExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-TypeOfExpression 'ICSharpCode.Decompiler.CSharp.Syntax.TypeOfExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitTypeParameterDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-TypeParameterDeclaration-'></a>
+### VisitTypeParameterDeclaration(typeParameterDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| typeParameterDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.TypeParameterDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-TypeParameterDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.TypeParameterDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitTypeReferenceExpression-ICSharpCode-Decompiler-CSharp-Syntax-TypeReferenceExpression-'></a>
+### VisitTypeReferenceExpression(typeReferenceExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| typeReferenceExpression | [ICSharpCode.Decompiler.CSharp.Syntax.TypeReferenceExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-TypeReferenceExpression 'ICSharpCode.Decompiler.CSharp.Syntax.TypeReferenceExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitUnaryOperatorExpression-ICSharpCode-Decompiler-CSharp-Syntax-UnaryOperatorExpression-'></a>
+### VisitUnaryOperatorExpression(unaryOperatorExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| unaryOperatorExpression | [ICSharpCode.Decompiler.CSharp.Syntax.UnaryOperatorExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-UnaryOperatorExpression 'ICSharpCode.Decompiler.CSharp.Syntax.UnaryOperatorExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitUncheckedExpression-ICSharpCode-Decompiler-CSharp-Syntax-UncheckedExpression-'></a>
+### VisitUncheckedExpression(uncheckedExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| uncheckedExpression | [ICSharpCode.Decompiler.CSharp.Syntax.UncheckedExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-UncheckedExpression 'ICSharpCode.Decompiler.CSharp.Syntax.UncheckedExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitUncheckedStatement-ICSharpCode-Decompiler-CSharp-Syntax-UncheckedStatement-'></a>
+### VisitUncheckedStatement(uncheckedStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| uncheckedStatement | [ICSharpCode.Decompiler.CSharp.Syntax.UncheckedStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-UncheckedStatement 'ICSharpCode.Decompiler.CSharp.Syntax.UncheckedStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitUndocumentedExpression-ICSharpCode-Decompiler-CSharp-Syntax-UndocumentedExpression-'></a>
+### VisitUndocumentedExpression(undocumentedExpression) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| undocumentedExpression | [ICSharpCode.Decompiler.CSharp.Syntax.UndocumentedExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-UndocumentedExpression 'ICSharpCode.Decompiler.CSharp.Syntax.UndocumentedExpression') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitUnsafeStatement-ICSharpCode-Decompiler-CSharp-Syntax-UnsafeStatement-'></a>
+### VisitUnsafeStatement(unsafeStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| unsafeStatement | [ICSharpCode.Decompiler.CSharp.Syntax.UnsafeStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-UnsafeStatement 'ICSharpCode.Decompiler.CSharp.Syntax.UnsafeStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitUsingAliasDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-UsingAliasDeclaration-'></a>
+### VisitUsingAliasDeclaration(usingAliasDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| usingAliasDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.UsingAliasDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-UsingAliasDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.UsingAliasDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitUsingDeclaration-ICSharpCode-Decompiler-CSharp-Syntax-UsingDeclaration-'></a>
+### VisitUsingDeclaration(usingDeclaration) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| usingDeclaration | [ICSharpCode.Decompiler.CSharp.Syntax.UsingDeclaration](#T-ICSharpCode-Decompiler-CSharp-Syntax-UsingDeclaration 'ICSharpCode.Decompiler.CSharp.Syntax.UsingDeclaration') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitUsingStatement-ICSharpCode-Decompiler-CSharp-Syntax-UsingStatement-'></a>
+### VisitUsingStatement(usingStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| usingStatement | [ICSharpCode.Decompiler.CSharp.Syntax.UsingStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-UsingStatement 'ICSharpCode.Decompiler.CSharp.Syntax.UsingStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitVariableDeclarationStatement-ICSharpCode-Decompiler-CSharp-Syntax-VariableDeclarationStatement-'></a>
+### VisitVariableDeclarationStatement(variableDeclarationStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| variableDeclarationStatement | [ICSharpCode.Decompiler.CSharp.Syntax.VariableDeclarationStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-VariableDeclarationStatement 'ICSharpCode.Decompiler.CSharp.Syntax.VariableDeclarationStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitVariableInitializer-ICSharpCode-Decompiler-CSharp-Syntax-VariableInitializer-'></a>
+### VisitVariableInitializer(variableInitializer) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| variableInitializer | [ICSharpCode.Decompiler.CSharp.Syntax.VariableInitializer](#T-ICSharpCode-Decompiler-CSharp-Syntax-VariableInitializer 'ICSharpCode.Decompiler.CSharp.Syntax.VariableInitializer') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitWhileStatement-ICSharpCode-Decompiler-CSharp-Syntax-WhileStatement-'></a>
+### VisitWhileStatement(whileStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| whileStatement | [ICSharpCode.Decompiler.CSharp.Syntax.WhileStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-WhileStatement 'ICSharpCode.Decompiler.CSharp.Syntax.WhileStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitYieldBreakStatement-ICSharpCode-Decompiler-CSharp-Syntax-YieldBreakStatement-'></a>
+### VisitYieldBreakStatement(yieldBreakStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| yieldBreakStatement | [ICSharpCode.Decompiler.CSharp.Syntax.YieldBreakStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-YieldBreakStatement 'ICSharpCode.Decompiler.CSharp.Syntax.YieldBreakStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-VisitYieldReturnStatement-ICSharpCode-Decompiler-CSharp-Syntax-YieldReturnStatement-'></a>
+### VisitYieldReturnStatement(yieldReturnStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| yieldReturnStatement | [ICSharpCode.Decompiler.CSharp.Syntax.YieldReturnStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-YieldReturnStatement 'ICSharpCode.Decompiler.CSharp.Syntax.YieldReturnStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-WriteAttributes-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-CSharp-Syntax-AttributeSection}-'></a>
+### WriteAttributes(attributes) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| attributes | [System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.AttributeSection}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.AttributeSection}') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-WriteBlock-ICSharpCode-Decompiler-CSharp-Syntax-BlockStatement-'></a>
+### WriteBlock(blockStatement) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| blockStatement | [ICSharpCode.Decompiler.CSharp.Syntax.BlockStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-BlockStatement 'ICSharpCode.Decompiler.CSharp.Syntax.BlockStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-WriteCommaSeparatedList-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-CSharp-Syntax-AstNode}-'></a>
+### WriteCommaSeparatedList(list) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| list | [System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.AstNode}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.AstNode}') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-WriteEmbeddedStatement-ICSharpCode-Decompiler-CSharp-Syntax-Statement,ICSharpCode-Decompiler-CSharp-OutputVisitor-NewLinePlacement-'></a>
+### WriteEmbeddedStatement(embeddedStatement,nlp) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| embeddedStatement | [ICSharpCode.Decompiler.CSharp.Syntax.Statement](#T-ICSharpCode-Decompiler-CSharp-Syntax-Statement 'ICSharpCode.Decompiler.CSharp.Syntax.Statement') | item to parse |
+| nlp | [ICSharpCode.Decompiler.CSharp.OutputVisitor.NewLinePlacement](#T-ICSharpCode-Decompiler-CSharp-OutputVisitor-NewLinePlacement 'ICSharpCode.Decompiler.CSharp.OutputVisitor.NewLinePlacement') |  |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-WriteIdentifier-System-String-'></a>
+### WriteIdentifier(identifier) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| identifier | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-WriteMethodBody-ICSharpCode-Decompiler-CSharp-Syntax-BlockStatement-'></a>
+### WriteMethodBody(body) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| body | [ICSharpCode.Decompiler.CSharp.Syntax.BlockStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-BlockStatement 'ICSharpCode.Decompiler.CSharp.Syntax.BlockStatement') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-WriteModifiers-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-CSharp-Syntax-CSharpModifierToken}-'></a>
+### WriteModifiers(modifierTokens) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| modifierTokens | [System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.CSharpModifierToken}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.CSharpModifierToken}') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-WritePrivateImplementationType-ICSharpCode-Decompiler-CSharp-Syntax-AstType-'></a>
+### WritePrivateImplementationType(privateImplementationType) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| privateImplementationType | [ICSharpCode.Decompiler.CSharp.Syntax.AstType](#T-ICSharpCode-Decompiler-CSharp-Syntax-AstType 'ICSharpCode.Decompiler.CSharp.Syntax.AstType') |  |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-WriteTypeArguments-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-CSharp-Syntax-AstType}-'></a>
+### WriteTypeArguments(typeArguments) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| typeArguments | [System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.AstType}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.AstType}') | item to parse |
+
+<a name='M-Bb-Decompilers-AstVisitorBase-WriteTypeParameters-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-CSharp-Syntax-TypeParameterDeclaration}-'></a>
+### WriteTypeParameters(typeParameters) `method`
+
+##### Summary
+
+Visits the children of the node.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| typeParameters | [System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.TypeParameterDeclaration}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.CSharp.Syntax.TypeParameterDeclaration}') | item to parse |
 
 <a name='T-ICSharpCode-Decompiler-IL-ControlFlow-AsyncAwaitDecompiler'></a>
 ## AsyncAwaitDecompiler `type`
@@ -10667,7 +12716,7 @@ The created [Activity](http://msdn.microsoft.com/query/dev14.query?appId=Dev14ID
 | parentContext | [System.Diagnostics.ActivityContext](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Diagnostics.ActivityContext 'System.Diagnostics.ActivityContext') | The parent [ActivityContext](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Diagnostics.ActivityContext 'System.Diagnostics.ActivityContext') object to initialize the created Activity object with. |
 | tags | [System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}}') | The optional tags list to initialize the created Activity object with. |
 | links | [System.Collections.Generic.IEnumerable{System.Diagnostics.ActivityLink}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Diagnostics.ActivityLink}') | The optional [ActivityLink](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Diagnostics.ActivityLink 'System.Diagnostics.ActivityLink') list to initialize the created Activity object with. |
-| startTime | [System.DateTimeOffset](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTimeOffset 'System.DateTimeOffset') | The optional start timestamp to set on the created Activity object. |
+| startTime | [System.DateTimeOffset](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTimeOffset 'System.DateTimeOffset') | The optional start timestamps to set on the created Activity object. |
 
 ##### Exceptions
 
@@ -10722,7 +12771,7 @@ The created [Activity](http://msdn.microsoft.com/query/dev14.query?appId=Dev14ID
 | parentContext | [System.Diagnostics.ActivityContext](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Diagnostics.ActivityContext 'System.Diagnostics.ActivityContext') | The parent [ActivityContext](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Diagnostics.ActivityContext 'System.Diagnostics.ActivityContext') object to initialize the created Activity object with. |
 | tags | [System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Object}}') | The optional tags list to initialize the created Activity object with. |
 | links | [System.Collections.Generic.IEnumerable{System.Diagnostics.ActivityLink}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Diagnostics.ActivityLink}') | The optional [ActivityLink](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Diagnostics.ActivityLink 'System.Diagnostics.ActivityLink') list to initialize the created Activity object with. |
-| startTime | [System.DateTimeOffset](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTimeOffset 'System.DateTimeOffset') | The optional start timestamp to set on the created Activity object. |
+| startTime | [System.DateTimeOffset](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTimeOffset 'System.DateTimeOffset') | The optional start timestamps to set on the created Activity object. |
 | name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The operation name of the Activity. |
 
 ##### Exceptions
@@ -15190,12 +17239,12 @@ This method has no parameters.
 
 Bb.Diagnostics
 
-<a name='M-Bb-Diagnostics-DiagnosticProviderExtensions-GetActivityNames-System-String-'></a>
-### GetActivityNames(name) `method`
+<a name='M-Bb-Diagnostics-DiagnosticProviderExtensions-GetTagCollection-System-ValueTuple{System-String,System-String}[]-'></a>
+### GetTagCollection(tags) `method`
 
 ##### Summary
 
-return all name of activities are loaded
+return a collection of activity tags
 
 ##### Returns
 
@@ -15205,59 +17254,7 @@ return all name of activities are loaded
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
-
-<a name='M-Bb-Diagnostics-DiagnosticProviderExtensions-GetMeterName-System-Type-'></a>
-### GetMeterName(type) `method`
-
-##### Summary
-
-return the name of the meter
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
-
-<a name='M-Bb-Diagnostics-DiagnosticProviderExtensions-GetMeterNames-System-String-'></a>
-### GetMeterNames(name) `method`
-
-##### Summary
-
-return all name of meters are loaded
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
-
-<a name='M-Bb-Diagnostics-DiagnosticProviderExtensions-GetTypes-System-String,System-Type-'></a>
-### GetTypes(name,type) `method`
-
-##### Summary
-
-Return all types that contains a static field with specified name and type
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
-| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| tags | [System.ValueTuple{System.String,System.String}[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ValueTuple 'System.ValueTuple{System.String,System.String}[]') | list of key values |
 
 <a name='T-ICSharpCode-Decompiler-CSharp-Syntax-DirectionExpression'></a>
 ## DirectionExpression `type`
@@ -24594,6 +26591,23 @@ Map a class with the command line args and environment variables
 | ---- | ----------- |
 | T |  |
 
+<a name='M-Bb-ComponentModel-Loaders-Initializer-With-System-IServiceProvider-'></a>
+### With(serviceProvider) `method`
+
+##### Summary
+
+Override the default service provider
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| serviceProvider | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') |  |
+
 <a name='T-Bb-ComponentModel-Loaders-InjectionLoader`1'></a>
 ## InjectionLoader\`1 `type`
 
@@ -25019,6 +27033,256 @@ performing system calls, writing to local variables through pointers, etc.
 
 Throwing an exception or directly writing to local variables
 is not considered a side effect, and is modeled by separate flags.
+
+<a name='T-Bb-Decompilers-InterceptorAstVisitorExtension'></a>
+## InterceptorAstVisitorExtension `type`
+
+##### Namespace
+
+Bb.Decompilers
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-AsIdentifier-ICSharpCode-Decompiler-CSharp-Syntax-Expression-'></a>
+### AsIdentifier(self) `method`
+
+##### Summary
+
+Try to cast in IdentifierExpression
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [ICSharpCode.Decompiler.CSharp.Syntax.Expression](#T-ICSharpCode-Decompiler-CSharp-Syntax-Expression 'ICSharpCode.Decompiler.CSharp.Syntax.Expression') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-CSharp-Syntax-ObjectCreateExpression,System-Type-'></a>
+### Match(self,type) `method`
+
+##### Summary
+
+Return true if the type of the object is the same as the type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [ICSharpCode.Decompiler.CSharp.Syntax.ObjectCreateExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-ObjectCreateExpression 'ICSharpCode.Decompiler.CSharp.Syntax.ObjectCreateExpression') |  |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-TypeSystem-ITypeDefinition,System-Type-'></a>
+### Match(self,type) `method`
+
+##### Summary
+
+Return true if the type of the object is the same as the type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [ICSharpCode.Decompiler.TypeSystem.ITypeDefinition](#T-ICSharpCode-Decompiler-TypeSystem-ITypeDefinition 'ICSharpCode.Decompiler.TypeSystem.ITypeDefinition') |  |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-TypeSystem-IType,System-Type-'></a>
+### Match(self,type) `method`
+
+##### Summary
+
+Return true if the type of the object is the same as the type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [ICSharpCode.Decompiler.TypeSystem.IType](#T-ICSharpCode-Decompiler-TypeSystem-IType 'ICSharpCode.Decompiler.TypeSystem.IType') |  |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-OnAccessor-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-Accessor}-'></a>
+### OnAccessor(self,action) `method`
+
+##### Summary
+
+Intercept Accessor
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [Bb.Decompilers.InterceptorAstVisitor](#T-Bb-Decompilers-InterceptorAstVisitor 'Bb.Decompilers.InterceptorAstVisitor') |  |
+| action | [System.Action{ICSharpCode.Decompiler.CSharp.Syntax.Accessor}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{ICSharpCode.Decompiler.CSharp.Syntax.Accessor}') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-OnAnonymousMethodExpression-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-AnonymousMethodExpression}-'></a>
+### OnAnonymousMethodExpression(self,action) `method`
+
+##### Summary
+
+Intercept AnonymousMethodExpression
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [Bb.Decompilers.InterceptorAstVisitor](#T-Bb-Decompilers-InterceptorAstVisitor 'Bb.Decompilers.InterceptorAstVisitor') |  |
+| action | [System.Action{ICSharpCode.Decompiler.CSharp.Syntax.AnonymousMethodExpression}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{ICSharpCode.Decompiler.CSharp.Syntax.AnonymousMethodExpression}') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-OnAnonymousTypeCreateExpression-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-AnonymousTypeCreateExpression}-'></a>
+### OnAnonymousTypeCreateExpression(self,action) `method`
+
+##### Summary
+
+Intercept AnonymousTypeCreateExpression
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [Bb.Decompilers.InterceptorAstVisitor](#T-Bb-Decompilers-InterceptorAstVisitor 'Bb.Decompilers.InterceptorAstVisitor') |  |
+| action | [System.Action{ICSharpCode.Decompiler.CSharp.Syntax.AnonymousTypeCreateExpression}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{ICSharpCode.Decompiler.CSharp.Syntax.AnonymousTypeCreateExpression}') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-OnArrayCreateExpression-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-ArrayCreateExpression}-'></a>
+### OnArrayCreateExpression(self,action) `method`
+
+##### Summary
+
+Intercept ArrayCreateExpression
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [Bb.Decompilers.InterceptorAstVisitor](#T-Bb-Decompilers-InterceptorAstVisitor 'Bb.Decompilers.InterceptorAstVisitor') |  |
+| action | [System.Action{ICSharpCode.Decompiler.CSharp.Syntax.ArrayCreateExpression}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{ICSharpCode.Decompiler.CSharp.Syntax.ArrayCreateExpression}') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-OnArrayInitializerExpression-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-ArrayInitializerExpression}-'></a>
+### OnArrayInitializerExpression(self,action) `method`
+
+##### Summary
+
+Intercept ArrayInitializerExpression
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [Bb.Decompilers.InterceptorAstVisitor](#T-Bb-Decompilers-InterceptorAstVisitor 'Bb.Decompilers.InterceptorAstVisitor') |  |
+| action | [System.Action{ICSharpCode.Decompiler.CSharp.Syntax.ArrayInitializerExpression}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{ICSharpCode.Decompiler.CSharp.Syntax.ArrayInitializerExpression}') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-Reference-ICSharpCode-Decompiler-Metadata-PEFile,System-Type-'></a>
+### Reference(self,type) `method`
+
+##### Summary
+
+return true if the file reference the assembly of the specified type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [ICSharpCode.Decompiler.Metadata.PEFile](#T-ICSharpCode-Decompiler-Metadata-PEFile 'ICSharpCode.Decompiler.Metadata.PEFile') |  |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-ResolveSemantic-ICSharpCode-Decompiler-CSharp-Syntax-IAnnotatable-'></a>
+### ResolveSemantic(self) `method`
+
+##### Summary
+
+Try to resolve the semantic of the object
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [ICSharpCode.Decompiler.CSharp.Syntax.IAnnotatable](#T-ICSharpCode-Decompiler-CSharp-Syntax-IAnnotatable 'ICSharpCode.Decompiler.CSharp.Syntax.IAnnotatable') |  |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.NotImplementedException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.NotImplementedException 'System.NotImplementedException') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-ResolveSemantic``1-ICSharpCode-Decompiler-CSharp-Syntax-IAnnotatable-'></a>
+### ResolveSemantic\`\`1(self) `method`
+
+##### Summary
+
+Try to resolve the semantic of the object
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [ICSharpCode.Decompiler.CSharp.Syntax.IAnnotatable](#T-ICSharpCode-Decompiler-CSharp-Syntax-IAnnotatable 'ICSharpCode.Decompiler.CSharp.Syntax.IAnnotatable') |  |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-Search-ICSharpCode-Decompiler-CSharp-Syntax-SyntaxTree,System-Action{Bb-Decompilers-InterceptorAstVisitor}-'></a>
+### Search(self,action) `method`
+
+##### Summary
+
+parse a syntax tree.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [ICSharpCode.Decompiler.CSharp.Syntax.SyntaxTree](#T-ICSharpCode-Decompiler-CSharp-Syntax-SyntaxTree 'ICSharpCode.Decompiler.CSharp.Syntax.SyntaxTree') | syntax to parse |
+| action | [System.Action{Bb.Decompilers.InterceptorAstVisitor}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.Decompilers.InterceptorAstVisitor}') |  |
 
 <a name='T-ICSharpCode-Decompiler-TypeSystem-InterningProvider'></a>
 ## InterningProvider `type`
@@ -32777,6 +35041,21 @@ Every file on disk can be loaded into a standalone PEFile instance.
 A PEFile can be combined with its referenced assemblies/modules to form a type system,
 in that case the [MetadataModule](#T-ICSharpCode-Decompiler-TypeSystem-MetadataModule 'ICSharpCode.Decompiler.TypeSystem.MetadataModule') class is used instead.
 
+##### Example
+
+Find all method of the libraey
+
+```C#
+using (var peFile = new ICSharpCode.Decompiler.Metadata.PEFile(assemblyPath))
+{
+    var metadata = peFile.Metadata;
+    foreach (var handle in metadata.MethodDefinitions)
+    {
+        var m = peFile.Module.GetDefinition((MethodDefinitionHandle)handle);
+    }
+}
+```
+
 ##### Remarks
 
 In addition to wrapping a `System.Reflection.Metadata.PEReader`, this class
@@ -38379,7 +40658,7 @@ Add a new directory for search types
 | configuration | [System.IO.DirectoryInfo[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo[] 'System.IO.DirectoryInfo[]') |  |
 
 <a name='M-Bb-ComponentModel-TypeDiscovery-Collect-System-Func{System-Type,System-Boolean},System-Reflection-Assembly[]-'></a>
-### Collect(assemblies) `method`
+### Collect(typeFilter,assemblies) `method`
 
 ##### Summary
 
@@ -38389,7 +40668,8 @@ Registers the specified assemblies.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| assemblies | [System.Func{System.Type,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Type,System.Boolean}') | The assemblies. |
+| typeFilter | [System.Func{System.Type,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Type,System.Boolean}') | filter to apply on the type to validate. |
+| assemblies | [System.Reflection.Assembly[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly[] 'System.Reflection.Assembly[]') | The assemblies. |
 
 <a name='M-Bb-ComponentModel-TypeDiscovery-CreateFromWithTypes``1-System-Type,System-Type[]-'></a>
 ### CreateFromWithTypes\`\`1(type,types) `method`
@@ -38530,8 +40810,8 @@ Gets the already assemblies loaded that match with specified namespaces.
 | ---- | ---- | ----------- |
 | namespaces | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.String}') | The namespaces filter. |
 
-<a name='M-Bb-ComponentModel-TypeDiscovery-GetAssembly-System-Reflection-AssemblyName,System-Boolean-'></a>
-### GetAssembly(name,AcceptAllVersion) `method`
+<a name='M-Bb-ComponentModel-TypeDiscovery-GetAssembly-System-String,System-Boolean-'></a>
+### GetAssembly(name,acceptAllVersion) `method`
 
 ##### Summary
 
@@ -38545,8 +40825,26 @@ Get assembly if already loaded
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.Reflection.AssemblyName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.AssemblyName 'System.Reflection.AssemblyName') |  |
-| AcceptAllVersion | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | assemblyName |
+| acceptAllVersion | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
+
+<a name='M-Bb-ComponentModel-TypeDiscovery-GetAssembly-System-Reflection-AssemblyName,System-Boolean-'></a>
+### GetAssembly(name,acceptAllVersion) `method`
+
+##### Summary
+
+Get assembly if already loaded
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.Reflection.AssemblyName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.AssemblyName 'System.Reflection.AssemblyName') | assembly name |
+| acceptAllVersion | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
 
 <a name='M-Bb-ComponentModel-TypeDiscovery-GetDirectoryPathFromAssemblies'></a>
 ### GetDirectoryPathFromAssemblies() `method`
@@ -38721,7 +41019,7 @@ Return a list of type that match with the specified filter
 | typeFilter | [System.Func{System.Type,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Type,System.Boolean}') | filter for select types |
 
 <a name='M-Bb-ComponentModel-TypeDiscovery-GetTypes-System-Reflection-Assembly,System-Func{System-Type,System-Boolean}-'></a>
-### GetTypes(ass) `method`
+### GetTypes(ass,typeFilter) `method`
 
 ##### Summary
 
@@ -38732,6 +41030,7 @@ Register all exported type in the specified assembly
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | ass | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') |  |
+| typeFilter | [System.Func{System.Type,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Type,System.Boolean}') | filter to apply on the type to validate. |
 
 <a name='M-Bb-ComponentModel-TypeDiscovery-GetTypesAssignableFrom-System-Type-'></a>
 ### GetTypesAssignableFrom(typeFilter) `method`

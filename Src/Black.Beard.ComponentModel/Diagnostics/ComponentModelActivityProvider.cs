@@ -127,7 +127,7 @@ namespace Bb.Diagnostics
         /// <param name="parentContext">The parent <see cref="ActivityContext"/> object to initialize the created Activity object with.</param>
         /// <param name="tags">The optional tags list to initialize the created Activity object with.</param>
         /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created Activity object with.</param>
-        /// <param name="startTime">The optional start timestamp to set on the created Activity object.</param>
+        /// <param name="startTime">The optional start timestamps to set on the created Activity object.</param>
         /// <returns>The created <see cref="Activity"/> object or null if there is no any listener.</returns>
         /// <exception cref="InvalidOperationException">If the Activity already exists.</exception>"
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -176,7 +176,7 @@ namespace Bb.Diagnostics
         /// <param name="parentContext">The parent <see cref="ActivityContext"/> object to initialize the created Activity object with.</param>
         /// <param name="tags">The optional tags list to initialize the created Activity object with.</param>
         /// <param name="links">The optional <see cref="ActivityLink"/> list to initialize the created Activity object with.</param>
-        /// <param name="startTime">The optional start timestamp to set on the created Activity object.</param>
+        /// <param name="startTime">The optional start timestamps to set on the created Activity object.</param>
         /// <param name="name">The operation name of the Activity.</param>
         /// <returns>The created <see cref="Activity"/> object or null if there is no any listener.</returns>
         /// <exception cref="InvalidOperationException">If the Activity already exists.</exception>"
@@ -206,12 +206,8 @@ namespace Bb.Diagnostics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Set(Action<Activity> action)
         {
-            if (WithTelemetry && action != null)
-            {
-                var current = Activity.Current;
-                if (current != null)
-                    action(current);
-            }
+            if (WithTelemetry && action != null && Activity.Current != null)
+                action(Activity.Current);
         }
 
         /// <summary>
@@ -221,12 +217,8 @@ namespace Bb.Diagnostics
         /// <param name="value"></param>
         public static void AddProperty(string key, object value)
         {
-            if (WithTelemetry)
-            {
-                var current = Activity.Current;
-                if (current != null)
-                    current.SetCustomProperty(key, value);
-            }
+            if (WithTelemetry && Activity.Current != null)
+                Activity.Current.SetCustomProperty(key, value);
         }
 
         /// <summary>
@@ -236,12 +228,8 @@ namespace Bb.Diagnostics
         /// <param name="value"></param>
         public static void AddBaggage(string key, string value)
         {
-            if (WithTelemetry)
-            {
-                var current = Activity.Current;
-                if (current != null)
-                    current.AddBaggage(key, value);
-            }
+            if (WithTelemetry && Activity.Current != null)
+                Activity.Current.AddBaggage(key, value);
         }
 
         /// <summary>
@@ -251,21 +239,8 @@ namespace Bb.Diagnostics
         /// <param name="tags"></param>
         public static void AddEvent(string eventName, params (string key, string value)[] tags)
         {
-            if (WithTelemetry)
-            {
-                var current = Activity.Current;
-                if (current != null)
-                {
-
-                    var _tags = new ActivityTagsCollection();
-
-                    foreach (var item in tags)
-                        _tags.Add(item.key, item.value);
-
-                    current.AddEvent(new ActivityEvent(eventName, default, _tags));
-
-                }
-            }
+            if (WithTelemetry && Activity.Current != null)
+                Activity.Current.AddEvent(new ActivityEvent(eventName, default, tags.GetTagCollection()));
         }
 
         #endregion Append infos
@@ -275,8 +250,9 @@ namespace Bb.Diagnostics
         /// </summary>
         static ComponentModelActivityProvider()
         {
-            Name = DiagnosticProviderExtensions.GetActivityName(typeof(ComponentModelActivityProvider));
-            Version = DiagnosticProviderExtensions.GetActivityVersion(typeof(ComponentModelActivityProvider));
+            var type = typeof(ComponentModelActivityProvider);
+            Name = type.GetActivityName();
+            Version = type.GetActivityVersion();
             Source = new ActivitySource(Name, Version?.ToString());
         }
 

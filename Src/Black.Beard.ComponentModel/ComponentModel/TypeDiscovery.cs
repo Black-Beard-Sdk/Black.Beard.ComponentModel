@@ -650,10 +650,21 @@ namespace Bb.ComponentModel
         /// <summary>
         /// Get assembly if already loaded
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="AcceptAllVersion"></param>
+        /// <param name="name">assemblyName</param>
+        /// <param name="acceptAllVersion"></param>
         /// <returns></returns>
-        public Assembly GetAssembly(AssemblyName name, bool AcceptAllVersion = true)
+        public Assembly GetAssembly(string name, bool acceptAllVersion = true)
+        {
+            return GetAssembly(new AssemblyName(name), acceptAllVersion);
+        }
+
+        /// <summary>
+        /// Get assembly if already loaded
+        /// </summary>
+        /// <param name="name">assembly name</param>
+        /// <param name="acceptAllVersion"></param>
+        /// <returns></returns>
+        public Assembly GetAssembly(AssemblyName name, bool acceptAllVersion = true)
         {
 
             foreach (var item in GetAssemblies())
@@ -667,7 +678,7 @@ namespace Bb.ComponentModel
                     if (n.Version.ToString() == name.Version.ToString())
                         return item;
 
-                    if (AcceptAllVersion)
+                    if (acceptAllVersion)
                         return item;
 
                 }
@@ -679,8 +690,9 @@ namespace Bb.ComponentModel
 
 
         /// <summary>
-        ///     Registers the specified assemblies.
+        /// Registers the specified assemblies.
         /// </summary>
+        /// <param name="typeFilter">filter to apply on the type to validate.</param>
         /// <param name="assemblies">The assemblies.</param>
         private IEnumerable<Type> Collect(Func<Type, bool> typeFilter, params Assembly[] assemblies)
         {
@@ -693,6 +705,7 @@ namespace Bb.ComponentModel
                 var list = GetTypes(item, typeFilter);
                 foreach (var type in list)
                     yield return type;
+
             }
 
         }
@@ -701,6 +714,7 @@ namespace Bb.ComponentModel
         ///     Register all exported type in the specified assembly
         /// </summary>
         /// <param name="ass"></param>
+        /// <param name="typeFilter">filter to apply on the type to validate.</param>
         public List<Type> GetTypes(Assembly ass, Func<Type, bool> typeFilter)
         {
             var result = new List<Type>();
