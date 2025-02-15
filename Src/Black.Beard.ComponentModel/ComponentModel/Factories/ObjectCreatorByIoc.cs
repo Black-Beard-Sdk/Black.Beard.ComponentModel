@@ -35,8 +35,6 @@ namespace Bb.ComponentModel.Factories
         /// Note if the generic is different of the declaring type of the ctor do a cast and is injected in the method.
         /// </summary>
         /// <typeparam name="T">is the type that contains the constructor with the specified arguments types</typeparam>
-        /// <param name="type">type must see from external method call</param>
-        /// <param name="types">arguments types of the constructor</param>
         /// <returns></returns>
         public static FactoryByIoc<T> GetActivator<T>()
             where T : class
@@ -50,7 +48,6 @@ namespace Bb.ComponentModel.Factories
         /// </summary>
         /// <typeparam name="T">is the type that contains the constructor with the specified arguments types</typeparam>
         /// <param name="type">type must see from external method call</param>
-        /// <param name="types">arguments types of the constructor</param>
         /// <returns></returns>
         public static FactoryByIoc<T> GetActivator<T>(Type type)
             where T : class
@@ -96,7 +93,8 @@ namespace Bb.ComponentModel.Factories
         /// Note if the generic is different of the declaring type of the ctor do a cast and is injected in the method.
         /// </summary>
         /// <typeparam name="T">is the type that contains the constructor with the specified arguments types</typeparam>
-        /// <param name="ctor">The ctor.</param>
+        /// <param name="methodBase">The ctor.</param>
+        /// <param name="description">description of the method</param>
         /// <returns></returns>
         public static FactoryByIoc<T> GetActivator<T>(ConstructorInfo methodBase, MethodDescription description)
             where T : class
@@ -110,7 +108,7 @@ namespace Bb.ComponentModel.Factories
         /// <summary>
         /// Set attribute to looking for inject instance
         /// </summary>
-        /// <typeparam name="T1">Type of attribute to looking for</typeparam>
+        /// <typeparam name="T">Type of attribute to looking for</typeparam>
         public static void SetInjectionAttribute<T>()
             where T : Attribute
         {
@@ -120,7 +118,7 @@ namespace Bb.ComponentModel.Factories
         /// <summary>
         /// Set attribute to looking for inject instance
         /// </summary>
-        /// <typeparam name="T1">Type of attribute to looking for</typeparam>
+        /// <param name="type">Type of attribute to looking for</param>
         public static void SetInjectionAttribute(Type type)
         {
 
@@ -146,7 +144,8 @@ namespace Bb.ComponentModel.Factories
         /// Note if the generic is different of the declaring type of the ctor do a cast and is injected in the method.
         /// </summary>
         /// <typeparam name="T">is the type that contains the method</typeparam>
-        /// <param name="ctor">The ctor.</param>
+        /// <param name="methodBase">The ctor.</param>
+        /// <param name="description">description of the method</param>
         /// <returns></returns>
         public static FactoryByIoc<T> GetCallMethod<T>(MethodBase methodBase, MethodDescription description)
         where T : class
@@ -196,7 +195,7 @@ namespace Bb.ComponentModel.Factories
                 {
 
                     Expression instance = paramResult;
-                    if(!type.IsAssignableFrom(instance.Type))
+                    if (!type.IsAssignableFrom(instance.Type))
                         instance = Expression.Convert(instance, type);
 
                     Expression c1 = Expression.Call(param, methodGetService, Expression.Constant(typeToInject));
@@ -233,10 +232,10 @@ namespace Bb.ComponentModel.Factories
 
         }
 
-        private static bool EvaluateToAdd(PropertyDescriptor property, out Type typeToject)
+        internal static bool EvaluateToAdd(PropertyDescriptor property, out Type typeToInject)
         {
 
-            typeToject = property.PropertyType;
+            typeToInject = property.PropertyType;
             var attributes = property.Attributes.Cast<Attribute>().ToList();
             foreach (Attribute attribute in attributes)
             {
@@ -249,7 +248,7 @@ namespace Bb.ComponentModel.Factories
                         if (!property.PropertyType.IsAssignableFrom(a.TypeToInject))
                             throw new InvalidCastException($"Property {property.Name} can't be convert in {a.TypeToInject.Name}.");
 
-                        typeToject = a.TypeToInject;
+                        typeToInject = a.TypeToInject;
                     }
 
                     return true;
@@ -322,6 +321,5 @@ namespace Bb.ComponentModel.Factories
         private static HashSet<Type> _injectAttributes = new();
 
     }
-
 
 }

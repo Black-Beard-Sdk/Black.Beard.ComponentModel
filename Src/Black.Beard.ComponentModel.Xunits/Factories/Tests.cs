@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Factories;
 using FluentAssertions;
@@ -8,6 +9,29 @@ namespace ComponentModels.Tests.Factories
 {
     public sealed class Tests
     {
+
+        [Fact]
+        public void TestGetPropertyToMap()
+        {
+            ObjectCreatorByIoc.SetInjectionAttribute<InjectAttribute>();
+            var i = new TestByIoc3();
+            var items = i.GetPropertiesToMap().ToList();
+            Assert.True(items.Count == 1);
+        }
+
+        [Fact]
+        public void TestMapper()
+        {
+            ObjectCreatorByIoc.SetInjectionAttribute<InjectAttribute>();
+            var serviceProvider = new LocalServiceProvider();
+
+            var i = new TestByIoc3();
+
+            i.MapInjectProperties(serviceProvider);
+
+            Assert.NotNull(i.Provider);
+
+        }
 
         [Fact]
         public void Constructor_FactoryByIoc()

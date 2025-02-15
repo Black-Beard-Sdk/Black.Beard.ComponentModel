@@ -2502,14 +2502,18 @@
   - [ClearSetInjectionAttribute()](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-ClearSetInjectionAttribute 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.ClearSetInjectionAttribute')
   - [GetActivatorByArguments\`\`1(types)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivatorByArguments``1-System-Type[]- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivatorByArguments``1(System.Type[])')
   - [GetActivatorByTypeAndArguments\`\`1(type,types)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivatorByTypeAndArguments``1-System-Type,System-Type[]- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivatorByTypeAndArguments``1(System.Type,System.Type[])')
-  - [GetActivator\`\`1(type,types)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivator``1')
-  - [GetActivator\`\`1(type,types)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1-System-Type- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivator``1(System.Type)')
-  - [GetActivator\`\`1(ctor)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1-System-Reflection-ConstructorInfo,Bb-ComponentModel-Factories-MethodDescription- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivator``1(System.Reflection.ConstructorInfo,Bb.ComponentModel.Factories.MethodDescription)')
+  - [GetActivator\`\`1()](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivator``1')
+  - [GetActivator\`\`1(type)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1-System-Type- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivator``1(System.Type)')
+  - [GetActivator\`\`1(methodBase,description)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1-System-Reflection-ConstructorInfo,Bb-ComponentModel-Factories-MethodDescription- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivator``1(System.Reflection.ConstructorInfo,Bb.ComponentModel.Factories.MethodDescription)')
   - [GetActivator\`\`1(ctor)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1-System-Reflection-MethodBase- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivator``1(System.Reflection.MethodBase)')
-  - [GetCallMethod\`\`1(ctor)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetCallMethod``1-System-Reflection-MethodBase,Bb-ComponentModel-Factories-MethodDescription- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetCallMethod``1(System.Reflection.MethodBase,Bb.ComponentModel.Factories.MethodDescription)')
-  - [SetInjectionAttribute()](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-SetInjectionAttribute-System-Type- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.SetInjectionAttribute(System.Type)')
+  - [GetCallMethod\`\`1(methodBase,description)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetCallMethod``1-System-Reflection-MethodBase,Bb-ComponentModel-Factories-MethodDescription- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetCallMethod``1(System.Reflection.MethodBase,Bb.ComponentModel.Factories.MethodDescription)')
+  - [SetInjectionAttribute(type)](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-SetInjectionAttribute-System-Type- 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.SetInjectionAttribute(System.Type)')
   - [SetInjectionAttribute\`\`1()](#M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-SetInjectionAttribute``1 'Bb.ComponentModel.Factories.ObjectCreatorByIoc.SetInjectionAttribute``1')
 - [ObjectCreator\`1](#T-Bb-ComponentModel-Factories-ObjectCreator`1 'Bb.ComponentModel.Factories.ObjectCreator`1')
+- [ObjectMapperExtension](#T-Bb-ComponentModel-Factories-ObjectMapperExtension 'Bb.ComponentModel.Factories.ObjectMapperExtension')
+  - [GetPropertiesToMap(source)](#M-Bb-ComponentModel-Factories-ObjectMapperExtension-GetPropertiesToMap-System-Object- 'Bb.ComponentModel.Factories.ObjectMapperExtension.GetPropertiesToMap(System.Object)')
+  - [MapInjectProperties\`\`1(source,serviceProvider,lastChanceFunction)](#M-Bb-ComponentModel-Factories-ObjectMapperExtension-MapInjectProperties``1-``0,System-IServiceProvider,System-Func{``0,System-ComponentModel-PropertyDescriptor,System-Object}- 'Bb.ComponentModel.Factories.ObjectMapperExtension.MapInjectProperties``1(``0,System.IServiceProvider,System.Func{``0,System.ComponentModel.PropertyDescriptor,System.Object})')
+  - [MapProperty\`\`1(source,serviceProvider,lastChanceFunction)](#M-Bb-ComponentModel-Factories-ObjectMapperExtension-MapProperty``1-``0,System-IServiceProvider,System-ComponentModel-PropertyDescriptor,System-Func{``0,System-ComponentModel-PropertyDescriptor,System-Object}- 'Bb.ComponentModel.Factories.ObjectMapperExtension.MapProperty``1(``0,System.IServiceProvider,System.ComponentModel.PropertyDescriptor,System.Func{``0,System.ComponentModel.PropertyDescriptor,System.Object})')
 - [OpCode](#T-ICSharpCode-Decompiler-IL-OpCode 'ICSharpCode.Decompiler.IL.OpCode')
   - [AddressOf](#F-ICSharpCode-Decompiler-IL-OpCode-AddressOf 'ICSharpCode.Decompiler.IL.OpCode.AddressOf')
   - [AnyNode](#F-ICSharpCode-Decompiler-IL-OpCode-AnyNode 'ICSharpCode.Decompiler.IL.OpCode.AnyNode')
@@ -33687,7 +33691,7 @@ Note if the generic is different of the declaring type of the ctor do a cast and
 | T | is the type that contains the constructor with the specified arguments types |
 
 <a name='M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1'></a>
-### GetActivator\`\`1(type,types) `method`
+### GetActivator\`\`1() `method`
 
 ##### Summary
 
@@ -33700,9 +33704,7 @@ Note if the generic is different of the declaring type of the ctor do a cast and
 
 ##### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| type | [M:Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivator\`\`1](#T-M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1 'M:Bb.ComponentModel.Factories.ObjectCreatorByIoc.GetActivator``1') | type must see from external method call |
+This method has no parameters.
 
 ##### Generic Types
 
@@ -33711,7 +33713,7 @@ Note if the generic is different of the declaring type of the ctor do a cast and
 | T | is the type that contains the constructor with the specified arguments types |
 
 <a name='M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1-System-Type-'></a>
-### GetActivator\`\`1(type,types) `method`
+### GetActivator\`\`1(type) `method`
 
 ##### Summary
 
@@ -33735,7 +33737,7 @@ Note if the generic is different of the declaring type of the ctor do a cast and
 | T | is the type that contains the constructor with the specified arguments types |
 
 <a name='M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetActivator``1-System-Reflection-ConstructorInfo,Bb-ComponentModel-Factories-MethodDescription-'></a>
-### GetActivator\`\`1(ctor) `method`
+### GetActivator\`\`1(methodBase,description) `method`
 
 ##### Summary
 
@@ -33750,7 +33752,8 @@ Note if the generic is different of the declaring type of the ctor do a cast and
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| ctor | [System.Reflection.ConstructorInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.ConstructorInfo 'System.Reflection.ConstructorInfo') | The ctor. |
+| methodBase | [System.Reflection.ConstructorInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.ConstructorInfo 'System.Reflection.ConstructorInfo') | The ctor. |
+| description | [Bb.ComponentModel.Factories.MethodDescription](#T-Bb-ComponentModel-Factories-MethodDescription 'Bb.ComponentModel.Factories.MethodDescription') | description of the method |
 
 ##### Generic Types
 
@@ -33783,7 +33786,7 @@ Note if the generic is different of the declaring type of the ctor a cast is inj
 | T |  |
 
 <a name='M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-GetCallMethod``1-System-Reflection-MethodBase,Bb-ComponentModel-Factories-MethodDescription-'></a>
-### GetCallMethod\`\`1(ctor) `method`
+### GetCallMethod\`\`1(methodBase,description) `method`
 
 ##### Summary
 
@@ -33798,7 +33801,8 @@ Note if the generic is different of the declaring type of the ctor do a cast and
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| ctor | [System.Reflection.MethodBase](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodBase 'System.Reflection.MethodBase') | The ctor. |
+| methodBase | [System.Reflection.MethodBase](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodBase 'System.Reflection.MethodBase') | The ctor. |
+| description | [Bb.ComponentModel.Factories.MethodDescription](#T-Bb-ComponentModel-Factories-MethodDescription 'Bb.ComponentModel.Factories.MethodDescription') | description of the method |
 
 ##### Generic Types
 
@@ -33807,7 +33811,7 @@ Note if the generic is different of the declaring type of the ctor do a cast and
 | T | is the type that contains the method |
 
 <a name='M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-SetInjectionAttribute-System-Type-'></a>
-### SetInjectionAttribute() `method`
+### SetInjectionAttribute(type) `method`
 
 ##### Summary
 
@@ -33815,13 +33819,9 @@ Set attribute to looking for inject instance
 
 ##### Parameters
 
-This method has no parameters.
-
-##### Generic Types
-
-| Name | Description |
-| ---- | ----------- |
-| T1 | Type of attribute to looking for |
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type of attribute to looking for |
 
 <a name='M-Bb-ComponentModel-Factories-ObjectCreatorByIoc-SetInjectionAttribute``1'></a>
 ### SetInjectionAttribute\`\`1() `method`
@@ -33838,7 +33838,7 @@ This method has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| T1 | Type of attribute to looking for |
+| T | Type of attribute to looking for |
 
 <a name='T-Bb-ComponentModel-Factories-ObjectCreator`1'></a>
 ## ObjectCreator\`1 `type`
@@ -33866,6 +33866,90 @@ define a factory
 | Name | Description |
 | ---- | ----------- |
 | T |  |
+
+<a name='T-Bb-ComponentModel-Factories-ObjectMapperExtension'></a>
+## ObjectMapperExtension `type`
+
+##### Namespace
+
+Bb.ComponentModel.Factories
+
+##### Summary
+
+Object mapper extension
+
+<a name='M-Bb-ComponentModel-Factories-ObjectMapperExtension-GetPropertiesToMap-System-Object-'></a>
+### GetPropertiesToMap(source) `method`
+
+##### Summary
+
+Resolve the properties to map. If your property is not in the list, you must add an attribute [InjectAttribute](#T-InjectAttribute 'InjectAttribute')
+
+##### Returns
+
+List of property with [InjectAttribute](#T-InjectAttribute 'InjectAttribute')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| source | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Item to evaluate |
+
+<a name='M-Bb-ComponentModel-Factories-ObjectMapperExtension-MapInjectProperties``1-``0,System-IServiceProvider,System-Func{``0,System-ComponentModel-PropertyDescriptor,System-Object}-'></a>
+### MapInjectProperties\`\`1(source,serviceProvider,lastChanceFunction) `method`
+
+##### Summary
+
+Map the method with attribute
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| source | [\`\`0](#T-``0 '``0') | source to map |
+| serviceProvider | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') | Provider of service |
+| lastChanceFunction | [System.Func{\`\`0,System.ComponentModel.PropertyDescriptor,System.Object}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{``0,System.ComponentModel.PropertyDescriptor,System.Object}') | if the provider has not the Type, you can help to resolve |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Type of the source to map |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') |  |
+
+<a name='M-Bb-ComponentModel-Factories-ObjectMapperExtension-MapProperty``1-``0,System-IServiceProvider,System-ComponentModel-PropertyDescriptor,System-Func{``0,System-ComponentModel-PropertyDescriptor,System-Object}-'></a>
+### MapProperty\`\`1(source,serviceProvider,lastChanceFunction) `method`
+
+##### Summary
+
+Map the property
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| source | [\`\`0](#T-``0 '``0') | source to map |
+| serviceProvider | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') | Provider of service |
+| lastChanceFunction | [System.ComponentModel.PropertyDescriptor](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.PropertyDescriptor 'System.ComponentModel.PropertyDescriptor') | if the provider has not the Type, you can help to resolve |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Type of the source to map |
 
 <a name='T-ICSharpCode-Decompiler-IL-OpCode'></a>
 ## OpCode `type`
