@@ -2,7 +2,6 @@
 using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Factories;
 using Bb.ComponentModel.Loaders;
-using Bb.Diagnostics;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -11,6 +10,7 @@ using Xunit;
 
 namespace DynamicDescriptors.Tests
 {
+
 
 
     public sealed class ReflexionTest

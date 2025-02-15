@@ -1940,6 +1940,7 @@
   - [AsIdentifier(self)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-AsIdentifier-ICSharpCode-Decompiler-CSharp-Syntax-Expression- 'Bb.Decompilers.InterceptorAstVisitorExtension.AsIdentifier(ICSharpCode.Decompiler.CSharp.Syntax.Expression)')
   - [Match(self,type)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-CSharp-Syntax-ObjectCreateExpression,System-Type- 'Bb.Decompilers.InterceptorAstVisitorExtension.Match(ICSharpCode.Decompiler.CSharp.Syntax.ObjectCreateExpression,System.Type)')
   - [Match(self,type)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-TypeSystem-ITypeDefinition,System-Type- 'Bb.Decompilers.InterceptorAstVisitorExtension.Match(ICSharpCode.Decompiler.TypeSystem.ITypeDefinition,System.Type)')
+  - [Match(self,method)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-TypeSystem-IMethod,System-Reflection-MethodBase- 'Bb.Decompilers.InterceptorAstVisitorExtension.Match(ICSharpCode.Decompiler.TypeSystem.IMethod,System.Reflection.MethodBase)')
   - [Match(self,type)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-TypeSystem-IType,System-Type- 'Bb.Decompilers.InterceptorAstVisitorExtension.Match(ICSharpCode.Decompiler.TypeSystem.IType,System.Type)')
   - [OnAccessor(self,action)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-OnAccessor-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-Accessor}- 'Bb.Decompilers.InterceptorAstVisitorExtension.OnAccessor(Bb.Decompilers.InterceptorAstVisitor,System.Action{ICSharpCode.Decompiler.CSharp.Syntax.Accessor})')
   - [OnAnonymousMethodExpression(self,action)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-OnAnonymousMethodExpression-Bb-Decompilers-InterceptorAstVisitor,System-Action{ICSharpCode-Decompiler-CSharp-Syntax-AnonymousMethodExpression}- 'Bb.Decompilers.InterceptorAstVisitorExtension.OnAnonymousMethodExpression(Bb.Decompilers.InterceptorAstVisitor,System.Action{ICSharpCode.Decompiler.CSharp.Syntax.AnonymousMethodExpression})')
@@ -27097,6 +27098,24 @@ Return true if the type of the object is the same as the type
 | ---- | ---- | ----------- |
 | self | [ICSharpCode.Decompiler.TypeSystem.ITypeDefinition](#T-ICSharpCode-Decompiler-TypeSystem-ITypeDefinition 'ICSharpCode.Decompiler.TypeSystem.ITypeDefinition') |  |
 | type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+
+<a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-TypeSystem-IMethod,System-Reflection-MethodBase-'></a>
+### Match(self,method) `method`
+
+##### Summary
+
+Return true if the type of the object is the same as the type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [ICSharpCode.Decompiler.TypeSystem.IMethod](#T-ICSharpCode-Decompiler-TypeSystem-IMethod 'ICSharpCode.Decompiler.TypeSystem.IMethod') |  |
+| method | [System.Reflection.MethodBase](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodBase 'System.Reflection.MethodBase') |  |
 
 <a name='M-Bb-Decompilers-InterceptorAstVisitorExtension-Match-ICSharpCode-Decompiler-TypeSystem-IType,System-Type-'></a>
 ### Match(self,type) `method`

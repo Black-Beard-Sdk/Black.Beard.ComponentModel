@@ -5,6 +5,7 @@ using ICSharpCode.Decompiler.TypeSystem;
 using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.CSharp;
+using System.Reflection;
 
 namespace Bb.Decompilers
 {
@@ -208,6 +209,41 @@ namespace Bb.Decompilers
         /// Return true if the type of the object is the same as the type
         /// </summary>
         /// <param name="self"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
+        public static bool Match(this IMethod self, MethodBase method)
+        {
+
+            if (self.Name == method.Name)
+            {
+
+                var ps1 = self.Parameters;
+                var ps2 = method.GetParameters();
+
+                if (ps1.Count != ps2.Length)
+                    return false;
+
+                for (var i = 0; i < self.Parameters.Count; i++)
+                {
+                    IParameter p1 = self.Parameters[i];
+                    var p2 = method.GetParameters()[i];
+                    if (!p1.Type.Match(p2.ParameterType))
+                        return false;
+                }
+                
+                return true;
+
+            }
+
+            return false;
+
+        }
+
+
+        /// <summary>
+        /// Return true if the type of the object is the same as the type
+        /// </summary>
+        /// <param name="self"></param>
         /// <param name="type"></param>
         /// <returns></returns>
         public static bool Match(this IType self, Type type)
@@ -217,6 +253,7 @@ namespace Bb.Decompilers
                 return true;
 
             return false;
+
         }
 
         /// <summary>

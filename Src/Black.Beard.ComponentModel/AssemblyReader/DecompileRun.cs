@@ -17,8 +17,7 @@ namespace ICSharpCode.Decompiler
 		public DecompilerSettings Settings { get; }
 		public IDocumentationProvider DocumentationProvider { get; set; }
 
-		Lazy<CSharp.TypeSystem.UsingScope> usingScope =>
-			new Lazy<CSharp.TypeSystem.UsingScope>(() => CreateUsingScope(Namespaces));
+		Lazy<CSharp.TypeSystem.UsingScope> usingScope => new Lazy<CSharp.TypeSystem.UsingScope>(() => CreateUsingScope(Namespaces));
 
 		public CSharp.TypeSystem.UsingScope UsingScope => usingScope.Value;
 
