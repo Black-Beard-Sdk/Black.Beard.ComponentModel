@@ -3,6 +3,8 @@ using System;
 
 namespace Bb.Injections
 {
+
+
     [System.Diagnostics.DebuggerDisplay("{LifeCycle} : {Type.FullName} -> {ImplementationType.FullName}")]
     public class TypeToInject
     {
@@ -24,7 +26,6 @@ namespace Bb.Injections
         public object? Instance { get; set; }
 
     }
-
 
 
 }

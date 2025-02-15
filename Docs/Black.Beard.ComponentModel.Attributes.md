@@ -99,6 +99,10 @@
   - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilder`1-CanExecute-System-Object- 'Bb.ComponentModel.InjectBuilder`1.CanExecute(System.Object)')
   - [Execute(context)](#M-Bb-ComponentModel-InjectBuilder`1-Execute-System-Object- 'Bb.ComponentModel.InjectBuilder`1.Execute(System.Object)')
   - [Execute(context)](#M-Bb-ComponentModel-InjectBuilder`1-Execute-`0- 'Bb.ComponentModel.InjectBuilder`1.Execute(`0)')
+- [InjectValueAttribute](#T-Bb-ComponentModel-InjectValueAttribute 'Bb.ComponentModel.InjectValueAttribute')
+  - [#ctor(variableName,required)](#M-Bb-ComponentModel-InjectValueAttribute-#ctor-System-String,System-Boolean- 'Bb.ComponentModel.InjectValueAttribute.#ctor(System.String,System.Boolean)')
+  - [Required](#P-Bb-ComponentModel-InjectValueAttribute-Required 'Bb.ComponentModel.InjectValueAttribute.Required')
+  - [VariableName](#P-Bb-ComponentModel-InjectValueAttribute-VariableName 'Bb.ComponentModel.InjectValueAttribute.VariableName')
 - [InjectorPolicyAttribute](#T-Bb-ComponentModel-Attributes-InjectorPolicyAttribute 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute')
   - [#ctor(type,lifeCycle)](#M-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-#ctor-System-Type,Bb-ComponentModel-Attributes-IocScopeEnum- 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.#ctor(System.Type,Bb.ComponentModel.Attributes.IocScopeEnum)')
   - [LifeCycle](#P-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-LifeCycle 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.LifeCycle')
@@ -1246,6 +1250,57 @@ Execute the initializing process with [](#!-T 'T')
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | context | [\`0](#T-`0 '`0') | specified context [](#!-T 'T') |
+
+<a name='T-Bb-ComponentModel-InjectValueAttribute'></a>
+## InjectValueAttribute `type`
+
+##### Namespace
+
+Bb.ComponentModel
+
+##### Summary
+
+Attribute to inject a value into a property.
+
+<a name='M-Bb-ComponentModel-InjectValueAttribute-#ctor-System-String,System-Boolean-'></a>
+### #ctor(variableName,required) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [InjectValueAttribute](#T-Bb-ComponentModel-InjectValueAttribute 'Bb.ComponentModel.InjectValueAttribute') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| variableName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the variable to inject. |
+| required | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Indicates whether the variable is required. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when `variableName` is null or empty. |
+
+##### Remarks
+
+This attribute is used to inject a value into a property.
+The `variableName` specifies the name of the variable to inject.
+The `required` parameter indicates whether the variable is required or not.
+
+<a name='P-Bb-ComponentModel-InjectValueAttribute-Required'></a>
+### Required `property`
+
+##### Summary
+
+Indicates whether the variable is required.
+
+<a name='P-Bb-ComponentModel-InjectValueAttribute-VariableName'></a>
+### VariableName `property`
+
+##### Summary
+
+Variable name to inject.
 
 <a name='T-Bb-ComponentModel-Attributes-InjectorPolicyAttribute'></a>
 ## InjectorPolicyAttribute `type`

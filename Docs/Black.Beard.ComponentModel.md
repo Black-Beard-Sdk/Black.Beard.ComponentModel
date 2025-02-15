@@ -793,6 +793,8 @@
   - [TryGetExit()](#M-ICSharpCode-Decompiler-IL-ControlFlow-ConditionDetection-TryGetExit-ICSharpCode-Decompiler-IL-ILInstruction,ICSharpCode-Decompiler-IL-ILInstruction@- 'ICSharpCode.Decompiler.IL.ControlFlow.ConditionDetection.TryGetExit(ICSharpCode.Decompiler.IL.ILInstruction,ICSharpCode.Decompiler.IL.ILInstruction@)')
   - [WillShortCircuit()](#M-ICSharpCode-Decompiler-IL-ControlFlow-ConditionDetection-WillShortCircuit-ICSharpCode-Decompiler-IL-Block,ICSharpCode-Decompiler-IL-IfInstruction,ICSharpCode-Decompiler-IL-ILInstruction- 'ICSharpCode.Decompiler.IL.ControlFlow.ConditionDetection.WillShortCircuit(ICSharpCode.Decompiler.IL.Block,ICSharpCode.Decompiler.IL.IfInstruction,ICSharpCode.Decompiler.IL.ILInstruction)')
 - [ConditionalExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-ConditionalExpression 'ICSharpCode.Decompiler.CSharp.Syntax.ConditionalExpression')
+- [ConnexionReaderExtension](#T-Bb-ComponentModel-Converters-ConnexionReaderExtension 'Bb.ComponentModel.Converters.ConnexionReaderExtension')
+  - [GetKeyValues(payload)](#M-Bb-ComponentModel-Converters-ConnexionReaderExtension-GetKeyValues-System-String- 'Bb.ComponentModel.Converters.ConnexionReaderExtension.GetKeyValues(System.String)')
 - [ConstantResolveResult](#T-ICSharpCode-Decompiler-Semantics-ConstantResolveResult 'ICSharpCode.Decompiler.Semantics.ConstantResolveResult')
 - [Constraint](#T-ICSharpCode-Decompiler-CSharp-Syntax-Constraint 'ICSharpCode.Decompiler.CSharp.Syntax.Constraint')
 - [ContainerKind](#T-ICSharpCode-Decompiler-IL-ContainerKind 'ICSharpCode.Decompiler.IL.ContainerKind')
@@ -1896,6 +1898,9 @@
   - [Initialize(args,init)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.String[])')
   - [Map(instance)](#M-Bb-ComponentModel-Loaders-Initializer-Map-Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}- 'Bb.ComponentModel.Loaders.Initializer.Map(Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer})')
   - [With(serviceProvider)](#M-Bb-ComponentModel-Loaders-Initializer-With-System-IServiceProvider- 'Bb.ComponentModel.Loaders.Initializer.With(System.IServiceProvider)')
+- [InjectValueAttributeExtensions](#T-Bb-Injections-InjectValueAttributeExtensions 'Bb.Injections.InjectValueAttributeExtensions')
+  - [GetKeys\`\`1(type)](#M-Bb-Injections-InjectValueAttributeExtensions-GetKeys``1-System-Type- 'Bb.Injections.InjectValueAttributeExtensions.GetKeys``1(System.Type)')
+  - [InjectValue\`\`1(self,valueResolver)](#M-Bb-Injections-InjectValueAttributeExtensions-InjectValue``1-``0,System-Func{System-String,System-String}- 'Bb.Injections.InjectValueAttributeExtensions.InjectValue``1(``0,System.Func{System.String,System.String})')
 - [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1')
   - [#ctor()](#M-Bb-ComponentModel-Loaders-InjectionLoader`1-#ctor-System-String,System-IServiceProvider- 'Bb.ComponentModel.Loaders.InjectionLoader`1.#ctor(System.String,System.IServiceProvider)')
   - [Executed](#P-Bb-ComponentModel-Loaders-InjectionLoader`1-Executed 'Bb.ComponentModel.Loaders.InjectionLoader`1.Executed')
@@ -1951,6 +1956,10 @@
   - [ResolveSemantic(self)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-ResolveSemantic-ICSharpCode-Decompiler-CSharp-Syntax-IAnnotatable- 'Bb.Decompilers.InterceptorAstVisitorExtension.ResolveSemantic(ICSharpCode.Decompiler.CSharp.Syntax.IAnnotatable)')
   - [ResolveSemantic\`\`1(self)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-ResolveSemantic``1-ICSharpCode-Decompiler-CSharp-Syntax-IAnnotatable- 'Bb.Decompilers.InterceptorAstVisitorExtension.ResolveSemantic``1(ICSharpCode.Decompiler.CSharp.Syntax.IAnnotatable)')
   - [Search(self,action)](#M-Bb-Decompilers-InterceptorAstVisitorExtension-Search-ICSharpCode-Decompiler-CSharp-Syntax-SyntaxTree,System-Action{Bb-Decompilers-InterceptorAstVisitor}- 'Bb.Decompilers.InterceptorAstVisitorExtension.Search(ICSharpCode.Decompiler.CSharp.Syntax.SyntaxTree,System.Action{Bb.Decompilers.InterceptorAstVisitor})')
+- [InternetConnectivityChecker](#T-Bb-InternetConnectivityChecker 'Bb.InternetConnectivityChecker')
+  - [IsConnectedToInternet()](#M-Bb-InternetConnectivityChecker-IsConnectedToInternet 'Bb.InternetConnectivityChecker.IsConnectedToInternet')
+  - [IsNetworkInterfaceConnected()](#M-Bb-InternetConnectivityChecker-IsNetworkInterfaceConnected 'Bb.InternetConnectivityChecker.IsNetworkInterfaceConnected')
+  - [SetMock(method)](#M-Bb-InternetConnectivityChecker-SetMock-System-Func{System-Threading-Tasks-Task{System-Boolean}}- 'Bb.InternetConnectivityChecker.SetMock(System.Func{System.Threading.Tasks.Task{System.Boolean}})')
 - [InterningProvider](#T-ICSharpCode-Decompiler-TypeSystem-InterningProvider 'ICSharpCode.Decompiler.TypeSystem.InterningProvider')
   - [Intern()](#M-ICSharpCode-Decompiler-TypeSystem-InterningProvider-Intern-ICSharpCode-Decompiler-TypeSystem-ISupportsInterning- 'ICSharpCode.Decompiler.TypeSystem.InterningProvider.Intern(ICSharpCode.Decompiler.TypeSystem.ISupportsInterning)')
   - [Intern()](#M-ICSharpCode-Decompiler-TypeSystem-InterningProvider-Intern-System-String- 'ICSharpCode.Decompiler.TypeSystem.InterningProvider.Intern(System.String)')
@@ -2219,6 +2228,10 @@
 - [LocalServiceProvider](#T-Bb-ComponentModel-Factories-LocalServiceProvider 'Bb.ComponentModel.Factories.LocalServiceProvider')
   - [Add\`\`1()](#M-Bb-ComponentModel-Factories-LocalServiceProvider-Add``1 'Bb.ComponentModel.Factories.LocalServiceProvider.Add``1')
   - [GetService(serviceType)](#M-Bb-ComponentModel-Factories-LocalServiceProvider-GetService-System-Type- 'Bb.ComponentModel.Factories.LocalServiceProvider.GetService(System.Type)')
+- [LockExtensions](#T-Bb-LockExtensions 'Bb.LockExtensions')
+  - [LockForRead(locker,finallyBlock)](#M-Bb-LockExtensions-LockForRead-System-Threading-ReaderWriterLockSlim,System-Action- 'Bb.LockExtensions.LockForRead(System.Threading.ReaderWriterLockSlim,System.Action)')
+  - [LockForUpgradeableRead(locker,finallyBlock)](#M-Bb-LockExtensions-LockForUpgradeableRead-System-Threading-ReaderWriterLockSlim,System-Action- 'Bb.LockExtensions.LockForUpgradeableRead(System.Threading.ReaderWriterLockSlim,System.Action)')
+  - [LockForWrite(locker,finallyBlock)](#M-Bb-LockExtensions-LockForWrite-System-Threading-ReaderWriterLockSlim,System-Action- 'Bb.LockExtensions.LockForWrite(System.Threading.ReaderWriterLockSlim,System.Action)')
 - [LockInstruction](#T-ICSharpCode-Decompiler-IL-LockInstruction 'ICSharpCode.Decompiler.IL.LockInstruction')
 - [LockStatement](#T-ICSharpCode-Decompiler-CSharp-Syntax-LockStatement 'ICSharpCode.Decompiler.CSharp.Syntax.LockStatement')
 - [LockTransform](#T-ICSharpCode-Decompiler-IL-Transforms-LockTransform 'ICSharpCode.Decompiler.IL.Transforms.LockTransform')
@@ -13236,6 +13249,41 @@ ICSharpCode.Decompiler.CSharp.Syntax
 ##### Summary
 
 Condition ? TrueExpression : FalseExpression
+
+<a name='T-Bb-ComponentModel-Converters-ConnexionReaderExtension'></a>
+## ConnexionReaderExtension `type`
+
+##### Namespace
+
+Bb.ComponentModel.Converters
+
+<a name='M-Bb-ComponentModel-Converters-ConnexionReaderExtension-GetKeyValues-System-String-'></a>
+### GetKeyValues(payload) `method`
+
+##### Summary
+
+Retrieves the key-value pairs from the given payload.
+
+##### Returns
+
+A dictionary containing the key-value pairs.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| payload | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The payload string. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the payload is null. |
+
+##### Remarks
+
+This method parses the payload string and extracts the key-value pairs. The payload string should be in a specific format where each key-value pair is separated by a delimiter.
+The method uses the DbConnectionOptions class to parse the payload string and retrieve the key-value pairs.
 
 <a name='T-ICSharpCode-Decompiler-Semantics-ConstantResolveResult'></a>
 ## ConstantResolveResult `type`
@@ -26613,6 +26661,82 @@ Override the default service provider
 | ---- | ---- | ----------- |
 | serviceProvider | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') |  |
 
+<a name='T-Bb-Injections-InjectValueAttributeExtensions'></a>
+## InjectValueAttributeExtensions `type`
+
+##### Namespace
+
+Bb.Injections
+
+##### Summary
+
+Provides extension methods for the [InjectValueAttribute](#T-Bb-ComponentModel-InjectValueAttribute 'Bb.ComponentModel.InjectValueAttribute') class.
+
+<a name='M-Bb-Injections-InjectValueAttributeExtensions-GetKeys``1-System-Type-'></a>
+### GetKeys\`\`1(type) `method`
+
+##### Summary
+
+Retrieves the [InjectValueAttribute](#T-Bb-ComponentModel-InjectValueAttribute 'Bb.ComponentModel.InjectValueAttribute') instances defined on the properties of the specified type.
+
+##### Returns
+
+An enumerable collection of [InjectValueAttribute](#T-Bb-ComponentModel-InjectValueAttribute 'Bb.ComponentModel.InjectValueAttribute') instances.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | The type to retrieve the attributes from. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | The type to retrieve the attributes from. |
+
+##### Remarks
+
+This method retrieves the [InjectValueAttribute](#T-Bb-ComponentModel-InjectValueAttribute 'Bb.ComponentModel.InjectValueAttribute') instances defined on the properties of the specified type.
+
+<a name='M-Bb-Injections-InjectValueAttributeExtensions-InjectValue``1-``0,System-Func{System-String,System-String}-'></a>
+### InjectValue\`\`1(self,valueResolver) `method`
+
+##### Summary
+
+Injects values into the properties of the specified object using the provided value resolver.
+
+##### Returns
+
+The object with the injected values.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [\`\`0](#T-``0 '``0') | The object to inject values into. |
+| valueResolver | [System.Func{System.String,System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.String,System.String}') | The value resolver function used to resolve the values. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | The type of the object to inject values into. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when `self` or `valueResolver` is null. |
+
+##### Remarks
+
+This method injects values into the properties of the specified object using the provided value resolver.
+The value resolver function takes a variable name as input and returns the corresponding value.
+If a property has the [InjectValueAttribute](#T-Bb-ComponentModel-InjectValueAttribute 'Bb.ComponentModel.InjectValueAttribute') applied and the value resolver returns null,
+and the attribute's Required property is true, an [ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') is thrown.
+The value returned by the value resolver is converted to the property's type using the current culture.
+
 <a name='T-Bb-ComponentModel-Loaders-InjectionLoader`1'></a>
 ## InjectionLoader\`1 `type`
 
@@ -27306,6 +27430,60 @@ parse a syntax tree.
 | ---- | ---- | ----------- |
 | self | [ICSharpCode.Decompiler.CSharp.Syntax.SyntaxTree](#T-ICSharpCode-Decompiler-CSharp-Syntax-SyntaxTree 'ICSharpCode.Decompiler.CSharp.Syntax.SyntaxTree') | syntax to parse |
 | action | [System.Action{Bb.Decompilers.InterceptorAstVisitor}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.Decompilers.InterceptorAstVisitor}') |  |
+
+<a name='T-Bb-InternetConnectivityChecker'></a>
+## InternetConnectivityChecker `type`
+
+##### Namespace
+
+Bb
+
+##### Summary
+
+Internet connectivity checker
+
+<a name='M-Bb-InternetConnectivityChecker-IsConnectedToInternet'></a>
+### IsConnectedToInternet() `method`
+
+##### Summary
+
+return true if connected to Internet
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-InternetConnectivityChecker-IsNetworkInterfaceConnected'></a>
+### IsNetworkInterfaceConnected() `method`
+
+##### Summary
+
+Return true if network interface is connected
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-InternetConnectivityChecker-SetMock-System-Func{System-Threading-Tasks-Task{System-Boolean}}-'></a>
+### SetMock(method) `method`
+
+##### Summary
+
+Set a mock for the method [IsConnectedToInternet](#M-Bb-InternetConnectivityChecker-IsConnectedToInternet 'Bb.InternetConnectivityChecker.IsConnectedToInternet')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| method | [System.Func{System.Threading.Tasks.Task{System.Boolean}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Threading.Tasks.Task{System.Boolean}}') |  |
 
 <a name='T-ICSharpCode-Decompiler-TypeSystem-InterningProvider'></a>
 ## InterningProvider `type`
@@ -30227,6 +30405,97 @@ return the service
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | serviceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | type to append |
+
+<a name='T-Bb-LockExtensions'></a>
+## LockExtensions `type`
+
+##### Namespace
+
+Bb
+
+<a name='M-Bb-LockExtensions-LockForRead-System-Threading-ReaderWriterLockSlim,System-Action-'></a>
+### LockForRead(locker,finallyBlock) `method`
+
+##### Summary
+
+Locks the ReaderWriterLockSlim object for read access.
+
+##### Returns
+
+An IDisposable object that represents the read lock.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| locker | [System.Threading.ReaderWriterLockSlim](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Threading.ReaderWriterLockSlim 'System.Threading.ReaderWriterLockSlim') | The ReaderWriterLockSlim object to lock. |
+| finallyBlock | [System.Action](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action') | An optional action to be executed after the lock is released. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the locker parameter is null. |
+
+##### Remarks
+
+This method acquires a read lock on the ReaderWriterLockSlim object, allowing multiple threads to read the protected resource simultaneously.
+
+<a name='M-Bb-LockExtensions-LockForUpgradeableRead-System-Threading-ReaderWriterLockSlim,System-Action-'></a>
+### LockForUpgradeableRead(locker,finallyBlock) `method`
+
+##### Summary
+
+Locks the ReaderWriterLockSlim object for upgradeable read access.
+
+##### Returns
+
+An IDisposable object that represents the upgradeable read lock.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| locker | [System.Threading.ReaderWriterLockSlim](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Threading.ReaderWriterLockSlim 'System.Threading.ReaderWriterLockSlim') | The ReaderWriterLockSlim object to lock. |
+| finallyBlock | [System.Action](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action') | An optional action to be executed after the lock is released. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the locker parameter is null. |
+
+##### Remarks
+
+This method acquires an upgradeable read lock on the ReaderWriterLockSlim object, allowing multiple threads to read the protected resource simultaneously or a single thread to upgrade to a write lock.
+
+<a name='M-Bb-LockExtensions-LockForWrite-System-Threading-ReaderWriterLockSlim,System-Action-'></a>
+### LockForWrite(locker,finallyBlock) `method`
+
+##### Summary
+
+Locks the ReaderWriterLockSlim object for write access.
+
+##### Returns
+
+An IDisposable object that represents the write lock.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| locker | [System.Threading.ReaderWriterLockSlim](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Threading.ReaderWriterLockSlim 'System.Threading.ReaderWriterLockSlim') | The ReaderWriterLockSlim object to lock. |
+| finallyBlock | [System.Action](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action') | An optional action to be executed after the lock is released. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the locker parameter is null. |
+
+##### Remarks
+
+This method acquires a write lock on the ReaderWriterLockSlim object, allowing exclusive write access to the protected resource.
 
 <a name='T-ICSharpCode-Decompiler-IL-LockInstruction'></a>
 ## LockInstruction `type`

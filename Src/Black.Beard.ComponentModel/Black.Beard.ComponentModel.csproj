@@ -38,6 +38,7 @@
 		<Compile Remove="ComponentModel\ObjectCreator.cs" />
 		<Compile Remove="ComponentModel\WalkerFilter.cs" />
 		<Compile Remove="Diagnostics\ComponentModelMetricProvider.cs" />
+		<Compile Remove="Injections\Injections.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
