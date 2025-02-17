@@ -960,6 +960,7 @@
   - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Double- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Double)')
   - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Decimal- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Decimal)')
   - [ToDecimal(value)](#M-Bb-Expressions-ConverterHelper-ToDecimal-System-Char- 'Bb.Expressions.ConverterHelper.ToDecimal(System.Char)')
+  - [ToDictionary(self)](#M-Bb-Expressions-ConverterHelper-ToDictionary-System-String- 'Bb.Expressions.ConverterHelper.ToDictionary(System.String)')
   - [ToDouble(value)](#M-Bb-Expressions-ConverterHelper-ToDouble-System-Char- 'Bb.Expressions.ConverterHelper.ToDouble(System.Char)')
   - [ToGuid(value)](#M-Bb-Expressions-ConverterHelper-ToGuid-System-Char[]- 'Bb.Expressions.ConverterHelper.ToGuid(System.Char[])')
   - [ToInt16(value)](#M-Bb-Expressions-ConverterHelper-ToInt16-System-Single- 'Bb.Expressions.ConverterHelper.ToInt16(System.Single)')
@@ -15202,6 +15203,23 @@ Convert a string to Decimal
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
+
+<a name='M-Bb-Expressions-ConverterHelper-ToDictionary-System-String-'></a>
+### ToDictionary(self) `method`
+
+##### Summary
+
+Convert a string to dictionary
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
 
 <a name='M-Bb-Expressions-ConverterHelper-ToDouble-System-Char-'></a>
 ### ToDouble(value) `method`

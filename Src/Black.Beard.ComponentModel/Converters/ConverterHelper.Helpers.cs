@@ -1,5 +1,7 @@
-﻿using Bb.Converters;
+﻿using Bb.ComponentModel.Converters;
+using Bb.Converters;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -9,8 +11,23 @@ namespace Bb.Expressions
 
     public static partial class ConverterHelper
     {
-        
-        
+
+
+        #region ToBoolean
+
+        /// <summary>
+        /// Convert a string to dictionary
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static Dictionary<string, string> ToDictionary(string self)
+        {
+            return self.GetKeyValues();
+        }
+
+        #endregion ToBoolean
+
+
         #region ToBoolean
 
         /// <summary>
@@ -658,6 +675,89 @@ namespace Bb.Expressions
 
 
         #region ToString
+
+        public static string ToString(this Dictionary<string, string> value)
+        {
+
+            if (value == null)
+                return null;
+
+            bool first = true;
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in value)
+            {
+
+                if (first)
+                    first = false;
+                else
+                    sb.Append(';');
+
+                sb.Append(item.Key);
+                sb.Append('=');
+
+                var valueItem = item.Value;
+
+                if (valueItem.Contains("\\"))
+                    valueItem = valueItem.Replace("\\", "\\\\");
+
+                if (valueItem.Contains(";"))
+                    valueItem = valueItem.Replace(";", "\\;");
+
+                if (valueItem.Contains("="))
+                    valueItem = valueItem.Replace("=", "\\=");
+
+                sb.Append(valueItem);
+
+            }
+
+            var result = sb.ToString();
+            return result;
+
+        }
+
+        public static string ToString(this Dictionary<string, object> value)
+        {
+
+            if (value == null)
+                return null;
+
+            bool first = true;
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in value)
+            {
+
+                if (first)
+                    first = false;
+                else
+                    sb.Append(';');
+
+                sb.Append(item.Key);
+                sb.Append('=');
+
+                string valueItem;
+                if (item.Value is string str)
+                    valueItem = str;
+                
+                else
+                    valueItem = (string)item.Value.ConvertToObject(typeof(string));
+                
+                if (valueItem.Contains("\\"))
+                    valueItem = valueItem.Replace("\\", "\\\\");
+
+                if (valueItem.Contains(";"))
+                    valueItem = valueItem.Replace(";", "\\;");
+
+                if (valueItem.Contains("="))
+                    valueItem = valueItem.Replace("=", "\\=");
+
+                sb.Append(valueItem);
+
+            }
+
+            var result = sb.ToString();
+            return result;
+
+        }
 
         /// <summary>
         /// Convert a DateTime to string
