@@ -16,7 +16,7 @@ namespace Bb.Expressions
     /// Referential of method for conversion between types
     /// </summary>
     public static partial class ConverterHelper
-    {    
+    {
 
         private static MethodInfo[] GetMethod()
         {
@@ -225,9 +225,16 @@ namespace Bb.Expressions
         /// <returns></returns>
         public static IEnumerable<MethodTypeConverter> Methods(Predicate<MethodTypeConverter> filter = null)
         {
-            foreach (var item in _dicConverters)
-                if (filter == null || filter(item.Value))
-                    yield return item.Value;
+            
+            if (filter == null)
+                foreach (var item in _dicConverters.Items())
+                    yield return item;
+            
+            else
+                foreach (var item in _dicConverters.Items())
+                    if (filter(item))
+                        yield return item;
+        
         }
 
         /// <summary>
@@ -252,35 +259,46 @@ namespace Bb.Expressions
         public static MethodConverter GetMethodToConvert(Type sourceType, Type targetType)
         {
 
+            MethodConverter method = null;
+            MethodTypeConverter typeSource;
+            List<MethodConverter> list;
+
+            if (_dicConverters.TryGetValue(sourceType, out typeSource))
+                if (typeSource.TryGetValue(targetType, out list))
+                    method = list[0];
+
+
             #region append
 
-            if (!_initialized.Contains(sourceType))
-                lock (_lock)
-                    if (!_initialized.Contains(sourceType))
-                        Discover(sourceType, false);
+            if (method == null)
+            {
+                if (!_initialized.Contains(sourceType))
+                    lock (_lock)
+                        if (!_initialized.Contains(sourceType))
+                            Discover(sourceType, false);
 
-            if (!_initialized.Contains(targetType))
-                lock (_lock)
-                    if (!_initialized.Contains(targetType))
-                    {
-                        Discover(targetType, false);
-                        if (targetType.IsConstructedGenericType)
+                if (!_initialized.Contains(targetType))
+                    lock (_lock)
+                        if (!_initialized.Contains(targetType))
                         {
-                            var p = targetType.GetGenericArguments();
-                            if (p.Length == 1)
+                            Discover(targetType, false);
+                            if (targetType.IsConstructedGenericType)
                             {
-                                registerCtors(p[0]);
-                                RegisterOperators(p[0], false);
+                                var p = targetType.GetGenericArguments();
+                                if (p.Length == 1)
+                                {
+                                    registerCtors(p[0]);
+                                    RegisterOperators(p[0], false);
+                                }
                             }
                         }
-                    }
+            }
 
             #endregion append
 
-            MethodConverter method = null;
 
-            if (_dicConverters.TryGetValue(sourceType, out var typeSource))
-                if (typeSource.TryGetValue(targetType, out var list))
+            if (_dicConverters.TryGetValue(sourceType, out typeSource))
+                if (typeSource.TryGetValue(targetType, out list))
                     method = list[0];
 
             return method;
@@ -359,21 +377,14 @@ namespace Bb.Expressions
 
             bool replace = false;
 
-            //if (newMethod.SourceType == typeof(Single))
-            //    if (newMethod.TargetType == typeof(char))
-            //    {
-            //    }
-
             if (newMethod.ToAdd == false)
                 throw new Exception("Method not allowed");
-
-            // Debug.WriteLine($"Register {newMethod}");
 
             if (!_dicConverters.TryGetValue(newMethod.SourceType, out var dicSource))
                 _dicConverters.Add(newMethod.SourceType, dicSource = new MethodTypeConverter(newMethod.SourceType));
 
             if (!dicSource.TryGetValue(newMethod.TargetType, out List<MethodConverter> list))
-                dicSource.Add(newMethod.TargetType, new List<MethodConverter>() { newMethod });
+                dicSource.Add(newMethod);
 
             else if (newMethod.ReplaceExistings)
                 replace = true;
@@ -427,7 +438,7 @@ namespace Bb.Expressions
                 AppendConverters(ReplaceExistings, type.GetInterfaceMap(typeof(IConvertible)).TargetMethods);
         }
 
-        private static Dictionary<Type, MethodTypeConverter> _dicConverters = new Dictionary<Type, MethodTypeConverter>();
+        private static ConverterIndex _dicConverters = new ConverterIndex();
         private static HashSet<string> _names = new HashSet<string>() { "ToByteArray", "ToString", "Concat", "Parse", "ToCharArray", "op_Implicit", "op_Explicit", "ToBoolean", "ToByte", "ToChar", "ToDateTime", "ToDecimal", "ToDouble", "ToInt16", "ToInt32", "ToInt64", "ToSByte", "ToSingle", "ToString", "ToUInt16", "ToUInt32", "ToUInt64", "ChangeType", "ToDateTimeOffset", };
         private static object _lock = new object();
         private static HashSet<Type> _initialized = new HashSet<Type>();

@@ -960,7 +960,8 @@
   - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Double- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Double)')
   - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Decimal- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Decimal)')
   - [ToDecimal(value)](#M-Bb-Expressions-ConverterHelper-ToDecimal-System-Char- 'Bb.Expressions.ConverterHelper.ToDecimal(System.Char)')
-  - [ToDictionary(self)](#M-Bb-Expressions-ConverterHelper-ToDictionary-System-String- 'Bb.Expressions.ConverterHelper.ToDictionary(System.String)')
+  - [ToDictionaryObject(self)](#M-Bb-Expressions-ConverterHelper-ToDictionaryObject-System-String- 'Bb.Expressions.ConverterHelper.ToDictionaryObject(System.String)')
+  - [ToDictionaryString(self)](#M-Bb-Expressions-ConverterHelper-ToDictionaryString-System-String- 'Bb.Expressions.ConverterHelper.ToDictionaryString(System.String)')
   - [ToDouble(value)](#M-Bb-Expressions-ConverterHelper-ToDouble-System-Char- 'Bb.Expressions.ConverterHelper.ToDouble(System.Char)')
   - [ToGuid(value)](#M-Bb-Expressions-ConverterHelper-ToGuid-System-Char[]- 'Bb.Expressions.ConverterHelper.ToGuid(System.Char[])')
   - [ToInt16(value)](#M-Bb-Expressions-ConverterHelper-ToInt16-System-Single- 'Bb.Expressions.ConverterHelper.ToInt16(System.Single)')
@@ -1888,6 +1889,7 @@
   - [Context](#P-Bb-ComponentModel-Loaders-Initializer-Context 'Bb.ComponentModel.Loaders.Initializer.Context')
   - [Creator](#P-Bb-ComponentModel-Loaders-Initializer-Creator 'Bb.ComponentModel.Loaders.Initializer.Creator')
   - [InjectRescue](#P-Bb-ComponentModel-Loaders-Initializer-InjectRescue 'Bb.ComponentModel.Loaders.Initializer.InjectRescue')
+  - [InjectValue](#P-Bb-ComponentModel-Loaders-Initializer-InjectValue 'Bb.ComponentModel.Loaders.Initializer.InjectValue')
   - [Last](#P-Bb-ComponentModel-Loaders-Initializer-Last 'Bb.ComponentModel.Loaders.Initializer.Last')
   - [Add()](#M-Bb-ComponentModel-Loaders-Initializer-Add-Bb-ComponentModel-Factories-Factory- 'Bb.ComponentModel.Loaders.Initializer.Add(Bb.ComponentModel.Factories.Factory)')
   - [AddInjectionAttribute(types)](#M-Bb-ComponentModel-Loaders-Initializer-AddInjectionAttribute-System-Type[]- 'Bb.ComponentModel.Loaders.Initializer.AddInjectionAttribute(System.Type[])')
@@ -2384,10 +2386,13 @@
 - [MethodSemanticsLookup](#T-ICSharpCode-Decompiler-Metadata-MethodSemanticsLookup 'ICSharpCode.Decompiler.Metadata.MethodSemanticsLookup')
 - [MethodTypeConverter](#T-Bb-Converters-MethodTypeConverter 'Bb.Converters.MethodTypeConverter')
   - [#ctor(type)](#M-Bb-Converters-MethodTypeConverter-#ctor-System-Type- 'Bb.Converters.MethodTypeConverter.#ctor(System.Type)')
+  - [Item](#P-Bb-Converters-MethodTypeConverter-Item-System-Type- 'Bb.Converters.MethodTypeConverter.Item(System.Type)')
   - [SourceType](#P-Bb-Converters-MethodTypeConverter-SourceType 'Bb.Converters.MethodTypeConverter.SourceType')
+  - [Add(newMethod)](#M-Bb-Converters-MethodTypeConverter-Add-Bb-Converters-MethodConverter- 'Bb.Converters.MethodTypeConverter.Add(Bb.Converters.MethodConverter)')
   - [AddFunction(targetType,func)](#M-Bb-Converters-MethodTypeConverter-AddFunction-System-Type,System-Func{System-Object,Bb-Converters-ConverterContext,System-Object}- 'Bb.Converters.MethodTypeConverter.AddFunction(System.Type,System.Func{System.Object,Bb.Converters.ConverterContext,System.Object})')
   - [Functions()](#M-Bb-Converters-MethodTypeConverter-Functions 'Bb.Converters.MethodTypeConverter.Functions')
   - [TryGetFunction(targetType,result)](#M-Bb-Converters-MethodTypeConverter-TryGetFunction-System-Type,System-Func{System-Object,Bb-Converters-ConverterContext,System-Object}@- 'Bb.Converters.MethodTypeConverter.TryGetFunction(System.Type,System.Func{System.Object,Bb.Converters.ConverterContext,System.Object}@)')
+  - [TryGetValue(key,value)](#M-Bb-Converters-MethodTypeConverter-TryGetValue-System-Type,System-Collections-Generic-List{Bb-Converters-MethodConverter}@- 'Bb.Converters.MethodTypeConverter.TryGetValue(System.Type,System.Collections.Generic.List{Bb.Converters.MethodConverter}@)')
 - [MinimalCorlib](#T-ICSharpCode-Decompiler-TypeSystem-Implementation-MinimalCorlib 'ICSharpCode.Decompiler.TypeSystem.Implementation.MinimalCorlib')
   - [Instance](#F-ICSharpCode-Decompiler-TypeSystem-Implementation-MinimalCorlib-Instance 'ICSharpCode.Decompiler.TypeSystem.Implementation.MinimalCorlib.Instance')
 - [Mode](#T-ICSharpCode-Decompiler-IL-Transforms-NullPropagationTransform-Mode 'ICSharpCode.Decompiler.IL.Transforms.NullPropagationTransform.Mode')
@@ -15204,8 +15209,25 @@ Convert a string to Decimal
 | ---- | ---- | ----------- |
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDictionary-System-String-'></a>
-### ToDictionary(self) `method`
+<a name='M-Bb-Expressions-ConverterHelper-ToDictionaryObject-System-String-'></a>
+### ToDictionaryObject(self) `method`
+
+##### Summary
+
+Convert a string to dictionary
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+
+<a name='M-Bb-Expressions-ConverterHelper-ToDictionaryString-System-String-'></a>
+### ToDictionaryString(self) `method`
 
 ##### Summary
 
@@ -26495,6 +26517,13 @@ Override the default creator
 
 called if the system can't resolve the value
 
+<a name='P-Bb-ComponentModel-Loaders-Initializer-InjectValue'></a>
+### InjectValue `property`
+
+##### Summary
+
+called if the system can't resolve the value
+
 <a name='P-Bb-ComponentModel-Loaders-Initializer-Last'></a>
 ### Last `property`
 
@@ -32423,12 +32452,42 @@ create a new instance of [MethodTypeConverter](#T-Bb-Converters-MethodTypeConver
 | ---- | ---- | ----------- |
 | type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | managed source type |
 
+<a name='P-Bb-Converters-MethodTypeConverter-Item-System-Type-'></a>
+### Item `property`
+
+##### Summary
+
+Get the list of conversion functions for the target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| key | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+
 <a name='P-Bb-Converters-MethodTypeConverter-SourceType'></a>
 ### SourceType `property`
 
 ##### Summary
 
 Managed source type
+
+<a name='M-Bb-Converters-MethodTypeConverter-Add-Bb-Converters-MethodConverter-'></a>
+### Add(newMethod) `method`
+
+##### Summary
+
+Add a conversion function
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMethod | [Bb.Converters.MethodConverter](#T-Bb-Converters-MethodConverter 'Bb.Converters.MethodConverter') |  |
 
 <a name='M-Bb-Converters-MethodTypeConverter-AddFunction-System-Type,System-Func{System-Object,Bb-Converters-ConverterContext,System-Object}-'></a>
 ### AddFunction(targetType,func) `method`
@@ -32476,6 +32535,24 @@ Try to get the conversion function for the target type
 | ---- | ---- | ----------- |
 | targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
 | result | [System.Func{System.Object,Bb.Converters.ConverterContext,System.Object}@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.Object,Bb.Converters.ConverterContext,System.Object}@') |  |
+
+<a name='M-Bb-Converters-MethodTypeConverter-TryGetValue-System-Type,System-Collections-Generic-List{Bb-Converters-MethodConverter}@-'></a>
+### TryGetValue(key,value) `method`
+
+##### Summary
+
+Try to get the list of conversion functions for the target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| key | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| value | [System.Collections.Generic.List{Bb.Converters.MethodConverter}@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{Bb.Converters.MethodConverter}@') |  |
 
 <a name='T-ICSharpCode-Decompiler-TypeSystem-Implementation-MinimalCorlib'></a>
 ## MinimalCorlib `type`

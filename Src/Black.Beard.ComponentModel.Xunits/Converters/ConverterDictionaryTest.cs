@@ -27,7 +27,6 @@ namespace Black.Beard.Converters
 
         }
 
-
         [Fact]
         public void Teststring2()
         {
@@ -64,6 +63,46 @@ namespace Black.Beard.Converters
             var result = ConverterHelper.ToObject<string>(dic);
 
             Assert.Equal(expectedValue, result);
+
+        }
+
+        [Fact]
+        public void Teststring4()
+        {
+
+            string value = "Key1=Value1;Key2=12";
+
+            var expectedResult = new Dictionary<string, string>()
+            {
+                { "key1", "Value1" },
+                { "key2", "12" }
+            };
+
+
+            var result = ConverterHelper.ToObject<Dictionary<string, string>>(value);
+
+            Assert.Equal(expectedResult["key1"], result["key1"]);
+            Assert.Equal(expectedResult["key2"], result["key2"]);
+
+        }
+
+        [Fact]
+        public void Teststring5()
+        {
+
+            string value = "Key1=Value1;Key2=12";
+
+            var expectedResult = new Dictionary<string, object>()
+            {
+                { "key1", "Value1" },
+                { "key2", "12" }
+            };
+
+
+            var result = ConverterHelper.ToObject<Dictionary<string, object>>(value);
+
+            Assert.Equal(expectedResult["key1"], result["key1"]);
+            Assert.Equal(expectedResult["key2"], result["key2"]);
 
         }
 

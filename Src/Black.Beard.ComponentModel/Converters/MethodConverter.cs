@@ -47,17 +47,25 @@ namespace Bb.Converters
             Method = method;
             IsStatic = method.IsStatic;
             TargetType = targetType;
+            TypeKey = new TypeKey(targetType);
             Parameters = method.GetParameters();
             var parameterLength = Parameters.Length;
 
             Type _genericArgument = null;
 
+            //if ("ToDictionary" == method.Name)
+            //    return;
+
             if (TargetType.IsGenericType)
             {
-                var genericArguments = TargetType.GetGenericArguments();
-                if (genericArguments.Length > 1)
+                // System.Collections.Generic.Dictionary`2[[System.String],[System.String]]
+                var tt = TargetType.GetGenericTypeDefinition();
+                if (!_genericTypeIncludes.Contains(tt))
                     return;
-                _genericArgument = genericArguments[0];
+
+                var genericArguments = TargetType.GetGenericArguments();
+                if (genericArguments.Length == 1)
+                    _genericArgument = genericArguments[0];
             }
 
             if (parameterLength == 0 && !IsStatic)
@@ -143,6 +151,8 @@ namespace Bb.Converters
         /// Gets a value indicating whether this method is a generic converter.
         /// </summary>
         public bool IsGenericConverter { get; }
+
+        internal TypeKey TypeKey { get; }
 
         /// <summary>
         /// Managed type to convert
@@ -241,6 +251,10 @@ namespace Bb.Converters
 
         private HashSet<Type> _sourceExcludes = new HashSet<Type>() { typeof(ReadOnlySpan<>), typeof(void) };
         private HashSet<Type> _targetExcludes = new HashSet<Type>() { typeof(void) };
+
+        private HashSet<Type> _genericTypeIncludes = new HashSet<Type>()
+        { typeof(Nullable<>), typeof(Dictionary<,>), typeof(IEnumerable<>) };
+
 
     }
 

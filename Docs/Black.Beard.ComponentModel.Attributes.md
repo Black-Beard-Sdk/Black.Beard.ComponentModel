@@ -15,6 +15,15 @@
   - [Dispose()](#M-Bb-BusySession-Dispose 'Bb.BusySession.Dispose')
   - [Run()](#M-Bb-BusySession-Run 'Bb.BusySession.Run')
   - [Update(message,percent)](#M-Bb-BusySession-Update-System-String,System-Int32- 'Bb.BusySession.Update(System.String,System.Int32)')
+- [ConstantsCore](#T-Bb-ComponentModel-ConstantsCore 'Bb.ComponentModel.ConstantsCore')
+  - [Cast](#F-Bb-ComponentModel-ConstantsCore-Cast 'Bb.ComponentModel.ConstantsCore.Cast')
+  - [Configuration](#F-Bb-ComponentModel-ConstantsCore-Configuration 'Bb.ComponentModel.ConstantsCore.Configuration')
+  - [ExposedTypes](#F-Bb-ComponentModel-ConstantsCore-ExposedTypes 'Bb.ComponentModel.ConstantsCore.ExposedTypes')
+  - [Initialization](#F-Bb-ComponentModel-ConstantsCore-Initialization 'Bb.ComponentModel.ConstantsCore.Initialization')
+  - [Model](#F-Bb-ComponentModel-ConstantsCore-Model 'Bb.ComponentModel.ConstantsCore.Model')
+  - [PerfMon](#F-Bb-ComponentModel-ConstantsCore-PerfMon 'Bb.ComponentModel.ConstantsCore.PerfMon')
+  - [Plugin](#F-Bb-ComponentModel-ConstantsCore-Plugin 'Bb.ComponentModel.ConstantsCore.Plugin')
+  - [Service](#F-Bb-ComponentModel-ConstantsCore-Service 'Bb.ComponentModel.ConstantsCore.Service')
 - [CultureProviderList](#T-Bb-ComponentModel-Attributes-CultureProviderList 'Bb.ComponentModel.Attributes.CultureProviderList')
   - [GetItems()](#M-Bb-ComponentModel-Attributes-CultureProviderList-GetItems 'Bb.ComponentModel.Attributes.CultureProviderList.GetItems')
 - [DataTranslation](#T-Bb-ComponentModel-Translations-DataTranslation 'Bb.ComponentModel.Translations.DataTranslation')
@@ -107,6 +116,11 @@
   - [#ctor(type,lifeCycle)](#M-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-#ctor-System-Type,Bb-ComponentModel-Attributes-IocScopeEnum- 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.#ctor(System.Type,Bb.ComponentModel.Attributes.IocScopeEnum)')
   - [LifeCycle](#P-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-LifeCycle 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.LifeCycle')
   - [Type](#P-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-Type 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.Type')
+- [IocException](#T-Bb-ComponentModel-Exceptions-IocException 'Bb.ComponentModel.Exceptions.IocException')
+  - [#ctor()](#M-Bb-ComponentModel-Exceptions-IocException-#ctor 'Bb.ComponentModel.Exceptions.IocException.#ctor')
+  - [#ctor(message)](#M-Bb-ComponentModel-Exceptions-IocException-#ctor-System-String- 'Bb.ComponentModel.Exceptions.IocException.#ctor(System.String)')
+  - [#ctor(message,inner)](#M-Bb-ComponentModel-Exceptions-IocException-#ctor-System-String,System-Exception- 'Bb.ComponentModel.Exceptions.IocException.#ctor(System.String,System.Exception)')
+  - [#ctor(info,context)](#M-Bb-ComponentModel-Exceptions-IocException-#ctor-System-Runtime-Serialization-SerializationInfo,System-Runtime-Serialization-StreamingContext- 'Bb.ComponentModel.Exceptions.IocException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)')
 - [ListItem](#T-Bb-ComponentModel-DataAnnotations-ListItem 'Bb.ComponentModel.DataAnnotations.ListItem')
   - [Disabled](#P-Bb-ComponentModel-DataAnnotations-ListItem-Disabled 'Bb.ComponentModel.DataAnnotations.ListItem.Disabled')
   - [Display](#P-Bb-ComponentModel-DataAnnotations-ListItem-Display 'Bb.ComponentModel.DataAnnotations.ListItem.Display')
@@ -173,6 +187,11 @@
 - [TypeDescriptorExtension](#T-Bb-ComponentModel-TypeDescriptorExtension 'Bb.ComponentModel.TypeDescriptorExtension')
   - [GetProperties(self)](#M-Bb-ComponentModel-TypeDescriptorExtension-GetProperties-System-Type- 'Bb.ComponentModel.TypeDescriptorExtension.GetProperties(System.Type)')
   - [GetProperties(self,funcFilter)](#M-Bb-ComponentModel-TypeDescriptorExtension-GetProperties-System-Type,System-Func{System-ComponentModel-PropertyDescriptor,System-Boolean}- 'Bb.ComponentModel.TypeDescriptorExtension.GetProperties(System.Type,System.Func{System.ComponentModel.PropertyDescriptor,System.Boolean})')
+- [UndefinedException](#T-Bb-ComponentModel-Exceptions-UndefinedException 'Bb.ComponentModel.Exceptions.UndefinedException')
+  - [#ctor()](#M-Bb-ComponentModel-Exceptions-UndefinedException-#ctor 'Bb.ComponentModel.Exceptions.UndefinedException.#ctor')
+  - [#ctor(variableName)](#M-Bb-ComponentModel-Exceptions-UndefinedException-#ctor-System-String- 'Bb.ComponentModel.Exceptions.UndefinedException.#ctor(System.String)')
+  - [#ctor(message,inner)](#M-Bb-ComponentModel-Exceptions-UndefinedException-#ctor-System-String,System-Exception- 'Bb.ComponentModel.Exceptions.UndefinedException.#ctor(System.String,System.Exception)')
+  - [#ctor(info,context)](#M-Bb-ComponentModel-Exceptions-UndefinedException-#ctor-System-Runtime-Serialization-SerializationInfo,System-Runtime-Serialization-StreamingContext- 'Bb.ComponentModel.Exceptions.UndefinedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)')
 
 <a name='T-Bb-BusySession'></a>
 ## BusySession `type`
@@ -305,6 +324,105 @@ Update the message form busy session
 | ---- | ---- | ----------- |
 | message | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
 | percent | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') |  |
+
+<a name='T-Bb-ComponentModel-ConstantsCore'></a>
+## ConstantsCore `type`
+
+##### Namespace
+
+Bb.ComponentModel
+
+##### Summary
+
+Provides constants for the Core component of the Black.Beard.ComponentModel library.
+
+<a name='F-Bb-ComponentModel-ConstantsCore-Cast'></a>
+### Cast `constants`
+
+##### Summary
+
+Gets the name of the cast key for the component.
+
+##### Remarks
+
+This key is used to specify the cast logic for the component.
+
+<a name='F-Bb-ComponentModel-ConstantsCore-Configuration'></a>
+### Configuration `constants`
+
+##### Summary
+
+Gets the name of the configuration key for the component.
+
+##### Remarks
+
+This key is used to specify the configuration settings for the component.
+
+<a name='F-Bb-ComponentModel-ConstantsCore-ExposedTypes'></a>
+### ExposedTypes `constants`
+
+##### Summary
+
+Gets the name of the exposed types configuration key.
+
+##### Remarks
+
+This key is used to specify the types that should be exposed by the component.
+
+<a name='F-Bb-ComponentModel-ConstantsCore-Initialization'></a>
+### Initialization `constants`
+
+##### Summary
+
+Gets the name of the initialization key for the component.
+
+##### Remarks
+
+This key is used to specify the initialization logic for the component.
+
+<a name='F-Bb-ComponentModel-ConstantsCore-Model'></a>
+### Model `constants`
+
+##### Summary
+
+Gets the name of the model key for the component.
+
+##### Remarks
+
+This key is used to specify the model settings for the component.
+
+<a name='F-Bb-ComponentModel-ConstantsCore-PerfMon'></a>
+### PerfMon `constants`
+
+##### Summary
+
+Gets the name of the performance monitoring key for the component.
+
+##### Remarks
+
+This key is used to specify the performance monitoring settings for the component.
+
+<a name='F-Bb-ComponentModel-ConstantsCore-Plugin'></a>
+### Plugin `constants`
+
+##### Summary
+
+Gets the name of the plugin key for the component.
+
+##### Remarks
+
+This key is used to specify the plugin settings for the component.
+
+<a name='F-Bb-ComponentModel-ConstantsCore-Service'></a>
+### Service `constants`
+
+##### Summary
+
+Gets the name of the service key for the component.
+
+##### Remarks
+
+This key is used to specify the service settings for the component.
 
 <a name='T-Bb-ComponentModel-Attributes-CultureProviderList'></a>
 ## CultureProviderList `type`
@@ -1341,6 +1459,73 @@ Gets or sets the life cycle if must be use in Ioc.
 
 Gets the type.
 
+<a name='T-Bb-ComponentModel-Exceptions-IocException'></a>
+## IocException `type`
+
+##### Namespace
+
+Bb.ComponentModel.Exceptions
+
+##### Summary
+
+Represents an exception that occurs in the IoC container.
+
+##### Remarks
+
+This exception is thrown when there is an error during the resolution or registration of dependencies in the IoC container.
+
+<a name='M-Bb-ComponentModel-Exceptions-IocException-#ctor'></a>
+### #ctor() `constructor`
+
+##### Summary
+
+Initializes a new instance of the [IocException](#T-Bb-ComponentModel-Exceptions-IocException 'Bb.ComponentModel.Exceptions.IocException') class.
+
+##### Parameters
+
+This constructor has no parameters.
+
+<a name='M-Bb-ComponentModel-Exceptions-IocException-#ctor-System-String-'></a>
+### #ctor(message) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [IocException](#T-Bb-ComponentModel-Exceptions-IocException 'Bb.ComponentModel.Exceptions.IocException') class with a specified error message.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| message | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The error message that explains the reason for the exception. |
+
+<a name='M-Bb-ComponentModel-Exceptions-IocException-#ctor-System-String,System-Exception-'></a>
+### #ctor(message,inner) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [IocException](#T-Bb-ComponentModel-Exceptions-IocException 'Bb.ComponentModel.Exceptions.IocException') class with a specified error message and a reference to the inner exception that is the cause of this exception.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| message | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The error message that explains the reason for the exception. |
+| inner | [System.Exception](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Exception 'System.Exception') | The exception that is the cause of the current exception, or a null reference if no inner exception is specified. |
+
+<a name='M-Bb-ComponentModel-Exceptions-IocException-#ctor-System-Runtime-Serialization-SerializationInfo,System-Runtime-Serialization-StreamingContext-'></a>
+### #ctor(info,context) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [IocException](#T-Bb-ComponentModel-Exceptions-IocException 'Bb.ComponentModel.Exceptions.IocException') class with serialized data.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| info | [System.Runtime.Serialization.SerializationInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Runtime.Serialization.SerializationInfo 'System.Runtime.Serialization.SerializationInfo') | The [SerializationInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Runtime.Serialization.SerializationInfo 'System.Runtime.Serialization.SerializationInfo') that holds the serialized object data about the exception being thrown. |
+| context | [System.Runtime.Serialization.StreamingContext](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Runtime.Serialization.StreamingContext 'System.Runtime.Serialization.StreamingContext') | The [StreamingContext](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Runtime.Serialization.StreamingContext 'System.Runtime.Serialization.StreamingContext') that contains contextual information about the source or destination. |
+
 <a name='T-Bb-ComponentModel-DataAnnotations-ListItem'></a>
 ## ListItem `type`
 
@@ -2126,3 +2311,70 @@ Return the list of propertyDescriptors
 | ---- | ---- | ----------- |
 | self | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
 | funcFilter | [System.Func{System.ComponentModel.PropertyDescriptor,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.ComponentModel.PropertyDescriptor,System.Boolean}') |  |
+
+<a name='T-Bb-ComponentModel-Exceptions-UndefinedException'></a>
+## UndefinedException `type`
+
+##### Namespace
+
+Bb.ComponentModel.Exceptions
+
+##### Summary
+
+Represents an exception that is thrown when a variable cannot be resolved.
+
+##### Remarks
+
+This exception is thrown when a variable cannot be resolved in the current context.
+
+<a name='M-Bb-ComponentModel-Exceptions-UndefinedException-#ctor'></a>
+### #ctor() `constructor`
+
+##### Summary
+
+Initializes a new instance of the [UndefinedException](#T-Bb-ComponentModel-Exceptions-UndefinedException 'Bb.ComponentModel.Exceptions.UndefinedException') class.
+
+##### Parameters
+
+This constructor has no parameters.
+
+<a name='M-Bb-ComponentModel-Exceptions-UndefinedException-#ctor-System-String-'></a>
+### #ctor(variableName) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [UndefinedException](#T-Bb-ComponentModel-Exceptions-UndefinedException 'Bb.ComponentModel.Exceptions.UndefinedException') class with the specified variable name.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| variableName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the variable that cannot be resolved. |
+
+<a name='M-Bb-ComponentModel-Exceptions-UndefinedException-#ctor-System-String,System-Exception-'></a>
+### #ctor(message,inner) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [UndefinedException](#T-Bb-ComponentModel-Exceptions-UndefinedException 'Bb.ComponentModel.Exceptions.UndefinedException') class with a specified error message and a reference to the inner exception that is the cause of this exception.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| message | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The error message that explains the reason for the exception. |
+| inner | [System.Exception](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Exception 'System.Exception') | The exception that is the cause of the current exception, or a null reference if no inner exception is specified. |
+
+<a name='M-Bb-ComponentModel-Exceptions-UndefinedException-#ctor-System-Runtime-Serialization-SerializationInfo,System-Runtime-Serialization-StreamingContext-'></a>
+### #ctor(info,context) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [UndefinedException](#T-Bb-ComponentModel-Exceptions-UndefinedException 'Bb.ComponentModel.Exceptions.UndefinedException') class with serialized data.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| info | [System.Runtime.Serialization.SerializationInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Runtime.Serialization.SerializationInfo 'System.Runtime.Serialization.SerializationInfo') | The [SerializationInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Runtime.Serialization.SerializationInfo 'System.Runtime.Serialization.SerializationInfo') that holds the serialized object data about the exception being thrown. |
+| context | [System.Runtime.Serialization.StreamingContext](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Runtime.Serialization.StreamingContext 'System.Runtime.Serialization.StreamingContext') | The [StreamingContext](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Runtime.Serialization.StreamingContext 'System.Runtime.Serialization.StreamingContext') that contains contextual information about the source or destination. |

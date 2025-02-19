@@ -1,17 +1,44 @@
 ﻿using Bb.ComponentModel;
 using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Loaders;
+using Bb.Injections;
 using FluentAssertions;
-using Namotion.Reflection;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Black.Beard.ComponentModel.Xunits.Initializers
 {
 
-
     public class ClassTest
     {
+
+
+        [Fact]
+        public void Test0()
+        {
+
+            Initializer.Initialize(c =>
+            {
+
+                c.InjectValue = (name) =>
+                {
+                    return "Toto=45";
+                };
+                c.OnInitialization = d =>
+                {
+                    if (d is InitializerTest t)
+                    {
+                        t.param4.Count.Should().Be(1);
+                        t.param4["toto"].Should().Be("45");
+                    }
+                };
+
+            }, "--param1:test");
+
+
+        }
+
 
         [Fact]
         public void Test1()
@@ -133,7 +160,7 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
                     }
                 };
 
-                c.InjectRescue = (e, d) =>
+                c.InjectRescue = (e, n, d) =>
                 {
                     return null;
                 };
@@ -197,16 +224,18 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
             return null;
         }
 
-        [EnvironmentMap("param1")]
+        [InjectValue("param1")]
         public string param1 { get; set; }
 
 
-        [EnvironmentMap("param2")]
+        [InjectValue("param2")]
         public bool param2 { get; set; }
 
-        [EnvironmentMap("param3")]
+        [InjectValue("param3")]
         public int param3 { get; set; }
 
+        [InjectValue("param4")]
+        public Dictionary<string, string> param4 { get; set; }
 
         [Inject]
         public Test1 ToInject { get; set; }

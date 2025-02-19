@@ -20,9 +20,20 @@ namespace Bb
             _execute = action;
         }
 
+        /// <summary>
+        /// Evaluates the target object with the specified value.
+        /// </summary>
+        /// <remarks>
+        /// This method evaluates the target object with the specified value using the provided evaluator function.
+        /// If the evaluator function is null or returns true, the action function will be invoked with the target object and the value.
+        /// </remarks>
+        /// <param name="target">The target object to evaluate.</param>
+        /// <param name="value">The value to evaluate the target object with.</param>
+        /// <returns>True if the evaluation passes or if the evaluator function is null, otherwise false.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when the target object is null.</exception>
         public bool Evaluate(T target, object value)
         {
-            
+
             var result = _evaluate == null || _evaluate(target, value);
 
             if (result)

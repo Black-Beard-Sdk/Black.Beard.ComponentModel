@@ -12,7 +12,6 @@ namespace Bb.Expressions
     public static partial class ConverterHelper
     {
 
-
         #region ToBoolean
 
         /// <summary>
@@ -20,9 +19,22 @@ namespace Bb.Expressions
         /// </summary>
         /// <param name="self"></param>
         /// <returns></returns>
-        public static Dictionary<string, string> ToDictionary(string self)
+        public static Dictionary<string, string> ToDictionaryString(string self)
         {
             return self.GetKeyValues();
+        }
+
+        /// <summary>
+        /// Convert a string to dictionary
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static Dictionary<string, object> ToDictionaryObject(string self)
+        {
+            var result = new Dictionary<string, object>();
+            foreach (var item in self.GetKeyValues())
+                result.Add(item.Key, item.Value);
+            return result;
         }
 
         #endregion ToBoolean

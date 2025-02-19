@@ -75,7 +75,7 @@ namespace Bb.Injections
                     if (attribute.Required && value == null)
                         throw new ArgumentNullException(item.Name);
 
-                    var convertedValue = value.ConvertTo(item.PropertyType, CultureInfo.CurrentCulture);
+                    var convertedValue = value.ConvertToObject(item.PropertyType);
                     item.SetValue(self, convertedValue);
 
                 }

@@ -32,16 +32,7 @@ namespace Bb.ComponentModel
         /// </summary>
         IUIComponent Parent { get; set; }
 
-        ///// <summary>
-        ///// Initializes a cascading update
-        ///// </summary>
-        //void UpdateCascade();
 
-        //void UpdateCascadeUp();
-
-        //void UpdateCascadeDown();
-
-        //event CascadeEventHandler? Cascade;
 
     }
 
