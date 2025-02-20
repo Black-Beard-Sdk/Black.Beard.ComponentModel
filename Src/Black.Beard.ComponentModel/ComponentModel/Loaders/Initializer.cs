@@ -97,6 +97,20 @@ namespace Bb.ComponentModel.Loaders
         }
 
         /// <summary>
+        /// Add service provider
+        /// </summary>
+        /// <param name="service">Service provider</param>
+        /// <returns></returns>
+        public Initializer WithService(IServiceProvider service)
+        {
+            if (service is LocalServiceProvider s && s.AutoAdd)
+                _serviceProvider = s;
+            else
+                _serviceProvider = new LocalServiceProvider(service) { AutoAdd = true };
+            return this;
+        }
+
+        /// <summary>
         /// Override the default creator
         /// </summary>
         public static Func<string[], Initializer> Creator { get; set; }
@@ -137,6 +151,11 @@ namespace Bb.ComponentModel.Loaders
 
         #endregion IServiceProvider
 
+        /// <summary>
+        /// Initialize the inject builder
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public Initializer SetInjectValue(Func<string, object> value)
         {
             InjectValue = value;
@@ -239,6 +258,7 @@ namespace Bb.ComponentModel.Loaders
             {
 
                 init.WithArguments(_args)
+                    
                     .WithInjectRescue(InjectRescue)
                     .WithInjectValue(InjectValue)
                     ;

@@ -1900,8 +1900,10 @@
   - [Initialize(args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.String[])')
   - [Initialize(init,args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.String[])')
   - [Initialize(args,init,initializer)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}},System.String[])')
+  - [SetInjectValue(value)](#M-Bb-ComponentModel-Loaders-Initializer-SetInjectValue-System-Func{System-String,System-Object}- 'Bb.ComponentModel.Loaders.Initializer.SetInjectValue(System.Func{System.String,System.Object})')
   - [TryGetFolders(key,value)](#M-Bb-ComponentModel-Loaders-Initializer-TryGetFolders-System-String,System-Collections-Generic-IEnumerable{System-String}@- 'Bb.ComponentModel.Loaders.Initializer.TryGetFolders(System.String,System.Collections.Generic.IEnumerable{System.String}@)')
   - [TryGetValue(key,value)](#M-Bb-ComponentModel-Loaders-Initializer-TryGetValue-System-String,System-Object@- 'Bb.ComponentModel.Loaders.Initializer.TryGetValue(System.String,System.Object@)')
+  - [WithService(service)](#M-Bb-ComponentModel-Loaders-Initializer-WithService-System-IServiceProvider- 'Bb.ComponentModel.Loaders.Initializer.WithService(System.IServiceProvider)')
 - [InjectValueAttributeExtensions](#T-Bb-Injections-InjectValueAttributeExtensions 'Bb.Injections.InjectValueAttributeExtensions')
   - [GetKeys\`\`1(type)](#M-Bb-Injections-InjectValueAttributeExtensions-GetKeys``1-System-Type- 'Bb.Injections.InjectValueAttributeExtensions.GetKeys``1(System.Type)')
   - [InjectValue\`\`1(self,valueResolver)](#M-Bb-Injections-InjectValueAttributeExtensions-InjectValue``1-``0,System-Func{System-String,System-String}- 'Bb.Injections.InjectValueAttributeExtensions.InjectValue``1(``0,System.Func{System.String,System.String})')
@@ -26659,6 +26661,23 @@ Discover all initializer and execute them for initializing the application
 | init | [System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}') | method to configure the process of initialization |
 | initializer | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | method to configure every InjectionLoader |
 
+<a name='M-Bb-ComponentModel-Loaders-Initializer-SetInjectValue-System-Func{System-String,System-Object}-'></a>
+### SetInjectValue(value) `method`
+
+##### Summary
+
+Initialize the inject builder
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | [System.Func{System.String,System.Object}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.String,System.Object}') |  |
+
 <a name='M-Bb-ComponentModel-Loaders-Initializer-TryGetFolders-System-String,System-Collections-Generic-IEnumerable{System-String}@-'></a>
 ### TryGetFolders(key,value) `method`
 
@@ -26694,6 +26713,23 @@ try to get the value for the specified value.
 | ---- | ---- | ----------- |
 | key | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | key |
 | value | [System.Object@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object@ 'System.Object@') | value for the key |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-WithService-System-IServiceProvider-'></a>
+### WithService(service) `method`
+
+##### Summary
+
+Add service provider
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| service | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') | Service provider |
 
 <a name='T-Bb-Injections-InjectValueAttributeExtensions'></a>
 ## InjectValueAttributeExtensions `type`
