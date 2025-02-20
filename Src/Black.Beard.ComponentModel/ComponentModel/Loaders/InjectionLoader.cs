@@ -1,10 +1,95 @@
 ﻿using Bb.ComponentModel.Factories;
+using ICSharpCode.Decompiler.Disassembler;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Bb.ComponentModel.Loaders
 {
+
+    public class InjectionLoader
+    {
+
+
+        public InjectionLoader(string context, IServiceProvider serviceProvider = null)
+        {
+
+            this.Context = context;
+
+            if (serviceProvider is LocalServiceProvider s && s.AutoAdd)
+                ServiceProvider = s;
+
+            else
+                ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
+
+            Types = new List<Type>();
+            Executed = new HashSet<string>();
+
+        }
+
+        /// <summary>
+        /// Context the match for explore the assemblies
+        /// </summary>
+        public string Context { get; }
+
+        /// <summary>
+        /// method to resolve the value by name to inject
+        /// </summary>
+        public Func<string, object> InjectValue { get; internal set; }
+
+        /// <summary>
+        /// Service provider
+        /// </summary>
+        public LocalServiceProvider ServiceProvider { get; internal set; }
+
+        /// <summary>
+        /// List of types builder found
+        /// </summary>
+        public List<Type> Types { get; }
+
+        /// <summary>
+        /// List of builder instances initialized
+        /// </summary>
+        public HashSet<string> Executed { get; }
+
+        //public bool ExcludeAbstractTypes { get; internal set; } = true;
+
+        //public bool ExcludeGenericTypes { get; internal set; } = true;
+
+        /// <summary>
+        /// return true if the module must be evaluated
+        /// </summary>
+        /// <param name="friendlyName"></param>
+        /// <returns></returns>
+        public bool CanExecuteModule(string friendlyName)
+        {
+
+            bool result = true;
+            if (_parser.TryResolveStringValue(friendlyName, out string variableValue))
+                result = variableValue?.ToLower() != "false";
+
+            if (result)
+                Debug.WriteLine($"injectionLoader {friendlyName} must be executed");
+            else
+                Debug.WriteLine($"injectionLoader {friendlyName} by passed");
+            return result;
+
+        }
+
+        /// <summary>
+        /// add attribute to match for inject instance
+        /// </summary>
+        /// <param name="types"></param>
+        public static void AddInjectionAttribute(params Type[] types)
+        {
+            foreach (var item in types)
+                ObjectCreatorByIoc.SetInjectionAttribute(item);
+        }
+
+        internal CommandLineParser _parser;
+
+    }
 
 
     /// <summary>
@@ -45,7 +130,7 @@ namespace Bb.ComponentModel.Loaders
     ///         .Execute(instance);
     /// </code>
     /// </example>
-    public class InjectionLoader<T>
+    public class InjectionLoader<T> : InjectionLoader
     {
 
 
@@ -57,105 +142,30 @@ namespace Bb.ComponentModel.Loaders
         /// <remarks>
         /// This constructor initializes a new instance of the <see cref="InjectionLoader{T}"/> class.
         /// </remarks>        
-        public InjectionLoader(string context, IServiceProvider serviceProvider = null)
+        public InjectionLoader(string context, IServiceProvider serviceProvider = null, Action<InjectionLoader<T>> initializer = null)
+            : base(context, serviceProvider)
         {
 
-            this.Context = context;
-
-            if (serviceProvider is LocalServiceProvider s && s.AutoAdd)
-                ServiceProvider = s;
-
-            else
-                ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
-
-
-            Types = new List<Type>();
             Instances = new List<IInjectBuilder<T>>();
-            Executed = new HashSet<string>();
+
+            if (initializer != null)
+                initializer(this);
+
         }
 
-        /// <summary>
-        /// Sets the inject value rescue function.
-        /// </summary>
-        /// <param name="injectRescue">The inject rescue function.</param>
-        /// <returns>The current instance of <see cref="InjectionLoader{T}"/>.</returns>
-        /// <remarks>
-        /// This method sets the function that will be called when the system cannot resolve the value to inject.
-        /// The function takes a <see cref="PropertyDescriptor"/> representing the property being injected,
-        /// a string representing the context, and an <see cref="IInjectBuilder{T}"/> instance.
-        /// It should return the value to be injected.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="injectRescue"/> is null.</exception>
-        public InjectionLoader<T> SetInjectRescue(Func<PropertyDescriptor, string, IInjectBuilder<T>, object> injectRescue)
+        public Func<PropertyDescriptor, string, IInjectBuilder<T>, object> InjectRescue { get; internal set; }
+
+
+        internal void AddInstances(IEnumerable<IInjectBuilder<T>> instances)
         {
-            InjectRescue = injectRescue;
-            return this;
+            var i = Instances as List<IInjectBuilder<T>>;
+            i.AddRange(instances);
         }
-
-        /// <summary>
-        /// Sets the inject value function.
-        /// </summary>
-        /// <param name="injectValue">The inject value function.</param>
-        /// <returns>The current instance of <see cref="InjectionLoader{T}"/>.</returns>
-        /// <remarks>
-        /// This method sets the function that will be called to retrieve the value to be injected.
-        /// The function takes a <see cref="string"/> representing the inject value and should return the value to be injected.
-        /// </remarks>
-        public InjectionLoader<T> SetInjectValue(Func<string, object> injectValue)
-        {
-            InjectValue = injectValue;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the services for the injection loader.
-        /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        /// <returns>The current instance of <see cref="InjectionLoader{T}"/>.</returns>
-        /// <remarks>
-        /// This method sets the <paramref name="serviceProvider"/> for the injection loader.
-        /// </remarks>
-        public InjectionLoader<T> WithServices(IServiceProvider serviceProvider)
-        {
-            ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
-            return this;
-        }
-
-        public Func<PropertyDescriptor, string, IInjectBuilder<T>, object> InjectRescue { get; private set; }
-
-        /// <summary>
-        /// method to resolve the value by name to inject
-        /// </summary>
-        public Func<string, object> InjectValue { get; private set; }
-
-        public string Context { get; }
-
-
-        /// <summary>
-        /// Service provider
-        /// </summary>
-        public LocalServiceProvider ServiceProvider { get; private set; }
-
-        /// <summary>
-        /// List of types builder found
-        /// </summary>
-        public List<Type> Types { get; }
 
         /// <summary>
         /// List of builder instances
         /// </summary>
-        public List<IInjectBuilder<T>> Instances { get; }
-
-        /// <summary>
-        /// List of builder instances initialized
-        /// </summary>
-        public HashSet<string> Executed { get; }
-
-        public bool ExcludeAbstractTypes { get; set; } = true;
-
-        public bool ExcludeGenericTypes { get; internal set; } = true;
-
-        internal CommandLineParser _parser;
+        public IEnumerable<IInjectBuilder<T>> Instances { get; }
 
     }
 

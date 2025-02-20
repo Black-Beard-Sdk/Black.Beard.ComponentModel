@@ -1,6 +1,6 @@
 ﻿using Bb.ComponentModel.Exceptions;
+using Bb.ComponentModel.Factories;
 using Bb.Expressions;
-using ICSharpCode.Decompiler.Disassembler;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -56,7 +56,7 @@ namespace Bb.ComponentModel.Loaders
         static LoaderInjectionExtensions()
         {
             _method = typeof(LoaderInjectionExtensions).GetMethods()
-                   .Where(c => c.Name == nameof(LoaderInjectionExtensions.Initialize))
+                   .Where(c => c.Name == nameof(LoaderInjectionExtensions.Configure))
                    .First(c => c.IsGenericMethod);
         }
 
@@ -68,12 +68,13 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="self">instance to initialize</param>
         /// <param name="serviceProvider"><see cref="IServiceProvider"/></param>
         /// <param name="context">by default the value is "Initialization"</param>
-        /// <param name="action">action to execute for every loader</param>
+        /// <param name="initializer">action to execute for every loader</param>
+        /// <param name="action">action to initialize for every loader</param>
         /// <returns></returns>
-        public static T Initialize<T>(this T self, IServiceProvider serviceProvider = null, string? context = null, Action<IInjectBuilder<T>> action = null)
+        public static T Configure<T>(this T self, IServiceProvider serviceProvider = null, string? context = null, Action<InjectionLoader<T>> initializer = null, Action<IInjectBuilder<T>> action = null)
         {
 
-            var loader = new InjectionLoader<T>(context ?? ConstantsCore.Initialization, serviceProvider)
+            var loader = new InjectionLoader<T>(context ?? ConstantsCore.Initialization, serviceProvider, initializer)
                 .LoadModules(action)
                 .Execute(self);
 
@@ -83,47 +84,147 @@ namespace Bb.ComponentModel.Loaders
 
 
         /// <summary>
-        /// create instance and initialize service from service provider
+        /// Sets the inject value rescue function.
         /// </summary>
-        /// <typeparam name="T">type of the service asked</typeparam>
-        /// <param name="serviceProvider"></param>
-        /// <param name="context"></param>
-        /// <param name="initializer"></param>
-        /// <returns></returns>
-        public static T GetInitializedService<T>(this IServiceProvider serviceProvider, string context, Action<IInjectBuilder<T>> initializer = null)
+        /// <typeparam name="T">Type of object must by resolved by discovery</typeparam>
+        /// <param name="self">instance to initialize</param>
+        /// <param name="injectRescue">The inject rescue function.</param>
+        /// <returns>The current instance of <see cref="InjectionLoader{T}"/>.</returns>
+        /// <remarks>
+        /// This method sets the function that will be called when the system cannot resolve the value to inject.
+        /// The function takes a <see cref="PropertyDescriptor"/> representing the property being injected,
+        /// a string representing the context, and an <see cref="IInjectBuilder{T}"/> instance.
+        /// It should return the value to be injected.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="injectRescue"/> is null.</exception>
+        public static InjectionLoader<T> WithInjectRescue<T>(this InjectionLoader<T> self, Func<PropertyDescriptor, string, IInjectBuilder<T>, object> injectRescue)
         {
+            self.InjectRescue = injectRescue;
+            return self;
+        }
 
-            var instance = (T)serviceProvider.GetService(typeof(T));
 
-            if (instance != null)
-                instance.Initialize(serviceProvider, context, initializer);
+        //public static InjectionLoader<T> WithExcludeAbstractTypes<T>(this InjectionLoader<T> self, bool value)
+        //{
+        //    self.ExcludeAbstractTypes = value;
+        //    return self;
+        //}
 
-            return instance;
+        //public static InjectionLoader<T> WithExcludeGenericTypes<T>(this InjectionLoader<T> self, bool value)
+        //{
+        //    self.ExcludeGenericTypes = value;
+        //    return self;
+        //}
 
+
+        /// <summary>
+        /// Sets the services for the injection loader.
+        /// </summary>
+        /// <typeparam name="T">Type of object must by resolved by discovery</typeparam>
+        /// <param name="self">instance to initialize</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <returns>The current instance of <see cref="InjectionLoader{T}"/>.</returns>
+        /// <remarks>
+        /// This method sets the <paramref name="serviceProvider"/> for the injection loader.
+        /// </remarks>
+        public static InjectionLoader<T> WithServices<T>(this InjectionLoader<T> self, IServiceProvider serviceProvider)
+        {
+            self.ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
+            return self;
+        }
+
+        /// <summary>
+        /// Sets the services for the injection loader.
+        /// </summary>
+        /// <typeparam name="T">Type of object must by resolved by discovery</typeparam>
+        /// <param name="self">instance to initialize</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="initializer">service initializer</param>
+        /// <returns>The current instance of <see cref="InjectionLoader{T}"/>.</returns>
+        /// <remarks>
+        /// This method sets the <paramref name="serviceProvider"/> for the injection loader.
+        /// </remarks>
+        public static InjectionLoader<T> WithServices<T>(this InjectionLoader<T> self, IServiceProvider serviceProvider, Action<LocalServiceProvider> initializer)
+        {
+            self.ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
+            initializer?.Invoke(self.ServiceProvider);
+            return self;
+        }
+
+        /// <summary>
+        /// Apply argument on the loader
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="self"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static InjectionLoader<T> WithArguments<T>(this InjectionLoader<T> self, string[] args)
+        {
+            self._parser = new CommandLineParser(args);
+            return self;
+        }
+
+
+        /// <summary>
+        /// Sets the inject value function.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="self">loader to configure</param>
+        /// <param name="injectValue">The inject value function.</param>
+        /// <returns>The current instance of <see cref="InjectionLoader{T}"/>.</returns>
+        /// <remarks>
+        /// This method sets the function that will be called to retrieve the value to be injected.
+        /// The function takes a <see cref="string"/> representing the inject value and should return the value to be injected.
+        /// </remarks>
+        public static InjectionLoader<T> WithInjectValue<T>(this InjectionLoader<T> self, Func<string, object> injectValue)
+        {
+            self.InjectValue = injectValue;
+            return self;
         }
 
         /// <summary>
         /// create instance and initialize service from service provider
         /// </summary>
         /// <typeparam name="T">type of the service asked</typeparam>
-        /// <param name="serviceProvider"></param>
-        /// <param name="context"></param>
-        /// <param name="initializer"></param>
+        /// <param name="serviceProvider"><see cref="IServiceProvider"/></param>
+        /// <param name="context">by default the value is "Initialization"</param>
+        /// <param name="initializer">action to execute for every loader</param>
+        /// <param name="action">action to initialize for every loader</param>
         /// <returns></returns>
-        public static object GetInitializedService(this IServiceProvider serviceProvider, Type type, string context, Action<IInjectBuilder> initializer = null)
+        public static T GetConfiguredService<T>(this IServiceProvider serviceProvider, string context, Action<InjectionLoader<T>> initializer = null, Action<IInjectBuilder<T>> action = null)
         {
 
-            var instance = serviceProvider.GetService(type);
+            var instance = (T)serviceProvider.GetService(typeof(T));
 
             if (instance != null)
-            {
-                var method = _method.MakeGenericMethod(type);
-                method.Invoke(instance, new object[] { serviceProvider, context, initializer });
-            }
+                instance.Configure(serviceProvider, context, initializer, action);
 
             return instance;
 
         }
+
+        ///// <summary>
+        ///// create instance and initialize service from service provider
+        ///// </summary>
+        ///// <typeparam name="T">type of the service asked</typeparam>
+        ///// <param name="serviceProvider"><see cref="IServiceProvider"/></param>
+        ///// <param name="context">by default the value is "Initialization"</param>
+        ///// <param name="initializer">action to execute for every loader</param>
+        ///// <param name="action">action to initialize for every loader</param>
+        //public static object GetConfiguredService(this IServiceProvider serviceProvider, Type type, string context, Action<InjectionLoader> initializer = null, Action<IInjectBuilder> action = null)
+        //{
+
+        //    var instance = serviceProvider.GetService(type);
+
+        //    if (instance != null)
+        //    {
+        //        var method = _method.MakeGenericMethod(type);
+        //        method.Invoke(instance, new object[] { serviceProvider, context, initializer, action });
+        //    }
+
+        //    return instance;
+
+        //}
 
 
         /// <summary>
@@ -144,7 +245,7 @@ namespace Bb.ComponentModel.Loaders
                 initializer?.Invoke(c);
             };
 
-            self.Instances.AddRange(InjectionExtensions.LoadAbstractLoaders(self.Types, initializerAction, self.ServiceProvider));
+            self.AddInstances(InjectionExtensions.LoadAbstractLoaders(self.Types, initializerAction, self.ServiceProvider));
             return self;
         }
 

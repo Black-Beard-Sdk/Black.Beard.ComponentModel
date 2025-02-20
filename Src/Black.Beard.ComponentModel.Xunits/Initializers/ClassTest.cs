@@ -35,7 +35,6 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
         }
 
-
         [Fact]
         public void Test1()
         {
@@ -137,7 +136,6 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
         }
 
-
         [Fact]
         public void Test5()
         {
@@ -166,7 +164,6 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
             ok.Should().BeTrue();
 
         }
-
 
         public class BuilderTest
         {
@@ -260,4 +257,5 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
         string Name { get; set; }
 
     }
+
 }
