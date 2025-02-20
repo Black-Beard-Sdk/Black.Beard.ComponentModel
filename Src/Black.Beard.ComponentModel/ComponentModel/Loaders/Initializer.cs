@@ -140,81 +140,6 @@ namespace Bb.ComponentModel.Loaders
 
         }
 
-        /// <summary>
-        /// Map a class with the command line args and environment variables
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="instance"></param>
-        /// <returns></returns>
-        private IInjectBuilder<Initializer> Map(IInjectBuilder<Initializer> instance)
-        {
-
-
-            var propertyCollection = TypeDescriptor.GetProperties(instance);
-
-            foreach (PropertyDescriptor property in propertyCollection)
-                if (property.GetValue(instance) == default)
-                {
-
-                    bool resolved = false;
-                    object value = null;
-
-                    bool required = false;
-                    string variableName = property.Name;
-                    if (ResolveVariableName(property, out string n, out bool r))
-                    {
-                        variableName = n;
-                        required = r;
-                        if (InjectValue != null)
-                        {
-                            value = InjectValue(variableName);
-                            resolved = true;
-                        }
-                    }
-
-                    if (!resolved)
-                    {
-
-                        if (_parser.TryResolveStringValue(variableName, out string v2))
-                        {
-                            value = v2;
-                            resolved = true;
-                        }
-                        else if (InjectRescue != null && TryToResolve(property, variableName, instance, out value))
-                            resolved = true;
-                    
-                    }
-
-                    if (value != null && property.PropertyType != value.GetType())
-                        try
-                        {
-                            value = ConverterHelper.ConvertToObject(value, property.PropertyType);
-                        }
-                        catch (Exception e)
-                        {
-                            throw new InvalidCastException($"var '{variableName}' can't be convert to '{property.PropertyType.Name}'.", e);
-                        }
-
-                    if (value != default)
-                        property.SetValue(instance, value);
-
-                    else if (required && !resolved)
-                    {
-                        throw new UndefinedException(nameof(variableName));
-                    }
-
-                }
-
-            return instance;
-
-        }
-
-        private bool TryToResolve(PropertyDescriptor property, string variableName, IInjectBuilder<Initializer> instance, out object value)
-        {
-            value = this.InjectRescue(property, variableName, instance);
-            return value != null;
-        }
-
 
         /// <summary>
         /// called if the system can't resolve the value
@@ -313,54 +238,20 @@ namespace Bb.ComponentModel.Loaders
         {
 
             var loader = new InjectionLoader<Initializer>(Context, this._serviceProvider)
-                .LoadModules(c =>
-                {
-
-                    Map(c);
-
-                    if (OnInitialization != null)
-                        OnInitialization(c);
-
-                })
-                .Execute(this);
-
-        }
-
-        private bool ResolveMappingValue(PropertyInfo property, Type type, out object value)
-        {
-
-            value = null;
-
-            var attribute2 = property.GetCustomAttributes()
-                .Where(c => c.GetType() == type)
-                .FirstOrDefault();
-
-            if (attribute2 != null)
-                value = ConverterHelper.ConvertToObject(GetService(property.PropertyType), property.PropertyType);
-
-            return true;
-
-        }
-
-        private bool ResolveVariableName(PropertyDescriptor property, out string name, out bool required)
-        {
-
-            required = false;
-            name = property.Name;
-
-            var attribute = property.Attributes.OfType<InjectValueAttribute>().FirstOrDefault();
-            if (attribute != null)
             {
-
-                if (!string.IsNullOrEmpty(attribute.VariableName))
-                {
-                    name = attribute.VariableName;
-                    required = attribute.Required;
-                }
+                _parser = _parser,
             }
+            .SetInjectRescue(InjectRescue)
+            .SetInjectValue(InjectValue)
+            .LoadModules(OnInitialization)
+            .Execute(this);
 
-            return true;
+        }
 
+        public Initializer SetInjectValue(Func<string, object> value)
+        {
+            InjectValue = value;
+            return this;
         }
 
         private CommandLineParser _parser;

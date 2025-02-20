@@ -21,21 +21,17 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
             Initializer.Initialize(c =>
             {
 
-                c.InjectValue = (name) =>
-                {
-                    return "Toto=45";
-                };
-                c.OnInitialization = d =>
-                {
-                    if (d is InitializerTest t)
-                    {
-                        t.param4.Count.Should().Be(1);
-                        t.param4["toto"].Should().Be("45");
-                    }
-                };
+                c.SetInjectValue((name) => name == "param4" ? "Toto=45" : null)
+                 .OnInitialization = d =>
+                 {
+                     if (d is InitializerTest t)
+                     {
+                         t.param4.Count.Should().Be(1);
+                         t.param4["toto"].Should().Be("45");
+                     }
+                 };
 
-            }, "--param1:test");
-
+            }, "--param1:test", "--param3:6");
 
         }
 

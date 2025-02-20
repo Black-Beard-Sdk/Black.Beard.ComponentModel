@@ -1,6 +1,7 @@
 ﻿using Bb.ComponentModel.Factories;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Bb.ComponentModel.Loaders
 {
@@ -47,9 +48,15 @@ namespace Bb.ComponentModel.Loaders
     public class InjectionLoader<T>
     {
 
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="InitializationLoader{T}"/> class.
+        /// Initializes a new instance of the <see cref="InjectionLoader{T}"/> class.
         /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <remarks>
+        /// This constructor initializes a new instance of the <see cref="InjectionLoader{T}"/> class.
+        /// </remarks>        
         public InjectionLoader(string context, IServiceProvider serviceProvider = null)
         {
 
@@ -57,7 +64,7 @@ namespace Bb.ComponentModel.Loaders
 
             if (serviceProvider is LocalServiceProvider s && s.AutoAdd)
                 ServiceProvider = s;
-           
+
             else
                 ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
 
@@ -67,14 +74,66 @@ namespace Bb.ComponentModel.Loaders
             Executed = new HashSet<string>();
         }
 
-        public string Context { get; }
+        /// <summary>
+        /// Sets the inject value rescue function.
+        /// </summary>
+        /// <param name="injectRescue">The inject rescue function.</param>
+        /// <returns>The current instance of <see cref="InjectionLoader{T}"/>.</returns>
+        /// <remarks>
+        /// This method sets the function that will be called when the system cannot resolve the value to inject.
+        /// The function takes a <see cref="PropertyDescriptor"/> representing the property being injected,
+        /// a string representing the context, and an <see cref="IInjectBuilder{T}"/> instance.
+        /// It should return the value to be injected.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="injectRescue"/> is null.</exception>
+        public InjectionLoader<T> SetInjectRescue(Func<PropertyDescriptor, string, IInjectBuilder<T>, object> injectRescue)
+        {
+            InjectRescue = injectRescue;
+            return this;
+        }
 
+        /// <summary>
+        /// Sets the inject value function.
+        /// </summary>
+        /// <param name="injectValue">The inject value function.</param>
+        /// <returns>The current instance of <see cref="InjectionLoader{T}"/>.</returns>
+        /// <remarks>
+        /// This method sets the function that will be called to retrieve the value to be injected.
+        /// The function takes a <see cref="string"/> representing the inject value and should return the value to be injected.
+        /// </remarks>
+        public InjectionLoader<T> SetInjectValue(Func<string, object> injectValue)
+        {
+            InjectValue = injectValue;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the services for the injection loader.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <returns>The current instance of <see cref="InjectionLoader{T}"/>.</returns>
+        /// <remarks>
+        /// This method sets the <paramref name="serviceProvider"/> for the injection loader.
+        /// </remarks>
         public InjectionLoader<T> WithServices(IServiceProvider serviceProvider)
         {
             ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
             return this;
         }
 
+        public Func<PropertyDescriptor, string, IInjectBuilder<T>, object> InjectRescue { get; private set; }
+
+        /// <summary>
+        /// method to resolve the value by name to inject
+        /// </summary>
+        public Func<string, object> InjectValue { get; private set; }
+
+        public string Context { get; }
+
+
+        /// <summary>
+        /// Service provider
+        /// </summary>
         public LocalServiceProvider ServiceProvider { get; private set; }
 
         /// <summary>
@@ -95,6 +154,8 @@ namespace Bb.ComponentModel.Loaders
         public bool ExcludeAbstractTypes { get; set; } = true;
 
         public bool ExcludeGenericTypes { get; internal set; } = true;
+
+        internal CommandLineParser _parser;
 
     }
 

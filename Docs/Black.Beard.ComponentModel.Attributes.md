@@ -34,9 +34,11 @@
   - [Value](#P-Bb-ComponentModel-Translations-DataTranslation-Value 'Bb.ComponentModel.Translations.DataTranslation.Value')
 - [DependOfAttribute](#T-Bb-ComponentModel-Attributes-DependOfAttribute 'Bb.ComponentModel.Attributes.DependOfAttribute')
   - [#ctor(type)](#M-Bb-ComponentModel-Attributes-DependOfAttribute-#ctor-System-Type- 'Bb.ComponentModel.Attributes.DependOfAttribute.#ctor(System.Type)')
+- [DisposedEventHandler](#T-Bb-ComponentModel-DisposedEventHandler 'Bb.ComponentModel.DisposedEventHandler')
 - [EnumerationProviderAttribute](#T-Bb-ComponentModel-Attributes-EnumerationProviderAttribute 'Bb.ComponentModel.Attributes.EnumerationProviderAttribute')
 - [EvaluatorEventArgs\`1](#T-Bb-EvaluatorEventArgs`1 'Bb.EvaluatorEventArgs`1')
   - [#ctor(evaluator)](#M-Bb-EvaluatorEventArgs`1-#ctor-System-Func{`0,System-Object,System-Boolean},System-Action{`0,System-Object}- 'Bb.EvaluatorEventArgs`1.#ctor(System.Func{`0,System.Object,System.Boolean},System.Action{`0,System.Object})')
+  - [Evaluate(target,value)](#M-Bb-EvaluatorEventArgs`1-Evaluate-`0,System-Object- 'Bb.EvaluatorEventArgs`1.Evaluate(`0,System.Object)')
 - [ExposeClassAttribute](#T-Bb-ComponentModel-Attributes-ExposeClassAttribute 'Bb.ComponentModel.Attributes.ExposeClassAttribute')
   - [#ctor()](#M-Bb-ComponentModel-Attributes-ExposeClassAttribute-#ctor 'Bb.ComponentModel.Attributes.ExposeClassAttribute.#ctor')
   - [#ctor(context)](#M-Bb-ComponentModel-Attributes-ExposeClassAttribute-#ctor-System-String- 'Bb.ComponentModel.Attributes.ExposeClassAttribute.#ctor(System.String)')
@@ -62,6 +64,9 @@
   - [OrderPriority](#P-Bb-ComponentModel-Loaders-IApplicationBuilderInitializer-OrderPriority 'Bb.ComponentModel.Loaders.IApplicationBuilderInitializer.OrderPriority')
   - [Type](#P-Bb-ComponentModel-Loaders-IApplicationBuilderInitializer-Type 'Bb.ComponentModel.Loaders.IApplicationBuilderInitializer.Type')
 - [IBusyService](#T-Bb-IBusyService 'Bb.IBusyService')
+  - [IsBusyFor(instance,title,action)](#M-Bb-IBusyService-IsBusyFor-System-Object,System-String,System-Action{Bb-BusySession}- 'Bb.IBusyService.IsBusyFor(System.Object,System.String,System.Action{Bb.BusySession})')
+  - [Update(session)](#M-Bb-IBusyService-Update-Bb-BusySession- 'Bb.IBusyService.Update(Bb.BusySession)')
+- [IDisposed](#T-Bb-ComponentModel-IDisposed 'Bb.ComponentModel.IDisposed')
 - [IFocusedService\`1](#T-Bb-IFocusedService`1 'Bb.IFocusedService`1')
   - [FocusChange(sender,test)](#M-Bb-IFocusedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean}- 'Bb.IFocusedService`1.FocusChange(System.Object,System.Func{`0,System.Object,System.Boolean})')
   - [FocusChange(sender,test,action)](#M-Bb-IFocusedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean},System-Action{`0,System-Object}- 'Bb.IFocusedService`1.FocusChange(System.Object,System.Func{`0,System.Object,System.Boolean},System.Action{`0,System.Object})')
@@ -508,6 +513,28 @@ Ctor
 | ---- | ---- | ----------- |
 | type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
 
+<a name='T-Bb-ComponentModel-DisposedEventHandler'></a>
+## DisposedEventHandler `type`
+
+##### Namespace
+
+Bb.ComponentModel
+
+##### Summary
+
+Represents the method that will handle the disposing of an object.
+event raised when instance is disposed.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| sender | [T:Bb.ComponentModel.DisposedEventHandler](#T-T-Bb-ComponentModel-DisposedEventHandler 'T:Bb.ComponentModel.DisposedEventHandler') | The source of the event. |
+
+##### Remarks
+
+This delegate represents the method that will be called when an object is being disposed.
+
 <a name='T-Bb-ComponentModel-Attributes-EnumerationProviderAttribute'></a>
 ## EnumerationProviderAttribute `type`
 
@@ -548,6 +575,35 @@ Initialize the evaluator event arguments
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | evaluator | [System.Func{\`0,System.Object,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object,System.Boolean}') |  |
+
+<a name='M-Bb-EvaluatorEventArgs`1-Evaluate-`0,System-Object-'></a>
+### Evaluate(target,value) `method`
+
+##### Summary
+
+Evaluates the target object with the specified value.
+
+##### Returns
+
+True if the evaluation passes or if the evaluator function is null, otherwise false.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| target | [\`0](#T-`0 '`0') | The target object to evaluate. |
+| value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The value to evaluate the target object with. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the target object is null. |
+
+##### Remarks
+
+This method evaluates the target object with the specified value using the provided evaluator function.
+If the evaluator function is null or returns true, the action function will be invoked with the target object and the value.
 
 <a name='T-Bb-ComponentModel-Attributes-ExposeClassAttribute'></a>
 ## ExposeClassAttribute `type`
@@ -742,12 +798,20 @@ Configuration to register Exposition manually
 
 Bb.ComponentModel.Loaders
 
+##### Summary
+
+
+
 <a name='P-Bb-ComponentModel-Loaders-IApplicationBuilderInitializer-Executed'></a>
 ### Executed `property`
 
 ##### Summary
 
 return true if the builder has been Initialized
+
+##### Remarks
+
+This method returns a boolean value indicating whether the builder has been initialized.
 
 <a name='P-Bb-ComponentModel-Loaders-IApplicationBuilderInitializer-FriendlyName'></a>
 ### FriendlyName `property`
@@ -756,6 +820,10 @@ return true if the builder has been Initialized
 
 Friendly name of the builder
 
+##### Remarks
+
+This method returns the friendly name of the builder.
+
 <a name='P-Bb-ComponentModel-Loaders-IApplicationBuilderInitializer-OrderPriority'></a>
 ### OrderPriority `property`
 
@@ -763,12 +831,20 @@ Friendly name of the builder
 
 Order of initialization
 
+##### Remarks
+
+This method returns the order to execute in the list of initialization.
+
 <a name='P-Bb-ComponentModel-Loaders-IApplicationBuilderInitializer-Type'></a>
 ### Type `property`
 
 ##### Summary
 
 Return the type of service that should be passed by argument
+
+##### Remarks
+
+This method returns the type of service that should be passed as an argument.
 
 <a name='T-Bb-IBusyService'></a>
 ## IBusyService `type`
@@ -780,6 +856,71 @@ Bb
 ##### Summary
 
 Busy service
+
+##### Remarks
+
+This service provides functionality for managing busy sessions.
+A busy session represents a period of time during which a specific instance is busy performing an action.
+The service allows subscribing to the BusyChanged event to be notified when the busy state changes.
+
+<a name='M-Bb-IBusyService-IsBusyFor-System-Object,System-String,System-Action{Bb-BusySession}-'></a>
+### IsBusyFor(instance,title,action) `method`
+
+##### Summary
+
+Checks if the specified instance is busy and executes the specified action if it is not busy.
+
+##### Returns
+
+The busy session associated with the instance.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instance | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The instance to check for busy state. |
+| title | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The title of the busy session. |
+| action | [System.Action{Bb.BusySession}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.BusySession}') | The action to execute if the instance is not busy. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown if the instance parameter is null. |
+
+<a name='M-Bb-IBusyService-Update-Bb-BusySession-'></a>
+### Update(session) `method`
+
+##### Summary
+
+Updates the specified busy session.
+
+##### Returns
+
+A task representing the asynchronous operation.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| session | [Bb.BusySession](#T-Bb-BusySession 'Bb.BusySession') | The busy session to update. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown if the session parameter is null. |
+
+<a name='T-Bb-ComponentModel-IDisposed'></a>
+## IDisposed `type`
+
+##### Namespace
+
+Bb.ComponentModel
+
+##### Summary
+
+Represents an object that can be disposed.
 
 <a name='T-Bb-IFocusedService`1'></a>
 ## IFocusedService\`1 `type`

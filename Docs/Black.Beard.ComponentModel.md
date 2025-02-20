@@ -1899,16 +1899,20 @@
   - [GetService(serviceType)](#M-Bb-ComponentModel-Loaders-Initializer-GetService-System-Type- 'Bb.ComponentModel.Loaders.Initializer.GetService(System.Type)')
   - [Initialize(args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.String[])')
   - [Initialize(args,init)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.String[])')
-  - [Map(instance)](#M-Bb-ComponentModel-Loaders-Initializer-Map-Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}- 'Bb.ComponentModel.Loaders.Initializer.Map(Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer})')
   - [With(serviceProvider)](#M-Bb-ComponentModel-Loaders-Initializer-With-System-IServiceProvider- 'Bb.ComponentModel.Loaders.Initializer.With(System.IServiceProvider)')
 - [InjectValueAttributeExtensions](#T-Bb-Injections-InjectValueAttributeExtensions 'Bb.Injections.InjectValueAttributeExtensions')
   - [GetKeys\`\`1(type)](#M-Bb-Injections-InjectValueAttributeExtensions-GetKeys``1-System-Type- 'Bb.Injections.InjectValueAttributeExtensions.GetKeys``1(System.Type)')
   - [InjectValue\`\`1(self,valueResolver)](#M-Bb-Injections-InjectValueAttributeExtensions-InjectValue``1-``0,System-Func{System-String,System-String}- 'Bb.Injections.InjectValueAttributeExtensions.InjectValue``1(``0,System.Func{System.String,System.String})')
 - [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1')
-  - [#ctor()](#M-Bb-ComponentModel-Loaders-InjectionLoader`1-#ctor-System-String,System-IServiceProvider- 'Bb.ComponentModel.Loaders.InjectionLoader`1.#ctor(System.String,System.IServiceProvider)')
+  - [#ctor(context,serviceProvider)](#M-Bb-ComponentModel-Loaders-InjectionLoader`1-#ctor-System-String,System-IServiceProvider- 'Bb.ComponentModel.Loaders.InjectionLoader`1.#ctor(System.String,System.IServiceProvider)')
   - [Executed](#P-Bb-ComponentModel-Loaders-InjectionLoader`1-Executed 'Bb.ComponentModel.Loaders.InjectionLoader`1.Executed')
+  - [InjectValue](#P-Bb-ComponentModel-Loaders-InjectionLoader`1-InjectValue 'Bb.ComponentModel.Loaders.InjectionLoader`1.InjectValue')
   - [Instances](#P-Bb-ComponentModel-Loaders-InjectionLoader`1-Instances 'Bb.ComponentModel.Loaders.InjectionLoader`1.Instances')
+  - [ServiceProvider](#P-Bb-ComponentModel-Loaders-InjectionLoader`1-ServiceProvider 'Bb.ComponentModel.Loaders.InjectionLoader`1.ServiceProvider')
   - [Types](#P-Bb-ComponentModel-Loaders-InjectionLoader`1-Types 'Bb.ComponentModel.Loaders.InjectionLoader`1.Types')
+  - [SetInjectRescue(injectRescue)](#M-Bb-ComponentModel-Loaders-InjectionLoader`1-SetInjectRescue-System-Func{System-ComponentModel-PropertyDescriptor,System-String,Bb-ComponentModel-IInjectBuilder{`0},System-Object}- 'Bb.ComponentModel.Loaders.InjectionLoader`1.SetInjectRescue(System.Func{System.ComponentModel.PropertyDescriptor,System.String,Bb.ComponentModel.IInjectBuilder{`0},System.Object})')
+  - [SetInjectValue(injectValue)](#M-Bb-ComponentModel-Loaders-InjectionLoader`1-SetInjectValue-System-Func{System-String,System-Object}- 'Bb.ComponentModel.Loaders.InjectionLoader`1.SetInjectValue(System.Func{System.String,System.Object})')
+  - [WithServices(serviceProvider)](#M-Bb-ComponentModel-Loaders-InjectionLoader`1-WithServices-System-IServiceProvider- 'Bb.ComponentModel.Loaders.InjectionLoader`1.WithServices(System.IServiceProvider)')
 - [InlineReturnTransform](#T-ICSharpCode-Decompiler-IL-Transforms-InlineReturnTransform 'ICSharpCode.Decompiler.IL.Transforms.InlineReturnTransform')
   - [CanModifyInstructions()](#M-ICSharpCode-Decompiler-IL-Transforms-InlineReturnTransform-CanModifyInstructions-ICSharpCode-Decompiler-IL-ILVariable,ICSharpCode-Decompiler-IL-Block,System-Collections-Generic-List{System-ValueTuple{ICSharpCode-Decompiler-IL-BlockContainer,ICSharpCode-Decompiler-IL-Block,ICSharpCode-Decompiler-IL-Branch}}@- 'ICSharpCode.Decompiler.IL.Transforms.InlineReturnTransform.CanModifyInstructions(ICSharpCode.Decompiler.IL.ILVariable,ICSharpCode.Decompiler.IL.Block,System.Collections.Generic.List{System.ValueTuple{ICSharpCode.Decompiler.IL.BlockContainer,ICSharpCode.Decompiler.IL.Block,ICSharpCode.Decompiler.IL.Branch}}@)')
 - [InsertParenthesesVisitor](#T-ICSharpCode-Decompiler-CSharp-OutputVisitor-InsertParenthesesVisitor 'ICSharpCode.Decompiler.CSharp.OutputVisitor.InsertParenthesesVisitor')
@@ -2217,6 +2221,7 @@
   - [GetInitializedService\`\`1(serviceProvider,context,initializer)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-GetInitializedService``1-System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.GetInitializedService``1(System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
   - [Initialize\`\`1(self,serviceProvider,context,action)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Initialize``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Initialize``1(``0,System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
   - [LoadModules\`\`1(self)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-LoadModules``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.LoadModules``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
+  - [Map\`\`1(instance)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Map``1-Bb-ComponentModel-IInjectBuilder{``0},System-Func{System-String,System-Object},System-Func{System-ComponentModel-PropertyDescriptor,System-String,Bb-ComponentModel-IInjectBuilder{``0},System-Object},Bb-ComponentModel-Loaders-CommandLineParser- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Map``1(Bb.ComponentModel.IInjectBuilder{``0},System.Func{System.String,System.Object},System.Func{System.ComponentModel.PropertyDescriptor,System.String,Bb.ComponentModel.IInjectBuilder{``0},System.Object},Bb.ComponentModel.Loaders.CommandLineParser)')
 - [LocAlloc](#T-ICSharpCode-Decompiler-IL-LocAlloc 'ICSharpCode.Decompiler.IL.LocAlloc')
 - [LocAllocSpan](#T-ICSharpCode-Decompiler-IL-LocAllocSpan 'ICSharpCode.Decompiler.IL.LocAllocSpan')
   - [Type](#P-ICSharpCode-Decompiler-IL-LocAllocSpan-Type 'ICSharpCode.Decompiler.IL.LocAllocSpan.Type')
@@ -26668,29 +26673,6 @@ Discover all initializer and execute them for initializing the application
 | args | [System.Action{Bb.ComponentModel.Loaders.Initializer}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.Initializer}') | arguments to push in the initialization process |
 | init | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | method to configure the process of initialization |
 
-<a name='M-Bb-ComponentModel-Loaders-Initializer-Map-Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}-'></a>
-### Map(instance) `method`
-
-##### Summary
-
-Map a class with the command line args and environment variables
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| instance | [Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer}](#T-Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer} 'Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer}') |  |
-
-##### Generic Types
-
-| Name | Description |
-| ---- | ----------- |
-| T |  |
-
 <a name='M-Bb-ComponentModel-Loaders-Initializer-With-System-IServiceProvider-'></a>
 ### With(serviceProvider) `method`
 
@@ -26792,15 +26774,22 @@ The value returned by the value resolver is converted to the property's type usi
 Bb.ComponentModel.Loaders
 
 <a name='M-Bb-ComponentModel-Loaders-InjectionLoader`1-#ctor-System-String,System-IServiceProvider-'></a>
-### #ctor() `constructor`
+### #ctor(context,serviceProvider) `constructor`
 
 ##### Summary
 
-Initializes a new instance of the [](#!-InitializationLoader<T> 'InitializationLoader<T>') class.
+Initializes a new instance of the [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1') class.
 
 ##### Parameters
 
-This constructor has no parameters.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| context | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The context. |
+| serviceProvider | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') | The service provider. |
+
+##### Remarks
+
+This constructor initializes a new instance of the [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1') class.
 
 <a name='P-Bb-ComponentModel-Loaders-InjectionLoader`1-Executed'></a>
 ### Executed `property`
@@ -26809,6 +26798,13 @@ This constructor has no parameters.
 
 List of builder instances initialized
 
+<a name='P-Bb-ComponentModel-Loaders-InjectionLoader`1-InjectValue'></a>
+### InjectValue `property`
+
+##### Summary
+
+method to resolve the value by name to inject
+
 <a name='P-Bb-ComponentModel-Loaders-InjectionLoader`1-Instances'></a>
 ### Instances `property`
 
@@ -26816,12 +26812,92 @@ List of builder instances initialized
 
 List of builder instances
 
+<a name='P-Bb-ComponentModel-Loaders-InjectionLoader`1-ServiceProvider'></a>
+### ServiceProvider `property`
+
+##### Summary
+
+Service provider
+
 <a name='P-Bb-ComponentModel-Loaders-InjectionLoader`1-Types'></a>
 ### Types `property`
 
 ##### Summary
 
 List of types builder found
+
+<a name='M-Bb-ComponentModel-Loaders-InjectionLoader`1-SetInjectRescue-System-Func{System-ComponentModel-PropertyDescriptor,System-String,Bb-ComponentModel-IInjectBuilder{`0},System-Object}-'></a>
+### SetInjectRescue(injectRescue) `method`
+
+##### Summary
+
+Sets the inject value rescue function.
+
+##### Returns
+
+The current instance of [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1').
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| injectRescue | [System.Func{System.ComponentModel.PropertyDescriptor,System.String,Bb.ComponentModel.IInjectBuilder{\`0},System.Object}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.ComponentModel.PropertyDescriptor,System.String,Bb.ComponentModel.IInjectBuilder{`0},System.Object}') | The inject rescue function. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when `injectRescue` is null. |
+
+##### Remarks
+
+This method sets the function that will be called when the system cannot resolve the value to inject.
+The function takes a [PropertyDescriptor](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.PropertyDescriptor 'System.ComponentModel.PropertyDescriptor') representing the property being injected,
+a string representing the context, and an [IInjectBuilder\`1](#T-Bb-ComponentModel-IInjectBuilder`1 'Bb.ComponentModel.IInjectBuilder`1') instance.
+It should return the value to be injected.
+
+<a name='M-Bb-ComponentModel-Loaders-InjectionLoader`1-SetInjectValue-System-Func{System-String,System-Object}-'></a>
+### SetInjectValue(injectValue) `method`
+
+##### Summary
+
+Sets the inject value function.
+
+##### Returns
+
+The current instance of [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1').
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| injectValue | [System.Func{System.String,System.Object}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.String,System.Object}') | The inject value function. |
+
+##### Remarks
+
+This method sets the function that will be called to retrieve the value to be injected.
+The function takes a [String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') representing the inject value and should return the value to be injected.
+
+<a name='M-Bb-ComponentModel-Loaders-InjectionLoader`1-WithServices-System-IServiceProvider-'></a>
+### WithServices(serviceProvider) `method`
+
+##### Summary
+
+Sets the services for the injection loader.
+
+##### Returns
+
+The current instance of [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1').
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| serviceProvider | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') | The service provider. |
+
+##### Remarks
+
+This method sets the `serviceProvider` for the injection loader.
 
 <a name='T-ICSharpCode-Decompiler-IL-Transforms-InlineReturnTransform'></a>
 ## InlineReturnTransform `type`
@@ -30281,6 +30357,29 @@ Load assemblies and initialize the loader
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | self | [Bb.ComponentModel.Loaders.InjectionLoader{\`\`0}](#T-Bb-ComponentModel-Loaders-InjectionLoader{``0} 'Bb.ComponentModel.Loaders.InjectionLoader{``0}') |  |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Map``1-Bb-ComponentModel-IInjectBuilder{``0},System-Func{System-String,System-Object},System-Func{System-ComponentModel-PropertyDescriptor,System-String,Bb-ComponentModel-IInjectBuilder{``0},System-Object},Bb-ComponentModel-Loaders-CommandLineParser-'></a>
+### Map\`\`1(instance) `method`
+
+##### Summary
+
+Map a class with the command line args and environment variables
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instance | [Bb.ComponentModel.IInjectBuilder{\`\`0}](#T-Bb-ComponentModel-IInjectBuilder{``0} 'Bb.ComponentModel.IInjectBuilder{``0}') |  |
 
 ##### Generic Types
 
