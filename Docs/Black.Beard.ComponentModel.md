@@ -1888,12 +1888,20 @@
   - [#ctor(args)](#M-Bb-ComponentModel-Loaders-Initializer-#ctor-System-String[]- 'Bb.ComponentModel.Loaders.Initializer.#ctor(System.String[])')
   - [Context](#P-Bb-ComponentModel-Loaders-Initializer-Context 'Bb.ComponentModel.Loaders.Initializer.Context')
   - [Creator](#P-Bb-ComponentModel-Loaders-Initializer-Creator 'Bb.ComponentModel.Loaders.Initializer.Creator')
+  - [GetFolderKeys](#P-Bb-ComponentModel-Loaders-Initializer-GetFolderKeys 'Bb.ComponentModel.Loaders.Initializer.GetFolderKeys')
+  - [GetKeys](#P-Bb-ComponentModel-Loaders-Initializer-GetKeys 'Bb.ComponentModel.Loaders.Initializer.GetKeys')
   - [InjectRescue](#P-Bb-ComponentModel-Loaders-Initializer-InjectRescue 'Bb.ComponentModel.Loaders.Initializer.InjectRescue')
   - [InjectValue](#P-Bb-ComponentModel-Loaders-Initializer-InjectValue 'Bb.ComponentModel.Loaders.Initializer.InjectValue')
   - [Last](#P-Bb-ComponentModel-Loaders-Initializer-Last 'Bb.ComponentModel.Loaders.Initializer.Last')
+  - [OnInitialization](#P-Bb-ComponentModel-Loaders-Initializer-OnInitialization 'Bb.ComponentModel.Loaders.Initializer.OnInitialization')
+  - [AddFolder(folderKey,folder)](#M-Bb-ComponentModel-Loaders-Initializer-AddFolder-System-String,System-String- 'Bb.ComponentModel.Loaders.Initializer.AddFolder(System.String,System.String)')
+  - [AddOrReplace(key,value)](#M-Bb-ComponentModel-Loaders-Initializer-AddOrReplace-System-String,System-Object- 'Bb.ComponentModel.Loaders.Initializer.AddOrReplace(System.String,System.Object)')
   - [GetService(serviceType)](#M-Bb-ComponentModel-Loaders-Initializer-GetService-System-Type- 'Bb.ComponentModel.Loaders.Initializer.GetService(System.Type)')
   - [Initialize(args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.String[])')
-  - [Initialize(args,init)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.String[])')
+  - [Initialize(init,args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.String[])')
+  - [Initialize(args,init,initializer)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}},System.String[])')
+  - [TryGetFolders(key,value)](#M-Bb-ComponentModel-Loaders-Initializer-TryGetFolders-System-String,System-Collections-Generic-IEnumerable{System-String}@- 'Bb.ComponentModel.Loaders.Initializer.TryGetFolders(System.String,System.Collections.Generic.IEnumerable{System.String}@)')
+  - [TryGetValue(key,value)](#M-Bb-ComponentModel-Loaders-Initializer-TryGetValue-System-String,System-Object@- 'Bb.ComponentModel.Loaders.Initializer.TryGetValue(System.String,System.Object@)')
 - [InjectValueAttributeExtensions](#T-Bb-Injections-InjectValueAttributeExtensions 'Bb.Injections.InjectValueAttributeExtensions')
   - [GetKeys\`\`1(type)](#M-Bb-Injections-InjectValueAttributeExtensions-GetKeys``1-System-Type- 'Bb.Injections.InjectValueAttributeExtensions.GetKeys``1(System.Type)')
   - [InjectValue\`\`1(self,valueResolver)](#M-Bb-Injections-InjectValueAttributeExtensions-InjectValue``1-``0,System-Func{System-String,System-String}- 'Bb.Injections.InjectValueAttributeExtensions.InjectValue``1(``0,System.Func{System.String,System.String})')
@@ -26514,6 +26522,20 @@ The context of the initialization
 
 Override the default creator
 
+<a name='P-Bb-ComponentModel-Loaders-Initializer-GetFolderKeys'></a>
+### GetFolderKeys `property`
+
+##### Summary
+
+Return the list configuration folders.
+
+<a name='P-Bb-ComponentModel-Loaders-Initializer-GetKeys'></a>
+### GetKeys `property`
+
+##### Summary
+
+Return the list of stored keys
+
 <a name='P-Bb-ComponentModel-Loaders-Initializer-InjectRescue'></a>
 ### InjectRescue `property`
 
@@ -26534,6 +26556,41 @@ called if the system can't resolve the value
 ##### Summary
 
 return the last initializer instance
+
+<a name='P-Bb-ComponentModel-Loaders-Initializer-OnInitialization'></a>
+### OnInitialization `property`
+
+##### Summary
+
+Method called for every InjectBuilder of initializer
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-AddFolder-System-String,System-String-'></a>
+### AddFolder(folderKey,folder) `method`
+
+##### Summary
+
+Add a folder to use for a context use by specified key
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| folderKey | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | folder context key |
+| folder | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | folder path |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-AddOrReplace-System-String,System-Object-'></a>
+### AddOrReplace(key,value) `method`
+
+##### Summary
+
+Add or replace value to use for initialization
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| key | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | key |
+| value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | value for the key |
 
 <a name='M-Bb-ComponentModel-Loaders-Initializer-GetService-System-Type-'></a>
 ### GetService(serviceType) `method`
@@ -26570,7 +26627,25 @@ Discover all initializer and execute them for initializing the application
 | args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | arguments to push in the initialization process |
 
 <a name='M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]-'></a>
-### Initialize(args,init) `method`
+### Initialize(init,args) `method`
+
+##### Summary
+
+Discover all initializer and execute them for initializing the application
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| init | [System.Action{Bb.ComponentModel.Loaders.Initializer}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.Initializer}') | method to configure the process of initialization |
+| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | arguments to push in the initialization process |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-String[]-'></a>
+### Initialize(args,init,initializer) `method`
 
 ##### Summary
 
@@ -26581,7 +26656,44 @@ Discover all initializer and execute them for initializing the application
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | args | [System.Action{Bb.ComponentModel.Loaders.Initializer}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.Initializer}') | arguments to push in the initialization process |
-| init | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | method to configure the process of initialization |
+| init | [System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}') | method to configure the process of initialization |
+| initializer | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | method to configure every InjectionLoader |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-TryGetFolders-System-String,System-Collections-Generic-IEnumerable{System-String}@-'></a>
+### TryGetFolders(key,value) `method`
+
+##### Summary
+
+try to get the list of folder for the specified value.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| key | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | key |
+| value | [System.Collections.Generic.IEnumerable{System.String}@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.String}@') | value for the key |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-TryGetValue-System-String,System-Object@-'></a>
+### TryGetValue(key,value) `method`
+
+##### Summary
+
+try to get the value for the specified value.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| key | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | key |
+| value | [System.Object@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object@ 'System.Object@') | value for the key |
 
 <a name='T-Bb-Injections-InjectValueAttributeExtensions'></a>
 ## InjectValueAttributeExtensions `type`

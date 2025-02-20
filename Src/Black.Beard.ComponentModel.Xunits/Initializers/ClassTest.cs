@@ -5,6 +5,7 @@ using Bb.Injections;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Black.Beard.ComponentModel.Xunits.Initializers
@@ -18,7 +19,7 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
         public void Test0()
         {
 
-            Initializer.Initialize(c =>
+            var i = Initializer.Initialize(c =>
             {
 
                 c.SetInjectValue((name) => name == "param4" ? "Toto=45" : null)
@@ -32,6 +33,20 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
                  };
 
             }, "--param1:test", "--param3:6");
+
+
+            i.GetKeys.Count().Should().Be(1);
+            var key = i.GetKeys.First();
+            key.Should().BeSameAs("Test");
+            i.TryGetValue(key, out var n).Should().BeTrue();
+            n.Should().BeSameAs("Toto");
+
+
+            i.GetFolderKeys.Count().Should().Be(1);
+            key = i.GetFolderKeys.First();
+            key.Should().BeSameAs("configs");
+            i.TryGetFolders(key, out var l).Should().BeTrue();
+            l.Contains("c:\\test").Should().BeTrue();
 
         }
 
@@ -198,6 +213,9 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
         {
 
             var p = this;
+
+            context.AddOrReplace("Test", "Toto");
+            context.AddFolder("configs", "c:\\test");
 
             return true;
         }
