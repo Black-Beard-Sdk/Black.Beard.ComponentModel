@@ -46,11 +46,6 @@ namespace Bb.ComponentModel.Loaders
     public class Initializer : IServiceProvider
     {
 
-        static Initializer()
-        {
-            Creator = (args) => new Initializer(args);
-        }
-
         /// <summary>
         /// Discover all initializer and execute them for initializing the application
         /// </summary>
@@ -58,7 +53,7 @@ namespace Bb.ComponentModel.Loaders
         /// <returns></returns>
         public static Initializer Initialize(params string[] args)
         {
-            return Initialize((i) => { }, args);
+            return Initialize(null, args);
         }
 
         /// <summary>
@@ -69,32 +64,50 @@ namespace Bb.ComponentModel.Loaders
         /// <returns></returns>
         public static Initializer Initialize(Action<Initializer> init, params string[] args)
         {
-            return Initialize(init, null, args);
+            return Initialize(init, null, null, args);
         }
 
-        /// <summary>
+        /// <summary>0.
+        /// 
         /// Discover all initializer and execute them for initializing the application
         /// </summary>
         /// <param name="args">arguments to push in the initialization process</param>
-        /// <param name="init">method to configure the process of initialization</param>
-        /// <param name="initializer">method to configure every InjectionLoader</param>
-        public static Initializer Initialize(Action<Initializer> init, Action<InjectionLoader<Initializer>> initializer, params string[] args)
+        /// <param name="init">method to configure the process of initialization. the parameter can be null</param>
+        /// <param name="initializer">method to configure every InjectionLoader. the parameter can be null</param>
+        /// <param name="onInitialization">method to configure every InjectionLoader. the parameter can be null</param>
+        public static Initializer Initialize(Action<Initializer> init, Action<InjectionLoader<Initializer>> initializer, Action<IInjectBuilder<Initializer>> onInitialization, params string[] args)
         {
+            Initializer i = new Initializer(args);
+            init?.Invoke(i);
+            return i.Configure(i._serviceProvider, i.Context, c =>
+            {
+                
+                c.WithArguments(i._args);
+                
+                if (initializer != null)
+                    initializer(c);
 
-            init ??= (i) => { };
-            initializer ??= (i) => { };
-
-            if (args == null || args.Length == 0)
-                args = Environment.GetCommandLineArgs();
-
-            Initializer i = Creator(args);
-            init(i);
-
-            i.Initialize(initializer);
-
-            return i;
-
+            }, onInitialization);
         }
+
+        /// <summary>
+        /// initialize the initializer
+        /// </summary>
+        /// <param name="args"></param>
+        public Initializer(params string[] args)
+        {
+            _args = args ?? Environment.GetCommandLineArgs();
+            _datas = new Dictionary<string, object>();
+            _folders = new Dictionary<string, HashSet<string>>();
+        }
+
+        /// <summary>
+        /// The context of the initialization
+        /// </summary>
+        public string Context { get; set; } = ConstantsCore.Initialization;
+
+
+        #region IServiceProvider
 
         /// <summary>
         /// Add service provider
@@ -109,36 +122,6 @@ namespace Bb.ComponentModel.Loaders
                 _serviceProvider = new LocalServiceProvider(service) { AutoAdd = true };
             return this;
         }
-
-        /// <summary>
-        /// Override the default creator
-        /// </summary>
-        public static Func<string[], Initializer> Creator { get; set; }
-
-        /// <summary>
-        /// The context of the initialization
-        /// </summary>
-        public static string Context { get; set; } = ConstantsCore.Initialization;
-
-        /// <summary>
-        /// initialize the initializer
-        /// </summary>
-        /// <param name="args"></param>
-        protected Initializer(params string[] args)
-        {
-            _args = args;
-            Initializer.Last = this;
-            _datas = new Dictionary<string, object>();
-            _datasConfigs = new Dictionary<string, HashSet<string>>();
-        }
-
-        /// <summary>
-        /// return the last initializer instance
-        /// </summary>
-        public static Initializer Last { get; private set; }
-
-        #region IServiceProvider
-
         /// <summary>
         /// Get asked service
         /// </summary>
@@ -151,39 +134,13 @@ namespace Bb.ComponentModel.Loaders
 
         #endregion IServiceProvider
 
-        /// <summary>
-        /// Initialize the inject builder
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public Initializer SetInjectValue(Func<string, object> value)
-        {
-            InjectValue = value;
-            return this;
-        }
-
-        /// <summary>
-        /// called if the system can't resolve the value
-        /// </summary>
-        public Func<PropertyDescriptor, string, IInjectBuilder<Initializer>, object> InjectRescue { get; set; }
-
-        /// <summary>
-        /// called if the system can't resolve the value
-        /// </summary>
-        public Func<string, object> InjectValue { get; set; }
-
-        /// <summary>
-        /// Method called for every InjectBuilder of initializer
-        /// </summary>
-        public Action<IInjectBuilder<Initializer>> OnInitialization { get; set; }
-
 
         #region folders
 
         /// <summary>
         /// Return the list configuration folders.
         /// </summary>
-        public IEnumerable<string> GetFolderKeys => _datasConfigs.Keys;
+        public IEnumerable<string> GetFolderKeys => _folders.Keys;
 
         /// <summary>
         /// Add a folder to use for a context use by specified key
@@ -192,8 +149,8 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="folder">folder path</param>
         public void AddFolder(string folderKey, string folder)
         {
-            if (!_datasConfigs.TryGetValue(folderKey, out HashSet<string> list))
-                _datasConfigs.Add(folderKey, list = new HashSet<string>());
+            if (!_folders.TryGetValue(folderKey, out HashSet<string> list))
+                _folders.Add(folderKey, list = new HashSet<string>());
             list.Add(folder);
         }
 
@@ -206,11 +163,88 @@ namespace Bb.ComponentModel.Loaders
         public bool TryGetFolders(string key, out IEnumerable<string> value)
         {
             value = default;
-            if (_datasConfigs.TryGetValue(key, out var value1))
+            if (_folders.TryGetValue(key, out var value1))
                 value = value1;
             return value != null;
 
         }
+
+        /// <summary>
+        /// Return true if the folder is already referenced
+        /// </summary>
+        /// <param name="folderKey">folder context key</param>
+        /// <param name="folder">folder path</param>
+        /// <returns></returns>
+        public bool ContainsFolder(string folderKey, string folder)
+        {
+            if (_folders.TryGetValue(folderKey, out HashSet<string> list))
+                return list.Contains(folder);
+            return false;
+        }
+
+        /// <summary>
+        /// Return true if the folder is already referenced
+        /// </summary>
+        /// <param name="folder">folder path</param>
+        /// <returns></returns>
+        public bool ContainsFolder(string folder)
+        {
+            foreach (var folderKey in _folders.Keys)
+                if (_folders[folderKey].Contains(folder))
+                    return true;
+            return false;
+        }
+
+        /// <summary>
+        /// remove a folder to use for a context use by specified key
+        /// </summary>
+        /// <param name="folderKey">folder context key</param>
+        /// <param name="folder">folder path</param>
+        public void DelFolder(string folderKey, string folder)
+        {
+            var l = new List<string>();
+
+            if (_folders.TryGetValue(folderKey, out HashSet<string> list))
+            {
+
+                if (list.Contains(folder))
+                    list.Remove(folder);
+
+                if (list.Count == 0)
+                    l.Add(folderKey);
+
+            }
+
+            foreach (var item in l)
+                _folders.Remove(item);
+
+        }
+
+        /// <summary>
+        /// remove a folder to use for a context use by specified key
+        /// </summary>
+        /// <param name="folder">folder path</param>
+        public void DelFolder(string folder)
+        {
+
+            var l = new List<string>();
+
+            foreach (var folderKey in _folders.Keys)
+            {
+
+                var list = _folders[folderKey];
+                if (list.Contains(folder))
+                    list.Remove(folder);
+
+                if (list.Count == 0)
+                    l.Add(folderKey);
+
+            }
+
+            foreach (var item in l)
+                _folders.Remove(item);
+        }
+
 
         #endregion folders
 
@@ -246,33 +280,43 @@ namespace Bb.ComponentModel.Loaders
             return _datas.TryGetValue(key, out value);
         }
 
+        /// <summary>
+        /// Return true if the key is referenced
+        /// </summary>
+        /// <param name="key">key to evaluate</param>
+        /// <returns></returns>
+        public bool ContainsKey(string key)
+        {
+            return _datas.ContainsKey(key);
+        }
+
+
+        /// <summary>
+        /// Return true if the key is deleted or false if the key was not found
+        /// </summary>
+        /// <param name="key">key to remove</param>
+        /// <returns></returns>
+        public bool RemoveKey(string key)
+        {
+            if (_datas.ContainsKey(key))
+            {
+                _datas.Remove(key);
+                return true;
+            }
+
+            return false;
+        }
+
+
         #endregion variables
 
 
         #region private
 
-        private void Initialize(Action<InjectionLoader<Initializer>> initializer)
-        {
-
-            this.Configure(_serviceProvider, Context, init =>
-            {
-
-                init.WithArguments(_args)
-                    
-                    .WithInjectRescue(InjectRescue)
-                    .WithInjectValue(InjectValue)
-                    ;
-
-                initializer?.Invoke(init);
-
-            }, OnInitialization)
-            ;
-
-        }
 
         private LocalServiceProvider _serviceProvider = new LocalServiceProvider() { AutoAdd = true };
         private Dictionary<string, object> _datas;
-        private Dictionary<string, HashSet<string>> _datasConfigs;
+        private Dictionary<string, HashSet<string>> _folders;
         private readonly string[] _args;
 
         #endregion private

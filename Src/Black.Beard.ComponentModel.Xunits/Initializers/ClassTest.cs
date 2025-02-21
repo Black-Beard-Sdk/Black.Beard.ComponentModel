@@ -6,6 +6,7 @@ using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Xunit;
 
 namespace Black.Beard.ComponentModel.Xunits.Initializers
@@ -14,25 +15,83 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
     public class ClassTest
     {
 
+        [Fact]
+        public void TestFolder()
+        {
+
+            var i = new Initializer();
+            i.AddFolder("configs", "c:\\test");
+            i.GetFolderKeys.Count().Should().Be(1);
+            var key = i.GetFolderKeys.First();
+            key.Should().BeSameAs("configs");
+            i.TryGetFolders(key, out var l).Should().BeTrue();
+            l.Contains("c:\\test").Should().BeTrue();
+
+            i.DelFolder("configs", "c:\\test");
+            i.GetFolderKeys.Count().Should().Be(0);
+
+            i.AddFolder("configs", "c:\\test");
+            i.DelFolder("c:\\test");
+            i.GetFolderKeys.Count().Should().Be(0);
+
+            i.AddFolder("configs", "c:\\test");
+            i.ContainsFolder("configs", "c:\\test").Should().BeTrue();
+            i.ContainsFolder("c:\\test").Should().BeTrue();
+
+        }
+
+        [Fact]
+        public void TestKey()
+        {
+
+            var i = new Initializer();
+            i.AddOrReplace("Test", "Toto");
+            i.GetKeys.Count().Should().Be(1);
+            var key = i.GetKeys.First();
+            key.Should().BeSameAs("Test");
+            i.TryGetValue(key, out var n).Should().BeTrue();
+            n.Should().BeSameAs("Toto");
+
+            i.RemoveKey("Test");
+            i.GetKeys.Count().Should().Be(0);
+
+            i.AddOrReplace("Test", "Toto");
+            i.RemoveKey("Test");
+            i.GetKeys.Count().Should().Be(0);
+
+            i.AddOrReplace("Test", "Toto");
+            i.ContainsKey("Test").Should().BeTrue();
+
+        }
+
+
+            [Fact]
+        public void TestNull()
+        {
+
+            var i = Initializer.Initialize();
+
+        }
 
         [Fact]
         public void Test0()
         {
 
-            var i = Initializer.Initialize(c =>
+            var i = Initializer.Initialize(null
+            , d =>
             {
-
-                c.SetInjectValue((name) => name == "param4" ? "Toto=45" : null)
-                 .OnInitialization = d =>
-                 {
-                     if (d is InitializerTest t)
-                     {
-                         t.param4.Count.Should().Be(1);
-                         t.param4["toto"].Should().Be("45");
-                     }
-                 };
-
-            }, "--param1:test", "--param3:6");
+                d.WithInjectValue((name) => name == "param4" ? "Toto=45" : null)
+                ;
+            },
+            e =>
+            {
+                if (e is InitializerTest t)
+                {
+                    t.param4.Count.Should().Be(1);
+                    t.param4["toto"].Should().Be("45");
+                }
+            }
+            , "--param1:test", "--param3:6");
 
 
             i.GetKeys.Count().Should().Be(1);
@@ -55,22 +114,19 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
         {
 
             bool ok = false;
-            Initializer.Initialize(c =>
+            Initializer.Initialize(null,
+            c =>
             {
 
-                c.OnInitialization = d =>
+            },
+            d =>
+            {
+                if (d is InitializerTest t)
                 {
-                    if (d is InitializerTest t)
-                    {
-                        t.param1.Should().Be("test");
-                        //t.param2.Should().BeTrue();
-                        //t.param3.Should().Be(1);
-                        t.ToInject.Should().NotBeNull();
-                        ok = true;
-                    }
-
-                };
-
+                    t.param1.Should().Be("test");
+                    t.ToInject.Should().NotBeNull();
+                    ok = true;
+                }
             }, "--param1:test");
 
             ok.Should().BeTrue();
@@ -82,22 +138,21 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
         {
 
             bool ok = false;
-            Initializer.Initialize(c =>
+            Initializer.Initialize(null,
+            c =>
             {
 
-                c.OnInitialization = d =>
+            },
+            d =>
+            {
+                if (d is InitializerTest t)
                 {
-                    if (d is InitializerTest t)
-                    {
-                        t.param2.Should().BeTrue();
-                        t.ToInject.Should().NotBeNull();
-                        ok = true;
-                    }
-
-
-                };
-
-            }, "--param2:true");
+                    t.param2.Should().BeTrue();
+                    t.ToInject.Should().NotBeNull();
+                    ok = true;
+                }
+            },
+            "--param2:true");
 
             ok.Should().BeTrue();
 
@@ -108,20 +163,21 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
         {
 
             bool ok = false;
-            Initializer.Initialize(c =>
+            Initializer.Initialize(null,
+            c =>
             {
 
-                c.OnInitialization = d =>
+            },
+            d =>
+            {
+                if (d is InitializerTest t)
                 {
-                    if (d is InitializerTest t)
-                    {
-                        t.param3.Should().Be(6);
-                        t.ToInject.Should().NotBeNull();
-                        ok = true;
-                    }
-                };
-
-            }, "--param3:6");
+                    t.param3.Should().Be(6);
+                    t.ToInject.Should().NotBeNull();
+                    ok = true;
+                }
+            },
+            "--param3:6");
 
             ok.Should().BeTrue();
 
@@ -132,19 +188,19 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
         {
 
             bool ok = false;
-            Initializer.Initialize(c =>
+            Initializer.Initialize(null,
+            c =>
             {
 
-                c.OnInitialization = d =>
+            },
+            d =>
+            {
+                if (d is InitializerTest t)
                 {
-                    if (d is InitializerTest t)
-                    {
-                        t.ToInject.Should().NotBeNull();
-                        t.ToInject2.Should().NotBeNull();
-                        ok = true;
-                    }
-                };
-
+                    t.ToInject.Should().NotBeNull();
+                    t.ToInject2.Should().NotBeNull();
+                    ok = true;
+                }
             });
 
             ok.Should().BeTrue();
@@ -156,24 +212,19 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
         {
 
             bool ok = false;
-            Initializer.Initialize(c =>
+            Initializer.Initialize(null,
+            c =>
             {
 
-                c.OnInitialization = d =>
+            },
+            d =>
+            {
+                if (d is InitializerTest t)
                 {
-                    if (d is InitializerTest t)
-                    {
-                        t.ToInject.Should().NotBeNull();
-                        t.ToInject2.Should().NotBeNull();
-                        ok = true;
-                    }
-                };
-
-                c.InjectRescue = (e, n, d) =>
-                {
-                    return null;
-                };
-
+                    t.ToInject.Should().NotBeNull();
+                    t.ToInject2.Should().NotBeNull();
+                    ok = true;
+                }
             });
 
             ok.Should().BeTrue();

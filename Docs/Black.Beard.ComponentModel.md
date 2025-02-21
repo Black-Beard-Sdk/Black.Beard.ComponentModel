@@ -1887,20 +1887,20 @@
 - [Initializer](#T-Bb-ComponentModel-Loaders-Initializer 'Bb.ComponentModel.Loaders.Initializer')
   - [#ctor(args)](#M-Bb-ComponentModel-Loaders-Initializer-#ctor-System-String[]- 'Bb.ComponentModel.Loaders.Initializer.#ctor(System.String[])')
   - [Context](#P-Bb-ComponentModel-Loaders-Initializer-Context 'Bb.ComponentModel.Loaders.Initializer.Context')
-  - [Creator](#P-Bb-ComponentModel-Loaders-Initializer-Creator 'Bb.ComponentModel.Loaders.Initializer.Creator')
   - [GetFolderKeys](#P-Bb-ComponentModel-Loaders-Initializer-GetFolderKeys 'Bb.ComponentModel.Loaders.Initializer.GetFolderKeys')
   - [GetKeys](#P-Bb-ComponentModel-Loaders-Initializer-GetKeys 'Bb.ComponentModel.Loaders.Initializer.GetKeys')
-  - [InjectRescue](#P-Bb-ComponentModel-Loaders-Initializer-InjectRescue 'Bb.ComponentModel.Loaders.Initializer.InjectRescue')
-  - [InjectValue](#P-Bb-ComponentModel-Loaders-Initializer-InjectValue 'Bb.ComponentModel.Loaders.Initializer.InjectValue')
-  - [Last](#P-Bb-ComponentModel-Loaders-Initializer-Last 'Bb.ComponentModel.Loaders.Initializer.Last')
-  - [OnInitialization](#P-Bb-ComponentModel-Loaders-Initializer-OnInitialization 'Bb.ComponentModel.Loaders.Initializer.OnInitialization')
   - [AddFolder(folderKey,folder)](#M-Bb-ComponentModel-Loaders-Initializer-AddFolder-System-String,System-String- 'Bb.ComponentModel.Loaders.Initializer.AddFolder(System.String,System.String)')
   - [AddOrReplace(key,value)](#M-Bb-ComponentModel-Loaders-Initializer-AddOrReplace-System-String,System-Object- 'Bb.ComponentModel.Loaders.Initializer.AddOrReplace(System.String,System.Object)')
+  - [ContainsFolder(folderKey,folder)](#M-Bb-ComponentModel-Loaders-Initializer-ContainsFolder-System-String,System-String- 'Bb.ComponentModel.Loaders.Initializer.ContainsFolder(System.String,System.String)')
+  - [ContainsFolder(folder)](#M-Bb-ComponentModel-Loaders-Initializer-ContainsFolder-System-String- 'Bb.ComponentModel.Loaders.Initializer.ContainsFolder(System.String)')
+  - [ContainsKey(key)](#M-Bb-ComponentModel-Loaders-Initializer-ContainsKey-System-String- 'Bb.ComponentModel.Loaders.Initializer.ContainsKey(System.String)')
+  - [DelFolder(folderKey,folder)](#M-Bb-ComponentModel-Loaders-Initializer-DelFolder-System-String,System-String- 'Bb.ComponentModel.Loaders.Initializer.DelFolder(System.String,System.String)')
+  - [DelFolder(folder)](#M-Bb-ComponentModel-Loaders-Initializer-DelFolder-System-String- 'Bb.ComponentModel.Loaders.Initializer.DelFolder(System.String)')
   - [GetService(serviceType)](#M-Bb-ComponentModel-Loaders-Initializer-GetService-System-Type- 'Bb.ComponentModel.Loaders.Initializer.GetService(System.Type)')
   - [Initialize(args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.String[])')
   - [Initialize(init,args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.String[])')
-  - [Initialize(args,init,initializer)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}},System.String[])')
-  - [SetInjectValue(value)](#M-Bb-ComponentModel-Loaders-Initializer-SetInjectValue-System-Func{System-String,System-Object}- 'Bb.ComponentModel.Loaders.Initializer.SetInjectValue(System.Func{System.String,System.Object})')
+  - [Initialize(args,init,initializer,onInitialization)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-Action{Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}},System.Action{Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer}},System.String[])')
+  - [RemoveKey(key)](#M-Bb-ComponentModel-Loaders-Initializer-RemoveKey-System-String- 'Bb.ComponentModel.Loaders.Initializer.RemoveKey(System.String)')
   - [TryGetFolders(key,value)](#M-Bb-ComponentModel-Loaders-Initializer-TryGetFolders-System-String,System-Collections-Generic-IEnumerable{System-String}@- 'Bb.ComponentModel.Loaders.Initializer.TryGetFolders(System.String,System.Collections.Generic.IEnumerable{System.String}@)')
   - [TryGetValue(key,value)](#M-Bb-ComponentModel-Loaders-Initializer-TryGetValue-System-String,System-Object@- 'Bb.ComponentModel.Loaders.Initializer.TryGetValue(System.String,System.Object@)')
   - [WithService(service)](#M-Bb-ComponentModel-Loaders-Initializer-WithService-System-IServiceProvider- 'Bb.ComponentModel.Loaders.Initializer.WithService(System.IServiceProvider)')
@@ -2221,7 +2221,7 @@
   - [RestoreSavePoint()](#M-ICSharpCode-Decompiler-IL-Patterns-ListMatch-RestoreSavePoint-ICSharpCode-Decompiler-IL-Patterns-Match@- 'ICSharpCode.Decompiler.IL.Patterns.ListMatch.RestoreSavePoint(ICSharpCode.Decompiler.IL.Patterns.Match@)')
 - [LiteralFormat](#T-ICSharpCode-Decompiler-CSharp-Syntax-LiteralFormat 'ICSharpCode.Decompiler.CSharp.Syntax.LiteralFormat')
 - [LoaderInjectionExtensions](#T-Bb-ComponentModel-Loaders-LoaderInjectionExtensions 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions')
-  - [Configure\`\`1(self,serviceProvider,context,initializer,action)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Configure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Configure``1(``0,System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
+  - [Configure\`\`1(self,serviceProvider,context,initializer,onInitializationAction)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Configure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Configure``1(``0,System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
   - [Execute\`\`1(self,builder)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Execute``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},``0- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Execute``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},``0)')
   - [GetConfiguredService\`\`1(serviceProvider,context,initializer,action)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-GetConfiguredService``1-System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.GetConfiguredService``1(System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
   - [LoadModules\`\`1(self)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-LoadModules``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.LoadModules``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
@@ -26517,13 +26517,6 @@ initialize the initializer
 
 The context of the initialization
 
-<a name='P-Bb-ComponentModel-Loaders-Initializer-Creator'></a>
-### Creator `property`
-
-##### Summary
-
-Override the default creator
-
 <a name='P-Bb-ComponentModel-Loaders-Initializer-GetFolderKeys'></a>
 ### GetFolderKeys `property`
 
@@ -26537,34 +26530,6 @@ Return the list configuration folders.
 ##### Summary
 
 Return the list of stored keys
-
-<a name='P-Bb-ComponentModel-Loaders-Initializer-InjectRescue'></a>
-### InjectRescue `property`
-
-##### Summary
-
-called if the system can't resolve the value
-
-<a name='P-Bb-ComponentModel-Loaders-Initializer-InjectValue'></a>
-### InjectValue `property`
-
-##### Summary
-
-called if the system can't resolve the value
-
-<a name='P-Bb-ComponentModel-Loaders-Initializer-Last'></a>
-### Last `property`
-
-##### Summary
-
-return the last initializer instance
-
-<a name='P-Bb-ComponentModel-Loaders-Initializer-OnInitialization'></a>
-### OnInitialization `property`
-
-##### Summary
-
-Method called for every InjectBuilder of initializer
 
 <a name='M-Bb-ComponentModel-Loaders-Initializer-AddFolder-System-String,System-String-'></a>
 ### AddFolder(folderKey,folder) `method`
@@ -26593,6 +26558,85 @@ Add or replace value to use for initialization
 | ---- | ---- | ----------- |
 | key | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | key |
 | value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | value for the key |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-ContainsFolder-System-String,System-String-'></a>
+### ContainsFolder(folderKey,folder) `method`
+
+##### Summary
+
+Return true if the folder is already referenced
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| folderKey | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | folder context key |
+| folder | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | folder path |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-ContainsFolder-System-String-'></a>
+### ContainsFolder(folder) `method`
+
+##### Summary
+
+Return true if the folder is already referenced
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| folder | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | folder path |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-ContainsKey-System-String-'></a>
+### ContainsKey(key) `method`
+
+##### Summary
+
+Return true if the key is referenced
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| key | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | key to evaluate |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-DelFolder-System-String,System-String-'></a>
+### DelFolder(folderKey,folder) `method`
+
+##### Summary
+
+remove a folder to use for a context use by specified key
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| folderKey | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | folder context key |
+| folder | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | folder path |
+
+<a name='M-Bb-ComponentModel-Loaders-Initializer-DelFolder-System-String-'></a>
+### DelFolder(folder) `method`
+
+##### Summary
+
+remove a folder to use for a context use by specified key
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| folder | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | folder path |
 
 <a name='M-Bb-ComponentModel-Loaders-Initializer-GetService-System-Type-'></a>
 ### GetService(serviceType) `method`
@@ -26646,10 +26690,12 @@ Discover all initializer and execute them for initializing the application
 | init | [System.Action{Bb.ComponentModel.Loaders.Initializer}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.Initializer}') | method to configure the process of initialization |
 | args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | arguments to push in the initialization process |
 
-<a name='M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-String[]-'></a>
-### Initialize(args,init,initializer) `method`
+<a name='M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-Action{Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}},System-String[]-'></a>
+### Initialize(args,init,initializer,onInitialization) `method`
 
 ##### Summary
+
+0.
 
 Discover all initializer and execute them for initializing the application
 
@@ -26658,15 +26704,16 @@ Discover all initializer and execute them for initializing the application
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | args | [System.Action{Bb.ComponentModel.Loaders.Initializer}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.Initializer}') | arguments to push in the initialization process |
-| init | [System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}') | method to configure the process of initialization |
-| initializer | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | method to configure every InjectionLoader |
+| init | [System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}') | method to configure the process of initialization. the parameter can be null |
+| initializer | [System.Action{Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer}}') | method to configure every InjectionLoader. the parameter can be null |
+| onInitialization | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | method to configure every InjectionLoader. the parameter can be null |
 
-<a name='M-Bb-ComponentModel-Loaders-Initializer-SetInjectValue-System-Func{System-String,System-Object}-'></a>
-### SetInjectValue(value) `method`
+<a name='M-Bb-ComponentModel-Loaders-Initializer-RemoveKey-System-String-'></a>
+### RemoveKey(key) `method`
 
 ##### Summary
 
-Initialize the inject builder
+Return true if the key is deleted or false if the key was not found
 
 ##### Returns
 
@@ -26676,7 +26723,7 @@ Initialize the inject builder
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| value | [System.Func{System.String,System.Object}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.String,System.Object}') |  |
+| key | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | key to remove |
 
 <a name='M-Bb-ComponentModel-Loaders-Initializer-TryGetFolders-System-String,System-Collections-Generic-IEnumerable{System-String}@-'></a>
 ### TryGetFolders(key,value) `method`
@@ -30247,8 +30294,41 @@ Form of a C# literal.
 
 Bb.ComponentModel.Loaders
 
+##### Summary
+
+Initialize an instance with class that will be discovered
+
+##### Example
+
+Create a class that will be discovered
+
+```Csharp
+[ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder&lt;MyClass&gt;), LifeCycle = IocScopeEnum.Transiant)]
+public class TestInitializer : IInjectBuilder&lt;MyClass&gt;
+{
+    public string FriendlyName =&gt; typeof(TestInitializer).Name;
+    public Type Type =&gt; typeof(MyClass);
+    public bool CanExecute(MyClass context) =&gt; context.CanExecuteModule(FriendlyName);
+    public bool CanExecute(object context) =&gt; CanExecute((MyClass)context);
+    public object Execute(object context) =&gt; Execute((MyClass)context);
+    public object Execute(MyClass context)
+    {
+        // execute your code here
+        return null;
+    }
+}
+```
+
+Run the initializer
+
+```Csharp
+    var context = ConstantsCore.Initialization;
+    new TestInitializer().Configure(serviceProvider, context);
+    ((IServiceProvider)provider).GetInitializedService(typeof(TestInitializer)).Initialize();
+```
+
 <a name='M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Configure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}-'></a>
-### Configure\`\`1(self,serviceProvider,context,initializer,action) `method`
+### Configure\`\`1(self,serviceProvider,context,initializer,onInitializationAction) `method`
 
 ##### Summary
 
@@ -30266,7 +30346,7 @@ Initialize the specified instance with classes that will be discovered
 | serviceProvider | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') | [IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') |
 | context | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | by default the value is "Initialization" |
 | initializer | [System.Action{Bb.ComponentModel.Loaders.InjectionLoader{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}}') | action to execute for every loader |
-| action | [System.Action{Bb.ComponentModel.IInjectBuilder{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.IInjectBuilder{``0}}') | action to initialize for every loader |
+| onInitializationAction | [System.Action{Bb.ComponentModel.IInjectBuilder{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.IInjectBuilder{``0}}') | action to initialize for every loader |
 
 ##### Generic Types
 

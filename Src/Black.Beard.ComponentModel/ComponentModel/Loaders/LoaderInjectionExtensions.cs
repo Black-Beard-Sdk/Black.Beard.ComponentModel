@@ -15,12 +15,12 @@ namespace Bb.ComponentModel.Loaders
     /// <summary>
     /// Initialize an instance with class that will be discovered
     /// </summary>
-    // <example>
+    /// <example>
     /// 
     /// Create a class that will be discovered
     /// <code lang="Csharp">
-    /// [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder<MyClass>), LifeCycle = IocScopeEnum.Transiant)]
-    /// public class TestInitializer : IInjectBuilder<MyClass>
+    /// [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder&lt;MyClass>), LifeCycle = IocScopeEnum.Transiant)]
+    /// public class TestInitializer : IInjectBuilder&lt;MyClass>
     /// {
     /// 
     ///     public string FriendlyName => typeof(TestInitializer).Name;
@@ -44,10 +44,12 @@ namespace Bb.ComponentModel.Loaders
     /// 
     /// Run the initializer
     /// <code lang="Csharp">
-    /// </code>
-    ///     
-    ///     new TestInitializer().Initialize();
+    /// 
+    ///     var context = ConstantsCore.Initialization;
+    ///     new TestInitializer().Configure(serviceProvider, context);
     ///     ((IServiceProvider)provider).GetInitializedService(typeof(TestInitializer)).Initialize();
+    /// 
+    /// </code>
     /// 
     /// </example>
     public static class LoaderInjectionExtensions
@@ -69,13 +71,13 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="serviceProvider"><see cref="IServiceProvider"/></param>
         /// <param name="context">by default the value is "Initialization"</param>
         /// <param name="initializer">action to execute for every loader</param>
-        /// <param name="action">action to initialize for every loader</param>
+        /// <param name="onInitializationAction">action to initialize for every loader</param>
         /// <returns></returns>
-        public static T Configure<T>(this T self, IServiceProvider serviceProvider = null, string? context = null, Action<InjectionLoader<T>> initializer = null, Action<IInjectBuilder<T>> action = null)
+        public static T Configure<T>(this T self, IServiceProvider serviceProvider = null, string? context = null, Action<InjectionLoader<T>> initializer = null, Action<IInjectBuilder<T>> onInitializationAction = null)
         {
 
             var loader = new InjectionLoader<T>(context ?? ConstantsCore.Initialization, serviceProvider, initializer)
-                .LoadModules(action)
+                .LoadModules(onInitializationAction)
                 .Execute(self);
 
             return self;
