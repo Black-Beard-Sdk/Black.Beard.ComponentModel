@@ -793,6 +793,13 @@
   - [TryGetExit()](#M-ICSharpCode-Decompiler-IL-ControlFlow-ConditionDetection-TryGetExit-ICSharpCode-Decompiler-IL-ILInstruction,ICSharpCode-Decompiler-IL-ILInstruction@- 'ICSharpCode.Decompiler.IL.ControlFlow.ConditionDetection.TryGetExit(ICSharpCode.Decompiler.IL.ILInstruction,ICSharpCode.Decompiler.IL.ILInstruction@)')
   - [WillShortCircuit()](#M-ICSharpCode-Decompiler-IL-ControlFlow-ConditionDetection-WillShortCircuit-ICSharpCode-Decompiler-IL-Block,ICSharpCode-Decompiler-IL-IfInstruction,ICSharpCode-Decompiler-IL-ILInstruction- 'ICSharpCode.Decompiler.IL.ControlFlow.ConditionDetection.WillShortCircuit(ICSharpCode.Decompiler.IL.Block,ICSharpCode.Decompiler.IL.IfInstruction,ICSharpCode.Decompiler.IL.ILInstruction)')
 - [ConditionalExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-ConditionalExpression 'ICSharpCode.Decompiler.CSharp.Syntax.ConditionalExpression')
+- [ConfigurationFolder](#T-Bb-ConfigurationFolder 'Bb.ConfigurationFolder')
+  - [Instance](#P-Bb-ConfigurationFolder-Instance 'Bb.ConfigurationFolder.Instance')
+  - [AddDirectory(folder)](#M-Bb-ConfigurationFolder-AddDirectory-System-String- 'Bb.ConfigurationFolder.AddDirectory(System.String)')
+  - [AddDirectory(folder)](#M-Bb-ConfigurationFolder-AddDirectory-System-IO-DirectoryInfo- 'Bb.ConfigurationFolder.AddDirectory(System.IO.DirectoryInfo)')
+  - [AddDirectoryIfExists(folder)](#M-Bb-ConfigurationFolder-AddDirectoryIfExists-System-String- 'Bb.ConfigurationFolder.AddDirectoryIfExists(System.String)')
+  - [AddDirectoryIfExists(folder)](#M-Bb-ConfigurationFolder-AddDirectoryIfExists-System-IO-DirectoryInfo- 'Bb.ConfigurationFolder.AddDirectoryIfExists(System.IO.DirectoryInfo)')
+  - [GetPaths()](#M-Bb-ConfigurationFolder-GetPaths 'Bb.ConfigurationFolder.GetPaths')
 - [ConnexionReaderExtension](#T-Bb-ComponentModel-Converters-ConnexionReaderExtension 'Bb.ComponentModel.Converters.ConnexionReaderExtension')
   - [GetKeyValues(payload)](#M-Bb-ComponentModel-Converters-ConnexionReaderExtension-GetKeyValues-System-String- 'Bb.ComponentModel.Converters.ConnexionReaderExtension.GetKeyValues(System.String)')
 - [ConstantResolveResult](#T-ICSharpCode-Decompiler-Semantics-ConstantResolveResult 'ICSharpCode.Decompiler.Semantics.ConstantResolveResult')
@@ -1908,6 +1915,7 @@
   - [GetKeys\`\`1(type)](#M-Bb-Injections-InjectValueAttributeExtensions-GetKeys``1-System-Type- 'Bb.Injections.InjectValueAttributeExtensions.GetKeys``1(System.Type)')
   - [InjectValue\`\`1(self,valueResolver)](#M-Bb-Injections-InjectValueAttributeExtensions-InjectValue``1-``0,System-Func{System-String,System-String}- 'Bb.Injections.InjectValueAttributeExtensions.InjectValue``1(``0,System.Func{System.String,System.String})')
 - [InjectionLoader](#T-Bb-ComponentModel-Loaders-InjectionLoader 'Bb.ComponentModel.Loaders.InjectionLoader')
+  - [#ctor(context,serviceProvider)](#M-Bb-ComponentModel-Loaders-InjectionLoader-#ctor-System-String,System-IServiceProvider- 'Bb.ComponentModel.Loaders.InjectionLoader.#ctor(System.String,System.IServiceProvider)')
   - [Context](#P-Bb-ComponentModel-Loaders-InjectionLoader-Context 'Bb.ComponentModel.Loaders.InjectionLoader.Context')
   - [Executed](#P-Bb-ComponentModel-Loaders-InjectionLoader-Executed 'Bb.ComponentModel.Loaders.InjectionLoader.Executed')
   - [InjectValue](#P-Bb-ComponentModel-Loaders-InjectionLoader-InjectValue 'Bb.ComponentModel.Loaders.InjectionLoader.InjectValue')
@@ -13269,6 +13277,103 @@ ICSharpCode.Decompiler.CSharp.Syntax
 ##### Summary
 
 Condition ? TrueExpression : FalseExpression
+
+<a name='T-Bb-ConfigurationFolder'></a>
+## ConfigurationFolder `type`
+
+##### Namespace
+
+Bb
+
+##### Summary
+
+Represents a collection of directories used for configuration purposes.
+
+<a name='P-Bb-ConfigurationFolder-Instance'></a>
+### Instance `property`
+
+##### Summary
+
+Gets the singleton instance of the ConfigurationFolder class.
+
+##### Remarks
+
+This property ensures that only one instance of the ConfigurationFolder class is created and used throughout the application.
+
+<a name='M-Bb-ConfigurationFolder-AddDirectory-System-String-'></a>
+### AddDirectory(folder) `method`
+
+##### Summary
+
+Adds the specified directory to the collection.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| folder | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The path of the directory to add. |
+
+<a name='M-Bb-ConfigurationFolder-AddDirectory-System-IO-DirectoryInfo-'></a>
+### AddDirectory(folder) `method`
+
+##### Summary
+
+Adds the specified directory to the collection.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| folder | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | The directory to add. |
+
+<a name='M-Bb-ConfigurationFolder-AddDirectoryIfExists-System-String-'></a>
+### AddDirectoryIfExists(folder) `method`
+
+##### Summary
+
+Adds the specified directory to the collection if it exists.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| folder | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The path of the directory to add. |
+
+##### Remarks
+
+This method checks if the specified directory exists and adds it to the collection if it does.
+
+<a name='M-Bb-ConfigurationFolder-AddDirectoryIfExists-System-IO-DirectoryInfo-'></a>
+### AddDirectoryIfExists(folder) `method`
+
+##### Summary
+
+Adds the specified directory to the collection if it exists.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| folder | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | The directory to add. |
+
+##### Remarks
+
+This method checks if the specified directory exists and adds it to the collection if it does.
+
+<a name='M-Bb-ConfigurationFolder-GetPaths'></a>
+### GetPaths() `method`
+
+##### Summary
+
+Gets an array of paths for all the directories in the collection.
+
+##### Returns
+
+An array of paths for all the directories in the collection.
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-Bb-ComponentModel-Converters-ConnexionReaderExtension'></a>
 ## ConnexionReaderExtension `type`
@@ -26861,70 +26966,110 @@ The value returned by the value resolver is converted to the property's type usi
 
 Bb.ComponentModel.Loaders
 
+##### Summary
+
+Injection loader
+
+<a name='M-Bb-ComponentModel-Loaders-InjectionLoader-#ctor-System-String,System-IServiceProvider-'></a>
+### #ctor(context,serviceProvider) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [InjectionLoader](#T-Bb-ComponentModel-Loaders-InjectionLoader 'Bb.ComponentModel.Loaders.InjectionLoader') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| context | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The context. |
+| serviceProvider | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') | The service provider. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the `context` is null. |
+
+##### Remarks
+
+This constructor initializes a new instance of the [InjectionLoader](#T-Bb-ComponentModel-Loaders-InjectionLoader 'Bb.ComponentModel.Loaders.InjectionLoader') class.
+
 <a name='P-Bb-ComponentModel-Loaders-InjectionLoader-Context'></a>
 ### Context `property`
 
 ##### Summary
 
-Context the match for explore the assemblies
+Gets the context used to explore the assemblies.
 
 <a name='P-Bb-ComponentModel-Loaders-InjectionLoader-Executed'></a>
 ### Executed `property`
 
 ##### Summary
 
-List of builder instances initialized
+Gets the list of builder instances initialized.
 
 <a name='P-Bb-ComponentModel-Loaders-InjectionLoader-InjectValue'></a>
 ### InjectValue `property`
 
 ##### Summary
 
-method to resolve the value by name to inject
+Gets or sets the method used to resolve the value by name to inject.
 
 <a name='P-Bb-ComponentModel-Loaders-InjectionLoader-ServiceProvider'></a>
 ### ServiceProvider `property`
 
 ##### Summary
 
-Service provider
+Gets or sets the service provider.
 
 <a name='P-Bb-ComponentModel-Loaders-InjectionLoader-Types'></a>
 ### Types `property`
 
 ##### Summary
 
-List of types builder found
+Gets the list of types builder found.
 
 <a name='M-Bb-ComponentModel-Loaders-InjectionLoader-AddInjectionAttribute-System-Type[]-'></a>
 ### AddInjectionAttribute(types) `method`
 
 ##### Summary
 
-add attribute to match for inject instance
+Adds the specified types as injection attributes.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| types | [System.Type[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type[] 'System.Type[]') |  |
+| types | [System.Type[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type[] 'System.Type[]') | The types to add as injection attributes. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the `types` is null. |
 
 <a name='M-Bb-ComponentModel-Loaders-InjectionLoader-CanExecuteModule-System-String-'></a>
 ### CanExecuteModule(friendlyName) `method`
 
 ##### Summary
 
-return true if the module must be evaluated
+Determines whether the module with the specified friendly name should be executed.
 
 ##### Returns
 
-
+`true` if the module should be executed; otherwise, `false`.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| friendlyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| friendlyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The friendly name of the module. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the `friendlyName` is null. |
 
 <a name='T-Bb-ComponentModel-Loaders-InjectionLoader`1'></a>
 ## InjectionLoader\`1 `type`

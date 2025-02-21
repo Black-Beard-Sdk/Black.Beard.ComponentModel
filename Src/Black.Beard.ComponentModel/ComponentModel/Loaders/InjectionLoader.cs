@@ -8,62 +8,70 @@ using System.Diagnostics;
 namespace Bb.ComponentModel.Loaders
 {
 
+    /// <summary>
+    /// Injection loader
+    /// </summary>
     public class InjectionLoader
     {
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InjectionLoader"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <remarks>
+        /// This constructor initializes a new instance of the <see cref="InjectionLoader"/> class.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">Thrown when the <paramref name="context"/> is null.</exception>
         public InjectionLoader(string context, IServiceProvider serviceProvider = null)
         {
-
-            this.Context = context;
+            this.Context = context ?? throw new ArgumentNullException(nameof(context));
 
             if (serviceProvider is LocalServiceProvider s && s.AutoAdd)
                 ServiceProvider = s;
-
             else
                 ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
 
             Types = new List<Type>();
             Executed = new HashSet<string>();
-
         }
 
         /// <summary>
-        /// Context the match for explore the assemblies
+        /// Gets the context used to explore the assemblies.
         /// </summary>
         public string Context { get; }
 
         /// <summary>
-        /// method to resolve the value by name to inject
+        /// Gets or sets the method used to resolve the value by name to inject.
         /// </summary>
         public Func<string, object> InjectValue { get; internal set; }
 
         /// <summary>
-        /// Service provider
+        /// Gets or sets the service provider.
         /// </summary>
         public LocalServiceProvider ServiceProvider { get; internal set; }
 
         /// <summary>
-        /// List of types builder found
+        /// Gets the list of types builder found.
         /// </summary>
         public List<Type> Types { get; }
 
         /// <summary>
-        /// List of builder instances initialized
+        /// Gets the list of builder instances initialized.
         /// </summary>
         public HashSet<string> Executed { get; }
 
-        //public bool ExcludeAbstractTypes { get; internal set; } = true;
-
-        //public bool ExcludeGenericTypes { get; internal set; } = true;
-
         /// <summary>
-        /// return true if the module must be evaluated
+        /// Determines whether the module with the specified friendly name should be executed.
         /// </summary>
-        /// <param name="friendlyName"></param>
-        /// <returns></returns>
+        /// <param name="friendlyName">The friendly name of the module.</param>
+        /// <returns><c>true</c> if the module should be executed; otherwise, <c>false</c>.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when the <paramref name="friendlyName"/> is null.</exception>
         public bool CanExecuteModule(string friendlyName)
         {
+            if (friendlyName == null)
+                throw new ArgumentNullException(nameof(friendlyName));
 
             bool result = true;
             if (_parser.TryResolveStringValue(friendlyName, out string variableValue))
@@ -74,15 +82,18 @@ namespace Bb.ComponentModel.Loaders
             else
                 Debug.WriteLine($"injectionLoader {friendlyName} by passed");
             return result;
-
         }
 
         /// <summary>
-        /// add attribute to match for inject instance
+        /// Adds the specified types as injection attributes.
         /// </summary>
-        /// <param name="types"></param>
+        /// <param name="types">The types to add as injection attributes.</param>
+        /// <exception cref="ArgumentNullException">Thrown when the <paramref name="types"/> is null.</exception>
         public static void AddInjectionAttribute(params Type[] types)
         {
+            if (types == null)
+                throw new ArgumentNullException(nameof(types));
+
             foreach (var item in types)
                 ObjectCreatorByIoc.SetInjectionAttribute(item);
         }
