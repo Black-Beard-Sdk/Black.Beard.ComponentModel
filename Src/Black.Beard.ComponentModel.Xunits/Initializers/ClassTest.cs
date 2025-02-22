@@ -3,6 +3,7 @@ using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Loaders;
 using Bb.Injections;
 using FluentAssertions;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,7 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
         }
 
 
-            [Fact]
+        [Fact]
         public void TestNull()
         {
 
@@ -231,6 +232,46 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
         }
 
+        [Fact]
+        public void Test6()
+        {
+
+            bool ok = false;
+            Initializer.Initialize(null,
+            c =>
+            {
+
+            },
+            d =>
+            {
+                if (d is InitializerTest t)
+                {
+                    t.ToInject.Should().NotBeNull();
+                    t.ToInject2.Should().NotBeNull();
+                    ok = true;
+                }
+            });
+
+            ok.Should().BeTrue();
+
+        }
+
+        [Fact]
+        public void Test7()
+        {
+
+            InjectBuilder.Set("InitializerTest", false);
+
+            bool ok = false;
+            Initializer.Initialize(null, null, null, p =>
+            {
+                InjectBuilder.Set("InitializerTest", true);
+                p.Executed.Contains("InitializerTest").Should().BeFalse();
+            });
+
+        }
+
+
         public class BuilderTest
         {
 
@@ -262,12 +303,8 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
         public bool CanExecute(Initializer context)
         {
-
-            var p = this;
-
             context.AddOrReplace("Test", "Toto");
             context.AddFolder("configs", "c:\\test");
-
             return true;
         }
 
@@ -305,6 +342,7 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
         [Inject(typeof(Test2))]
         public ITest ToInject2 { get; set; }
+
 
     }
 

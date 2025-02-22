@@ -103,10 +103,14 @@
 - [IUISite](#T-Bb-ComponentModel-IUISite 'Bb.ComponentModel.IUISite')
   - [Parent](#P-Bb-ComponentModel-IUISite-Parent 'Bb.ComponentModel.IUISite.Parent')
 - [InjectBuilder](#T-Bb-ComponentModel-InjectBuilder 'Bb.ComponentModel.InjectBuilder')
+  - [FilterToLaunch](#F-Bb-ComponentModel-InjectBuilder-FilterToLaunch 'Bb.ComponentModel.InjectBuilder.FilterToLaunch')
   - [FriendlyName](#P-Bb-ComponentModel-InjectBuilder-FriendlyName 'Bb.ComponentModel.InjectBuilder.FriendlyName')
   - [Type](#P-Bb-ComponentModel-InjectBuilder-Type 'Bb.ComponentModel.InjectBuilder.Type')
   - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilder-CanExecute-System-Object- 'Bb.ComponentModel.InjectBuilder.CanExecute(System.Object)')
   - [Execute(context)](#M-Bb-ComponentModel-InjectBuilder-Execute-System-Object- 'Bb.ComponentModel.InjectBuilder.Execute(System.Object)')
+  - [InitializeExcludedFromEnvironment(key)](#M-Bb-ComponentModel-InjectBuilder-InitializeExcludedFromEnvironment-System-String- 'Bb.ComponentModel.InjectBuilder.InitializeExcludedFromEnvironment(System.String)')
+  - [Set(friendlyName,toLaunch)](#M-Bb-ComponentModel-InjectBuilder-Set-System-String,System-Boolean- 'Bb.ComponentModel.InjectBuilder.Set(System.String,System.Boolean)')
+  - [ToInjectBuilder(builder)](#M-Bb-ComponentModel-InjectBuilder-ToInjectBuilder-Bb-ComponentModel-IInjectBuilder- 'Bb.ComponentModel.InjectBuilder.ToInjectBuilder(Bb.ComponentModel.IInjectBuilder)')
 - [InjectBuilder\`1](#T-Bb-ComponentModel-InjectBuilder`1 'Bb.ComponentModel.InjectBuilder`1')
   - [Type](#P-Bb-ComponentModel-InjectBuilder`1-Type 'Bb.ComponentModel.InjectBuilder`1.Type')
   - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilder`1-CanExecute-`0- 'Bb.ComponentModel.InjectBuilder`1.CanExecute(`0)')
@@ -1380,6 +1384,13 @@ Bb.ComponentModel
 
 Class base that implement default behavior for [IInjectBuilder](#T-Bb-ComponentModel-IInjectBuilder 'Bb.ComponentModel.IInjectBuilder')
 
+<a name='F-Bb-ComponentModel-InjectBuilder-FilterToLaunch'></a>
+### FilterToLaunch `constants`
+
+##### Summary
+
+Internal filter to launch the builders
+
 <a name='P-Bb-ComponentModel-InjectBuilder-FriendlyName'></a>
 ### FriendlyName `property`
 
@@ -1428,12 +1439,152 @@ Execute the initializing process with [Object](http://msdn.microsoft.com/query/d
 | ---- | ---- | ----------- |
 | context | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | specified context [Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |
 
+<a name='M-Bb-ComponentModel-InjectBuilder-InitializeExcludedFromEnvironment-System-String-'></a>
+### InitializeExcludedFromEnvironment(key) `method`
+
+##### Summary
+
+Initializes the excluded items from the environment based on the specified key.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| key | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The key to retrieve the environment variable. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the key parameter is null. |
+
+##### Remarks
+
+This method retrieves the value of the environment variable specified by the key parameter. If the value is not null, it splits the value into individual items using ';' as the separator. For each item, if it starts with '-', it adds the item (excluding the '-' character) to the cache. Otherwise, it removes the item from the cache.
+e.g. If the value is "friendlyName1;friendlyName2;-friendlyName3", the cache will contain "friendlyName1" and "friendlyName2" and will not contain "friendlyName3".
+
+<a name='M-Bb-ComponentModel-InjectBuilder-Set-System-String,System-Boolean-'></a>
+### Set(friendlyName,toLaunch) `method`
+
+##### Summary
+
+Sets the specified friendly name and launch flag.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| friendlyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The friendly name. |
+| toLaunch | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | The launch flag. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the friendlyName parameter is null. |
+
+##### Remarks
+
+This method sets the launch flag for the specified friendly name. If the launch flag is true, the friendly name is removed from the cache. If the launch flag is false, the friendly name is added to the cache.
+
+<a name='M-Bb-ComponentModel-InjectBuilder-ToInjectBuilder-Bb-ComponentModel-IInjectBuilder-'></a>
+### ToInjectBuilder(builder) `method`
+
+##### Summary
+
+Determines whether the specified builder should be injected into the builder.
+
+##### Returns
+
+`true` if the specified builder should be injected into the builder; otherwise, `false`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| builder | [Bb.ComponentModel.IInjectBuilder](#T-Bb-ComponentModel-IInjectBuilder 'Bb.ComponentModel.IInjectBuilder') | The builder. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the builder parameter is null. |
+
+##### Remarks
+
+This method checks if the specified builder's friendly name is not present in the cache of a item that must not to execute. If the friendly name is not present, it means the builder should be injected into the builder.
+
 <a name='T-Bb-ComponentModel-InjectBuilder`1'></a>
 ## InjectBuilder\`1 `type`
 
 ##### Namespace
 
 Bb.ComponentModel
+
+##### Summary
+
+Class base that implement default behavior for [IInjectBuilder\`1](#T-Bb-ComponentModel-IInjectBuilder`1 'Bb.ComponentModel.IInjectBuilder`1')
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | context of the initialization |
+
+##### Example
+
+Sample add service in the web application
+ 
+ First add a new class that will intercept the service to configure. in this case the WebApplicationBuilder and the WebApplication
+
+```C#
+    
+    [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder&lt;WebApplicationBuilder&gt;), LifeCycle = IocScopeEnum.Transiant)]
+    public class ConfigureWebApplicationBuilder : InjectBuilder&lt;WebApplicationBuilder&gt;
+    {
+        public object Execute(WebApplicationBuilder context)
+        {
+            // Add your code here
+            return null;
+        }
+    }
+    
+    [ExposeClass(ConstantsCore.Initialization, ExposedType = typeof(IInjectBuilder&lt;WebApplication&gt;), LifeCycle = IocScopeEnum.Transiant)]
+    public class ConfigureWebApplication : InjectBuilder&lt;WebApplication&gt;
+    {
+        public object Execute(WebApplication context)
+        {
+            // Add your code here
+            return null;
+        }
+    }
+```
+
+call the builder in the main program
+
+```
+ 
+     // In the main program insert the bloc that create and initialize the WebApplication class
+     WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+     builder.Configure(builder.Services.BuildServiceProvider());
+     var app = builder.Build();
+     app.Configure(app.Services);
+     
+ 
+```
+
+exclude the builder from the environment
+
+```
+    InjectBuilder.InitializeExcludedFromEnvironment("environmentKey"); 
+```
+
+/// 
+ exclude the builder from the variable launch
+
+```
+    run -friendlyName
+```
 
 <a name='P-Bb-ComponentModel-InjectBuilder`1-Type'></a>
 ### Type `property`

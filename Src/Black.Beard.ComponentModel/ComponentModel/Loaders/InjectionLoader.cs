@@ -1,5 +1,4 @@
 ﻿using Bb.ComponentModel.Factories;
-using ICSharpCode.Decompiler.Disassembler;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -68,19 +67,19 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="friendlyName">The friendly name of the module.</param>
         /// <returns><c>true</c> if the module should be executed; otherwise, <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException">Thrown when the <paramref name="friendlyName"/> is null.</exception>
-        public bool CanExecuteModule(string friendlyName)
+        public bool CanExecuteModule(IInjectBuilder friendlyName)
         {
             if (friendlyName == null)
                 throw new ArgumentNullException(nameof(friendlyName));
 
             bool result = true;
-            if (_parser.TryResolveStringValue(friendlyName, out string variableValue))
-                result = variableValue?.ToLower() != "false";
 
-            if (result)
-                Debug.WriteLine($"injectionLoader {friendlyName} must be executed");
-            else
-                Debug.WriteLine($"injectionLoader {friendlyName} by passed");
+            if (!InjectBuilder.ToInjectBuilder(friendlyName))
+                result = false;                
+
+            if (result && _parser.TryResolveStringValue(friendlyName.FriendlyName, out string variableValue))
+                result = variableValue?.ToLower() != "false";
+                 
             return result;
         }
 
@@ -91,11 +90,13 @@ namespace Bb.ComponentModel.Loaders
         /// <exception cref="ArgumentNullException">Thrown when the <paramref name="types"/> is null.</exception>
         public static void AddInjectionAttribute(params Type[] types)
         {
+
             if (types == null)
                 throw new ArgumentNullException(nameof(types));
 
             foreach (var item in types)
                 ObjectCreatorByIoc.SetInjectionAttribute(item);
+        
         }
 
         internal CommandLineParser _parser;

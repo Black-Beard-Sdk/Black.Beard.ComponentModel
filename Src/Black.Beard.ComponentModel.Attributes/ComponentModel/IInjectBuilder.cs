@@ -14,7 +14,6 @@ namespace Bb.ComponentModel
         /// </summary>
         string FriendlyName { get; }
 
-
         /// <summary>
         /// Execute the initializing process with <see cref="object"/>
         /// </summary>
@@ -33,7 +32,6 @@ namespace Bb.ComponentModel
         /// Return the type of service that should be passed by argument
         /// </summary>
         Type Type { get; }
-
 
     }
 

@@ -64,7 +64,12 @@ namespace Bb.ComponentModel.Loaders
         /// <returns></returns>
         public static Initializer Initialize(Action<Initializer> init, params string[] args)
         {
-            return Initialize(init, null, null, args);
+            return Initialize(init, null, null, null, args);
+        }
+
+        public static Initializer Initialize(Action<Initializer> init, Action<InjectionLoader<Initializer>> initializer, Action<IInjectBuilder<Initializer>> onInitialization,  params string[] args)
+        {
+            return Initialize(init, initializer, onInitialization, null, args);
         }
 
         /// <summary>0.
@@ -75,19 +80,19 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="init">method to configure the process of initialization. the parameter can be null</param>
         /// <param name="initializer">method to configure every InjectionLoader. the parameter can be null</param>
         /// <param name="onInitialization">method to configure every InjectionLoader. the parameter can be null</param>
-        public static Initializer Initialize(Action<Initializer> init, Action<InjectionLoader<Initializer>> initializer, Action<IInjectBuilder<Initializer>> onInitialization, params string[] args)
+        public static Initializer Initialize(Action<Initializer> init, Action<InjectionLoader<Initializer>> initializer, Action<IInjectBuilder<Initializer>> onInitialization, Action<InjectionLoader<Initializer>> postExecution, params string[] args)
         {
             Initializer i = new Initializer(args);
             init?.Invoke(i);
             return i.Configure(i._serviceProvider, i.Context, c =>
             {
-                
+
                 c.WithArguments(i._args);
-                
+
                 if (initializer != null)
                     initializer(c);
 
-            }, onInitialization);
+            }, onInitialization, postExecution);
         }
 
         /// <summary>

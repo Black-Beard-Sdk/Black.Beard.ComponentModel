@@ -73,12 +73,23 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="initializer">action to execute for every loader</param>
         /// <param name="onInitializationAction">action to initialize for every loader</param>
         /// <returns></returns>
-        public static T Configure<T>(this T self, IServiceProvider serviceProvider = null, string? context = null, Action<InjectionLoader<T>> initializer = null, Action<IInjectBuilder<T>> onInitializationAction = null)
+        public static T Configure<T>(
+            this T self, 
+            IServiceProvider serviceProvider = null, 
+            string? context = null, 
+            Action<InjectionLoader<T>> initializer = null, 
+            Action<IInjectBuilder<T>> onInitializationAction = null,
+            Action<InjectionLoader<T>> postExecution = null
+
+            )
         {
 
             var loader = new InjectionLoader<T>(context ?? ConstantsCore.Initialization, serviceProvider, initializer)
                 .LoadModules(onInitializationAction)
                 .Execute(self);
+
+            if (postExecution != null)
+                postExecution(loader);
 
             return self;
 
@@ -266,7 +277,7 @@ namespace Bb.ComponentModel.Loaders
                 throw new ArgumentNullException(nameof(builder));
 
             foreach (IInjectBuilder<T> item in self.Instances)
-                if (item.CanExecute(builder))
+                if (self.CanExecuteModule(item) &&  item.CanExecute(builder))
                 {
                     var name = item.FriendlyName ?? item.GetType().FullName;
                     item.Execute(builder);

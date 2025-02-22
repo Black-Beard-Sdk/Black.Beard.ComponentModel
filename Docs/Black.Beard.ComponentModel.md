@@ -1906,7 +1906,7 @@
   - [GetService(serviceType)](#M-Bb-ComponentModel-Loaders-Initializer-GetService-System-Type- 'Bb.ComponentModel.Loaders.Initializer.GetService(System.Type)')
   - [Initialize(args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.String[])')
   - [Initialize(init,args)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.String[])')
-  - [Initialize(args,init,initializer,onInitialization)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-Action{Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}},System.Action{Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer}},System.String[])')
+  - [Initialize(args,init,initializer,onInitialization)](#M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-Action{Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-String[]- 'Bb.ComponentModel.Loaders.Initializer.Initialize(System.Action{Bb.ComponentModel.Loaders.Initializer},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}},System.Action{Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer}},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}},System.String[])')
   - [RemoveKey(key)](#M-Bb-ComponentModel-Loaders-Initializer-RemoveKey-System-String- 'Bb.ComponentModel.Loaders.Initializer.RemoveKey(System.String)')
   - [TryGetFolders(key,value)](#M-Bb-ComponentModel-Loaders-Initializer-TryGetFolders-System-String,System-Collections-Generic-IEnumerable{System-String}@- 'Bb.ComponentModel.Loaders.Initializer.TryGetFolders(System.String,System.Collections.Generic.IEnumerable{System.String}@)')
   - [TryGetValue(key,value)](#M-Bb-ComponentModel-Loaders-Initializer-TryGetValue-System-String,System-Object@- 'Bb.ComponentModel.Loaders.Initializer.TryGetValue(System.String,System.Object@)')
@@ -1922,7 +1922,7 @@
   - [ServiceProvider](#P-Bb-ComponentModel-Loaders-InjectionLoader-ServiceProvider 'Bb.ComponentModel.Loaders.InjectionLoader.ServiceProvider')
   - [Types](#P-Bb-ComponentModel-Loaders-InjectionLoader-Types 'Bb.ComponentModel.Loaders.InjectionLoader.Types')
   - [AddInjectionAttribute(types)](#M-Bb-ComponentModel-Loaders-InjectionLoader-AddInjectionAttribute-System-Type[]- 'Bb.ComponentModel.Loaders.InjectionLoader.AddInjectionAttribute(System.Type[])')
-  - [CanExecuteModule(friendlyName)](#M-Bb-ComponentModel-Loaders-InjectionLoader-CanExecuteModule-System-String- 'Bb.ComponentModel.Loaders.InjectionLoader.CanExecuteModule(System.String)')
+  - [CanExecuteModule(friendlyName)](#M-Bb-ComponentModel-Loaders-InjectionLoader-CanExecuteModule-Bb-ComponentModel-IInjectBuilder- 'Bb.ComponentModel.Loaders.InjectionLoader.CanExecuteModule(Bb.ComponentModel.IInjectBuilder)')
 - [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1')
   - [#ctor(context,serviceProvider)](#M-Bb-ComponentModel-Loaders-InjectionLoader`1-#ctor-System-String,System-IServiceProvider,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{`0}}- 'Bb.ComponentModel.Loaders.InjectionLoader`1.#ctor(System.String,System.IServiceProvider,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{`0}})')
   - [Instances](#P-Bb-ComponentModel-Loaders-InjectionLoader`1-Instances 'Bb.ComponentModel.Loaders.InjectionLoader`1.Instances')
@@ -2229,7 +2229,7 @@
   - [RestoreSavePoint()](#M-ICSharpCode-Decompiler-IL-Patterns-ListMatch-RestoreSavePoint-ICSharpCode-Decompiler-IL-Patterns-Match@- 'ICSharpCode.Decompiler.IL.Patterns.ListMatch.RestoreSavePoint(ICSharpCode.Decompiler.IL.Patterns.Match@)')
 - [LiteralFormat](#T-ICSharpCode-Decompiler-CSharp-Syntax-LiteralFormat 'ICSharpCode.Decompiler.CSharp.Syntax.LiteralFormat')
 - [LoaderInjectionExtensions](#T-Bb-ComponentModel-Loaders-LoaderInjectionExtensions 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions')
-  - [Configure\`\`1(self,serviceProvider,context,initializer,onInitializationAction)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Configure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Configure``1(``0,System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
+  - [Configure\`\`1(self,serviceProvider,context,initializer,onInitializationAction)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Configure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Configure``1(``0,System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}})')
   - [Execute\`\`1(self,builder)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Execute``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},``0- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Execute``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},``0)')
   - [GetConfiguredService\`\`1(serviceProvider,context,initializer,action)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-GetConfiguredService``1-System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.GetConfiguredService``1(System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
   - [LoadModules\`\`1(self)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-LoadModules``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.LoadModules``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
@@ -26795,7 +26795,7 @@ Discover all initializer and execute them for initializing the application
 | init | [System.Action{Bb.ComponentModel.Loaders.Initializer}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.Initializer}') | method to configure the process of initialization |
 | args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | arguments to push in the initialization process |
 
-<a name='M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-Action{Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}},System-String[]-'></a>
+<a name='M-Bb-ComponentModel-Loaders-Initializer-Initialize-System-Action{Bb-ComponentModel-Loaders-Initializer},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-Action{Bb-ComponentModel-IInjectBuilder{Bb-ComponentModel-Loaders-Initializer}},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{Bb-ComponentModel-Loaders-Initializer}},System-String[]-'></a>
 ### Initialize(args,init,initializer,onInitialization) `method`
 
 ##### Summary
@@ -26811,7 +26811,7 @@ Discover all initializer and execute them for initializing the application
 | args | [System.Action{Bb.ComponentModel.Loaders.Initializer}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.Initializer}') | arguments to push in the initialization process |
 | init | [System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}') | method to configure the process of initialization. the parameter can be null |
 | initializer | [System.Action{Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.IInjectBuilder{Bb.ComponentModel.Loaders.Initializer}}') | method to configure every InjectionLoader. the parameter can be null |
-| onInitialization | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | method to configure every InjectionLoader. the parameter can be null |
+| onInitialization | [System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.InjectionLoader{Bb.ComponentModel.Loaders.Initializer}}') | method to configure every InjectionLoader. the parameter can be null |
 
 <a name='M-Bb-ComponentModel-Loaders-Initializer-RemoveKey-System-String-'></a>
 ### RemoveKey(key) `method`
@@ -27048,7 +27048,7 @@ Adds the specified types as injection attributes.
 | ---- | ----------- |
 | [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the `types` is null. |
 
-<a name='M-Bb-ComponentModel-Loaders-InjectionLoader-CanExecuteModule-System-String-'></a>
+<a name='M-Bb-ComponentModel-Loaders-InjectionLoader-CanExecuteModule-Bb-ComponentModel-IInjectBuilder-'></a>
 ### CanExecuteModule(friendlyName) `method`
 
 ##### Summary
@@ -27063,7 +27063,7 @@ Determines whether the module with the specified friendly name should be execute
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| friendlyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The friendly name of the module. |
+| friendlyName | [Bb.ComponentModel.IInjectBuilder](#T-Bb-ComponentModel-IInjectBuilder 'Bb.ComponentModel.IInjectBuilder') | The friendly name of the module. |
 
 ##### Exceptions
 
@@ -30472,7 +30472,7 @@ Run the initializer
     ((IServiceProvider)provider).GetInitializedService(typeof(TestInitializer)).Initialize();
 ```
 
-<a name='M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Configure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}-'></a>
+<a name='M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Configure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}}-'></a>
 ### Configure\`\`1(self,serviceProvider,context,initializer,onInitializationAction) `method`
 
 ##### Summary
