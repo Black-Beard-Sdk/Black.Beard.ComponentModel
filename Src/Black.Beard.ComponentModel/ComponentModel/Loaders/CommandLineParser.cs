@@ -176,9 +176,6 @@ namespace Bb.ComponentModel.Loaders
             else if (TryResolveFromEnvironement(name, out result))
                 r = true;
 
-            var r2 = r ? "Succeeded" : "Failed";
-            Console.WriteLine($"Resolving {name} from configuration : {r2}");
-
             return r;
 
         }

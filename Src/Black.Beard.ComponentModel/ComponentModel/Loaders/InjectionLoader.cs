@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 
 namespace Bb.ComponentModel.Loaders
 {
@@ -12,7 +11,6 @@ namespace Bb.ComponentModel.Loaders
     /// </summary>
     public class InjectionLoader
     {
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InjectionLoader"/> class.

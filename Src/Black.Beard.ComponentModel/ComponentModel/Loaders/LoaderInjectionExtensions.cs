@@ -216,30 +216,6 @@ namespace Bb.ComponentModel.Loaders
 
         }
 
-        ///// <summary>
-        ///// create instance and initialize service from service provider
-        ///// </summary>
-        ///// <typeparam name="T">type of the service asked</typeparam>
-        ///// <param name="serviceProvider"><see cref="IServiceProvider"/></param>
-        ///// <param name="context">by default the value is "Initialization"</param>
-        ///// <param name="initializer">action to execute for every loader</param>
-        ///// <param name="action">action to initialize for every loader</param>
-        //public static object GetConfiguredService(this IServiceProvider serviceProvider, Type type, string context, Action<InjectionLoader> initializer = null, Action<IInjectBuilder> action = null)
-        //{
-
-        //    var instance = serviceProvider.GetService(type);
-
-        //    if (instance != null)
-        //    {
-        //        var method = _method.MakeGenericMethod(type);
-        //        method.Invoke(instance, new object[] { serviceProvider, context, initializer, action });
-        //    }
-
-        //    return instance;
-
-        //}
-
-
         /// <summary>
         /// Load assemblies and initialize the loader
         /// </summary>
@@ -365,20 +341,19 @@ namespace Bb.ComponentModel.Loaders
                         }
                         catch (Exception e)
                         {
-                            throw new InvalidCastException($"var '{variableName}' can't be convert to '{property.PropertyType.Name}'.", e);
+                            throw new InvalidCastException($"{typeof(T).FullName}.{property.Name} required variable '{variableName}' that can't be converted to '{property.PropertyType.Name}'.", e);
                         }
 
                     if (value != default)
                         property.SetValue(instance, value);
 
                     else if (required && !resolved)
-                    {
-                        throw new UndefinedException(nameof(variableName));
-                    }
+                        throw new UndefinedException($"{typeof(T).FullName}.{property.Name} required variable '{variableName}'");
 
                 }
 
             }
+
             return instance;
 
         }
