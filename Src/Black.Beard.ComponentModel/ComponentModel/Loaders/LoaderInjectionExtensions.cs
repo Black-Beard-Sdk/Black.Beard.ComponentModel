@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace Bb.ComponentModel.Loaders
 {
@@ -74,10 +75,10 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="onInitializationAction">action to initialize for every loader</param>
         /// <returns></returns>
         public static T Configure<T>(
-            this T self, 
-            IServiceProvider serviceProvider = null, 
-            string? context = null, 
-            Action<InjectionLoader<T>> initializer = null, 
+            this T self,
+            IServiceProvider serviceProvider = null,
+            string? context = null,
+            Action<InjectionLoader<T>> initializer = null,
             Action<IInjectBuilder<T>> onInitializationAction = null,
             Action<InjectionLoader<T>> postExecution = null
 
@@ -253,13 +254,26 @@ namespace Bb.ComponentModel.Loaders
                 throw new ArgumentNullException(nameof(builder));
 
             foreach (IInjectBuilder<T> item in self.Instances)
-                if (self.CanExecuteModule(item) &&  item.CanExecute(builder))
+            {
+
+                var name = item.FriendlyName ?? item.GetType().FullName;
+
+                if (self.CanExecuteModule(item))
                 {
-                    var name = item.FriendlyName ?? item.GetType().FullName;
-                    item.Execute(builder);
-                    Trace.WriteLine($"add-on '{name}' initialized", TraceLevel.Info.ToString());
-                    self.Executed.Add(name);
+                    if (item.CanExecute(builder))
+                    {
+                        item.Execute(builder);
+                        Debug.WriteLine($"add-on '{name}' initialized");
+                        self.Executed.Add(name);
+                    }
+                    else
+                        Debug.WriteLine($"add-on '{name}' is deactivated");
+
                 }
+                else
+                    Debug.WriteLine($"add-on '{name}' refuses to run");
+            
+            }
 
             return self;
 

@@ -67,6 +67,7 @@ namespace Bb.ComponentModel.Loaders
         /// <exception cref="ArgumentNullException">Thrown when the <paramref name="friendlyName"/> is null.</exception>
         public bool CanExecuteModule(IInjectBuilder friendlyName)
         {
+
             if (friendlyName == null)
                 throw new ArgumentNullException(nameof(friendlyName));
 
@@ -79,6 +80,7 @@ namespace Bb.ComponentModel.Loaders
                 result = variableValue?.ToLower() != "false";
                  
             return result;
+
         }
 
         /// <summary>
