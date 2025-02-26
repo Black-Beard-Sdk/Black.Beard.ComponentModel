@@ -13,7 +13,7 @@ namespace ComponentModels.Tests.Factories
         [Fact]
         public void TestGetPropertyToMap()
         {
-            ObjectCreatorByIoc.SetInjectionAttribute<InjectAttribute>();
+            ObjectCreatorByIoc.SetInjectionAttribute<InjectByIocAttribute>();
             var i = new TestByIoc3();
             var items = i.GetPropertiesToMap().ToList();
             Assert.True(items.Count == 1);
@@ -22,7 +22,7 @@ namespace ComponentModels.Tests.Factories
         [Fact]
         public void TestMapper()
         {
-            ObjectCreatorByIoc.SetInjectionAttribute<InjectAttribute>();
+            ObjectCreatorByIoc.SetInjectionAttribute<InjectByIocAttribute>();
             var serviceProvider = new LocalServiceProvider();
 
             var i = new TestByIoc3();
@@ -43,7 +43,7 @@ namespace ComponentModels.Tests.Factories
 
             var srv = (TestByIoc1)serviceProvider.GetService(typeof(TestByIoc1));
 
-            ObjectCreatorByIoc.SetInjectionAttribute<InjectAttribute>();
+            ObjectCreatorByIoc.SetInjectionAttribute<InjectByIocAttribute>();
             var factory3 = ObjectCreatorByIoc.GetActivator<TestByIoc3>();
             var oo = factory3.Invoke(serviceProvider);
 
@@ -154,7 +154,7 @@ namespace ComponentModels.Tests.Factories
 
         }        
 
-        [Inject]
+        [InjectByIoc]
         public IServiceProvider Provider { get; set; }
 
 

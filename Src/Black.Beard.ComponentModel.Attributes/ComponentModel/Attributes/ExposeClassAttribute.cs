@@ -36,7 +36,7 @@ namespace Bb.ComponentModel.Attributes
         public ExposeClassAttribute(string context, string display)
         {
             Context = context;
-            this.Name = display;
+            Name = display;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Bb.ComponentModel.Attributes
         /// <value>
         /// The context.
         /// </value>
-        public string Context { get; set; }              
+        public string Context { get; set; }
 
         /// <summary>
         /// Gets or sets the life cycle if must be use in Ioc.
@@ -72,11 +72,11 @@ namespace Bb.ComponentModel.Attributes
         public Type ExposedType { get; set; }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Determines whether the specified <see cref="object" />, is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj)
         {
@@ -85,7 +85,7 @@ namespace Bb.ComponentModel.Attributes
                 return false;
 
             if (obj is ExposeClassAttribute)
-                return this.GetHashCode() == obj.GetHashCode();
+                return GetHashCode() == obj.GetHashCode();
 
             return false;
 

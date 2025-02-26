@@ -1,4 +1,4 @@
-﻿using Bb.ComponentModel;
+﻿using Bb.ComponentModel.Attributes;
 using Bb.Expressions;
 using System;
 using System.Collections.Generic;
@@ -9,29 +9,29 @@ namespace Bb.Injections
 
 
     /// <summary>
-    /// Provides extension methods for the <see cref="InjectValueAttribute"/> class.
+    /// Provides extension methods for the <see cref="InjectValueByIocAttribute"/> class.
     /// </summary>
     public static class InjectValueAttributeExtensions
     {
 
         /// <summary>
-        /// Retrieves the <see cref="InjectValueAttribute"/> instances defined on the properties of the specified type.
+        /// Retrieves the <see cref="InjectValueByIocAttribute"/> instances defined on the properties of the specified type.
         /// </summary>
         /// <typeparam name="T">The type to retrieve the attributes from.</typeparam>
         /// <param name="type">The type to retrieve the attributes from.</param>
-        /// <returns>An enumerable collection of <see cref="InjectValueAttribute"/> instances.</returns>
+        /// <returns>An enumerable collection of <see cref="InjectValueByIocAttribute"/> instances.</returns>
         /// <remarks>
-        /// This method retrieves the <see cref="InjectValueAttribute"/> instances defined on the properties of the specified type.
+        /// This method retrieves the <see cref="InjectValueByIocAttribute"/> instances defined on the properties of the specified type.
         /// </remarks>
-        public static IEnumerable<InjectValueAttribute> GetKeys<T>(this Type type)
+        public static IEnumerable<InjectValueByIocAttribute> GetKeys<T>(this Type type)
         {
 
             var properties = type.GetProperties();
             foreach (var item in properties)
             {
-                var attr = item.GetCustomAttributes(typeof(InjectValueAttribute), true);
+                var attr = item.GetCustomAttributes(typeof(InjectValueByIocAttribute), true);
                 if (attr.Length > 0)
-                    yield return (InjectValueAttribute)attr[0];
+                    yield return (InjectValueByIocAttribute)attr[0];
 
             }
 
@@ -49,7 +49,7 @@ namespace Bb.Injections
         /// <remarks>
         /// This method injects values into the properties of the specified object using the provided value resolver.
         /// The value resolver function takes a variable name as input and returns the corresponding value.
-        /// If a property has the <see cref="InjectValueAttribute"/> applied and the value resolver returns null,
+        /// If a property has the <see cref="InjectValueByIocAttribute"/> applied and the value resolver returns null,
         /// and the attribute's Required property is true, an <see cref="ArgumentNullException"/> is thrown.
         /// The value returned by the value resolver is converted to the property's type using the current culture.
         /// </remarks>
@@ -66,11 +66,11 @@ namespace Bb.Injections
             var properties = type.GetProperties();
             foreach (var item in properties)
             {
-                var attr = item.GetCustomAttributes(typeof(InjectValueAttribute), true);
+                var attr = item.GetCustomAttributes(typeof(InjectValueByIocAttribute), true);
                 if (attr.Length > 0)
                 {
 
-                    var attribute = (InjectValueAttribute)attr[0];
+                    var attribute = (InjectValueByIocAttribute)attr[0];
                     var value = valueResolver(attribute.VariableName);
                     if (attribute.Required && value == null)
                         throw new ArgumentNullException(item.Name);

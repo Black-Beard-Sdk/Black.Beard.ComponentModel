@@ -18,19 +18,19 @@ namespace Bb.ComponentModel.Attributes
         /// <param name="displayName">key for matching ruless</param>
         public ExposeMethodAttribute(string displayName)
         {
-            this.DisplayName = displayName;
+            DisplayName = displayName;
         }
 
         public ExposeMethodAttribute(string context, string displayName)
-            : this (displayName)
+            : this(displayName)
         {
-            this.Context = context;
+            Context = context;
         }
 
         public ExposeMethodAttribute(string context, MethodType kind, string displayName)
             : this(context, displayName)
         {
-            this.Kind = kind;
+            Kind = kind;
         }
 
         public string DisplayName { get; }
@@ -38,7 +38,7 @@ namespace Bb.ComponentModel.Attributes
         public string Context { get; }
 
         public MethodType Kind { get; }
-         
+
     }
 
     public enum MethodType

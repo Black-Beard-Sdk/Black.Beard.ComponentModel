@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bb.ComponentModel
+namespace Bb.ComponentModel.Attributes
 {
 
 
@@ -8,11 +8,11 @@ namespace Bb.ComponentModel
     /// Attribute to inject a value into a property.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
-    public sealed class InjectValueAttribute : Attribute
+    public sealed class InjectValueByIocAttribute : Attribute
     {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InjectValueAttribute"/> class.
+        /// Initializes a new instance of the <see cref="InjectValueByIocAttribute"/> class.
         /// </summary>
         /// <param name="variableName">The name of the variable to inject.</param>
         /// <param name="required">Indicates whether the variable is required.</param>
@@ -23,14 +23,14 @@ namespace Bb.ComponentModel
         /// </remarks>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="variableName"/> is null or empty.</exception>
 
-        public InjectValueAttribute(string variableName, bool required = false)
+        public InjectValueByIocAttribute(string variableName, bool required = false)
         {
 
             if (string.IsNullOrEmpty(variableName))
                 throw new ArgumentNullException(nameof(variableName));
 
-            this.VariableName = variableName;
-            this.Required = required;
+            VariableName = variableName;
+            Required = required;
 
         }
 

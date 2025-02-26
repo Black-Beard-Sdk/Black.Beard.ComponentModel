@@ -1,4 +1,5 @@
-﻿using Bb.ComponentModel.Exceptions;
+﻿using Bb.ComponentModel.Attributes;
+using Bb.ComponentModel.Exceptions;
 using Bb.ComponentModel.Factories;
 using Bb.Expressions;
 using System;
@@ -322,7 +323,7 @@ namespace Bb.ComponentModel.Loaders
             required = false;
             name = property.Name;
 
-            var attribute = property.Attributes.OfType<InjectValueAttribute>().FirstOrDefault();
+            var attribute = property.Attributes.OfType<InjectValueByIocAttribute>().FirstOrDefault();
             if (attribute != null)
             {
 

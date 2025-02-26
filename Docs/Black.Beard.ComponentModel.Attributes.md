@@ -117,10 +117,10 @@
   - [CanExecute(context)](#M-Bb-ComponentModel-InjectBuilder`1-CanExecute-System-Object- 'Bb.ComponentModel.InjectBuilder`1.CanExecute(System.Object)')
   - [Execute(context)](#M-Bb-ComponentModel-InjectBuilder`1-Execute-System-Object- 'Bb.ComponentModel.InjectBuilder`1.Execute(System.Object)')
   - [Execute(context)](#M-Bb-ComponentModel-InjectBuilder`1-Execute-`0- 'Bb.ComponentModel.InjectBuilder`1.Execute(`0)')
-- [InjectValueAttribute](#T-Bb-ComponentModel-InjectValueAttribute 'Bb.ComponentModel.InjectValueAttribute')
-  - [#ctor(variableName,required)](#M-Bb-ComponentModel-InjectValueAttribute-#ctor-System-String,System-Boolean- 'Bb.ComponentModel.InjectValueAttribute.#ctor(System.String,System.Boolean)')
-  - [Required](#P-Bb-ComponentModel-InjectValueAttribute-Required 'Bb.ComponentModel.InjectValueAttribute.Required')
-  - [VariableName](#P-Bb-ComponentModel-InjectValueAttribute-VariableName 'Bb.ComponentModel.InjectValueAttribute.VariableName')
+- [InjectValueByIocAttribute](#T-Bb-ComponentModel-Attributes-InjectValueByIocAttribute 'Bb.ComponentModel.Attributes.InjectValueByIocAttribute')
+  - [#ctor(variableName,required)](#M-Bb-ComponentModel-Attributes-InjectValueByIocAttribute-#ctor-System-String,System-Boolean- 'Bb.ComponentModel.Attributes.InjectValueByIocAttribute.#ctor(System.String,System.Boolean)')
+  - [Required](#P-Bb-ComponentModel-Attributes-InjectValueByIocAttribute-Required 'Bb.ComponentModel.Attributes.InjectValueByIocAttribute.Required')
+  - [VariableName](#P-Bb-ComponentModel-Attributes-InjectValueByIocAttribute-VariableName 'Bb.ComponentModel.Attributes.InjectValueByIocAttribute.VariableName')
 - [InjectorPolicyAttribute](#T-Bb-ComponentModel-Attributes-InjectorPolicyAttribute 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute')
   - [#ctor(type,lifeCycle)](#M-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-#ctor-System-Type,Bb-ComponentModel-Attributes-IocScopeEnum- 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.#ctor(System.Type,Bb.ComponentModel.Attributes.IocScopeEnum)')
   - [LifeCycle](#P-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-LifeCycle 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.LifeCycle')
@@ -793,7 +793,7 @@ Configuration to register Exposition manually
 
 ##### See Also
 
-- [System.Collections.Generic.List<Bb.ComponentModel.ExposedTypeConfiguration>](#!-System-Collections-Generic-List<Bb-ComponentModel-ExposedTypeConfiguration> 'System.Collections.Generic.List<Bb.ComponentModel.ExposedTypeConfiguration>')
+- [List<ComponentModel.ExposedTypeConfiguration>](#!-List<ComponentModel-ExposedTypeConfiguration> 'List<ComponentModel.ExposedTypeConfiguration>')
 
 <a name='T-Bb-ComponentModel-Loaders-IApplicationBuilderInitializer'></a>
 ## IApplicationBuilderInitializer `type`
@@ -1661,23 +1661,23 @@ Execute the initializing process with [](#!-T 'T')
 | ---- | ---- | ----------- |
 | context | [\`0](#T-`0 '`0') | specified context [](#!-T 'T') |
 
-<a name='T-Bb-ComponentModel-InjectValueAttribute'></a>
-## InjectValueAttribute `type`
+<a name='T-Bb-ComponentModel-Attributes-InjectValueByIocAttribute'></a>
+## InjectValueByIocAttribute `type`
 
 ##### Namespace
 
-Bb.ComponentModel
+Bb.ComponentModel.Attributes
 
 ##### Summary
 
 Attribute to inject a value into a property.
 
-<a name='M-Bb-ComponentModel-InjectValueAttribute-#ctor-System-String,System-Boolean-'></a>
+<a name='M-Bb-ComponentModel-Attributes-InjectValueByIocAttribute-#ctor-System-String,System-Boolean-'></a>
 ### #ctor(variableName,required) `constructor`
 
 ##### Summary
 
-Initializes a new instance of the [InjectValueAttribute](#T-Bb-ComponentModel-InjectValueAttribute 'Bb.ComponentModel.InjectValueAttribute') class.
+Initializes a new instance of the [InjectValueByIocAttribute](#T-Bb-ComponentModel-Attributes-InjectValueByIocAttribute 'Bb.ComponentModel.Attributes.InjectValueByIocAttribute') class.
 
 ##### Parameters
 
@@ -1698,14 +1698,14 @@ This attribute is used to inject a value into a property.
 The `variableName` specifies the name of the variable to inject.
 The `required` parameter indicates whether the variable is required or not.
 
-<a name='P-Bb-ComponentModel-InjectValueAttribute-Required'></a>
+<a name='P-Bb-ComponentModel-Attributes-InjectValueByIocAttribute-Required'></a>
 ### Required `property`
 
 ##### Summary
 
 Indicates whether the variable is required.
 
-<a name='P-Bb-ComponentModel-InjectValueAttribute-VariableName'></a>
+<a name='P-Bb-ComponentModel-Attributes-InjectValueByIocAttribute-VariableName'></a>
 ### VariableName `property`
 
 ##### Summary

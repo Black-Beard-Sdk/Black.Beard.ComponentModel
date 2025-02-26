@@ -323,24 +323,24 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
             return null;
         }
 
-        [InjectValue("param1")]
+        [InjectValueByIoc("param1")]
         public string param1 { get; set; }
 
 
-        [InjectValue("param2")]
+        [InjectValueByIoc("param2")]
         public bool param2 { get; set; }
 
-        [InjectValue("param3")]
+        [InjectValueByIoc("param3")]
         public int param3 { get; set; }
 
-        [InjectValue("param4")]
+        [InjectValueByIoc("param4")]
         public Dictionary<string, string> param4 { get; set; }
 
-        [Inject]
+        [InjectByIoc]
         public Test1 ToInject { get; set; }
 
 
-        [Inject(typeof(Test2))]
+        [InjectByIoc(typeof(Test2))]
         public ITest ToInject2 { get; set; }
 
 

@@ -239,7 +239,7 @@ namespace Bb.ComponentModel.Factories
             var attributes = property.Attributes.Cast<Attribute>().ToList();
             foreach (Attribute attribute in attributes)
             {
-                if (attribute is InjectAttribute a)
+                if (attribute is InjectByIocAttribute a)
                 {
 
                     if (a.TypeToInject != null)

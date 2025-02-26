@@ -3,16 +3,16 @@
 namespace Bb.ComponentModel.Attributes
 {
     [System.AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
-    public sealed class InjectAttribute : Attribute
+    public sealed class InjectByIocAttribute : Attribute
     {
 
         // This is a positional argument
-        public InjectAttribute()
+        public InjectByIocAttribute()
         {
 
         }
 
-        public InjectAttribute(Type type)
+        public InjectByIocAttribute(Type type)
         {
             this.TypeToInject = type;
         }
