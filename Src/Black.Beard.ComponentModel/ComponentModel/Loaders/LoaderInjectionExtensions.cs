@@ -73,6 +73,7 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="context">by default the value is "Initialization"</param>
         /// <param name="initializer">action to execute for every loader</param>
         /// <param name="onInitializationAction">action to initialize for every loader</param>
+        /// <param name="postExecution">to execute after ran</param>
         /// <returns></returns>
         public static T Configure<T>(
             this T self,
@@ -96,6 +97,41 @@ namespace Bb.ComponentModel.Loaders
 
         }
 
+        /// <summary>
+        /// Prepare the configuration for the specified type.
+        /// </summary>
+        /// <typeparam name="T">The type of object to be resolved by discovery.</typeparam>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="context">The context value. By default, it is set to "Initialization".</param>
+        /// <param name="initializer">The action to execute for every loader.</param>
+        /// <param name="onInitializationAction">The action to initialize for every loader.</param>
+        /// <returns>The prepared <see cref="InjectionLoader{T}"/> instance.</returns>
+        /// <remarks>
+        /// This method prepares the configuration for the specified type.
+        /// It initializes the <see cref="InjectionLoader{T}"/> instance with the specified context, service provider, and initializer.
+        /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// IServiceProvider sp;
+        /// var i = new WebApplicationBuilder();
+        /// var loader = sp.PrepareConfiguration&lt;WebApplicationBuilder>(ConstantCore.Initialization);
+        /// loader.Execute(i);
+        /// </code>
+        /// </example>
+        public static InjectionLoader<T> PrepareConfiguration<T>(
+            this IServiceProvider serviceProvider,
+            string? context = null,
+            Action<InjectionLoader<T>> initializer = null,
+            Action<IInjectBuilder<T>> onInitializationAction = null
+            )
+        {
+
+            var loader = new InjectionLoader<T>(context ?? ConstantsCore.Initialization, serviceProvider, initializer)
+                .LoadModules(onInitializationAction);
+
+            return loader;
+
+        }
 
         /// <summary>
         /// Sets the inject value rescue function.
