@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using Bb.ComponentModel.Translations;
+using Bb.Translations;
 using FluentAssertions;
 using Xunit;
 

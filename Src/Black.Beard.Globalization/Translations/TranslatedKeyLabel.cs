@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 
-namespace Bb.ComponentModel.Translations
+namespace Bb.Translations
 {
 
 
@@ -14,7 +14,6 @@ namespace Bb.ComponentModel.Translations
     [DebuggerDisplay("{DefaultDisplay}")]
     public class TranslatedKeyLabel
     {
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TranslatedKeyLabel"/> class.
@@ -34,7 +33,6 @@ namespace Bb.ComponentModel.Translations
 
             if (ModeDebug)
                 Trace(this, string.Empty);
-
 
         }
 

@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Black.Beard.ComponentModel\Black.Beard.ComponentModel.csproj" />
+    <ProjectReference Include="..\Black.Beard.Globalization\Black.Beard.Globalization.csproj" />
   </ItemGroup>
 
   <ItemGroup>

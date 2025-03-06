@@ -1,10 +1,9 @@
 ﻿using System.Globalization;
 
-namespace Bb.ComponentModel.Translations
+namespace Bb.Translations
 {
     public interface ITranslateContainer
     {
-
 
         /// <summary>
         /// Return a translation for the key and the culture
@@ -14,12 +13,32 @@ namespace Bb.ComponentModel.Translations
         /// <returns></returns>
         DataTranslation Get(TranslatedKeyLabel key, CultureInfo culture);
 
+
+        /// <summary>
+        /// Try to resolve the key for the specified culture
+        /// </summary>
+        /// <param name="key">The key to translate</param>
+        /// <param name="culture">the target culture</param>
+        /// <param name="result">the result of the translation</param>
+        /// <returns></returns>
+        bool Get(TranslatedKeyLabel key, CultureInfo culture, out DataTranslation result);
+
+
         /// <summary>
         /// Return a translation for the key mapped to the current culture
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
         TranslatedKeyLabel Get(TranslatedKeyLabel key);
+
+
+        /// <summary>
+        /// Try to resolve the key
+        /// </summary>
+        /// <param name="key">The key to translate</param>
+        /// <param name="result">the result of the translation</param>
+        /// <returns></returns>
+        bool Get(TranslatedKeyLabel key, out DataTranslation result);
 
         /// <summary>
         /// Return a translation for the key mapped with culture

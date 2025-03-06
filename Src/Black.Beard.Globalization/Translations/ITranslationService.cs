@@ -1,17 +1,7 @@
 ﻿using System.Globalization;
 
-namespace Bb.ComponentModel.Translations
+namespace Bb.Translations
 {
-
-    /// <summary>
-    /// Contract for translation service
-    /// </summary>
-    public interface ITranslateHost
-    {
-
-        ITranslateService TranslationService { get; }
-
-    }
 
     /// <summary>
     /// Contract for translation service

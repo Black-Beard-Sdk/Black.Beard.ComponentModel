@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 
-namespace Bb.ComponentModel.Translations
+namespace Bb.Translations
 {
     [DebuggerDisplay("{Culture} : {Value}")]
     public class DataTranslation

@@ -1,4 +1,4 @@
-﻿using Bb.ComponentModel.Translations;
+﻿using Bb.Translations;
 using System;
 
 namespace Bb.ComponentModel.Attributes
