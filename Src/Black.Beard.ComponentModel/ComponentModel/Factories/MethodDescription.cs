@@ -11,7 +11,7 @@ namespace Bb.ComponentModel.Factories
     public class MethodDescription
     {
 
-        public MethodDescription(string name, MethodBase method)
+        public MethodDescription(string name, MethodBase method, Type typeReturn)
         {
 
             if (method == null)
@@ -30,12 +30,15 @@ namespace Bb.ComponentModel.Factories
                 };
                 this.Parameters.Add(p);
             }
+            
+            if (typeReturn != null)
+                this.Type = typeReturn;
 
-            if (method is ConstructorInfo ctor)
+            else if (method is ConstructorInfo ctor)
                 this.Type = ctor.DeclaringType;
 
             else if (method is MethodInfo method1)
-                this.Type = method1.ReturnType;
+                this.Type =  method1.ReturnType;
 
         }
 
@@ -49,6 +52,7 @@ namespace Bb.ComponentModel.Factories
         public MethodBase Method { get; set; }
 
         public string Content { get; set; }
+
         public Type Type { get; }
     }
 }

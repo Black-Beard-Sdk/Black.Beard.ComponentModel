@@ -41,6 +41,16 @@ namespace Bb.ComponentModel.Factories
         /// <summary>
         /// Creates a new instance of T with the specified arguments.
         /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
+        public override object CallInstance()
+        {
+            return CallByKey(null, null);
+        }
+
+        /// <summary>
+        /// Creates a new instance of T with the specified arguments.
+        /// </summary>
         /// <param name="key">key for match in the repository.</param>
         /// <param name="args">The arguments.</param>
         /// <returns></returns>

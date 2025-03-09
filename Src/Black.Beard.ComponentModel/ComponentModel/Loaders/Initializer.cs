@@ -124,7 +124,7 @@ namespace Bb.ComponentModel.Loaders
             if (service is LocalServiceProvider s && s.AutoAdd)
                 _serviceProvider = s;
             else
-                _serviceProvider = new LocalServiceProvider(service) { AutoAdd = true };
+                _serviceProvider = new LocalServiceProvider(true, service);
             return this;
         }
         /// <summary>
@@ -319,7 +319,7 @@ namespace Bb.ComponentModel.Loaders
         #region private
 
 
-        private LocalServiceProvider _serviceProvider = new LocalServiceProvider() { AutoAdd = true };
+        private LocalServiceProvider _serviceProvider = new LocalServiceProvider(true);
         private Dictionary<string, object> _datas;
         private Dictionary<string, HashSet<string>> _folders;
         private readonly string[] _args;

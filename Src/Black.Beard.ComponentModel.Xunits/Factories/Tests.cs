@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Bb.ComponentModel;
 using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Factories;
 using FluentAssertions;
@@ -59,13 +60,29 @@ namespace ComponentModels.Tests.Factories
             result.Arg1.Should().Be("t1");
         }
 
-
         [Fact]
         public void Constructor_Factory2()
         {
             var factory = ObjectCreator.GetActivatorByArguments<Test1>(typeof(string), typeof(int));
             Test1 result = factory.CallByKey(null, "t2", 1);
             result.Arg1.Should().Be("t2");
+        }
+
+        [Fact]
+        public void Constructor_Factory3()
+        {
+            FactoryByIoc<InitializerTest3> factory = ObjectCreatorByIoc.GetActivator<InitializerTest3>(typeof(InitializerTest3));
+            InitializerTest3 result = (InitializerTest3)factory.CallInstance();
+            //result.Arg1.Should().Be("t1");
+        }
+
+        [Fact]
+        public void Constructor_Factory4()
+        {
+            var serviceProvider = new LocalServiceProvider(true);
+            var s = serviceProvider.GetService<InitializerTest4>();
+            s.Should().NotBeNull();
+            s.Instance.Should().NotBeNull();
         }
 
         [Fact]
@@ -78,6 +95,40 @@ namespace ComponentModels.Tests.Factories
         }
 
     }
+
+
+    [ExposeClass(ConstantsCore.Service)]
+    public class InitializerTest3
+    {
+
+        [IocConstructor(typeof(InitializerTest3))]
+        public static InitializerTest3 Create()
+        {
+            return new InitializerTest3();
+        }
+
+    }
+
+    [ExposeClass(ConstantsCore.Service)]
+    public class InitializerTest4
+    {
+
+        public InitializerTest4(InitializerTest3 instance)
+        {
+            this.Instance = instance;
+        }
+
+        public InitializerTest3 Instance { get; }
+
+        [IocConstructor(typeof(InitializerTest4))]
+        public static InitializerTest4 Create(InitializerTest3 instance)
+        {
+            return new InitializerTest4(instance);
+        }
+
+    }
+
+
 
 
     public class Test1

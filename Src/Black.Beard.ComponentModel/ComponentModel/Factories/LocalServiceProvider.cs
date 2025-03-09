@@ -1,13 +1,31 @@
-﻿using Bb.ComponentModel.Loaders;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Bb.ComponentModel.Factories
 {
+
+
+    /// <summary>
+    /// Local service provider
+    /// </summary>
     public class LocalServiceProvider : IServiceProvider
     {
 
+        /// <summary>
+        /// Initialize a new instance of <see cref="LocalServiceProvider"/>
+        /// </summary>
+        /// <param name="autoAdd"></param>
+        /// <param name="parent"></param>
+        public LocalServiceProvider(bool autoAdd, IServiceProvider parent = null) 
+            : this(parent)
+        {
+            this.AutoAdd = autoAdd;
+        }
+
+        /// <summary>
+        /// Initialize a new instance of <see cref="LocalServiceProvider"/>
+        /// </summary>
+        /// <param name="parent"></param>
         public LocalServiceProvider(IServiceProvider parent = null)
         {
             this._parent = parent;
@@ -15,7 +33,20 @@ namespace Bb.ComponentModel.Factories
             this._instances = new Dictionary<Type, object>();
         }
 
+        /// <summary>
+        /// Auto add service if missing in the service provider
+        /// </summary>
         public bool AutoAdd { get; set; }
+
+        /// <summary>
+        /// Return the service asked
+        /// </summary>
+        /// <typeparam name="T">type of the service</typeparam>
+        /// <returns></returns>
+        public T GetService<T>()
+        {
+            return (T)GetService(typeof(T));
+        }
 
         /// <summary>
         /// Get asked service
@@ -67,7 +98,7 @@ namespace Bb.ComponentModel.Factories
         /// Add a factory in the service provider
         /// </summary>
         /// <typeparam name="T">type to append for resolve</typeparam>
-        /// <type name="type">implementation of the service</typeparam>
+        /// <type name="type">implementation of the service</type>
         /// <returns><see cref="LocalServiceProvider"/></returns>
         public LocalServiceProvider Add<T>(Type type)
             where T : class
@@ -78,8 +109,8 @@ namespace Bb.ComponentModel.Factories
         /// <summary>
         /// Add a factory in the service provider
         /// </summary>
-        /// <type name="type">type to append for resolve</typeparam>
-        /// <type name="instance">instance of the service</typeparam>
+        /// <type name="type">type to append for resolve</type>
+        /// <type name="instance">instance of the service</type>
         /// <returns><see cref="LocalServiceProvider"/></returns>
         public LocalServiceProvider Add(Type type, object instance)
         {
@@ -90,7 +121,7 @@ namespace Bb.ComponentModel.Factories
         /// <summary>
         /// Add a factory in the service provider
         /// </summary>
-        /// <type name="factory">factory to append</typeparam>
+        /// <type name="factory">factory to append</type>
         /// <returns><see cref="LocalServiceProvider"/></returns>
         public LocalServiceProvider Add(Factory factory)
         {

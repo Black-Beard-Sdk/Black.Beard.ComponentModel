@@ -74,7 +74,7 @@ namespace Bb.ComponentModel.Factories
             if (ctor == null)
                 throw new MissingPublicException(type, types);
 
-            var description = new MethodDescription(ctor.ToString(), ctor);
+            var description = new MethodDescription(ctor.ToString(), ctor, null);
             return GetCallMethod<T>(ctor, description);
         }
 

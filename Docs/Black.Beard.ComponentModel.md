@@ -1336,10 +1336,12 @@
   - [Extract()](#M-ICSharpCode-Decompiler-IL-Transforms-ExtractionContext-Extract-ICSharpCode-Decompiler-IL-ILInstruction- 'ICSharpCode.Decompiler.IL.Transforms.ExtractionContext.Extract(ICSharpCode.Decompiler.IL.ILInstruction)')
 - [Factory](#T-Bb-ComponentModel-Factories-Factory 'Bb.ComponentModel.Factories.Factory')
   - [CallInstance(args)](#M-Bb-ComponentModel-Factories-Factory-CallInstance-System-Object[]- 'Bb.ComponentModel.Factories.Factory.CallInstance(System.Object[])')
+  - [CallInstance(args)](#M-Bb-ComponentModel-Factories-Factory-CallInstance 'Bb.ComponentModel.Factories.Factory.CallInstance')
 - [FactoryByIoc\`1](#T-Bb-ComponentModel-Factories-FactoryByIoc`1 'Bb.ComponentModel.Factories.FactoryByIoc`1')
   - [IsEmpty](#P-Bb-ComponentModel-Factories-FactoryByIoc`1-IsEmpty 'Bb.ComponentModel.Factories.FactoryByIoc`1.IsEmpty')
   - [Call(arg)](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-Call-System-String,System-IServiceProvider- 'Bb.ComponentModel.Factories.FactoryByIoc`1.Call(System.String,System.IServiceProvider)')
   - [CallByKey(args)](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-CallByKey-System-String,System-Object[]- 'Bb.ComponentModel.Factories.FactoryByIoc`1.CallByKey(System.String,System.Object[])')
+  - [CallInstance(args)](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-CallInstance 'Bb.ComponentModel.Factories.FactoryByIoc`1.CallInstance')
   - [CallInstance(args)](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-CallInstance-System-Object[]- 'Bb.ComponentModel.Factories.FactoryByIoc`1.CallInstance(System.Object[])')
   - [ClearAttribute()](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-ClearAttribute 'Bb.ComponentModel.Factories.FactoryByIoc`1.ClearAttribute')
   - [Invoke(args)](#M-Bb-ComponentModel-Factories-FactoryByIoc`1-Invoke-System-IServiceProvider- 'Bb.ComponentModel.Factories.FactoryByIoc`1.Invoke(System.IServiceProvider)')
@@ -1349,6 +1351,7 @@
   - [IsEmpty](#P-Bb-ComponentModel-Factories-Factory`1-IsEmpty 'Bb.ComponentModel.Factories.Factory`1.IsEmpty')
   - [CallByKey(key,args)](#M-Bb-ComponentModel-Factories-Factory`1-CallByKey-System-String,System-Object[]- 'Bb.ComponentModel.Factories.Factory`1.CallByKey(System.String,System.Object[])')
   - [CallInstance(args)](#M-Bb-ComponentModel-Factories-Factory`1-CallInstance-System-Object[]- 'Bb.ComponentModel.Factories.Factory`1.CallInstance(System.Object[])')
+  - [CallInstance(args)](#M-Bb-ComponentModel-Factories-Factory`1-CallInstance 'Bb.ComponentModel.Factories.Factory`1.CallInstance')
   - [Reset(args)](#M-Bb-ComponentModel-Factories-Factory`1-Reset 'Bb.ComponentModel.Factories.Factory`1.Reset')
 - [FakeMember](#T-ICSharpCode-Decompiler-TypeSystem-Implementation-FakeMember 'ICSharpCode.Decompiler.TypeSystem.Implementation.FakeMember')
 - [FieldAccessor](#T-Bb-ComponentModel-Accessors-FieldAccessor 'Bb.ComponentModel.Accessors.FieldAccessor')
@@ -2252,8 +2255,15 @@
   - [IsStatic](#P-ICSharpCode-Decompiler-TypeSystem-Implementation-LocalFunctionMethod-IsStatic 'ICSharpCode.Decompiler.TypeSystem.Implementation.LocalFunctionMethod.IsStatic')
 - [LocalResolveResult](#T-ICSharpCode-Decompiler-Semantics-LocalResolveResult 'ICSharpCode.Decompiler.Semantics.LocalResolveResult')
 - [LocalServiceProvider](#T-Bb-ComponentModel-Factories-LocalServiceProvider 'Bb.ComponentModel.Factories.LocalServiceProvider')
+  - [#ctor(autoAdd,parent)](#M-Bb-ComponentModel-Factories-LocalServiceProvider-#ctor-System-Boolean,System-IServiceProvider- 'Bb.ComponentModel.Factories.LocalServiceProvider.#ctor(System.Boolean,System.IServiceProvider)')
+  - [#ctor(parent)](#M-Bb-ComponentModel-Factories-LocalServiceProvider-#ctor-System-IServiceProvider- 'Bb.ComponentModel.Factories.LocalServiceProvider.#ctor(System.IServiceProvider)')
+  - [AutoAdd](#P-Bb-ComponentModel-Factories-LocalServiceProvider-AutoAdd 'Bb.ComponentModel.Factories.LocalServiceProvider.AutoAdd')
+  - [Add()](#M-Bb-ComponentModel-Factories-LocalServiceProvider-Add-System-Type,System-Object- 'Bb.ComponentModel.Factories.LocalServiceProvider.Add(System.Type,System.Object)')
+  - [Add()](#M-Bb-ComponentModel-Factories-LocalServiceProvider-Add-Bb-ComponentModel-Factories-Factory- 'Bb.ComponentModel.Factories.LocalServiceProvider.Add(Bb.ComponentModel.Factories.Factory)')
   - [Add\`\`1()](#M-Bb-ComponentModel-Factories-LocalServiceProvider-Add``1 'Bb.ComponentModel.Factories.LocalServiceProvider.Add``1')
+  - [Add\`\`1()](#M-Bb-ComponentModel-Factories-LocalServiceProvider-Add``1-System-Type- 'Bb.ComponentModel.Factories.LocalServiceProvider.Add``1(System.Type)')
   - [GetService(serviceType)](#M-Bb-ComponentModel-Factories-LocalServiceProvider-GetService-System-Type- 'Bb.ComponentModel.Factories.LocalServiceProvider.GetService(System.Type)')
+  - [GetService\`\`1()](#M-Bb-ComponentModel-Factories-LocalServiceProvider-GetService``1 'Bb.ComponentModel.Factories.LocalServiceProvider.GetService``1')
 - [LockExtensions](#T-Bb-LockExtensions 'Bb.LockExtensions')
   - [LockForRead(locker,finallyBlock)](#M-Bb-LockExtensions-LockForRead-System-Threading-ReaderWriterLockSlim,System-Action- 'Bb.LockExtensions.LockForRead(System.Threading.ReaderWriterLockSlim,System.Action)')
   - [LockForUpgradeableRead(locker,finallyBlock)](#M-Bb-LockExtensions-LockForUpgradeableRead-System-Threading-ReaderWriterLockSlim,System-Action- 'Bb.LockExtensions.LockForUpgradeableRead(System.Threading.ReaderWriterLockSlim,System.Action)')
@@ -20148,6 +20158,23 @@ Creates a new instance of T with the specified arguments.
 | ---- | ---- | ----------- |
 | args | [System.Object[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object[] 'System.Object[]') | The arguments. |
 
+<a name='M-Bb-ComponentModel-Factories-Factory-CallInstance'></a>
+### CallInstance(args) `method`
+
+##### Summary
+
+Creates a new instance of T with the specified arguments.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| args | [M:Bb.ComponentModel.Factories.Factory.CallInstance](#T-M-Bb-ComponentModel-Factories-Factory-CallInstance 'M:Bb.ComponentModel.Factories.Factory.CallInstance') | The arguments. |
+
 <a name='T-Bb-ComponentModel-Factories-FactoryByIoc`1'></a>
 ## FactoryByIoc\`1 `type`
 
@@ -20205,6 +20232,23 @@ Creates a new instance of T with the specified arguments.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | args | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The arguments. |
+
+<a name='M-Bb-ComponentModel-Factories-FactoryByIoc`1-CallInstance'></a>
+### CallInstance(args) `method`
+
+##### Summary
+
+Creates a new instance of T with the specified arguments.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| args | [M:Bb.ComponentModel.Factories.FactoryByIoc\`1.CallInstance](#T-M-Bb-ComponentModel-Factories-FactoryByIoc`1-CallInstance 'M:Bb.ComponentModel.Factories.FactoryByIoc`1.CallInstance') | The arguments. |
 
 <a name='M-Bb-ComponentModel-Factories-FactoryByIoc`1-CallInstance-System-Object[]-'></a>
 ### CallInstance(args) `method`
@@ -20343,6 +20387,23 @@ Creates a new instance of T with the specified arguments.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | args | [System.Object[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object[] 'System.Object[]') | The arguments. |
+
+<a name='M-Bb-ComponentModel-Factories-Factory`1-CallInstance'></a>
+### CallInstance(args) `method`
+
+##### Summary
+
+Creates a new instance of T with the specified arguments.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| args | [M:Bb.ComponentModel.Factories.Factory\`1.CallInstance](#T-M-Bb-ComponentModel-Factories-Factory`1-CallInstance 'M:Bb.ComponentModel.Factories.Factory`1.CallInstance') | The arguments. |
 
 <a name='M-Bb-ComponentModel-Factories-Factory`1-Reset'></a>
 ### Reset(args) `method`
@@ -30917,6 +30978,74 @@ Represents a local variable or parameter.
 
 Bb.ComponentModel.Factories
 
+##### Summary
+
+Local service provider
+
+<a name='M-Bb-ComponentModel-Factories-LocalServiceProvider-#ctor-System-Boolean,System-IServiceProvider-'></a>
+### #ctor(autoAdd,parent) `constructor`
+
+##### Summary
+
+Initialize a new instance of [LocalServiceProvider](#T-Bb-ComponentModel-Factories-LocalServiceProvider 'Bb.ComponentModel.Factories.LocalServiceProvider')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| autoAdd | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
+| parent | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') |  |
+
+<a name='M-Bb-ComponentModel-Factories-LocalServiceProvider-#ctor-System-IServiceProvider-'></a>
+### #ctor(parent) `constructor`
+
+##### Summary
+
+Initialize a new instance of [LocalServiceProvider](#T-Bb-ComponentModel-Factories-LocalServiceProvider 'Bb.ComponentModel.Factories.LocalServiceProvider')
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| parent | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') |  |
+
+<a name='P-Bb-ComponentModel-Factories-LocalServiceProvider-AutoAdd'></a>
+### AutoAdd `property`
+
+##### Summary
+
+Auto add service if missing in the service provider
+
+<a name='M-Bb-ComponentModel-Factories-LocalServiceProvider-Add-System-Type,System-Object-'></a>
+### Add() `method`
+
+##### Summary
+
+Add a factory in the service provider
+
+##### Returns
+
+[LocalServiceProvider](#T-Bb-ComponentModel-Factories-LocalServiceProvider 'Bb.ComponentModel.Factories.LocalServiceProvider')
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-ComponentModel-Factories-LocalServiceProvider-Add-Bb-ComponentModel-Factories-Factory-'></a>
+### Add() `method`
+
+##### Summary
+
+Add a factory in the service provider
+
+##### Returns
+
+[LocalServiceProvider](#T-Bb-ComponentModel-Factories-LocalServiceProvider 'Bb.ComponentModel.Factories.LocalServiceProvider')
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='M-Bb-ComponentModel-Factories-LocalServiceProvider-Add``1'></a>
 ### Add\`\`1() `method`
 
@@ -30938,6 +31067,27 @@ This method has no parameters.
 | ---- | ----------- |
 | T | type to append |
 
+<a name='M-Bb-ComponentModel-Factories-LocalServiceProvider-Add``1-System-Type-'></a>
+### Add\`\`1() `method`
+
+##### Summary
+
+Add a factory in the service provider
+
+##### Returns
+
+[LocalServiceProvider](#T-Bb-ComponentModel-Factories-LocalServiceProvider 'Bb.ComponentModel.Factories.LocalServiceProvider')
+
+##### Parameters
+
+This method has no parameters.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | type to append for resolve |
+
 <a name='M-Bb-ComponentModel-Factories-LocalServiceProvider-GetService-System-Type-'></a>
 ### GetService(serviceType) `method`
 
@@ -30954,6 +31104,27 @@ return the service
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | serviceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | type to append |
+
+<a name='M-Bb-ComponentModel-Factories-LocalServiceProvider-GetService``1'></a>
+### GetService\`\`1() `method`
+
+##### Summary
+
+Return the service asked
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | type of the service |
 
 <a name='T-Bb-LockExtensions'></a>
 ## LockExtensions `type`

@@ -180,7 +180,7 @@ namespace Bb.ComponentModel.Loaders
         /// </remarks>
         public static InjectionLoader<T> WithServices<T>(this InjectionLoader<T> self, IServiceProvider serviceProvider)
         {
-            self.ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
+            self.ServiceProvider = new LocalServiceProvider(true, serviceProvider);
             return self;
         }
 
@@ -197,7 +197,7 @@ namespace Bb.ComponentModel.Loaders
         /// </remarks>
         public static InjectionLoader<T> WithServices<T>(this InjectionLoader<T> self, IServiceProvider serviceProvider, Action<LocalServiceProvider> initializer)
         {
-            self.ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
+            self.ServiceProvider = new LocalServiceProvider(true, serviceProvider);
             initializer?.Invoke(self.ServiceProvider);
             return self;
         }

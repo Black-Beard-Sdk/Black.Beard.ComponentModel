@@ -53,5 +53,13 @@ namespace Bb.ComponentModel.Factories
         /// <returns></returns>
         public abstract object CallInstance(params dynamic[] args);
 
+        /// <summary>
+        /// Creates a new instance of T with the specified arguments.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
+        public abstract object CallInstance();
+
+
     }
 }

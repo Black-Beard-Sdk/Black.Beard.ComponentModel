@@ -106,6 +106,11 @@
   - [#ctor(type,lifeCycle)](#M-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-#ctor-System-Type,Bb-ComponentModel-Attributes-IocScopeEnum- 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.#ctor(System.Type,Bb.ComponentModel.Attributes.IocScopeEnum)')
   - [LifeCycle](#P-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-LifeCycle 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.LifeCycle')
   - [Type](#P-Bb-ComponentModel-Attributes-InjectorPolicyAttribute-Type 'Bb.ComponentModel.Attributes.InjectorPolicyAttribute.Type')
+- [IocConstructorAttribute](#T-Bb-ComponentModel-Attributes-IocConstructorAttribute 'Bb.ComponentModel.Attributes.IocConstructorAttribute')
+  - [#ctor()](#M-Bb-ComponentModel-Attributes-IocConstructorAttribute-#ctor 'Bb.ComponentModel.Attributes.IocConstructorAttribute.#ctor')
+  - [#ctor()](#M-Bb-ComponentModel-Attributes-IocConstructorAttribute-#ctor-System-Type- 'Bb.ComponentModel.Attributes.IocConstructorAttribute.#ctor(System.Type)')
+  - [Type](#P-Bb-ComponentModel-Attributes-IocConstructorAttribute-Type 'Bb.ComponentModel.Attributes.IocConstructorAttribute.Type')
+  - [GetMethods(type)](#M-Bb-ComponentModel-Attributes-IocConstructorAttribute-GetMethods-System-Type- 'Bb.ComponentModel.Attributes.IocConstructorAttribute.GetMethods(System.Type)')
 - [IocException](#T-Bb-ComponentModel-Exceptions-IocException 'Bb.ComponentModel.Exceptions.IocException')
   - [#ctor()](#M-Bb-ComponentModel-Exceptions-IocException-#ctor 'Bb.ComponentModel.Exceptions.IocException.#ctor')
   - [#ctor(message)](#M-Bb-ComponentModel-Exceptions-IocException-#ctor-System-String- 'Bb.ComponentModel.Exceptions.IocException.#ctor(System.String)')
@@ -1483,6 +1488,63 @@ Gets or sets the life cycle if must be use in Ioc.
 ##### Summary
 
 Gets the type.
+
+<a name='T-Bb-ComponentModel-Attributes-IocConstructorAttribute'></a>
+## IocConstructorAttribute `type`
+
+##### Namespace
+
+Bb.ComponentModel.Attributes
+
+##### Summary
+
+specify this class contains method to create object
+
+<a name='M-Bb-ComponentModel-Attributes-IocConstructorAttribute-#ctor'></a>
+### #ctor() `constructor`
+
+##### Summary
+
+Initializes a new instance of the [IocConstructorAttribute](#T-Bb-ComponentModel-Attributes-IocConstructorAttribute 'Bb.ComponentModel.Attributes.IocConstructorAttribute') class.
+
+##### Parameters
+
+This constructor has no parameters.
+
+<a name='M-Bb-ComponentModel-Attributes-IocConstructorAttribute-#ctor-System-Type-'></a>
+### #ctor() `constructor`
+
+##### Summary
+
+Initializes a new instance of the [IocConstructorAttribute](#T-Bb-ComponentModel-Attributes-IocConstructorAttribute 'Bb.ComponentModel.Attributes.IocConstructorAttribute') class.
+
+##### Parameters
+
+This constructor has no parameters.
+
+<a name='P-Bb-ComponentModel-Attributes-IocConstructorAttribute-Type'></a>
+### Type `property`
+
+##### Summary
+
+Type managed by the constructor
+
+<a name='M-Bb-ComponentModel-Attributes-IocConstructorAttribute-GetMethods-System-Type-'></a>
+### GetMethods(type) `method`
+
+##### Summary
+
+Return the list of method to create object
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
 
 <a name='T-Bb-ComponentModel-Exceptions-IocException'></a>
 ## IocException `type`

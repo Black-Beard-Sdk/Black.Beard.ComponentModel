@@ -28,7 +28,7 @@ namespace Bb.ComponentModel.Loaders
             if (serviceProvider is LocalServiceProvider s && s.AutoAdd)
                 ServiceProvider = s;
             else
-                ServiceProvider = new LocalServiceProvider(serviceProvider) { AutoAdd = true };
+                ServiceProvider = new LocalServiceProvider(true, serviceProvider);
 
             Types = new List<Type>();
             Executed = new HashSet<string>();

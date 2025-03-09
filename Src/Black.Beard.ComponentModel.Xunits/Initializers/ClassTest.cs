@@ -364,5 +364,5 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
         string Name { get; set; }
 
     }
-
+  
 }

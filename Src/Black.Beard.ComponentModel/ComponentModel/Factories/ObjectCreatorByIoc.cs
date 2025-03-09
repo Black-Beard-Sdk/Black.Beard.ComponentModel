@@ -52,19 +52,28 @@ namespace Bb.ComponentModel.Factories
         public static FactoryByIoc<T> GetActivator<T>(Type type)
             where T : class
         {
-            var ctors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
 
+            MethodDescription description;
+
+            var item = IocConstructorAttribute.GetMethods(type).FirstOrDefault();
+            if (item.Item1 != null)
+            {
+                description = new MethodDescription(item.Item2.ToString(), item.Item2, item.Item1);
+                return GetCallMethod<T>(item.Item2, description);
+            }
+
+
+            var ctors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
             if (ctors == null || ctors.Length == 0)
                 throw new MissingPublicException(type, new Type[0]);
-
             if (ctors.Length > 1)
                 throw new DuplicatedConstructorException(type, new Type[0]);
 
             var ctor = ctors[0];
-
-            var description = new MethodDescription(ctor.ToString(), ctor);
+            description = new MethodDescription(ctor.ToString(), ctor, null);
 
             return GetCallMethod<T>(ctor, description);
+
 
         }
 
@@ -84,7 +93,7 @@ namespace Bb.ComponentModel.Factories
             if (ctor == null)
                 throw new MissingPublicException(type, types);
 
-            var description = new MethodDescription(ctor.ToString(), ctor);
+            var description = new MethodDescription(ctor.ToString(), ctor, null);
             return GetCallMethod<T>(ctor, description);
         }
 

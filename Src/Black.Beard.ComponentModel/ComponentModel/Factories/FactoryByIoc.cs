@@ -34,8 +34,20 @@ namespace Bb.ComponentModel.Factories
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns></returns>
+        public override object CallInstance()
+        {
+            return Call(null, null);
+        }
+
+        /// <summary>
+        /// Creates a new instance of T with the specified arguments.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
         public override object CallInstance(params dynamic[] args)
         {
+            if (args.Length == 0)
+                return Call(null, null);
             return Call(null, (IServiceProvider)args[0]);
         }
 
