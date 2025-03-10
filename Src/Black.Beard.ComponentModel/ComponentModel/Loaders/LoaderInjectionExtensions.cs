@@ -47,7 +47,7 @@ namespace Bb.ComponentModel.Loaders
     /// <code lang="Csharp">
     /// 
     ///     var context = ConstantsCore.Initialization;
-    ///     new TestInitializer().Configure(serviceProvider, context);
+    ///     new TestInitializer().AutoConfigure(serviceProvider, context);
     ///     ((IServiceProvider)provider).GetInitializedService(typeof(TestInitializer)).Initialize();
     /// 
     /// </code>

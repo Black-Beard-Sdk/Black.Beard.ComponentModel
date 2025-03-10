@@ -2232,12 +2232,12 @@
   - [RestoreSavePoint()](#M-ICSharpCode-Decompiler-IL-Patterns-ListMatch-RestoreSavePoint-ICSharpCode-Decompiler-IL-Patterns-Match@- 'ICSharpCode.Decompiler.IL.Patterns.ListMatch.RestoreSavePoint(ICSharpCode.Decompiler.IL.Patterns.Match@)')
 - [LiteralFormat](#T-ICSharpCode-Decompiler-CSharp-Syntax-LiteralFormat 'ICSharpCode.Decompiler.CSharp.Syntax.LiteralFormat')
 - [LoaderInjectionExtensions](#T-Bb-ComponentModel-Loaders-LoaderInjectionExtensions 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions')
-  - [Configure\`\`1(self,serviceProvider,context,initializer,onInitializationAction,postExecution)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Configure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Configure``1(``0,System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}})')
+  - [AutoConfigure\`\`1(self,serviceProvider,context,initializer,onInitializationAction,postExecution)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-AutoConfigure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.AutoConfigure``1(``0,System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}})')
   - [Execute\`\`1(self,builder)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Execute``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},``0- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Execute``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},``0)')
   - [GetConfiguredService\`\`1(serviceProvider,context,initializer,action)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-GetConfiguredService``1-System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.GetConfiguredService``1(System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
   - [LoadModules\`\`1(self)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-LoadModules``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.LoadModules``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
   - [Map\`\`1(instance)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Map``1-Bb-ComponentModel-IInjectBuilder{``0},System-Func{System-String,System-Object},System-Func{System-ComponentModel-PropertyDescriptor,System-String,Bb-ComponentModel-IInjectBuilder{``0},System-Object},Bb-ComponentModel-Loaders-CommandLineParser- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Map``1(Bb.ComponentModel.IInjectBuilder{``0},System.Func{System.String,System.Object},System.Func{System.ComponentModel.PropertyDescriptor,System.String,Bb.ComponentModel.IInjectBuilder{``0},System.Object},Bb.ComponentModel.Loaders.CommandLineParser)')
-  - [PrepareConfiguration\`\`1(serviceProvider,context,initializer,onInitializationAction)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-PrepareConfiguration``1-System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.PrepareConfiguration``1(System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
+  - [PrepareAutoConfiguration\`\`1(serviceProvider,context,initializer,onInitializationAction)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-PrepareAutoConfiguration``1-System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.PrepareAutoConfiguration``1(System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
   - [WithArguments\`\`1(self,args)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-WithArguments``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-String[]- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.WithArguments``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},System.String[])')
   - [WithInjectRescue\`\`1(self,injectRescue)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-WithInjectRescue``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-Func{System-ComponentModel-PropertyDescriptor,System-String,Bb-ComponentModel-IInjectBuilder{``0},System-Object}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.WithInjectRescue``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},System.Func{System.ComponentModel.PropertyDescriptor,System.String,Bb.ComponentModel.IInjectBuilder{``0},System.Object})')
   - [WithInjectValue\`\`1(self,injectValue)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-WithInjectValue``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-Func{System-String,System-Object}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.WithInjectValue``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},System.Func{System.String,System.Object})')
@@ -30530,12 +30530,12 @@ Run the initializer
 
 ```Csharp
     var context = ConstantsCore.Initialization;
-    new TestInitializer().Configure(serviceProvider, context);
+    new TestInitializer().AutoConfigure(serviceProvider, context);
     ((IServiceProvider)provider).GetInitializedService(typeof(TestInitializer)).Initialize();
 ```
 
-<a name='M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Configure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}}-'></a>
-### Configure\`\`1(self,serviceProvider,context,initializer,onInitializationAction,postExecution) `method`
+<a name='M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-AutoConfigure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}}-'></a>
+### AutoConfigure\`\`1(self,serviceProvider,context,initializer,onInitializationAction,postExecution) `method`
 
 ##### Summary
 
@@ -30664,8 +30664,8 @@ Map a class with the command line args and environment variables
 | ---- | ----------- |
 | T |  |
 
-<a name='M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-PrepareConfiguration``1-System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}-'></a>
-### PrepareConfiguration\`\`1(serviceProvider,context,initializer,onInitializationAction) `method`
+<a name='M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-PrepareAutoConfiguration``1-System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}-'></a>
+### PrepareAutoConfiguration\`\`1(serviceProvider,context,initializer,onInitializationAction) `method`
 
 ##### Summary
 

@@ -40,7 +40,26 @@ namespace Bb.ComponentModel
         /// <summary>
         /// Return the list of loaded assemblies
         /// </summary>
-        public IEnumerable<Assembly> Assemblies => AssemblyLoadContext.CurrentContextualReflectionContext.Assemblies;
+        public IEnumerable<Assembly> Assemblies
+        {
+            get
+            {
+
+                IEnumerable<Assembly> result = null;
+                var ctx = AssemblyLoadContext.CurrentContextualReflectionContext;
+                
+                if (ctx == null)
+                    ctx = AssemblyLoadContext.All.FirstOrDefault();
+                
+                if (ctx != null)
+                    result = ctx.Assemblies;
+
+                return result;
+
+            }
+
+        }
+
 
         /// <summary>
         /// Return the <see cref="AssemblyDirectoryResolver"/>
