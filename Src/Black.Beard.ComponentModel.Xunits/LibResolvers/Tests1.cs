@@ -54,11 +54,11 @@ namespace ComponentModels.Tests.LibResolvers
 
         }
 
-
         public interface ISubTest2
         {
 
         }
+
 
     }
 

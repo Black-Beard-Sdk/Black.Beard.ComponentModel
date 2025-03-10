@@ -271,6 +271,16 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
         }
 
+        [Fact]
+        public void Test8()
+        {
+            var oo1 = LoaderInjectionExtensions.PrepareAutoConfiguration<T1>(null, "t1");
+            var oo2 = LoaderInjectionExtensions.PrepareAutoConfiguration<T1>(null, "t2");
+
+            oo1.Instances.Count().Should().Be(1);
+            oo2.Instances.Count().Should().Be(1);
+
+        }
 
         public class BuilderTest
         {
@@ -285,6 +295,24 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
 
         }
 
+    }
+
+
+    public class T1
+    {
+
+    }
+
+    [ExposeClass("t1", ExposedType = typeof(IInjectBuilder<T1>))]
+    [ExposeClass("t2", ExposedType = typeof(IInjectBuilder<T1>))]
+    public class SubT11 : InjectBuilder<T1>
+    {
+        public override object Execute(T1 context)
+        {
+
+            return null;
+
+        }
     }
 
 

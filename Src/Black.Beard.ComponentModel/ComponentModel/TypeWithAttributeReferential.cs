@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 
 
 namespace Bb.ComponentModel
@@ -51,7 +52,9 @@ namespace Bb.ComponentModel
         {
             foreach (var item in Types)
             {
-                var items = TypeDescriptor.GetAttributes(item).OfType<TAttribute>().ToList();
+                var items = item.GetCustomAttributes<TAttribute>().ToList();
+                if (!items.Any())
+                    items = TypeDescriptor.GetAttributes(item).OfType<TAttribute>().ToList();
                 yield return new KeyValuePair<Type, IEnumerable<TAttribute>>(item, items);
             }
         }
