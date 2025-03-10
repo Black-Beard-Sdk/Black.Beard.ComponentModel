@@ -8,7 +8,6 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Xml.Linq;
 
 namespace Bb.ComponentModel.Loaders
 {
@@ -60,7 +59,7 @@ namespace Bb.ComponentModel.Loaders
         static LoaderInjectionExtensions()
         {
             _method = typeof(LoaderInjectionExtensions).GetMethods()
-                   .Where(c => c.Name == nameof(LoaderInjectionExtensions.Configure))
+                   .Where(c => c.Name == nameof(LoaderInjectionExtensions.AutoConfigure))
                    .First(c => c.IsGenericMethod);
         }
 
@@ -76,7 +75,7 @@ namespace Bb.ComponentModel.Loaders
         /// <param name="onInitializationAction">action to initialize for every loader</param>
         /// <param name="postExecution">to execute after ran</param>
         /// <returns></returns>
-        public static T Configure<T>(
+        public static T AutoConfigure<T>(
             this T self,
             IServiceProvider serviceProvider = null,
             string? context = null,
@@ -119,7 +118,7 @@ namespace Bb.ComponentModel.Loaders
         /// loader.Execute(i);
         /// </code>
         /// </example>
-        public static InjectionLoader<T> PrepareConfiguration<T>(
+        public static InjectionLoader<T> PrepareAutoConfiguration<T>(
             this IServiceProvider serviceProvider,
             string? context = null,
             Action<InjectionLoader<T>> initializer = null,
@@ -248,7 +247,7 @@ namespace Bb.ComponentModel.Loaders
             var instance = (T)serviceProvider.GetService(typeof(T));
 
             if (instance != null)
-                instance.Configure(serviceProvider, context, initializer, action);
+                instance.AutoConfigure(serviceProvider, context, initializer, action);
 
             return instance;
 

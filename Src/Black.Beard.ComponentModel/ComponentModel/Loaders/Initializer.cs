@@ -84,7 +84,7 @@ namespace Bb.ComponentModel.Loaders
         {
             Initializer i = new Initializer(args);
             init?.Invoke(i);
-            return i.Configure(i._serviceProvider, i.Context, c =>
+            return i.AutoConfigure(i._serviceProvider, i.Context, c =>
             {
 
                 c.WithArguments(i._args);
