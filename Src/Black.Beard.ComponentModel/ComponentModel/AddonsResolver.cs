@@ -73,78 +73,13 @@ namespace Bb.ComponentModel
                     AddDirectories(item.Path);
 
                 foreach (var item in repositories.ByName)
-                    AddAssemblyName(item.AssemblyName);
+                    AddAssemblyByName(item.AssemblyName);
 
             }
             return this;
 
         }
 
-
-        /// <summary>
-        /// Return a list of assembly referenced by entry assembly
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<AssemblyMatched> ResolveListOfReferences()
-        {
-            return ResolveListReferences(Assembly.GetEntryAssembly());
-
-        }
-
-        /// <summary>
-        /// Return a list of assembly referenced by specified assembly
-        /// </summary>
-        /// <param name="assembly">assembly to evaluate</param>
-        /// <returns></returns>
-        public IEnumerable<AssemblyMatched> ResolveListReferences(Assembly assembly)
-        {
-            Dictionary<string, AssemblyMatched> _list = new Dictionary<string, AssemblyMatched>();
-            var filePath = new FileInfo(assembly.Location);
-            if (TryToLoadFile(filePath, out PEFile peFile))
-            {
-
-                if (FilterAssembly == null || FilterAssembly(peFile))
-                {
-                    var ass = BuildModelAssembly(filePath, peFile);
-                    if (!_list.ContainsKey(assembly.GetName().Name))
-                        _list.Add(assembly.GetName().Name, ass);
-                }
-
-                EvaluateReferences(peFile, _list);
-            }
-            return _list.Values;
-
-        }
-
-        private void EvaluateReferences(PEFile file, Dictionary<string, AssemblyMatched> list)
-        {
-            foreach (var item in file.AssemblyReferences)
-                if (!list.ContainsKey(item.Name))
-                    Resolve(item, list);
-        }
-
-        /// <summary>
-        /// Resolves the specified assembly reference and adds it to the list if it is not already present.
-        /// </summary>
-        /// <param name="item">The assembly reference to resolve. Must not be null.</param>
-        /// <param name="list">The dictionary to add the resolved assembly to. Must not be null.</param>
-        /// <exception cref="ArgumentNullException">Thrown when item or list is null.</exception>
-        /// <remarks>
-        /// This method attempts to resolve the specified assembly reference and adds it to the provided dictionary if it is not already present.
-        /// </remarks>
-        private void Resolve(AssemblyReference item, Dictionary<string, AssemblyMatched> list)
-        {
-            if (Paths.TryToResolveAssemblyLocation(new AssemblyName(item.FullName), out var filePath))
-                if (Filter(filePath))
-                    if (TryToLoadFile(filePath, out PEFile peFile))
-                        if (FilterAssembly == null || FilterAssembly(peFile))
-                        {
-                            var assembly = BuildModelAssembly(filePath, peFile);
-                            if (!list.ContainsKey(assembly.AssemblyName))
-                                list.Add(assembly.AssemblyName, assembly);
-                            EvaluateReferences(peFile, list);
-                        }
-        }
 
         #region Add directories
 
@@ -294,7 +229,7 @@ namespace Bb.ComponentModel
         /// This method adds the specified assembly name to the resolver's list for analysis.
         /// </remarks>
         /// <exception cref="ArgumentNullException">Thrown when assemblyName is null.</exception>
-        public AddonsResolver AddAssemblyName(string assemblyName)
+        public AddonsResolver AddAssemblyByName(string assemblyName)
         {
             AssemblyLoader.Instance.LoadAssemblyName(assemblyName);
             return this;
@@ -309,13 +244,13 @@ namespace Bb.ComponentModel
         /// This method sets a filter to include only assemblies that reference the specified type's assembly.
         /// </remarks>
         /// <exception cref="ArgumentNullException">Thrown when type is null.</exception>
-        public AddonsResolver WhereAssemblyReference(Type type)
+        public AddonsResolver WithReference(Type type)
         {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
 
             var ass = type.Assembly;
-            WhereAssemblyReference(ass);
+            WithReference(ass);
             return this;
         }
 
@@ -328,13 +263,13 @@ namespace Bb.ComponentModel
         /// This method sets a filter to include only assemblies that reference the specified assembly.
         /// </remarks>
         /// <exception cref="ArgumentNullException">Thrown when assembly is null.</exception>
-        public AddonsResolver WhereAssemblyReference(Assembly assembly)
+        public AddonsResolver WithReference(Assembly assembly)
         {
 
             if (assembly == null)
                 throw new ArgumentNullException(nameof(assembly));
 
-            WhereAssemblyReference(assembly.GetName());
+            WithReference(assembly.GetName());
             return this;
         }
 
@@ -347,7 +282,7 @@ namespace Bb.ComponentModel
         /// This method sets a filter to include only assemblies that reference the specified assembly name.
         /// </remarks>
         /// <exception cref="ArgumentNullException">Thrown when assemblyName is null.</exception>
-        public AddonsResolver WhereAssemblyReference(AssemblyName assemblyName)
+        public AddonsResolver WithReference(AssemblyName assemblyName)
         {
             this.WhereAssembly(c => assemblyName.Name != c.Name && c.AssemblyReferences.References(assemblyName));
             return this;
@@ -609,7 +544,6 @@ namespace Bb.ComponentModel
 
         #endregion Types
 
-
         #region Exclude filenames
 
         /// <summary>
@@ -726,6 +660,7 @@ namespace Bb.ComponentModel
         #endregion Filters
 
 
+
         /// <summary>
         /// Apply filters and return the list of types
         /// </summary>
@@ -762,6 +697,42 @@ namespace Bb.ComponentModel
             //            {
             //                file.Dispose();
             //            }
+
+        }
+
+
+        /// <summary>
+        /// Return a list of assembly referenced by entry assembly
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<AssemblyMatched> SearchListOfReferences()
+        {
+            return SearchListReferences(Assembly.GetEntryAssembly());
+
+        }
+
+        /// <summary>
+        /// Return a list of assembly referenced by specified assembly
+        /// </summary>
+        /// <param name="assembly">assembly to evaluate</param>
+        /// <returns></returns>
+        public IEnumerable<AssemblyMatched> SearchListReferences(Assembly assembly)
+        {
+            Dictionary<string, AssemblyMatched> _list = new Dictionary<string, AssemblyMatched>();
+            var filePath = new FileInfo(assembly.Location);
+            if (TryToLoadFile(filePath, out PEFile peFile))
+            {
+
+                if (FilterAssembly == null || FilterAssembly(peFile))
+                {
+                    var ass = BuildModelAssembly(filePath, peFile);
+                    if (!_list.ContainsKey(assembly.GetName().Name))
+                        _list.Add(assembly.GetName().Name, ass);
+                }
+
+                EvaluateReferences(peFile, _list);
+            }
+            return _list.Values;
 
         }
 
@@ -832,6 +803,37 @@ namespace Bb.ComponentModel
 
             return peFile != null;
 
+        }
+
+
+        private void EvaluateReferences(PEFile file, Dictionary<string, AssemblyMatched> list)
+        {
+            foreach (var item in file.AssemblyReferences)
+                if (!list.ContainsKey(item.Name))
+                    Resolve(item, list);
+        }
+
+        /// <summary>
+        /// Resolves the specified assembly reference and adds it to the list if it is not already present.
+        /// </summary>
+        /// <param name="item">The assembly reference to resolve. Must not be null.</param>
+        /// <param name="list">The dictionary to add the resolved assembly to. Must not be null.</param>
+        /// <exception cref="ArgumentNullException">Thrown when item or list is null.</exception>
+        /// <remarks>
+        /// This method attempts to resolve the specified assembly reference and adds it to the provided dictionary if it is not already present.
+        /// </remarks>
+        private void Resolve(AssemblyReference item, Dictionary<string, AssemblyMatched> list)
+        {
+            if (Paths.TryToResolveAssemblyLocation(new AssemblyName(item.FullName), out var filePath))
+                if (Filter(filePath))
+                    if (TryToLoadFile(filePath, out PEFile peFile))
+                        if (FilterAssembly == null || FilterAssembly(peFile))
+                        {
+                            var assembly = BuildModelAssembly(filePath, peFile);
+                            if (!list.ContainsKey(assembly.AssemblyName))
+                                list.Add(assembly.AssemblyName, assembly);
+                            EvaluateReferences(peFile, list);
+                        }
         }
 
 

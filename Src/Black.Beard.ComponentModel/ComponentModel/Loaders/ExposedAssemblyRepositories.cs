@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 
 namespace Bb.ComponentModel.Loaders
@@ -18,7 +20,6 @@ namespace Bb.ComponentModel.Loaders
 
 
         public List<ExposedAssemblyRepositoryByName> ByName { get; set; }
-    
 
     }
 

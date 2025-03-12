@@ -103,7 +103,7 @@ namespace DynamicDescriptors.Tests
                   .FirstOrDefault();
 
             var item01 = new AddonsResolver(directories)
-                    .WhereAssemblyReference(typeof(ExposeClassAttribute))
+                    .WithReference(typeof(ExposeClassAttribute))
                     .SearchAssemblies()
                     .EnsureIsLoaded()
                       //.FirstOrDefault()
@@ -215,8 +215,8 @@ namespace DynamicDescriptors.Tests
                 .Search(c =>
                 {
 
-                    var o = c.WhereAssemblyReference(typeof(IInjectBuilder))
-                             .ResolveListReferences(typeof(ReflexionTest).Assembly)
+                    var o = c.WithReference(typeof(IInjectBuilder))
+                             .SearchListReferences(typeof(ReflexionTest).Assembly)
                              .Where(x => !x.IsSystemDirectory && !x.IsSdk)
                              .ToList();
 
@@ -240,9 +240,9 @@ namespace DynamicDescriptors.Tests
 
             var o = new AddonsResolver(AssemblyDirectoryResolver.Instance)
                 .WithFile( c => !c.InSystemDirectory())
-                .WhereAssemblyReference(typeof(IInjectBuilder))
+                .WithReference(typeof(IInjectBuilder))
                 .WhereAssembly(c => !c.IsSdk())
-                .ResolveListReferences(typeof(ReflexionTest).Assembly)
+                .SearchListReferences(typeof(ReflexionTest).Assembly)
                 .ToList();
 
             Assert.True(o.Count() == 2);
