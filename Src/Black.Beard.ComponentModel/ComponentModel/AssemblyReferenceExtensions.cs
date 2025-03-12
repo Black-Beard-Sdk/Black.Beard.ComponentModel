@@ -13,6 +13,49 @@ namespace Bb.ComponentModel
     {
 
         /// <summary>
+        /// Load all assemblies if not loaded
+        /// </summary>
+        /// <param name="self">list of assembly to load</param>
+        public static void LoadAssemblies(this IEnumerable<AssemblyMatched> self)
+        {
+            foreach (var item in self)
+                item.Load();
+        }
+
+        /// <summary>
+        /// Load all assemblies if not loaded and return the list of assembly failed to loaded
+        /// </summary>
+        /// <param name="self">list of assembly to load</param>
+        /// <returns>list of assembly not loaded</returns>
+        public static IEnumerable<PEFile> LoadAssemblies(this IEnumerable<PEFile> self)
+        {
+
+            List<PEFile> _result = new List<PEFile>();
+
+            foreach (var item in self)
+            {
+
+                var file = new FileInfo(item.FullName);
+                var isLoaded = TypeDiscovery.Instance.IsLoaded(file);
+
+                if (!isLoaded)
+                    try
+                    {
+                        AssemblyLoader.Instance.LoadAssembly(file, null);
+                    }
+                    catch (Exception)
+                    {
+                        _result.Add(item);
+                    }
+            }
+
+            return _result;
+
+
+        }
+
+
+        /// <summary>
         /// Determines whether the specified file is located in the system directory.
         /// </summary>
         /// <param name="file">The file to check. Must not be null.</param>

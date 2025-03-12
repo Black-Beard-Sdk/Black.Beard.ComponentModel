@@ -679,25 +679,6 @@ namespace Bb.ComponentModel
                             yield return result;
                     }
 
-            //foreach (FileInfo assemblyPath in Paths.GetAssembliesOfDirectories(FileFilter))
-            //    if (Filter(assemblyPath))
-            //        if (TryToLoadFile(assemblyPath, out PEFile file))
-            //            try
-            //            {
-            //                if (FilterAssembly == null || FilterAssembly(file))
-            //                    foreach (var item in file.Module.TypeDefinitions)
-            //                        if (filter == null || filter.Evaluate(item))
-            //                        {
-            //                            TypeMatched result = BuildModel(assemblyPath, file, item);
-            //                            if (TypeFilter == null || TypeFilter(result))
-            //                                yield return result;
-            //                        }
-            //            }
-            //            finally
-            //            {
-            //                file.Dispose();
-            //            }
-
         }
 
 

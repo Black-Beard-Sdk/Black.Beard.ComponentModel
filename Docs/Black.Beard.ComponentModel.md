@@ -247,6 +247,8 @@
   - [InSystemDirectory(file)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-InSystemDirectory-System-IO-FileInfo- 'Bb.ComponentModel.AssemblyReferenceExtensions.InSystemDirectory(System.IO.FileInfo)')
   - [IsSdk(file)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-IsSdk-ICSharpCode-Decompiler-Metadata-PEFile- 'Bb.ComponentModel.AssemblyReferenceExtensions.IsSdk(ICSharpCode.Decompiler.Metadata.PEFile)')
   - [IsSdk(file)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-IsSdk-System-Reflection-Assembly- 'Bb.ComponentModel.AssemblyReferenceExtensions.IsSdk(System.Reflection.Assembly)')
+  - [LoadAssemblies(self)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-LoadAssemblies-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched}- 'Bb.ComponentModel.AssemblyReferenceExtensions.LoadAssemblies(System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched})')
+  - [LoadAssemblies(self)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-LoadAssemblies-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-Metadata-PEFile}- 'Bb.ComponentModel.AssemblyReferenceExtensions.LoadAssemblies(System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.Metadata.PEFile})')
 - [AssignVariableNames](#T-ICSharpCode-Decompiler-IL-Transforms-AssignVariableNames 'ICSharpCode.Decompiler.IL.Transforms.AssignVariableNames')
   - [IsSupportedInstruction()](#M-ICSharpCode-Decompiler-IL-Transforms-AssignVariableNames-IsSupportedInstruction-System-Object- 'ICSharpCode.Decompiler.IL.Transforms.AssignVariableNames.IsSupportedInstruction(System.Object)')
 - [AssignmentExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-AssignmentExpression 'ICSharpCode.Decompiler.CSharp.Syntax.AssignmentExpression')
@@ -7135,6 +7137,36 @@ bool isSdk = assembly.IsSdk();
 ##### Remarks
 
 This method checks if the specified assembly contains attributes that indicate it is an SDK assembly.
+
+<a name='M-Bb-ComponentModel-AssemblyReferenceExtensions-LoadAssemblies-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched}-'></a>
+### LoadAssemblies(self) `method`
+
+##### Summary
+
+Load all assemblies if not loaded
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}') | list of assembly to load |
+
+<a name='M-Bb-ComponentModel-AssemblyReferenceExtensions-LoadAssemblies-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-Metadata-PEFile}-'></a>
+### LoadAssemblies(self) `method`
+
+##### Summary
+
+Load all assemblies if not loaded and return the list of assembly failed to loaded
+
+##### Returns
+
+list of assembly not loaded
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.Metadata.PEFile}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.Metadata.PEFile}') | list of assembly to load |
 
 <a name='T-ICSharpCode-Decompiler-IL-Transforms-AssignVariableNames'></a>
 ## AssignVariableNames `type`

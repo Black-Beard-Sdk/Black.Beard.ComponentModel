@@ -154,15 +154,10 @@ namespace Bb.ComponentModel.Loaders
         /// <remarks>
         /// This constructor initializes a new instance of the <see cref="InjectionLoader{T}"/> class.
         /// </remarks>        
-        public InjectionLoader(string context, IServiceProvider serviceProvider = null, Action<InjectionLoader<T>> initializer = null)
+        public InjectionLoader(string context, IServiceProvider serviceProvider = null)
             : base(context, serviceProvider)
         {
-
-            Instances = new List<IInjectBuilder<T>>();
-
-            if (initializer != null)
-                initializer(this);
-
+            Instances = new List<IInjectBuilder<T>>();            
         }
 
         public Func<PropertyDescriptor, string, IInjectBuilder<T>, object> InjectRescue { get; internal set; }

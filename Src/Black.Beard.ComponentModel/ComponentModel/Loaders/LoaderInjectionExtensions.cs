@@ -4,10 +4,8 @@ using Bb.ComponentModel.Factories;
 using Bb.Expressions;
 using System;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 
 namespace Bb.ComponentModel.Loaders
 {
@@ -58,9 +56,9 @@ namespace Bb.ComponentModel.Loaders
 
         static LoaderInjectionExtensions()
         {
-            _method = typeof(LoaderInjectionExtensions).GetMethods()
-                   .Where(c => c.Name == nameof(LoaderInjectionExtensions.AutoConfigure))
-                   .First(c => c.IsGenericMethod);
+            //_method = typeof(LoaderInjectionExtensions).GetMethods()
+            //       .Where(c => c.Name == nameof(LoaderInjectionExtensions.AutoConfigure))
+            //       .First(c => c.IsGenericMethod);
         }
 
 
@@ -82,12 +80,11 @@ namespace Bb.ComponentModel.Loaders
             Action<InjectionLoader<T>> initializer = null,
             Action<IInjectBuilder<T>> onInitializationAction = null,
             Action<InjectionLoader<T>> postExecution = null
-
             )
         {
 
-            var loader = new InjectionLoader<T>(context ?? ConstantsCore.Initialization, serviceProvider, initializer)
-                .LoadModules(onInitializationAction)
+            var loader = new InjectionLoader<T>(context ?? ConstantsCore.Initialization, serviceProvider)
+                .LoadModules(initializer, onInitializationAction)
                 .Execute(self);
 
             if (postExecution != null)
@@ -126,8 +123,8 @@ namespace Bb.ComponentModel.Loaders
             )
         {
 
-            var loader = new InjectionLoader<T>(context ?? ConstantsCore.Initialization, serviceProvider, initializer)
-                .LoadModules(onInitializationAction);
+            var loader = new InjectionLoader<T>(context ?? ConstantsCore.Initialization, serviceProvider)
+                .LoadModules(initializer, onInitializationAction);
 
             return loader;
 
@@ -233,14 +230,24 @@ namespace Bb.ComponentModel.Loaders
         }
 
         /// <summary>
-        /// create instance and initialize service from service provider
+        /// Creates an instance and initializes the service from the service provider.
         /// </summary>
-        /// <typeparam name="T">type of the service asked</typeparam>
-        /// <param name="serviceProvider"><see cref="IServiceProvider"/></param>
-        /// <param name="context">by default the value is "Initialization"</param>
-        /// <param name="initializer">action to execute for every loader</param>
-        /// <param name="action">action to initialize for every loader</param>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of the service to be resolved by discovery.</typeparam>
+        /// <param name="serviceProvider">The service provider. Must not be null.</param>
+        /// <param name="context">The context value. By default, it is set to "Initialization".</param>
+        /// <param name="initializer">The action to execute for every loader. Can be null.</param>
+        /// <param name="action">The action to initialize for every loader. Can be null.</param>
+        /// <returns>The configured service instance of type <see cref="T"/>.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="serviceProvider"/> is null.</exception>
+        /// <remarks>
+        /// This method creates an instance of the specified service type and initializes it using the provided service provider and context.
+        /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// IServiceProvider serviceProvider = new ServiceCollection().BuildServiceProvider();
+        /// var configuredService = serviceProvider.GetConfiguredService&lt;MyService>("Initialization", loader => { /* initializer code */ }, builder => { /* action code */ });
+        /// </code>
+        /// </example>
         public static T GetConfiguredService<T>(this IServiceProvider serviceProvider, string context, Action<InjectionLoader<T>> initializer = null, Action<IInjectBuilder<T>> action = null)
         {
 
@@ -254,21 +261,40 @@ namespace Bb.ComponentModel.Loaders
         }
 
         /// <summary>
-        /// Load assemblies and initialize the loader
+        /// Loads modules and initializes the loader with the specified actions.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="self"></param>
-        /// <returns></returns>
-        public static InjectionLoader<T> LoadModules<T>(this InjectionLoader<T> self, Action<IInjectBuilder<T>> initializer)
+        /// <typeparam name="T">The type of object to be resolved by discovery.</typeparam>
+        /// <param name="self">The instance of <see cref="InjectionLoader{T}"/> to initialize. Must not be null.</param>
+        /// <param name="initializer">The action to execute for every loader. Must not be null.</param>
+        /// <param name="onInitializationAction">The action to initialize for every loader. Must not be null.</param>
+        /// <returns>The initialized <see cref="InjectionLoader{T}"/> instance.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="self"/>, <paramref name="initializer"/>, or <paramref name="onInitializationAction"/> is null.</exception>
+        /// <remarks>
+        /// This method loads modules and initializes the loader with the specified actions.
+        /// It collects types that implement <see cref="IInjectBuilder{T}"/> and adds instances of these types to the loader.
+        /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// var loader = new InjectionLoader&lt;MyClass>(context, serviceProvider);
+        /// loader.LoadModules(
+        ///     initializer: l => { /* initializer code */ },
+        ///     onInitializationAction: b => { /* initialization action code */ }
+        /// );
+        /// </code>
+        /// </example>
+        public static InjectionLoader<T> LoadModules<T>(this InjectionLoader<T> self, Action<InjectionLoader<T>> initializer, Action<IInjectBuilder<T>> onInitializationAction)
         {
 
             self._parser ??= new CommandLineParser();
             self.Types.AddRange(InjectionExtensions.CollectTypes<IInjectBuilder<T>>(self.Context));
 
+            if (initializer != null)
+                initializer(self);
+
             Action<IInjectBuilder<T>> initializerAction = c =>
             {
                 c.Map(self.InjectValue, self.InjectRescue, self._parser);
-                initializer?.Invoke(c);
+                onInitializationAction?.Invoke(c);
             };
 
             self.AddInstances(InjectionExtensions.LoadAbstractLoaders(self.Types, initializerAction, self.ServiceProvider));
@@ -308,7 +334,7 @@ namespace Bb.ComponentModel.Loaders
                 }
                 else
                     Debug.WriteLine($"add-on '{name}' refuses to run");
-            
+
             }
 
             return self;
@@ -448,7 +474,7 @@ namespace Bb.ComponentModel.Loaders
             return value != null;
         }
 
-        private static MethodInfo _method;
+        // private static MethodInfo _method;
 
     }
 
