@@ -91,28 +91,42 @@
 - [AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')
   - [#ctor(paths)](#M-Bb-ComponentModel-AddonsResolver-#ctor-System-String[]- 'Bb.ComponentModel.AddonsResolver.#ctor(System.String[])')
   - [#ctor(paths)](#M-Bb-ComponentModel-AddonsResolver-#ctor-Bb-ComponentModel-AssemblyDirectoryResolver- 'Bb.ComponentModel.AddonsResolver.#ctor(Bb.ComponentModel.AssemblyDirectoryResolver)')
+  - [Context](#P-Bb-ComponentModel-AddonsResolver-Context 'Bb.ComponentModel.AddonsResolver.Context')
   - [ExcludeAbstracts](#P-Bb-ComponentModel-AddonsResolver-ExcludeAbstracts 'Bb.ComponentModel.AddonsResolver.ExcludeAbstracts')
   - [ExcludeGenerics](#P-Bb-ComponentModel-AddonsResolver-ExcludeGenerics 'Bb.ComponentModel.AddonsResolver.ExcludeGenerics')
   - [ExcludedAssemblies](#P-Bb-ComponentModel-AddonsResolver-ExcludedAssemblies 'Bb.ComponentModel.AddonsResolver.ExcludedAssemblies')
   - [FileFilter](#P-Bb-ComponentModel-AddonsResolver-FileFilter 'Bb.ComponentModel.AddonsResolver.FileFilter')
   - [FilterAssembly](#P-Bb-ComponentModel-AddonsResolver-FilterAssembly 'Bb.ComponentModel.AddonsResolver.FilterAssembly')
   - [New](#P-Bb-ComponentModel-AddonsResolver-New 'Bb.ComponentModel.AddonsResolver.New')
+  - [Paths](#P-Bb-ComponentModel-AddonsResolver-Paths 'Bb.ComponentModel.AddonsResolver.Paths')
   - [TypeFilter](#P-Bb-ComponentModel-AddonsResolver-TypeFilter 'Bb.ComponentModel.AddonsResolver.TypeFilter')
   - [AddAssemblyName(assemblyName)](#M-Bb-ComponentModel-AddonsResolver-AddAssemblyName-System-String- 'Bb.ComponentModel.AddonsResolver.AddAssemblyName(System.String)')
+  - [AddDirectories(paths)](#M-Bb-ComponentModel-AddonsResolver-AddDirectories-System-IO-DirectoryInfo[]- 'Bb.ComponentModel.AddonsResolver.AddDirectories(System.IO.DirectoryInfo[])')
+  - [AddDirectories(paths)](#M-Bb-ComponentModel-AddonsResolver-AddDirectories-System-Collections-Generic-IEnumerable{System-IO-DirectoryInfo}- 'Bb.ComponentModel.AddonsResolver.AddDirectories(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo})')
+  - [AddDirectories(paths)](#M-Bb-ComponentModel-AddonsResolver-AddDirectories-System-String[]- 'Bb.ComponentModel.AddonsResolver.AddDirectories(System.String[])')
+  - [AddDirectories(paths)](#M-Bb-ComponentModel-AddonsResolver-AddDirectories-System-Collections-Generic-IEnumerable{System-String}- 'Bb.ComponentModel.AddonsResolver.AddDirectories(System.Collections.Generic.IEnumerable{System.String})')
+  - [AddExcludeAssemblies(assemblies)](#M-Bb-ComponentModel-AddonsResolver-AddExcludeAssemblies-System-String[]- 'Bb.ComponentModel.AddonsResolver.AddExcludeAssemblies(System.String[])')
+  - [AddRestrictAssemblies(assemblies)](#M-Bb-ComponentModel-AddonsResolver-AddRestrictAssemblies-System-String[]- 'Bb.ComponentModel.AddonsResolver.AddRestrictAssemblies(System.String[])')
+  - [AddRestrictAssemblies(assemblies)](#M-Bb-ComponentModel-AddonsResolver-AddRestrictAssemblies-Bb-ComponentModel-AssemblyMatched[]- 'Bb.ComponentModel.AddonsResolver.AddRestrictAssemblies(Bb.ComponentModel.AssemblyMatched[])')
+  - [AddRestrictAssemblies(assemblies)](#M-Bb-ComponentModel-AddonsResolver-AddRestrictAssemblies-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched}- 'Bb.ComponentModel.AddonsResolver.AddRestrictAssemblies(System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched})')
+  - [ClearAssemblyFilters(filenames)](#M-Bb-ComponentModel-AddonsResolver-ClearAssemblyFilters-System-String[]- 'Bb.ComponentModel.AddonsResolver.ClearAssemblyFilters(System.String[])')
   - [ClearBaseType(baseTypes)](#M-Bb-ComponentModel-AddonsResolver-ClearBaseType-System-Collections-Generic-IEnumerable{System-Type}- 'Bb.ComponentModel.AddonsResolver.ClearBaseType(System.Collections.Generic.IEnumerable{System.Type})')
-  - [ClearFileFilters(filenames)](#M-Bb-ComponentModel-AddonsResolver-ClearFileFilters-System-String[]- 'Bb.ComponentModel.AddonsResolver.ClearFileFilters(System.String[])')
   - [ClearFilterType()](#M-Bb-ComponentModel-AddonsResolver-ClearFilterType 'Bb.ComponentModel.AddonsResolver.ClearFilterType')
-  - [ClearWithFile()](#M-Bb-ComponentModel-AddonsResolver-ClearWithFile 'Bb.ComponentModel.AddonsResolver.ClearWithFile')
+  - [ClearImplements()](#M-Bb-ComponentModel-AddonsResolver-ClearImplements 'Bb.ComponentModel.AddonsResolver.ClearImplements')
   - [ExcludeAbstractTypes(excludeAbstract)](#M-Bb-ComponentModel-AddonsResolver-ExcludeAbstractTypes-System-Boolean- 'Bb.ComponentModel.AddonsResolver.ExcludeAbstractTypes(System.Boolean)')
-  - [ExcludeFile(filenames)](#M-Bb-ComponentModel-AddonsResolver-ExcludeFile-System-String[]- 'Bb.ComponentModel.AddonsResolver.ExcludeFile(System.String[])')
   - [ExcludeGenericTypes(excludeGenerics)](#M-Bb-ComponentModel-AddonsResolver-ExcludeGenericTypes-System-Boolean- 'Bb.ComponentModel.AddonsResolver.ExcludeGenericTypes(System.Boolean)')
   - [FilterType(filter)](#M-Bb-ComponentModel-AddonsResolver-FilterType-System-Func{Bb-ComponentModel-TypeMatched,System-Boolean}- 'Bb.ComponentModel.AddonsResolver.FilterType(System.Func{Bb.ComponentModel.TypeMatched,System.Boolean})')
   - [GetAssemblies()](#M-Bb-ComponentModel-AddonsResolver-GetAssemblies 'Bb.ComponentModel.AddonsResolver.GetAssemblies')
   - [Implements(interfaces)](#M-Bb-ComponentModel-AddonsResolver-Implements-System-Collections-Generic-IEnumerable{System-Type}- 'Bb.ComponentModel.AddonsResolver.Implements(System.Collections.Generic.IEnumerable{System.Type})')
-  - [Implements()](#M-Bb-ComponentModel-AddonsResolver-Implements 'Bb.ComponentModel.AddonsResolver.Implements')
   - [Implements(interfaces)](#M-Bb-ComponentModel-AddonsResolver-Implements-System-Type[]- 'Bb.ComponentModel.AddonsResolver.Implements(System.Type[])')
+  - [InContext(context)](#M-Bb-ComponentModel-AddonsResolver-InContext-System-String- 'Bb.ComponentModel.AddonsResolver.InContext(System.String)')
+  - [ParseAssemblies()](#M-Bb-ComponentModel-AddonsResolver-ParseAssemblies 'Bb.ComponentModel.AddonsResolver.ParseAssemblies')
+  - [Resolve(item,list)](#M-Bb-ComponentModel-AddonsResolver-Resolve-ICSharpCode-Decompiler-Metadata-AssemblyReference,System-Collections-Generic-Dictionary{System-String,Bb-ComponentModel-AssemblyMatched}- 'Bb.ComponentModel.AddonsResolver.Resolve(ICSharpCode.Decompiler.Metadata.AssemblyReference,System.Collections.Generic.Dictionary{System.String,Bb.ComponentModel.AssemblyMatched})')
+  - [ResolveListOfFile()](#M-Bb-ComponentModel-AddonsResolver-ResolveListOfFile 'Bb.ComponentModel.AddonsResolver.ResolveListOfFile')
+  - [ResolveListOfFile(assembly)](#M-Bb-ComponentModel-AddonsResolver-ResolveListOfFile-System-Reflection-Assembly- 'Bb.ComponentModel.AddonsResolver.ResolveListOfFile(System.Reflection.Assembly)')
   - [SearchAssemblies()](#M-Bb-ComponentModel-AddonsResolver-SearchAssemblies 'Bb.ComponentModel.AddonsResolver.SearchAssemblies')
   - [SearchTypes()](#M-Bb-ComponentModel-AddonsResolver-SearchTypes 'Bb.ComponentModel.AddonsResolver.SearchTypes')
+  - [TryToLoadFile(filename,peFile)](#M-Bb-ComponentModel-AddonsResolver-TryToLoadFile-System-IO-FileInfo,ICSharpCode-Decompiler-Metadata-PEFile@- 'Bb.ComponentModel.AddonsResolver.TryToLoadFile(System.IO.FileInfo,ICSharpCode.Decompiler.Metadata.PEFile@)')
   - [WhereAssembly(filterAssembly)](#M-Bb-ComponentModel-AddonsResolver-WhereAssembly-System-Func{ICSharpCode-Decompiler-Metadata-PEFile,System-Boolean}- 'Bb.ComponentModel.AddonsResolver.WhereAssembly(System.Func{ICSharpCode.Decompiler.Metadata.PEFile,System.Boolean})')
   - [WhereAssemblyReference(type)](#M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Type- 'Bb.ComponentModel.AddonsResolver.WhereAssemblyReference(System.Type)')
   - [WhereAssemblyReference(assembly)](#M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Reflection-Assembly- 'Bb.ComponentModel.AddonsResolver.WhereAssemblyReference(System.Reflection.Assembly)')
@@ -175,24 +189,31 @@
   - [AddDirectoryFromFiles(paths)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-AddDirectoryFromFiles-System-Collections-Generic-IEnumerable{System-String}- 'Bb.ComponentModel.AssemblyDirectoryResolver.AddDirectoryFromFiles(System.Collections.Generic.IEnumerable{System.String})')
   - [AddDirectoryFromFiles(paths)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-AddDirectoryFromFiles-System-IO-FileInfo[]- 'Bb.ComponentModel.AssemblyDirectoryResolver.AddDirectoryFromFiles(System.IO.FileInfo[])')
   - [AddDirectoryFromFiles(paths)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-AddDirectoryFromFiles-System-Collections-Generic-IEnumerable{System-IO-FileInfo}- 'Bb.ComponentModel.AssemblyDirectoryResolver.AddDirectoryFromFiles(System.Collections.Generic.IEnumerable{System.IO.FileInfo})')
-  - [AddFileNotLoading(fullNames)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-AddFileNotLoading-System-String[]- 'Bb.ComponentModel.AssemblyDirectoryResolver.AddFileNotLoading(System.String[])')
-  - [AddFileNotLoading(fullNames)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-AddFileNotLoading-System-IO-FileInfo[]- 'Bb.ComponentModel.AssemblyDirectoryResolver.AddFileNotLoading(System.IO.FileInfo[])')
+  - [AddFileForNotLoad(fullNames)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-AddFileForNotLoad-System-String[]- 'Bb.ComponentModel.AssemblyDirectoryResolver.AddFileForNotLoad(System.String[])')
+  - [AddFileForNotLoad(fullNames)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-AddFileForNotLoad-System-IO-FileInfo[]- 'Bb.ComponentModel.AssemblyDirectoryResolver.AddFileForNotLoad(System.IO.FileInfo[])')
   - [Clear()](#M-Bb-ComponentModel-AssemblyDirectoryResolver-Clear 'Bb.ComponentModel.AssemblyDirectoryResolver.Clear')
   - [DelDirectories(paths)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-DelDirectories-System-Collections-Generic-IEnumerable{System-String}- 'Bb.ComponentModel.AssemblyDirectoryResolver.DelDirectories(System.Collections.Generic.IEnumerable{System.String})')
   - [DelDirectories(paths)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-DelDirectories-System-String[]- 'Bb.ComponentModel.AssemblyDirectoryResolver.DelDirectories(System.String[])')
   - [DelDirectories(paths)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-DelDirectories-System-Collections-Generic-IEnumerable{System-IO-DirectoryInfo}- 'Bb.ComponentModel.AssemblyDirectoryResolver.DelDirectories(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo})')
   - [DelDirectories(paths)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-DelDirectories-System-IO-DirectoryInfo[]- 'Bb.ComponentModel.AssemblyDirectoryResolver.DelDirectories(System.IO.DirectoryInfo[])')
-  - [GetAssemblies()](#M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssemblies-System-Func{System-IO-FileInfo,System-Boolean}- 'Bb.ComponentModel.AssemblyDirectoryResolver.GetAssemblies(System.Func{System.IO.FileInfo,System.Boolean})')
-  - [GetAssemblies(directory)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssemblies-System-String,System-Func{System-IO-FileInfo,System-Boolean}- 'Bb.ComponentModel.AssemblyDirectoryResolver.GetAssemblies(System.String,System.Func{System.IO.FileInfo,System.Boolean})')
-  - [GetAssemblies(filter)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssemblies-System-IO-DirectoryInfo,System-Func{System-IO-FileInfo,System-Boolean}- 'Bb.ComponentModel.AssemblyDirectoryResolver.GetAssemblies(System.IO.DirectoryInfo,System.Func{System.IO.FileInfo,System.Boolean})')
+  - [GetAssemblies(directory,filter)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssemblies-System-String,System-Func{System-IO-FileInfo,System-Boolean}- 'Bb.ComponentModel.AssemblyDirectoryResolver.GetAssemblies(System.String,System.Func{System.IO.FileInfo,System.Boolean})')
+  - [GetAssemblies(directory,filter)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssemblies-System-IO-DirectoryInfo,System-Func{System-IO-FileInfo,System-Boolean}- 'Bb.ComponentModel.AssemblyDirectoryResolver.GetAssemblies(System.IO.DirectoryInfo,System.Func{System.IO.FileInfo,System.Boolean})')
+  - [GetAssembliesOfDirectories()](#M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssembliesOfDirectories-System-Func{System-IO-FileInfo,System-Boolean}- 'Bb.ComponentModel.AssemblyDirectoryResolver.GetAssembliesOfDirectories(System.Func{System.IO.FileInfo,System.Boolean})')
   - [GetDirectories()](#M-Bb-ComponentModel-AssemblyDirectoryResolver-GetDirectories 'Bb.ComponentModel.AssemblyDirectoryResolver.GetDirectories')
   - [GetPaths()](#M-Bb-ComponentModel-AssemblyDirectoryResolver-GetPaths 'Bb.ComponentModel.AssemblyDirectoryResolver.GetPaths')
   - [GetSystemDirectories()](#M-Bb-ComponentModel-AssemblyDirectoryResolver-GetSystemDirectories 'Bb.ComponentModel.AssemblyDirectoryResolver.GetSystemDirectories')
+  - [IsEntryDirectory(path)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-IsEntryDirectory-System-String- 'Bb.ComponentModel.AssemblyDirectoryResolver.IsEntryDirectory(System.String)')
+  - [IsEntryDirectory(path)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-IsEntryDirectory-System-IO-DirectoryInfo- 'Bb.ComponentModel.AssemblyDirectoryResolver.IsEntryDirectory(System.IO.DirectoryInfo)')
+  - [IsEntryDirectory(assembly)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-IsEntryDirectory-System-Reflection-Assembly- 'Bb.ComponentModel.AssemblyDirectoryResolver.IsEntryDirectory(System.Reflection.Assembly)')
   - [IsInEntryDirectory(path)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-IsInEntryDirectory-System-IO-DirectoryInfo- 'Bb.ComponentModel.AssemblyDirectoryResolver.IsInEntryDirectory(System.IO.DirectoryInfo)')
-  - [IsInSystemDirectory(file)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-IsInSystemDirectory-System-Reflection-Assembly- 'Bb.ComponentModel.AssemblyDirectoryResolver.IsInSystemDirectory(System.Reflection.Assembly)')
+  - [IsInSystemDirectory(assembly)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-IsInSystemDirectory-System-Reflection-Assembly- 'Bb.ComponentModel.AssemblyDirectoryResolver.IsInSystemDirectory(System.Reflection.Assembly)')
   - [IsInSystemDirectory(file)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-IsInSystemDirectory-System-IO-FileInfo- 'Bb.ComponentModel.AssemblyDirectoryResolver.IsInSystemDirectory(System.IO.FileInfo)')
   - [IsInSystemDirectory(path)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-IsInSystemDirectory-System-IO-DirectoryInfo- 'Bb.ComponentModel.AssemblyDirectoryResolver.IsInSystemDirectory(System.IO.DirectoryInfo)')
-  - [ResolveAssemblyFilenames(filter)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-ResolveAssemblyFilenames-System-Reflection-AssemblyName- 'Bb.ComponentModel.AssemblyDirectoryResolver.ResolveAssemblyFilenames(System.Reflection.AssemblyName)')
+  - [IsSystemDirectory(path)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-IsSystemDirectory-System-String- 'Bb.ComponentModel.AssemblyDirectoryResolver.IsSystemDirectory(System.String)')
+  - [IsSystemDirectory(path)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-IsSystemDirectory-System-IO-DirectoryInfo- 'Bb.ComponentModel.AssemblyDirectoryResolver.IsSystemDirectory(System.IO.DirectoryInfo)')
+  - [IsSystemDirectory(assembly)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-IsSystemDirectory-System-Reflection-Assembly- 'Bb.ComponentModel.AssemblyDirectoryResolver.IsSystemDirectory(System.Reflection.Assembly)')
+  - [ResolveAssemblyFilenames(assemblyName)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-ResolveAssemblyFilenames-System-Reflection-AssemblyName- 'Bb.ComponentModel.AssemblyDirectoryResolver.ResolveAssemblyFilenames(System.Reflection.AssemblyName)')
+  - [TryToResolveAssemblyLocation(assemblyName,file)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-TryToResolveAssemblyLocation-System-Reflection-AssemblyName,System-IO-FileInfo@- 'Bb.ComponentModel.AssemblyDirectoryResolver.TryToResolveAssemblyLocation(System.Reflection.AssemblyName,System.IO.FileInfo@)')
 - [AssemblyLoader](#T-Bb-ComponentModel-AssemblyLoader 'Bb.ComponentModel.AssemblyLoader')
   - [Assemblies](#P-Bb-ComponentModel-AssemblyLoader-Assemblies 'Bb.ComponentModel.AssemblyLoader.Assemblies')
   - [AssemblyNotResolved](#P-Bb-ComponentModel-AssemblyLoader-AssemblyNotResolved 'Bb.ComponentModel.AssemblyLoader.AssemblyNotResolved')
@@ -222,6 +243,10 @@
   - [Load(failedOnloadError)](#M-Bb-ComponentModel-AssemblyMatched-Load-System-Boolean- 'Bb.ComponentModel.AssemblyMatched.Load(System.Boolean)')
 - [AssemblyReferenceExtensions](#T-Bb-ComponentModel-AssemblyReferenceExtensions 'Bb.ComponentModel.AssemblyReferenceExtensions')
   - [EnsureIsLoaded(self,failedOnloadError)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-EnsureIsLoaded-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched},System-Boolean- 'Bb.ComponentModel.AssemblyReferenceExtensions.EnsureIsLoaded(System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched},System.Boolean)')
+  - [InEntryDirectory(file)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-InEntryDirectory-System-IO-FileInfo- 'Bb.ComponentModel.AssemblyReferenceExtensions.InEntryDirectory(System.IO.FileInfo)')
+  - [InSystemDirectory(file)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-InSystemDirectory-System-IO-FileInfo- 'Bb.ComponentModel.AssemblyReferenceExtensions.InSystemDirectory(System.IO.FileInfo)')
+  - [IsSdk(file)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-IsSdk-ICSharpCode-Decompiler-Metadata-PEFile- 'Bb.ComponentModel.AssemblyReferenceExtensions.IsSdk(ICSharpCode.Decompiler.Metadata.PEFile)')
+  - [IsSdk(file)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-IsSdk-System-Reflection-Assembly- 'Bb.ComponentModel.AssemblyReferenceExtensions.IsSdk(System.Reflection.Assembly)')
 - [AssignVariableNames](#T-ICSharpCode-Decompiler-IL-Transforms-AssignVariableNames 'ICSharpCode.Decompiler.IL.Transforms.AssignVariableNames')
   - [IsSupportedInstruction()](#M-ICSharpCode-Decompiler-IL-Transforms-AssignVariableNames-IsSupportedInstruction-System-Object- 'ICSharpCode.Decompiler.IL.Transforms.AssignVariableNames.IsSupportedInstruction(System.Object)')
 - [AssignmentExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-AssignmentExpression 'ICSharpCode.Decompiler.CSharp.Syntax.AssignmentExpression')
@@ -3202,7 +3227,8 @@
   - [CreateFrom\`\`1(type,args)](#M-Bb-ComponentModel-TypeDiscovery-CreateFrom``1-System-Type,System-Object[]- 'Bb.ComponentModel.TypeDiscovery.CreateFrom``1(System.Type,System.Object[])')
   - [CreateWithTypes\`\`1(args)](#M-Bb-ComponentModel-TypeDiscovery-CreateWithTypes``1-System-Type[]- 'Bb.ComponentModel.TypeDiscovery.CreateWithTypes``1(System.Type[])')
   - [Create\`\`1(args)](#M-Bb-ComponentModel-TypeDiscovery-Create``1-System-Object[]- 'Bb.ComponentModel.TypeDiscovery.Create``1(System.Object[])')
-  - [EnsureAllAssembliesAreLoaded(acceptAllVersion)](#M-Bb-ComponentModel-TypeDiscovery-EnsureAllAssembliesAreLoaded-System-Boolean- 'Bb.ComponentModel.TypeDiscovery.EnsureAllAssembliesAreLoaded(System.Boolean)')
+  - [EnsureAllAssembliesAreLoaded(acceptAllVersion,recursively)](#M-Bb-ComponentModel-TypeDiscovery-EnsureAllAssembliesAreLoaded-System-Boolean,System-Boolean- 'Bb.ComponentModel.TypeDiscovery.EnsureAllAssembliesAreLoaded(System.Boolean,System.Boolean)')
+  - [EnsureAssemblyIsLoadedWithReferences(assembly to loadtoload,acceptAllVersion,recursively)](#M-Bb-ComponentModel-TypeDiscovery-EnsureAssemblyIsLoadedWithReferences-System-Reflection-Assembly,System-Boolean,System-Boolean,System-Collections-Generic-HashSet{System-String}- 'Bb.ComponentModel.TypeDiscovery.EnsureAssemblyIsLoadedWithReferences(System.Reflection.Assembly,System.Boolean,System.Boolean,System.Collections.Generic.HashSet{System.String})')
   - [GetAllAssemblies()](#M-Bb-ComponentModel-TypeDiscovery-GetAllAssemblies 'Bb.ComponentModel.TypeDiscovery.GetAllAssemblies')
   - [GetAssemblies(namespaces)](#M-Bb-ComponentModel-TypeDiscovery-GetAssemblies-System-Collections-Generic-IEnumerable{System-String}- 'Bb.ComponentModel.TypeDiscovery.GetAssemblies(System.Collections.Generic.IEnumerable{System.String})')
   - [GetAssembly(name,acceptAllVersion)](#M-Bb-ComponentModel-TypeDiscovery-GetAssembly-System-String,System-Boolean- 'Bb.ComponentModel.TypeDiscovery.GetAssembly(System.String,System.Boolean)')
@@ -3227,6 +3253,7 @@
   - [LoadAssembliesFrom()](#M-Bb-ComponentModel-TypeDiscovery-LoadAssembliesFrom-System-IO-DirectoryInfo- 'Bb.ComponentModel.TypeDiscovery.LoadAssembliesFrom(System.IO.DirectoryInfo)')
   - [LoadAssembliesFromFolders()](#M-Bb-ComponentModel-TypeDiscovery-LoadAssembliesFromFolders-System-Collections-Generic-IEnumerable{System-IO-DirectoryInfo}- 'Bb.ComponentModel.TypeDiscovery.LoadAssembliesFromFolders(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo})')
   - [ResolveByName(targetType)](#M-Bb-ComponentModel-TypeDiscovery-ResolveByName-System-String- 'Bb.ComponentModel.TypeDiscovery.ResolveByName(System.String)')
+  - [Search(action,autoload,failedOnloadError,paths)](#M-Bb-ComponentModel-TypeDiscovery-Search-System-Action{Bb-ComponentModel-AddonsResolver},System-Boolean,System-Boolean,Bb-ComponentModel-AssemblyDirectoryResolver- 'Bb.ComponentModel.TypeDiscovery.Search(System.Action{Bb.ComponentModel.AddonsResolver},System.Boolean,System.Boolean,Bb.ComponentModel.AssemblyDirectoryResolver)')
 - [TypeDiscoveryExtension](#T-Bb-ComponentModel-TypeDiscoveryExtension 'Bb.ComponentModel.TypeDiscoveryExtension')
   - [GetAssembliesFromFolder(self,fileFilter)](#M-Bb-ComponentModel-TypeDiscoveryExtension-GetAssembliesFromFolder-System-IO-DirectoryInfo,System-Func{System-IO-FileInfo,System-Boolean}- 'Bb.ComponentModel.TypeDiscoveryExtension.GetAssembliesFromFolder(System.IO.DirectoryInfo,System.Func{System.IO.FileInfo,System.Boolean})')
   - [GetFileName(self)](#M-Bb-ComponentModel-TypeDiscoveryExtension-GetFileName-System-Type- 'Bb.ComponentModel.TypeDiscoveryExtension.GetFileName(System.Type)')
@@ -4597,6 +4624,14 @@ Adds XML documentation for member definitions.
 
 Bb.ComponentModel
 
+##### Summary
+
+The AddonsResolver class is responsible for resolving and filtering assemblies and types based on various criteria.
+
+##### Remarks
+
+This class provides methods to add directories, filter assemblies and types, and search for types and assemblies that match the specified criteria.
+
 <a name='M-Bb-ComponentModel-AddonsResolver-#ctor-System-String[]-'></a>
 ### #ctor(paths) `constructor`
 
@@ -4608,7 +4643,7 @@ Initialize a new instance of [AddonsResolver](#T-Bb-ComponentModel-AddonsResolve
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| paths | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | path to add for analyses |
+| paths | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | Path to add for analyses. Must not be null. |
 
 <a name='M-Bb-ComponentModel-AddonsResolver-#ctor-Bb-ComponentModel-AssemblyDirectoryResolver-'></a>
 ### #ctor(paths) `constructor`
@@ -4621,7 +4656,20 @@ Create a new instance of [AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'B
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| paths | [Bb.ComponentModel.AssemblyDirectoryResolver](#T-Bb-ComponentModel-AssemblyDirectoryResolver 'Bb.ComponentModel.AssemblyDirectoryResolver') | path to add for analyses |
+| paths | [Bb.ComponentModel.AssemblyDirectoryResolver](#T-Bb-ComponentModel-AssemblyDirectoryResolver 'Bb.ComponentModel.AssemblyDirectoryResolver') | Path to add for analyses. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when paths is null. |
+
+<a name='P-Bb-ComponentModel-AddonsResolver-Context'></a>
+### Context `property`
+
+##### Summary
+
+The context for the resolver
 
 <a name='P-Bb-ComponentModel-AddonsResolver-ExcludeAbstracts'></a>
 ### ExcludeAbstracts `property`
@@ -4665,19 +4713,189 @@ Define a filter for assemblies to use in the register
 
 Helper for creating a new instance of [AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')
 
+<a name='P-Bb-ComponentModel-AddonsResolver-Paths'></a>
+### Paths `property`
+
+##### Summary
+
+List of path where assemblies are stored
+
 <a name='P-Bb-ComponentModel-AddonsResolver-TypeFilter'></a>
 ### TypeFilter `property`
 
 ##### Summary
 
-filter on the finals types selected
+Filter on the final types selected
 
 <a name='M-Bb-ComponentModel-AddonsResolver-AddAssemblyName-System-String-'></a>
 ### AddAssemblyName(assemblyName) `method`
 
 ##### Summary
 
+Add an assembly name to the resolver's list for analysis.
 
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assemblyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the assembly to add. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when assemblyName is null. |
+
+##### Remarks
+
+This method adds the specified assembly name to the resolver's list for analysis.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-AddDirectories-System-IO-DirectoryInfo[]-'></a>
+### AddDirectories(paths) `method`
+
+##### Summary
+
+Add a list of directories to the resolver's path list for analysis.
+
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| paths | [System.IO.DirectoryInfo[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo[] 'System.IO.DirectoryInfo[]') | The paths of the directories to add. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when paths is null. |
+
+##### Example
+
+```C#
+var resolver = new AddonsResolver();
+resolver.AddDirectories(new DirectoryInfo("path1"), new DirectoryInfo("path2"));
+```
+
+##### Remarks
+
+This method adds the specified directories to the resolver's path list for analysis.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-AddDirectories-System-Collections-Generic-IEnumerable{System-IO-DirectoryInfo}-'></a>
+### AddDirectories(paths) `method`
+
+##### Summary
+
+Add a list of directories to the resolver's path list for analysis.
+
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| paths | [System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo}') | The paths of the directories to add. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when paths is null. |
+
+##### Example
+
+```C#
+var resolver = new AddonsResolver();
+resolver.AddDirectories(new [] { new DirectoryInfo("path1"), new DirectoryInfo("path2" }));
+```
+
+##### Remarks
+
+This method adds the specified directories to the resolver's path list for analysis.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-AddDirectories-System-String[]-'></a>
+### AddDirectories(paths) `method`
+
+##### Summary
+
+Add a list of directories to the resolver's path list for analysis.
+
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| paths | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | The paths of the directories to add. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when paths is null. |
+
+##### Example
+
+```C#
+var resolver = new AddonsResolver();
+resolver.AddDirectories("path1", "path2");
+```
+
+##### Remarks
+
+This method adds the specified directories to the resolver's path list for analysis.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-AddDirectories-System-Collections-Generic-IEnumerable{System-String}-'></a>
+### AddDirectories(paths) `method`
+
+##### Summary
+
+Add a list of directories to the resolver's path list for analysis.
+
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| paths | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.String}') | The paths of the directories to add. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when paths is null. |
+
+##### Example
+
+```C#
+var resolver = new AddonsResolver();
+resolver.AddDirectories(new string[] { "path1", "path2" });
+```
+
+##### Remarks
+
+This method adds the specified directories to the resolver's path list for analysis.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-AddExcludeAssemblies-System-String[]-'></a>
+### AddExcludeAssemblies(assemblies) `method`
+
+##### Summary
+
+Add filter for exclude filenames
 
 ##### Returns
 
@@ -4687,41 +4905,112 @@ filter on the finals types selected
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| assemblyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| assemblies | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | list of assembly to exclude |
+
+<a name='M-Bb-ComponentModel-AddonsResolver-AddRestrictAssemblies-System-String[]-'></a>
+### AddRestrictAssemblies(assemblies) `method`
+
+##### Summary
+
+Add filter for restrict assembly name
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assemblies | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | list of assembly to restrict |
+
+<a name='M-Bb-ComponentModel-AddonsResolver-AddRestrictAssemblies-Bb-ComponentModel-AssemblyMatched[]-'></a>
+### AddRestrictAssemblies(assemblies) `method`
+
+##### Summary
+
+Add filter for restrict assembly name
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assemblies | [Bb.ComponentModel.AssemblyMatched[]](#T-Bb-ComponentModel-AssemblyMatched[] 'Bb.ComponentModel.AssemblyMatched[]') | list of assembly to restrict |
+
+<a name='M-Bb-ComponentModel-AddonsResolver-AddRestrictAssemblies-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched}-'></a>
+### AddRestrictAssemblies(assemblies) `method`
+
+##### Summary
+
+Add filter for restrict assembly name
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assemblies | [System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}') | list of assembly to restrict |
+
+<a name='M-Bb-ComponentModel-AddonsResolver-ClearAssemblyFilters-System-String[]-'></a>
+### ClearAssemblyFilters(filenames) `method`
+
+##### Summary
+
+remove all excluded filenames
+
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| filenames | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | The filenames to exclude. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when filenames is null. |
+
+##### Remarks
+
+This method sets a filter to exclude the specified filenames.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-ClearBaseType-System-Collections-Generic-IEnumerable{System-Type}-'></a>
 ### ClearBaseType(baseTypes) `method`
 
 ##### Summary
 
-
+Clear the filter on the possible base types
 
 ##### Returns
 
-
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| baseTypes | [System.Collections.Generic.IEnumerable{System.Type}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Type}') |  |
+| baseTypes | [System.Collections.Generic.IEnumerable{System.Type}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Type}') | The base types to clear. Must not be null. |
 
-<a name='M-Bb-ComponentModel-AddonsResolver-ClearFileFilters-System-String[]-'></a>
-### ClearFileFilters(filenames) `method`
+##### Exceptions
 
-##### Summary
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when baseTypes is null. |
 
-Clear the list of excluded filenames
+##### Remarks
 
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| filenames | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') |  |
+This method clears the filter on the possible base types.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-ClearFilterType'></a>
 ### ClearFilterType() `method`
@@ -4738,71 +5027,66 @@ Remove the filter on type
 
 This method has no parameters.
 
-<a name='M-Bb-ComponentModel-AddonsResolver-ClearWithFile'></a>
-### ClearWithFile() `method`
+<a name='M-Bb-ComponentModel-AddonsResolver-ClearImplements'></a>
+### ClearImplements() `method`
 
 ##### Summary
 
-Remove filter on [FileInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileInfo 'System.IO.FileInfo')
+Clear the filter on all interfaces must be implemented
 
 ##### Returns
 
-
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 This method has no parameters.
+
+##### Remarks
+
+This method clears the filter on all interfaces that must be implemented.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-ExcludeAbstractTypes-System-Boolean-'></a>
 ### ExcludeAbstractTypes(excludeAbstract) `method`
 
 ##### Summary
 
-set excluding abstract types filter
+Set excluding abstract types filter
 
 ##### Returns
 
-
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| excludeAbstract | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
+| excludeAbstract | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | If true, exclude abstract types. |
 
-<a name='M-Bb-ComponentModel-AddonsResolver-ExcludeFile-System-String[]-'></a>
-### ExcludeFile(filenames) `method`
+##### Remarks
 
-##### Summary
-
-Add filter for exclude filenames
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| filenames | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') |  |
+This method sets a filter to exclude abstract types from the analysis.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-ExcludeGenericTypes-System-Boolean-'></a>
 ### ExcludeGenericTypes(excludeGenerics) `method`
 
 ##### Summary
 
-set excluding abstract types filter
+Set excluding generic types filter
 
 ##### Returns
 
-
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| excludeGenerics | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | if true, don"t append generic types |
+| excludeGenerics | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | If true, exclude generic types. |
+
+##### Remarks
+
+This method sets a filter to exclude generic types from the analysis.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-FilterType-System-Func{Bb-ComponentModel-TypeMatched,System-Boolean}-'></a>
 ### FilterType(filter) `method`
@@ -4813,13 +5097,23 @@ Add a filter on type must be returned.
 
 ##### Returns
 
-
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| filter | [System.Func{Bb.ComponentModel.TypeMatched,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{Bb.ComponentModel.TypeMatched,System.Boolean}') |  |
+| filter | [System.Func{Bb.ComponentModel.TypeMatched,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{Bb.ComponentModel.TypeMatched,System.Boolean}') | The filter function to evaluate types. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when filter is null. |
+
+##### Remarks
+
+This method sets a filter function to evaluate if a type must be returned.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-GetAssemblies'></a>
 ### GetAssemblies() `method`
@@ -4845,28 +5139,24 @@ Add a filter on all interfaces must be implemented
 
 ##### Returns
 
-
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| interfaces | [System.Collections.Generic.IEnumerable{System.Type}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Type}') |  |
+| interfaces | [System.Collections.Generic.IEnumerable{System.Type}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Type}') | The interfaces to filter. Must not be null. |
 
-<a name='M-Bb-ComponentModel-AddonsResolver-Implements'></a>
-### Implements() `method`
+##### Exceptions
 
-##### Summary
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when interfaces is null. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Thrown when an item in interfaces is not an interface. |
 
-Add a filter on all interfaces must be implemented
+##### Remarks
 
-##### Returns
-
-
-
-##### Parameters
-
-This method has no parameters.
+This method sets a filter to include only types that implement the specified interfaces.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-Implements-System-Type[]-'></a>
 ### Implements(interfaces) `method`
@@ -4877,13 +5167,122 @@ Add a filter on all interfaces must be implemented
 
 ##### Returns
 
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| interfaces | [System.Type[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type[] 'System.Type[]') | The interfaces to filter. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when interfaces is null. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Thrown when an item in interfaces is not an interface. |
+
+##### Remarks
+
+This method sets a filter to include only types that implement the specified interfaces.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-InContext-System-String-'></a>
+### InContext(context) `method`
+
+##### Summary
+
+Set the context for the resolver
+
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| context | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The context to set. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when context is null. |
+
+##### Remarks
+
+This method sets the context for the resolver.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-ParseAssemblies'></a>
+### ParseAssemblies() `method`
+
+##### Summary
+
+Return a list of types that match the specified criteria.
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-Resolve-ICSharpCode-Decompiler-Metadata-AssemblyReference,System-Collections-Generic-Dictionary{System-String,Bb-ComponentModel-AssemblyMatched}-'></a>
+### Resolve(item,list) `method`
+
+##### Summary
+
+Resolves the specified assembly reference and adds it to the list if it is not already present.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| item | [ICSharpCode.Decompiler.Metadata.AssemblyReference](#T-ICSharpCode-Decompiler-Metadata-AssemblyReference 'ICSharpCode.Decompiler.Metadata.AssemblyReference') | The assembly reference to resolve. Must not be null. |
+| list | [System.Collections.Generic.Dictionary{System.String,Bb.ComponentModel.AssemblyMatched}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.Dictionary 'System.Collections.Generic.Dictionary{System.String,Bb.ComponentModel.AssemblyMatched}') | The dictionary to add the resolved assembly to. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when item or list is null. |
+
+##### Remarks
+
+This method attempts to resolve the specified assembly reference and adds it to the provided dictionary if it is not already present.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-ResolveListOfFile'></a>
+### ResolveListOfFile() `method`
+
+##### Summary
+
+Return a list of assembly referenced by entry assembly
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-ResolveListOfFile-System-Reflection-Assembly-'></a>
+### ResolveListOfFile(assembly) `method`
+
+##### Summary
+
+Return a list of assembly referenced by specified assembly
+
+##### Returns
+
 
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| interfaces | [System.Type[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type[] 'System.Type[]') |  |
+| assembly | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') | assembly to evaluate |
 
 <a name='M-Bb-ComponentModel-AddonsResolver-SearchAssemblies'></a>
 ### SearchAssemblies() `method`
@@ -4915,73 +5314,131 @@ Apply filters and return the list of types
 
 This method has no parameters.
 
-<a name='M-Bb-ComponentModel-AddonsResolver-WhereAssembly-System-Func{ICSharpCode-Decompiler-Metadata-PEFile,System-Boolean}-'></a>
-### WhereAssembly(filterAssembly) `method`
+<a name='M-Bb-ComponentModel-AddonsResolver-TryToLoadFile-System-IO-FileInfo,ICSharpCode-Decompiler-Metadata-PEFile@-'></a>
+### TryToLoadFile(filename,peFile) `method`
 
 ##### Summary
 
-evaluate if the assembly must be used
+Try to load file for Assembly
 
 ##### Returns
 
-[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')fluent syntax
+
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| filterAssembly | [System.Func{ICSharpCode.Decompiler.Metadata.PEFile,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{ICSharpCode.Decompiler.Metadata.PEFile,System.Boolean}') |  |
+| filename | [System.IO.FileInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileInfo 'System.IO.FileInfo') |  |
+| peFile | [ICSharpCode.Decompiler.Metadata.PEFile@](#T-ICSharpCode-Decompiler-Metadata-PEFile@ 'ICSharpCode.Decompiler.Metadata.PEFile@') | file loaded is succeed |
+
+<a name='M-Bb-ComponentModel-AddonsResolver-WhereAssembly-System-Func{ICSharpCode-Decompiler-Metadata-PEFile,System-Boolean}-'></a>
+### WhereAssembly(filterAssembly) `method`
+
+##### Summary
+
+Evaluate if the assembly must be used
+
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| filterAssembly | [System.Func{ICSharpCode.Decompiler.Metadata.PEFile,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{ICSharpCode.Decompiler.Metadata.PEFile,System.Boolean}') | The filter function to evaluate assemblies. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when filterAssembly is null. |
+
+##### Remarks
+
+This method sets a filter function to evaluate if an assembly must be used.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Type-'></a>
 ### WhereAssemblyReference(type) `method`
 
 ##### Summary
 
-filter on assembly name
+Filter on assembly name
 
 ##### Returns
 
-[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')fluent syntax
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | assembly of type |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | The type whose assembly to filter. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when type is null. |
+
+##### Remarks
+
+This method sets a filter to include only assemblies that reference the specified type's assembly.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Reflection-Assembly-'></a>
 ### WhereAssemblyReference(assembly) `method`
 
 ##### Summary
 
-filter on assembly name
+Filter on assembly name
 
 ##### Returns
 
-[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')fluent syntax
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| assembly | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') |  |
+| assembly | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') | The assembly to filter. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when assembly is null. |
+
+##### Remarks
+
+This method sets a filter to include only assemblies that reference the specified assembly.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-WhereAssemblyReference-System-Reflection-AssemblyName-'></a>
 ### WhereAssemblyReference(assemblyName) `method`
 
 ##### Summary
 
-filter on assembly name
+Filter on assembly name
 
 ##### Returns
 
-[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver')fluent syntax
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| assemblyName | [System.Reflection.AssemblyName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.AssemblyName 'System.Reflection.AssemblyName') |  |
+| assemblyName | [System.Reflection.AssemblyName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.AssemblyName 'System.Reflection.AssemblyName') | The name of the assembly to filter. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when assemblyName is null. |
+
+##### Remarks
+
+This method sets a filter to include only assemblies that reference the specified assembly name.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-With-Bb-ComponentModel-Loaders-ExposedAssemblyRepositories-'></a>
 ### With(repositories) `method`
@@ -4992,13 +5449,23 @@ Add a list of repositories
 
 ##### Returns
 
-
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| repositories | [Bb.ComponentModel.Loaders.ExposedAssemblyRepositories](#T-Bb-ComponentModel-Loaders-ExposedAssemblyRepositories 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositories') |  |
+| repositories | [Bb.ComponentModel.Loaders.ExposedAssemblyRepositories](#T-Bb-ComponentModel-Loaders-ExposedAssemblyRepositories 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositories') | The repositories to add. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when repositories is null. |
+
+##### Remarks
+
+This method adds the specified repositories to the resolver's path list for analysis.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-WithBaseType-System-Collections-Generic-IEnumerable{System-Type}-'></a>
 ### WithBaseType(baseTypes) `method`
@@ -5009,13 +5476,23 @@ Add a filter on the possible base types
 
 ##### Returns
 
-
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| baseTypes | [System.Collections.Generic.IEnumerable{System.Type}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Type}') |  |
+| baseTypes | [System.Collections.Generic.IEnumerable{System.Type}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Type}') | The base types to filter. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when baseTypes is null. |
+
+##### Remarks
+
+This method sets a filter to include only types that have the specified base types.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-WithBaseType-System-Type[]-'></a>
 ### WithBaseType(baseTypes) `method`
@@ -5026,13 +5503,23 @@ Add a filter on the possible base types
 
 ##### Returns
 
-
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| baseTypes | [System.Type[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type[] 'System.Type[]') |  |
+| baseTypes | [System.Type[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type[] 'System.Type[]') | The base types to filter. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when baseTypes is null. |
+
+##### Remarks
+
+This method sets a filter to include only types that have the specified base types.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-WithFile-System-Func{System-IO-FileInfo,System-Boolean}-'></a>
 ### WithFile(fileFilter) `method`
@@ -5043,13 +5530,23 @@ Add a filter on file must be evaluated.
 
 ##### Returns
 
-
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| fileFilter | [System.Func{System.IO.FileInfo,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.IO.FileInfo,System.Boolean}') |  |
+| fileFilter | [System.Func{System.IO.FileInfo,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.IO.FileInfo,System.Boolean}') | The filter function to evaluate files. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when fileFilter is null. |
+
+##### Remarks
+
+This method sets a filter function to evaluate if a file must be used.
 
 <a name='T-ICSharpCode-Decompiler-IL-AddressOf'></a>
 ## AddressOf `type`
@@ -5555,12 +6052,6 @@ Adds the directories path's.
 | ---- | ---- | ----------- |
 | paths | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | The paths of the directories. |
 
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.IO.DirectoryNotFoundException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryNotFoundException 'System.IO.DirectoryNotFoundException') | if the directory file is not found and the value of ThrowExceptionIfNotFound is true |
-
 <a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-AddDirectories-System-Collections-Generic-IEnumerable{System-String}-'></a>
 ### AddDirectories(paths) `method`
 
@@ -5722,8 +6213,8 @@ Adds the directories path's form files location
 | ---- | ----------- |
 | [System.IO.DirectoryNotFoundException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryNotFoundException 'System.IO.DirectoryNotFoundException') | if the directory file is not found and the value of ThrowExceptionIfNotFound is true |
 
-<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-AddFileNotLoading-System-String[]-'></a>
-### AddFileNotLoading(fullNames) `method`
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-AddFileForNotLoad-System-String[]-'></a>
+### AddFileForNotLoad(fullNames) `method`
 
 ##### Summary
 
@@ -5737,10 +6228,10 @@ Adds the file on the list of file must don't to load.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| fullNames | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | The full names. |
+| fullNames | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | The full-name's list. |
 
-<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-AddFileNotLoading-System-IO-FileInfo[]-'></a>
-### AddFileNotLoading(fullNames) `method`
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-AddFileForNotLoad-System-IO-FileInfo[]-'></a>
+### AddFileForNotLoad(fullNames) `method`
 
 ##### Summary
 
@@ -5839,8 +6330,44 @@ Deletes the directories.
 | ---- | ---- | ----------- |
 | paths | [System.IO.DirectoryInfo[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo[] 'System.IO.DirectoryInfo[]') | The paths. |
 
-<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssemblies-System-Func{System-IO-FileInfo,System-Boolean}-'></a>
-### GetAssemblies() `method`
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssemblies-System-String,System-Func{System-IO-FileInfo,System-Boolean}-'></a>
+### GetAssemblies(directory,filter) `method`
+
+##### Summary
+
+Gets the assemblies of the specified folder.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| directory | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The directory path. |
+| filter | [System.Func{System.IO.FileInfo,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.IO.FileInfo,System.Boolean}') | file filter. |
+
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssemblies-System-IO-DirectoryInfo,System-Func{System-IO-FileInfo,System-Boolean}-'></a>
+### GetAssemblies(directory,filter) `method`
+
+##### Summary
+
+Gets the assemblies.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| directory | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | The directory path. |
+| filter | [System.Func{System.IO.FileInfo,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{System.IO.FileInfo,System.Boolean}') | The file filter. |
+
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssembliesOfDirectories-System-Func{System-IO-FileInfo,System-Boolean}-'></a>
+### GetAssembliesOfDirectories() `method`
 
 ##### Summary
 
@@ -5853,40 +6380,6 @@ Gets the assemblies list.
 ##### Parameters
 
 This method has no parameters.
-
-<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssemblies-System-String,System-Func{System-IO-FileInfo,System-Boolean}-'></a>
-### GetAssemblies(directory) `method`
-
-##### Summary
-
-Gets the assemblies.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| directory | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The directory path. |
-
-<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-GetAssemblies-System-IO-DirectoryInfo,System-Func{System-IO-FileInfo,System-Boolean}-'></a>
-### GetAssemblies(filter) `method`
-
-##### Summary
-
-Gets the assemblies.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| filter | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | The filter. |
 
 <a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-GetDirectories'></a>
 ### GetDirectories() `method`
@@ -5933,6 +6426,57 @@ Gets the system directories.
 
 This method has no parameters.
 
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-IsEntryDirectory-System-String-'></a>
+### IsEntryDirectory(path) `method`
+
+##### Summary
+
+return true if the specified path is the entry directory
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| path | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | path to evaluate |
+
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-IsEntryDirectory-System-IO-DirectoryInfo-'></a>
+### IsEntryDirectory(path) `method`
+
+##### Summary
+
+return true if the specified path is the entry directory
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| path | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | path to evaluate |
+
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-IsEntryDirectory-System-Reflection-Assembly-'></a>
+### IsEntryDirectory(assembly) `method`
+
+##### Summary
+
+return true if the specified path is the entry directory
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assembly | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') | assembly to evaluate |
+
 <a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-IsInEntryDirectory-System-IO-DirectoryInfo-'></a>
 ### IsInEntryDirectory(path) `method`
 
@@ -5948,10 +6492,10 @@ Return true if the directory is entry directory
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| path | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') |  |
+| path | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | path o evaluate |
 
 <a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-IsInSystemDirectory-System-Reflection-Assembly-'></a>
-### IsInSystemDirectory(file) `method`
+### IsInSystemDirectory(assembly) `method`
 
 ##### Summary
 
@@ -5965,14 +6509,14 @@ return true id the specified assembly is in System
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| file | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') |  |
+| assembly | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') | assembly to evaluate |
 
 <a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-IsInSystemDirectory-System-IO-FileInfo-'></a>
 ### IsInSystemDirectory(file) `method`
 
 ##### Summary
 
-
+return true if the specified file is in System folder
 
 ##### Returns
 
@@ -5982,7 +6526,7 @@ return true id the specified assembly is in System
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| file | [System.IO.FileInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileInfo 'System.IO.FileInfo') |  |
+| file | [System.IO.FileInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileInfo 'System.IO.FileInfo') | file |
 
 <a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-IsInSystemDirectory-System-IO-DirectoryInfo-'></a>
 ### IsInSystemDirectory(path) `method`
@@ -5999,14 +6543,14 @@ Return true if the directory is System directory
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| path | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') |  |
+| path | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | path o evaluate |
 
-<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-ResolveAssemblyFilenames-System-Reflection-AssemblyName-'></a>
-### ResolveAssemblyFilenames(filter) `method`
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-IsSystemDirectory-System-String-'></a>
+### IsSystemDirectory(path) `method`
 
 ##### Summary
 
-Gets the assemblies.
+return true if the specified path is the system directory
 
 ##### Returns
 
@@ -6016,7 +6560,76 @@ Gets the assemblies.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| filter | [System.Reflection.AssemblyName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.AssemblyName 'System.Reflection.AssemblyName') | The filter. |
+| path | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | path to evaluate |
+
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-IsSystemDirectory-System-IO-DirectoryInfo-'></a>
+### IsSystemDirectory(path) `method`
+
+##### Summary
+
+return true if the specified path is the system directory
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| path | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | path to evaluate |
+
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-IsSystemDirectory-System-Reflection-Assembly-'></a>
+### IsSystemDirectory(assembly) `method`
+
+##### Summary
+
+return true if the specified assembly is in System
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assembly | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') | assembly to evaluate |
+
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-ResolveAssemblyFilenames-System-Reflection-AssemblyName-'></a>
+### ResolveAssemblyFilenames(assemblyName) `method`
+
+##### Summary
+
+Gets the assembly file.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assemblyName | [System.Reflection.AssemblyName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.AssemblyName 'System.Reflection.AssemblyName') | The assembly to resolve. |
+
+<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-TryToResolveAssemblyLocation-System-Reflection-AssemblyName,System-IO-FileInfo@-'></a>
+### TryToResolveAssemblyLocation(assemblyName,file) `method`
+
+##### Summary
+
+try to resolve assembly location from the specified assembly name.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assemblyName | [System.Reflection.AssemblyName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.AssemblyName 'System.Reflection.AssemblyName') |  |
+| file | [System.IO.FileInfo@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileInfo@ 'System.IO.FileInfo@') |  |
 
 <a name='T-Bb-ComponentModel-AssemblyLoader'></a>
 ## AssemblyLoader `type`
@@ -6386,6 +6999,142 @@ Return true if the assembly reference contains the assembly name
 | ---- | ---- | ----------- |
 | self | [System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}') |  |
 | failedOnloadError | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
+
+<a name='M-Bb-ComponentModel-AssemblyReferenceExtensions-InEntryDirectory-System-IO-FileInfo-'></a>
+### InEntryDirectory(file) `method`
+
+##### Summary
+
+Determines whether the specified file is located in the entry directory.
+
+##### Returns
+
+`true` if the file is in the entry directory; otherwise, `false`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| file | [System.IO.FileInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileInfo 'System.IO.FileInfo') | The file to check. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the file parameter is null. |
+
+##### Example
+
+```C#
+FileInfo fileInfo = new FileInfo("C:\\Windows\\System32\\example.dll");
+bool isInSystemDirectory = fileInfo.InEntryDirectory();
+```
+
+##### Remarks
+
+This method checks if the specified file is located in the entry directory.
+
+<a name='M-Bb-ComponentModel-AssemblyReferenceExtensions-InSystemDirectory-System-IO-FileInfo-'></a>
+### InSystemDirectory(file) `method`
+
+##### Summary
+
+Determines whether the specified file is located in the system directory.
+
+##### Returns
+
+`true` if the file is in the system directory; otherwise, `false`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| file | [System.IO.FileInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileInfo 'System.IO.FileInfo') | The file to check. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the file parameter is null. |
+
+##### Example
+
+```C#
+FileInfo fileInfo = new FileInfo("C:\\Windows\\System32\\example.dll");
+bool isInSystemDirectory = fileInfo.InSystemDirectory();
+```
+
+##### Remarks
+
+This method checks if the specified file is located in the system directory.
+
+<a name='M-Bb-ComponentModel-AssemblyReferenceExtensions-IsSdk-ICSharpCode-Decompiler-Metadata-PEFile-'></a>
+### IsSdk(file) `method`
+
+##### Summary
+
+Determines whether the specified assembly is an SDK assembly.
+
+##### Returns
+
+`true` if the assembly is an SDK assembly; otherwise, `false`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| file | [ICSharpCode.Decompiler.Metadata.PEFile](#T-ICSharpCode-Decompiler-Metadata-PEFile 'ICSharpCode.Decompiler.Metadata.PEFile') | The assembly to check. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the file parameter is null. |
+
+##### Example
+
+```C#
+var assembly = new PEFile("path");
+bool isSdk = assembly.IsSdk();
+```
+
+##### Remarks
+
+This method checks if the specified assembly contains attributes that indicate it is an SDK assembly.
+
+<a name='M-Bb-ComponentModel-AssemblyReferenceExtensions-IsSdk-System-Reflection-Assembly-'></a>
+### IsSdk(file) `method`
+
+##### Summary
+
+Determines whether the specified assembly is an SDK assembly.
+
+##### Returns
+
+`true` if the assembly is an SDK assembly; otherwise, `false`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| file | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') | The assembly to check. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the file parameter is null. |
+
+##### Example
+
+```C#
+Assembly assembly = Assembly.Load("SomeAssembly");
+bool isSdk = assembly.IsSdk();
+```
+
+##### Remarks
+
+This method checks if the specified assembly contains attributes that indicate it is an SDK assembly.
 
 <a name='T-ICSharpCode-Decompiler-IL-Transforms-AssignVariableNames'></a>
 ## AssignVariableNames `type`
@@ -41905,8 +42654,8 @@ Resolve types argument and Creates an optimized factory for the specified argume
 | ---- | ----------- |
 | T |  |
 
-<a name='M-Bb-ComponentModel-TypeDiscovery-EnsureAllAssembliesAreLoaded-System-Boolean-'></a>
-### EnsureAllAssembliesAreLoaded(acceptAllVersion) `method`
+<a name='M-Bb-ComponentModel-TypeDiscovery-EnsureAllAssembliesAreLoaded-System-Boolean,System-Boolean-'></a>
+### EnsureAllAssembliesAreLoaded(acceptAllVersion,recursively) `method`
 
 ##### Summary
 
@@ -41916,7 +42665,23 @@ try to load all referenced assemblies
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| acceptAllVersion | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
+| acceptAllVersion | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Accept all version |
+| recursively | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | drop down in assemblies and load |
+
+<a name='M-Bb-ComponentModel-TypeDiscovery-EnsureAssemblyIsLoadedWithReferences-System-Reflection-Assembly,System-Boolean,System-Boolean,System-Collections-Generic-HashSet{System-String}-'></a>
+### EnsureAssemblyIsLoadedWithReferences(assembly to loadtoload,acceptAllVersion,recursively) `method`
+
+##### Summary
+
+try to load all referenced assemblies in the specified assembly
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assembly to loadtoload | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') | Accept all version |
+| acceptAllVersion | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Accept all version |
+| recursively | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | drop down in assemblies and load |
 
 <a name='M-Bb-ComponentModel-TypeDiscovery-GetAllAssemblies'></a>
 ### GetAllAssemblies() `method`
@@ -42328,6 +43093,26 @@ Resolves the type by specified name.
 | Name | Description |
 | ---- | ----------- |
 | [System.DllNotFoundException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DllNotFoundException 'System.DllNotFoundException') |  |
+
+<a name='M-Bb-ComponentModel-TypeDiscovery-Search-System-Action{Bb-ComponentModel-AddonsResolver},System-Boolean,System-Boolean,Bb-ComponentModel-AssemblyDirectoryResolver-'></a>
+### Search(action,autoload,failedOnloadError,paths) `method`
+
+##### Summary
+
+Load all assemblies that matches with criteria
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| action | [System.Action{Bb.ComponentModel.AddonsResolver}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.AddonsResolver}') | delegate to specify criteria |
+| autoload | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | load assemblies that matche |
+| failedOnloadError | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | throw a exception if failed to load assembly |
+| paths | [Bb.ComponentModel.AssemblyDirectoryResolver](#T-Bb-ComponentModel-AssemblyDirectoryResolver 'Bb.ComponentModel.AssemblyDirectoryResolver') | List of path |
 
 <a name='T-Bb-ComponentModel-TypeDiscoveryExtension'></a>
 ## TypeDiscoveryExtension `type`

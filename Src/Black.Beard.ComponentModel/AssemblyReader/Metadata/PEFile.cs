@@ -28,7 +28,6 @@ using System.Reflection.PortableExecutable;
 using ICSharpCode.Decompiler.TypeSystem;
 using ICSharpCode.Decompiler.TypeSystem.Implementation;
 using ICSharpCode.Decompiler.Util;
-using static System.Net.WebRequestMethods;
 
 namespace ICSharpCode.Decompiler.Metadata
 {

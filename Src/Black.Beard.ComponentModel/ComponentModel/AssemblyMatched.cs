@@ -59,7 +59,34 @@ namespace Bb.ComponentModel
         /// <value>
         /// The assembly.
         /// </value>
-        public Assembly Assembly { get; protected set; }
+        public Assembly Assembly
+        {
+            get
+            {
+                if (_assembly == null && AssemblyIsLoaded)
+                    Assembly = TypeDiscovery.Instance.GetAssembly(this.AssemblyName);
+                return _assembly;
+            }
+            private set
+            {
+                if (value != null)
+                {
+                    _assembly = value;
+                    _isLoaded = this.Assembly != null;
+                    IsEntryDirectory = AssemblyDirectoryResolver.IsEntryDirectory(_assembly);
+                    IsSystemDirectory = AssemblyDirectoryResolver.IsSystemDirectory(_assembly);
+                    IsSdk = _assembly.IsSdk();
+                }
+                else
+                {
+                    _assembly = null;
+                    _isLoaded = false;
+                    IsEntryDirectory = false;
+                    IsSystemDirectory = false;
+                    IsSdk = false;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets a value indicating whether [failed to load].
@@ -91,7 +118,6 @@ namespace Bb.ComponentModel
                 try
                 {
                     this.Assembly = AssemblyLoader.Instance.LoadAssembly(this.AssemblyLocation, null);
-                    _isLoaded = this.Assembly != null;
                 }
                 catch (Exception)
                 {
@@ -102,7 +128,22 @@ namespace Bb.ComponentModel
 
         }
 
+        public virtual void ResolveIfLoaded()
+        {
+
+            if (_assembly == null && AssemblyIsLoaded)
+                this.Assembly = AssemblyLoader.Instance.LoadAssembly(this.AssemblyLocation, null);
+
+        }
+
+
         private bool? _isLoaded;
+
+        public bool IsEntryDirectory { get; internal set; }
+        public bool IsSystemDirectory { get; internal set; }
+        public bool IsSdk { get; internal set; }
+
+        private Assembly _assembly;
 
     }
 

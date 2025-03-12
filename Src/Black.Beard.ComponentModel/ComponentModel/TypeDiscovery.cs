@@ -118,8 +118,9 @@ namespace Bb.ComponentModel
         /// <summary>
         /// try to load all referenced assemblies
         /// </summary>
-        /// <param name="acceptAllVersion"></param>
-        public void EnsureAllAssembliesAreLoaded(bool acceptAllVersion = true)
+        /// <param name="acceptAllVersion">Accept all version</param>
+        /// <param name="recursively">drop down in assemblies and load</param>
+        public void EnsureAllAssembliesAreLoaded(bool acceptAllVersion = true, bool recursively = true)
         {
 
             using (var _ = ComponentModelActivityProvider.StartActivity("loading assemblies"))
@@ -129,38 +130,43 @@ namespace Bb.ComponentModel
                     foreach (var ass in Assemblies())
                         if (_hash.Add(ass.FullName))
                         {
-                            EnsureAssemblyIsLoadedWithReferences(ass, acceptAllVersion, true, _hash);
+                            EnsureAssemblyIsLoadedWithReferences(ass, acceptAllVersion, recursively, _hash);
                         }
                 }
 
         }
 
-
-        internal void EnsureAssemblyIsLoadedWithReferences(Assembly ass, bool acceptAllVersion, bool recursively, HashSet<string> hash)
+        /// <summary>
+        /// try to load all referenced assemblies in the specified assembly
+        /// </summary>
+        /// <param name="assembly to load">Accept all version</param>
+        /// <param name="acceptAllVersion">Accept all version</param>
+        /// <param name="recursively">drop down in assemblies and load</param>
+        public void EnsureAssemblyIsLoadedWithReferences(Assembly assembly, bool acceptAllVersion, bool recursively, HashSet<string> hash)
         {
 
-            if (!Paths.IsInSystemDirectory(ass))
+            if (!Paths.IsInSystemDirectory(assembly))
             {
-                AssemblyName[] assemblies = ass.GetReferencedAssemblies();
+                AssemblyName[] assemblies = assembly.GetReferencedAssemblies();
 
                 foreach (AssemblyName item in assemblies)
                 {
 
-                    Assembly assembly = null;
+                    Assembly assembly1 = null;
                     if (!AssemblyLoader.Instance.IsLoadedByAssemblyByName(item, acceptAllVersion))
                         try
                         {
-                            assembly = AssemblyLoader.Instance.LoadAssemblyName(item);
+                            assembly1 = AssemblyLoader.Instance.LoadAssemblyName(item);
                         }
                         catch (Exception ex)
                         {
                         }
                     else
-                        assembly = GetAssembly(item, acceptAllVersion);
+                        assembly1 = GetAssembly(item, acceptAllVersion);
 
-                    if (recursively && assembly != null)
-                        if (hash.Add(assembly.FullName))
-                            EnsureAssemblyIsLoadedWithReferences(assembly, acceptAllVersion, recursively, hash);
+                    if (recursively && assembly1 != null)
+                        if (hash.Add(assembly1.FullName))
+                            EnsureAssemblyIsLoadedWithReferences(assembly1, acceptAllVersion, recursively, hash);
 
                 }
             }
@@ -556,22 +562,17 @@ namespace Bb.ComponentModel
         }
 
 
-        private Assembly GetLoadedAssembly(string filename)
-        {
+        //private Assembly GetLoadedAssembly(string filename)
+        //{
+        //    foreach (Assembly assembly in Assemblies())
+        //    {
+        //        var name2 = Path.GetFileNameWithoutExtension(assembly.ManifestModule.ScopeName);
+        //        if (filename == name2)
+        //            return assembly;
+        //    }
+        //    return null;
+        //}
 
-            foreach (Assembly assembly in Assemblies())
-            {
-
-                var name2 = Path.GetFileNameWithoutExtension(assembly.ManifestModule.ScopeName);
-
-                if (filename == name2)
-                    return assembly;
-
-            }
-
-            return null;
-
-        }
 
         /// <summary>
         ///     Load in memory all the assemblies from the directory bin.
@@ -944,6 +945,14 @@ namespace Bb.ComponentModel
 
         }
 
+        /// <summary>
+        /// Load all assemblies that matches with criteria 
+        /// </summary>
+        /// <param name="action">delegate to specify criteria</param>
+        /// <param name="autoload">load assemblies that matche</param>
+        /// <param name="failedOnloadError">throw a exception if failed to load assembly</param>
+        /// <param name="paths">List of path</param>
+        /// <returns></returns>
         public IEnumerable<TypeMatched> Search(Action<AddonsResolver> action, bool autoload = false, bool failedOnloadError = false, AssemblyDirectoryResolver paths = null)
         {
 

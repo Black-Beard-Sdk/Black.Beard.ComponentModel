@@ -391,7 +391,7 @@ namespace Bb.Translations
                 culture = CultureInfo.GetCultureInfo(cultureName);
                 return true;
             }
-            catch (Exception)
+            catch (CultureNotFoundException)
             {
             }
 

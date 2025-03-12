@@ -109,7 +109,6 @@ namespace DynamicDescriptors.Tests
                       //.FirstOrDefault()
                       ;
 
-
             var item1 = new AddonsResolver(directories)
                     .InContext(ConstantsCore.Plugin)
                     .SearchTypes()
@@ -138,7 +137,7 @@ namespace DynamicDescriptors.Tests
             var types = TypeDiscovery.Instance
                 .Search(c =>
                     c.InContext(ConstantsCore.Plugin)
-                    .Implements(typeof(ITest))
+                     .Implements(typeof(ITest))
                 , true)
                 .ToList()
                 ;
@@ -158,7 +157,7 @@ namespace DynamicDescriptors.Tests
             var types = TypeDiscovery.Instance
                 .Search(c =>
                     c.InContext(ConstantsCore.Plugin)
-                    .WithBaseType(typeof(SubTestClass))
+                     .WithBaseType(typeof(SubTestClass))
                 , true)
                 .ToList()
                 ;
@@ -196,7 +195,7 @@ namespace DynamicDescriptors.Tests
             var types = TypeDiscovery.Instance
                 .Search(c =>
                     c.InContext(ConstantsCore.Plugin)
-                    .Implements(typeof(IInjectBuilder))
+                     .Implements(typeof(IInjectBuilder))
                 , autoloadTypes)
                 .ToList()
                 ;
@@ -206,6 +205,50 @@ namespace DynamicDescriptors.Tests
             types.Single(c => c.FullName == typeof(TestClass).FullName);
 
         }
+
+
+        [Fact]
+        public void FilterTest52()
+        {
+
+            var types = TypeDiscovery.Instance
+                .Search(c =>
+                {
+
+                    var o = c.WhereAssemblyReference(typeof(IInjectBuilder))
+                             .ResolveListReferences(typeof(ReflexionTest).Assembly)
+                             .Where(x => !x.IsSystemDirectory && !x.IsSdk)
+                             .ToList();
+
+                    Assert.True(o.Count() == 2);
+
+                    c.AddRestrictAssemblies(o)
+                     .InContext(ConstantsCore.Plugin)
+                     .Implements(typeof(IInjectBuilder))
+                     ;
+                
+                }).ToList();
+
+            Assert.Single(types);
+
+        }
+
+
+        [Fact]
+        public void FilterTest53()
+        {
+
+            var o = new AddonsResolver(AssemblyDirectoryResolver.Instance)
+                .WithFile( c => !c.InSystemDirectory())
+                .WhereAssemblyReference(typeof(IInjectBuilder))
+                .WhereAssembly(c => !c.IsSdk())
+                .ResolveListReferences(typeof(ReflexionTest).Assembly)
+                .ToList();
+
+            Assert.True(o.Count() == 2);
+
+        }
+
 
         [Fact]
         public void FilterTest6()
@@ -227,7 +270,7 @@ namespace DynamicDescriptors.Tests
         }
 
         [Fact]
-        public void GetLoadedAsseembliesTest()
+        public void GetLoadedAssembliesTest()
         {
 
             var dic = TypeDiscovery.Instance.GetLoadedAssemblies().ToList();
@@ -239,6 +282,20 @@ namespace DynamicDescriptors.Tests
                     Assert.True(false, $"assembly {item.FullName} not found");
 
         }
+
+        //[Fact]
+        //public void Test1()
+        //{
+
+        //    //var dic = TypeDiscovery.Instance.GetLoadedAssemblies().ToList();
+
+        //    //foreach (var item in AppDomain.CurrentDomain.GetAssemblies())
+        //    //    if (dic.Contains(item.FullName))
+        //    //        Assert.True(true);
+        //    //    else
+        //    //        Assert.True(false, $"assembly {item.FullName} not found");
+
+        //}
 
     }
 

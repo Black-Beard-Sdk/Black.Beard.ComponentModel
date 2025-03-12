@@ -76,7 +76,6 @@ namespace Bb.ComponentModel
             _paths.Clear();
             _initialized = false;
             return this;
-
         }
 
         /// <summary>
@@ -90,7 +89,6 @@ namespace Bb.ComponentModel
                 foreach (var item in paths)
                     DelDirectories(new DirectoryInfo(item));
             return this;
-
         }
 
         /// <summary>
@@ -104,7 +102,6 @@ namespace Bb.ComponentModel
                 foreach (var item in paths)
                     DelDirectories(new DirectoryInfo(item));
             return this;
-
         }
 
         /// <summary>
@@ -143,7 +140,6 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="paths">The paths of the directories.</param>
         /// <returns><see cref="AssemblyDirectoryResolver"/> </returns>
-        /// <exception cref="System.IO.DirectoryNotFoundException">if the directory file is not found and the value of ThrowExceptionIfNotFound is true</exception>
         public AssemblyDirectoryResolver AddDirectories(params string[] paths)
         {
             if (paths != null)
@@ -250,6 +246,7 @@ namespace Bb.ComponentModel
                 {
 
                     item.Refresh();
+
                     if (item.Exists)
                         _paths.Add(item.FullName.Trim(Path.DirectorySeparatorChar));
 
@@ -279,7 +276,70 @@ namespace Bb.ComponentModel
         /// </summary>
         public static DirectoryInfo SystemDirectory => _sSystemDirectory ?? (_sSystemDirectory = new FileInfo(typeof(object).Assembly.Location).Directory);
 
+        /// <summary>
+        /// return true if the specified path is the system directory
+        /// </summary>
+        /// <param name="path">path to evaluate</param>
+        /// <returns></returns>
+        public static bool IsSystemDirectory(string path)
+        {
+            return SystemDirectory.FullName == path;
+        }
+
+        /// <summary>
+        /// return true if the specified path is the system directory
+        /// </summary>
+        /// <param name="path">path to evaluate</param>
+        /// <returns></returns>
+        public static bool IsSystemDirectory(DirectoryInfo path)
+        {
+            return SystemDirectory.FullName == path.FullName;
+        }
+
+        /// <summary>
+        /// return true if the specified assembly is in System
+        /// </summary>
+        /// <param name="assembly">assembly to evaluate</param>
+        /// <returns></returns>
+        public static bool IsSystemDirectory(Assembly assembly)
+        {
+            return IsSystemDirectory(new FileInfo(assembly.Location).Directory);
+        }        
+
+    
+
+
         public static DirectoryInfo EntryDirectory => _sEntryDirectory ?? (_sEntryDirectory = new FileInfo(Assembly.GetEntryAssembly().Location).Directory);
+
+        /// <summary>
+        /// return true if the specified path is the entry directory
+        /// </summary>
+        /// <param name="path">path to evaluate</param>
+        /// <returns></returns>
+        public static bool IsEntryDirectory(string path)
+        {
+            return EntryDirectory.FullName == path;
+        }
+
+        /// <summary>
+        /// return true if the specified path is the entry directory
+        /// </summary>
+        /// <param name="path">path to evaluate</param>
+        /// <returns></returns>
+        public static bool IsEntryDirectory(DirectoryInfo path)
+        {
+            return EntryDirectory.FullName == path.FullName;
+        }
+
+        /// <summary>
+        /// return true if the specified path is the entry directory
+        /// </summary>
+        /// <param name="assembly">assembly to evaluate</param>
+        /// <returns></returns>
+        public static bool IsEntryDirectory(Assembly assembly)
+        {
+            return IsEntryDirectory(new FileInfo(assembly.Location).Directory);
+        }
 
 
 
@@ -322,11 +382,30 @@ namespace Bb.ComponentModel
         #region Get assembly files
 
         /// <summary>
+        /// try to resolve assembly location from the specified assembly name.
+        /// </summary>
+        /// <param name="assemblyName"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public bool TryToResolveAssemblyLocation(AssemblyName assemblyName, out FileInfo file)
+        {
+            foreach (var directory in this.GetDirectories())
+            {
+                file = assemblyName.ResolveAssemblyFilename(directory);
+                if (file != null)
+                    return true;
+            }
+            file = null;
+            return false;
+        }
+
+        /// <summary>
         /// Gets the assemblies list.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<FileInfo> GetAssemblies(Func<FileInfo, bool> filter = null)
+        public IEnumerable<FileInfo> GetAssembliesOfDirectories(Func<FileInfo, bool> filter = null)
         {
+
             HashSet<string> files = new HashSet<string>();
             var dirs = this.GetDirectories().ToArray();
             var _excludes = new HashSet<string>(_excludedFiles);
@@ -353,9 +432,10 @@ namespace Bb.ComponentModel
         }
 
         /// <summary>
-        /// Gets the assemblies.
+        /// Gets the assemblies of the specified folder.
         /// </summary>
         /// <param name="directory">The directory path.</param>
+        /// <param name="filter">file filter.</param>
         /// <returns></returns>
         public IEnumerable<FileInfo> GetAssemblies(string directory, Func<FileInfo, bool> filter = null)
         {
@@ -365,7 +445,8 @@ namespace Bb.ComponentModel
         /// <summary>
         /// Gets the assemblies.
         /// </summary>
-        /// <param name="filter">The filter.</param>
+        /// <param name="directory">The directory path.</param>
+        /// <param name="filter">The file filter.</param>
         /// <returns></returns>
         public IEnumerable<FileInfo> GetAssemblies(DirectoryInfo directory, Func<FileInfo, bool> filter = null)
         {
@@ -394,9 +475,9 @@ namespace Bb.ComponentModel
         }
 
         /// <summary>
-        /// Gets the assemblies.
+        /// Gets the assembly file.
         /// </summary>
-        /// <param name="filter">The filter.</param>
+        /// <param name="assemblyName">The assembly to resolve.</param>
         /// <returns></returns>
         public IEnumerable<FileInfo> ResolveAssemblyFilenames(AssemblyName assemblyName)
         {
@@ -411,9 +492,9 @@ namespace Bb.ComponentModel
         /// <summary>
         /// Adds the file on the list of file must don't to load.
         /// </summary>
-        /// <param name="fullNames">The full names.</param>
+        /// <param name="fullNames">The full-name's list.</param>
         /// <returns></returns>
-        public AssemblyDirectoryResolver AddFileNotLoading(params string[] fullNames)
+        public AssemblyDirectoryResolver AddFileForNotLoad(params string[] fullNames)
         {
             foreach (var item in fullNames)
                 _excludedFiles.Add(item);
@@ -426,18 +507,17 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="fullNames">The full names.</param>
         /// <returns></returns>
-        public AssemblyDirectoryResolver AddFileNotLoading(params FileInfo[] fullNames)
+        public AssemblyDirectoryResolver AddFileForNotLoad(params FileInfo[] fullNames)
         {
             foreach (var item in fullNames)
                 _excludedFiles.Add(item.FullName);
             return this;
         }
 
-
         /// <summary>
         /// return true id the specified assembly is in System
         /// </summary>
-        /// <param name="file"></param>
+        /// <param name="assembly">assembly to evaluate</param>
         /// <returns></returns>
         public bool IsInSystemDirectory(Assembly assembly)
         {
@@ -448,20 +528,19 @@ namespace Bb.ComponentModel
         }
 
         /// <summary>
-        /// 
+        /// return true if the specified file is in System folder
         /// </summary>
-        /// <param name="file"></param>
+        /// <param name="file">file</param>
         /// <returns></returns>
         public bool IsInSystemDirectory(FileInfo file)
         {
             return IsInSystemDirectory(file?.Directory);
         }
 
-
         /// <summary>
         /// Return true if the directory is System directory
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">path o evaluate</param>
         /// <returns></returns>
         public bool IsInSystemDirectory(DirectoryInfo path)
         {
@@ -482,7 +561,7 @@ namespace Bb.ComponentModel
         /// <summary>
         /// Return true if the directory is entry directory
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">path o evaluate</param>
         /// <returns></returns>
         public bool IsInEntryDirectory(DirectoryInfo path)
         {
