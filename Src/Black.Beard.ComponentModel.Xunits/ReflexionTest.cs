@@ -2,6 +2,7 @@
 using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Factories;
 using Bb.ComponentModel.Loaders;
+using FluentAssertions;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -182,7 +183,7 @@ namespace DynamicDescriptors.Tests
             loader.LoadModules(c =>
             {
 
-            }).Execute(instance);
+            }, d => { }).Execute(instance);
 
         }
 
@@ -226,7 +227,7 @@ namespace DynamicDescriptors.Tests
                      .InContext(ConstantsCore.Plugin)
                      .Implements(typeof(IInjectBuilder))
                      ;
-                
+
                 }).ToList();
 
             Assert.Single(types);
@@ -239,7 +240,7 @@ namespace DynamicDescriptors.Tests
         {
 
             var o = new AddonsResolver(AssemblyDirectoryResolver.Instance)
-                .WithFile( c => !c.InSystemDirectory())
+                .WithFile(c => !c.InSystemDirectory())
                 .WithReference(typeof(IInjectBuilder))
                 .WhereAssembly(c => !c.IsSdk())
                 .SearchListReferences(typeof(ReflexionTest).Assembly)
@@ -249,6 +250,37 @@ namespace DynamicDescriptors.Tests
 
         }
 
+        [Fact]
+        public void FilterTest54()
+        {
+
+            //var pp = typeof(System.Configuration.Configuration).Assembly.Location;
+
+            var root = new FileInfo(typeof(ReflexionTest).Assembly.Location).Directory.FullName;
+            var p = new AssemblyMatched()
+            {
+                AssemblyLocation = new FileInfo(Path.Combine(root, "System.Configuration.ConfigurationManager" + ".dll")),
+            };
+
+            p.Load();
+
+            p.Assembly.Should().NotBeNull();
+
+        }
+
+        //[Theory]
+        //[InlineData("file:///C:/path/to/file", "c:\\path\\to\\file")]
+        //[InlineData("C:/path/to/%66ile", "c:\\path\\to\\file")]
+        //[InlineData("C:/path/to/FILE", "c:\\path\\to\\file")]
+        //[InlineData("C:/path/to/%20file", "c:\\path\\to\\ file")]
+        //public void Format_ShouldReturnExpectedResult(string input, string expected)
+        //{
+        //    // Act
+        //    var result = PathHelper.FormatPath(input);
+
+        //    // Assert
+        //    Assert.Equal(expected, result);
+        //}
 
         [Fact]
         public void FilterTest6()

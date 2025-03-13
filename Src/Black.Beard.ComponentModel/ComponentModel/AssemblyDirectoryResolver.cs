@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.Encodings.Web;
 
 namespace Bb.ComponentModel
 {
@@ -16,14 +17,6 @@ namespace Bb.ComponentModel
     {
 
         #region Singleton & ctors
-
-        /// <summary>
-        /// Initializes the <see cref="AssemblyDirectoryResolver"/> class.
-        /// </summary>
-        static AssemblyDirectoryResolver()
-        {
-
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyDirectoryResolver"/> class.
@@ -274,7 +267,7 @@ namespace Bb.ComponentModel
         /// <summary>
         /// return system Directory that contains the root assemblies
         /// </summary>
-        public static DirectoryInfo SystemDirectory => _sSystemDirectory ?? (_sSystemDirectory = new FileInfo(typeof(object).Assembly.Location).Directory);
+        public static DirectoryInfo SystemDirectory => _sSystemDirectory ?? (_sSystemDirectory = new FileInfo(typeof(object).Assembly.Location.FormatPath()).Directory);
 
         /// <summary>
         /// return true if the specified path is the system directory
@@ -293,7 +286,7 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public static bool IsSystemDirectory(DirectoryInfo path)
         {
-            return SystemDirectory.FullName == path.FullName;
+            return path.IsPathEquals(SystemDirectory);
         }
 
         /// <summary>
@@ -303,13 +296,19 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public static bool IsSystemDirectory(Assembly assembly)
         {
-            return IsSystemDirectory(new FileInfo(assembly.Location).Directory);
-        }        
 
-    
+            if (assembly.IsDynamic)
+                return false;
+
+            var path = string.IsNullOrEmpty(assembly.Location)
+                ? assembly.CodeBase
+                : assembly.Location;
+            var file = new FileInfo(path.FormatPath());
+            return IsSystemDirectory(file.Directory);
+        }
 
 
-        public static DirectoryInfo EntryDirectory => _sEntryDirectory ?? (_sEntryDirectory = new FileInfo(Assembly.GetEntryAssembly().Location).Directory);
+        public static DirectoryInfo EntryDirectory => _sEntryDirectory ?? (_sEntryDirectory = new FileInfo(Assembly.GetEntryAssembly().Location.FormatPath()).Directory);
 
         /// <summary>
         /// return true if the specified path is the entry directory
@@ -328,7 +327,7 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public static bool IsEntryDirectory(DirectoryInfo path)
         {
-            return EntryDirectory.FullName == path.FullName;
+            return EntryDirectory.IsPathEquals(path);
         }
 
         /// <summary>
@@ -338,7 +337,13 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public static bool IsEntryDirectory(Assembly assembly)
         {
-            return IsEntryDirectory(new FileInfo(assembly.Location).Directory);
+            if (assembly.IsDynamic)
+                return false;
+            var path = string.IsNullOrEmpty(assembly.Location)
+                ? assembly.CodeBase
+                : assembly.Location;
+            var file = new FileInfo(path.FormatPath());
+            return IsEntryDirectory(file.Directory);
         }
 
 
@@ -522,7 +527,7 @@ namespace Bb.ComponentModel
         public bool IsInSystemDirectory(Assembly assembly)
         {
             if (assembly.IsDynamic || string.IsNullOrEmpty(assembly.Location))
-                return false;   
+                return false;
 
             return IsInSystemDirectory(new FileInfo(assembly.Location).Directory);
         }

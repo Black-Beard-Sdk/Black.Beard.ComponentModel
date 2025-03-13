@@ -83,10 +83,10 @@ namespace Bb.ComponentModel
         ///     name requires a dependent assembly which was compiled for a version of the runtime
         ///     later than the currently loaded version.
         /// </exception>
-        public override void Load(bool failedOnloadError = true)
+        public override bool Load(bool failedOnloadError = true)
         {
 
-            base.Load(failedOnloadError);
+            var result = base.Load(failedOnloadError);
             if (Assembly != null)
             {
 
@@ -96,8 +96,10 @@ namespace Bb.ComponentModel
                     name = this.DeclaringTypeFullName + "+" + name.Substring(this.DeclaringTypeFullName.Length + 1);
 
                 this.Type = Assembly.GetType(name, failedOnloadError, false);
-
+                result = this.Type != null;
             }
+
+            return result;
 
         }
 

@@ -13,13 +13,37 @@ namespace Bb.ComponentModel
     {
 
         /// <summary>
-        /// Load all assemblies if not loaded
+        /// Try to load the assemblies.
         /// </summary>
-        /// <param name="self">list of assembly to load</param>
-        public static void LoadAssemblies(this IEnumerable<AssemblyMatched> self)
+        /// <param name="failedOnloadError">if set to <c>true</c> [failed onload error].</param>
+        /// <exception cref="System.ArgumentException">name is invalid. -or- The length of name exceeds 1024 characters</exception>
+        /// <exception cref="System.TypeLoadException">throwOnError is true, and the type cannot be found</exception>
+        /// <exception cref="System.IO.FileNotFoundException">name requires a dependent assembly that could not be found.</exception>
+        /// <exception cref="System.IO.FileLoadException">
+        ///     name requires a dependent assembly that was found but could not be loaded. -or-
+        ///     The current assembly was loaded into the reflection-only context, and name requires
+        ///     a dependent assembly that was not preloaded.
+        ///</exception>
+        /// <exception cref="System.BadImageFormatException">
+        ///     name requires a dependent assembly, but the file is not a valid assembly. -or-
+        ///     name requires a dependent assembly which was compiled for a version of the runtime
+        ///     later than the currently loaded version.
+        /// </exception>
+        /// <returns>return false if item are fail to loading</returns>
+        public static bool LoadAssemblies(this IEnumerable<AssemblyMatched> self, bool failedOnloadError = true)
         {
+
+            bool result = true;
             foreach (var item in self)
-                item.Load();
+            {
+
+                var p = item.Load(failedOnloadError);
+                if (item.FailedToLoad)
+                    result = false;
+            }
+
+          return result;
+
         }
 
         /// <summary>

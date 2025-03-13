@@ -24,7 +24,7 @@ namespace Bb.ComponentModel
         /// <value>
         /// The assembly location.
         /// </value>
-        public FileInfo AssemblyLocation { get; internal set; }
+        public FileInfo AssemblyLocation { get; set; }
 
         /// <summary>
         /// Gets the name of the assembly.
@@ -40,7 +40,7 @@ namespace Bb.ComponentModel
         /// <value>
         /// The assembly version.
         /// </value>
-        public Version AssemblyVersion { get; internal set; }
+        public Version AssemblyVersion { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether [assembly is loaded].
@@ -63,7 +63,7 @@ namespace Bb.ComponentModel
         {
             get
             {
-                if (_assembly == null && AssemblyIsLoaded)
+                if (_assembly == null && !AssemblyIsLoaded)
                     Assembly = TypeDiscovery.Instance.GetAssembly(this.AssemblyName);
                 return _assembly;
             }
@@ -72,6 +72,7 @@ namespace Bb.ComponentModel
                 if (value != null)
                 {
                     _assembly = value;
+                    AssemblyName = _assembly.GetName().Name;
                     _isLoaded = this.Assembly != null;
                     IsEntryDirectory = AssemblyDirectoryResolver.IsEntryDirectory(_assembly);
                     IsSystemDirectory = AssemblyDirectoryResolver.IsSystemDirectory(_assembly);
@@ -80,6 +81,7 @@ namespace Bb.ComponentModel
                 else
                 {
                     _assembly = null;
+                    AssemblyName = null;
                     _isLoaded = false;
                     IsEntryDirectory = false;
                     IsSystemDirectory = false;
@@ -111,13 +113,16 @@ namespace Bb.ComponentModel
         ///     name requires a dependent assembly which was compiled for a version of the runtime
         ///     later than the currently loaded version.
         /// </exception>
-        public virtual void Load(bool failedOnloadError = true)
+        public virtual bool Load(bool failedOnloadError = true)
         {
-
-            if (!AssemblyIsLoaded && !failedOnloadError)
+            
+            bool result = false;
+            
+            if (!AssemblyIsLoaded && !FailedToLoad)
                 try
                 {
                     this.Assembly = AssemblyLoader.Instance.LoadAssembly(this.AssemblyLocation, null);
+                    result = true;
                 }
                 catch (Exception)
                 {
@@ -125,6 +130,8 @@ namespace Bb.ComponentModel
                     if (failedOnloadError)
                         throw;
                 }
+
+            return result;
 
         }
 

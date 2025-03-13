@@ -180,7 +180,6 @@
   - [Instance](#P-Bb-ComponentModel-AssemblyDirectoryResolver-Instance 'Bb.ComponentModel.AssemblyDirectoryResolver.Instance')
   - [SystemDirectory](#P-Bb-ComponentModel-AssemblyDirectoryResolver-SystemDirectory 'Bb.ComponentModel.AssemblyDirectoryResolver.SystemDirectory')
   - [ThrowExceptionIfNotFound](#P-Bb-ComponentModel-AssemblyDirectoryResolver-ThrowExceptionIfNotFound 'Bb.ComponentModel.AssemblyDirectoryResolver.ThrowExceptionIfNotFound')
-  - [#cctor()](#M-Bb-ComponentModel-AssemblyDirectoryResolver-#cctor 'Bb.ComponentModel.AssemblyDirectoryResolver.#cctor')
   - [AddDirectories(paths)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-AddDirectories-System-String[]- 'Bb.ComponentModel.AssemblyDirectoryResolver.AddDirectories(System.String[])')
   - [AddDirectories(paths)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-AddDirectories-System-Collections-Generic-IEnumerable{System-String}- 'Bb.ComponentModel.AssemblyDirectoryResolver.AddDirectories(System.Collections.Generic.IEnumerable{System.String})')
   - [AddDirectories(paths)](#M-Bb-ComponentModel-AssemblyDirectoryResolver-AddDirectories-System-Collections-Generic-IEnumerable{System-IO-DirectoryInfo}- 'Bb.ComponentModel.AssemblyDirectoryResolver.AddDirectories(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo})')
@@ -247,7 +246,7 @@
   - [InSystemDirectory(file)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-InSystemDirectory-System-IO-FileInfo- 'Bb.ComponentModel.AssemblyReferenceExtensions.InSystemDirectory(System.IO.FileInfo)')
   - [IsSdk(file)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-IsSdk-ICSharpCode-Decompiler-Metadata-PEFile- 'Bb.ComponentModel.AssemblyReferenceExtensions.IsSdk(ICSharpCode.Decompiler.Metadata.PEFile)')
   - [IsSdk(file)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-IsSdk-System-Reflection-Assembly- 'Bb.ComponentModel.AssemblyReferenceExtensions.IsSdk(System.Reflection.Assembly)')
-  - [LoadAssemblies(self)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-LoadAssemblies-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched}- 'Bb.ComponentModel.AssemblyReferenceExtensions.LoadAssemblies(System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched})')
+  - [LoadAssemblies(failedOnloadError)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-LoadAssemblies-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched},System-Boolean- 'Bb.ComponentModel.AssemblyReferenceExtensions.LoadAssemblies(System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched},System.Boolean)')
   - [LoadAssemblies(self)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-LoadAssemblies-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-Metadata-PEFile}- 'Bb.ComponentModel.AssemblyReferenceExtensions.LoadAssemblies(System.Collections.Generic.IEnumerable{ICSharpCode.Decompiler.Metadata.PEFile})')
 - [AssignVariableNames](#T-ICSharpCode-Decompiler-IL-Transforms-AssignVariableNames 'ICSharpCode.Decompiler.IL.Transforms.AssignVariableNames')
   - [IsSupportedInstruction()](#M-ICSharpCode-Decompiler-IL-Transforms-AssignVariableNames-IsSupportedInstruction-System-Object- 'ICSharpCode.Decompiler.IL.Transforms.AssignVariableNames.IsSupportedInstruction(System.Object)')
@@ -1944,6 +1943,10 @@
 - [InjectValueAttributeExtensions](#T-Bb-Injections-InjectValueAttributeExtensions 'Bb.Injections.InjectValueAttributeExtensions')
   - [GetKeys\`\`1(type)](#M-Bb-Injections-InjectValueAttributeExtensions-GetKeys``1-System-Type- 'Bb.Injections.InjectValueAttributeExtensions.GetKeys``1(System.Type)')
   - [InjectValue\`\`1(self,valueResolver)](#M-Bb-Injections-InjectValueAttributeExtensions-InjectValue``1-``0,System-Func{System-String,System-String}- 'Bb.Injections.InjectValueAttributeExtensions.InjectValue``1(``0,System.Func{System.String,System.String})')
+- [InjectionExtensions](#T-Bb-ComponentModel-Loaders-InjectionExtensions 'Bb.ComponentModel.Loaders.InjectionExtensions')
+  - [AddTypes\`\`1(self,context)](#M-Bb-ComponentModel-Loaders-InjectionExtensions-AddTypes``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-String- 'Bb.ComponentModel.Loaders.InjectionExtensions.AddTypes``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},System.String)')
+  - [CollectTypes\`\`1(context)](#M-Bb-ComponentModel-Loaders-InjectionExtensions-CollectTypes``1-System-String- 'Bb.ComponentModel.Loaders.InjectionExtensions.CollectTypes``1(System.String)')
+  - [LoadAbstractLoaders\`\`1(types,initializer,serviceProvider)](#M-Bb-ComponentModel-Loaders-InjectionExtensions-LoadAbstractLoaders``1-System-Collections-Generic-List{System-Type},System-Action{``0},Bb-ComponentModel-Factories-LocalServiceProvider- 'Bb.ComponentModel.Loaders.InjectionExtensions.LoadAbstractLoaders``1(System.Collections.Generic.List{System.Type},System.Action{``0},Bb.ComponentModel.Factories.LocalServiceProvider)')
 - [InjectionLoader](#T-Bb-ComponentModel-Loaders-InjectionLoader 'Bb.ComponentModel.Loaders.InjectionLoader')
   - [#ctor(context,serviceProvider)](#M-Bb-ComponentModel-Loaders-InjectionLoader-#ctor-System-String,System-IServiceProvider- 'Bb.ComponentModel.Loaders.InjectionLoader.#ctor(System.String,System.IServiceProvider)')
   - [Context](#P-Bb-ComponentModel-Loaders-InjectionLoader-Context 'Bb.ComponentModel.Loaders.InjectionLoader.Context')
@@ -1954,7 +1957,7 @@
   - [AddInjectionAttribute(types)](#M-Bb-ComponentModel-Loaders-InjectionLoader-AddInjectionAttribute-System-Type[]- 'Bb.ComponentModel.Loaders.InjectionLoader.AddInjectionAttribute(System.Type[])')
   - [CanExecuteModule(friendlyName)](#M-Bb-ComponentModel-Loaders-InjectionLoader-CanExecuteModule-Bb-ComponentModel-IInjectBuilder- 'Bb.ComponentModel.Loaders.InjectionLoader.CanExecuteModule(Bb.ComponentModel.IInjectBuilder)')
 - [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1')
-  - [#ctor(context,serviceProvider)](#M-Bb-ComponentModel-Loaders-InjectionLoader`1-#ctor-System-String,System-IServiceProvider,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{`0}}- 'Bb.ComponentModel.Loaders.InjectionLoader`1.#ctor(System.String,System.IServiceProvider,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{`0}})')
+  - [#ctor(context,serviceProvider)](#M-Bb-ComponentModel-Loaders-InjectionLoader`1-#ctor-System-String,System-IServiceProvider- 'Bb.ComponentModel.Loaders.InjectionLoader`1.#ctor(System.String,System.IServiceProvider)')
   - [Instances](#P-Bb-ComponentModel-Loaders-InjectionLoader`1-Instances 'Bb.ComponentModel.Loaders.InjectionLoader`1.Instances')
 - [InlineReturnTransform](#T-ICSharpCode-Decompiler-IL-Transforms-InlineReturnTransform 'ICSharpCode.Decompiler.IL.Transforms.InlineReturnTransform')
   - [CanModifyInstructions()](#M-ICSharpCode-Decompiler-IL-Transforms-InlineReturnTransform-CanModifyInstructions-ICSharpCode-Decompiler-IL-ILVariable,ICSharpCode-Decompiler-IL-Block,System-Collections-Generic-List{System-ValueTuple{ICSharpCode-Decompiler-IL-BlockContainer,ICSharpCode-Decompiler-IL-Block,ICSharpCode-Decompiler-IL-Branch}}@- 'ICSharpCode.Decompiler.IL.Transforms.InlineReturnTransform.CanModifyInstructions(ICSharpCode.Decompiler.IL.ILVariable,ICSharpCode.Decompiler.IL.Block,System.Collections.Generic.List{System.ValueTuple{ICSharpCode.Decompiler.IL.BlockContainer,ICSharpCode.Decompiler.IL.Block,ICSharpCode.Decompiler.IL.Branch}}@)')
@@ -2262,7 +2265,7 @@
   - [AutoConfigure\`\`1(self,serviceProvider,context,initializer,onInitializationAction,postExecution)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-AutoConfigure``1-``0,System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.AutoConfigure``1(``0,System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}})')
   - [Execute\`\`1(self,builder)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Execute``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},``0- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Execute``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},``0)')
   - [GetConfiguredService\`\`1(serviceProvider,context,initializer,action)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-GetConfiguredService``1-System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.GetConfiguredService``1(System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
-  - [LoadModules\`\`1(self)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-LoadModules``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.LoadModules``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
+  - [LoadModules\`\`1(self,initializer,onInitializationAction)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-LoadModules``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.LoadModules``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
   - [Map\`\`1(instance)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Map``1-Bb-ComponentModel-IInjectBuilder{``0},System-Func{System-String,System-Object},System-Func{System-ComponentModel-PropertyDescriptor,System-String,Bb-ComponentModel-IInjectBuilder{``0},System-Object},Bb-ComponentModel-Loaders-CommandLineParser- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.Map``1(Bb.ComponentModel.IInjectBuilder{``0},System.Func{System.String,System.Object},System.Func{System.ComponentModel.PropertyDescriptor,System.String,Bb.ComponentModel.IInjectBuilder{``0},System.Object},Bb.ComponentModel.Loaders.CommandLineParser)')
   - [PrepareAutoConfiguration\`\`1(serviceProvider,context,initializer,onInitializationAction)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-PrepareAutoConfiguration``1-System-IServiceProvider,System-String,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.PrepareAutoConfiguration``1(System.IServiceProvider,System.String,System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}},System.Action{Bb.ComponentModel.IInjectBuilder{``0}})')
   - [WithArguments\`\`1(self,args)](#M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-WithArguments``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-String[]- 'Bb.ComponentModel.Loaders.LoaderInjectionExtensions.WithArguments``1(Bb.ComponentModel.Loaders.InjectionLoader{``0},System.String[])')
@@ -2751,6 +2754,15 @@
   - [ActsAsParenthesizedExpression()](#M-ICSharpCode-Decompiler-CSharp-Syntax-ParenthesizedExpression-ActsAsParenthesizedExpression-ICSharpCode-Decompiler-CSharp-Syntax-AstNode- 'ICSharpCode.Decompiler.CSharp.Syntax.ParenthesizedExpression.ActsAsParenthesizedExpression(ICSharpCode.Decompiler.CSharp.Syntax.AstNode)')
   - [UnpackParenthesizedExpression()](#M-ICSharpCode-Decompiler-CSharp-Syntax-ParenthesizedExpression-UnpackParenthesizedExpression-ICSharpCode-Decompiler-CSharp-Syntax-Expression- 'ICSharpCode.Decompiler.CSharp.Syntax.ParenthesizedExpression.UnpackParenthesizedExpression(ICSharpCode.Decompiler.CSharp.Syntax.Expression)')
 - [ParenthesizedVariableDesignation](#T-ICSharpCode-Decompiler-CSharp-Syntax-ParenthesizedVariableDesignation 'ICSharpCode.Decompiler.CSharp.Syntax.ParenthesizedVariableDesignation')
+- [PathComparer](#T-Bb-ComponentModel-PathComparer 'Bb.ComponentModel.PathComparer')
+  - [Equals(x,y)](#M-Bb-ComponentModel-PathComparer-Equals-System-String,System-String- 'Bb.ComponentModel.PathComparer.Equals(System.String,System.String)')
+  - [GetHashCode(obj)](#M-Bb-ComponentModel-PathComparer-GetHashCode-System-String- 'Bb.ComponentModel.PathComparer.GetHashCode(System.String)')
+- [PathHelper](#T-Bb-ComponentModel-PathHelper 'Bb.ComponentModel.PathHelper')
+  - [#cctor()](#M-Bb-ComponentModel-PathHelper-#cctor 'Bb.ComponentModel.PathHelper.#cctor')
+  - [FormatPath(path)](#M-Bb-ComponentModel-PathHelper-FormatPath-System-String- 'Bb.ComponentModel.PathHelper.FormatPath(System.String)')
+  - [IsPathEquals(path1,path2)](#M-Bb-ComponentModel-PathHelper-IsPathEquals-System-IO-DirectoryInfo,System-IO-DirectoryInfo- 'Bb.ComponentModel.PathHelper.IsPathEquals(System.IO.DirectoryInfo,System.IO.DirectoryInfo)')
+  - [IsPathEquals(path1,path2)](#M-Bb-ComponentModel-PathHelper-IsPathEquals-System-IO-FileInfo,System-IO-FileInfo- 'Bb.ComponentModel.PathHelper.IsPathEquals(System.IO.FileInfo,System.IO.FileInfo)')
+  - [IsPathEquals(path1,path2)](#M-Bb-ComponentModel-PathHelper-IsPathEquals-System-String,System-String- 'Bb.ComponentModel.PathHelper.IsPathEquals(System.String,System.String)')
 - [Pattern](#T-ICSharpCode-Decompiler-CSharp-Syntax-PatternMatching-Pattern 'ICSharpCode.Decompiler.CSharp.Syntax.PatternMatching.Pattern')
   - [AnyString](#F-ICSharpCode-Decompiler-CSharp-Syntax-PatternMatching-Pattern-AnyString 'ICSharpCode.Decompiler.CSharp.Syntax.PatternMatching.Pattern.AnyString')
 - [PatternExtensions](#T-ICSharpCode-Decompiler-CSharp-Syntax-PatternMatching-PatternExtensions 'ICSharpCode.Decompiler.CSharp.Syntax.PatternMatching.PatternExtensions')
@@ -6026,17 +6038,6 @@ return system Directory that contains the root assemblies
 
 Gets or sets a value indicating whether [throw exception if the directory file is not found].
 
-<a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-#cctor'></a>
-### #cctor() `method`
-
-##### Summary
-
-Initializes the [AssemblyDirectoryResolver](#T-Bb-ComponentModel-AssemblyDirectoryResolver 'Bb.ComponentModel.AssemblyDirectoryResolver') class.
-
-##### Parameters
-
-This method has no parameters.
-
 <a name='M-Bb-ComponentModel-AssemblyDirectoryResolver-AddDirectories-System-String[]-'></a>
 ### AddDirectories(paths) `method`
 
@@ -7138,18 +7139,36 @@ bool isSdk = assembly.IsSdk();
 
 This method checks if the specified assembly contains attributes that indicate it is an SDK assembly.
 
-<a name='M-Bb-ComponentModel-AssemblyReferenceExtensions-LoadAssemblies-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched}-'></a>
-### LoadAssemblies(self) `method`
+<a name='M-Bb-ComponentModel-AssemblyReferenceExtensions-LoadAssemblies-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched},System-Boolean-'></a>
+### LoadAssemblies(failedOnloadError) `method`
 
 ##### Summary
 
-Load all assemblies if not loaded
+Try to load the assemblies.
+
+##### Returns
+
+return false if item are fail to loading
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| self | [System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}') | list of assembly to load |
+| failedOnloadError | [System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched}') | if set to `true` [failed onload error]. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | name is invalid. -or- The length of name exceeds 1024 characters |
+| [System.TypeLoadException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.TypeLoadException 'System.TypeLoadException') | throwOnError is true, and the type cannot be found |
+| [System.IO.FileNotFoundException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileNotFoundException 'System.IO.FileNotFoundException') | name requires a dependent assembly that could not be found. |
+| [System.IO.FileLoadException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileLoadException 'System.IO.FileLoadException') | name requires a dependent assembly that was found but could not be loaded. -or-
+     The current assembly was loaded into the reflection-only context, and name requires
+     a dependent assembly that was not preloaded. |
+| [System.BadImageFormatException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.BadImageFormatException 'System.BadImageFormatException') | name requires a dependent assembly, but the file is not a valid assembly. -or-
+     name requires a dependent assembly which was compiled for a version of the runtime
+     later than the currently loaded version. |
 
 <a name='M-Bb-ComponentModel-AssemblyReferenceExtensions-LoadAssemblies-System-Collections-Generic-IEnumerable{ICSharpCode-Decompiler-Metadata-PEFile}-'></a>
 ### LoadAssemblies(self) `method`
@@ -27802,6 +27821,137 @@ If a property has the [InjectValueByIocAttribute](#T-Bb-ComponentModel-Attribute
 and the attribute's Required property is true, an [ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') is thrown.
 The value returned by the value resolver is converted to the property's type using the current culture.
 
+<a name='T-Bb-ComponentModel-Loaders-InjectionExtensions'></a>
+## InjectionExtensions `type`
+
+##### Namespace
+
+Bb.ComponentModel.Loaders
+
+<a name='M-Bb-ComponentModel-Loaders-InjectionExtensions-AddTypes``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-String-'></a>
+### AddTypes\`\`1(self,context) `method`
+
+##### Summary
+
+Adds the specified types to the injection loader.
+
+##### Returns
+
+The updated injection loader instance of type [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1').
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [Bb.ComponentModel.Loaders.InjectionLoader{\`\`0}](#T-Bb-ComponentModel-Loaders-InjectionLoader{``0} 'Bb.ComponentModel.Loaders.InjectionLoader{``0}') | The injection loader instance. Cannot be null. |
+| context | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The context used to explore the assemblies. Cannot be null. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | The type of the injection loader. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the `self` or `context` is null. |
+
+##### Example
+
+```C#
+var loader = new InjectionLoader&lt;MyType&gt;("myContext");
+loader.AddTypes("myContext");
+```
+
+##### Remarks
+
+This method collects all types that implement the specified interface from the given context and adds them to the injection loader.
+
+<a name='M-Bb-ComponentModel-Loaders-InjectionExtensions-CollectTypes``1-System-String-'></a>
+### CollectTypes\`\`1(context) `method`
+
+##### Summary
+
+Collects types that implement the specified interface from the given context.
+
+##### Returns
+
+A list of types that implement the specified interface [Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type').
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| context | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The context used to explore the assemblies. Cannot be null. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | The interface type to collect. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the `context` is null. |
+
+##### Example
+
+```C#
+var types = InjectionExtensions.CollectTypes&gt;IInjectBuilder&gt;MyContext&gt;&gt;("myContext");
+```
+
+##### Remarks
+
+This method collects all types that implement the specified interface from the given context.
+It uses the TypeDiscovery instance to get exposed types and filters them based on the interface type.
+
+<a name='M-Bb-ComponentModel-Loaders-InjectionExtensions-LoadAbstractLoaders``1-System-Collections-Generic-List{System-Type},System-Action{``0},Bb-ComponentModel-Factories-LocalServiceProvider-'></a>
+### LoadAbstractLoaders\`\`1(types,initializer,serviceProvider) `method`
+
+##### Summary
+
+Loads abstract loaders from the specified types.
+
+##### Returns
+
+A list of loaded instances of type [](#!-T 'T').
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| types | [System.Collections.Generic.List{System.Type}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{System.Type}') | The list of types to be loaded. Cannot be null. |
+| initializer | [System.Action{\`\`0}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{``0}') | The initializer action to be applied to each loaded instance. Can be null. |
+| serviceProvider | [Bb.ComponentModel.Factories.LocalServiceProvider](#T-Bb-ComponentModel-Factories-LocalServiceProvider 'Bb.ComponentModel.Factories.LocalServiceProvider') | The service provider used to resolve the instances. Cannot be null. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | The type of the loaders to be loaded. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the `types` or `serviceProvider` is null. |
+
+##### Example
+
+```C#
+var types = new List&lt;Type&gt; { typeof(MyLoader1), typeof(MyLoader2) };
+var serviceProvider = new LocalServiceProvider();
+var loaders = InjectionExtensions.LoadAbstractLoaders(types, loader =&gt; loader.Initialize(), serviceProvider);
+```
+
+##### Remarks
+
+This method iterates over the provided types, resolves each type using the service provider, and applies the initializer action if provided.
+
 <a name='T-Bb-ComponentModel-Loaders-InjectionLoader'></a>
 ## InjectionLoader `type`
 
@@ -27921,7 +28071,7 @@ Determines whether the module with the specified friendly name should be execute
 
 Bb.ComponentModel.Loaders
 
-<a name='M-Bb-ComponentModel-Loaders-InjectionLoader`1-#ctor-System-String,System-IServiceProvider,System-Action{Bb-ComponentModel-Loaders-InjectionLoader{`0}}-'></a>
+<a name='M-Bb-ComponentModel-Loaders-InjectionLoader`1-#ctor-System-String,System-IServiceProvider-'></a>
 ### #ctor(context,serviceProvider) `constructor`
 
 ##### Summary
@@ -31378,49 +31528,89 @@ Initialize the builder with all application builder found
 
 ##### Summary
 
-create instance and initialize service from service provider
+Creates an instance and initializes the service from the service provider.
 
 ##### Returns
 
-
+The configured service instance of type [](#!-T 'T').
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| serviceProvider | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') | [IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') |
-| context | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | by default the value is "Initialization" |
-| initializer | [System.Action{Bb.ComponentModel.Loaders.InjectionLoader{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}}') | action to execute for every loader |
-| action | [System.Action{Bb.ComponentModel.IInjectBuilder{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.IInjectBuilder{``0}}') | action to initialize for every loader |
+| serviceProvider | [System.IServiceProvider](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IServiceProvider 'System.IServiceProvider') | The service provider. Must not be null. |
+| context | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The context value. By default, it is set to "Initialization". |
+| initializer | [System.Action{Bb.ComponentModel.Loaders.InjectionLoader{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}}') | The action to execute for every loader. Can be null. |
+| action | [System.Action{Bb.ComponentModel.IInjectBuilder{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.IInjectBuilder{``0}}') | The action to initialize for every loader. Can be null. |
 
 ##### Generic Types
 
 | Name | Description |
 | ---- | ----------- |
-| T | type of the service asked |
+| T | The type of the service to be resolved by discovery. |
 
-<a name='M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-LoadModules``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}-'></a>
-### LoadModules\`\`1(self) `method`
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when `serviceProvider` is null. |
+
+##### Example
+
+```C#
+IServiceProvider serviceProvider = new ServiceCollection().BuildServiceProvider();
+var configuredService = serviceProvider.GetConfiguredService&lt;MyService&gt;("Initialization", loader =&gt; { /* initializer code */ }, builder =&gt; { /* action code */ });
+```
+
+##### Remarks
+
+This method creates an instance of the specified service type and initializes it using the provided service provider and context.
+
+<a name='M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-LoadModules``1-Bb-ComponentModel-Loaders-InjectionLoader{``0},System-Action{Bb-ComponentModel-Loaders-InjectionLoader{``0}},System-Action{Bb-ComponentModel-IInjectBuilder{``0}}-'></a>
+### LoadModules\`\`1(self,initializer,onInitializationAction) `method`
 
 ##### Summary
 
-Load assemblies and initialize the loader
+Loads modules and initializes the loader with the specified actions.
 
 ##### Returns
 
-
+The initialized [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1') instance.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| self | [Bb.ComponentModel.Loaders.InjectionLoader{\`\`0}](#T-Bb-ComponentModel-Loaders-InjectionLoader{``0} 'Bb.ComponentModel.Loaders.InjectionLoader{``0}') |  |
+| self | [Bb.ComponentModel.Loaders.InjectionLoader{\`\`0}](#T-Bb-ComponentModel-Loaders-InjectionLoader{``0} 'Bb.ComponentModel.Loaders.InjectionLoader{``0}') | The instance of [InjectionLoader\`1](#T-Bb-ComponentModel-Loaders-InjectionLoader`1 'Bb.ComponentModel.Loaders.InjectionLoader`1') to initialize. Must not be null. |
+| initializer | [System.Action{Bb.ComponentModel.Loaders.InjectionLoader{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.Loaders.InjectionLoader{``0}}') | The action to execute for every loader. Must not be null. |
+| onInitializationAction | [System.Action{Bb.ComponentModel.IInjectBuilder{\`\`0}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action{Bb.ComponentModel.IInjectBuilder{``0}}') | The action to initialize for every loader. Must not be null. |
 
 ##### Generic Types
 
 | Name | Description |
 | ---- | ----------- |
-| T |  |
+| T | The type of object to be resolved by discovery. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when `self`, `initializer`, or `onInitializationAction` is null. |
+
+##### Example
+
+```C#
+var loader = new InjectionLoader&lt;MyClass&gt;(context, serviceProvider);
+loader.LoadModules(
+    initializer: l =&gt; { /* initializer code */ },
+    onInitializationAction: b =&gt; { /* initialization action code */ }
+);
+```
+
+##### Remarks
+
+This method loads modules and initializes the loader with the specified actions.
+It collects types that implement [IInjectBuilder\`1](#T-Bb-ComponentModel-IInjectBuilder`1 'Bb.ComponentModel.IInjectBuilder`1') and adds instances of these types to the loader.
 
 <a name='M-Bb-ComponentModel-Loaders-LoaderInjectionExtensions-Map``1-Bb-ComponentModel-IInjectBuilder{``0},System-Func{System-String,System-Object},System-Func{System-ComponentModel-PropertyDescriptor,System-String,Bb-ComponentModel-IInjectBuilder{``0},System-Object},Bb-ComponentModel-Loaders-CommandLineParser-'></a>
 ### Map\`\`1(instance) `method`
@@ -37163,6 +37353,206 @@ ICSharpCode.Decompiler.CSharp.Syntax
 ##### Summary
 
 ( VariableDesignation (, VariableDesignation)* )
+
+<a name='T-Bb-ComponentModel-PathComparer'></a>
+## PathComparer `type`
+
+##### Namespace
+
+Bb.ComponentModel
+
+##### Summary
+
+Compares file and directory paths for equality.
+
+<a name='M-Bb-ComponentModel-PathComparer-Equals-System-String,System-String-'></a>
+### Equals(x,y) `method`
+
+##### Summary
+
+Determines whether the specified paths are equal.
+
+##### Returns
+
+`true` if the specified paths are equal; otherwise, `false`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| x | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The first path. |
+| y | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The second path. |
+
+##### Remarks
+
+This method compares the full paths in a case-insensitive manner.
+
+<a name='M-Bb-ComponentModel-PathComparer-GetHashCode-System-String-'></a>
+### GetHashCode(obj) `method`
+
+##### Summary
+
+Returns a hash code for the specified path.
+
+##### Returns
+
+A hash code for the specified path.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| obj | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The path. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when the path is null. |
+
+##### Remarks
+
+This method returns a hash code for the full path in a case-insensitive manner.
+
+<a name='T-Bb-ComponentModel-PathHelper'></a>
+## PathHelper `type`
+
+##### Namespace
+
+Bb.ComponentModel
+
+##### Summary
+
+Provides methods to compare file and directory paths.
+
+<a name='M-Bb-ComponentModel-PathHelper-#cctor'></a>
+### #cctor() `method`
+
+##### Summary
+
+Initializes the [PathHelper](#T-Bb-ComponentModel-PathHelper 'Bb.ComponentModel.PathHelper') class.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-Bb-ComponentModel-PathHelper-FormatPath-System-String-'></a>
+### FormatPath(path) `method`
+
+##### Summary
+
+Formats the specified path to a standard format.
+
+##### Returns
+
+The formatted path.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| path | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The path to format. |
+
+##### Example
+
+```C#
+string path = "file:///C:/Path1";
+string formattedPath = path.FormatPath();
+```
+
+##### Remarks
+
+This method converts the path to a lower-case invariant string and removes URI encoding.
+
+<a name='M-Bb-ComponentModel-PathHelper-IsPathEquals-System-IO-DirectoryInfo,System-IO-DirectoryInfo-'></a>
+### IsPathEquals(path1,path2) `method`
+
+##### Summary
+
+Determines whether the specified directory paths are equal.
+
+##### Returns
+
+`true` if the specified paths are equal; otherwise, `false`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| path1 | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | The first directory path. |
+| path2 | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | The second directory path. |
+
+##### Example
+
+```C#
+var dir1 = new DirectoryInfo("C:\\Path1");
+var dir2 = new DirectoryInfo("C:\\path1");
+bool areEqual = dir1.IsPathEquals(dir2);
+```
+
+##### Remarks
+
+This method compares the full names of the directories in a case-insensitive manner.
+
+<a name='M-Bb-ComponentModel-PathHelper-IsPathEquals-System-IO-FileInfo,System-IO-FileInfo-'></a>
+### IsPathEquals(path1,path2) `method`
+
+##### Summary
+
+Determines whether the specified file paths are equal.
+
+##### Returns
+
+`true` if the specified paths are equal; otherwise, `false`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| path1 | [System.IO.FileInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileInfo 'System.IO.FileInfo') | The first file path. |
+| path2 | [System.IO.FileInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileInfo 'System.IO.FileInfo') | The second file path. |
+
+##### Example
+
+```C#
+var file1 = new FileInfo("C:\\Path1\\file.txt");
+var file2 = new FileInfo("C:\\path1\\FILE.TXT");
+bool areEqual = file1.IsPathEquals(file2);
+```
+
+##### Remarks
+
+This method compares the full names of the files in a case-insensitive manner.
+
+<a name='M-Bb-ComponentModel-PathHelper-IsPathEquals-System-String,System-String-'></a>
+### IsPathEquals(path1,path2) `method`
+
+##### Summary
+
+Determines whether the specified string paths are equal.
+
+##### Returns
+
+`true` if the specified paths are equal; otherwise, `false`.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| path1 | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The first string path. |
+| path2 | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The second string path. |
+
+##### Example
+
+```C#
+string path1 = "C:\\Path1";
+string path2 = "C:\\path1";
+bool areEqual = path1.IsPathEquals(path2);
+```
+
+##### Remarks
+
+This method compares the formatted paths in a case-insensitive manner.
 
 <a name='T-ICSharpCode-Decompiler-CSharp-Syntax-PatternMatching-Pattern'></a>
 ## Pattern `type`
