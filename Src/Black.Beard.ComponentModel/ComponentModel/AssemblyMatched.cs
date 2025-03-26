@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -135,22 +136,37 @@ namespace Bb.ComponentModel
 
         }
 
+        /// <summary>
+        /// Resolve the assembly if it is loaded.
+        /// </summary>
         public virtual void ResolveIfLoaded()
         {
-
             if (_assembly == null && AssemblyIsLoaded)
+            {
                 this.Assembly = AssemblyLoader.Instance.LoadAssembly(this.AssemblyLocation, null);
+                IsLoaded = Assembly != null;
+            }
+        }
 
+        /// <summary>
+        /// Return the list of assemblies by name already loaded.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Assembly> GetAssembliesByName()
+        {
+            return TypeDiscovery.Instance.GetAssemblies(this.AssemblyName);
         }
 
 
-        private bool? _isLoaded;
-
         public bool IsEntryDirectory { get; internal set; }
+
         public bool IsSystemDirectory { get; internal set; }
+        
         public bool IsSdk { get; internal set; }
+        public bool IsLoaded { get; internal set; }
 
         private Assembly _assembly;
+        private bool? _isLoaded;
 
     }
 

@@ -1086,7 +1086,7 @@ namespace Bb.ComponentModel
                 AssemblyVersion = file.Version,
                 IsEntryDirectory = isEntryDirectory,
                 IsSystemDirectory = isSystemDirectory,
-                IsSdk = isSystemDirectory || file.IsSdk()
+                IsSdk = isSystemDirectory || file.IsSdk(),
             };
 
             result.ResolveIfLoaded();

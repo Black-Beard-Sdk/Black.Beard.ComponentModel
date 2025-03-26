@@ -103,7 +103,7 @@ namespace Bb.ComponentModel
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool IsLoadedByFile(string fullname)
+        public bool IsLoadedByFile(string fullname)
         {
             return _loadedByFile.ContainsKey(fullname);
         }
@@ -689,6 +689,22 @@ namespace Bb.ComponentModel
 
         }
 
+        /// <summary>
+        /// Return the list of loaded assemblies
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public IEnumerable<Assembly> GetAssemblies(string name)
+        {
+
+            foreach (var item in GetAssemblies())
+            {
+                var n = item.GetName();
+                if (n?.Name == name)
+                    yield return item;
+            }
+
+        }
 
         /// <summary>
         /// Registers the specified assemblies.

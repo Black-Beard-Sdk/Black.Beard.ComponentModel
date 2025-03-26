@@ -239,7 +239,9 @@
   - [AssemblyName](#P-Bb-ComponentModel-AssemblyMatched-AssemblyName 'Bb.ComponentModel.AssemblyMatched.AssemblyName')
   - [AssemblyVersion](#P-Bb-ComponentModel-AssemblyMatched-AssemblyVersion 'Bb.ComponentModel.AssemblyMatched.AssemblyVersion')
   - [FailedToLoad](#P-Bb-ComponentModel-AssemblyMatched-FailedToLoad 'Bb.ComponentModel.AssemblyMatched.FailedToLoad')
+  - [GetAssembliesByName()](#M-Bb-ComponentModel-AssemblyMatched-GetAssembliesByName 'Bb.ComponentModel.AssemblyMatched.GetAssembliesByName')
   - [Load(failedOnloadError)](#M-Bb-ComponentModel-AssemblyMatched-Load-System-Boolean- 'Bb.ComponentModel.AssemblyMatched.Load(System.Boolean)')
+  - [ResolveIfLoaded()](#M-Bb-ComponentModel-AssemblyMatched-ResolveIfLoaded 'Bb.ComponentModel.AssemblyMatched.ResolveIfLoaded')
 - [AssemblyReferenceExtensions](#T-Bb-ComponentModel-AssemblyReferenceExtensions 'Bb.ComponentModel.AssemblyReferenceExtensions')
   - [EnsureIsLoaded(self,failedOnloadError)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-EnsureIsLoaded-System-Collections-Generic-IEnumerable{Bb-ComponentModel-AssemblyMatched},System-Boolean- 'Bb.ComponentModel.AssemblyReferenceExtensions.EnsureIsLoaded(System.Collections.Generic.IEnumerable{Bb.ComponentModel.AssemblyMatched},System.Boolean)')
   - [InEntryDirectory(file)](#M-Bb-ComponentModel-AssemblyReferenceExtensions-InEntryDirectory-System-IO-FileInfo- 'Bb.ComponentModel.AssemblyReferenceExtensions.InEntryDirectory(System.IO.FileInfo)')
@@ -3245,6 +3247,7 @@
   - [EnsureAssemblyIsLoadedWithReferences(assembly to loadtoload,acceptAllVersion,recursively)](#M-Bb-ComponentModel-TypeDiscovery-EnsureAssemblyIsLoadedWithReferences-System-Reflection-Assembly,System-Boolean,System-Boolean,System-Collections-Generic-HashSet{System-String}- 'Bb.ComponentModel.TypeDiscovery.EnsureAssemblyIsLoadedWithReferences(System.Reflection.Assembly,System.Boolean,System.Boolean,System.Collections.Generic.HashSet{System.String})')
   - [GetAllAssemblies()](#M-Bb-ComponentModel-TypeDiscovery-GetAllAssemblies 'Bb.ComponentModel.TypeDiscovery.GetAllAssemblies')
   - [GetAssemblies(namespaces)](#M-Bb-ComponentModel-TypeDiscovery-GetAssemblies-System-Collections-Generic-IEnumerable{System-String}- 'Bb.ComponentModel.TypeDiscovery.GetAssemblies(System.Collections.Generic.IEnumerable{System.String})')
+  - [GetAssemblies(name)](#M-Bb-ComponentModel-TypeDiscovery-GetAssemblies-System-String- 'Bb.ComponentModel.TypeDiscovery.GetAssemblies(System.String)')
   - [GetAssembly(name,acceptAllVersion)](#M-Bb-ComponentModel-TypeDiscovery-GetAssembly-System-String,System-Boolean- 'Bb.ComponentModel.TypeDiscovery.GetAssembly(System.String,System.Boolean)')
   - [GetAssembly(name,acceptAllVersion)](#M-Bb-ComponentModel-TypeDiscovery-GetAssembly-System-Reflection-AssemblyName,System-Boolean- 'Bb.ComponentModel.TypeDiscovery.GetAssembly(System.Reflection.AssemblyName,System.Boolean)')
   - [GetDirectoryPathFromAssemblies()](#M-Bb-ComponentModel-TypeDiscovery-GetDirectoryPathFromAssemblies 'Bb.ComponentModel.TypeDiscovery.GetDirectoryPathFromAssemblies')
@@ -6951,6 +6954,21 @@ Gets the assembly version.
 
 Gets a value indicating whether [failed to load].
 
+<a name='M-Bb-ComponentModel-AssemblyMatched-GetAssembliesByName'></a>
+### GetAssembliesByName() `method`
+
+##### Summary
+
+Return the list of assemblies by name already loaded.
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='M-Bb-ComponentModel-AssemblyMatched-Load-System-Boolean-'></a>
 ### Load(failedOnloadError) `method`
 
@@ -6977,6 +6995,17 @@ Try to load the assembly.
 | [System.BadImageFormatException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.BadImageFormatException 'System.BadImageFormatException') | name requires a dependent assembly, but the file is not a valid assembly. -or-
      name requires a dependent assembly which was compiled for a version of the runtime
      later than the currently loaded version. |
+
+<a name='M-Bb-ComponentModel-AssemblyMatched-ResolveIfLoaded'></a>
+### ResolveIfLoaded() `method`
+
+##### Summary
+
+Resolve the assembly if it is loaded.
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-Bb-ComponentModel-AssemblyReferenceExtensions'></a>
 ## AssemblyReferenceExtensions `type`
@@ -43136,6 +43165,23 @@ Gets the already assemblies loaded that match with specified namespaces.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | namespaces | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.String}') | The namespaces filter. |
+
+<a name='M-Bb-ComponentModel-TypeDiscovery-GetAssemblies-System-String-'></a>
+### GetAssemblies(name) `method`
+
+##### Summary
+
+Return the list of loaded assemblies
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
 
 <a name='M-Bb-ComponentModel-TypeDiscovery-GetAssembly-System-String,System-Boolean-'></a>
 ### GetAssembly(name,acceptAllVersion) `method`
