@@ -61,10 +61,14 @@ namespace ICSharpCode.Decompiler.Metadata
 	[DebuggerDisplay("{FileName}")]
 	public class PEFile : IDisposable, TypeSystem.IModuleReference
 	{
+
 		public string FileName { get; }
+
 		public PEReader Reader { get; }
+		
 		public MetadataReader Metadata { get; }
-        public MetadataModule Module { get; }
+        
+		public MetadataModule Module { get; }
 
         public PEFile(string fileName, PEStreamOptions streamOptions = PEStreamOptions.Default, MetadataReaderOptions metadataOptions = MetadataReaderOptions.Default)
 			: this(fileName, new PEReader(new FileStream(fileName, FileMode.Open, FileAccess.Read), streamOptions), metadataOptions)

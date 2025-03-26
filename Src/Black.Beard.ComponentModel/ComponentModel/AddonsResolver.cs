@@ -723,10 +723,9 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public IEnumerable<AssemblyMatched> SearchAssemblies()
         {
-
             foreach (PEFile file in ParseAssemblies())
             {
-                AssemblyMatched result = BuildModelAssembly(new FileInfo(file.FullName), file);
+                AssemblyMatched result = BuildModelAssembly(new FileInfo(file.FileName), file);
                 yield return result;
             }
         }

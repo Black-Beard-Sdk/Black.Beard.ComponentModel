@@ -267,21 +267,7 @@ namespace DynamicDescriptors.Tests
             p.Assembly.Should().NotBeNull();
 
         }
-
-        //[Theory]
-        //[InlineData("file:///C:/path/to/file", "c:\\path\\to\\file")]
-        //[InlineData("C:/path/to/%66ile", "c:\\path\\to\\file")]
-        //[InlineData("C:/path/to/FILE", "c:\\path\\to\\file")]
-        //[InlineData("C:/path/to/%20file", "c:\\path\\to\\ file")]
-        //public void Format_ShouldReturnExpectedResult(string input, string expected)
-        //{
-        //    // Act
-        //    var result = PathHelper.FormatPath(input);
-
-        //    // Assert
-        //    Assert.Equal(expected, result);
-        //}
-
+     
         [Fact]
         public void FilterTest6()
         {
@@ -314,21 +300,7 @@ namespace DynamicDescriptors.Tests
                     Assert.True(false, $"assembly {item.FullName} not found");
 
         }
-
-        //[Fact]
-        //public void Test1()
-        //{
-
-        //    //var dic = TypeDiscovery.Instance.GetLoadedAssemblies().ToList();
-
-        //    //foreach (var item in AppDomain.CurrentDomain.GetAssemblies())
-        //    //    if (dic.Contains(item.FullName))
-        //    //        Assert.True(true);
-        //    //    else
-        //    //        Assert.True(false, $"assembly {item.FullName} not found");
-
-        //}
-
+        
     }
 
     [ExposeClass(Context = ConstantsCore.Plugin + "Test")]
