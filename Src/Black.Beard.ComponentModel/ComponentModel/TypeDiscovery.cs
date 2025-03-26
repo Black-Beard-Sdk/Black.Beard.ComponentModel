@@ -716,13 +716,9 @@ namespace Bb.ComponentModel
 
             foreach (var item in assemblies)
             {
-
-                Trace.TraceInformation(item.FullName);
-
                 var list = GetTypes(item, typeFilter);
                 foreach (var type in list)
                     yield return type;
-
             }
 
         }
