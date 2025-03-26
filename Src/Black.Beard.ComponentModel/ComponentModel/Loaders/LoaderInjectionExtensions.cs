@@ -319,21 +319,28 @@ namespace Bb.ComponentModel.Loaders
             {
 
                 var name = item.FriendlyName ?? item.GetType().FullName;
-
+                var msg = $"add-on '{self.Context}'.'{name}' is";
                 if (self.CanExecuteModule(item))
                 {
                     if (item.CanExecute(builder))
                     {
-                        item.Execute(builder);
-                        Debug.WriteLine($"add-on '{name}' initialized");
-                        self.Executed.Add(name);
+                        try
+                        {
+                            item.Execute(builder);
+                            Trace.WriteLine($"{msg} initialized");
+                            self.Executed.Add(name);
+                        }
+                        catch (Exception e)
+                        {
+                            Trace.TraceError($"{msg} failed." + e.Message);
+                        }
                     }
                     else
-                        Debug.WriteLine($"add-on '{name}' is deactivated");
+                        Trace.WriteLine($"{msg} bypassed");
 
                 }
                 else
-                    Debug.WriteLine($"add-on '{name}' refuses to run");
+                    Trace.WriteLine($"{msg} refused to run");
 
             }
 
