@@ -823,10 +823,15 @@
 - [ConditionalExpression](#T-ICSharpCode-Decompiler-CSharp-Syntax-ConditionalExpression 'ICSharpCode.Decompiler.CSharp.Syntax.ConditionalExpression')
 - [ConfigurationFolder](#T-Bb-ConfigurationFolder 'Bb.ConfigurationFolder')
   - [Instance](#P-Bb-ConfigurationFolder-Instance 'Bb.ConfigurationFolder.Instance')
+  - [AddAssemblyDirectory(assembly)](#M-Bb-ConfigurationFolder-AddAssemblyDirectory-System-Reflection-Assembly- 'Bb.ConfigurationFolder.AddAssemblyDirectory(System.Reflection.Assembly)')
+  - [AddCallingAssemblyDirectory()](#M-Bb-ConfigurationFolder-AddCallingAssemblyDirectory 'Bb.ConfigurationFolder.AddCallingAssemblyDirectory')
   - [AddDirectory(folder)](#M-Bb-ConfigurationFolder-AddDirectory-System-String- 'Bb.ConfigurationFolder.AddDirectory(System.String)')
   - [AddDirectory(folder)](#M-Bb-ConfigurationFolder-AddDirectory-System-IO-DirectoryInfo- 'Bb.ConfigurationFolder.AddDirectory(System.IO.DirectoryInfo)')
   - [AddDirectoryIfExists(folder)](#M-Bb-ConfigurationFolder-AddDirectoryIfExists-System-String- 'Bb.ConfigurationFolder.AddDirectoryIfExists(System.String)')
   - [AddDirectoryIfExists(folder)](#M-Bb-ConfigurationFolder-AddDirectoryIfExists-System-IO-DirectoryInfo- 'Bb.ConfigurationFolder.AddDirectoryIfExists(System.IO.DirectoryInfo)')
+  - [AddEntryAssemblyDirectory()](#M-Bb-ConfigurationFolder-AddEntryAssemblyDirectory 'Bb.ConfigurationFolder.AddEntryAssemblyDirectory')
+  - [AddExecutingAssemblyDirectory()](#M-Bb-ConfigurationFolder-AddExecutingAssemblyDirectory 'Bb.ConfigurationFolder.AddExecutingAssemblyDirectory')
+  - [GetFiles(searchPattern)](#M-Bb-ConfigurationFolder-GetFiles-System-String- 'Bb.ConfigurationFolder.GetFiles(System.String)')
   - [GetPaths()](#M-Bb-ConfigurationFolder-GetPaths 'Bb.ConfigurationFolder.GetPaths')
 - [ConnexionReaderExtension](#T-Bb-Converters-ConnexionReaderExtension 'Bb.Converters.ConnexionReaderExtension')
   - [GetKeyValues(payload)](#M-Bb-Converters-ConnexionReaderExtension-GetKeyValues-System-String- 'Bb.Converters.ConnexionReaderExtension.GetKeyValues(System.String)')
@@ -1024,11 +1029,11 @@
   - [ToTimeSpan(value)](#M-Bb-Converters-ConverterHelper-ToTimeSpan-System-DateTimeOffset- 'Bb.Converters.ConverterHelper.ToTimeSpan(System.DateTimeOffset)')
   - [TryGetMethodToConvert(sourceType,targetType,method)](#M-Bb-Converters-ConverterHelper-TryGetMethodToConvert-System-Type,System-Type,Bb-Converters-MethodConverter@- 'Bb.Converters.ConverterHelper.TryGetMethodToConvert(System.Type,System.Type,Bb.Converters.MethodConverter@)')
   - [Unserialize(value,type)](#M-Bb-Converters-ConverterHelper-Unserialize-System-String,System-Type- 'Bb.Converters.ConverterHelper.Unserialize(System.String,System.Type)')
-- [ConverterHelperNullable](#T-Bb-Converters-ConverterHelperNullable 'Bb.Converters.ConverterHelperNullable')
-  - [ToDateTime(value)](#M-Bb-Converters-ConverterHelperNullable-ToDateTime-System-DateTimeOffset- 'Bb.Converters.ConverterHelperNullable.ToDateTime(System.DateTimeOffset)')
-  - [ToDateTime(value)](#M-Bb-Converters-ConverterHelperNullable-ToDateTime-System-Nullable{System-DateTimeOffset}- 'Bb.Converters.ConverterHelperNullable.ToDateTime(System.Nullable{System.DateTimeOffset})')
-  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelperNullable-ToDateTimeOffset-System-DateTime- 'Bb.Converters.ConverterHelperNullable.ToDateTimeOffset(System.DateTime)')
-  - [ToDateTimeOffset(value,cultureInfo)](#M-Bb-Converters-ConverterHelperNullable-ToDateTimeOffset-System-String,System-Globalization-CultureInfo- 'Bb.Converters.ConverterHelperNullable.ToDateTimeOffset(System.String,System.Globalization.CultureInfo)')
+- [ConverterMoreNullable](#T-Bb-Converters-ConverterMoreNullable 'Bb.Converters.ConverterMoreNullable')
+  - [ToDateTime(value)](#M-Bb-Converters-ConverterMoreNullable-ToDateTime-System-DateTimeOffset- 'Bb.Converters.ConverterMoreNullable.ToDateTime(System.DateTimeOffset)')
+  - [ToDateTime(value)](#M-Bb-Converters-ConverterMoreNullable-ToDateTime-System-Nullable{System-DateTimeOffset}- 'Bb.Converters.ConverterMoreNullable.ToDateTime(System.Nullable{System.DateTimeOffset})')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterMoreNullable-ToDateTimeOffset-System-DateTime- 'Bb.Converters.ConverterMoreNullable.ToDateTimeOffset(System.DateTime)')
+  - [ToDateTimeOffset(value,cultureInfo)](#M-Bb-Converters-ConverterMoreNullable-ToDateTimeOffset-System-String,System-Globalization-CultureInfo- 'Bb.Converters.ConverterMoreNullable.ToDateTimeOffset(System.String,System.Globalization.CultureInfo)')
 - [Converter\`1](#T-Bb-Converters-Converter`1 'Bb.Converters.Converter`1')
   - [Format](#P-Bb-Converters-Converter`1-Format 'Bb.Converters.Converter`1.Format')
 - [Converter\`2](#T-Bb-Converters-Converter`2 'Bb.Converters.Converter`2')
@@ -2977,6 +2982,11 @@
   - [GetStandardValuesSupported(context)](#M-Bb-Helpers-StandardValuesStringConverter-GetStandardValuesSupported-System-ComponentModel-ITypeDescriptorContext- 'Bb.Helpers.StandardValuesStringConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)')
 - [StartingConfiguration](#T-Bb-StartingConfiguration 'Bb.StartingConfiguration')
   - [Instance](#P-Bb-StartingConfiguration-Instance 'Bb.StartingConfiguration.Instance')
+  - [GetValues()](#M-Bb-StartingConfiguration-GetValues 'Bb.StartingConfiguration.GetValues')
+  - [Get\`\`1(key)](#M-Bb-StartingConfiguration-Get``1-System-String- 'Bb.StartingConfiguration.Get``1(System.String)')
+  - [LoadFromFile(filePath)](#M-Bb-StartingConfiguration-LoadFromFile-System-String- 'Bb.StartingConfiguration.LoadFromFile(System.String)')
+  - [Set(key,value)](#M-Bb-StartingConfiguration-Set-System-String,System-Object- 'Bb.StartingConfiguration.Set(System.String,System.Object)')
+  - [SetFromContent(filePath)](#M-Bb-StartingConfiguration-SetFromContent-System-String- 'Bb.StartingConfiguration.SetFromContent(System.String)')
 - [State](#T-ICSharpCode-Decompiler-FlowAnalysis-DefiniteAssignmentVisitor-State 'ICSharpCode.Decompiler.FlowAnalysis.DefiniteAssignmentVisitor.State')
 - [State](#T-ICSharpCode-Decompiler-FlowAnalysis-ReachingDefinitionsVisitor-State 'ICSharpCode.Decompiler.FlowAnalysis.ReachingDefinitionsVisitor.State')
   - [#ctor()](#M-ICSharpCode-Decompiler-FlowAnalysis-DefiniteAssignmentVisitor-State-#ctor-System-Int32- 'ICSharpCode.Decompiler.FlowAnalysis.DefiniteAssignmentVisitor.State.#ctor(System.Int32)')
@@ -14140,6 +14150,57 @@ Gets the singleton instance of the ConfigurationFolder class.
 
 This property ensures that only one instance of the ConfigurationFolder class is created and used throughout the application.
 
+<a name='M-Bb-ConfigurationFolder-AddAssemblyDirectory-System-Reflection-Assembly-'></a>
+### AddAssemblyDirectory(assembly) `method`
+
+##### Summary
+
+Adds the directory of the specified assembly to the collection.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assembly | [System.Reflection.Assembly](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.Assembly 'System.Reflection.Assembly') | The assembly whose directory is to be added. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Thrown if the assembly is dynamic or has no location. |
+
+##### Example
+
+```C#
+Assembly assembly = Assembly.GetExecutingAssembly();
+ConfigurationFolder.AddAssemblyDirectory(assembly);
+```
+
+##### Remarks
+
+This method retrieves the directory of the specified assembly and adds it to the collection.
+
+<a name='M-Bb-ConfigurationFolder-AddCallingAssemblyDirectory'></a>
+### AddCallingAssemblyDirectory() `method`
+
+##### Summary
+
+Adds the directory of the calling assembly to the collection.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Example
+
+```C#
+ConfigurationFolder.AddCallingAssemblyDirectory();
+```
+
+##### Remarks
+
+This method retrieves the directory of the assembly that called this method and adds it to the collection.
+
 <a name='M-Bb-ConfigurationFolder-AddDirectory-System-String-'></a>
 ### AddDirectory(folder) `method`
 
@@ -14151,7 +14212,17 @@ Adds the specified directory to the collection.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| folder | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The path of the directory to add. |
+| folder | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The path of the directory to add. Must not be null or empty. |
+
+##### Example
+
+```C#
+ConfigurationFolder.AddDirectory("C:\\MyConfigs");
+```
+
+##### Remarks
+
+This method adds a directory to the collection without checking if it exists.
 
 <a name='M-Bb-ConfigurationFolder-AddDirectory-System-IO-DirectoryInfo-'></a>
 ### AddDirectory(folder) `method`
@@ -14164,7 +14235,18 @@ Adds the specified directory to the collection.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| folder | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | The directory to add. |
+| folder | [System.IO.DirectoryInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.DirectoryInfo 'System.IO.DirectoryInfo') | The directory to add. Must not be null. |
+
+##### Example
+
+```C#
+var directory = new DirectoryInfo("C:\\MyConfigs");
+ConfigurationFolder.AddDirectory(directory);
+```
+
+##### Remarks
+
+This method adds a directory to the collection without checking if it exists.
 
 <a name='M-Bb-ConfigurationFolder-AddDirectoryIfExists-System-String-'></a>
 ### AddDirectoryIfExists(folder) `method`
@@ -14200,6 +14282,79 @@ Adds the specified directory to the collection if it exists.
 
 This method checks if the specified directory exists and adds it to the collection if it does.
 
+<a name='M-Bb-ConfigurationFolder-AddEntryAssemblyDirectory'></a>
+### AddEntryAssemblyDirectory() `method`
+
+##### Summary
+
+Adds the directory of the entry assembly to the collection.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Example
+
+```C#
+ConfigurationFolder.AddEntryAssemblyDirectory();
+```
+
+##### Remarks
+
+This method retrieves the directory of the entry assembly (the application entry point) and adds it to the collection.
+
+<a name='M-Bb-ConfigurationFolder-AddExecutingAssemblyDirectory'></a>
+### AddExecutingAssemblyDirectory() `method`
+
+##### Summary
+
+Adds the directory of the executing assembly to the collection.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Example
+
+```C#
+ConfigurationFolder.AddExecutingAssemblyDirectory();
+```
+
+##### Remarks
+
+This method retrieves the directory of the currently executing assembly and adds it to the collection.
+
+<a name='M-Bb-ConfigurationFolder-GetFiles-System-String-'></a>
+### GetFiles(searchPattern) `method`
+
+##### Summary
+
+Retrieves all files matching the specified search pattern from the directories in the collection.
+
+##### Returns
+
+A collection of [FileInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileInfo 'System.IO.FileInfo') objects representing the matching files.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| searchPattern | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The search pattern to match file names (e.g., "*.txt"). Must not be null or empty. |
+
+##### Example
+
+```C#
+IEnumerable&lt;FileInfo&gt; files = ConfigurationFolder.Instance.GetFiles("*.config");
+foreach (var file in files)
+{
+    Console.WriteLine(file.FullName);
+}
+```
+
+##### Remarks
+
+This method searches all directories in the collection for files matching the specified search pattern.
+
 <a name='M-Bb-ConfigurationFolder-GetPaths'></a>
 ### GetPaths() `method`
 
@@ -14214,6 +14369,20 @@ An array of paths for all the directories in the collection.
 ##### Parameters
 
 This method has no parameters.
+
+##### Example
+
+```C#
+string[] paths = ConfigurationFolder.GetPaths();
+foreach (var path in paths)
+{
+    Console.WriteLine(path);
+}
+```
+
+##### Remarks
+
+This method retrieves the full paths of all directories currently in the collection.
 
 <a name='T-Bb-Converters-ConnexionReaderExtension'></a>
 ## ConnexionReaderExtension `type`
@@ -15268,7 +15437,7 @@ Bb.Converters
 
 ##### Summary
 
-Referential of method for conversion between types
+My Converter
 
 <a name='M-Bb-Converters-ConverterHelper-#cctor'></a>
 ### #cctor() `method`
@@ -15342,37 +15511,58 @@ Add methods to the list of methods to be used for conversion
 
 ##### Summary
 
-Convert a value to specified target type
+Converts a value to the specified target type.
 
 ##### Returns
 
-
+The converted value.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
-| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
-| context | [Bb.Converters.ConverterContext](#T-Bb-Converters-ConverterContext 'Bb.Converters.ConverterContext') | conversionHelper |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The initial value to convert. Must not be null. |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | The target type to convert to. Must not be null. |
+| context | [Bb.Converters.ConverterContext](#T-Bb-Converters-ConverterContext 'Bb.Converters.ConverterContext') | The conversion context. Can be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.InvalidOperationException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.InvalidOperationException 'System.InvalidOperationException') | Thrown if no conversion function is available for the specified types. |
+
+##### Remarks
+
+This method uses a conversion function specific to the source and target types.
 
 <a name='M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type-'></a>
 ### ConvertTo(self,targetType) `method`
 
 ##### Summary
 
-Convert a value to specified target type
+Converts a value to the specified target type.
 
 ##### Returns
 
-
+The converted value.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
-| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The initial value to convert. Must not be null. |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | The target type to convert to. Must not be null. |
+
+##### Example
+
+```C#
+object result = "123".ConvertTo(typeof(int));
+Console.WriteLine(result); // Output: 123
+```
+
+##### Remarks
+
+This method uses the default conversion context.
 
 <a name='M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo-'></a>
 ### ConvertTo(self,targetType,culture) `method`
@@ -15437,96 +15627,140 @@ Convert a value to specified target type
 
 ##### Summary
 
-Convert a value to specified target type
+Converts a value to the specified target type.
 
 ##### Returns
 
-converted value
+The converted value.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The initial value to convert. Must not be null. |
 
 ##### Generic Types
 
 | Name | Description |
 | ---- | ----------- |
-| T | Target type |
+| T | The target type to convert to. |
+
+##### Example
+
+```C#
+int result = "123".ConvertTo&lt;int&gt;();
+Console.WriteLine(result); // Output: 123
+```
+
+##### Remarks
+
+This method uses the default conversion context.
 
 <a name='M-Bb-Converters-ConverterHelper-ConvertTo``1-System-Object,System-Globalization-CultureInfo-'></a>
 ### ConvertTo\`\`1(self,culture) `method`
 
 ##### Summary
 
-Convert a value to specified target type
+Converts a value to the specified target type using a specific culture.
 
 ##### Returns
 
-
+The converted value.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
-| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | culture for help conversion |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The initial value to convert. Must not be null. |
+| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | The culture to use for the conversion. Must not be null. |
 
 ##### Generic Types
 
 | Name | Description |
 | ---- | ----------- |
-| T | Target type |
+| T | The target type to convert to. |
+
+##### Example
+
+```C#
+double result = "123.45".ConvertTo&lt;double&gt;(CultureInfo.InvariantCulture);
+Console.WriteLine(result); // Output: 123.45
+```
+
+##### Remarks
+
+This method allows specifying a culture to assist in the conversion process.
 
 <a name='M-Bb-Converters-ConverterHelper-ConvertTo``1-System-Object,System-Text-Encoding-'></a>
 ### ConvertTo\`\`1(self,encoding) `method`
 
 ##### Summary
 
-Convert a value to specified target type
+Converts a value to the specified target type using a specific text encoding.
 
 ##### Returns
 
-
+The converted value.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
-| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The initial value to convert. Must not be null. |
+| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | The text encoding to use for the conversion. Must not be null. |
 
 ##### Generic Types
 
 | Name | Description |
 | ---- | ----------- |
-| T | Target type |
+| T | The target type to convert to. |
+
+##### Example
+
+```C#
+string result = "Hello".ConvertTo&lt;string&gt;(Encoding.UTF8);
+Console.WriteLine(result); // Output: Hello
+```
+
+##### Remarks
+
+This method allows specifying a text encoding to assist in the conversion process.
 
 <a name='M-Bb-Converters-ConverterHelper-ConvertTo``1-System-Object,System-Globalization-CultureInfo,System-Text-Encoding-'></a>
 ### ConvertTo\`\`1(self,culture,encoding) `method`
 
 ##### Summary
 
-Convert a value to specified target type
+Converts a value to the specified target type using a specific culture and text encoding.
 
 ##### Returns
 
-
+The converted value.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
-| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | culture for help conversion |
-| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The initial value to convert. Must not be null. |
+| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | The culture to use for the conversion. Must not be null. |
+| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | The text encoding to use for the conversion. Must not be null. |
 
 ##### Generic Types
 
 | Name | Description |
 | ---- | ----------- |
-| T | Target type |
+| T | The target type to convert to. |
+
+##### Example
+
+```C#
+string result = "123".ConvertTo&lt;string&gt;(CultureInfo.InvariantCulture, Encoding.UTF8);
+Console.WriteLine(result); // Output: 123
+```
+
+##### Remarks
+
+This method allows specifying both a culture and a text encoding to assist in the conversion process.
 
 <a name='M-Bb-Converters-ConverterHelper-GetFunctionForConvert-System-Type,System-Type-'></a>
 ### GetFunctionForConvert(sourceType,targetType) `method`
@@ -16692,14 +16926,14 @@ Deserializes the specified string value in the specified type.
 | value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The value. |
 | type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | The type. |
 
-<a name='T-Bb-Converters-ConverterHelperNullable'></a>
-## ConverterHelperNullable `type`
+<a name='T-Bb-Converters-ConverterMoreNullable'></a>
+## ConverterMoreNullable `type`
 
 ##### Namespace
 
 Bb.Converters
 
-<a name='M-Bb-Converters-ConverterHelperNullable-ToDateTime-System-DateTimeOffset-'></a>
+<a name='M-Bb-Converters-ConverterMoreNullable-ToDateTime-System-DateTimeOffset-'></a>
 ### ToDateTime(value) `method`
 
 ##### Summary
@@ -16716,7 +16950,7 @@ Convert a DateTime to a DateTimeOffset
 | ---- | ---- | ----------- |
 | value | [System.DateTimeOffset](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTimeOffset 'System.DateTimeOffset') |  |
 
-<a name='M-Bb-Converters-ConverterHelperNullable-ToDateTime-System-Nullable{System-DateTimeOffset}-'></a>
+<a name='M-Bb-Converters-ConverterMoreNullable-ToDateTime-System-Nullable{System-DateTimeOffset}-'></a>
 ### ToDateTime(value) `method`
 
 ##### Summary
@@ -16733,7 +16967,7 @@ Convert a DateTime to a DateTimeOffset
 | ---- | ---- | ----------- |
 | value | [System.Nullable{System.DateTimeOffset}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{System.DateTimeOffset}') |  |
 
-<a name='M-Bb-Converters-ConverterHelperNullable-ToDateTimeOffset-System-DateTime-'></a>
+<a name='M-Bb-Converters-ConverterMoreNullable-ToDateTimeOffset-System-DateTime-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -16750,7 +16984,7 @@ Convert a DateTime to DateTimeOffset
 | ---- | ---- | ----------- |
 | value | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | DateTime |
 
-<a name='M-Bb-Converters-ConverterHelperNullable-ToDateTimeOffset-System-String,System-Globalization-CultureInfo-'></a>
+<a name='M-Bb-Converters-ConverterMoreNullable-ToDateTimeOffset-System-String,System-Globalization-CultureInfo-'></a>
 ### ToDateTimeOffset(value,cultureInfo) `method`
 
 ##### Summary
@@ -40067,6 +40301,146 @@ Gets the singleton instance of the ConfigurationFolder class.
 ##### Remarks
 
 This property ensures that only one instance of the ConfigurationFolder class is created and used throughout the application.
+
+<a name='M-Bb-StartingConfiguration-GetValues'></a>
+### GetValues() `method`
+
+##### Summary
+
+Gets a formatted string of all configuration key-value pairs.
+
+##### Returns
+
+A formatted string containing all configuration key-value pairs.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Example
+
+```C#
+string configValues = StartingConfiguration.Instance.GetValues();
+Console.WriteLine(configValues);
+```
+
+##### Remarks
+
+This method formats the configuration settings into a human-readable string.
+
+<a name='M-Bb-StartingConfiguration-Get``1-System-String-'></a>
+### Get\`\`1(key) `method`
+
+##### Summary
+
+Gets the value associated with the specified key.
+
+##### Returns
+
+The value associated with the specified key, or the default value of `T` if the key does not exist.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| key | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The key of the configuration setting. Must not be null or empty. |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | The type of the value to retrieve. |
+
+##### Example
+
+```C#
+string appName = StartingConfiguration.Instance.Get&lt;string&gt;("AppName");
+Console.WriteLine(appName);
+```
+
+##### Remarks
+
+This method retrieves a configuration value and casts it to the specified type.
+
+<a name='M-Bb-StartingConfiguration-LoadFromFile-System-String-'></a>
+### LoadFromFile(filePath) `method`
+
+##### Summary
+
+Loads configuration settings from a file.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| filePath | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The path to the configuration file. Must not be null or empty. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.IO.FileNotFoundException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IO.FileNotFoundException 'System.IO.FileNotFoundException') | Thrown if the specified file does not exist. |
+
+##### Example
+
+```C#
+StartingConfiguration.Instance.LoadFromFile("config.txt");
+```
+
+##### Remarks
+
+This method reads key-value pairs from a file and adds them to the configuration.
+
+<a name='M-Bb-StartingConfiguration-Set-System-String,System-Object-'></a>
+### Set(key,value) `method`
+
+##### Summary
+
+Sets a configuration value for the specified key.
+
+##### Returns
+
+The current [StartingConfiguration](#T-Bb-StartingConfiguration 'Bb.StartingConfiguration') instance for method chaining.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| key | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The key of the configuration setting. Must not be null or empty. |
+| value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The value to associate with the key. Can be null. |
+
+##### Example
+
+```C#
+StartingConfiguration.Instance.Set("AppName", "MyApplication");
+```
+
+##### Remarks
+
+This method adds or updates a configuration setting in the internal dictionary.
+
+<a name='M-Bb-StartingConfiguration-SetFromContent-System-String-'></a>
+### SetFromContent(filePath) `method`
+
+##### Summary
+
+Parses and sets configuration settings from the content of a file.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| filePath | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The path to the configuration file. Must not be null or empty. |
+
+##### Example
+
+```C#
+StartingConfiguration.Instance.SetFromContent("config.txt");
+```
+
+##### Remarks
+
+This method reads the content of a file and parses it into key-value pairs.
 
 <a name='T-ICSharpCode-Decompiler-FlowAnalysis-DefiniteAssignmentVisitor-State'></a>
 ## State `type`
