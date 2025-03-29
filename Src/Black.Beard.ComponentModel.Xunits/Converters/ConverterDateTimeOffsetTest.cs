@@ -1,4 +1,4 @@
-﻿using Bb.Expressions;
+﻿using Bb.Converters;
 using FluentAssertions;
 using System;
 using System.Globalization;
@@ -44,7 +44,7 @@ namespace Black.Beard.Converters
 
             DateTimeOffset date = new DateTimeOffset(2024, 3, 2, 10, 25, 36, new TimeSpan(2, 0, 0));
 
-            var i = date.ToLongIndex(true, Bb.Expressions.DateTimeLimit.Month);
+            var i = date.ToLongIndex(true, DateTimeLimit.Month);
 
             // 20 240 302 102 536
             ulong expected = 2403;
@@ -59,7 +59,7 @@ namespace Black.Beard.Converters
 
             DateTimeOffset date = new DateTimeOffset(2024, 3, 2, 10, 25, 36, new TimeSpan(2, 0, 0));
 
-            var i = date.ToLongIndex(true, Bb.Expressions.DateTimeLimit.Day);
+            var i = date.ToLongIndex(true, DateTimeLimit.Day);
 
             // 240 302 102 536
             ulong expected = 240302;
@@ -74,7 +74,7 @@ namespace Black.Beard.Converters
 
             DateTimeOffset date = new DateTimeOffset(2024, 3, 2, 10, 25, 36, new TimeSpan(2, 0, 0));
 
-            var i = date.ToLongIndex(true, Bb.Expressions.DateTimeLimit.Hour);
+            var i = date.ToLongIndex(true, DateTimeLimit.Hour);
 
             // 240 302 102 536
             ulong expected = 24030208;
@@ -89,7 +89,7 @@ namespace Black.Beard.Converters
 
             DateTimeOffset date = new DateTimeOffset(2024, 3, 2, 10, 25, 36, new TimeSpan(2, 0, 0));
 
-            var i = date.ToLongIndex(true, Bb.Expressions.DateTimeLimit.Minute);
+            var i = date.ToLongIndex(true, DateTimeLimit.Minute);
 
             // 240 302 102 536
             ulong expected = 2403020825;
@@ -104,7 +104,7 @@ namespace Black.Beard.Converters
 
             DateTimeOffset date = new DateTimeOffset(2024, 3, 2, 10, 25, 36, new TimeSpan(2, 0, 0));
 
-            var i = date.ToLongIndex(true, Bb.Expressions.DateTimeLimit.Second);
+            var i = date.ToLongIndex(true, DateTimeLimit.Second);
 
             // 240 302 102 536
             ulong expected = 240302082536;
@@ -119,7 +119,7 @@ namespace Black.Beard.Converters
 
             DateTimeOffset date = new DateTimeOffset(2024, 3, 2, 10, 25, 36, 925, new TimeSpan(2, 0, 0));
 
-            var i = date.ToLongIndex(true, Bb.Expressions.DateTimeLimit.MilliSecond);
+            var i = date.ToLongIndex(true, DateTimeLimit.MilliSecond);
 
             // 240 302 102 536
             ulong expected = 240302082536925;
@@ -134,7 +134,7 @@ namespace Black.Beard.Converters
 
             DateTimeOffset date = new DateTimeOffset(2024, 3, 2, 10, 25, 36, 925, new TimeSpan(2, 0, 0));
 
-            var i = date.ToLongIndex(false, Bb.Expressions.DateTimeLimit.MilliSecond);
+            var i = date.ToLongIndex(false, DateTimeLimit.MilliSecond);
 
             // 240 302 102 536
             ulong expected = 20240302082536925;

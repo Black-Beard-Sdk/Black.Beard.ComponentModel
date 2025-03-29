@@ -828,8 +828,8 @@
   - [AddDirectoryIfExists(folder)](#M-Bb-ConfigurationFolder-AddDirectoryIfExists-System-String- 'Bb.ConfigurationFolder.AddDirectoryIfExists(System.String)')
   - [AddDirectoryIfExists(folder)](#M-Bb-ConfigurationFolder-AddDirectoryIfExists-System-IO-DirectoryInfo- 'Bb.ConfigurationFolder.AddDirectoryIfExists(System.IO.DirectoryInfo)')
   - [GetPaths()](#M-Bb-ConfigurationFolder-GetPaths 'Bb.ConfigurationFolder.GetPaths')
-- [ConnexionReaderExtension](#T-Bb-ComponentModel-Converters-ConnexionReaderExtension 'Bb.ComponentModel.Converters.ConnexionReaderExtension')
-  - [GetKeyValues(payload)](#M-Bb-ComponentModel-Converters-ConnexionReaderExtension-GetKeyValues-System-String- 'Bb.ComponentModel.Converters.ConnexionReaderExtension.GetKeyValues(System.String)')
+- [ConnexionReaderExtension](#T-Bb-Converters-ConnexionReaderExtension 'Bb.Converters.ConnexionReaderExtension')
+  - [GetKeyValues(payload)](#M-Bb-Converters-ConnexionReaderExtension-GetKeyValues-System-String- 'Bb.Converters.ConnexionReaderExtension.GetKeyValues(System.String)')
 - [ConstantResolveResult](#T-ICSharpCode-Decompiler-Semantics-ConstantResolveResult 'ICSharpCode.Decompiler.Semantics.ConstantResolveResult')
 - [Constraint](#T-ICSharpCode-Decompiler-CSharp-Syntax-Constraint 'ICSharpCode.Decompiler.CSharp.Syntax.Constraint')
 - [ContainerKind](#T-ICSharpCode-Decompiler-IL-ContainerKind 'ICSharpCode.Decompiler.IL.ContainerKind')
@@ -941,92 +941,94 @@
   - [Culture](#P-Bb-Converters-ConverterContext-Culture 'Bb.Converters.ConverterContext.Culture')
   - [DefaultCultureInfo](#P-Bb-Converters-ConverterContext-DefaultCultureInfo 'Bb.Converters.ConverterContext.DefaultCultureInfo')
   - [Encoding](#P-Bb-Converters-ConverterContext-Encoding 'Bb.Converters.ConverterContext.Encoding')
-- [ConverterHelper](#T-Bb-Expressions-ConverterHelper 'Bb.Expressions.ConverterHelper')
-  - [#cctor()](#M-Bb-Expressions-ConverterHelper-#cctor 'Bb.Expressions.ConverterHelper.#cctor')
-  - [AppendConverter(method,replaceExisting)](#M-Bb-Expressions-ConverterHelper-AppendConverter-System-Delegate,System-Boolean- 'Bb.Expressions.ConverterHelper.AppendConverter(System.Delegate,System.Boolean)')
-  - [AppendConverters(type,replaceExisting,bindings)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Type,System-Nullable{System-Boolean},System-Reflection-BindingFlags,System-Func{System-Reflection-MethodInfo,System-Boolean}- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Type,System.Nullable{System.Boolean},System.Reflection.BindingFlags,System.Func{System.Reflection.MethodInfo,System.Boolean})')
-  - [AppendConverters(replaceExisting,ms)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Nullable{System-Boolean},System-Reflection-MethodInfo[]- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Nullable{System.Boolean},System.Reflection.MethodInfo[])')
-  - [AppendConverters(ms)](#M-Bb-Expressions-ConverterHelper-AppendConverters-System-Reflection-ConstructorInfo[]- 'Bb.Expressions.ConverterHelper.AppendConverters(System.Reflection.ConstructorInfo[])')
-  - [ConvertTo(self,targetType,culture)](#M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo- 'Bb.Expressions.ConverterHelper.ConvertTo(System.Object,System.Type,System.Globalization.CultureInfo)')
-  - [ConvertTo(self,targetType,encoding)](#M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Text-Encoding- 'Bb.Expressions.ConverterHelper.ConvertTo(System.Object,System.Type,System.Text.Encoding)')
-  - [ConvertTo(self,culture,targetType,encoding)](#M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo,System-Text-Encoding- 'Bb.Expressions.ConverterHelper.ConvertTo(System.Object,System.Type,System.Globalization.CultureInfo,System.Text.Encoding)')
-  - [ConvertToObject(self,targetType)](#M-Bb-Expressions-ConverterHelper-ConvertToObject-System-Object,System-Type- 'Bb.Expressions.ConverterHelper.ConvertToObject(System.Object,System.Type)')
-  - [GetFunctionForConvert(sourceType,targetType)](#M-Bb-Expressions-ConverterHelper-GetFunctionForConvert-System-Type,System-Type- 'Bb.Expressions.ConverterHelper.GetFunctionForConvert(System.Type,System.Type)')
-  - [GetMethodToConvert(sourceType,targetType,method)](#M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type,Bb-Converters-MethodConverter@- 'Bb.Expressions.ConverterHelper.GetMethodToConvert(System.Type,System.Type,Bb.Converters.MethodConverter@)')
-  - [GetMethodToConvert(sourceType,targetType)](#M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type- 'Bb.Expressions.ConverterHelper.GetMethodToConvert(System.Type,System.Type)')
-  - [Methods(filter)](#M-Bb-Expressions-ConverterHelper-Methods-System-Predicate{Bb-Converters-MethodTypeConverter}- 'Bb.Expressions.ConverterHelper.Methods(System.Predicate{Bb.Converters.MethodTypeConverter})')
-  - [Register(newMethod)](#M-Bb-Expressions-ConverterHelper-Register-Bb-Converters-MethodConverter- 'Bb.Expressions.ConverterHelper.Register(Bb.Converters.MethodConverter)')
-  - [Reset(type)](#M-Bb-Expressions-ConverterHelper-Reset-System-Type- 'Bb.Expressions.ConverterHelper.Reset(System.Type)')
-  - [ToBoolean(self)](#M-Bb-Expressions-ConverterHelper-ToBoolean-System-String- 'Bb.Expressions.ConverterHelper.ToBoolean(System.String)')
-  - [ToBoolean(self)](#M-Bb-Expressions-ConverterHelper-ToBoolean-System-Int32- 'Bb.Expressions.ConverterHelper.ToBoolean(System.Int32)')
-  - [ToByte(value)](#M-Bb-Expressions-ConverterHelper-ToByte-System-Char[]- 'Bb.Expressions.ConverterHelper.ToByte(System.Char[])')
-  - [ToByte(value)](#M-Bb-Expressions-ConverterHelper-ToByte-System-Byte[]- 'Bb.Expressions.ConverterHelper.ToByte(System.Byte[])')
-  - [ToByte(self)](#M-Bb-Expressions-ConverterHelper-ToByte-System-Single- 'Bb.Expressions.ConverterHelper.ToByte(System.Single)')
-  - [ToByteArray(value)](#M-Bb-Expressions-ConverterHelper-ToByteArray-System-String- 'Bb.Expressions.ConverterHelper.ToByteArray(System.String)')
-  - [ToByteArray(value)](#M-Bb-Expressions-ConverterHelper-ToByteArray-System-Char[]- 'Bb.Expressions.ConverterHelper.ToByteArray(System.Char[])')
-  - [ToByteArray(value)](#M-Bb-Expressions-ConverterHelper-ToByteArray-System-Char- 'Bb.Expressions.ConverterHelper.ToByteArray(System.Char)')
-  - [ToByteArray(value)](#M-Bb-Expressions-ConverterHelper-ToByteArray-System-Int32- 'Bb.Expressions.ConverterHelper.ToByteArray(System.Int32)')
-  - [ToChar(self)](#M-Bb-Expressions-ConverterHelper-ToChar-System-Single- 'Bb.Expressions.ConverterHelper.ToChar(System.Single)')
-  - [ToChar(self)](#M-Bb-Expressions-ConverterHelper-ToChar-System-Double- 'Bb.Expressions.ConverterHelper.ToChar(System.Double)')
-  - [ToChar(self)](#M-Bb-Expressions-ConverterHelper-ToChar-System-Boolean- 'Bb.Expressions.ConverterHelper.ToChar(System.Boolean)')
-  - [ToChar(self)](#M-Bb-Expressions-ConverterHelper-ToChar-System-Decimal- 'Bb.Expressions.ConverterHelper.ToChar(System.Decimal)')
-  - [ToChar(self)](#M-Bb-Expressions-ConverterHelper-ToChar-System-Int32- 'Bb.Expressions.ConverterHelper.ToChar(System.Int32)')
-  - [ToChar(value)](#M-Bb-Expressions-ConverterHelper-ToChar-System-Byte[]- 'Bb.Expressions.ConverterHelper.ToChar(System.Byte[])')
-  - [ToChar(value)](#M-Bb-Expressions-ConverterHelper-ToChar-System-SByte[]- 'Bb.Expressions.ConverterHelper.ToChar(System.SByte[])')
-  - [ToChar(value)](#M-Bb-Expressions-ConverterHelper-ToChar-System-Char[]- 'Bb.Expressions.ConverterHelper.ToChar(System.Char[])')
-  - [ToCharArray(value)](#M-Bb-Expressions-ConverterHelper-ToCharArray-System-Int32- 'Bb.Expressions.ConverterHelper.ToCharArray(System.Int32)')
-  - [ToCharArray(value)](#M-Bb-Expressions-ConverterHelper-ToCharArray-System-Guid- 'Bb.Expressions.ConverterHelper.ToCharArray(System.Guid)')
-  - [ToCharArray(value)](#M-Bb-Expressions-ConverterHelper-ToCharArray-System-Byte[]- 'Bb.Expressions.ConverterHelper.ToCharArray(System.Byte[])')
-  - [ToDateTime(value)](#M-Bb-Expressions-ConverterHelper-ToDateTime-System-DateTimeOffset- 'Bb.Expressions.ConverterHelper.ToDateTime(System.DateTimeOffset)')
-  - [ToDateTimeOffser(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffser-System-TimeSpan- 'Bb.Expressions.ConverterHelper.ToDateTimeOffser(System.TimeSpan)')
-  - [ToDateTimeOffset(value,cultureInfo)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-String,System-Globalization-CultureInfo- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.String,System.Globalization.CultureInfo)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-DateTime- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.DateTime)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-SByte- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.SByte)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Byte- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Byte)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Int16- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Int16)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-UInt16- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.UInt16)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Int32- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Int32)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-UInt32- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.UInt32)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Int64- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Int64)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-UInt64- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.UInt64)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Boolean- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Boolean)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Char- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Char)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Single- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Single)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Double- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Double)')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Decimal- 'Bb.Expressions.ConverterHelper.ToDateTimeOffset(System.Decimal)')
-  - [ToDecimal(value)](#M-Bb-Expressions-ConverterHelper-ToDecimal-System-Char- 'Bb.Expressions.ConverterHelper.ToDecimal(System.Char)')
-  - [ToDictionaryObject(self)](#M-Bb-Expressions-ConverterHelper-ToDictionaryObject-System-String- 'Bb.Expressions.ConverterHelper.ToDictionaryObject(System.String)')
-  - [ToDictionaryString(self)](#M-Bb-Expressions-ConverterHelper-ToDictionaryString-System-String- 'Bb.Expressions.ConverterHelper.ToDictionaryString(System.String)')
-  - [ToDouble(value)](#M-Bb-Expressions-ConverterHelper-ToDouble-System-Char- 'Bb.Expressions.ConverterHelper.ToDouble(System.Char)')
-  - [ToGuid(value)](#M-Bb-Expressions-ConverterHelper-ToGuid-System-Char[]- 'Bb.Expressions.ConverterHelper.ToGuid(System.Char[])')
-  - [ToInt16(value)](#M-Bb-Expressions-ConverterHelper-ToInt16-System-Single- 'Bb.Expressions.ConverterHelper.ToInt16(System.Single)')
-  - [ToInt16(value)](#M-Bb-Expressions-ConverterHelper-ToInt16-System-Double- 'Bb.Expressions.ConverterHelper.ToInt16(System.Double)')
-  - [ToInt16(value)](#M-Bb-Expressions-ConverterHelper-ToInt16-System-Char- 'Bb.Expressions.ConverterHelper.ToInt16(System.Char)')
-  - [ToInt32(value)](#M-Bb-Expressions-ConverterHelper-ToInt32-System-Single- 'Bb.Expressions.ConverterHelper.ToInt32(System.Single)')
-  - [ToInt32(value)](#M-Bb-Expressions-ConverterHelper-ToInt32-System-Double- 'Bb.Expressions.ConverterHelper.ToInt32(System.Double)')
-  - [ToInt32(value)](#M-Bb-Expressions-ConverterHelper-ToInt32-System-Char- 'Bb.Expressions.ConverterHelper.ToInt32(System.Char)')
-  - [ToInt64(value)](#M-Bb-Expressions-ConverterHelper-ToInt64-System-Single- 'Bb.Expressions.ConverterHelper.ToInt64(System.Single)')
-  - [ToInt64(value)](#M-Bb-Expressions-ConverterHelper-ToInt64-System-Double- 'Bb.Expressions.ConverterHelper.ToInt64(System.Double)')
-  - [ToInt64(value)](#M-Bb-Expressions-ConverterHelper-ToInt64-System-Char- 'Bb.Expressions.ConverterHelper.ToInt64(System.Char)')
-  - [ToObject(self,targetType,context)](#M-Bb-Expressions-ConverterHelper-ToObject-System-Object,System-Type,Bb-Converters-ConverterContext- 'Bb.Expressions.ConverterHelper.ToObject(System.Object,System.Type,Bb.Converters.ConverterContext)')
-  - [ToObject\`\`1(self)](#M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object- 'Bb.Expressions.ConverterHelper.ToObject``1(System.Object)')
-  - [ToObject\`\`1(self,culture)](#M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo- 'Bb.Expressions.ConverterHelper.ToObject``1(System.Object,System.Globalization.CultureInfo)')
-  - [ToObject\`\`1(self,encoding)](#M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Text-Encoding- 'Bb.Expressions.ConverterHelper.ToObject``1(System.Object,System.Text.Encoding)')
-  - [ToObject\`\`1(self,culture,encoding)](#M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo,System-Text-Encoding- 'Bb.Expressions.ConverterHelper.ToObject``1(System.Object,System.Globalization.CultureInfo,System.Text.Encoding)')
-  - [ToSByte(value)](#M-Bb-Expressions-ConverterHelper-ToSByte-System-Char[]- 'Bb.Expressions.ConverterHelper.ToSByte(System.Char[])')
-  - [ToSByte(value)](#M-Bb-Expressions-ConverterHelper-ToSByte-System-Byte[]- 'Bb.Expressions.ConverterHelper.ToSByte(System.Byte[])')
-  - [ToSByte(value)](#M-Bb-Expressions-ConverterHelper-ToSByte-System-SByte[]- 'Bb.Expressions.ConverterHelper.ToSByte(System.SByte[])')
-  - [ToSingle(value)](#M-Bb-Expressions-ConverterHelper-ToSingle-System-Char- 'Bb.Expressions.ConverterHelper.ToSingle(System.Char)')
-  - [ToString(value)](#M-Bb-Expressions-ConverterHelper-ToString-System-Guid- 'Bb.Expressions.ConverterHelper.ToString(System.Guid)')
-  - [ToString(self)](#M-Bb-Expressions-ConverterHelper-ToString-System-Char[]- 'Bb.Expressions.ConverterHelper.ToString(System.Char[])')
-  - [ToString(self)](#M-Bb-Expressions-ConverterHelper-ToString-System-Byte[]- 'Bb.Expressions.ConverterHelper.ToString(System.Byte[])')
-  - [ToTimeSpan(value)](#M-Bb-Expressions-ConverterHelper-ToTimeSpan-System-DateTime- 'Bb.Expressions.ConverterHelper.ToTimeSpan(System.DateTime)')
-  - [ToTimeSpan(value)](#M-Bb-Expressions-ConverterHelper-ToTimeSpan-System-DateTimeOffset- 'Bb.Expressions.ConverterHelper.ToTimeSpan(System.DateTimeOffset)')
-- [ConverterHelperNullable](#T-Bb-Expressions-ConverterHelperNullable 'Bb.Expressions.ConverterHelperNullable')
-  - [ToDateTime(value)](#M-Bb-Expressions-ConverterHelperNullable-ToDateTime-System-DateTimeOffset- 'Bb.Expressions.ConverterHelperNullable.ToDateTime(System.DateTimeOffset)')
-  - [ToDateTime(value)](#M-Bb-Expressions-ConverterHelperNullable-ToDateTime-System-Nullable{System-DateTimeOffset}- 'Bb.Expressions.ConverterHelperNullable.ToDateTime(System.Nullable{System.DateTimeOffset})')
-  - [ToDateTimeOffset(value)](#M-Bb-Expressions-ConverterHelperNullable-ToDateTimeOffset-System-DateTime- 'Bb.Expressions.ConverterHelperNullable.ToDateTimeOffset(System.DateTime)')
-  - [ToDateTimeOffset(value,cultureInfo)](#M-Bb-Expressions-ConverterHelperNullable-ToDateTimeOffset-System-String,System-Globalization-CultureInfo- 'Bb.Expressions.ConverterHelperNullable.ToDateTimeOffset(System.String,System.Globalization.CultureInfo)')
+- [ConverterHelper](#T-Bb-Converters-ConverterHelper 'Bb.Converters.ConverterHelper')
+  - [#cctor()](#M-Bb-Converters-ConverterHelper-#cctor 'Bb.Converters.ConverterHelper.#cctor')
+  - [AppendConverter(method,replaceExisting)](#M-Bb-Converters-ConverterHelper-AppendConverter-System-Delegate,System-Boolean- 'Bb.Converters.ConverterHelper.AppendConverter(System.Delegate,System.Boolean)')
+  - [AppendConverters(type,replaceExisting,bindings)](#M-Bb-Converters-ConverterHelper-AppendConverters-System-Type,System-Nullable{System-Boolean},System-Reflection-BindingFlags,System-Func{System-Reflection-MethodInfo,System-Boolean}- 'Bb.Converters.ConverterHelper.AppendConverters(System.Type,System.Nullable{System.Boolean},System.Reflection.BindingFlags,System.Func{System.Reflection.MethodInfo,System.Boolean})')
+  - [AppendConverters(replaceExisting,ms)](#M-Bb-Converters-ConverterHelper-AppendConverters-System-Nullable{System-Boolean},System-Reflection-MethodInfo[]- 'Bb.Converters.ConverterHelper.AppendConverters(System.Nullable{System.Boolean},System.Reflection.MethodInfo[])')
+  - [AppendConverters(ms)](#M-Bb-Converters-ConverterHelper-AppendConverters-System-Reflection-ConstructorInfo[]- 'Bb.Converters.ConverterHelper.AppendConverters(System.Reflection.ConstructorInfo[])')
+  - [ConvertTo(self,targetType,culture)](#M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo- 'Bb.Converters.ConverterHelper.ConvertTo(System.Object,System.Type,System.Globalization.CultureInfo)')
+  - [ConvertTo(self,targetType,encoding)](#M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,System-Text-Encoding- 'Bb.Converters.ConverterHelper.ConvertTo(System.Object,System.Type,System.Text.Encoding)')
+  - [ConvertTo(self,culture,targetType,encoding)](#M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo,System-Text-Encoding- 'Bb.Converters.ConverterHelper.ConvertTo(System.Object,System.Type,System.Globalization.CultureInfo,System.Text.Encoding)')
+  - [ConvertToObject(self,targetType)](#M-Bb-Converters-ConverterHelper-ConvertToObject-System-Object,System-Type- 'Bb.Converters.ConverterHelper.ConvertToObject(System.Object,System.Type)')
+  - [GetFunctionForConvert(sourceType,targetType)](#M-Bb-Converters-ConverterHelper-GetFunctionForConvert-System-Type,System-Type- 'Bb.Converters.ConverterHelper.GetFunctionForConvert(System.Type,System.Type)')
+  - [GetMethodToConvert(sourceType,targetType)](#M-Bb-Converters-ConverterHelper-GetMethodToConvert-System-Type,System-Type- 'Bb.Converters.ConverterHelper.GetMethodToConvert(System.Type,System.Type)')
+  - [Methods(filter)](#M-Bb-Converters-ConverterHelper-Methods-System-Predicate{Bb-Converters-MethodTypeConverter}- 'Bb.Converters.ConverterHelper.Methods(System.Predicate{Bb.Converters.MethodTypeConverter})')
+  - [Register(newMethod)](#M-Bb-Converters-ConverterHelper-Register-Bb-Converters-MethodConverter- 'Bb.Converters.ConverterHelper.Register(Bb.Converters.MethodConverter)')
+  - [Reset(type)](#M-Bb-Converters-ConverterHelper-Reset-System-Type- 'Bb.Converters.ConverterHelper.Reset(System.Type)')
+  - [Serialize(value)](#M-Bb-Converters-ConverterHelper-Serialize-System-Object- 'Bb.Converters.ConverterHelper.Serialize(System.Object)')
+  - [ToBoolean(self)](#M-Bb-Converters-ConverterHelper-ToBoolean-System-String- 'Bb.Converters.ConverterHelper.ToBoolean(System.String)')
+  - [ToBoolean(self)](#M-Bb-Converters-ConverterHelper-ToBoolean-System-Int32- 'Bb.Converters.ConverterHelper.ToBoolean(System.Int32)')
+  - [ToByte(value)](#M-Bb-Converters-ConverterHelper-ToByte-System-Char[]- 'Bb.Converters.ConverterHelper.ToByte(System.Char[])')
+  - [ToByte(value)](#M-Bb-Converters-ConverterHelper-ToByte-System-Byte[]- 'Bb.Converters.ConverterHelper.ToByte(System.Byte[])')
+  - [ToByte(self)](#M-Bb-Converters-ConverterHelper-ToByte-System-Single- 'Bb.Converters.ConverterHelper.ToByte(System.Single)')
+  - [ToByteArray(value)](#M-Bb-Converters-ConverterHelper-ToByteArray-System-String- 'Bb.Converters.ConverterHelper.ToByteArray(System.String)')
+  - [ToByteArray(value)](#M-Bb-Converters-ConverterHelper-ToByteArray-System-Char[]- 'Bb.Converters.ConverterHelper.ToByteArray(System.Char[])')
+  - [ToByteArray(value)](#M-Bb-Converters-ConverterHelper-ToByteArray-System-Char- 'Bb.Converters.ConverterHelper.ToByteArray(System.Char)')
+  - [ToByteArray(value)](#M-Bb-Converters-ConverterHelper-ToByteArray-System-Int32- 'Bb.Converters.ConverterHelper.ToByteArray(System.Int32)')
+  - [ToChar(self)](#M-Bb-Converters-ConverterHelper-ToChar-System-Single- 'Bb.Converters.ConverterHelper.ToChar(System.Single)')
+  - [ToChar(self)](#M-Bb-Converters-ConverterHelper-ToChar-System-Double- 'Bb.Converters.ConverterHelper.ToChar(System.Double)')
+  - [ToChar(self)](#M-Bb-Converters-ConverterHelper-ToChar-System-Boolean- 'Bb.Converters.ConverterHelper.ToChar(System.Boolean)')
+  - [ToChar(self)](#M-Bb-Converters-ConverterHelper-ToChar-System-Decimal- 'Bb.Converters.ConverterHelper.ToChar(System.Decimal)')
+  - [ToChar(self)](#M-Bb-Converters-ConverterHelper-ToChar-System-Int32- 'Bb.Converters.ConverterHelper.ToChar(System.Int32)')
+  - [ToChar(value)](#M-Bb-Converters-ConverterHelper-ToChar-System-Byte[]- 'Bb.Converters.ConverterHelper.ToChar(System.Byte[])')
+  - [ToChar(value)](#M-Bb-Converters-ConverterHelper-ToChar-System-SByte[]- 'Bb.Converters.ConverterHelper.ToChar(System.SByte[])')
+  - [ToChar(value)](#M-Bb-Converters-ConverterHelper-ToChar-System-Char[]- 'Bb.Converters.ConverterHelper.ToChar(System.Char[])')
+  - [ToCharArray(value)](#M-Bb-Converters-ConverterHelper-ToCharArray-System-Int32- 'Bb.Converters.ConverterHelper.ToCharArray(System.Int32)')
+  - [ToCharArray(value)](#M-Bb-Converters-ConverterHelper-ToCharArray-System-Guid- 'Bb.Converters.ConverterHelper.ToCharArray(System.Guid)')
+  - [ToCharArray(value)](#M-Bb-Converters-ConverterHelper-ToCharArray-System-Byte[]- 'Bb.Converters.ConverterHelper.ToCharArray(System.Byte[])')
+  - [ToDateTime(value)](#M-Bb-Converters-ConverterHelper-ToDateTime-System-DateTimeOffset- 'Bb.Converters.ConverterHelper.ToDateTime(System.DateTimeOffset)')
+  - [ToDateTimeOffser(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffser-System-TimeSpan- 'Bb.Converters.ConverterHelper.ToDateTimeOffser(System.TimeSpan)')
+  - [ToDateTimeOffset(value,cultureInfo)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-String,System-Globalization-CultureInfo- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.String,System.Globalization.CultureInfo)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-DateTime- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.DateTime)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-SByte- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.SByte)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Byte- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.Byte)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Int16- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.Int16)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-UInt16- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.UInt16)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Int32- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.Int32)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-UInt32- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.UInt32)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Int64- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.Int64)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-UInt64- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.UInt64)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Boolean- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.Boolean)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Char- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.Char)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Single- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.Single)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Double- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.Double)')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Decimal- 'Bb.Converters.ConverterHelper.ToDateTimeOffset(System.Decimal)')
+  - [ToDecimal(value)](#M-Bb-Converters-ConverterHelper-ToDecimal-System-Char- 'Bb.Converters.ConverterHelper.ToDecimal(System.Char)')
+  - [ToDictionaryObject(self)](#M-Bb-Converters-ConverterHelper-ToDictionaryObject-System-String- 'Bb.Converters.ConverterHelper.ToDictionaryObject(System.String)')
+  - [ToDictionaryString(self)](#M-Bb-Converters-ConverterHelper-ToDictionaryString-System-String- 'Bb.Converters.ConverterHelper.ToDictionaryString(System.String)')
+  - [ToDouble(value)](#M-Bb-Converters-ConverterHelper-ToDouble-System-Char- 'Bb.Converters.ConverterHelper.ToDouble(System.Char)')
+  - [ToGuid(value)](#M-Bb-Converters-ConverterHelper-ToGuid-System-Char[]- 'Bb.Converters.ConverterHelper.ToGuid(System.Char[])')
+  - [ToInt16(value)](#M-Bb-Converters-ConverterHelper-ToInt16-System-Single- 'Bb.Converters.ConverterHelper.ToInt16(System.Single)')
+  - [ToInt16(value)](#M-Bb-Converters-ConverterHelper-ToInt16-System-Double- 'Bb.Converters.ConverterHelper.ToInt16(System.Double)')
+  - [ToInt16(value)](#M-Bb-Converters-ConverterHelper-ToInt16-System-Char- 'Bb.Converters.ConverterHelper.ToInt16(System.Char)')
+  - [ToInt32(value)](#M-Bb-Converters-ConverterHelper-ToInt32-System-Single- 'Bb.Converters.ConverterHelper.ToInt32(System.Single)')
+  - [ToInt32(value)](#M-Bb-Converters-ConverterHelper-ToInt32-System-Double- 'Bb.Converters.ConverterHelper.ToInt32(System.Double)')
+  - [ToInt32(value)](#M-Bb-Converters-ConverterHelper-ToInt32-System-Char- 'Bb.Converters.ConverterHelper.ToInt32(System.Char)')
+  - [ToInt64(value)](#M-Bb-Converters-ConverterHelper-ToInt64-System-Single- 'Bb.Converters.ConverterHelper.ToInt64(System.Single)')
+  - [ToInt64(value)](#M-Bb-Converters-ConverterHelper-ToInt64-System-Double- 'Bb.Converters.ConverterHelper.ToInt64(System.Double)')
+  - [ToInt64(value)](#M-Bb-Converters-ConverterHelper-ToInt64-System-Char- 'Bb.Converters.ConverterHelper.ToInt64(System.Char)')
+  - [ToObject(self,targetType,context)](#M-Bb-Converters-ConverterHelper-ToObject-System-Object,System-Type,Bb-Converters-ConverterContext- 'Bb.Converters.ConverterHelper.ToObject(System.Object,System.Type,Bb.Converters.ConverterContext)')
+  - [ToObject\`\`1(self)](#M-Bb-Converters-ConverterHelper-ToObject``1-System-Object- 'Bb.Converters.ConverterHelper.ToObject``1(System.Object)')
+  - [ToObject\`\`1(self,culture)](#M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo- 'Bb.Converters.ConverterHelper.ToObject``1(System.Object,System.Globalization.CultureInfo)')
+  - [ToObject\`\`1(self,encoding)](#M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Text-Encoding- 'Bb.Converters.ConverterHelper.ToObject``1(System.Object,System.Text.Encoding)')
+  - [ToObject\`\`1(self,culture,encoding)](#M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo,System-Text-Encoding- 'Bb.Converters.ConverterHelper.ToObject``1(System.Object,System.Globalization.CultureInfo,System.Text.Encoding)')
+  - [ToSByte(value)](#M-Bb-Converters-ConverterHelper-ToSByte-System-Char[]- 'Bb.Converters.ConverterHelper.ToSByte(System.Char[])')
+  - [ToSByte(value)](#M-Bb-Converters-ConverterHelper-ToSByte-System-Byte[]- 'Bb.Converters.ConverterHelper.ToSByte(System.Byte[])')
+  - [ToSByte(value)](#M-Bb-Converters-ConverterHelper-ToSByte-System-SByte[]- 'Bb.Converters.ConverterHelper.ToSByte(System.SByte[])')
+  - [ToSingle(value)](#M-Bb-Converters-ConverterHelper-ToSingle-System-Char- 'Bb.Converters.ConverterHelper.ToSingle(System.Char)')
+  - [ToString(value)](#M-Bb-Converters-ConverterHelper-ToString-System-Guid- 'Bb.Converters.ConverterHelper.ToString(System.Guid)')
+  - [ToString(self)](#M-Bb-Converters-ConverterHelper-ToString-System-Char[]- 'Bb.Converters.ConverterHelper.ToString(System.Char[])')
+  - [ToString(self)](#M-Bb-Converters-ConverterHelper-ToString-System-Byte[]- 'Bb.Converters.ConverterHelper.ToString(System.Byte[])')
+  - [ToTimeSpan(value)](#M-Bb-Converters-ConverterHelper-ToTimeSpan-System-DateTime- 'Bb.Converters.ConverterHelper.ToTimeSpan(System.DateTime)')
+  - [ToTimeSpan(value)](#M-Bb-Converters-ConverterHelper-ToTimeSpan-System-DateTimeOffset- 'Bb.Converters.ConverterHelper.ToTimeSpan(System.DateTimeOffset)')
+  - [TryGetMethodToConvert(sourceType,targetType,method)](#M-Bb-Converters-ConverterHelper-TryGetMethodToConvert-System-Type,System-Type,Bb-Converters-MethodConverter@- 'Bb.Converters.ConverterHelper.TryGetMethodToConvert(System.Type,System.Type,Bb.Converters.MethodConverter@)')
+  - [Unserialize(value,type)](#M-Bb-Converters-ConverterHelper-Unserialize-System-String,System-Type- 'Bb.Converters.ConverterHelper.Unserialize(System.String,System.Type)')
+- [ConverterHelperNullable](#T-Bb-Converters-ConverterHelperNullable 'Bb.Converters.ConverterHelperNullable')
+  - [ToDateTime(value)](#M-Bb-Converters-ConverterHelperNullable-ToDateTime-System-DateTimeOffset- 'Bb.Converters.ConverterHelperNullable.ToDateTime(System.DateTimeOffset)')
+  - [ToDateTime(value)](#M-Bb-Converters-ConverterHelperNullable-ToDateTime-System-Nullable{System-DateTimeOffset}- 'Bb.Converters.ConverterHelperNullable.ToDateTime(System.Nullable{System.DateTimeOffset})')
+  - [ToDateTimeOffset(value)](#M-Bb-Converters-ConverterHelperNullable-ToDateTimeOffset-System-DateTime- 'Bb.Converters.ConverterHelperNullable.ToDateTimeOffset(System.DateTime)')
+  - [ToDateTimeOffset(value,cultureInfo)](#M-Bb-Converters-ConverterHelperNullable-ToDateTimeOffset-System-String,System-Globalization-CultureInfo- 'Bb.Converters.ConverterHelperNullable.ToDateTimeOffset(System.String,System.Globalization.CultureInfo)')
 - [Converter\`1](#T-Bb-Converters-Converter`1 'Bb.Converters.Converter`1')
   - [Format](#P-Bb-Converters-Converter`1-Format 'Bb.Converters.Converter`1.Format')
 - [Converter\`2](#T-Bb-Converters-Converter`2 'Bb.Converters.Converter`2')
@@ -2471,10 +2473,6 @@
 - [MultiDictionary\`2](#T-ICSharpCode-Decompiler-Util-MultiDictionary`2 'ICSharpCode.Decompiler.Util.MultiDictionary`2')
   - [Count](#P-ICSharpCode-Decompiler-Util-MultiDictionary`2-Count 'ICSharpCode.Decompiler.Util.MultiDictionary`2.Count')
   - [RemoveAll()](#M-ICSharpCode-Decompiler-Util-MultiDictionary`2-RemoveAll-`0- 'ICSharpCode.Decompiler.Util.MultiDictionary`2.RemoveAll(`0)')
-- [MyConverter](#T-Bb-Converters-MyConverter 'Bb.Converters.MyConverter')
-  - [Default](#F-Bb-Converters-MyConverter-Default 'Bb.Converters.MyConverter.Default')
-  - [Serialize(value)](#M-Bb-Converters-MyConverter-Serialize-System-Object- 'Bb.Converters.MyConverter.Serialize(System.Object)')
-  - [Unserialize(value,type)](#M-Bb-Converters-MyConverter-Unserialize-System-String,System-Type- 'Bb.Converters.MyConverter.Unserialize(System.String,System.Type)')
 - [NInt](#T-ICSharpCode-Decompiler-TypeSystem-ReflectionHelper-NInt 'ICSharpCode.Decompiler.TypeSystem.ReflectionHelper.NInt')
 - [NUInt](#T-ICSharpCode-Decompiler-TypeSystem-ReflectionHelper-NUInt 'ICSharpCode.Decompiler.TypeSystem.ReflectionHelper.NUInt')
 - [NameLookupMode](#T-ICSharpCode-Decompiler-CSharp-Resolver-NameLookupMode 'ICSharpCode.Decompiler.CSharp.Resolver.NameLookupMode')
@@ -2866,9 +2864,9 @@
   - [ToTypeReference(type)](#M-ICSharpCode-Decompiler-TypeSystem-ReflectionHelper-ToTypeReference-System-Type- 'ICSharpCode.Decompiler.TypeSystem.ReflectionHelper.ToTypeReference(System.Type)')
   - [ToTypeReference(typeCode)](#M-ICSharpCode-Decompiler-TypeSystem-ReflectionHelper-ToTypeReference-System-TypeCode- 'ICSharpCode.Decompiler.TypeSystem.ReflectionHelper.ToTypeReference(System.TypeCode)')
 - [ReflectionNameParseException](#T-ICSharpCode-Decompiler-TypeSystem-ReflectionNameParseException 'ICSharpCode.Decompiler.TypeSystem.ReflectionNameParseException')
-- [ReflexionHelper](#T-Bb-Expressions-ReflexionHelper 'Bb.Expressions.ReflexionHelper')
-  - [GetMethodList(self)](#M-Bb-Expressions-ReflexionHelper-GetMethodList-System-Type- 'Bb.Expressions.ReflexionHelper.GetMethodList(System.Type)')
-  - [GetMethods(self,filter)](#M-Bb-Expressions-ReflexionHelper-GetMethods-System-Type,System-Func{System-Reflection-MethodInfo,System-Boolean}- 'Bb.Expressions.ReflexionHelper.GetMethods(System.Type,System.Func{System.Reflection.MethodInfo,System.Boolean})')
+- [ReflexionHelper](#T-Bb-Converters-ReflexionHelper 'Bb.Converters.ReflexionHelper')
+  - [GetMethodList(self)](#M-Bb-Converters-ReflexionHelper-GetMethodList-System-Type- 'Bb.Converters.ReflexionHelper.GetMethodList(System.Type)')
+  - [GetMethods(self,filter)](#M-Bb-Converters-ReflexionHelper-GetMethods-System-Type,System-Func{System-Reflection-MethodInfo,System-Boolean}- 'Bb.Converters.ReflexionHelper.GetMethods(System.Type,System.Func{System.Reflection.MethodInfo,System.Boolean})')
 - [RemoveCLSCompliantAttribute](#T-ICSharpCode-Decompiler-CSharp-Transforms-RemoveCLSCompliantAttribute 'ICSharpCode.Decompiler.CSharp.Transforms.RemoveCLSCompliantAttribute')
 - [RemoveCompilerGeneratedAssemblyAttributes](#T-ICSharpCode-Decompiler-CSharp-Transforms-RemoveCompilerGeneratedAssemblyAttributes 'ICSharpCode.Decompiler.CSharp.Transforms.RemoveCompilerGeneratedAssemblyAttributes')
 - [RemoveDeadVariableInit](#T-ICSharpCode-Decompiler-IL-Transforms-RemoveDeadVariableInit 'ICSharpCode.Decompiler.IL.Transforms.RemoveDeadVariableInit')
@@ -2977,6 +2975,8 @@
   - [GetStandardValues(context)](#M-Bb-Helpers-StandardValuesStringConverter-GetStandardValues-System-ComponentModel-ITypeDescriptorContext- 'Bb.Helpers.StandardValuesStringConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)')
   - [GetStandardValuesExclusive(context)](#M-Bb-Helpers-StandardValuesStringConverter-GetStandardValuesExclusive-System-ComponentModel-ITypeDescriptorContext- 'Bb.Helpers.StandardValuesStringConverter.GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext)')
   - [GetStandardValuesSupported(context)](#M-Bb-Helpers-StandardValuesStringConverter-GetStandardValuesSupported-System-ComponentModel-ITypeDescriptorContext- 'Bb.Helpers.StandardValuesStringConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)')
+- [StartingConfiguration](#T-Bb-StartingConfiguration 'Bb.StartingConfiguration')
+  - [Instance](#P-Bb-StartingConfiguration-Instance 'Bb.StartingConfiguration.Instance')
 - [State](#T-ICSharpCode-Decompiler-FlowAnalysis-DefiniteAssignmentVisitor-State 'ICSharpCode.Decompiler.FlowAnalysis.DefiniteAssignmentVisitor.State')
 - [State](#T-ICSharpCode-Decompiler-FlowAnalysis-ReachingDefinitionsVisitor-State 'ICSharpCode.Decompiler.FlowAnalysis.ReachingDefinitionsVisitor.State')
   - [#ctor()](#M-ICSharpCode-Decompiler-FlowAnalysis-DefiniteAssignmentVisitor-State-#ctor-System-Int32- 'ICSharpCode.Decompiler.FlowAnalysis.DefiniteAssignmentVisitor.State.#ctor(System.Int32)')
@@ -14215,14 +14215,14 @@ An array of paths for all the directories in the collection.
 
 This method has no parameters.
 
-<a name='T-Bb-ComponentModel-Converters-ConnexionReaderExtension'></a>
+<a name='T-Bb-Converters-ConnexionReaderExtension'></a>
 ## ConnexionReaderExtension `type`
 
 ##### Namespace
 
-Bb.ComponentModel.Converters
+Bb.Converters
 
-<a name='M-Bb-ComponentModel-Converters-ConnexionReaderExtension-GetKeyValues-System-String-'></a>
+<a name='M-Bb-Converters-ConnexionReaderExtension-GetKeyValues-System-String-'></a>
 ### GetKeyValues(payload) `method`
 
 ##### Summary
@@ -15259,18 +15259,18 @@ Culture used by default if the parameter is not specified
 
 Encoding used by default if the parameter is not specified
 
-<a name='T-Bb-Expressions-ConverterHelper'></a>
+<a name='T-Bb-Converters-ConverterHelper'></a>
 ## ConverterHelper `type`
 
 ##### Namespace
 
-Bb.Expressions
+Bb.Converters
 
 ##### Summary
 
 Referential of method for conversion between types
 
-<a name='M-Bb-Expressions-ConverterHelper-#cctor'></a>
+<a name='M-Bb-Converters-ConverterHelper-#cctor'></a>
 ### #cctor() `method`
 
 ##### Summary
@@ -15281,7 +15281,7 @@ Constructor
 
 This method has no parameters.
 
-<a name='M-Bb-Expressions-ConverterHelper-AppendConverter-System-Delegate,System-Boolean-'></a>
+<a name='M-Bb-Converters-ConverterHelper-AppendConverter-System-Delegate,System-Boolean-'></a>
 ### AppendConverter(method,replaceExisting) `method`
 
 ##### Summary
@@ -15295,7 +15295,7 @@ Append new method to register
 | method | [System.Delegate](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Delegate 'System.Delegate') |  |
 | replaceExisting | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-AppendConverters-System-Type,System-Nullable{System-Boolean},System-Reflection-BindingFlags,System-Func{System-Reflection-MethodInfo,System-Boolean}-'></a>
+<a name='M-Bb-Converters-ConverterHelper-AppendConverters-System-Type,System-Nullable{System-Boolean},System-Reflection-BindingFlags,System-Func{System-Reflection-MethodInfo,System-Boolean}-'></a>
 ### AppendConverters(type,replaceExisting,bindings) `method`
 
 ##### Summary
@@ -15310,7 +15310,7 @@ Append new method to register
 | replaceExisting | [System.Nullable{System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{System.Boolean}') | if true, replace existing methods |
 | bindings | [System.Reflection.BindingFlags](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.BindingFlags 'System.Reflection.BindingFlags') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-AppendConverters-System-Nullable{System-Boolean},System-Reflection-MethodInfo[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-AppendConverters-System-Nullable{System-Boolean},System-Reflection-MethodInfo[]-'></a>
 ### AppendConverters(replaceExisting,ms) `method`
 
 ##### Summary
@@ -15324,7 +15324,7 @@ Add methods to the list of methods to be used for conversion
 | replaceExisting | [System.Nullable{System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{System.Boolean}') | if true, replace existing methods |
 | ms | [System.Reflection.MethodInfo[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.MethodInfo[] 'System.Reflection.MethodInfo[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-AppendConverters-System-Reflection-ConstructorInfo[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-AppendConverters-System-Reflection-ConstructorInfo[]-'></a>
 ### AppendConverters(ms) `method`
 
 ##### Summary
@@ -15337,7 +15337,7 @@ Add methods to the list of methods to be used for conversion
 | ---- | ---- | ----------- |
 | ms | [System.Reflection.ConstructorInfo[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.ConstructorInfo[] 'System.Reflection.ConstructorInfo[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo-'></a>
 ### ConvertTo(self,targetType,culture) `method`
 
 ##### Summary
@@ -15356,7 +15356,7 @@ Convert a value to specified target type
 | targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
 | culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | culture for help conversion |
 
-<a name='M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Text-Encoding-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,System-Text-Encoding-'></a>
 ### ConvertTo(self,targetType,encoding) `method`
 
 ##### Summary
@@ -15375,7 +15375,7 @@ Convert a value to specified target type
 | targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
 | encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
 
-<a name='M-Bb-Expressions-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo,System-Text-Encoding-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo,System-Text-Encoding-'></a>
 ### ConvertTo(self,culture,targetType,encoding) `method`
 
 ##### Summary
@@ -15395,7 +15395,7 @@ Convert a value to specified target type
 | targetType | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | Target type |
 | encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
 
-<a name='M-Bb-Expressions-ConverterHelper-ConvertToObject-System-Object,System-Type-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ConvertToObject-System-Object,System-Type-'></a>
 ### ConvertToObject(self,targetType) `method`
 
 ##### Summary
@@ -15413,7 +15413,7 @@ Convert a value to specified target type
 | self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
 | targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
 
-<a name='M-Bb-Expressions-ConverterHelper-GetFunctionForConvert-System-Type,System-Type-'></a>
+<a name='M-Bb-Converters-ConverterHelper-GetFunctionForConvert-System-Type,System-Type-'></a>
 ### GetFunctionForConvert(sourceType,targetType) `method`
 
 ##### Summary
@@ -15431,26 +15431,7 @@ Get the function to convert sourceType to targetType
 | sourceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Source type |
 | targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
 
-<a name='M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type,Bb-Converters-MethodConverter@-'></a>
-### GetMethodToConvert(sourceType,targetType,method) `method`
-
-##### Summary
-
-Try to resolve the method to convert sourceType to targetType
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| sourceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
-| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
-| method | [Bb.Converters.MethodConverter@](#T-Bb-Converters-MethodConverter@ 'Bb.Converters.MethodConverter@') |  |
-
-<a name='M-Bb-Expressions-ConverterHelper-GetMethodToConvert-System-Type,System-Type-'></a>
+<a name='M-Bb-Converters-ConverterHelper-GetMethodToConvert-System-Type,System-Type-'></a>
 ### GetMethodToConvert(sourceType,targetType) `method`
 
 ##### Summary
@@ -15468,7 +15449,7 @@ Get the method to convert sourceType to targetType
 | sourceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Source type |
 | targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
 
-<a name='M-Bb-Expressions-ConverterHelper-Methods-System-Predicate{Bb-Converters-MethodTypeConverter}-'></a>
+<a name='M-Bb-Converters-ConverterHelper-Methods-System-Predicate{Bb-Converters-MethodTypeConverter}-'></a>
 ### Methods(filter) `method`
 
 ##### Summary
@@ -15485,7 +15466,7 @@ Return all source types that can be converted to targetType
 | ---- | ---- | ----------- |
 | filter | [System.Predicate{Bb.Converters.MethodTypeConverter}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Predicate 'System.Predicate{Bb.Converters.MethodTypeConverter}') | filter for bypass items |
 
-<a name='M-Bb-Expressions-ConverterHelper-Register-Bb-Converters-MethodConverter-'></a>
+<a name='M-Bb-Converters-ConverterHelper-Register-Bb-Converters-MethodConverter-'></a>
 ### Register(newMethod) `method`
 
 ##### Summary
@@ -15508,7 +15489,7 @@ Register a new method to convert sourceType to targetType
 
 If a method already existing in the referential and the property ReplaceExisting is false, the method is not append
 
-<a name='M-Bb-Expressions-ConverterHelper-Reset-System-Type-'></a>
+<a name='M-Bb-Converters-ConverterHelper-Reset-System-Type-'></a>
 ### Reset(type) `method`
 
 ##### Summary
@@ -15521,7 +15502,24 @@ Remove specified type
 | ---- | ---- | ----------- |
 | type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | specified type to remove |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToBoolean-System-String-'></a>
+<a name='M-Bb-Converters-ConverterHelper-Serialize-System-Object-'></a>
+### Serialize(value) `method`
+
+##### Summary
+
+Serializes the specified value in string.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The value. |
+
+<a name='M-Bb-Converters-ConverterHelper-ToBoolean-System-String-'></a>
 ### ToBoolean(self) `method`
 
 ##### Summary
@@ -15538,7 +15536,7 @@ Convert a string to boolean
 | ---- | ---- | ----------- |
 | self | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToBoolean-System-Int32-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToBoolean-System-Int32-'></a>
 ### ToBoolean(self) `method`
 
 ##### Summary
@@ -15555,7 +15553,7 @@ Convert a string to boolean
 | ---- | ---- | ----------- |
 | self | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToByte-System-Char[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToByte-System-Char[]-'></a>
 ### ToByte(value) `method`
 
 ##### Summary
@@ -15572,7 +15570,7 @@ Convert a string to byte
 | ---- | ---- | ----------- |
 | value | [System.Char[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char[] 'System.Char[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToByte-System-Byte[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToByte-System-Byte[]-'></a>
 ### ToByte(value) `method`
 
 ##### Summary
@@ -15589,7 +15587,7 @@ Convert a string to byte
 | ---- | ---- | ----------- |
 | value | [System.Byte[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Byte[] 'System.Byte[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToByte-System-Single-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToByte-System-Single-'></a>
 ### ToByte(self) `method`
 
 ##### Summary
@@ -15606,7 +15604,7 @@ Convert a string to byte
 | ---- | ---- | ----------- |
 | self | [System.Single](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Single 'System.Single') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToByteArray-System-String-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToByteArray-System-String-'></a>
 ### ToByteArray(value) `method`
 
 ##### Summary
@@ -15623,7 +15621,7 @@ Convert a string to byte array
 | ---- | ---- | ----------- |
 | value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToByteArray-System-Char[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToByteArray-System-Char[]-'></a>
 ### ToByteArray(value) `method`
 
 ##### Summary
@@ -15640,7 +15638,7 @@ Convert a string to byte array
 | ---- | ---- | ----------- |
 | value | [System.Char[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char[] 'System.Char[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToByteArray-System-Char-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToByteArray-System-Char-'></a>
 ### ToByteArray(value) `method`
 
 ##### Summary
@@ -15657,7 +15655,7 @@ Convert a string to byte array
 | ---- | ---- | ----------- |
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToByteArray-System-Int32-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToByteArray-System-Int32-'></a>
 ### ToByteArray(value) `method`
 
 ##### Summary
@@ -15674,7 +15672,7 @@ Convert a string to byte array
 | ---- | ---- | ----------- |
 | value | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToChar-System-Single-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToChar-System-Single-'></a>
 ### ToChar(self) `method`
 
 ##### Summary
@@ -15691,7 +15689,7 @@ Convert a string to char
 | ---- | ---- | ----------- |
 | self | [System.Single](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Single 'System.Single') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToChar-System-Double-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToChar-System-Double-'></a>
 ### ToChar(self) `method`
 
 ##### Summary
@@ -15708,7 +15706,7 @@ Convert a string to char
 | ---- | ---- | ----------- |
 | self | [System.Double](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Double 'System.Double') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToChar-System-Boolean-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToChar-System-Boolean-'></a>
 ### ToChar(self) `method`
 
 ##### Summary
@@ -15725,7 +15723,7 @@ Convert a string to char
 | ---- | ---- | ----------- |
 | self | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToChar-System-Decimal-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToChar-System-Decimal-'></a>
 ### ToChar(self) `method`
 
 ##### Summary
@@ -15742,7 +15740,7 @@ Convert a string to char
 | ---- | ---- | ----------- |
 | self | [System.Decimal](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Decimal 'System.Decimal') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToChar-System-Int32-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToChar-System-Int32-'></a>
 ### ToChar(self) `method`
 
 ##### Summary
@@ -15759,7 +15757,7 @@ Convert a string to char
 | ---- | ---- | ----------- |
 | self | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToChar-System-Byte[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToChar-System-Byte[]-'></a>
 ### ToChar(value) `method`
 
 ##### Summary
@@ -15776,7 +15774,7 @@ Convert a string to char
 | ---- | ---- | ----------- |
 | value | [System.Byte[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Byte[] 'System.Byte[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToChar-System-SByte[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToChar-System-SByte[]-'></a>
 ### ToChar(value) `method`
 
 ##### Summary
@@ -15793,7 +15791,7 @@ Convert a string to char
 | ---- | ---- | ----------- |
 | value | [System.SByte[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.SByte[] 'System.SByte[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToChar-System-Char[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToChar-System-Char[]-'></a>
 ### ToChar(value) `method`
 
 ##### Summary
@@ -15810,7 +15808,7 @@ Convert a string to char
 | ---- | ---- | ----------- |
 | value | [System.Char[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char[] 'System.Char[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToCharArray-System-Int32-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToCharArray-System-Int32-'></a>
 ### ToCharArray(value) `method`
 
 ##### Summary
@@ -15827,7 +15825,7 @@ Convert a string to char array
 | ---- | ---- | ----------- |
 | value | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToCharArray-System-Guid-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToCharArray-System-Guid-'></a>
 ### ToCharArray(value) `method`
 
 ##### Summary
@@ -15844,7 +15842,7 @@ Convert a string to char array
 | ---- | ---- | ----------- |
 | value | [System.Guid](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Guid 'System.Guid') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToCharArray-System-Byte[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToCharArray-System-Byte[]-'></a>
 ### ToCharArray(value) `method`
 
 ##### Summary
@@ -15861,7 +15859,7 @@ Convert a string to char array
 | ---- | ---- | ----------- |
 | value | [System.Byte[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Byte[] 'System.Byte[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTime-System-DateTimeOffset-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTime-System-DateTimeOffset-'></a>
 ### ToDateTime(value) `method`
 
 ##### Summary
@@ -15878,7 +15876,7 @@ Convert a DateTime to a DateTimeOffset
 | ---- | ---- | ----------- |
 | value | [System.DateTimeOffset](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTimeOffset 'System.DateTimeOffset') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffser-System-TimeSpan-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffser-System-TimeSpan-'></a>
 ### ToDateTimeOffser(value) `method`
 
 ##### Summary
@@ -15895,7 +15893,7 @@ Convert a string to DateTimeOffset
 | ---- | ---- | ----------- |
 | value | [System.TimeSpan](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.TimeSpan 'System.TimeSpan') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-String,System-Globalization-CultureInfo-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-String,System-Globalization-CultureInfo-'></a>
 ### ToDateTimeOffset(value,cultureInfo) `method`
 
 ##### Summary
@@ -15913,7 +15911,7 @@ Convert a string to DateTimeOffset
 | value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
 | cultureInfo | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | [CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo'). By default ConvertMore.CultureInfois used |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-DateTime-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-DateTime-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -15930,7 +15928,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-SByte-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-SByte-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -15947,7 +15945,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.SByte](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.SByte 'System.SByte') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Byte-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Byte-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -15964,7 +15962,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.Byte](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Byte 'System.Byte') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Int16-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Int16-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -15981,7 +15979,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.Int16](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int16 'System.Int16') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-UInt16-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-UInt16-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -15998,7 +15996,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.UInt16](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.UInt16 'System.UInt16') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Int32-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Int32-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -16015,7 +16013,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-UInt32-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-UInt32-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -16032,7 +16030,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.UInt32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.UInt32 'System.UInt32') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Int64-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Int64-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -16049,7 +16047,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.Int64](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int64 'System.Int64') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-UInt64-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-UInt64-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -16066,7 +16064,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.UInt64](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.UInt64 'System.UInt64') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Boolean-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Boolean-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -16083,7 +16081,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Char-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Char-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -16100,7 +16098,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Single-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Single-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -16117,7 +16115,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.Single](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Single 'System.Single') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Double-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Double-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -16134,7 +16132,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.Double](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Double 'System.Double') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDateTimeOffset-System-Decimal-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDateTimeOffset-System-Decimal-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -16151,7 +16149,7 @@ Convert a DateTimeOffset to a DateTime
 | ---- | ---- | ----------- |
 | value | [System.Decimal](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Decimal 'System.Decimal') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDecimal-System-Char-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDecimal-System-Char-'></a>
 ### ToDecimal(value) `method`
 
 ##### Summary
@@ -16168,7 +16166,7 @@ Convert a string to Decimal
 | ---- | ---- | ----------- |
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDictionaryObject-System-String-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDictionaryObject-System-String-'></a>
 ### ToDictionaryObject(self) `method`
 
 ##### Summary
@@ -16185,7 +16183,7 @@ Convert a string to dictionary
 | ---- | ---- | ----------- |
 | self | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDictionaryString-System-String-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDictionaryString-System-String-'></a>
 ### ToDictionaryString(self) `method`
 
 ##### Summary
@@ -16202,7 +16200,7 @@ Convert a string to dictionary
 | ---- | ---- | ----------- |
 | self | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToDouble-System-Char-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToDouble-System-Char-'></a>
 ### ToDouble(value) `method`
 
 ##### Summary
@@ -16219,7 +16217,7 @@ Convert a string to Double
 | ---- | ---- | ----------- |
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToGuid-System-Char[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToGuid-System-Char[]-'></a>
 ### ToGuid(value) `method`
 
 ##### Summary
@@ -16236,7 +16234,7 @@ Convert a string to Guid
 | ---- | ---- | ----------- |
 | value | [System.Char[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char[] 'System.Char[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToInt16-System-Single-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToInt16-System-Single-'></a>
 ### ToInt16(value) `method`
 
 ##### Summary
@@ -16253,7 +16251,7 @@ Convert a string to Int16
 | ---- | ---- | ----------- |
 | value | [System.Single](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Single 'System.Single') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToInt16-System-Double-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToInt16-System-Double-'></a>
 ### ToInt16(value) `method`
 
 ##### Summary
@@ -16270,7 +16268,7 @@ Convert a string to Int16
 | ---- | ---- | ----------- |
 | value | [System.Double](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Double 'System.Double') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToInt16-System-Char-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToInt16-System-Char-'></a>
 ### ToInt16(value) `method`
 
 ##### Summary
@@ -16287,7 +16285,7 @@ Convert a string to Int16
 | ---- | ---- | ----------- |
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToInt32-System-Single-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToInt32-System-Single-'></a>
 ### ToInt32(value) `method`
 
 ##### Summary
@@ -16304,7 +16302,7 @@ Convert a string to Int32
 | ---- | ---- | ----------- |
 | value | [System.Single](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Single 'System.Single') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToInt32-System-Double-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToInt32-System-Double-'></a>
 ### ToInt32(value) `method`
 
 ##### Summary
@@ -16321,7 +16319,7 @@ Convert a string to Int32
 | ---- | ---- | ----------- |
 | value | [System.Double](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Double 'System.Double') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToInt32-System-Char-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToInt32-System-Char-'></a>
 ### ToInt32(value) `method`
 
 ##### Summary
@@ -16338,7 +16336,7 @@ Convert a string to Int32
 | ---- | ---- | ----------- |
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToInt64-System-Single-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToInt64-System-Single-'></a>
 ### ToInt64(value) `method`
 
 ##### Summary
@@ -16355,7 +16353,7 @@ Convert a string to Int64
 | ---- | ---- | ----------- |
 | value | [System.Single](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Single 'System.Single') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToInt64-System-Double-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToInt64-System-Double-'></a>
 ### ToInt64(value) `method`
 
 ##### Summary
@@ -16372,7 +16370,7 @@ Convert a string to Int64
 | ---- | ---- | ----------- |
 | value | [System.Double](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Double 'System.Double') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToInt64-System-Char-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToInt64-System-Char-'></a>
 ### ToInt64(value) `method`
 
 ##### Summary
@@ -16389,7 +16387,7 @@ Convert a string to Int64
 | ---- | ---- | ----------- |
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToObject-System-Object,System-Type,Bb-Converters-ConverterContext-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToObject-System-Object,System-Type,Bb-Converters-ConverterContext-'></a>
 ### ToObject(self,targetType,context) `method`
 
 ##### Summary
@@ -16408,7 +16406,7 @@ Convert a value to specified target type
 | targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
 | context | [Bb.Converters.ConverterContext](#T-Bb-Converters-ConverterContext 'Bb.Converters.ConverterContext') | conversionHelper |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToObject``1-System-Object-'></a>
 ### ToObject\`\`1(self) `method`
 
 ##### Summary
@@ -16431,7 +16429,7 @@ converted value
 | ---- | ----------- |
 | T | Target type |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo-'></a>
 ### ToObject\`\`1(self,culture) `method`
 
 ##### Summary
@@ -16455,7 +16453,7 @@ Convert a value to specified target type
 | ---- | ----------- |
 | T | Target type |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Text-Encoding-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Text-Encoding-'></a>
 ### ToObject\`\`1(self,encoding) `method`
 
 ##### Summary
@@ -16479,7 +16477,7 @@ Convert a value to specified target type
 | ---- | ----------- |
 | T | Target type |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo,System-Text-Encoding-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo,System-Text-Encoding-'></a>
 ### ToObject\`\`1(self,culture,encoding) `method`
 
 ##### Summary
@@ -16504,7 +16502,7 @@ Convert a value to specified target type
 | ---- | ----------- |
 | T | Target type |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToSByte-System-Char[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToSByte-System-Char[]-'></a>
 ### ToSByte(value) `method`
 
 ##### Summary
@@ -16521,7 +16519,7 @@ Convert a string to sbyte
 | ---- | ---- | ----------- |
 | value | [System.Char[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char[] 'System.Char[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToSByte-System-Byte[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToSByte-System-Byte[]-'></a>
 ### ToSByte(value) `method`
 
 ##### Summary
@@ -16538,7 +16536,7 @@ Convert a string to sbyte
 | ---- | ---- | ----------- |
 | value | [System.Byte[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Byte[] 'System.Byte[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToSByte-System-SByte[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToSByte-System-SByte[]-'></a>
 ### ToSByte(value) `method`
 
 ##### Summary
@@ -16555,7 +16553,7 @@ Convert a string to sbyte
 | ---- | ---- | ----------- |
 | value | [System.SByte[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.SByte[] 'System.SByte[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToSingle-System-Char-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToSingle-System-Char-'></a>
 ### ToSingle(value) `method`
 
 ##### Summary
@@ -16572,7 +16570,7 @@ Convert a string to Single
 | ---- | ---- | ----------- |
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToString-System-Guid-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToString-System-Guid-'></a>
 ### ToString(value) `method`
 
 ##### Summary
@@ -16589,7 +16587,7 @@ Convert a DateTime to string
 | ---- | ---- | ----------- |
 | value | [System.Guid](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Guid 'System.Guid') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToString-System-Char[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToString-System-Char[]-'></a>
 ### ToString(self) `method`
 
 ##### Summary
@@ -16606,7 +16604,7 @@ Convert a DateTime to string
 | ---- | ---- | ----------- |
 | self | [System.Char[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char[] 'System.Char[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToString-System-Byte[]-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToString-System-Byte[]-'></a>
 ### ToString(self) `method`
 
 ##### Summary
@@ -16623,7 +16621,7 @@ Convert a DateTime to string
 | ---- | ---- | ----------- |
 | self | [System.Byte[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Byte[] 'System.Byte[]') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToTimeSpan-System-DateTime-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToTimeSpan-System-DateTime-'></a>
 ### ToTimeSpan(value) `method`
 
 ##### Summary
@@ -16640,7 +16638,7 @@ Convert a DateTime to TimeSpan
 | ---- | ---- | ----------- |
 | value | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
 
-<a name='M-Bb-Expressions-ConverterHelper-ToTimeSpan-System-DateTimeOffset-'></a>
+<a name='M-Bb-Converters-ConverterHelper-ToTimeSpan-System-DateTimeOffset-'></a>
 ### ToTimeSpan(value) `method`
 
 ##### Summary
@@ -16657,14 +16655,51 @@ Convert a DateTimeOffset to TimeSpan
 | ---- | ---- | ----------- |
 | value | [System.DateTimeOffset](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTimeOffset 'System.DateTimeOffset') |  |
 
-<a name='T-Bb-Expressions-ConverterHelperNullable'></a>
+<a name='M-Bb-Converters-ConverterHelper-TryGetMethodToConvert-System-Type,System-Type,Bb-Converters-MethodConverter@-'></a>
+### TryGetMethodToConvert(sourceType,targetType,method) `method`
+
+##### Summary
+
+Try to resolve the method to convert sourceType to targetType
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| sourceType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
+| method | [Bb.Converters.MethodConverter@](#T-Bb-Converters-MethodConverter@ 'Bb.Converters.MethodConverter@') |  |
+
+<a name='M-Bb-Converters-ConverterHelper-Unserialize-System-String,System-Type-'></a>
+### Unserialize(value,type) `method`
+
+##### Summary
+
+Deserializes the specified string value in the specified type.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The value. |
+| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | The type. |
+
+<a name='T-Bb-Converters-ConverterHelperNullable'></a>
 ## ConverterHelperNullable `type`
 
 ##### Namespace
 
-Bb.Expressions
+Bb.Converters
 
-<a name='M-Bb-Expressions-ConverterHelperNullable-ToDateTime-System-DateTimeOffset-'></a>
+<a name='M-Bb-Converters-ConverterHelperNullable-ToDateTime-System-DateTimeOffset-'></a>
 ### ToDateTime(value) `method`
 
 ##### Summary
@@ -16681,7 +16716,7 @@ Convert a DateTime to a DateTimeOffset
 | ---- | ---- | ----------- |
 | value | [System.DateTimeOffset](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTimeOffset 'System.DateTimeOffset') |  |
 
-<a name='M-Bb-Expressions-ConverterHelperNullable-ToDateTime-System-Nullable{System-DateTimeOffset}-'></a>
+<a name='M-Bb-Converters-ConverterHelperNullable-ToDateTime-System-Nullable{System-DateTimeOffset}-'></a>
 ### ToDateTime(value) `method`
 
 ##### Summary
@@ -16698,7 +16733,7 @@ Convert a DateTime to a DateTimeOffset
 | ---- | ---- | ----------- |
 | value | [System.Nullable{System.DateTimeOffset}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{System.DateTimeOffset}') |  |
 
-<a name='M-Bb-Expressions-ConverterHelperNullable-ToDateTimeOffset-System-DateTime-'></a>
+<a name='M-Bb-Converters-ConverterHelperNullable-ToDateTimeOffset-System-DateTime-'></a>
 ### ToDateTimeOffset(value) `method`
 
 ##### Summary
@@ -16715,7 +16750,7 @@ Convert a DateTime to DateTimeOffset
 | ---- | ---- | ----------- |
 | value | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | DateTime |
 
-<a name='M-Bb-Expressions-ConverterHelperNullable-ToDateTimeOffset-System-String,System-Globalization-CultureInfo-'></a>
+<a name='M-Bb-Converters-ConverterHelperNullable-ToDateTimeOffset-System-String,System-Globalization-CultureInfo-'></a>
 ### ToDateTimeOffset(value,cultureInfo) `method`
 
 ##### Summary
@@ -34339,59 +34374,6 @@ Returns true if at least one entry was removed.
 
 This method has no parameters.
 
-<a name='T-Bb-Converters-MyConverter'></a>
-## MyConverter `type`
-
-##### Namespace
-
-Bb.Converters
-
-##### Summary
-
-My Converter
-
-<a name='F-Bb-Converters-MyConverter-Default'></a>
-### Default `constants`
-
-##### Summary
-
-The default value
-
-<a name='M-Bb-Converters-MyConverter-Serialize-System-Object-'></a>
-### Serialize(value) `method`
-
-##### Summary
-
-Serializes the specified value in string.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| value | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | The value. |
-
-<a name='M-Bb-Converters-MyConverter-Unserialize-System-String,System-Type-'></a>
-### Unserialize(value,type) `method`
-
-##### Summary
-
-Unserializes the specified string value in the specified type.
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The value. |
-| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | The type. |
-
 <a name='T-ICSharpCode-Decompiler-TypeSystem-ReflectionHelper-NInt'></a>
 ## NInt `type`
 
@@ -38865,14 +38847,14 @@ ICSharpCode.Decompiler.TypeSystem
 
 Represents an error while parsing a reflection name.
 
-<a name='T-Bb-Expressions-ReflexionHelper'></a>
+<a name='T-Bb-Converters-ReflexionHelper'></a>
 ## ReflexionHelper `type`
 
 ##### Namespace
 
-Bb.Expressions
+Bb.Converters
 
-<a name='M-Bb-Expressions-ReflexionHelper-GetMethodList-System-Type-'></a>
+<a name='M-Bb-Converters-ReflexionHelper-GetMethodList-System-Type-'></a>
 ### GetMethodList(self) `method`
 
 ##### Summary
@@ -38889,7 +38871,7 @@ return methods
 | ---- | ---- | ----------- |
 | self | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
 
-<a name='M-Bb-Expressions-ReflexionHelper-GetMethods-System-Type,System-Func{System-Reflection-MethodInfo,System-Boolean}-'></a>
+<a name='M-Bb-Converters-ReflexionHelper-GetMethods-System-Type,System-Func{System-Reflection-MethodInfo,System-Boolean}-'></a>
 ### GetMethods(self,filter) `method`
 
 ##### Summary
@@ -40067,6 +40049,24 @@ find a common set of values the object supports; otherwise, false.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | context | [System.ComponentModel.ITypeDescriptorContext](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.ITypeDescriptorContext 'System.ComponentModel.ITypeDescriptorContext') | An [ITypeDescriptorContext](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.ITypeDescriptorContext 'System.ComponentModel.ITypeDescriptorContext') that provides a format context. |
+
+<a name='T-Bb-StartingConfiguration'></a>
+## StartingConfiguration `type`
+
+##### Namespace
+
+Bb
+
+<a name='P-Bb-StartingConfiguration-Instance'></a>
+### Instance `property`
+
+##### Summary
+
+Gets the singleton instance of the ConfigurationFolder class.
+
+##### Remarks
+
+This property ensures that only one instance of the ConfigurationFolder class is created and used throughout the application.
 
 <a name='T-ICSharpCode-Decompiler-FlowAnalysis-DefiniteAssignmentVisitor-State'></a>
 ## State `type`

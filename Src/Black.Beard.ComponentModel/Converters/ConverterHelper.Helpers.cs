@@ -1,12 +1,10 @@
-﻿using Bb.ComponentModel.Converters;
-using Bb.Converters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace Bb.Expressions
+namespace Bb.Converters
 {
 
     public static partial class ConverterHelper

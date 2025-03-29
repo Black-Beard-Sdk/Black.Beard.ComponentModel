@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 
-namespace Bb.ComponentModel.Converters
+namespace Bb.Converters
 {
 
     public static class ConnexionReaderExtension

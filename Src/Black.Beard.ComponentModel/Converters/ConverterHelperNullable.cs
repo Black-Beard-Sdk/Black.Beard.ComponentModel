@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bb.Expressions
+namespace Bb.Converters
 {
 
     public static partial class ConverterHelperNullable

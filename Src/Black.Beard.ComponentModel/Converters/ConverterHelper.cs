@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bb.Expressions;
+using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,9 +7,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Bb.Converters;
 
-namespace Bb.Expressions
+namespace Bb.Converters
 {
 
 
@@ -65,7 +65,7 @@ namespace Bb.Expressions
         /// <returns>converted value</returns>
         public static T ToObject<T>(this object self)
         {
-            return (T)ToObject(self, typeof(T));
+            return (T)ToObject(self, typeof(T), null);
         }
 
         /// <summary>
@@ -110,11 +110,49 @@ namespace Bb.Expressions
         /// </summary>
         /// <param name="self">initial value to convert</param>
         /// <param name="targetType">Target type</param>
+        /// <param name="context">conversionHelper</param>
+        /// <returns></returns>
+        public static object ToObject(this object self, Type targetType, ConverterContext? context)
+        {
+
+            object result = null;
+
+            if (self != null)
+            {
+
+                var function = GetFunctionForConvert(self.GetType(), targetType);
+
+                if (function != null)
+                {
+
+                    if (context == null)
+                        context = ConverterContext.Default;
+
+                    result = function(self, context);
+                }
+
+            }
+
+            return result;
+
+        }
+
+
+
+
+        /// <summary>
+        /// Convert a value to specified target type
+        /// </summary>
+        /// <param name="self">initial value to convert</param>
+        /// <param name="targetType">Target type</param>
         /// <returns></returns>
         public static object ConvertToObject(this object self, Type targetType)
         {
             return self.ToObject(targetType, null);
         }
+
+
+
 
         /// <summary>
         /// Convert a value to specified target type
@@ -153,37 +191,7 @@ namespace Bb.Expressions
             return self.ToObject(targetType, new ConverterContext(culture, encoding));
         }
 
-        /// <summary>
-        /// Convert a value to specified target type
-        /// </summary>
-        /// <param name="self">initial value to convert</param>
-        /// <param name="targetType">Target type</param>
-        /// <param name="context">conversionHelper</param>
-        /// <returns></returns>
-        public static object ToObject(this object self, Type targetType, ConverterContext? context = null)
-        {
 
-            object result = null;
-
-            if (self != null)
-            {
-
-                var function = GetFunctionForConvert(self.GetType(), targetType);
-
-                if (function != null)
-                {
-
-                    if (context == null)
-                        context = ConverterContext.Default;
-
-                    result = function(self, context);
-                }
-
-            }
-
-            return result;
-
-        }
 
         /// <summary>
         /// Get the function to convert sourceType to targetType
@@ -244,7 +252,7 @@ namespace Bb.Expressions
         /// <param name="targetType"></param>
         /// <param name="method"></param>
         /// <returns></returns>
-        public static bool GetMethodToConvert(Type sourceType, Type targetType, out MethodConverter method)
+        public static bool TryGetMethodToConvert(Type sourceType, Type targetType, out MethodConverter method)
         {
             method = GetMethodToConvert(sourceType, targetType);
             return method != null;

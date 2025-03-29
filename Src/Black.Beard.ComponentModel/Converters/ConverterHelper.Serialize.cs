@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Text.Json;
 
 namespace Bb.Converters
 {
@@ -9,13 +10,8 @@ namespace Bb.Converters
     /// <summary>
     /// My Converter
     /// </summary>
-    public class MyConverter
+    public static partial class ConverterHelper
     {
-
-        /// <summary>
-        /// The default value
-        /// </summary>
-        public static string Default = "A5BA2123-213E-4AE9-BD2F-6C13C34EA6FB";
 
         /// <summary>
         /// Serializes the specified value in string.
@@ -26,7 +22,7 @@ namespace Bb.Converters
         {
 
             if (value == null)
-                return Default;
+                return string.Empty;
 
             switch (value)
             {
@@ -144,7 +140,7 @@ namespace Bb.Converters
         }
 
         /// <summary>
-        /// Unserializes the specified string value in the specified type.
+        /// Deserializes the specified string value in the specified type.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="type">The type.</param>
@@ -152,7 +148,7 @@ namespace Bb.Converters
         internal static dynamic Unserialize(string value, Type type)
         {
 
-            if (value == Default)
+            if (string.IsNullOrEmpty(value))
                 return null;
 
             if (type.IsEnum)
@@ -206,8 +202,10 @@ namespace Bb.Converters
                 return string.IsNullOrWhiteSpace(value) ? (ulong?)null : convertible.ToUInt64(CultureInfo.CurrentCulture);
 
             var c = TypeDescriptor.GetConverter(type);
-            string result = c.ConvertTo(value, typeof(string)) as string;
-            return result;
+            if (c.CanConvertTo(typeof(string)))
+                return c.ConvertTo(value, typeof(string)) as string;
+
+            return (string)ConverterHelper.ConvertToObject(value, type);
 
         }
 

@@ -3,7 +3,7 @@ using System.Buffers;
 using System.Linq;
 using System.Reflection;
 
-namespace Bb.Expressions
+namespace Bb.Converters
 {
     public static class ReflexionHelper
     {

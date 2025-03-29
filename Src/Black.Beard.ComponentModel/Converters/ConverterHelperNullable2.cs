@@ -2,7 +2,7 @@
 using System;
 using System.Globalization;
 
-namespace Bb.Expressions
+namespace Bb.Converters
 {
 
     public static partial class ConverterHelperNullable

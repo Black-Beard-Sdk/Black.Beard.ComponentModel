@@ -123,7 +123,7 @@ namespace Black.Beard.Converters
                 try
                 {
 
-                    result = ConverterHelper.ToObject(value.Item1, item.Key.Item2, value.Item3);
+                    result =   ConverterHelper.ToObject(value.Item1, item.Key.Item2, value.Item3);
 
                     if (value.Item4 != null)
                         Assert.True(value.Item4(value.Item1, result));

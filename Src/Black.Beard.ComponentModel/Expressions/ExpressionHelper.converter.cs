@@ -27,7 +27,7 @@ namespace Bb.Expressions
             if (sourceType == targetType)
                 return 0;
 
-            var result = ConverterHelper.GetMethodToConvert(sourceType, targetType, out var method);
+            var result = ConverterHelper.TryGetMethodToConvert(sourceType, targetType, out var method);
             if (result)
                 return 2;
 
@@ -91,7 +91,7 @@ namespace Bb.Expressions
             if (targetType.IsAssignableFrom(sourceType) || sourceType.IsAssignableFrom(targetType))
                 result = Expression.Convert(self, targetType);
 
-            else if (!ConverterHelper.GetMethodToConvert(sourceType, targetType, out method))   // Find a registered method to convert
+            else if (!ConverterHelper.TryGetMethodToConvert(sourceType, targetType, out method))   // Find a registered method to convert
             {                                                                                   // method not found
 
                 if (targetType.IsConstructedGenericType)                                        // generic
@@ -169,7 +169,7 @@ namespace Bb.Expressions
 
                 self = self.Convert(typeEnum, method, context);
 
-                if (!ConverterHelper.GetMethodToConvert(typeEnum, targetType, out method))
+                if (!ConverterHelper.TryGetMethodToConvert(typeEnum, targetType, out method))
                 {
 
                 }
