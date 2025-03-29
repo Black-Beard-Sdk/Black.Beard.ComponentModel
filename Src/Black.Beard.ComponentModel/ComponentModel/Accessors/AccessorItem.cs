@@ -158,7 +158,7 @@ namespace Bb.ComponentModel.Accessors
 
             if (result != null)
             {
-                var t2 = (T1)ConverterHelper.ConvertToObject(result, typeof(T1));
+                var t2 = (T1)ConverterHelper.ConvertTo(result, typeof(T1));
                 return t2;
             }
 
@@ -181,7 +181,7 @@ namespace Bb.ComponentModel.Accessors
             }
 
             if (value.GetType() != this.Type)
-                value = ConverterHelper.ConvertToObject(value, this.Type);
+                value = ConverterHelper.ConvertTo(value, this.Type);
 
             SetValue(instance, value);
 

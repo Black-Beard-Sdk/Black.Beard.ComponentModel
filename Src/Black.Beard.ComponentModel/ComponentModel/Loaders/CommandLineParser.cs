@@ -43,7 +43,7 @@ namespace Bb.ComponentModel.Loaders
 
             if (TryResolveStringValue(name, out string result1))
             {
-                result = ConverterHelper.ToObject<T>(result1);
+                result = ConverterHelper.ConvertTo<T>(result1);
                 r = true;
             }
 
@@ -65,7 +65,7 @@ namespace Bb.ComponentModel.Loaders
 
             if (TryResolveStringValue(name, out string result1))
             {
-                result = ConverterHelper.ToObject<T>(result1, culture);
+                result = ConverterHelper.ConvertTo<T>(result1, culture);
                 r = true;
             }
 
@@ -87,7 +87,7 @@ namespace Bb.ComponentModel.Loaders
 
             if (TryResolveStringValue(name, out string result1))
             {
-                result = ConverterHelper.ToObject<T>(result1, encoding);
+                result = ConverterHelper.ConvertTo<T>(result1, encoding);
                 r = true;
             }
 

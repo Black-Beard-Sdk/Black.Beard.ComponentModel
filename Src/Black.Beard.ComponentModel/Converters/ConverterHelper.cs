@@ -53,143 +53,16 @@ namespace Bb.Converters
 
             AppendConverters(typeof(Convert), true, BindingFlags.Static | BindingFlags.Public, c => _names.Contains(c.Name));
             AppendConverters(typeof(ConverterHelper), true, BindingFlags.Static | BindingFlags.Public);
-            AppendConverters(typeof(ConverterHelperNullable), true, BindingFlags.Static | BindingFlags.Public);
-
-        }
-
-        /// <summary>
-        /// Convert a value to specified target type
-        /// </summary>
-        /// <typeparam name="T">Target type</typeparam>
-        /// <param name="self">initial value to convert</param>
-        /// <returns>converted value</returns>
-        public static T ToObject<T>(this object self)
-        {
-            return (T)ToObject(self, typeof(T), null);
-        }
-
-        /// <summary>
-        /// Convert a value to specified target type
-        /// </summary>
-        /// <typeparam name="T">Target type</typeparam>
-        /// <param name="self">initial value to convert</param>
-        /// <param name="culture">culture for help conversion</param>
-        /// <returns></returns>
-        public static T ToObject<T>(this object self, CultureInfo culture)
-        {
-            return (T)ToObject(self, typeof(T), new ConverterContext(culture));
-        }
-
-        /// <summary>
-        /// Convert a value to specified target type
-        /// </summary>
-        /// <typeparam name="T">Target type</typeparam>
-        /// <param name="self">initial value to convert</param>
-        /// <param name="encoding">text encoding for help conversion</param>
-        /// <returns></returns>
-        public static T ToObject<T>(this object self, Encoding encoding)
-        {
-            return (T)ToObject(self, typeof(T), new ConverterContext(null, encoding));
-        }
-
-        /// <summary>
-        /// Convert a value to specified target type
-        /// </summary>
-        /// <typeparam name="T">Target type</typeparam>
-        /// <param name="self">initial value to convert</param>
-        /// <param name="culture">culture for help conversion</param>
-        /// <param name="encoding">text encoding for help conversion</param>
-        /// <returns></returns>
-        public static T ToObject<T>(this object self, CultureInfo culture, Encoding encoding)
-        {
-            return (T)ToObject(self, typeof(T), new ConverterContext(culture, encoding));
-        }
-
-        /// <summary>
-        /// Convert a value to specified target type
-        /// </summary>
-        /// <param name="self">initial value to convert</param>
-        /// <param name="targetType">Target type</param>
-        /// <param name="context">conversionHelper</param>
-        /// <returns></returns>
-        public static object ToObject(this object self, Type targetType, ConverterContext? context)
-        {
-
-            object result = null;
-
-            if (self != null)
-            {
-
-                var function = GetFunctionForConvert(self.GetType(), targetType);
-
-                if (function != null)
-                {
-
-                    if (context == null)
-                        context = ConverterContext.Default;
-
-                    result = function(self, context);
-                }
-
-            }
-
-            return result;
+            AppendConverters(typeof(ConverterMoreNullable), true, BindingFlags.Static | BindingFlags.Public);
 
         }
 
 
-
-
-        /// <summary>
-        /// Convert a value to specified target type
-        /// </summary>
-        /// <param name="self">initial value to convert</param>
-        /// <param name="targetType">Target type</param>
-        /// <returns></returns>
         public static object ConvertToObject(this object self, Type targetType)
         {
-            return self.ToObject(targetType, null);
+            return self.ConvertTo(targetType, (ConverterContext)null);
         }
 
-
-
-
-        /// <summary>
-        /// Convert a value to specified target type
-        /// </summary>
-        /// <param name="self">initial value to convert</param>
-        /// <param name="targetType">Target type</param>
-        /// <param name="culture">culture for help conversion</param>
-        /// <returns></returns>
-        public static object ConvertTo(this object self, Type targetType, CultureInfo culture)
-        {
-            return self.ToObject(targetType, new ConverterContext(culture));
-        }
-
-        /// <summary>
-        /// Convert a value to specified target type
-        /// </summary>
-        /// <param name="self">initial value to convert</param>
-        /// <param name="targetType">Target type</param>
-        /// <param name="encoding">text encoding for help conversion</param>
-        /// <returns></returns>
-        public static object ConvertTo(this object self, Type targetType, Encoding encoding)
-        {
-            return self.ToObject(targetType, new ConverterContext(null, encoding));
-        }
-
-        /// <summary>
-        /// Convert a value to specified target type
-        /// </summary>
-        /// <param name="self">initial value to convert</param>
-        /// <param name="culture">culture for help conversion</param>
-        /// <param name="targetType">Target type</param>
-        /// <param name="encoding">text encoding for help conversion</param>
-        /// <returns></returns>
-        public static object ConvertTo(this object self, Type targetType, CultureInfo culture, Encoding encoding)
-        {
-            return self.ToObject(targetType, new ConverterContext(culture, encoding));
-        }
 
 
 

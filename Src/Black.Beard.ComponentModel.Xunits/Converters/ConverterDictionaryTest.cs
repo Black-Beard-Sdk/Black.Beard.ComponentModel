@@ -22,7 +22,7 @@ namespace Black.Beard.Converters
             };
 
 
-            var result = ConverterHelper.ToObject<string>(dic);
+            var result = ConverterHelper.ConvertTo<string>(dic);
 
             Assert.Equal(expectedValue, result);
 
@@ -41,7 +41,7 @@ namespace Black.Beard.Converters
             };
 
 
-            var result = ConverterHelper.ToObject<string>(dic);
+            var result = ConverterHelper.ConvertTo<string>(dic);
 
             Assert.Equal(expectedValue, result);
 
@@ -61,7 +61,7 @@ namespace Black.Beard.Converters
             };
 
 
-            var result = ConverterHelper.ToObject<string>(dic);
+            var result = ConverterHelper.ConvertTo<string>(dic);
 
             Assert.Equal(expectedValue, result);
 
@@ -80,7 +80,7 @@ namespace Black.Beard.Converters
             };
 
 
-            var result = ConverterHelper.ToObject<Dictionary<string, string>>(value);
+            var result = ConverterHelper.ConvertTo<Dictionary<string, string>>(value);
 
             Assert.Equal(expectedResult["key1"], result["key1"]);
             Assert.Equal(expectedResult["key2"], result["key2"]);
@@ -100,7 +100,7 @@ namespace Black.Beard.Converters
             };
 
 
-            var result = ConverterHelper.ToObject<Dictionary<string, object>>(value);
+            var result = ConverterHelper.ConvertTo<Dictionary<string, object>>(value);
 
             Assert.Equal(expectedResult["key1"], result["key1"]);
             Assert.Equal(expectedResult["key2"], result["key2"]);

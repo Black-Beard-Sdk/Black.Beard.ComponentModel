@@ -749,7 +749,7 @@ namespace Bb.Converters
                     valueItem = str;
                 
                 else
-                    valueItem = (string)item.Value.ConvertToObject(typeof(string));
+                    valueItem = (string)item.Value.ConvertTo(typeof(string));
                 
                 if (valueItem.Contains("\\"))
                     valueItem = valueItem.Replace("\\", "\\\\");

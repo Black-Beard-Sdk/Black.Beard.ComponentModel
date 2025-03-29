@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Text;
 using System.Text.Json;
 
 namespace Bb.Converters
@@ -12,6 +13,200 @@ namespace Bb.Converters
     /// </summary>
     public static partial class ConverterHelper
     {
+
+
+
+        /// <summary>
+        /// Converts a value to the specified target type.
+        /// </summary>
+        /// <typeparam name="T">The target type to convert to.</typeparam>
+        /// <param name="self">The initial value to convert. Must not be null.</param>
+        /// <returns>
+        /// The converted value.
+        /// </returns>
+        /// <remarks>
+        /// This method uses the default conversion context.
+        /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// int result = "123".ConvertTo&lt;int&gt;();
+        /// Console.WriteLine(result); // Output: 123
+        /// </code>
+        /// </example>
+        public static T ConvertTo<T>(this object self)
+        {
+            return (T)ConvertTo(self, typeof(T), (ConverterContext)null);
+        }
+
+        /// <summary>
+        /// Converts a value to the specified target type using a specific culture.
+        /// </summary>
+        /// <typeparam name="T">The target type to convert to.</typeparam>
+        /// <param name="self">The initial value to convert. Must not be null.</param>
+        /// <param name="culture">The culture to use for the conversion. Must not be null.</param>
+        /// <returns>
+        /// The converted value.
+        /// </returns>
+        /// <remarks>
+        /// This method allows specifying a culture to assist in the conversion process.
+        /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// double result = "123.45".ConvertTo&lt;double&gt;(CultureInfo.InvariantCulture);
+        /// Console.WriteLine(result); // Output: 123.45
+        /// </code>
+        /// </example>
+        public static T ConvertTo<T>(this object self, CultureInfo culture)
+        {
+            return (T)ConvertTo(self, typeof(T), new ConverterContext(culture));
+        }
+
+        /// <summary>
+        /// Converts a value to the specified target type using a specific text encoding.
+        /// </summary>
+        /// <typeparam name="T">The target type to convert to.</typeparam>
+        /// <param name="self">The initial value to convert. Must not be null.</param>
+        /// <param name="encoding">The text encoding to use for the conversion. Must not be null.</param>
+        /// <returns>
+        /// The converted value.
+        /// </returns>
+        /// <remarks>
+        /// This method allows specifying a text encoding to assist in the conversion process.
+        /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// string result = "Hello".ConvertTo&lt;string&gt;(Encoding.UTF8);
+        /// Console.WriteLine(result); // Output: Hello
+        /// </code>
+        /// </example>
+        public static T ConvertTo<T>(this object self, Encoding encoding)
+        {
+            return (T)ConvertTo(self, typeof(T), new ConverterContext(null, encoding));
+        }
+
+        /// <summary>
+        /// Converts a value to the specified target type using a specific culture and text encoding.
+        /// </summary>
+        /// <typeparam name="T">The target type to convert to.</typeparam>
+        /// <param name="self">The initial value to convert. Must not be null.</param>
+        /// <param name="culture">The culture to use for the conversion. Must not be null.</param>
+        /// <param name="encoding">The text encoding to use for the conversion. Must not be null.</param>
+        /// <returns>
+        /// The converted value.
+        /// </returns>
+        /// <remarks>
+        /// This method allows specifying both a culture and a text encoding to assist in the conversion process.
+        /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// string result = "123".ConvertTo&lt;string&gt;(CultureInfo.InvariantCulture, Encoding.UTF8);
+        /// Console.WriteLine(result); // Output: 123
+        /// </code>
+        /// </example>
+        public static T ConvertTo<T>(this object self, CultureInfo culture, Encoding encoding)
+        {
+            return (T)ConvertTo(self, typeof(T), new ConverterContext(culture, encoding));
+        }
+
+        /// <summary>
+        /// Converts a value to the specified target type.
+        /// </summary>
+        /// <param name="self">The initial value to convert. Must not be null.</param>
+        /// <param name="targetType">The target type to convert to. Must not be null.</param>
+        /// <param name="context">The conversion context. Can be null.</param>
+        /// <returns>
+        /// The converted value.
+        /// </returns>
+        /// <remarks>
+        /// This method uses a conversion function specific to the source and target types.
+        /// </remarks>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if no conversion function is available for the specified types.
+        /// </exception>
+        public static object ConvertTo(this object self, Type targetType, ConverterContext? context)
+        {
+
+            object result = null;
+
+            if (self != null)
+            {
+
+                var function = GetFunctionForConvert(self.GetType(), targetType);
+
+                if (function != null)
+                {
+
+                    if (context == null)
+                        context = ConverterContext.Default;
+
+                    result = function(self, context);
+                }
+
+            }
+
+            return result;
+
+        }
+
+        /// <summary>
+        /// Converts a value to the specified target type.
+        /// </summary>
+        /// <param name="self">The initial value to convert. Must not be null.</param>
+        /// <param name="targetType">The target type to convert to. Must not be null.</param>
+        /// <returns>
+        /// The converted value.
+        /// </returns>
+        /// <remarks>
+        /// This method uses the default conversion context.
+        /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// object result = "123".ConvertTo(typeof(int));
+        /// Console.WriteLine(result); // Output: 123
+        /// </code>
+        /// </example>
+        public static object ConvertTo(this object self, Type targetType)
+        {
+            return self.ConvertTo(targetType, (ConverterContext)null);
+        }
+
+        /// <summary>
+        /// Convert a value to specified target type
+        /// </summary>
+        /// <param name="self">initial value to convert</param>
+        /// <param name="targetType">Target type</param>
+        /// <param name="culture">culture for help conversion</param>
+        /// <returns></returns>
+        public static object ConvertTo(this object self, Type targetType, CultureInfo culture)
+        {
+            return self.ConvertTo(targetType, new ConverterContext(culture));
+        }
+
+        /// <summary>
+        /// Convert a value to specified target type
+        /// </summary>
+        /// <param name="self">initial value to convert</param>
+        /// <param name="targetType">Target type</param>
+        /// <param name="encoding">text encoding for help conversion</param>
+        /// <returns></returns>
+        public static object ConvertTo(this object self, Type targetType, Encoding encoding)
+        {
+            return self.ConvertTo(targetType, new ConverterContext(null, encoding));
+        }
+
+        /// <summary>
+        /// Convert a value to specified target type
+        /// </summary>
+        /// <param name="self">initial value to convert</param>
+        /// <param name="culture">culture for help conversion</param>
+        /// <param name="targetType">Target type</param>
+        /// <param name="encoding">text encoding for help conversion</param>
+        /// <returns></returns>
+        public static object ConvertTo(this object self, Type targetType, CultureInfo culture, Encoding encoding)
+        {
+            return self.ConvertTo(targetType, new ConverterContext(culture, encoding));
+        }
+
 
         /// <summary>
         /// Serializes the specified value in string.
@@ -205,7 +400,7 @@ namespace Bb.Converters
             if (c.CanConvertTo(typeof(string)))
                 return c.ConvertTo(value, typeof(string)) as string;
 
-            return (string)ConverterHelper.ConvertToObject(value, type);
+            return (string)ConverterHelper.ConvertTo(value, type);
 
         }
 

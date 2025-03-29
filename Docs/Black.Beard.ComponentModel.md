@@ -947,10 +947,15 @@
   - [AppendConverters(type,replaceExisting,bindings)](#M-Bb-Converters-ConverterHelper-AppendConverters-System-Type,System-Nullable{System-Boolean},System-Reflection-BindingFlags,System-Func{System-Reflection-MethodInfo,System-Boolean}- 'Bb.Converters.ConverterHelper.AppendConverters(System.Type,System.Nullable{System.Boolean},System.Reflection.BindingFlags,System.Func{System.Reflection.MethodInfo,System.Boolean})')
   - [AppendConverters(replaceExisting,ms)](#M-Bb-Converters-ConverterHelper-AppendConverters-System-Nullable{System-Boolean},System-Reflection-MethodInfo[]- 'Bb.Converters.ConverterHelper.AppendConverters(System.Nullable{System.Boolean},System.Reflection.MethodInfo[])')
   - [AppendConverters(ms)](#M-Bb-Converters-ConverterHelper-AppendConverters-System-Reflection-ConstructorInfo[]- 'Bb.Converters.ConverterHelper.AppendConverters(System.Reflection.ConstructorInfo[])')
+  - [ConvertTo(self,targetType,context)](#M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,Bb-Converters-ConverterContext- 'Bb.Converters.ConverterHelper.ConvertTo(System.Object,System.Type,Bb.Converters.ConverterContext)')
+  - [ConvertTo(self,targetType)](#M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type- 'Bb.Converters.ConverterHelper.ConvertTo(System.Object,System.Type)')
   - [ConvertTo(self,targetType,culture)](#M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo- 'Bb.Converters.ConverterHelper.ConvertTo(System.Object,System.Type,System.Globalization.CultureInfo)')
   - [ConvertTo(self,targetType,encoding)](#M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,System-Text-Encoding- 'Bb.Converters.ConverterHelper.ConvertTo(System.Object,System.Type,System.Text.Encoding)')
   - [ConvertTo(self,culture,targetType,encoding)](#M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo,System-Text-Encoding- 'Bb.Converters.ConverterHelper.ConvertTo(System.Object,System.Type,System.Globalization.CultureInfo,System.Text.Encoding)')
-  - [ConvertToObject(self,targetType)](#M-Bb-Converters-ConverterHelper-ConvertToObject-System-Object,System-Type- 'Bb.Converters.ConverterHelper.ConvertToObject(System.Object,System.Type)')
+  - [ConvertTo\`\`1(self)](#M-Bb-Converters-ConverterHelper-ConvertTo``1-System-Object- 'Bb.Converters.ConverterHelper.ConvertTo``1(System.Object)')
+  - [ConvertTo\`\`1(self,culture)](#M-Bb-Converters-ConverterHelper-ConvertTo``1-System-Object,System-Globalization-CultureInfo- 'Bb.Converters.ConverterHelper.ConvertTo``1(System.Object,System.Globalization.CultureInfo)')
+  - [ConvertTo\`\`1(self,encoding)](#M-Bb-Converters-ConverterHelper-ConvertTo``1-System-Object,System-Text-Encoding- 'Bb.Converters.ConverterHelper.ConvertTo``1(System.Object,System.Text.Encoding)')
+  - [ConvertTo\`\`1(self,culture,encoding)](#M-Bb-Converters-ConverterHelper-ConvertTo``1-System-Object,System-Globalization-CultureInfo,System-Text-Encoding- 'Bb.Converters.ConverterHelper.ConvertTo``1(System.Object,System.Globalization.CultureInfo,System.Text.Encoding)')
   - [GetFunctionForConvert(sourceType,targetType)](#M-Bb-Converters-ConverterHelper-GetFunctionForConvert-System-Type,System-Type- 'Bb.Converters.ConverterHelper.GetFunctionForConvert(System.Type,System.Type)')
   - [GetMethodToConvert(sourceType,targetType)](#M-Bb-Converters-ConverterHelper-GetMethodToConvert-System-Type,System-Type- 'Bb.Converters.ConverterHelper.GetMethodToConvert(System.Type,System.Type)')
   - [Methods(filter)](#M-Bb-Converters-ConverterHelper-Methods-System-Predicate{Bb-Converters-MethodTypeConverter}- 'Bb.Converters.ConverterHelper.Methods(System.Predicate{Bb.Converters.MethodTypeConverter})')
@@ -1008,11 +1013,6 @@
   - [ToInt64(value)](#M-Bb-Converters-ConverterHelper-ToInt64-System-Single- 'Bb.Converters.ConverterHelper.ToInt64(System.Single)')
   - [ToInt64(value)](#M-Bb-Converters-ConverterHelper-ToInt64-System-Double- 'Bb.Converters.ConverterHelper.ToInt64(System.Double)')
   - [ToInt64(value)](#M-Bb-Converters-ConverterHelper-ToInt64-System-Char- 'Bb.Converters.ConverterHelper.ToInt64(System.Char)')
-  - [ToObject(self,targetType,context)](#M-Bb-Converters-ConverterHelper-ToObject-System-Object,System-Type,Bb-Converters-ConverterContext- 'Bb.Converters.ConverterHelper.ToObject(System.Object,System.Type,Bb.Converters.ConverterContext)')
-  - [ToObject\`\`1(self)](#M-Bb-Converters-ConverterHelper-ToObject``1-System-Object- 'Bb.Converters.ConverterHelper.ToObject``1(System.Object)')
-  - [ToObject\`\`1(self,culture)](#M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo- 'Bb.Converters.ConverterHelper.ToObject``1(System.Object,System.Globalization.CultureInfo)')
-  - [ToObject\`\`1(self,encoding)](#M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Text-Encoding- 'Bb.Converters.ConverterHelper.ToObject``1(System.Object,System.Text.Encoding)')
-  - [ToObject\`\`1(self,culture,encoding)](#M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo,System-Text-Encoding- 'Bb.Converters.ConverterHelper.ToObject``1(System.Object,System.Globalization.CultureInfo,System.Text.Encoding)')
   - [ToSByte(value)](#M-Bb-Converters-ConverterHelper-ToSByte-System-Char[]- 'Bb.Converters.ConverterHelper.ToSByte(System.Char[])')
   - [ToSByte(value)](#M-Bb-Converters-ConverterHelper-ToSByte-System-Byte[]- 'Bb.Converters.ConverterHelper.ToSByte(System.Byte[])')
   - [ToSByte(value)](#M-Bb-Converters-ConverterHelper-ToSByte-System-SByte[]- 'Bb.Converters.ConverterHelper.ToSByte(System.SByte[])')
@@ -15337,6 +15337,43 @@ Add methods to the list of methods to be used for conversion
 | ---- | ---- | ----------- |
 | ms | [System.Reflection.ConstructorInfo[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.ConstructorInfo[] 'System.Reflection.ConstructorInfo[]') |  |
 
+<a name='M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,Bb-Converters-ConverterContext-'></a>
+### ConvertTo(self,targetType,context) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
+| context | [Bb.Converters.ConverterContext](#T-Bb-Converters-ConverterContext 'Bb.Converters.ConverterContext') | conversionHelper |
+
+<a name='M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type-'></a>
+### ConvertTo(self,targetType) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
+
 <a name='M-Bb-Converters-ConverterHelper-ConvertTo-System-Object,System-Type,System-Globalization-CultureInfo-'></a>
 ### ConvertTo(self,targetType,culture) `method`
 
@@ -15395,8 +15432,31 @@ Convert a value to specified target type
 | targetType | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | Target type |
 | encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
 
-<a name='M-Bb-Converters-ConverterHelper-ConvertToObject-System-Object,System-Type-'></a>
-### ConvertToObject(self,targetType) `method`
+<a name='M-Bb-Converters-ConverterHelper-ConvertTo``1-System-Object-'></a>
+### ConvertTo\`\`1(self) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+converted value
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Target type |
+
+<a name='M-Bb-Converters-ConverterHelper-ConvertTo``1-System-Object,System-Globalization-CultureInfo-'></a>
+### ConvertTo\`\`1(self,culture) `method`
 
 ##### Summary
 
@@ -15411,7 +15471,62 @@ Convert a value to specified target type
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
-| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
+| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | culture for help conversion |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Target type |
+
+<a name='M-Bb-Converters-ConverterHelper-ConvertTo``1-System-Object,System-Text-Encoding-'></a>
+### ConvertTo\`\`1(self,encoding) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Target type |
+
+<a name='M-Bb-Converters-ConverterHelper-ConvertTo``1-System-Object,System-Globalization-CultureInfo,System-Text-Encoding-'></a>
+### ConvertTo\`\`1(self,culture,encoding) `method`
+
+##### Summary
+
+Convert a value to specified target type
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
+| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | culture for help conversion |
+| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Target type |
 
 <a name='M-Bb-Converters-ConverterHelper-GetFunctionForConvert-System-Type,System-Type-'></a>
 ### GetFunctionForConvert(sourceType,targetType) `method`
@@ -16386,121 +16501,6 @@ Convert a string to Int64
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | value | [System.Char](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Char 'System.Char') |  |
-
-<a name='M-Bb-Converters-ConverterHelper-ToObject-System-Object,System-Type,Bb-Converters-ConverterContext-'></a>
-### ToObject(self,targetType,context) `method`
-
-##### Summary
-
-Convert a value to specified target type
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
-| targetType | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Target type |
-| context | [Bb.Converters.ConverterContext](#T-Bb-Converters-ConverterContext 'Bb.Converters.ConverterContext') | conversionHelper |
-
-<a name='M-Bb-Converters-ConverterHelper-ToObject``1-System-Object-'></a>
-### ToObject\`\`1(self) `method`
-
-##### Summary
-
-Convert a value to specified target type
-
-##### Returns
-
-converted value
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
-
-##### Generic Types
-
-| Name | Description |
-| ---- | ----------- |
-| T | Target type |
-
-<a name='M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo-'></a>
-### ToObject\`\`1(self,culture) `method`
-
-##### Summary
-
-Convert a value to specified target type
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
-| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | culture for help conversion |
-
-##### Generic Types
-
-| Name | Description |
-| ---- | ----------- |
-| T | Target type |
-
-<a name='M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Text-Encoding-'></a>
-### ToObject\`\`1(self,encoding) `method`
-
-##### Summary
-
-Convert a value to specified target type
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
-| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
-
-##### Generic Types
-
-| Name | Description |
-| ---- | ----------- |
-| T | Target type |
-
-<a name='M-Bb-Converters-ConverterHelper-ToObject``1-System-Object,System-Globalization-CultureInfo,System-Text-Encoding-'></a>
-### ToObject\`\`1(self,culture,encoding) `method`
-
-##### Summary
-
-Convert a value to specified target type
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| self | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | initial value to convert |
-| culture | [System.Globalization.CultureInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Globalization.CultureInfo 'System.Globalization.CultureInfo') | culture for help conversion |
-| encoding | [System.Text.Encoding](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Text.Encoding 'System.Text.Encoding') | text encoding for help conversion |
-
-##### Generic Types
-
-| Name | Description |
-| ---- | ----------- |
-| T | Target type |
 
 <a name='M-Bb-Converters-ConverterHelper-ToSByte-System-Char[]-'></a>
 ### ToSByte(value) `method`

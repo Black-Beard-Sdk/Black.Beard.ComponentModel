@@ -421,7 +421,7 @@ namespace Bb.ComponentModel.Loaders
                     if (value != null && property.PropertyType != value.GetType())
                         try
                         {
-                            value = ConverterHelper.ConvertToObject(value, property.PropertyType);
+                            value = ConverterHelper.ConvertTo(value, property.PropertyType);
                         }
                         catch (Exception e)
                         {

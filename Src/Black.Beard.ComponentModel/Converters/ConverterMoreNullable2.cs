@@ -5,7 +5,7 @@ using System.Globalization;
 namespace Bb.Converters
 {
 
-    public static partial class ConverterHelperNullable
+    public static partial class ConverterMoreNullable
     {
 
         #region ToBoolean

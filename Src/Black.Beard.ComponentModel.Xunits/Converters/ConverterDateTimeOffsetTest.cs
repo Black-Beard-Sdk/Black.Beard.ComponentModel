@@ -16,7 +16,7 @@ namespace Black.Beard.Converters
         public void Test1()
         {
             var date = new DateTimeOffset(2020, 1, 3, 10, 00, 00, new TimeSpan(2, 0, 0));
-            DateTimeOffset? date2 = (DateTimeOffset)ConverterHelper.ToObject(date, typeof(DateTimeOffset?));
+            DateTimeOffset? date2 = (DateTimeOffset)date.ConvertTo(typeof(DateTimeOffset?));
             Assert.Equal(date, date2.Value);
         }
 
@@ -25,7 +25,7 @@ namespace Black.Beard.Converters
         public void Test2()
         {
             DateTimeOffset? date = new DateTimeOffset(2020, 1, 3, 10, 00, 00, new TimeSpan(2, 0, 0));
-            DateTimeOffset date2 = (DateTimeOffset)ConverterHelper.ToObject(date, typeof(DateTimeOffset));
+            DateTimeOffset date2 = (DateTimeOffset)date.ConvertTo(typeof(DateTimeOffset));
             Assert.Equal(date.Value, date2);
         }
 
@@ -34,7 +34,7 @@ namespace Black.Beard.Converters
         public void Test3()
         {
             DateTimeOffset date = new DateTimeOffset(2020, 1, 3, 10, 00, 00, new TimeSpan(2, 0, 0));
-            DateTime date2 = (DateTime)ConverterHelper.ToObject(date, typeof(DateTime));
+            DateTime date2 = (DateTime)date.ConvertTo(typeof(DateTime));
             Assert.Equal(date, date2);
         }
 
@@ -166,7 +166,7 @@ namespace Black.Beard.Converters
             var date = new DateTimeOffset(2020, 1, 3, 10, 00, 00, new TimeSpan(2, 0, 0));
             var txt = date.ToString(CultureInfo.CurrentCulture);
 
-            txt.ToObject(typeof(DateTimeOffset)).Should().Be(date);
+            txt.ConvertTo(typeof(DateTimeOffset)).Should().Be(date);
 
         }
 
