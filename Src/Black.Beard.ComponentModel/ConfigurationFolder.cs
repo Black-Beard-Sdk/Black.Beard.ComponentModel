@@ -172,7 +172,7 @@ namespace Bb
         /// }
         /// </code>
         /// </example>
-        internal static string[] GetPaths()
+        public static string[] GetPaths()
         {
             List<string> result = new List<string>();
 
