@@ -3,7 +3,9 @@ using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Factories;
 using Bb.ComponentModel.Loaders;
 using FluentAssertions;
+using ICSharpCode.Decompiler.Metadata;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -300,7 +302,24 @@ namespace DynamicDescriptors.Tests
                     Assert.True(false, $"assembly {item.FullName} not found");
 
         }
-        
+
+        [Fact]
+        public void Test()
+        {
+
+
+            var item = typeof(ReflexionTest).Assembly.Location;
+
+            var items = new AddonsResolver()
+                .SearchListReferences(item)
+                ;
+
+            var pp = items.Where(c => !c.IsLoaded && !c.IsSdk).ToList();
+
+            Assert.True(pp.Count < 5);
+
+        }
+
     }
 
     [ExposeClass(Context = ConstantsCore.Plugin + "Test")]

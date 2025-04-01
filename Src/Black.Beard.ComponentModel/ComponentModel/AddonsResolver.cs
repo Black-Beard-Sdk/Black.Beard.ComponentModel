@@ -686,7 +686,7 @@ namespace Bb.ComponentModel
         /// Return a list of assembly referenced by entry assembly
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<AssemblyMatched> SearchListOfReferences()
+        public IEnumerable<AssemblyMatched> SearchListReferences()
         {
             return SearchListReferences(Assembly.GetEntryAssembly());
 
@@ -699,16 +699,27 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public IEnumerable<AssemblyMatched> SearchListReferences(Assembly assembly)
         {
-            Dictionary<string, AssemblyMatched> _list = new Dictionary<string, AssemblyMatched>();
             var filePath = new FileInfo(assembly.Location);
+            return SearchListReferences(filePath);         
+        }
+
+        public IEnumerable<AssemblyMatched> SearchListReferences(string filepath)
+        {
+            var file = new FileInfo(filepath);
+            return SearchListReferences(file);
+        }
+
+        public IEnumerable<AssemblyMatched> SearchListReferences(FileInfo filePath)
+        {
+            Dictionary<string, AssemblyMatched> _list = new Dictionary<string, AssemblyMatched>();
             if (TryToLoadFile(filePath, out PEFile peFile))
             {
 
                 if (FilterAssembly == null || FilterAssembly(peFile))
                 {
                     var ass = BuildModelAssembly(filePath, peFile);
-                    if (!_list.ContainsKey(assembly.GetName().Name))
-                        _list.Add(assembly.GetName().Name, ass);
+                    if (!_list.ContainsKey(peFile.Name)) //  assembly.GetName().Name))
+                        _list.Add(peFile.Name /*assembly.GetName().Name*/, ass);
                 }
 
                 EvaluateReferences(peFile, _list);

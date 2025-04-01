@@ -123,7 +123,7 @@
   - [ParseAssemblies()](#M-Bb-ComponentModel-AddonsResolver-ParseAssemblies 'Bb.ComponentModel.AddonsResolver.ParseAssemblies')
   - [Resolve(item,list)](#M-Bb-ComponentModel-AddonsResolver-Resolve-ICSharpCode-Decompiler-Metadata-AssemblyReference,System-Collections-Generic-Dictionary{System-String,Bb-ComponentModel-AssemblyMatched}- 'Bb.ComponentModel.AddonsResolver.Resolve(ICSharpCode.Decompiler.Metadata.AssemblyReference,System.Collections.Generic.Dictionary{System.String,Bb.ComponentModel.AssemblyMatched})')
   - [SearchAssemblies()](#M-Bb-ComponentModel-AddonsResolver-SearchAssemblies 'Bb.ComponentModel.AddonsResolver.SearchAssemblies')
-  - [SearchListOfReferences()](#M-Bb-ComponentModel-AddonsResolver-SearchListOfReferences 'Bb.ComponentModel.AddonsResolver.SearchListOfReferences')
+  - [SearchListReferences()](#M-Bb-ComponentModel-AddonsResolver-SearchListReferences 'Bb.ComponentModel.AddonsResolver.SearchListReferences')
   - [SearchListReferences(assembly)](#M-Bb-ComponentModel-AddonsResolver-SearchListReferences-System-Reflection-Assembly- 'Bb.ComponentModel.AddonsResolver.SearchListReferences(System.Reflection.Assembly)')
   - [SearchTypes()](#M-Bb-ComponentModel-AddonsResolver-SearchTypes 'Bb.ComponentModel.AddonsResolver.SearchTypes')
   - [TryToLoadFile(filename,peFile)](#M-Bb-ComponentModel-AddonsResolver-TryToLoadFile-System-IO-FileInfo,ICSharpCode-Decompiler-Metadata-PEFile@- 'Bb.ComponentModel.AddonsResolver.TryToLoadFile(System.IO.FileInfo,ICSharpCode.Decompiler.Metadata.PEFile@)')
@@ -5294,8 +5294,8 @@ Apply filters and return the list of assemblies
 
 This method has no parameters.
 
-<a name='M-Bb-ComponentModel-AddonsResolver-SearchListOfReferences'></a>
-### SearchListOfReferences() `method`
+<a name='M-Bb-ComponentModel-AddonsResolver-SearchListReferences'></a>
+### SearchListReferences() `method`
 
 ##### Summary
 
