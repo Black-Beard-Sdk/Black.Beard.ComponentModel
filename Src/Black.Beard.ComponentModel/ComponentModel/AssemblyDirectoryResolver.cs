@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text.Encodings.Web;
 
 namespace Bb.ComponentModel
 {
-
-
 
     /// <summary>
     /// Manage the assemblies folders

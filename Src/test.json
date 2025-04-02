@@ -1,0 +1,219 @@
+openapi: 3.0.2
+info:
+  title: 'Pickup services parcel domain : Get Parcel Info'
+  version: '1.1'
+  description: This service allows retrieving information about a parcel.
+servers:
+  - url: https://col-api.pickup-services.com
+    description: PROD
+  - url: https://col-api-qua.pickup-services.com
+    description: QUA
+  - url: https://col-api-uat.pickup-services.com
+    description: UAT
+  - url: https://col-api-test.pickup-services.com
+    description: TEST
+externalDocs:
+  description: ''
+  url: https://pickup-services.atlassian.net/wiki/spaces/MD/pages/560565524/C21-Scanner+AMS-PUDO+PSSA+Parcel+Scan+GetParcelInfo
+paths:
+  /GetParcelInfo/v1/:
+    post:
+      summary: Get information about a parcel.
+      tags:
+        - GetParcelInfo
+      operationId: getParcelInfo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestBody'
+      responses:
+        '200':
+          description: Ok with information about a parcel.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        parcelNumber:
+                          minLength: 1
+                          type: string
+                          description: The main functional ID of the parcel.
+                        mappedParcelState:
+                          type: integer
+                          description: The current state ID of the parcel.
+                        currentStepTime:
+                          type: string
+                          description: Latest step change time.
+                          format: date-time
+                          nullable: true
+                        expirationTime:
+                          type: string
+                          description: PUDO should not keep the parcel after this date.
+                          format: date-time
+                          nullable: true
+                        currentSite:
+                          type: string
+                          description: "Site where the parcel is.\r\nPudo International ID or GEOPOSTDEPOTNUMBER."
+                          nullable: true
+                        customerName:
+                          type: string
+                          description: Parcel receiver name.
+                          nullable: true
+                        carrierId:
+                          type: string
+                          description: Client carrier public ID.
+                          nullable: true
+                        carrierMisrouted:
+                          type: boolean
+                        clientMisrouted:
+                          type: boolean
+                        prestationType:
+                          type: string
+                          description: Actual prestation (e.g., Delivery, Swap, DropOff, Supply).
+                          nullable: true
+                        prestationOptions:
+                          type: array
+                          description: Options added to the prestation type (e.g., PINCODE, COD).
+                          items: 
+                            type: string
+                        physicalCarrier:
+                          type: string
+                          description: The current physical carrier.
+                      additionalProperties: false
+                      description: The parcel, as sent to the PDA.
+                  recordsFiltered:
+                    description: Total records found according to the request.
+                    type: integer
+                  start:
+                    description: Offset.
+                    type: integer
+                  length:
+                    description: Number of parcels requested (according to pageSize).
+                    type: integer
+                  recordsTotal:
+                    description: The actual number of parcels in the array data.
+                    type: integer
+          headers:
+            pickup-correlation-id:
+              schema:
+                $ref: '#/components/headers/pickup-correlation-id'
+            RateLimit-Limit:
+              schema:
+                $ref: '#/components/headers/RateLimit-Limit-second'
+            RateLimit-Remaining:
+              schema:
+                $ref: '#/components/headers/RateLimit-Remaining-second'
+        '401':
+          description: 'Unauthorized: Illegal request because you are not authenticated.'
+          headers:
+            pickup-correlation-id:
+              schema:
+                $ref: '#/components/headers/pickup-correlation-id'
+        '403':
+          description: 'Forbidden: You have no permission to execute the method.'
+          headers:
+            pickup-correlation-id:
+              schema:
+                $ref: '#/components/headers/pickup-correlation-id'
+            RateLimit-Limit:
+              schema:
+                $ref: '#/components/headers/RateLimit-Limit-second'
+            RateLimit-Remaining:
+              schema:
+                $ref: '#/components/headers/RateLimit-Remaining-second'
+        '429':
+          description: Too Many Requests: The number of HTTP requests has exceeded the allowed limit.
+          headers:
+            pickup-correlation-id:
+              schema:
+                $ref: '#/components/headers/pickup-correlation-id'
+            RateLimit-Limit:
+              schema:
+                $ref: '#/components/headers/RateLimit-Limit-second'
+            RateLimit-Remaining:
+              schema:
+                $ref: '#/components/headers/RateLimit-Remaining-second'
+        '500':
+          description: Internal Server Error.
+          headers:
+            pickup-correlation-id:
+              schema:
+                $ref: '#/components/headers/pickup-correlation-id'
+            RateLimit-Limit:
+              schema:
+                $ref: '#/components/headers/RateLimit-Limit-second'
+            RateLimit-Remaining:
+              schema:
+                $ref: '#/components/headers/RateLimit-Remaining-second'
+components:
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      name: API-KEY
+      in: header
+    BearerAuth:
+      description: 'JWT Authorization header using the Bearer scheme. Enter ''Bearer'' [space] and then your token in the text input below. Example: ''Bearer 12345abcdef'''
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    RequestBody:
+      type: object
+      description: Either parcelId or customerPhone must be present.
+      properties:
+        parcelId:
+          description: Parcel ID, maximum 32 characters.
+          type: string
+          maxLength: 32
+          nullable: true
+        customerPhone:
+          description: Recipient's phone number, minimum 6 characters, maximum 16 characters. Must be in international E.164 format.
+          type: string
+          minLength: 6
+          maxLength: 16
+          nullable: true
+        pageSize:
+          description: Number of parcels returned per page.
+          type: integer
+          nullable: true
+        pageStart:
+          description: Offset to start the page.
+          type: integer
+          nullable: true
+  headers:
+    pickup-correlation-id:
+      schema:
+        description: Unique identifier associated with the request.
+        type: string
+        format: uuid
+    RateLimit-Limit-second:
+      schema:
+        description: Request limit per second.
+        externalDocs:
+          description: Documentation for Kong.
+          url: https://docs.konghq.com/hub/kong-inc/rate-limiting/
+        type: integer
+      example: 100
+    RateLimit-Remaining-second:
+      schema:
+        description: Remaining request limit per second.
+        type: integer
+      example: 92
+security:
+  - ApiKey: []
+  - BearerAuth: []
+x-sla:
+  availability: 99.5%
+  responseTime: <200ms
+x-maintenance:
+  schedule: |
+    Scheduled maintenance: Every first Sunday of the month from 02:00 to 04:00 UTC.
+  availability: 24/7 with announced maintenance windows.
+
