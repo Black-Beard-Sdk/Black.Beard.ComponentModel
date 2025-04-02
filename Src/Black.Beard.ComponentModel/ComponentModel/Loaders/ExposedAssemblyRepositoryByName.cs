@@ -1,26 +1,26 @@
 ﻿
-namespace Bb.ComponentModel.Loaders
-{
+//namespace Bb.ComponentModel.Loaders
+//{
 
 
-    /// <summary>
-    /// Load assemblies by name
-    /// </summary>
-    public class ExposedAssemblyRepositoryByName : ExposedAssemblyRepository
-    {
+//    /// <summary>
+//    /// Load assemblies by name
+//    /// </summary>
+//    public class ExposedAssemblyRepositoryByName : ExposedAssemblyRepository
+//    {
 
-        public ExposedAssemblyRepositoryByName()
-        {
+//        public ExposedAssemblyRepositoryByName()
+//        {
 
-        }
+//        }
 
-        /// <summary>
-        /// Assembly name to load
-        /// </summary>
-        public string AssemblyName { get; set; }
-
-
-    }
+//        /// <summary>
+//        /// Assembly name to load
+//        /// </summary>
+//        public string AssemblyName { get; set; }
 
 
-}
+//    }
+
+
+//}

@@ -128,7 +128,6 @@
   - [SearchTypes()](#M-Bb-ComponentModel-AddonsResolver-SearchTypes 'Bb.ComponentModel.AddonsResolver.SearchTypes')
   - [TryToLoadFile(filename,peFile)](#M-Bb-ComponentModel-AddonsResolver-TryToLoadFile-System-IO-FileInfo,ICSharpCode-Decompiler-Metadata-PEFile@- 'Bb.ComponentModel.AddonsResolver.TryToLoadFile(System.IO.FileInfo,ICSharpCode.Decompiler.Metadata.PEFile@)')
   - [WhereAssembly(filterAssembly)](#M-Bb-ComponentModel-AddonsResolver-WhereAssembly-System-Func{ICSharpCode-Decompiler-Metadata-PEFile,System-Boolean}- 'Bb.ComponentModel.AddonsResolver.WhereAssembly(System.Func{ICSharpCode.Decompiler.Metadata.PEFile,System.Boolean})')
-  - [With(repositories)](#M-Bb-ComponentModel-AddonsResolver-With-Bb-ComponentModel-Loaders-ExposedAssemblyRepositories- 'Bb.ComponentModel.AddonsResolver.With(Bb.ComponentModel.Loaders.ExposedAssemblyRepositories)')
   - [WithBaseType(baseTypes)](#M-Bb-ComponentModel-AddonsResolver-WithBaseType-System-Collections-Generic-IEnumerable{System-Type}- 'Bb.ComponentModel.AddonsResolver.WithBaseType(System.Collections.Generic.IEnumerable{System.Type})')
   - [WithBaseType(baseTypes)](#M-Bb-ComponentModel-AddonsResolver-WithBaseType-System-Type[]- 'Bb.ComponentModel.AddonsResolver.WithBaseType(System.Type[])')
   - [WithFile(fileFilter)](#M-Bb-ComponentModel-AddonsResolver-WithFile-System-Func{System-IO-FileInfo,System-Boolean}- 'Bb.ComponentModel.AddonsResolver.WithFile(System.Func{System.IO.FileInfo,System.Boolean})')
@@ -1233,11 +1232,6 @@
   - [InvalidOrUnexpectedCharacter](#F-LightJson-Serialization-JsonParseException-ErrorType-InvalidOrUnexpectedCharacter 'LightJson.Serialization.JsonParseException.ErrorType.InvalidOrUnexpectedCharacter')
   - [Unknown](#F-LightJson-Serialization-JsonParseException-ErrorType-Unknown 'LightJson.Serialization.JsonParseException.ErrorType.Unknown')
 - [EscapeInvalidIdentifiers](#T-ICSharpCode-Decompiler-CSharp-Transforms-EscapeInvalidIdentifiers 'ICSharpCode.Decompiler.CSharp.Transforms.EscapeInvalidIdentifiers')
-- [ExposedAssemblyRepository](#T-Bb-ComponentModel-Loaders-ExposedAssemblyRepository 'Bb.ComponentModel.Loaders.ExposedAssemblyRepository')
-- [ExposedAssemblyRepositoryByFolder](#T-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByFolder 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositoryByFolder')
-  - [Path](#P-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByFolder-Path 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositoryByFolder.Path')
-- [ExposedAssemblyRepositoryByName](#T-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByName 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositoryByName')
-  - [AssemblyName](#P-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByName-AssemblyName 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositoryByName.AssemblyName')
 - [ExposedTypes](#T-Bb-ComponentModel-ExposedTypes 'Bb.ComponentModel.ExposedTypes')
   - [#ctor()](#M-Bb-ComponentModel-ExposedTypes-#ctor 'Bb.ComponentModel.ExposedTypes.#ctor')
   - [Add(configurations)](#M-Bb-ComponentModel-ExposedTypes-Add-Bb-ComponentModel-Attributes-ExposedTypeConfigurations- 'Bb.ComponentModel.ExposedTypes.Add(Bb.ComponentModel.Attributes.ExposedTypeConfigurations)')
@@ -5366,33 +5360,6 @@ Evaluate if the assembly must be used
 ##### Remarks
 
 This method sets a filter function to evaluate if an assembly must be used.
-
-<a name='M-Bb-ComponentModel-AddonsResolver-With-Bb-ComponentModel-Loaders-ExposedAssemblyRepositories-'></a>
-### With(repositories) `method`
-
-##### Summary
-
-Add a list of repositories
-
-##### Returns
-
-[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| repositories | [Bb.ComponentModel.Loaders.ExposedAssemblyRepositories](#T-Bb-ComponentModel-Loaders-ExposedAssemblyRepositories 'Bb.ComponentModel.Loaders.ExposedAssemblyRepositories') | The repositories to add. Must not be null. |
-
-##### Exceptions
-
-| Name | Description |
-| ---- | ----------- |
-| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when repositories is null. |
-
-##### Remarks
-
-This method adds the specified repositories to the resolver's path list for analysis.
 
 <a name='M-Bb-ComponentModel-AddonsResolver-WithBaseType-System-Collections-Generic-IEnumerable{System-Type}-'></a>
 ### WithBaseType(baseTypes) `method`
@@ -18894,53 +18861,6 @@ Escape invalid identifiers.
 ##### Remarks
 
 This transform is not enabled by default.
-
-<a name='T-Bb-ComponentModel-Loaders-ExposedAssemblyRepository'></a>
-## ExposedAssemblyRepository `type`
-
-##### Namespace
-
-Bb.ComponentModel.Loaders
-
-##### Summary
-
-base class for loading assemblies
-
-<a name='T-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByFolder'></a>
-## ExposedAssemblyRepositoryByFolder `type`
-
-##### Namespace
-
-Bb.ComponentModel.Loaders
-
-##### Summary
-
-Load assemblies from a folder
-
-<a name='P-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByFolder-Path'></a>
-### Path `property`
-
-##### Summary
-
-Folder path for loading assemblies
-
-<a name='T-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByName'></a>
-## ExposedAssemblyRepositoryByName `type`
-
-##### Namespace
-
-Bb.ComponentModel.Loaders
-
-##### Summary
-
-Load assemblies by name
-
-<a name='P-Bb-ComponentModel-Loaders-ExposedAssemblyRepositoryByName-AssemblyName'></a>
-### AssemblyName `property`
-
-##### Summary
-
-Assembly name to load
 
 <a name='T-Bb-ComponentModel-ExposedTypes'></a>
 ## ExposedTypes `type`

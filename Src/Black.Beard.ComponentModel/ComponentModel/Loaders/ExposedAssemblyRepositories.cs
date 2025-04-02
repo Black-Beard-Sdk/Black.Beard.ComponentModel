@@ -7,21 +7,21 @@ namespace Bb.ComponentModel.Loaders
 {
 
 
-    public class ExposedAssemblyRepositories
-    {
+    //public class ExposedAssemblyRepositories
+    //{
 
-        public ExposedAssemblyRepositories()
-        {
-            ByFolder = new List<ExposedAssemblyRepositoryByFolder>();
-            ByName = new List<ExposedAssemblyRepositoryByName>();
-        }
+    //    public ExposedAssemblyRepositories()
+    //    {
+    //        ByFolder = new List<ExposedAssemblyRepositoryByFolder>();
+    //        ByName = new List<ExposedAssemblyRepositoryByName>();
+    //    }
 
-        public List<ExposedAssemblyRepositoryByFolder> ByFolder { get; set; }
+    //    public List<ExposedAssemblyRepositoryByFolder> ByFolder { get; set; }
 
 
-        public List<ExposedAssemblyRepositoryByName> ByName { get; set; }
+    //    public List<ExposedAssemblyRepositoryByName> ByName { get; set; }
 
-    }
+    //}
 
 
 

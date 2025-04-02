@@ -1,19 +1,19 @@
-﻿namespace Bb.ComponentModel.Loaders
-{
+﻿//namespace Bb.ComponentModel.Loaders
+//{
 
 
-    /// <summary>
-    /// base class for loading assemblies
-    /// </summary>
-    public abstract class ExposedAssemblyRepository
-    {
+//    /// <summary>
+//    /// base class for loading assemblies
+//    /// </summary>
+//    public abstract class ExposedAssemblyRepository
+//    {
 
-        public ExposedAssemblyRepository()
-        {
+//        public ExposedAssemblyRepository()
+//        {
 
-        }
+//        }
 
-    }
+//    }
 
 
-}
+//}

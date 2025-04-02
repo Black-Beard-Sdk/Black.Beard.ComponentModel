@@ -55,30 +55,30 @@ namespace Bb.ComponentModel
         }
 
 
-        /// <summary>
-        /// Add a list of repositories
-        /// </summary>
-        /// <param name="repositories">The repositories to add. Must not be null.</param>
-        /// <returns><see cref="AddonsResolver"/> fluent syntax</returns>
-        /// <remarks>
-        /// This method adds the specified repositories to the resolver's path list for analysis.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">Thrown when repositories is null.</exception>
-        public AddonsResolver With(ExposedAssemblyRepositories repositories)
-        {
-            if (repositories != null)
-            {
+        ///// <summary>
+        ///// Add a list of repositories
+        ///// </summary>
+        ///// <param name="repositories">The repositories to add. Must not be null.</param>
+        ///// <returns><see cref="AddonsResolver"/> fluent syntax</returns>
+        ///// <remarks>
+        ///// This method adds the specified repositories to the resolver's path list for analysis.
+        ///// </remarks>
+        ///// <exception cref="ArgumentNullException">Thrown when repositories is null.</exception>
+        //public AddonsResolver With(ExposedAssemblyRepositories repositories)
+        //{
+        //    if (repositories != null)
+        //    {
 
-                foreach (var item in repositories.ByFolder)
-                    AddDirectories(item.Path);
+        //        foreach (var item in repositories.ByFolder)
+        //            AddDirectories(item.Path);
 
-                foreach (var item in repositories.ByName)
-                    AddAssemblyByName(item.AssemblyName);
+        //        foreach (var item in repositories.ByName)
+        //            AddAssemblyByName(item.AssemblyName);
 
-            }
-            return this;
+        //    }
+        //    return this;
 
-        }
+        //}
 
 
         #region Add directories
