@@ -44,10 +44,6 @@
 
 	<ItemGroup>
 	  <Compile Include="ComponentModel\Loaders\CommandLineParser.cs" />
-	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositories.cs" />
-	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepository.cs" />
-	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositoryByFolder.cs" />
-	  <Compile Include="ComponentModel\Loaders\ExposedAssemblyRepositoryByName.cs" />
 	  <Compile Include="ComponentModel\Loaders\Initializer.cs" />
 	  <Compile Include="ComponentModel\Loaders\InjectionExtensions.cs" />
 	  <Compile Include="ComponentModel\Loaders\InjectionLoader.cs" />
