@@ -226,6 +226,22 @@ namespace Bb.ComponentModel
         }
 
         /// <summary>
+        /// Add an assembly names to the resolver's list for analysis.
+        /// </summary>
+        /// <param name="assemblyNames">The name of the assemblies to add. Must not be null.</param>
+        /// <returns><see cref="AddonsResolver"/> fluent syntax</returns>
+        /// <remarks>
+        /// This method adds the specified assembly name to the resolver's list for analysis.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">Thrown when assemblyName is null.</exception>
+        public AddonsResolver AddAssemblyByNames(IEnumerable<string> assemblyNames)
+        {
+            foreach (var assemblyName in assemblyNames)
+                AssemblyLoader.Instance.LoadAssemblyName(assemblyName);
+            return this;
+        }
+
+        /// <summary>
         /// Filter on assembly name
         /// </summary>
         /// <param name="type">The type whose assembly to filter. Must not be null.</param>
