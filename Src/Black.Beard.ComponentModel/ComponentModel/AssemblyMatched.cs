@@ -36,12 +36,10 @@ namespace Bb.ComponentModel
         public string AssemblyName { get; internal set; }
 
         /// <summary>
-        /// Gets the assembly version.
+        /// Gets the full name of the assembly.
         /// </summary>
-        /// <value>
-        /// The assembly version.
-        /// </value>
-        public Version AssemblyVersion { get; set; }
+        public AssemblyName AssemblyFullName { get; internal set; }
+
 
         /// <summary>
         /// Gets a value indicating whether [assembly is loaded].
@@ -60,7 +58,7 @@ namespace Bb.ComponentModel
                     _isLoaded = AssemblyLoader.Instance.IsLoadedByFile(this.AssemblyLocation);
 
                 else if (!string.IsNullOrEmpty(this.AssemblyName))
-                    _isLoaded = AssemblyLoader.Instance.IsLoadedByAssemblyByName(new AssemblyName(this.AssemblyName), false);
+                    _isLoaded = AssemblyLoader.Instance.IsLoadedByAssemblyByName(this.AssemblyFullName, false);
 
                 return _isLoaded.HasValue ? _isLoaded.Value : false;
 
@@ -80,10 +78,19 @@ namespace Bb.ComponentModel
 
                 if (_assembly == null)
                 {
-                    if (this.AssemblyLocation != null)
+
+                    if(AssemblyLoader.Instance.IsLoadedByAssemblyByName(this.AssemblyFullName, false))
+                        _assembly = TypeDiscovery.Instance.GetAssembly(this.AssemblyFullName);
+
+                    else if (AssemblyLoader.Instance.IsLoadedByAssemblyByName(this.AssemblyFullName, true))
+                            _assembly = TypeDiscovery.Instance.GetAssembly(this.AssemblyFullName);
+
+                    else if (this.AssemblyLocation != null)
                         _assembly = AssemblyLoader.Instance.LoadAssembly(this.AssemblyLocation);
+
                     else
-                        _assembly = TypeDiscovery.Instance.GetAssembly(this.AssemblyName);
+                        _assembly = TypeDiscovery.Instance.GetAssembly(this.AssemblyFullName);
+                
                 }
 
                 return _assembly;
@@ -143,7 +150,10 @@ namespace Bb.ComponentModel
             if (!AssemblyIsLoaded && !FailedToLoad)
                 try
                 {
-                    this.Assembly = AssemblyLoader.Instance.LoadAssembly(this.AssemblyLocation, null);
+                    
+                    this.Assembly = AssemblyLoader
+                        .Instance.LoadAssembly(this.AssemblyLocation, null);
+
                     result = true;
                 }
                 catch (Exception)

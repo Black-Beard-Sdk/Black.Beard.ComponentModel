@@ -18,7 +18,7 @@ namespace Bb.ComponentModel
 
         static AssemblyLoader()
         {
-            AssemblyLoader._instance = new AssemblyLoader();         
+            AssemblyLoader._instance = new AssemblyLoader();
         }
 
         private AssemblyLoader()
@@ -47,10 +47,10 @@ namespace Bb.ComponentModel
 
                 IEnumerable<Assembly> result = null;
                 var ctx = AssemblyLoadContext.CurrentContextualReflectionContext;
-                
+
                 if (ctx == null)
                     ctx = AssemblyLoadContext.All.FirstOrDefault();
-                
+
                 if (ctx != null)
                     result = ctx.Assemblies;
 
@@ -152,7 +152,7 @@ namespace Bb.ComponentModel
                 if (ComponentModelActivityProvider.WithTelemetry)
                     ComponentModelActivityProvider.AddProperty("added_ass" + _loadedByFile.Count().ToString(), item.FullName);
                 AddAssembly(ass, null);
-                
+
                 return ass;
 
             }
@@ -256,10 +256,10 @@ namespace Bb.ComponentModel
             if (string.IsNullOrEmpty(fileAssembly.Name))
                 throw new ArgumentNullException(nameof(fileAssembly.Name));
 
+            fileAssembly.Refresh();
             if (!fileAssembly.Exists)
                 throw new FileNotFoundException(fileAssembly.FullName);
 
-            fileAssembly.Refresh();
             if (TryToGet(fileAssembly.FullName, out Assembly assembly))
                 return assembly;
 
@@ -296,7 +296,7 @@ namespace Bb.ComponentModel
             if (!_assemblyNames.TryGetValue(name.Name, out var dic))
                 return false;
 
-            if (acceptAllversions)
+            if (acceptAllversions || name.Version == null)
                 return true;
 
             return dic.Contains(name.Version.ToString());
@@ -412,7 +412,8 @@ namespace Bb.ComponentModel
                             return filePdb.Exists;
                         }
                         return false;
-                    };
+                    }
+                    ;
 
                     if (filePdb == null && test())
                         assembly = LoadAssembly(fileAssembly.FullName);

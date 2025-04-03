@@ -235,10 +235,10 @@
   - [TryToGet(filename,assembly)](#M-Bb-ComponentModel-AssemblyLoader-TryToGet-System-IO-FileInfo,System-Reflection-Assembly@- 'Bb.ComponentModel.AssemblyLoader.TryToGet(System.IO.FileInfo,System.Reflection.Assembly@)')
 - [AssemblyMatched](#T-Bb-ComponentModel-AssemblyMatched 'Bb.ComponentModel.AssemblyMatched')
   - [Assembly](#P-Bb-ComponentModel-AssemblyMatched-Assembly 'Bb.ComponentModel.AssemblyMatched.Assembly')
+  - [AssemblyFullName](#P-Bb-ComponentModel-AssemblyMatched-AssemblyFullName 'Bb.ComponentModel.AssemblyMatched.AssemblyFullName')
   - [AssemblyIsLoaded](#P-Bb-ComponentModel-AssemblyMatched-AssemblyIsLoaded 'Bb.ComponentModel.AssemblyMatched.AssemblyIsLoaded')
   - [AssemblyLocation](#P-Bb-ComponentModel-AssemblyMatched-AssemblyLocation 'Bb.ComponentModel.AssemblyMatched.AssemblyLocation')
   - [AssemblyName](#P-Bb-ComponentModel-AssemblyMatched-AssemblyName 'Bb.ComponentModel.AssemblyMatched.AssemblyName')
-  - [AssemblyVersion](#P-Bb-ComponentModel-AssemblyMatched-AssemblyVersion 'Bb.ComponentModel.AssemblyMatched.AssemblyVersion')
   - [FailedToLoad](#P-Bb-ComponentModel-AssemblyMatched-FailedToLoad 'Bb.ComponentModel.AssemblyMatched.FailedToLoad')
   - [GetAssembliesByName()](#M-Bb-ComponentModel-AssemblyMatched-GetAssembliesByName 'Bb.ComponentModel.AssemblyMatched.GetAssembliesByName')
   - [Load(failedOnloadError)](#M-Bb-ComponentModel-AssemblyMatched-Load-System-Boolean- 'Bb.ComponentModel.AssemblyMatched.Load(System.Boolean)')
@@ -6933,6 +6933,13 @@ Bb.ComponentModel
 
 Gets the assembly of the type. Call the method Load for load the assembly.
 
+<a name='P-Bb-ComponentModel-AssemblyMatched-AssemblyFullName'></a>
+### AssemblyFullName `property`
+
+##### Summary
+
+Gets the full name of the assembly.
+
 <a name='P-Bb-ComponentModel-AssemblyMatched-AssemblyIsLoaded'></a>
 ### AssemblyIsLoaded `property`
 
@@ -6953,13 +6960,6 @@ Gets the assembly location.
 ##### Summary
 
 Gets the name of the assembly.
-
-<a name='P-Bb-ComponentModel-AssemblyMatched-AssemblyVersion'></a>
-### AssemblyVersion `property`
-
-##### Summary
-
-Gets the assembly version.
 
 <a name='P-Bb-ComponentModel-AssemblyMatched-FailedToLoad'></a>
 ### FailedToLoad `property`

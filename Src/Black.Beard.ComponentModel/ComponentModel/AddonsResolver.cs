@@ -706,7 +706,7 @@ namespace Bb.ComponentModel
         public IEnumerable<AssemblyMatched> SearchListReferences(Assembly assembly)
         {
             var filePath = new FileInfo(assembly.Location);
-            return SearchListReferences(filePath);         
+            return SearchListReferences(filePath);
         }
 
         public IEnumerable<AssemblyMatched> SearchListReferences(string filepath)
@@ -792,6 +792,8 @@ namespace Bb.ComponentModel
             try
             {
                 peFile = new PEFile(filename.FullName);
+                if (peFile.Failed)
+                    return false;
             }
             catch (PEFileNotSupportedException)
             {
@@ -1080,7 +1082,7 @@ namespace Bb.ComponentModel
             {
                 AssemblyLocation = assemblyPath,
                 AssemblyName = file.Name,
-                AssemblyVersion = file.Version,
+                AssemblyFullName = new AssemblyName(file.FullName),
                 FullName = item.FullName,
                 TypeNamespace = item.Namespace,
                 TypeName = item.Name,
@@ -1100,7 +1102,7 @@ namespace Bb.ComponentModel
             {
                 AssemblyLocation = assemblyPath,
                 AssemblyName = file.Name,
-                AssemblyVersion = file.Version,
+                AssemblyFullName = new AssemblyName(file.FullName),
                 IsEntryDirectory = isEntryDirectory,
                 IsSystemDirectory = isSystemDirectory,
                 IsSdk = isSystemDirectory || file.IsSdk(),

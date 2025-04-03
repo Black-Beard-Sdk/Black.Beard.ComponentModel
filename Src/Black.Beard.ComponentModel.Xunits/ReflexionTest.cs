@@ -3,9 +3,7 @@ using Bb.ComponentModel.Attributes;
 using Bb.ComponentModel.Factories;
 using Bb.ComponentModel.Loaders;
 using FluentAssertions;
-using ICSharpCode.Decompiler.Metadata;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -18,7 +16,6 @@ namespace DynamicDescriptors.Tests
 
     public sealed class ReflexionTest
     {
-
 
         [Fact]
         public void TestIsSystemDirectory()
@@ -238,7 +235,6 @@ namespace DynamicDescriptors.Tests
 
         }
 
-
         [Fact]
         public void FilterTest53()
         {
@@ -260,10 +256,12 @@ namespace DynamicDescriptors.Tests
 
             //var pp = typeof(System.Configuration.Configuration).Assembly.Location;
 
-            var root = new FileInfo(typeof(ReflexionTest).Assembly.Location).Directory.FullName;
+            var root 
+                = new FileInfo(typeof(object).Assembly.Location).Directory.FullName;
             var p = new AssemblyMatched()
             {
-                AssemblyLocation = new FileInfo(Path.Combine(root, "System.Configuration.ConfigurationManager" + ".dll")),
+                AssemblyLocation 
+                = new FileInfo(Path.Combine(root, "System.Configuration" + ".dll")),
             };
 
             p.Load();

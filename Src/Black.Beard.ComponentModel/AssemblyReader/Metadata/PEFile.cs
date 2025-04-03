@@ -85,11 +85,15 @@ namespace ICSharpCode.Decompiler.Metadata
 			this.FileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
 			this.Reader = reader ?? throw new ArgumentNullException(nameof(reader));
 			if (!reader.HasMetadata)
-				throw new PEFileNotSupportedException("PE file does not contain any managed metadata.");
-			this.Metadata = reader.GetMetadataReader(metadataOptions);
-
-            this.Module = new MetadataModule(new SimpleCompilation(this), this, TypeSystemOptions.Default);
-
+			{
+				this.Failed = true;
+                // throw new PEFileNotSupportedException("PE file does not contain any managed metadata.");
+            }
+			else
+			{
+				this.Metadata = reader.GetMetadataReader(metadataOptions);
+				this.Module = new MetadataModule(new SimpleCompilation(this), this, TypeSystemOptions.Default);
+			}
         }
 
         public bool IsAssembly => Metadata.IsAssembly;
@@ -212,7 +216,9 @@ namespace ICSharpCode.Decompiler.Metadata
 			}
 		}
 
-		public TypeSystem.IModuleReference WithOptions(TypeSystemOptions options)
+        public bool Failed { get; }
+
+        public TypeSystem.IModuleReference WithOptions(TypeSystemOptions options)
 		{
 			return new PEFileWithOptions(this, options);
 		}

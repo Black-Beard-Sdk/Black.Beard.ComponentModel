@@ -676,7 +676,7 @@ namespace Bb.ComponentModel
                 if (n.Name == name.Name)
                 {
 
-                    if (n.Version.ToString() == name.Version.ToString())
+                    if (name.Version == null || n.Version.ToString() == name.Version.ToString())
                         return item;
 
                     if (acceptAllVersion)
