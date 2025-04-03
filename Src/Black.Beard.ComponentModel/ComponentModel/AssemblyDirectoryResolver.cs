@@ -547,13 +547,13 @@ namespace Bb.ComponentModel
         public bool IsInSystemDirectory(DirectoryInfo path)
         {
 
-            var pathEntry = EntryDirectory.FullName;
-            var pathSystem = SystemDirectory.FullName;
+            var pathEntry = EntryDirectory.FullName.ToLower();
+            var pathSystem = SystemDirectory.FullName.ToLower();
 
             if (pathEntry == pathSystem)
                 return false;
 
-            if (path.FullName == pathSystem)
+            if (path.FullName.ToLower() == pathSystem)
                 return true;
 
             return false;
@@ -567,8 +567,8 @@ namespace Bb.ComponentModel
         /// <returns></returns>
         public bool IsInEntryDirectory(DirectoryInfo path)
         {
-            var pathEntry = EntryDirectory.FullName;
-            return path.FullName == pathEntry;
+            var pathEntry = EntryDirectory.FullName.ToLower();
+            return path.FullName.ToLower() == pathEntry;
         }
 
         #endregion Get assembly files

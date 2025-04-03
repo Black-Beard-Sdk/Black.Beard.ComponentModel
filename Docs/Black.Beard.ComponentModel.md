@@ -102,6 +102,7 @@
   - [TypeFilter](#P-Bb-ComponentModel-AddonsResolver-TypeFilter 'Bb.ComponentModel.AddonsResolver.TypeFilter')
   - [AddAssemblyByName(assemblyName)](#M-Bb-ComponentModel-AddonsResolver-AddAssemblyByName-System-String- 'Bb.ComponentModel.AddonsResolver.AddAssemblyByName(System.String)')
   - [AddAssemblyByNames(assemblyNames)](#M-Bb-ComponentModel-AddonsResolver-AddAssemblyByNames-System-String[]- 'Bb.ComponentModel.AddonsResolver.AddAssemblyByNames(System.String[])')
+  - [AddAssemblyByNames(assemblyNames)](#M-Bb-ComponentModel-AddonsResolver-AddAssemblyByNames-System-Collections-Generic-IEnumerable{System-String}- 'Bb.ComponentModel.AddonsResolver.AddAssemblyByNames(System.Collections.Generic.IEnumerable{System.String})')
   - [AddDirectories(paths)](#M-Bb-ComponentModel-AddonsResolver-AddDirectories-System-IO-DirectoryInfo[]- 'Bb.ComponentModel.AddonsResolver.AddDirectories(System.IO.DirectoryInfo[])')
   - [AddDirectories(paths)](#M-Bb-ComponentModel-AddonsResolver-AddDirectories-System-Collections-Generic-IEnumerable{System-IO-DirectoryInfo}- 'Bb.ComponentModel.AddonsResolver.AddDirectories(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo})')
   - [AddDirectories(paths)](#M-Bb-ComponentModel-AddonsResolver-AddDirectories-System-String[]- 'Bb.ComponentModel.AddonsResolver.AddDirectories(System.String[])')
@@ -4773,6 +4774,33 @@ Add an assembly names to the resolver's list for analysis.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | assemblyNames | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | The name of the assemblies to add. Must not be null. |
+
+##### Exceptions
+
+| Name | Description |
+| ---- | ----------- |
+| [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown when assemblyName is null. |
+
+##### Remarks
+
+This method adds the specified assembly name to the resolver's list for analysis.
+
+<a name='M-Bb-ComponentModel-AddonsResolver-AddAssemblyByNames-System-Collections-Generic-IEnumerable{System-String}-'></a>
+### AddAssemblyByNames(assemblyNames) `method`
+
+##### Summary
+
+Add an assembly names to the resolver's list for analysis.
+
+##### Returns
+
+[AddonsResolver](#T-Bb-ComponentModel-AddonsResolver 'Bb.ComponentModel.AddonsResolver') fluent syntax
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| assemblyNames | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.String}') | The name of the assemblies to add. Must not be null. |
 
 ##### Exceptions
 

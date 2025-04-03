@@ -49,10 +49,23 @@ namespace Bb.ComponentModel
         /// <value>
         ///   <c>true</c> if [assembly is loaded]; otherwise, <c>false</c>.
         /// </value>
-        public bool AssemblyIsLoaded => _isLoaded.HasValue
-            ? (_isLoaded.Value && _isLoaded.Value)
-            : (_isLoaded = TypeDiscovery.Instance.IsLoaded(this.AssemblyLocation)).Value;
+        public bool AssemblyIsLoaded
+        {
+            get
+            {
+                if (_isLoaded.HasValue)
+                    return _isLoaded.Value;
 
+                if (this.AssemblyLocation != null)
+                    _isLoaded = AssemblyLoader.Instance.IsLoadedByFile(this.AssemblyLocation);
+
+                else if (!string.IsNullOrEmpty(this.AssemblyName))
+                    _isLoaded = AssemblyLoader.Instance.IsLoadedByAssemblyByName(new AssemblyName(this.AssemblyName), false);
+
+                return _isLoaded.HasValue ? _isLoaded.Value : false;
+
+            }
+        }
 
         /// <summary>
         /// Gets the assembly of the type. Call the method Load for load the assembly.
@@ -64,9 +77,17 @@ namespace Bb.ComponentModel
         {
             get
             {
-                if (_assembly == null && !AssemblyIsLoaded)
-                    Assembly = TypeDiscovery.Instance.GetAssembly(this.AssemblyName);
+
+                if (_assembly == null)
+                {
+                    if (this.AssemblyLocation != null)
+                        _assembly = AssemblyLoader.Instance.LoadAssembly(this.AssemblyLocation);
+                    else
+                        _assembly = TypeDiscovery.Instance.GetAssembly(this.AssemblyName);
+                }
+
                 return _assembly;
+
             }
             private set
             {
@@ -74,7 +95,7 @@ namespace Bb.ComponentModel
                 {
                     _assembly = value;
                     AssemblyName = _assembly.GetName().Name;
-                    _isLoaded = this.Assembly != null;
+                    _isLoaded = value != null;
                     IsEntryDirectory = AssemblyDirectoryResolver.IsEntryDirectory(_assembly);
                     IsSystemDirectory = AssemblyDirectoryResolver.IsSystemDirectory(_assembly);
                     IsSdk = _assembly.IsSdk();
@@ -116,9 +137,9 @@ namespace Bb.ComponentModel
         /// </exception>
         public virtual bool Load(bool failedOnloadError = true)
         {
-            
+
             bool result = false;
-            
+
             if (!AssemblyIsLoaded && !FailedToLoad)
                 try
                 {
@@ -161,7 +182,7 @@ namespace Bb.ComponentModel
         public bool IsEntryDirectory { get; internal set; }
 
         public bool IsSystemDirectory { get; internal set; }
-        
+
         public bool IsSdk { get; internal set; }
         public bool IsLoaded { get; internal set; }
 

@@ -680,7 +680,7 @@ namespace Bb.ComponentModel
                 foreach (var item in file.Module.TypeDefinitions)
                     if (filter == null || filter.Evaluate(item))
                     {
-                        TypeMatched result = BuildModel(new FileInfo(file.FullName), file, item);
+                        TypeMatched result = BuildModel(new FileInfo(file.FileName), file, item);
                         if (TypeFilter == null || TypeFilter(result))
                             yield return result;
                     }

@@ -30,7 +30,10 @@ namespace DynamicDescriptors.Tests
         [Fact]
         public void TestIsSystemDirectory2()
         {
-            var test = AssemblyDirectoryResolver.Instance.IsInSystemDirectory(new FileInfo(typeof(object).Assembly.Location).Directory);
+            var ass = typeof(object).Assembly;
+            var test = AssemblyDirectoryResolver
+                .Instance
+                .IsInSystemDirectory(new FileInfo(ass.Location).Directory);
             Assert.True(test);
         }
 
@@ -208,7 +211,6 @@ namespace DynamicDescriptors.Tests
             types.Single(c => c.FullName == typeof(TestClass).FullName);
 
         }
-
 
         [Fact]
         public void FilterTest52()
