@@ -10,47 +10,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="ComponentDescriptors\**" />
-	  <Compile Remove="ComponentModel\Loaders\**" />
-	  <Compile Remove="ComponentModel\PEReaders\**" />
-	  <Compile Remove="Exceptions\**" />
-	  <Compile Remove="TypeDescriptors\**" />
-	  <Compile Remove="_TypeDescriptors\**" />
-	  <EmbeddedResource Remove="ComponentDescriptors\**" />
-	  <EmbeddedResource Remove="ComponentModel\Loaders\**" />
-	  <EmbeddedResource Remove="ComponentModel\PEReaders\**" />
-	  <EmbeddedResource Remove="Exceptions\**" />
-	  <EmbeddedResource Remove="TypeDescriptors\**" />
-	  <EmbeddedResource Remove="_TypeDescriptors\**" />
-	  <None Remove="ComponentDescriptors\**" />
-	  <None Remove="ComponentModel\Loaders\**" />
-	  <None Remove="ComponentModel\PEReaders\**" />
-	  <None Remove="Exceptions\**" />
-	  <None Remove="TypeDescriptors\**" />
-	  <None Remove="_TypeDescriptors\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Remove="ComponentModel\Factories\FactoryProvider.cs" />
-		<Compile Remove="ComponentModel\Factory.cs" />
-		<Compile Remove="ComponentModel\FactoryProvider.cs" />
-		<Compile Remove="ComponentModel\MethodDiscoveryAssembly.cs" />
-		<Compile Remove="ComponentModel\ObjectCreator.cs" />
-		<Compile Remove="ComponentModel\WalkerFilter.cs" />
-		<Compile Remove="ConfigurationFolder.cs" />
-		<Compile Remove="Diagnostics\ComponentModelMetricProvider.cs" />
-		<Compile Remove="Injections\Injections.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Include="ComponentModel\Loaders\CommandLineParser.cs" />
-	  <Compile Include="ComponentModel\Loaders\Initializer.cs" />
-	  <Compile Include="ComponentModel\Loaders\InjectionExtensions.cs" />
-	  <Compile Include="ComponentModel\Loaders\InjectionLoader.cs" />
-	  <Compile Include="ComponentModel\Loaders\LoaderInjectionExtensions.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="..\..\README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
@@ -84,9 +43,6 @@
 	  <None Update="AssemblyReader\Metadata\ILOpCodes.tt">
 	    <Generator>TextTemplatingFileGenerator</Generator>
 	    <LastGenOutput>ILOpCodes.cs</LastGenOutput>
-	  </None>
-	  <None Update="ExposedAssemblyRepositories.schema.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 
