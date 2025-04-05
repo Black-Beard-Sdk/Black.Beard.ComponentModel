@@ -149,6 +149,10 @@
   - [GetItems()](#M-Bb-ComponentModel-Attributes-ProviderListBase`1-GetItems 'Bb.ComponentModel.Attributes.ProviderListBase`1.GetItems')
   - [ResolveOriginalValue(item)](#M-Bb-ComponentModel-Attributes-ProviderListBase`1-ResolveOriginalValue-Bb-ComponentModel-DataAnnotations-ListItem{`0}- 'Bb.ComponentModel.Attributes.ProviderListBase`1.ResolveOriginalValue(Bb.ComponentModel.DataAnnotations.ListItem{`0})')
 - [TypeDescriptorExtension](#T-Bb-ComponentModel-TypeDescriptorExtension 'Bb.ComponentModel.TypeDescriptorExtension')
+  - [GetAttributes\`\`1(self)](#M-Bb-ComponentModel-TypeDescriptorExtension-GetAttributes``1-System-Type- 'Bb.ComponentModel.TypeDescriptorExtension.GetAttributes``1(System.Type)')
+  - [GetAttributes\`\`1(self,filterFunction)](#M-Bb-ComponentModel-TypeDescriptorExtension-GetAttributes``1-System-Type,System-Func{``0,System-Boolean}- 'Bb.ComponentModel.TypeDescriptorExtension.GetAttributes``1(System.Type,System.Func{``0,System.Boolean})')
+  - [GetAttributes\`\`1(self)](#M-Bb-ComponentModel-TypeDescriptorExtension-GetAttributes``1-System-Reflection-PropertyInfo- 'Bb.ComponentModel.TypeDescriptorExtension.GetAttributes``1(System.Reflection.PropertyInfo)')
+  - [GetAttributes\`\`1(self,filterFunction)](#M-Bb-ComponentModel-TypeDescriptorExtension-GetAttributes``1-System-Reflection-PropertyInfo,System-Func{``0,System-Boolean}- 'Bb.ComponentModel.TypeDescriptorExtension.GetAttributes``1(System.Reflection.PropertyInfo,System.Func{``0,System.Boolean})')
   - [GetProperties(self)](#M-Bb-ComponentModel-TypeDescriptorExtension-GetProperties-System-Type- 'Bb.ComponentModel.TypeDescriptorExtension.GetProperties(System.Type)')
   - [GetProperties(self,funcFilter)](#M-Bb-ComponentModel-TypeDescriptorExtension-GetProperties-System-Type,System-Func{System-ComponentModel-PropertyDescriptor,System-Boolean}- 'Bb.ComponentModel.TypeDescriptorExtension.GetProperties(System.Type,System.Func{System.ComponentModel.PropertyDescriptor,System.Boolean})')
 - [UndefinedException](#T-Bb-ComponentModel-Exceptions-UndefinedException 'Bb.ComponentModel.Exceptions.UndefinedException')
@@ -1983,6 +1987,104 @@ Return the new value that must to be set in the property
 ##### Namespace
 
 Bb.ComponentModel
+
+##### Summary
+
+Extension for [TypeDescriptor](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ComponentModel.TypeDescriptor 'System.ComponentModel.TypeDescriptor')
+
+<a name='M-Bb-ComponentModel-TypeDescriptorExtension-GetAttributes``1-System-Type-'></a>
+### GetAttributes\`\`1(self) `method`
+
+##### Summary
+
+Use type descriptor GetAttribute for resolve the list of attribute
+
+##### Returns
+
+[IEnumerable\`1](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable`1 'System.Collections.Generic.IEnumerable`1')List of attribute
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type source |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Type of the attributes you must looking for |
+
+<a name='M-Bb-ComponentModel-TypeDescriptorExtension-GetAttributes``1-System-Type,System-Func{``0,System-Boolean}-'></a>
+### GetAttributes\`\`1(self,filterFunction) `method`
+
+##### Summary
+
+Use type descriptor GetAttribute for resolve the list of attribute
+
+##### Returns
+
+[IEnumerable\`1](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable`1 'System.Collections.Generic.IEnumerable`1')List of attribute
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') | Type source |
+| filterFunction | [System.Func{\`\`0,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{``0,System.Boolean}') | Type source |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Type of the attributes you must looking for |
+
+<a name='M-Bb-ComponentModel-TypeDescriptorExtension-GetAttributes``1-System-Reflection-PropertyInfo-'></a>
+### GetAttributes\`\`1(self) `method`
+
+##### Summary
+
+Use type descriptor GetAttribute for resolve the list of attribute
+
+##### Returns
+
+[IEnumerable\`1](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable`1 'System.Collections.Generic.IEnumerable`1')List of attribute
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Reflection.PropertyInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.PropertyInfo 'System.Reflection.PropertyInfo') | Type source |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Type of the attributes you must looking for |
+
+<a name='M-Bb-ComponentModel-TypeDescriptorExtension-GetAttributes``1-System-Reflection-PropertyInfo,System-Func{``0,System-Boolean}-'></a>
+### GetAttributes\`\`1(self,filterFunction) `method`
+
+##### Summary
+
+Use type descriptor GetAttribute for resolve the list of attribute
+
+##### Returns
+
+[IEnumerable\`1](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable`1 'System.Collections.Generic.IEnumerable`1')List of attribute
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| self | [System.Reflection.PropertyInfo](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Reflection.PropertyInfo 'System.Reflection.PropertyInfo') | Type source |
+| filterFunction | [System.Func{\`\`0,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{``0,System.Boolean}') | Type source |
+
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T | Type of the attributes you must looking for |
 
 <a name='M-Bb-ComponentModel-TypeDescriptorExtension-GetProperties-System-Type-'></a>
 ### GetProperties(self) `method`

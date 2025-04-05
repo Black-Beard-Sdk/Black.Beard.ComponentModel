@@ -57,19 +57,17 @@ namespace ComponentModels.Tests.LibResolvers
                 return CanExecute((MyContext)context);
             }
 
-            public object Execute(object context)
+            public void Execute(object context)
             {
-                return Execute((MyContext)context);
+                Execute((MyContext)context);
             }
 
-            public object Execute(MyContext context)
+            public void Execute(MyContext context)
             {
                 context.Test = true;
                 // do action
-                return null;
+
             }
-
-
         }
 
         public class MyContext

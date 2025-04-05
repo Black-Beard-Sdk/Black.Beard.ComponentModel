@@ -307,10 +307,10 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
     [ExposeClass("t2", ExposedType = typeof(IInjectBuilder<T1>))]
     public class SubT11 : InjectBuilder<T1>
     {
-        public override object Execute(T1 context)
+        public override void Execute(T1 context)
         {
 
-            return null;
+        
 
         }
     }
@@ -341,14 +341,14 @@ namespace Black.Beard.ComponentModel.Xunits.Initializers
             return true;
         }
 
-        public object Execute(Initializer context)
+        public void Execute(Initializer context)
         {
-            return null;
+;
         }
 
-        public object Execute(object context)
+        public void Execute(object context)
         {
-            return null;
+         
         }
 
         [InjectValueByIoc("param1")]

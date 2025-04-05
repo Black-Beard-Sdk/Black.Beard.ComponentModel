@@ -20,7 +20,7 @@
         /// </summary>
         /// <param name="context">specified context <see cref="T"/></param>
         /// <returns></returns>
-        object Execute(T context);
+        void Execute(T context);
 
     }
 

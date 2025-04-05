@@ -326,9 +326,9 @@ namespace DynamicDescriptors.Tests
     public class TestClass3 : InjectBuilder<UITest>
     {
 
-        public override object Execute(UITest context)
+        public override void Execute(UITest context)
         {
-            return null;
+       
         }
 
     }
@@ -361,7 +361,7 @@ namespace DynamicDescriptors.Tests
             throw new NotImplementedException();
         }
 
-        public object Execute(object context)
+        public void Execute(object context)
         {
             throw new NotImplementedException();
         }
@@ -377,7 +377,7 @@ namespace DynamicDescriptors.Tests
 
         public abstract bool CanExecute(object context);
 
-        public abstract object Execute(object context);
+        public abstract void Execute(object context);
 
     }
 

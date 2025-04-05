@@ -88,14 +88,14 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="context">specified context <see cref="object"/></param>
         /// <returns></returns>        
-        public override object Execute(object context) => Execute((T)context);
+        public override void Execute(object context) => Execute((T)context);
 
         /// <summary>
         /// Execute the initializing process with <see cref="T"/>
         /// </summary>
         /// <param name="context">specified context <see cref="T"/></param>
         /// <returns></returns>
-        public abstract object Execute(T context);
+        public abstract void Execute(T context);
 
     }
 
@@ -127,7 +127,7 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="context">specified context <see cref="object"/></param>
         /// <returns></returns>        
-        public abstract object Execute(object context);
+        public abstract void Execute(object context);
 
         /// <summary>
         /// Internal filter to launch the builders

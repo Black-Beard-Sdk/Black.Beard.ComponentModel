@@ -8,6 +8,9 @@ namespace Bb.Translations
 {
 
 
+    /// <summary>
+    /// Extension for <see cref="TranslatedKeyLabel"/>
+    /// </summary>
     public static class TranslatedKeyLabelExtension
     {
 
