@@ -28,7 +28,7 @@ namespace Black.Beard.Accessors
         public void Test1()
         {
 
-            var list1 = typeof(Cls12).GetAccessors(MemberStrategy.Fields);
+            var list1 = typeof(Cls12).GetAccessors(MemberStrategys.Fields);
             var i = list1[nameof(Cls12.Name)];
 
             var lst1 = i.ContainsAttribute<KeyAttribute>();
@@ -42,7 +42,7 @@ namespace Black.Beard.Accessors
         public void Test2()
         {
 
-            var list1 = typeof(Int32).GetAccessors(MemberStrategy.Static | MemberStrategy.Fields);
+            var list1 = typeof(Int32).GetAccessors(MemberStrategys.Static | MemberStrategys.Fields);
             foreach (var item in list1)
             {
                 item.GetAttributes().ToList().ForEach(c => Console.WriteLine(c.GetType().Name));

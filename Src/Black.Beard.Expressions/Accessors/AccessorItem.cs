@@ -31,7 +31,7 @@ namespace Bb.Accessors
         /// <remarks>
         /// This constructor initializes the base properties of the <see cref="AccessorItem"/> class.
         /// </remarks>
-        protected AccessorItem(Type ComponentType, MemberType memberTypeEnum, MemberStrategy strategy, MemberInfo member, Type memberType)
+        protected AccessorItem(Type ComponentType, MemberType memberTypeEnum, MemberStrategys strategy, MemberInfo member, Type memberType)
         {
             this.ComponentType = ComponentType;
             this.TypeEnum = memberTypeEnum;
@@ -56,7 +56,7 @@ namespace Bb.Accessors
         /// <summary>
         /// Gets the strategy accessor.
         /// </summary>
-        public MemberStrategy Strategy { get; }
+        public MemberStrategys Strategy { get; }
 
         /// <summary>
         /// Gets a value indicating whether [can write].
@@ -236,9 +236,7 @@ namespace Bb.Accessors
 
             }
 
-            _attributes ??= Member.GetCustomAttributes()
-                    .OfType<Attribute>()
-                    .ToList();
+            _attributes ??= Member.GetCustomAttributes().ToList();
 
             return _attributes;
 
@@ -633,7 +631,7 @@ namespace Bb.Accessors
 
         #endregion attributes
 
-        internal static AccessorList GetPropertiesImpl(Type componentType, MemberStrategy strategy, Func<Type, bool>? filter, Func<MemberInfo, bool>? memberFilter)
+        internal static AccessorList GetPropertiesImpl(Type componentType, MemberStrategys strategy, Func<Type, bool>? filter, Func<MemberInfo, bool>? memberFilter)
         {
 
             if (filter == null)
@@ -641,14 +639,14 @@ namespace Bb.Accessors
 
             AccessorList? list = null;
 
-            if (strategy.HasFlag(MemberStrategy.ConvertIfDifferent))
-                strategy = strategy & ~MemberStrategy.Direct;
+            if (strategy.HasFlag(MemberStrategys.ConvertIfDifferent))
+                strategy = strategy & ~MemberStrategys.Direct;
 
-            if (!strategy.HasFlag(MemberStrategy.Properties) && !strategy.HasFlag(MemberStrategy.Fields))
-                strategy |= MemberStrategy.Properties;
+            if (!strategy.HasFlag(MemberStrategys.Properties) && !strategy.HasFlag(MemberStrategys.Fields))
+                strategy |= MemberStrategys.Properties;
 
-            if (!strategy.HasFlag(MemberStrategy.Instance) && !strategy.HasFlag(MemberStrategy.Static))
-                strategy |= MemberStrategy.Instance;
+            if (!strategy.HasFlag(MemberStrategys.Instance) && !strategy.HasFlag(MemberStrategys.Static))
+                strategy |= MemberStrategys.Instance;
 
 
             if (memberFilter != null)
@@ -679,17 +677,17 @@ namespace Bb.Accessors
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static AccessorList GenerateList(Type componentType, MemberStrategy strategy, Func<Type, bool> typeFilter, Func<MemberInfo, bool> memberFilter)
+        private static AccessorList GenerateList(Type componentType, MemberStrategys strategy, Func<Type, bool> typeFilter, Func<MemberInfo, bool> memberFilter)
         {
 
             AccessorList list = new AccessorList();
 
-            if (strategy.HasFlag(MemberStrategy.Properties))
+            if (strategy.HasFlag(MemberStrategys.Properties))
                 foreach (PropertyInfo item in AccessorList.GetProperties(componentType, typeFilter))
                     if (memberFilter(item) && !list.ContainsKey(item.Name) && IsAccepted(item, strategy))
                         list.Add(new PropertyAccessor(componentType, item, strategy));
 
-            if (strategy.HasFlag(MemberStrategy.Fields))
+            if (strategy.HasFlag(MemberStrategys.Fields))
                 foreach (FieldInfo item in AccessorList.GetFields(componentType, typeFilter))
                     if (memberFilter(item) && !list.ContainsKey(item.Name) && IsAccepted(item, strategy))
                         list.Add(new FieldAccessor(componentType, item, strategy));
@@ -720,7 +718,7 @@ namespace Bb.Accessors
         #region private
 
 
-        private static bool IsAccepted(PropertyInfo item, MemberStrategy strategy)
+        private static bool IsAccepted(PropertyInfo item, MemberStrategys strategy)
         {
 
             if (item.GetIndexParameters().Length > 0)
@@ -729,12 +727,12 @@ namespace Bb.Accessors
             if (item.GetMethod == null && item.SetMethod == null)
                 return false;
 
-            if (!strategy.HasFlag(MemberStrategy.Static)
+            if (!strategy.HasFlag(MemberStrategys.Static)
                 && ((item.GetMethod != null && item.GetMethod.IsStatic)
                  || (item.SetMethod != null && item.SetMethod.IsStatic)))
                 return false;
 
-            if (!strategy.HasFlag(MemberStrategy.Instance)
+            if (!strategy.HasFlag(MemberStrategys.Instance)
                 && ((item.GetMethod != null && !item.GetMethod.IsStatic)
                  || (item.SetMethod != null && !item.SetMethod.IsStatic)))
                 return false;
@@ -743,17 +741,17 @@ namespace Bb.Accessors
 
         }
 
-        private static bool IsAccepted(FieldInfo item, MemberStrategy strategy)
+        private static bool IsAccepted(FieldInfo item, MemberStrategys strategy)
         {
 
-            if (!strategy.HasFlag(MemberStrategy.NotPublicFields) && !item.Attributes.HasFlag(FieldAttributes.Public)
+            if (!strategy.HasFlag(MemberStrategys.NotPublicFields) && !item.Attributes.HasFlag(FieldAttributes.Public)
                 && (item.Attributes.HasFlag(FieldAttributes.Private) || item.Attributes.HasFlag(FieldAttributes.PrivateScope)))
                     return false;
 
-            if (strategy.HasFlag(MemberStrategy.Static) && !strategy.HasFlag(MemberStrategy.Instance))
+            if (strategy.HasFlag(MemberStrategys.Static) && !strategy.HasFlag(MemberStrategys.Instance))
                 return item.IsStatic;
 
-            else if (strategy.HasFlag(MemberStrategy.Instance) && !strategy.HasFlag(MemberStrategy.Static))
+            else if (strategy.HasFlag(MemberStrategys.Instance) && !strategy.HasFlag(MemberStrategys.Static))
                 return !item.IsStatic;
 
             return true;
@@ -770,7 +768,7 @@ namespace Bb.Accessors
         /// <summary>
         /// The _accessors
         /// </summary>
-        private static Dictionary<MemberStrategy, Dictionary<Type, AccessorList>> _strategyPropertiesAccessors = new Dictionary<MemberStrategy, Dictionary<Type, AccessorList>>();
+        private static Dictionary<MemberStrategys, Dictionary<Type, AccessorList>> _strategyPropertiesAccessors = new Dictionary<MemberStrategys, Dictionary<Type, AccessorList>>();
         /// <summary>
         /// The _lock
         /// </summary>

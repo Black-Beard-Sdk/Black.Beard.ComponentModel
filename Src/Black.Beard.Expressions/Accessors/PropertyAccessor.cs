@@ -26,7 +26,7 @@ namespace Bb.Accessors
         /// <remarks>
         /// This constructor initializes the <see cref="PropertyAccessor"/> with the specified property and strategy.
         /// </remarks>
-        internal PropertyAccessor(Type componentType, PropertyInfo property, MemberStrategy strategy)
+        internal PropertyAccessor(Type componentType, PropertyInfo property, MemberStrategys strategy)
             : base(componentType, MemberType.Property, strategy, property, property.PropertyType)
         {
             var m = property.GetMethod ?? property.SetMethod;
@@ -44,7 +44,7 @@ namespace Bb.Accessors
             if (property.CanWrite)
             {
 
-                if (strategy.HasFlag(MemberStrategy.ConvertIfDifferent))
+                if (strategy.HasFlag(MemberStrategys.ConvertIfDifferent))
                     SetValue = SetConvertIfDifferentDirect(componentType, property);
                 else
                     SetValue = SetDirect(componentType, property);

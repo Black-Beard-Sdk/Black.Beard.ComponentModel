@@ -18,10 +18,10 @@ namespace Black.Beard.Accessors
             var list2 = typeof(Cls1).GetAccessors();
             Assert.Equal(list1, list2);
 
-            list1 = typeof(Cls1).GetAccessors(MemberStrategy.ConvertIfDifferent);
+            list1 = typeof(Cls1).GetAccessors(MemberStrategys.ConvertIfDifferent);
             Assert.NotEqual(list2, list1);
 
-            list2 = typeof(Cls1).GetAccessors(MemberStrategy.ConvertIfDifferent);
+            list2 = typeof(Cls1).GetAccessors(MemberStrategys.ConvertIfDifferent);
             Assert.Equal(list1, list2);
 
         }
@@ -52,7 +52,7 @@ namespace Black.Beard.Accessors
 
             var cls = new Cls1() { };
 
-            var list = typeof(Cls1).GetAccessors(MemberStrategy.ConvertIfDifferent);
+            var list = typeof(Cls1).GetAccessors(MemberStrategys.ConvertIfDifferent);
 
             list[nameof(Cls1.Name)].SetValue(cls, expected);
 
@@ -70,7 +70,7 @@ namespace Black.Beard.Accessors
 
             var cls = new Cls1() { };
 
-            var list = typeof(Cls1).GetAccessors(MemberStrategy.Direct);
+            var list = typeof(Cls1).GetAccessors(MemberStrategys.Direct);
 
             list[nameof(Cls1.Name)].ConvertBeforeSettingValue(cls, expected);
 
@@ -105,7 +105,7 @@ namespace Black.Beard.Accessors
 
             var cls = new Cls3() { };
 
-            var list = typeof(Cls3).GetAccessors(MemberStrategy.Direct);
+            var list = typeof(Cls3).GetAccessors(MemberStrategys.Direct);
             var item = list[nameof(Cls3.Name)];
             Assert.Null(item.SetValue);
 
@@ -119,7 +119,7 @@ namespace Black.Beard.Accessors
 
             var cls = new Cls4() { };
 
-            var list = typeof(Cls4).GetAccessors(MemberStrategy.Direct);
+            var list = typeof(Cls4).GetAccessors(MemberStrategys.Direct);
             var item = list[nameof(Cls3.Name)];
             Assert.Null(item);
 

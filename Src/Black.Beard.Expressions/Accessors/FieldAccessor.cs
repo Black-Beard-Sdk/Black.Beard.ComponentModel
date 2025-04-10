@@ -24,7 +24,7 @@ namespace Bb.Accessors
         /// <remarks>
         /// This constructor initializes the <see cref="FieldAccessor"/> with the specified field and strategy.
         /// </remarks>
-        internal FieldAccessor(Type componentType, FieldInfo field, MemberStrategy strategy)
+        internal FieldAccessor(Type componentType, FieldInfo field, MemberStrategys strategy)
             : base(componentType, MemberType.Property, strategy, field, field.FieldType)
         {
             this.IsStatic = field.IsStatic;
@@ -39,7 +39,7 @@ namespace Bb.Accessors
 
             if (!field.IsInitOnly && !field.IsLiteral)
             {
-                if (strategy.HasFlag(MemberStrategy.ConvertIfDifferent))
+                if (strategy.HasFlag(MemberStrategys.ConvertIfDifferent))
                     SetValue = SetConvertIfDifferentDirect(componentType, field);
                 
                 else 

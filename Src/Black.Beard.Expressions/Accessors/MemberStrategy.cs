@@ -7,7 +7,7 @@ namespace Bb.Accessors
     /// Enumeration for member access strategies.
     /// </summary>
     [Flags]
-    public enum MemberStrategy
+    public enum MemberStrategys
     {
 
         /// <summary>

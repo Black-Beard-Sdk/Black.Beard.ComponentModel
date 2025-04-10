@@ -34,7 +34,7 @@ namespace Black.Beard.Accessors
         [Fact]
         public void ConvertIfDifferentTest()
         {
-            var list1 = typeof(Cls5).GetAccessors(MemberStrategy.ConvertIfDifferent);
+            var list1 = typeof(Cls5).GetAccessors(MemberStrategys.ConvertIfDifferent);
             Assert.Equal(1, list1.Count);
             Assert.NotNull(list1[nameof(Cls5.Name)]);
         }
@@ -42,7 +42,7 @@ namespace Black.Beard.Accessors
         [Fact]
         public void DirectTest()
         {
-            var list1 = typeof(Cls5).GetAccessors(MemberStrategy.Direct);
+            var list1 = typeof(Cls5).GetAccessors(MemberStrategys.Direct);
             Assert.Equal(1, list1.Count);
             Assert.NotNull(list1[nameof(Cls5.Name)]);
         }
@@ -50,7 +50,7 @@ namespace Black.Beard.Accessors
         [Fact]
         public void InstanceTest()
         {
-            var list1 = typeof(Cls5).GetAccessors(MemberStrategy.Instance);
+            var list1 = typeof(Cls5).GetAccessors(MemberStrategys.Instance);
             Assert.Equal(1, list1.Count);
             Assert.NotNull(list1[nameof(Cls5.Name)]);
         }
@@ -58,7 +58,7 @@ namespace Black.Beard.Accessors
         [Fact]
         public void DefaultTest()
         {
-            var list1 = typeof(Cls5).GetAccessors( MemberStrategy.Instance | MemberStrategy.Static | MemberStrategy.Properties);
+            var list1 = typeof(Cls5).GetAccessors( MemberStrategys.Instance | MemberStrategys.Static | MemberStrategys.Properties);
             Assert.Equal(2, list1.Count);
             Assert.NotNull(list1[nameof(Cls5.Name)]);
             Assert.NotNull(list1[nameof(Cls5.Name2)]);
@@ -67,7 +67,7 @@ namespace Black.Beard.Accessors
         [Fact]
         public void StaticTest()
         {
-            var list1 = typeof(Cls5).GetAccessors(MemberStrategy.Static);
+            var list1 = typeof(Cls5).GetAccessors(MemberStrategys.Static);
             Assert.Equal(1, list1.Count);
             Assert.NotNull(list1[nameof(Cls5.Name2)]);
         }
@@ -75,7 +75,7 @@ namespace Black.Beard.Accessors
         [Fact]
         public void InstanceFieldTest()
         {
-            var list1 = typeof(Cls5).GetAccessors(MemberStrategy.Fields);
+            var list1 = typeof(Cls5).GetAccessors(MemberStrategys.Fields);
             Assert.Equal(1, list1.Count);
             Assert.NotNull(list1[nameof(Cls5.Name3)]);
         }
@@ -83,7 +83,7 @@ namespace Black.Beard.Accessors
         [Fact]
         public void InstanceFieldStaticTest()
         {
-            var list1 = typeof(Cls5).GetAccessors(MemberStrategy.Fields | MemberStrategy.Static);
+            var list1 = typeof(Cls5).GetAccessors(MemberStrategys.Fields | MemberStrategys.Static);
             Assert.Equal(1, list1.Count);
             Assert.NotNull(list1[nameof(Cls5.Name31)]);
         }
@@ -91,7 +91,7 @@ namespace Black.Beard.Accessors
         [Fact]
         public void InstanceFieldStaticTest2()
         {
-            var list1 = typeof(Cls5).GetAccessors(MemberStrategy.Fields | MemberStrategy.Static | MemberStrategy.NotPublicFields);
+            var list1 = typeof(Cls5).GetAccessors(MemberStrategys.Fields | MemberStrategys.Static | MemberStrategys.NotPublicFields);
             Assert.Equal(3, list1.Count);
             Assert.NotNull(list1["Name31"]);
             Assert.NotNull(list1["Name8"]);
@@ -101,7 +101,7 @@ namespace Black.Beard.Accessors
         [Fact]
         public void InstanceFieldPrivateTest()
         {
-            var list1 = typeof(Cls5).GetAccessors(MemberStrategy.Fields | MemberStrategy.NotPublicFields);
+            var list1 = typeof(Cls5).GetAccessors(MemberStrategys.Fields | MemberStrategys.NotPublicFields);
             Assert.Equal(6, list1.Count);
             Assert.NotNull(list1[nameof(Cls5.Name3)]);
             Assert.NotNull(list1["Name4"]);

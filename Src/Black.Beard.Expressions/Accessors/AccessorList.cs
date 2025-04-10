@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Bb.Accessors
 {
@@ -237,7 +238,7 @@ namespace Bb.Accessors
         public AccessorItem? this[MemberInfo member]
         {
             get => this[member.Name];
-            set => this[member.Name] = value as AccessorItem;
+            set => this[member.Name] = value;
         }
 
         /// <summary>
@@ -318,13 +319,7 @@ namespace Bb.Accessors
             foreach (var item in _list.Select(c => c.Value))
                 if (item.GetValue != null)
                 {
-
-                    var v1 = item.GetValue(instance);
-                    var e1 = item.ValidateMember(instance, false);
-                    if (e1 != null)
-                        foreach (var item3 in e1.Data.Values)
-                            e.Data.Add("exception" + (e.Data.Count + 1).ToString(), item3);
-
+                    var v1 = ValidateMember(instance, e, item, item.GetValue);
                     var _a = item.GetAttributes<ValidationAttribute>(true).ToList();
                     var validationException = ValidateMember(v1, item.Member, _a);
 
@@ -337,6 +332,18 @@ namespace Bb.Accessors
             if (e.Data.Count > 0)
                 throw e;
 
+        }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static object ValidateMember(object instance, ValidationException e, AccessorItem item, Func<object, object> getValue)
+        {
+            var v1 = getValue(instance);
+            var e1 = item.ValidateMember(instance, false);
+            if (e1 != null)
+                foreach (var item3 in e1.Data.Values)
+                    e.Data.Add("exception" + (e.Data.Count + 1).ToString(), item3);
+            return v1;
         }
 
         /// <summary>

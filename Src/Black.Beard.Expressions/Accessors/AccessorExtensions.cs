@@ -39,12 +39,12 @@ namespace Bb.Accessors
         /// }
         /// </code>
         /// </example>
-        public static AccessorList GetAccessors(this Type type, MemberStrategy strategy =
-            MemberStrategy.Direct
-          | MemberStrategy.Properties
-          | MemberStrategy.Fields
-          | MemberStrategy.Instance
-          | MemberStrategy.Static
+        public static AccessorList GetAccessors(this Type type, MemberStrategys strategy =
+            MemberStrategys.Direct
+          | MemberStrategys.Properties
+          | MemberStrategys.Fields
+          | MemberStrategys.Instance
+          | MemberStrategys.Static
             , Func<Type, bool>? filter = null
             , Func<MemberInfo, bool>? memberFilter = null)
         {
@@ -78,9 +78,9 @@ namespace Bb.Accessors
             , Func<Type, bool> filter
             , Func<MemberInfo, bool>? memberFilter = null)
         {
-            MemberStrategy strategy = MemberStrategy.Direct 
-                | MemberStrategy.Properties | MemberStrategy.Fields
-                | MemberStrategy.Instance | MemberStrategy.Static;
+            MemberStrategys strategy = MemberStrategys.Direct 
+                | MemberStrategys.Properties | MemberStrategys.Fields
+                | MemberStrategys.Instance | MemberStrategys.Static;
 
             return AccessorItem.GetPropertiesImpl(type, strategy, filter, memberFilter);
         }

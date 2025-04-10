@@ -62,7 +62,7 @@ namespace Bb.Binders
             this._target = target ?? throw new ArgumentNullException(nameof(target), "Target cannot be null.");
 
             this._source.PropertyChanged += _source_PropertyChanged;
-            _sourceReader = AccessorItem.GetPropertiesImpl(typeof(TSource), MemberStrategy.Direct | MemberStrategy.Instance | MemberStrategy.Properties, null, null);
+            _sourceReader = AccessorItem.GetPropertiesImpl(typeof(TSource), MemberStrategys.Direct | MemberStrategys.Instance | MemberStrategys.Properties, null, null);
             if (_source is IDisposed disposed1)
                 disposed1.Disposed += Source_Disposed;
 
@@ -78,46 +78,6 @@ namespace Bb.Binders
         public event DisposedEventHandler? Disposed;
 
 
-        /// <summary>
-        /// Disposes the binder and releases associated resources.
-        /// </summary>
-        /// <remarks>
-        /// This method un-subscribes from events and cleans up resources associated with the binder.
-        /// </remarks>
-        /// <example>
-        /// <code lang="C#">
-        /// binder.Dispose();
-        /// </code>
-        /// </example>
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-
-        private void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_source != null)
-                {
-
-                    _source.PropertyChanged -= _source_PropertyChanged;
-
-                    if (_source is IDisposed disposed1)
-                        disposed1.Disposed -= Source_Disposed;
-
-                    if (_target is IDisposed disposed2)
-                        disposed2.Disposed -= Target_Disposed;
-
-                    Disposed?.Invoke(this, EventArgs.Empty);
-
-                }
-
-                IsDisposed = true;
-
-            }
-        }
 
         private void Source_Disposed(object? sender, EventArgs e)
         {
@@ -169,6 +129,59 @@ namespace Bb.Binders
         private readonly PropertyBinder<TSource, TTarget> _configuration;
         private AccessorList? _sourceReader;
         private TTarget? _target;
+        private bool disposedValue;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+
+                    if (disposing)
+                    {
+                        if (_source != null)
+                        {
+
+                            _source.PropertyChanged -= _source_PropertyChanged;
+
+                            if (_source is IDisposed disposed1)
+                                disposed1.Disposed -= Source_Disposed;
+
+                            if (_target is IDisposed disposed2)
+                                disposed2.Disposed -= Target_Disposed;
+
+                            Disposed?.Invoke(this, EventArgs.Empty);
+
+                        }
+
+                        IsDisposed = true;
+
+                    }
+                }
+
+                disposedValue = true;
+            }
+        }
+
+
+        /// <summary>
+        /// Disposes the binder and releases associated resources.
+        /// </summary>
+        /// <remarks>
+        /// This method un-subscribes from events and cleans up resources associated with the binder.
+        /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// binder.Dispose();
+        /// </code>
+        /// </example>
+        public void Dispose()
+        {
+            // Ne changez pas ce code. Placez le code de nettoyage dans la méthode 'Dispose(bool disposing)'
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
 
     }
 
