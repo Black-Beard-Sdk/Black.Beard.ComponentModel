@@ -1,4 +1,4 @@
-﻿using Bb.ComponentModel.Accessors;
+﻿using Bb.Accessors;
 using Xunit;
 
 namespace Black.Beard.Accessors

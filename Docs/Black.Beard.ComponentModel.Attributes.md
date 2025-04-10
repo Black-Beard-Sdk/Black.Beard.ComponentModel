@@ -28,7 +28,6 @@
   - [GetItems()](#M-Bb-ComponentModel-Attributes-CultureProviderList-GetItems 'Bb.ComponentModel.Attributes.CultureProviderList.GetItems')
 - [DependOfAttribute](#T-Bb-ComponentModel-Attributes-DependOfAttribute 'Bb.ComponentModel.Attributes.DependOfAttribute')
   - [#ctor(type)](#M-Bb-ComponentModel-Attributes-DependOfAttribute-#ctor-System-Type- 'Bb.ComponentModel.Attributes.DependOfAttribute.#ctor(System.Type)')
-- [DisposedEventHandler](#T-Bb-ComponentModel-DisposedEventHandler 'Bb.ComponentModel.DisposedEventHandler')
 - [EnumerationProviderAttribute](#T-Bb-ComponentModel-Attributes-EnumerationProviderAttribute 'Bb.ComponentModel.Attributes.EnumerationProviderAttribute')
 - [EvaluatorEventArgs\`1](#T-Bb-EvaluatorEventArgs`1 'Bb.EvaluatorEventArgs`1')
   - [#ctor(evaluator)](#M-Bb-EvaluatorEventArgs`1-#ctor-System-Func{`0,System-Object,System-Boolean},System-Action{`0,System-Object}- 'Bb.EvaluatorEventArgs`1.#ctor(System.Func{`0,System.Object,System.Boolean},System.Action{`0,System.Object})')
@@ -60,7 +59,6 @@
 - [IBusyService](#T-Bb-IBusyService 'Bb.IBusyService')
   - [IsBusyFor(instance,title,action)](#M-Bb-IBusyService-IsBusyFor-System-Object,System-String,System-Action{Bb-BusySession}- 'Bb.IBusyService.IsBusyFor(System.Object,System.String,System.Action{Bb.BusySession})')
   - [Update(session)](#M-Bb-IBusyService-Update-Bb-BusySession- 'Bb.IBusyService.Update(Bb.BusySession)')
-- [IDisposed](#T-Bb-ComponentModel-IDisposed 'Bb.ComponentModel.IDisposed')
 - [IFocusedService\`1](#T-Bb-IFocusedService`1 'Bb.IFocusedService`1')
   - [FocusChange(sender,test)](#M-Bb-IFocusedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean}- 'Bb.IFocusedService`1.FocusChange(System.Object,System.Func{`0,System.Object,System.Boolean})')
   - [FocusChange(sender,test,action)](#M-Bb-IFocusedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean},System-Action{`0,System-Object}- 'Bb.IFocusedService`1.FocusChange(System.Object,System.Func{`0,System.Object,System.Boolean},System.Action{`0,System.Object})')
@@ -79,10 +77,6 @@
   - [GetOriginalValue(item)](#M-Bb-ComponentModel-DataAnnotations-IListProvider-GetOriginalValue-Bb-ComponentModel-DataAnnotations-ListItem- 'Bb.ComponentModel.DataAnnotations.IListProvider.GetOriginalValue(Bb.ComponentModel.DataAnnotations.ListItem)')
 - [IProjectedService\`1](#T-Bb-IProjectedService`1 'Bb.IProjectedService`1')
   - [FocusChange(sender,test)](#M-Bb-IProjectedService`1-FocusChange-System-Object,System-Func{`0,System-Object,System-Boolean}- 'Bb.IProjectedService`1.FocusChange(System.Object,System.Func{`0,System.Object,System.Boolean})')
-- [IUIComponent](#T-Bb-ComponentModel-IUIComponent 'Bb.ComponentModel.IUIComponent')
-  - [GetService(type)](#M-Bb-ComponentModel-IUIComponent-GetService-System-Type- 'Bb.ComponentModel.IUIComponent.GetService(System.Type)')
-- [IUISite](#T-Bb-ComponentModel-IUISite 'Bb.ComponentModel.IUISite')
-  - [Parent](#P-Bb-ComponentModel-IUISite-Parent 'Bb.ComponentModel.IUISite.Parent')
 - [InjectBuilder](#T-Bb-ComponentModel-InjectBuilder 'Bb.ComponentModel.InjectBuilder')
   - [FilterToLaunch](#F-Bb-ComponentModel-InjectBuilder-FilterToLaunch 'Bb.ComponentModel.InjectBuilder.FilterToLaunch')
   - [FriendlyName](#P-Bb-ComponentModel-InjectBuilder-FriendlyName 'Bb.ComponentModel.InjectBuilder.FriendlyName')
@@ -433,28 +427,6 @@ Ctor
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
-
-<a name='T-Bb-ComponentModel-DisposedEventHandler'></a>
-## DisposedEventHandler `type`
-
-##### Namespace
-
-Bb.ComponentModel
-
-##### Summary
-
-Represents the method that will handle the disposing of an object.
-event raised when instance is disposed.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| sender | [T:Bb.ComponentModel.DisposedEventHandler](#T-T-Bb-ComponentModel-DisposedEventHandler 'T:Bb.ComponentModel.DisposedEventHandler') | The source of the event. |
-
-##### Remarks
-
-This delegate represents the method that will be called when an object is being disposed.
 
 <a name='T-Bb-ComponentModel-Attributes-EnumerationProviderAttribute'></a>
 ## EnumerationProviderAttribute `type`
@@ -832,17 +804,6 @@ A task representing the asynchronous operation.
 | ---- | ----------- |
 | [System.ArgumentNullException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentNullException 'System.ArgumentNullException') | Thrown if the session parameter is null. |
 
-<a name='T-Bb-ComponentModel-IDisposed'></a>
-## IDisposed `type`
-
-##### Namespace
-
-Bb.ComponentModel
-
-##### Summary
-
-Represents an object that can be disposed.
-
 <a name='T-Bb-IFocusedService`1'></a>
 ## IFocusedService\`1 `type`
 
@@ -1068,52 +1029,6 @@ Project the object on focus
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | object source |
 | test | [System.Func{\`0,System.Object,System.Boolean}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Func 'System.Func{`0,System.Object,System.Boolean}') | Test to evaluate before change the focus |
-
-<a name='T-Bb-ComponentModel-IUIComponent'></a>
-## IUIComponent `type`
-
-##### Namespace
-
-Bb.ComponentModel
-
-##### Summary
-
-Represents a component that can be added to a container.
-
-<a name='M-Bb-ComponentModel-IUIComponent-GetService-System-Type-'></a>
-### GetService(type) `method`
-
-##### Summary
-
-Get asked service
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| type | [System.Type](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Type 'System.Type') |  |
-
-<a name='T-Bb-ComponentModel-IUISite'></a>
-## IUISite `type`
-
-##### Namespace
-
-Bb.ComponentModel
-
-##### Summary
-
-Represents a component that can be added to a container.
-
-<a name='P-Bb-ComponentModel-IUISite-Parent'></a>
-### Parent `property`
-
-##### Summary
-
-Gets the name of the parent component.
 
 <a name='T-Bb-ComponentModel-InjectBuilder'></a>
 ## InjectBuilder `type`

@@ -301,8 +301,8 @@ namespace ICSharpCode.Decompiler.CSharp.Transforms
 			}
 			if (type.IsReferenceType != false && !m.Has("nullConditional"))
 			{
-				// ToString() might throw NullReferenceException, but the builtin operator+ doesn't.
-				return expr;
+                // ToString() might throw ArgumentNullException, but the builtin operator+ doesn't.
+                return expr;
 			}
 			if (!ToStringIsKnownEffectFree(type) && toStringMethod != null && IL.Transforms.ILInlining.MethodRequiresCopyForReadonlyLValue(toStringMethod))
 			{

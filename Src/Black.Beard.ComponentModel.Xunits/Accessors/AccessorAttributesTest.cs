@@ -1,4 +1,4 @@
-﻿using Bb.ComponentModel.Accessors;
+﻿using Bb.Accessors;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;

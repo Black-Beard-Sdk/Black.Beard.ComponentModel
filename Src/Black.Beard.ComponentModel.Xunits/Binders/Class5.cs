@@ -4,6 +4,7 @@ using System.ComponentModel;
 using Xunit;
 using Bb.ComponentModel.Observables;
 using System.Linq;
+using Bb;
 
 
 namespace Black.Beard.ComponentModel.Xunits.Binders

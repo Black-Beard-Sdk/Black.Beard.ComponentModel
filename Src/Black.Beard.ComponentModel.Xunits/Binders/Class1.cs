@@ -1,5 +1,5 @@
-﻿using Bb.ComponentModel;
-using Bb.ComponentModel.Binders;
+﻿using Bb;
+using Bb.Binders;
 using System;
 using System.ComponentModel;
 using Xunit;

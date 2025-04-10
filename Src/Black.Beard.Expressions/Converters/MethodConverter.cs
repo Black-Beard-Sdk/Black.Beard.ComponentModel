@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: Existings
+
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -51,10 +53,7 @@ namespace Bb.Converters
             Parameters = method.GetParameters();
             var parameterLength = Parameters.Length;
 
-            Type _genericArgument = null;
-
-            //if ("ToDictionary" == method.Name)
-            //    return;
+            Type? _genericArgument = null;
 
             if (TargetType.IsGenericType)
             {
@@ -71,7 +70,8 @@ namespace Bb.Converters
             if (parameterLength == 0 && !IsStatic)
             {
                 SourceType = method.DeclaringType;
-                ToAdd = !_sourceExcludes.Contains(SourceType);
+                if (SourceType != null)
+                    ToAdd = !_sourceExcludes.Contains(SourceType);
             }
             else if (parameterLength > 0)
             {
@@ -120,15 +120,18 @@ namespace Bb.Converters
                         else if (Parameter1.Attributes.HasFlag(ParameterAttributes.Out) && TargetType == typeof(bool))
                         {
                             TargetType = Parameter1.ParameterType.GetElementType();
-                            IsGenericConverter = TargetType.IsGenericParameter && TargetType == _genericArgument;
-                            ToAdd = true;
-                            Case = ConvertMethodType.TwoParameterWithBooleanReturn;
+                            if (TargetType != null)
+                            {
+                                IsGenericConverter = TargetType.IsGenericParameter && TargetType == _genericArgument;
+                                ToAdd = true;
+                                Case = ConvertMethodType.TwoParameterWithBooleanReturn;
+                            }
                         }
                     }
 
                 }
 
-                if (ToAdd)
+                if (ToAdd && TargetType != null)
                     ToAdd = !_targetExcludes.Contains(TargetType) && TargetType != SourceType;
 
             }
@@ -157,12 +160,16 @@ namespace Bb.Converters
         /// <summary>
         /// Managed type to convert
         /// </summary>
-        public Type SourceType { get; }
+        public Type? SourceType { get; }
 
         /// <summary>
         /// Managed target type to convert.
         /// </summary>
-        public Type TargetType { get; }
+        public Type? TargetType { get; }
+
+        /// <summary>
+        /// Gets the parameters of the method.
+        /// </summary>
         public ParameterInfo[] Parameters { get; }
 
         /// <summary>
@@ -196,7 +203,7 @@ namespace Bb.Converters
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{SourceType.Name} -> {TargetType.Name} : {Method.DeclaringType.Name}.{Method}";
+            return $"{SourceType?.Name} -> {TargetType?.Name} : {Method?.DeclaringType?.Name}.{Method}";
         }
 
         /// <summary>
@@ -204,7 +211,7 @@ namespace Bb.Converters
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is MethodConverter m)
                 return m.Method == this.Method;
@@ -221,7 +228,7 @@ namespace Bb.Converters
         }
 
         /// <summary>
-        /// implicit conversion from <see cref="delegate"/> to <see cref="MethodConverter"/>
+        /// implicit conversion from <see cref="Delegate"/> to <see cref="MethodConverter"/>
         /// </summary>
         /// <param name="delegate"></param>
 
@@ -249,22 +256,46 @@ namespace Bb.Converters
         }
 
 
-        private HashSet<Type> _sourceExcludes = new HashSet<Type>() { typeof(ReadOnlySpan<>), typeof(void) };
-        private HashSet<Type> _targetExcludes = new HashSet<Type>() { typeof(void) };
+        private readonly HashSet<Type> _sourceExcludes = new HashSet<Type>() { typeof(ReadOnlySpan<>), typeof(void) };
+        private readonly HashSet<Type> _targetExcludes = new HashSet<Type>() { typeof(void) };
 
-        private HashSet<Type> _genericTypeIncludes = new HashSet<Type>()
+        private readonly HashSet<Type> _genericTypeIncludes = new HashSet<Type>()
         { typeof(Nullable<>), typeof(Dictionary<,>), typeof(IEnumerable<>) };
 
 
     }
 
+    /// <summary>
+    /// Defines the method type for conversion.
+    /// </summary>
     public enum ConvertMethodType
     {
+
+        /// <summary>
+        /// By default
+        /// </summary>
         Undefined,
+
+        /// <summary>
+        /// One parameter
+        /// </summary>
         OneParameter,
+
+        /// <summary>
+        /// One parameter managed
+        /// </summary>
         OneParameterManaged,
+
+        /// <summary>
+        /// Two parameter
+        /// </summary>
         TwoParameterManaged,
+
+        /// <summary>
+        /// Two parameter with boolean return
+        /// </summary>
         TwoParameterWithBooleanReturn
+    
     }
 
 }

@@ -33,6 +33,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Black.Beard.ComponentModel.Attributes\Black.Beard.ComponentModel.Attributes.csproj" />
+		<ProjectReference Include="..\Black.Beard.Expressions\Black.Beard.Expressions.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

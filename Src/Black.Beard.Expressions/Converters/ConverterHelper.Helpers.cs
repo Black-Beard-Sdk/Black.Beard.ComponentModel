@@ -435,6 +435,9 @@ namespace Bb.Converters
 
         #region ToByteArray
 
+
+       
+
         /// <summary>
         /// Convert a string to byte array
         /// </summary>
