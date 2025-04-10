@@ -42,13 +42,13 @@ namespace ComponentModels.Tests.LibResolvers
 
         }
 
-        [ExposeClass("test1111", ExposedType = typeof(SubTest1), LifeCycle = IocScopeEnum.Singleton, Name = "t1")]
+        [ExposeClass("test1111", ExposedType = typeof(SubTest1), LifeCycle = IocScope.Singleton, Name = "t1")]
         private class SubTest1
         {
 
         }
 
-        [ExposeClass("test1112", ExposedType = typeof(ISubTest2), LifeCycle = IocScopeEnum.Singleton, Name = "t2")]
+        [ExposeClass("test1112", ExposedType = typeof(ISubTest2), LifeCycle = IocScope.Singleton, Name = "t2")]
         private class SubTest2 : ISubTest2
         {
 

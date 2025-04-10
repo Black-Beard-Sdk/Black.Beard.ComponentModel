@@ -12,10 +12,9 @@ namespace Bb.Expressions
         /// <summary>
         /// Return the property name of the expression
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="expression">expression that contains the property member</param>
         /// <returns>return the property name</returns>
-        public static string GetPropertyName(this Expression expression)
+        public static string? GetPropertyName(this Expression expression)
         {
             return ExpressionMemberVisitor.GetPropertyName(expression);
         }
@@ -23,10 +22,9 @@ namespace Bb.Expressions
         /// <summary>
         /// Return the field name of the expression
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="expression">expression that contains the property member</param>
         /// <returns>return the property name</returns>
-        public static string GetFieldName(this Expression expression)
+        public static string? GetFieldName(this Expression expression)
         {
             return ExpressionMemberVisitor.GetPropertyName(expression);
         }
@@ -41,12 +39,47 @@ namespace Bb.Expressions
         public static MemberExpression Property(this Expression self, string propertyName)
         {
             var properties = self.Type.GetProperties();
-            var property = properties.Where(c => c.Name == propertyName).FirstOrDefault();
+            var property = properties.FirstOrDefault(c => c.Name == propertyName);
 
             if (property is null)
                 throw new MissingMemberException(propertyName);
 
             return Property(self, property);
+        }
+
+        /// <summary>
+        /// create a member expression from property
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="propertyName">property</param>
+        /// <param name="binding">filter for resolve field</param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public static MemberExpression Property(this Expression self, string propertyName, BindingFlags binding)
+        {
+
+            var property = self.Type.GetProperty(propertyName, binding);
+
+            if (property is null)
+                throw new MissingMemberException(propertyName);
+
+            return Property(self, property);
+
+        }
+
+        /// <summary>
+        /// create a member expression from property
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="property">property</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static MemberExpression Property(this Expression self, PropertyInfo property)
+        {
+            if (property is null)
+                throw new ArgumentNullException(nameof(property));
+
+            return Expression.Property(self, property);
         }
 
         /// <summary>
@@ -92,48 +125,13 @@ namespace Bb.Expressions
         /// create a member expression from property
         /// </summary>
         /// <param name="self"></param>
-        /// <param name="propertyName">property</param>
-        /// <param name="binding">filter for resolve field</param>
-        /// <returns></returns>
-        /// <exception cref="NullReferenceException"></exception>
-        public static MemberExpression Property(this Expression self, string propertyName, BindingFlags binding)
-        {
-
-            var property = self.Type.GetProperty(propertyName, binding);
-
-            if (property is null)
-                throw new MissingMemberException(propertyName);
-
-            return Property(self, property);
-
-        }
-
-        /// <summary>
-        /// create a member expression from property
-        /// </summary>
-        /// <param name="self"></param>
-        /// <param name="property">property</param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public static MemberExpression Property(this Expression self, PropertyInfo property)
-        {
-            if (property is null)
-                throw new ArgumentNullException(nameof(property));
-
-            return Expression.Property(self, property);
-        }
-
-        /// <summary>
-        /// create a member expression from property
-        /// </summary>
-        /// <param name="self"></param>
         /// <param name="field">property</param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException"></exception>
         public static MemberExpression Field(this Expression self, FieldInfo field)
         {
             if (field is null)
-                throw new NullReferenceException(nameof(field));
+                throw new ArgumentNullException(nameof(field));
 
             return Expression.Field(self, field);
         }

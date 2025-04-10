@@ -15,7 +15,7 @@ namespace Bb.Expressions
         /// <remarks>
         /// This property represents the target of the label in the expression tree.
         /// </remarks>
-        public LabelTarget Instance { get; set; }
+        public LabelTarget? Instance { get; set; }
 
         /// <summary>
         /// Gets the name of the label.
@@ -23,7 +23,7 @@ namespace Bb.Expressions
         /// <remarks>
         /// This property holds the name of the label, which is used to identify it in the expression tree.
         /// </remarks>
-        public string Name { get; internal set; }
+        public string? Name { get; internal set; }
 
         /// <summary>
         /// Gets the kind of the label.

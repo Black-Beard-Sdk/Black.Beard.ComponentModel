@@ -14,7 +14,7 @@ namespace Bb.ComponentModel.Attributes
         /// </summary>
         /// <param name="type"></param>
         /// <param name="lifeCycle"></param>
-        public InjectorPolicyAttribute(Type type, IocScopeEnum lifeCycle)
+        public InjectorPolicyAttribute(Type type, IocScope lifeCycle)
         {
 
             Type = type;
@@ -35,7 +35,7 @@ namespace Bb.ComponentModel.Attributes
         /// <value>
         /// The life cycle.
         /// </value>
-        public IocScopeEnum LifeCycle { get; set; }
+        public IocScope LifeCycle { get; set; }
 
     }
 

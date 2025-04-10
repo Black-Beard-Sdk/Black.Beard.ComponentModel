@@ -27,15 +27,10 @@ namespace Bb.Accessors
         /// This constructor initializes the <see cref="PropertyAccessor"/> with the specified property and strategy.
         /// </remarks>
         internal PropertyAccessor(Type componentType, PropertyInfo property, MemberStrategy strategy)
-            : base(componentType, MemberType.Property, strategy)
+            : base(componentType, MemberType.Property, strategy, property, property.PropertyType)
         {
-
-            this.Member = property;
-            this.Name = ResolveName(property.Name);
-            this.DeclaringType = property.DeclaringType;
             var m = property.GetMethod ?? property.SetMethod;
             this.IsStatic = m != null && (m.Attributes & MethodAttributes.Static) == MethodAttributes.Static;
-            this.Type = property.PropertyType;
 
             #region Get
 

@@ -43,8 +43,11 @@ namespace Bb.Converters
         {
         }
 
-        private MethodConverter(MethodBase method, Type targetType)
+        private MethodConverter(MethodBase method, Type? targetType)
         {
+
+            if (targetType == null)
+                throw new ArgumentNullException(nameof(targetType));
 
             Method = method;
             IsStatic = method.IsStatic;
@@ -185,12 +188,12 @@ namespace Bb.Converters
         /// <summary>
         /// Parameter 0
         /// </summary>
-        public ParameterInfo Parameter0 { get; }
+        public ParameterInfo? Parameter0 { get; }
 
         /// <summary>
         /// Parameter 1
         /// </summary>
-        public ParameterInfo Parameter1 { get; }
+        public ParameterInfo? Parameter1 { get; }
 
         /// <summary>
         /// If true, the converter will replace existing converters

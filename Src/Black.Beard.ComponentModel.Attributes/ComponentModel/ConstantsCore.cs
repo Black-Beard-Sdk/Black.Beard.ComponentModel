@@ -1,4 +1,6 @@
-﻿namespace Bb.ComponentModel
+﻿// Ignore Spelling: Perf Plugin
+
+namespace Bb.ComponentModel
 {
 
     /// <summary>

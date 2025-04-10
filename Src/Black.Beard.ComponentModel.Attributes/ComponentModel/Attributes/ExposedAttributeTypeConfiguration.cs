@@ -1,9 +1,15 @@
 ﻿namespace Bb.ComponentModel.Attributes
 {
 
+    /// <summary>
+    /// ExposedAttributeTypeConfiguration
+    /// </summary>
     public class ExposedAttributeTypeConfiguration
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExposedAttributeTypeConfiguration"/> class.
+        /// </summary>
         public ExposedAttributeTypeConfiguration()
         {
 
@@ -39,7 +45,7 @@
         /// <value>
         /// The life cycle.
         /// </value>
-        public IocScopeEnum LifeCycle { get; set; }
+        public IocScope LifeCycle { get; set; }
 
         /// <summary>
         /// Gets or sets the exposition type.

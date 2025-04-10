@@ -72,7 +72,7 @@ namespace Bb.ComponentModel
         /// <summary>
         /// Return true if the process can be ran
         /// </summary>
-        /// <param name="context">specified context <see cref="T"/></param>
+        /// <param name="context">specified context</param>
         /// <returns></returns>
         public virtual bool CanExecute(T context) => FilterToLaunch(this);
 
@@ -91,9 +91,9 @@ namespace Bb.ComponentModel
         public override void Execute(object context) => Execute((T)context);
 
         /// <summary>
-        /// Execute the initializing process with <see cref="T"/>
+        /// Execute the initializing process
         /// </summary>
-        /// <param name="context">specified context <see cref="T"/></param>
+        /// <param name="context">specified context</param>
         /// <returns></returns>
         public abstract void Execute(T context);
 
@@ -120,7 +120,7 @@ namespace Bb.ComponentModel
         /// </summary>
         /// <param name="context">specified context <see cref="object"/></param>
         /// <returns></returns>
-        public virtual bool CanExecute(object context) => FilterToLaunch != null ? FilterToLaunch(this) : true;
+        public virtual bool CanExecute(object context) => FilterToLaunch == null || FilterToLaunch(this);
 
         /// <summary>
         /// Execute the initializing process with <see cref="object"/>
@@ -132,7 +132,7 @@ namespace Bb.ComponentModel
         /// <summary>
         /// Internal filter to launch the builders
         /// </summary>
-        public static Func<IInjectBuilder, bool> FilterToLaunch = (i) => true;
+        public static Func<IInjectBuilder, bool> FilterToLaunch { get; set; } = (i) => true;
 
         /// <summary>
         /// Sets the specified friendly name and launch flag.
@@ -197,7 +197,7 @@ namespace Bb.ComponentModel
                 var items = value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var item in items)
                 {
-                    if (item.StartsWith("-"))
+                    if (item.StartsWith('-'))
                         _cache.Add(item.Substring(1));
                     else
                         _cache.Remove(item);

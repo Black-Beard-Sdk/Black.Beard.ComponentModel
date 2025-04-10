@@ -163,7 +163,10 @@ namespace Bb.Expressions.Statements
             Expression resultExpression;
             Expression? expressionFinaly = null;
 
-            Expression expressionTry = Body.GetExpression(new HashSet<string>(variableParent));
+            Expression? expressionTry = Body.GetExpression(new HashSet<string>(variableParent));
+
+            if (expressionTry == null)
+                throw new Exceptions.InvalidArgumentNameException($"the bloc must contains a boby");
 
             foreach (CatchStatement @catch in Catchs)
             {
@@ -176,6 +179,10 @@ namespace Bb.Expressions.Statements
 
                     @catch.Body.AddVarIfNotExists(@catch.Parameter);
                     var body = @catch.GetExpression(variableParent);
+
+                    if (body  == null)
+                        throw new Exceptions.InvalidArgumentNameException($"the bloc must contains a bobt");
+
                     c = Expression.Catch(@catch.Parameter, body);
 
                     if (!string.IsNullOrEmpty(@catch.Parameter.Name))
@@ -184,7 +191,12 @@ namespace Bb.Expressions.Statements
                 else
                 {
                     var body = @catch.GetExpression(variableParent);
+
+                    if (body == null)
+                        throw new Exceptions.InvalidArgumentNameException($"the bloc must contains a bobt");
+
                     c = Expression.Catch(@catch.TypeToCatch, body);
+
                 }
                 _catchs1.Add(c);
             }

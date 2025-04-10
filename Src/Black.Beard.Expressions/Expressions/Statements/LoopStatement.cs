@@ -70,7 +70,7 @@ namespace Bb.Expressions.Statements
         /// </example>
         public override Expression GetExpression(HashSet<string> variableParent)
         {
-            Expression b1 = Body.GetExpression(new HashSet<string>(variableParent));
+            Expression? b1 = Body.GetExpression(new HashSet<string>(variableParent));
             if (b1.CanReduce)
                 b1 = b1.Reduce();
             if (Condition == null)
@@ -97,6 +97,10 @@ namespace Bb.Expressions.Statements
         /// </example>
         public GotoExpression GenerateBreak()
         {
+
+            if (this._breakLabel.Instance == null)
+                throw new Exceptions.DuplicatedArgumentNameException("the bloc does not contain a break label");
+
             return Expression.Break(_breakLabel.Instance);
         }
 
@@ -117,7 +121,12 @@ namespace Bb.Expressions.Statements
         /// </example>
         public GotoExpression GenerateContinue()
         {
+
+            if (_continueLabel.Instance == null)
+                throw new Exceptions.DuplicatedArgumentNameException("the bloc does not contain a continue label");
+
             return Expression.Break(_continueLabel.Instance);
+
         }
 
         private readonly Label _breakLabel;

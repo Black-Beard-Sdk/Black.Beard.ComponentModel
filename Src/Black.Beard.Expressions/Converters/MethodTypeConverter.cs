@@ -51,7 +51,7 @@ namespace Bb.Converters
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public bool TryGetValue(Type key, out List<MethodConverter> value)
+        public bool TryGetValue(Type key, out List<MethodConverter>? value)
         {
             return _dic.TryGetValue(new TypeKey(key), out value);
         }
@@ -146,11 +146,25 @@ namespace Bb.Converters
             return Type.GetHashCode();
         }
 
-        override public bool Equals(object obj)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object? obj)
         {
-            if (obj != null && obj is TypeKey o)
+            if (obj is TypeKey o)
                 return o.Type.GetHashCode() == this.Type.GetHashCode();
             return false;
+        }
+
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns></returns>
+        public override string? ToString()
+        {
+            return Type?.ToString();
         }
 
     }

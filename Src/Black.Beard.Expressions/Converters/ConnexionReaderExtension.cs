@@ -1,4 +1,5 @@
 ﻿// NOSONAR
+using Bb.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -229,11 +230,11 @@ namespace Bb.Converters
                 // don't trace passwords ever!
                 if (null != keyvalue)
                 {
-                    Trace.WriteLine(string.Format("<comm.DbConnectionOptions|INFO|ADV> KeyName='{0}', KeyValue='{1}'", keyname, keyvalue));
+                    Trace.TraceWarning(string.Format("<comm.DbConnectionOptions|INFO|ADV> KeyName='{0}', KeyValue='{1}'", keyname, keyvalue));
                 }
                 else
                 {
-                    Trace.WriteLine(string.Format("<comm.DbConnectionOptions|INFO|ADV> KeyName='{0}'", keyname));
+                    Trace.TraceWarning(string.Format("<comm.DbConnectionOptions|INFO|ADV> KeyName='{0}'", keyname));
                 }
             }
         }
@@ -964,7 +965,7 @@ namespace Bb.Converters
 
         internal static Exception InvalidConnectionOptionValue(string key) => new InvalidConnectionOptionValueException(key);
 
-        public static Exception KeywordNotSupported(string keyword) => new Exceptions(keyword);
+        public static Exception KeywordNotSupported(string keyword) => new BaseException(keyword);
 
         public static Exception ConnectionStringSyntax(int position) => new ConnectionStringSyntaxException(position);
 
@@ -1022,17 +1023,6 @@ namespace Bb.Converters
         public ConnectionStringSyntaxException(int position) : base($"syntax error at position {position}") { }
         public ConnectionStringSyntaxException(string message, Exception inner) : base(message, inner) { }
         protected ConnectionStringSyntaxException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
-    }
-
-    [Serializable]
-    public class Exceptions : Exception
-    {
-        public Exceptions() { }
-        public Exceptions(string message) : base($"The keyword '{message}' is not supported.") { }
-        public Exceptions(string message, Exception inner) : base(message, inner) { }
-        protected Exceptions(
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }

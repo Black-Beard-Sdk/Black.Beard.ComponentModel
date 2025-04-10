@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bb.ComponentModel.Loaders
+namespace Bb.ComponentModel
 {
 
 

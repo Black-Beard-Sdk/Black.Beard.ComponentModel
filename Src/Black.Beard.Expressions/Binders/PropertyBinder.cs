@@ -82,6 +82,8 @@ namespace Bb.Binders
             where TSource : class, INotifyPropertyChanged
         {
             var propertyName = expression.GetPropertyName();
+            if (string.IsNullOrEmpty(propertyName))
+                throw new InvalidOperationException(nameof(propertyName));
             Bind(propertyName, action);
         }
 

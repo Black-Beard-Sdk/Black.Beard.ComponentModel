@@ -26,15 +26,21 @@ namespace Bb.Accessors
         /// <param name="ComponentType">The type of the component. Must not be null.</param>
         /// <param name="memberTypeEnum">The type of the member (e.g., Property, Field).</param>
         /// <param name="strategy">The strategy used to determine member access.</param>
+        /// <param name="member">Member.</param>
+        /// <param name="memberType">Type of the member</param>
         /// <remarks>
         /// This constructor initializes the base properties of the <see cref="AccessorItem"/> class.
         /// </remarks>
-        protected AccessorItem(Type ComponentType, MemberType memberTypeEnum, MemberStrategy strategy)
+        protected AccessorItem(Type ComponentType, MemberType memberTypeEnum, MemberStrategy strategy, MemberInfo member, Type memberType)
         {
-            // TODO: Complete member initialization
             this.ComponentType = ComponentType;
             this.TypeEnum = memberTypeEnum;
             this.Strategy = strategy;
+            this.Member = member;
+            this.Name = ResolveName(member.Name);
+            this.DeclaringType = member.DeclaringType;
+            this.Type = memberType;
+
         }
 
         #region Properties
@@ -82,7 +88,7 @@ namespace Bb.Accessors
         /// <value>
         /// The name.
         /// </value>
-        public string Name { get; protected set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets or sets the type of the declaring.
@@ -90,7 +96,7 @@ namespace Bb.Accessors
         /// <value>
         /// The type of the declaring.
         /// </value>
-        public Type? DeclaringType { get; protected set; }
+        public Type? DeclaringType { get; }
 
         /// <summary>
         /// Original type
@@ -103,7 +109,7 @@ namespace Bb.Accessors
         /// <value>
         /// The type.
         /// </value>
-        public Type Type { get; protected set; }
+        public Type Type { get; }
 
         /// <summary>
         /// Gets or sets a value indicating whether [is static].
@@ -127,7 +133,7 @@ namespace Bb.Accessors
         /// <value>
         /// The member.
         /// </value>
-        public MemberInfo Member { get; protected set; }
+        public MemberInfo Member { get; }
 
         #endregion Properties
 
@@ -741,7 +747,7 @@ namespace Bb.Accessors
         {
 
             if (!strategy.HasFlag(MemberStrategy.NotPublicFields) && !item.Attributes.HasFlag(FieldAttributes.Public)
-                && item.Attributes.HasFlag(FieldAttributes.Private) || item.Attributes.HasFlag(FieldAttributes.PrivateScope))
+                && (item.Attributes.HasFlag(FieldAttributes.Private) || item.Attributes.HasFlag(FieldAttributes.PrivateScope)))
                     return false;
 
             if (strategy.HasFlag(MemberStrategy.Static) && !strategy.HasFlag(MemberStrategy.Instance))

@@ -1,6 +1,12 @@
-﻿namespace Bb
+﻿// Ignore Spelling: Desactivate
+
+namespace Bb
 {
 
+
+    /// <summary>
+    /// This class provides debugging functionality for local development.
+    /// </summary>
     public class LocalDebug
     {
 

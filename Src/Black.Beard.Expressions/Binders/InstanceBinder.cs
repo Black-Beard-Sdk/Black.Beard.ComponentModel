@@ -14,7 +14,6 @@ namespace Bb.Binders
     /// <typeparam name="TTarget"></typeparam>
     public class InstanceBinder<TSource, TTarget> : IDisposed
         where TSource : class, INotifyPropertyChanged
-        where TTarget : INotifyPropertyChanged
     {
 
 
@@ -137,7 +136,7 @@ namespace Bb.Binders
 
             if (_sourceReader != null
                 && _source != null
-                && EqualityComparer<TTarget>.Default.Equals(_target, default)
+                && !EqualityComparer<TTarget>.Default.Equals(_target, default)
                 && !string.IsNullOrEmpty(e.PropertyName)
                 && _configuration.TryGet(e.PropertyName, out var action) && action != null)
             {

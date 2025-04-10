@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Bb
+namespace Bb.ComponentModel
 {
 
     /// <summary>

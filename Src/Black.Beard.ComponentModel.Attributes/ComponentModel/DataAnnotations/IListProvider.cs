@@ -35,7 +35,12 @@ namespace Bb.ComponentModel.DataAnnotations
         /// <returns></returns>
         object GetOriginalValue(ListItem item);
 
-
+        /// <summary>
+        /// Compare the value of the list item with the value
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         bool Compare(ListItem left, object right);
 
 

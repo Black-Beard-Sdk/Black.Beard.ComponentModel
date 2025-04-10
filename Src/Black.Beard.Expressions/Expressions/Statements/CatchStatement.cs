@@ -108,7 +108,7 @@ namespace Bb.Expressions.Statements
         /// Console.WriteLine(expression);
         /// </code>
         /// </example>
-        public override Expression GetExpression(HashSet<string> variableParent)
+        public override Expression? GetExpression(HashSet<string> variableParent)
         {
             return Body.GetExpression(new HashSet<string>(variableParent));
         }

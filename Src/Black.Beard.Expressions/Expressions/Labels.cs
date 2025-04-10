@@ -25,6 +25,9 @@ namespace Bb.Expressions
             if (label.Kind != KindLabel.Default && this._labels.Values.Any(c => c.Kind == label.Kind))
                 throw new Exceptions.DuplicatedArgumentNameException($"the bloc contains already label of type {label.Kind.ToString()}");
 
+            if (string.IsNullOrEmpty(label.Name))
+                label.Name = GetNewName();
+
             this._labels.Add(label.Name, label);
 
         }
@@ -85,6 +88,10 @@ namespace Bb.Expressions
 
             foreach (var item in labels.GetLabels())
             {
+
+                if (string.IsNullOrEmpty(item.Name))
+                    item.Name = GetNewName();
+
                 var item2 = this.GetByName(item.Name);
                 if (item2 != null)
                 {
@@ -93,6 +100,7 @@ namespace Bb.Expressions
                     else
                         throw new Exceptions.DuplicatedArgumentNameException($"{item.Name} already existings");
                 }
+
             }
 
             this._parent = labels;

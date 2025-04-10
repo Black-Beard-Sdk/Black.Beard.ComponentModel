@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Ignore Spelling: Ioc
+
+using System;
 
 namespace Bb.ComponentModel.Exceptions
 {

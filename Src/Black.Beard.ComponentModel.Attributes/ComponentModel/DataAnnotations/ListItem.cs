@@ -46,10 +46,14 @@ namespace Bb.ComponentModel.DataAnnotations
         /// </summary>
         public bool Selected { get; set; } = false;
 
-
+        /// <summary>
+        /// Image or icon to display in the list item.
+        /// </summary>
         public object Icon { get; set; }
 
-
+        /// <summary>
+        /// Gets or sets the tag.
+        /// </summary>
         public virtual object Tag { get; protected set; }
 
         #endregion
@@ -68,12 +72,12 @@ namespace Bb.ComponentModel.DataAnnotations
         /// <summary>
         /// return true if the value is equal to the value of the object
         /// </summary>
-        /// <param name="o"></param>
+        /// <param name="obj">object to evaluate</param>
         /// <returns></returns>
-        public override bool Equals(object o)
+        public override bool Equals(object obj)
         {
 
-            var other = o as ListItem;
+            var other = obj as ListItem;
 
             if (other == null)
                 return false;

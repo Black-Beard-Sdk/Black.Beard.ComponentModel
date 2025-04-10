@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Bb.ComponentModel.Attributes;
 using System.Linq;
+using Bb.ComponentModel;
 
 namespace Bb.ComponentModel.Loaders
 {

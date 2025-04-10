@@ -26,7 +26,7 @@ namespace Bb.Converters
         /// converter.SetFunc = value => value.ToString();
         /// </code>
         /// </example>
-        public Func<T?, U?> SetFunc { get; set; }
+        public Func<T?, U?>? SetFunc { get; set; }
 
         /// <summary>
         /// The culture info being used for decimal points, date and time format, etc.

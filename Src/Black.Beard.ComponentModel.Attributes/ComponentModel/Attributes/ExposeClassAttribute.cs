@@ -61,7 +61,7 @@ namespace Bb.ComponentModel.Attributes
         /// <value>
         /// The life cycle.
         /// </value>
-        public IocScopeEnum LifeCycle { get; set; }
+        public IocScope LifeCycle { get; set; }
 
         /// <summary>
         /// Gets or sets the exposition type.
@@ -112,6 +112,9 @@ namespace Bb.ComponentModel.Attributes
 
         }
 
+        /// <summary>
+        /// Gets the type identifier for this instance.
+        /// </summary>
         public override object TypeId => base.TypeId;
 
     }

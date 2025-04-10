@@ -4,6 +4,11 @@ using System.ComponentModel;
 
 namespace Bb.ComponentModel.Attributes
 {
+
+
+    /// <summary>
+    /// Specifies a list provider for a property or field.
+    /// </summary>
     [System.AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Struct, Inherited = false, AllowMultiple = true)]
     public sealed class ListProviderAttribute : Attribute
     {
@@ -12,8 +17,6 @@ namespace Bb.ComponentModel.Attributes
         /// new instance of <see cref="ListProviderAttribute"/>
         /// </summary>
         /// <param name="typeListResolver">the type must implement <see cref="IListProvider"/> </param>
-        /// <param name="property">property descriptor that decorated with the current attribute</param>
-        /// <param name="instance">Instance of the object</param>
         /// <exception cref="ArgumentException">if the type not implement <see cref="IListProvider"/> </exception>
         public ListProviderAttribute(Type typeListResolver)
         {
@@ -60,6 +63,9 @@ namespace Bb.ComponentModel.Attributes
 
         }
 
+        /// <summary>
+        /// Gets the type of the list provider.
+        /// </summary>
         public Type ProviderListType { get; }
 
     }

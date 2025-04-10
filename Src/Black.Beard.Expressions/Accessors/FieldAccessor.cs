@@ -25,15 +25,10 @@ namespace Bb.Accessors
         /// This constructor initializes the <see cref="FieldAccessor"/> with the specified field and strategy.
         /// </remarks>
         internal FieldAccessor(Type componentType, FieldInfo field, MemberStrategy strategy)
-            : base(componentType, MemberType.Property, strategy)
+            : base(componentType, MemberType.Property, strategy, field, field.FieldType)
         {
-
-            this.Member = field;
-            this.Name = ResolveName(field.Name);            
-            this.DeclaringType = field.DeclaringType;
             this.IsStatic = field.IsStatic;
-            this.Type = field.FieldType;
-
+            
             #region Get
 
             this.GetValue = GetDirect(componentType, field);

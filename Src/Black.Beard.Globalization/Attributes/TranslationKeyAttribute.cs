@@ -5,6 +5,9 @@ namespace Bb.ComponentModel.Attributes
 {
 
 
+    /// <summary>
+    /// Attribute to mark a property or class with a translation key.
+    /// </summary>
     [System.AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     public sealed class TranslationKeyAttribute : Attribute
     {
@@ -34,6 +37,10 @@ namespace Bb.ComponentModel.Attributes
         /// </summary>
         public string Key { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public TranslatedKeyLabel GetTranslation() => TranslatedKeyLabel.Parse(this.Key);
 
 

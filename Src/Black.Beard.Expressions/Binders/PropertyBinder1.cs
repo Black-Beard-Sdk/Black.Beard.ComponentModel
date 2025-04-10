@@ -32,7 +32,6 @@ namespace Bb.Binders
     /// </example>
     public class PropertyBinder<TSource, TTarget> : PropertyBinder<TTarget>
         where TSource : class, INotifyPropertyChanged
-        where TTarget : INotifyPropertyChanged
     {
 
         /// <summary>
@@ -68,7 +67,9 @@ namespace Bb.Binders
             Expression<Func<TSource, TValue>> expression,
             Action<TTarget, TValue> action)
         {
-            string propertyName = expression.GetPropertyName();
+            string? propertyName = expression.GetPropertyName();
+            if (string.IsNullOrEmpty(propertyName))
+                throw new ArgumentNullException(nameof(expression), "Expression must not be null or empty.");
             Bind(propertyName, (a, b) => action(a, (TValue)b));
 
             return this;

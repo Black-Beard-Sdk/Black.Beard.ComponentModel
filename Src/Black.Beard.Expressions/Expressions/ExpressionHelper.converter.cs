@@ -295,15 +295,10 @@ namespace Bb.Expressions
                         LocalDebug.Stop();
                     }
                 }
-                return self;
 
             }
-            else
-            {
-                LocalDebug.Stop();
-            }
 
-            return null;
+            return self;
 
         }
 
@@ -388,25 +383,20 @@ namespace Bb.Expressions
             if (targetType.IsAssignableFrom(sourceType) || sourceType.IsAssignableFrom(targetType))
                 return Expression.Convert(self, targetType);
 
-            else if (!ConverterHelper.TryGetMethodToConvert(sourceType, targetType, out MethodConverter? method))   // Find a registered method to convert
+            else if (ConverterHelper.TryGetMethodToConvert(sourceType, targetType, out MethodConverter? method))   // Find a registered method to convert
             {                                                                                   // method not found
 
                 if (method == null)
                     throw new TargetInvocationException($"no method for manage conversion of {sourceType} to {targetType}. please use ConverterHelper for register a custom method", null);
 
                 if (targetType.IsConstructedGenericType)                                        // generic
-                    self.ConvertToGeneric(sourceType, targetType, context, ref method);
+                    self = self.ConvertToGeneric(sourceType, targetType, context, ref method);
 
                 else if (targetType.IsArray && targetType.GetArrayRank() == 1)                  // array of 1 rank
                     self = self.ConvertToArray(sourceType, targetType, context, ref method);
 
                 else if (sourceType.IsEnum || targetType.IsEnum)                                // Target is enum
                     self = self.ConvertEnum(sourceType, targetType, context, ref method);
-
-                else
-                {
-                    LocalDebug.Stop();
-                }
 
                 if (method != null)
                     result = self.Convert(sourceType, method, context);

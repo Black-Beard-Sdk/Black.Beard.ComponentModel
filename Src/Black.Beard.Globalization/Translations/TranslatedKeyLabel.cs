@@ -37,6 +37,53 @@ namespace Bb.Translations
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="TranslatedKeyLabel"/> class.
+        /// </summary>
+        /// <param name="path">group of translation key</param>
+        /// <param name="defaultDisplay">default display</param>
+        public TranslatedKeyLabel(string path, string defaultDisplay)
+            : this(path, defaultDisplay, defaultDisplay)
+        {
+
+            if (ModeDebug)
+                Trace(this, string.Empty);
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TranslatedKeyLabel"/> class.
+        /// </summary>
+        /// <param name="path">context for group key</param>
+        /// <param name="defaultDisplay">default display</param>
+        /// <param name="key">key of translation</param>
+        /// <param name="culture">default culture</param>
+        public TranslatedKeyLabel(string path, string defaultDisplay, string key, CultureInfo? culture = null)
+        {
+            this.Path = path;
+            this.DefaultDisplay = defaultDisplay;
+            this.Key = key ?? defaultDisplay;
+            this.DefaultCulture = culture ?? CultureInfo.InvariantCulture;
+
+            this.Translations = new Dictionary<CultureInfo, DataTranslation>
+            {
+                { this.DefaultCulture, new DataTranslation(this) { Culture = this.DefaultCulture, Value = defaultDisplay } }
+            };
+
+            if (defaultDisplay == null)
+            {
+                IsNotValidKey = true;
+                if (ModeDebug)
+                    Trace(this, string.Empty);
+            }
+
+        }
+
+
+
+
+
+
+        /// <summary>
         /// Translate the current key
         /// </summary>
         /// <param name="service">service that translate keys</param>
@@ -60,47 +107,8 @@ namespace Bb.Translations
             return service.Translate(this, arguments);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TranslatedKeyLabel"/> class.
-        /// </summary>
-        /// <param name="path">group of translation key</param>
-        /// <param name="defaultDisplay">default display</param>
-        public TranslatedKeyLabel(string path, string defaultDisplay)
-            : this(path, defaultDisplay, defaultDisplay)
-        {
 
-            if (ModeDebug)
-                Trace(this, string.Empty);
 
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TranslatedKeyLabel"/> class.
-        /// </summary>
-        /// <param name="path">context for group key</param>
-        /// <param name="defaultDisplay">default display</param>
-        /// <param name="key">key of translation</param>
-        /// <param name="culture">default culture</param>
-        public TranslatedKeyLabel(string? path, string defaultDisplay, string key, CultureInfo? culture = null)
-        {
-            this.Path = path;
-            this.DefaultDisplay = defaultDisplay;
-            this.Key = key ?? defaultDisplay;
-            this.DefaultCulture = culture ?? CultureInfo.InvariantCulture;
-
-            this.Translations = new Dictionary<CultureInfo, DataTranslation>
-            {
-                { this.DefaultCulture, new DataTranslation(this) { Culture = this.DefaultCulture, Value = defaultDisplay } }
-            };
-
-            if (defaultDisplay == null)
-            {
-                IsNotValidKey = true;
-                if (ModeDebug)
-                    Trace(this, string.Empty);
-            }
-
-        }
 
         /// <summary>
         /// Default key
@@ -191,11 +199,19 @@ namespace Bb.Translations
         }
 
 
+        /// <summary>
+        /// Convert a string to a TranslatedKeyLabel
+        /// </summary>
+        /// <param name="key">string key</param>
         public static implicit operator TranslatedKeyLabel(string key)
         {
             return TranslatedKeyLabel.Parse(key) ?? TranslatedKeyLabel.EmptyKey;
         }
 
+        /// <summary>
+        /// Convert a TranslatedKeyLabel to a string
+        /// </summary>
+        /// <param name="key">Translated key label</param>
         public static implicit operator string(TranslatedKeyLabel key)
         {
             return key.ToString();
@@ -245,7 +261,7 @@ namespace Bb.Translations
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
 
             if (obj is TranslatedKeyLabel key)
@@ -255,6 +271,10 @@ namespace Bb.Translations
 
         }
 
+        /// <summary>
+        /// Return the hash code of the key
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return this.ToString().GetHashCode();
@@ -276,7 +296,7 @@ namespace Bb.Translations
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static TranslatedKeyLabel? Parse(string key)
+        public static TranslatedKeyLabel Parse(string key)
         {
 
             if (string.IsNullOrEmpty(key))
@@ -393,13 +413,14 @@ namespace Bb.Translations
             }
             catch (CultureNotFoundException)
             {
+
             }
 
             return false;
 
         }
 
-        private class Lexer
+        private sealed class Lexer
         {
 
             public Lexer(string key)
@@ -453,7 +474,7 @@ namespace Bb.Translations
 
             }
 
-            private string _payload;
+            private readonly string _payload;
             int index = 0;
 
 
@@ -482,7 +503,6 @@ namespace Bb.Translations
                 }
 
             }
-
 
         }
 

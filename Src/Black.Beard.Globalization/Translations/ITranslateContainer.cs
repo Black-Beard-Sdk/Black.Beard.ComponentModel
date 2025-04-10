@@ -2,6 +2,10 @@
 
 namespace Bb.Translations
 {
+
+    /// <summary>
+    /// container for storing the translations
+    /// </summary>
     public interface ITranslateContainer
     {
 

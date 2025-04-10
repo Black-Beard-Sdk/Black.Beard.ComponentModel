@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bb
+namespace Bb.ComponentModel
 {
 
     /// <summary>
@@ -37,8 +37,16 @@ namespace Bb
     public interface IProjectedService<T>
     {
 
+        /// <summary>
+        /// Listen the focus change
+        /// </summary>
+        /// <param name="action">action to execute</param>
         void Execute(Action<T, object> action);
 
+        /// <summary>
+        /// Register the service
+        /// </summary>
+        /// <param name="service"></param>
         void Register(T service);
 
         /// <summary>

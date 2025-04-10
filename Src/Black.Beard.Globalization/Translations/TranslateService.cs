@@ -5,13 +5,16 @@ using System.Linq;
 namespace Bb.Translations
 {
 
-
-
-    // [ExposeClass(ConstantsCore.Service, ExposedType = typeof(ITranslateService), LifeCycle = IocScopeEnum.Singleton)]
+    /// <summary>
+    /// Service to translate the keys
+    /// </summary>
     public abstract class TranslateService : ITranslateService
     {
 
-        public TranslateService()
+        /// <summary>
+        /// Initialize the service
+        /// </summary>
+        protected TranslateService()
         {
             _availableCultures = new HashSet<CultureInfo> { CultureInfo.InvariantCulture };
             _container = CreateContainer();
@@ -53,24 +56,24 @@ namespace Bb.Translations
         /// <summary>
         /// Translate the key for th current culture
         /// </summary>
-        /// <param name="culture"></param>
-        /// <param name="label"></param>
-        /// <param name="arguments"></param>
+        /// <param name="culture">target culture</param>
+        /// <param name="key">key to translate</param>
+        /// <param name="arguments">sub keys</param>
         /// <returns></returns>
-        public string Translate(CultureInfo culture, TranslatedKeyLabel label, params TranslatedKeyLabel[] arguments)
+        public string Translate(CultureInfo culture, TranslatedKeyLabel key, params TranslatedKeyLabel[] arguments)
         {
 
             DataTranslation result;
 
-            if (!label.IsNotValidKey)
+            if (!key.IsNotValidKey)
             {
 
-                if (!_container.Get(label, culture, out result))
+                if (!_container.Get(key, culture, out result))
                     lock (_lock)
-                        if (!_container.Get(label, culture, out result))
-                            foreach (var item in label.Translations)
+                        if (!_container.Get(key, culture, out result))
+                            foreach (var item in key.Translations)
                             {
-                                var result1 = Create(label, culture);
+                                var result1 = Create(key, culture);
                                 if (result1.Culture.IetfLanguageTag == culture.IetfLanguageTag)
                                     result = result1;
                             }
@@ -79,11 +82,11 @@ namespace Bb.Translations
                     return result.Value;
 
                 else
-                    FailedToResolve(label, culture);
+                    FailedToResolve(key, culture);
 
             }
 
-            var r = label.DefaultDisplay;
+            var r = key.DefaultDisplay;
             return r;
 
         }
@@ -100,9 +103,8 @@ namespace Bb.Translations
             set { _container = value; }
         }
 
-        private HashSet<CultureInfo> _availableCultures;
-
-        private volatile object _lock = new object();
+        private readonly HashSet<CultureInfo> _availableCultures;
+        private readonly object _lock = new object();
         private ITranslateContainer _container;
 
     }

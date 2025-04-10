@@ -5,6 +5,11 @@ using System.Text;
 
 namespace Bb.Translations
 {
+
+
+    /// <summary>
+    /// Translation of a key
+    /// </summary>
     [DebuggerDisplay("{Culture} : {Value}")]
     public class DataTranslation
     {
@@ -39,7 +44,10 @@ namespace Bb.Translations
         /// </summary>
         public string DefaultValueValue { get => _parent.DefaultDisplay; }
 
-
+        /// <summary>
+        /// return the default value of the parent
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
 

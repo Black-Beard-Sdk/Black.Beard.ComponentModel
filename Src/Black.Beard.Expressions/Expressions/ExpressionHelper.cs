@@ -37,9 +37,12 @@ namespace Bb.Expressions
         /// <returns></returns>
         public static Type ResolveType(this Expression self)
         {
-            return self.NodeType == ExpressionType.Lambda
-                ? (self as LambdaExpression).ReturnType
-                : self.Type;
+
+            if (self.NodeType == ExpressionType.Lambda && self is LambdaExpression lambda)
+                return lambda.ReturnType;
+            
+            return  self.Type;
+
         }
 
         /// <summary>

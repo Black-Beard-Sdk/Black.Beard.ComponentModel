@@ -183,17 +183,17 @@ namespace Bb.Converters
 
             MethodConverter? method = null;
             MethodTypeConverter typeSource;
-            List<MethodConverter> list;
+            List<MethodConverter>? list;
 
             if (_dicConverters.TryGetValue(sourceType, out typeSource)
-                 && typeSource.TryGetValue(targetType, out list))
+                 && typeSource.TryGetValue(targetType, out list) && list != null && list.Any())
                 method = list[0];
-
 
             #region append
 
             if (method == null)
             {
+
                 if (!_initialized.Contains(sourceType))
                     lock (_lock)
                         if (!_initialized.Contains(sourceType))
@@ -214,14 +214,15 @@ namespace Bb.Converters
                                 }
                             }
                         }
+
+
+                if (_dicConverters.TryGetValue(sourceType, out typeSource)
+                    && typeSource.TryGetValue(targetType, out list) && list != null && list.Any())
+                        method = list[0];
+
             }
 
             #endregion append
-
-
-            if (_dicConverters.TryGetValue(sourceType, out typeSource)
-                 && typeSource.TryGetValue(targetType, out list))
-                method = list[0];
 
             return method;
 
@@ -299,6 +300,10 @@ namespace Bb.Converters
         /// </remarks>
         public static void Register(MethodConverter newMethod)
         {
+
+            if (newMethod == null)
+                throw new ArgumentNullException(nameof(newMethod));
+
             // TODO : check if the method is ok
             bool replace = false;
 

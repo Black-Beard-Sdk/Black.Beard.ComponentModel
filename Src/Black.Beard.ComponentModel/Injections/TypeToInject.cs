@@ -17,7 +17,7 @@ namespace Bb.Injections
         public Type? Type { get; set; }
 
 
-        public IocScopeEnum LifeCycle { get; set; }
+        public IocScope LifeCycle { get; set; }
 
         public Type? ImplementationType { get; set; }
 

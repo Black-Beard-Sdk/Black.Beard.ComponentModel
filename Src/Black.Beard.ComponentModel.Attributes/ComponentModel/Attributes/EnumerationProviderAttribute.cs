@@ -11,11 +11,18 @@ namespace Bb.ComponentModel.Attributes
     sealed class EnumerationProviderAttribute : Attribute
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EnumerationProviderAttribute"/> class.
+        /// </summary>
+        /// <param name="typeProvider"></param>
         public EnumerationProviderAttribute(Type typeProvider)
         {
             this.Provider = typeProvider;
         }
 
+        /// <summary>
+        /// Gets the type to use like provider.
+        /// </summary>
         public Type Provider { get; }
 
     }

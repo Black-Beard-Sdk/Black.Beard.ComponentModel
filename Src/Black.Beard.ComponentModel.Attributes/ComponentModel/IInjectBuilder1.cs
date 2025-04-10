@@ -4,21 +4,21 @@
     /// <summary>
     /// specialized interface for Initialize service
     /// </summary>
-    public interface IInjectBuilder<T> : IInjectBuilder
+    public interface IInjectBuilder<in T> : IInjectBuilder
     {
 
         /// <summary>
         /// Return true if the process can be ran
         /// </summary>
-        /// <param name="context">specified context <see cref="T"/></param>
+        /// <param name="context">specified context </param>
         /// <returns></returns>
         bool CanExecute(T context);
 
 
         /// <summary>
-        /// Execute the initializing process with <see cref="T"/>
+        /// Execute the initializing process with
         /// </summary>
-        /// <param name="context">specified context <see cref="T"/></param>
+        /// <param name="context">specified context</param>
         /// <returns></returns>
         void Execute(T context);
 

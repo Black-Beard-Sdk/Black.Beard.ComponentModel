@@ -39,6 +39,7 @@
 	<PropertyGroup>
 		<VsxmdAutoDeleteXml>True</VsxmdAutoDeleteXml>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Nullable>annotations</Nullable>
 	</PropertyGroup>
 	
 </Project>

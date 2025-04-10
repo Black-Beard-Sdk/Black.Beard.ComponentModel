@@ -3,37 +3,40 @@
 namespace Bb.Converters
 {
 
-
+    /// <summary>
+    /// Provides extension methods for converting <see cref="DateTime"/> and <see cref="DateTimeOffset"/> to unsigned long indices.
+    /// </summary>
     public static class ConvertMore
     {
 
         /// <summary>
-        /// Convert a DateTime to ulong for indexation
+        /// Converts a <see cref="DateTime"/> to an unsigned long for indexing or sorting.
         /// </summary>
-        /// <param name="self">DateTime to convert. Must not be null.</param>
-        /// <param name="yearOnTwoDigit">If true, the year is used on two digits (e.g., 24 instead of 2024)</param>
-        /// <param name="limit">Specifies the precision of the index, from month to millisecond</param>
+        /// <param name="self">The <see cref="DateTime"/> to convert. Must not be null.</param>
+        /// <param name="yearOnTwoDigit">If <c>true</c>, the year is represented with two digits (e.g., 24 instead of 2024).</param>
+        /// <param name="limit">Specifies the precision of the index, from month to millisecond.</param>
         /// <returns>
-        /// A <see cref="System.UInt64"/> representation of the date time value, formatted according to the specified parameters.
+        /// A <see cref="ulong"/> representation of the <see cref="DateTime"/> value, formatted according to the specified parameters.
         /// </returns>
         /// <remarks>
-        /// This method converts a DateTime to an unsigned long integer that can be used for indexing or sorting.
-        /// The resulting value has a format that depends on the limit parameter:
-        /// - Month: YYMM or YYYYMM
-        /// - Day: YYMMDD or YYYYMMDD
-        /// - Hour: YYMMDDHH or YYYYMMDDHH
-        /// - Minute: YYMMDDHHMM or YYYYMMDDHHMM
-        /// - Second: YYMMDDHHMMSS or YYYYMMDDHHMMSS
-        /// - MilliSecond: YYMMDDHHMMSSMMM or YYYYMMDDHHMMSSMMM
+        /// This method converts a <see cref="DateTime"/> to an unsigned long integer that can be used for indexing or sorting.
+        /// The resulting value's format depends on the <paramref name="limit"/> parameter:
+        /// <list type="bullet">
+        /// <item><term>Month</term>: YYMM or YYYYMM</item>
+        /// <item><term>Day</term>: YYMMDD or YYYYMMDD</item>
+        /// <item><term>Hour</term>: YYMMDDHH or YYYYMMDDHH</item>
+        /// <item><term>Minute</term>: YYMMDDHHMM or YYYYMMDDHHMM</item>
+        /// <item><term>Second</term>: YYMMDDHHMMSS or YYYYMMDDHHMMSS</item>
+        /// <item><term>Millisecond</term>: YYMMDDHHMMSSMMM or YYYYMMDDHHMMSSMMM</item>
+        /// </list>
         /// </remarks>
         /// <example>
         /// <code lang="C#">
-        ///     DateTime date = new DateTime(2024, 3, 2, 10, 25, 36);
-        ///     var i = date.ToLongIndex(true, DateTimeLimit.Second);
-        ///     ulong expected = 240302102536;
-        ///     Assert.Equal(expected, i);
+        /// DateTime date = new DateTime(2024, 3, 2, 10, 25, 36);
+        /// ulong index = date.ToLongIndex(true, DateTimeLimit.Second);
+        /// Console.WriteLine(index); // Output: 240302102536
         /// </code>
-        /// </example>   
+        /// </example>
         public static ulong ToLongIndex(this DateTime self, bool yearOnTwoDigit = true, DateTimeLimit limit = DateTimeLimit.None)
         {
 
@@ -86,43 +89,71 @@ namespace Bb.Converters
         }
 
         /// <summary>
-        /// Convert a DateTimeOffset to ulong for indexation
+        /// Converts a <see cref="DateTimeOffset"/> to an unsigned long for indexing or sorting.
         /// </summary>
-        /// <param name="self">DateTimeOffset to convert. Must not be null.</param>
-        /// <param name="yearOnTwoDigit">If true, the year is used on two digits (e.g., 24 instead of 2024)</param>
-        /// <param name="limit">Specifies the precision of the index, from month to millisecond</param>
+        /// <param name="self">The <see cref="DateTimeOffset"/> to convert. Must not be null.</param>
+        /// <param name="yearOnTwoDigit">If <c>true</c>, the year is represented with two digits (e.g., 24 instead of 2024).</param>
+        /// <param name="limit">Specifies the precision of the index, from month to millisecond.</param>
         /// <returns>
-        /// A <see cref="System.UInt64"/> representation of the date time offset value, formatted according to the specified parameters.
+        /// A <see cref="ulong"/> representation of the <see cref="DateTimeOffset"/> value, formatted according to the specified parameters.
         /// </returns>
         /// <remarks>
-        /// This method converts a DateTimeOffset to an unsigned long integer that can be used for indexing or sorting.
-        /// The method first converts the DateTimeOffset to UTC before applying the index conversion.
-        /// The resulting value has a format that depends on the limit parameter similar to the DateTime version.
+        /// This method converts a <see cref="DateTimeOffset"/> to an unsigned long integer that can be used for indexing or sorting.
+        /// The method first converts the <see cref="DateTimeOffset"/> to UTC before applying the index conversion.
+        /// The resulting value's format depends on the <paramref name="limit"/> parameter, similar to the <see cref="DateTime"/> version.
         /// </remarks>
         /// <example>
         /// <code lang="C#">
-        /// DateTimeOffset date = new DateTimeOffset(2024, 3, 2, 10, 25, 36, new TimeSpan(2, 0, 0));
-        /// var i = date.ToLongIndex(true, DateTimeLimit.Second);
-        /// ulong expected = 240302102536;
-        /// Assert.Equal(expected, i);
+        /// DateTimeOffset date = new DateTimeOffset(2024, 3, 2, 10, 25, 36, TimeSpan.FromHours(2));
+        /// ulong index = date.ToLongIndex(true, DateTimeLimit.Second);
+        /// Console.WriteLine(index); // Output: 240302102536
         /// </code>
-        /// </example>        
+        /// </example>
         public static ulong ToLongIndex(this DateTimeOffset self, bool yearOnTwoDigit = true, DateTimeLimit limit = DateTimeLimit.None)
         {
             return self.UtcDateTime.ToLongIndex(yearOnTwoDigit, limit);
         }
 
-
     }
 
+    /// <summary>
+    /// Specifies the precision level for converting <see cref="DateTime"/> or <see cref="DateTimeOffset"/> to an unsigned long index.
+    /// </summary>
     public enum DateTimeLimit
     {
+        /// <summary>
+        /// No specific precision is applied.
+        /// </summary>
         None = 5,
+
+        /// <summary>
+        /// Precision up to the month (e.g., YYMM or YYYYMM).
+        /// </summary>
         Month = 0,
+
+        /// <summary>
+        /// Precision up to the day (e.g., YYMMDD or YYYYMMDD).
+        /// </summary>
         Day = 1,
+
+        /// <summary>
+        /// Precision up to the hour (e.g., YYMMDDHH or YYYYMMDDHH).
+        /// </summary>
         Hour = 2,
+
+        /// <summary>
+        /// Precision up to the minute (e.g., YYMMDDHHMM or YYYYMMDDHHMM).
+        /// </summary>
         Minute = 3,
+
+        /// <summary>
+        /// Precision up to the second (e.g., YYMMDDHHMMSS or YYYYMMDDHHMMSS).
+        /// </summary>
         Second = 4,
+
+        /// <summary>
+        /// Precision up to the millisecond (e.g., YYMMDDHHMMSSMMM or YYYYMMDDHHMMSSMMM).
+        /// </summary>
         MilliSecond = 5,
     }
 
