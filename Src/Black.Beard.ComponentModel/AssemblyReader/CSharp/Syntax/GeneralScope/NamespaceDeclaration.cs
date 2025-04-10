@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // NamespaceDeclaration.cs
 //  
 // Author:

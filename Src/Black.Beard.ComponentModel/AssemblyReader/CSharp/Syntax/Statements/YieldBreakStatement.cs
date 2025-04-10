@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // YieldBreakStatement.cs
 //
 // Author:

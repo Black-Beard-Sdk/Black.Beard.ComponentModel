@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // PreProcessorDirective.cs
 //  
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // GotoStatement.cs
 //
 // Author:

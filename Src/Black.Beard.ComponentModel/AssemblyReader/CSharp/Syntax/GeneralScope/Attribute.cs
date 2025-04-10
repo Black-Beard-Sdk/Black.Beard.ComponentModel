@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // Attribute.cs
 //
 // Author:

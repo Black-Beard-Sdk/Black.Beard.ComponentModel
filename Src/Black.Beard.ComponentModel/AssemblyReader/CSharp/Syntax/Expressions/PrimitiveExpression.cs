@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // PrimitiveExpression.cs
 //
 // Author:

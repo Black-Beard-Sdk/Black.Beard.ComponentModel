@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // Constraint.cs
 //
 // Author:

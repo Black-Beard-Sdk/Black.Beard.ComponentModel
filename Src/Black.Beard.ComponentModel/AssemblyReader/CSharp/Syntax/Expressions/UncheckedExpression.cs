@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // UncheckedExpression.cs
 //  
 // Author:

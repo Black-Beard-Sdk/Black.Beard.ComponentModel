@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ArrayInitializerExpression.cs
 //
 // Author:

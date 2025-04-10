@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // BinaryOperatorExpression.cs
 //
 // Author:

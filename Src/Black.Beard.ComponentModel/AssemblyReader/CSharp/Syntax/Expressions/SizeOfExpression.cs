@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // SizeOfExpression.cs
 //  
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ExpressionStatement.cs
 //  
 // Author:

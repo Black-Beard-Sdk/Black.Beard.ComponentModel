@@ -1,4 +1,5 @@
-﻿//
+﻿// NOSONAR
+//
 // AliasTypeResolveResult.cs
 //
 // Author:

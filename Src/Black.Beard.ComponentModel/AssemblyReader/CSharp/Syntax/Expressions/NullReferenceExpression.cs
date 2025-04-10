@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // NullReferenceExpression.cs
 //
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ParameterDeclarationExpression.cs
 //
 // Author:

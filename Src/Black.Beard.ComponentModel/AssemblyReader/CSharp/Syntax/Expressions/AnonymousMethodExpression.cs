@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // AnonymousMethodExpression.cs
 //
 // Author:

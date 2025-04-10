@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // FieldDeclaration.cs
 //
 // Author:

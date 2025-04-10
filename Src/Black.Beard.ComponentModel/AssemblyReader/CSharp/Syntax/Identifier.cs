@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // Identifier.cs
 //
 // Author:

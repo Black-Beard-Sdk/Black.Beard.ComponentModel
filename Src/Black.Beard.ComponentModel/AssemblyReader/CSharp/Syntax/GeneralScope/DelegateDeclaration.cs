@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // DelegateDeclaration.cs
 //
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // PointerReferenceExpression.cs
 //  
 // Author:

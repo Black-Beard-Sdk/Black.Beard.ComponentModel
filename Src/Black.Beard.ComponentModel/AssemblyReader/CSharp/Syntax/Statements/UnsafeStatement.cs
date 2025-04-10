@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // UnsafeStatement.cs
 //
 // Author:

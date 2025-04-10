@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // SyntaxTree.cs
 //
 // Author:

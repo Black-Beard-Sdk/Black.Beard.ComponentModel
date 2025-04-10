@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // TypeOfIsExpression.cs
 //
 // Author:

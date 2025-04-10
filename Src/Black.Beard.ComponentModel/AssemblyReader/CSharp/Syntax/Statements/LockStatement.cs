@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // LockStatement.cs
 //  
 // Author:

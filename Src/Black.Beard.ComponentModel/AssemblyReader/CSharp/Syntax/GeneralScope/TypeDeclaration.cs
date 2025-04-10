@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // TypeDeclaration.cs
 //
 // Author:

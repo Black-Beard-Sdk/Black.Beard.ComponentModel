@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // WhileStatement.cs
 //  
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // VariableDeclarationStatement.cs
 //  
 // Author:

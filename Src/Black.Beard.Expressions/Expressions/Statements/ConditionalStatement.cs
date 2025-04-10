@@ -133,25 +133,28 @@ namespace Bb.Expressions.Statements
         public override Expression? GetExpression(HashSet<string> variableParent)
         {
 
-            Expression? expression = null;
-            if (_then != null)
+            ConditionalExpression? expression = null;
+            Expression? b1 = _then != null ? _then.GetExpression(new HashSet<string>(variableParent)) : null;
+            Expression? b2 = _else != null ? _else.GetExpression(new HashSet<string>(variableParent)) : null;
+
+            if (b1 == null && b2 == null)
+                return null;
+
+            else if (b1 != null && b2 == null)
+                expression = Expression.IfThen(ConditionalExpression, b1);
+
+            else if (b1 == null && b2 != null)
+                expression = Expression.IfThen(ConditionalExpression.Not(), b2);
+
+            else
             {
-
-                Expression? b1 = _then.GetExpression(new HashSet<string>(variableParent));
-                Expression? b2 = null;
-
-                if (_else != null)
-                    b2 = Else.GetExpression(new HashSet<string>(variableParent));
-
-
-                expression = b2 == null
-                    ? Expression.IfThen(ConditionalExpression, b1)
-                    : Expression.IfThenElse(ConditionalExpression, b1, b2);
-
-                if (expression.CanReduce)
-                    expression = expression.Reduce();
-
+                if (b1 == null) b1 = Expression.Empty();
+                if (b2 == null) b2 = Expression.Empty();
+                expression = Expression.IfThenElse(ConditionalExpression, b1, b2);
             }
+            if (expression.CanReduce)
+                return expression.Reduce();
+
 
             return expression;
         }

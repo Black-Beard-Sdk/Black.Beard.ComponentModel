@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // AnonymousTypeCreateExpression.cs
 //  
 // Author:

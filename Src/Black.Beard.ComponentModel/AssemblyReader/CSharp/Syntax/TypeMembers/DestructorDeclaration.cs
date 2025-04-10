@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // DestructorDeclaration.cs
 //
 // Author:

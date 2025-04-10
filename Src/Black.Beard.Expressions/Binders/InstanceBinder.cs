@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Bb.Accessors;
 
@@ -136,7 +137,7 @@ namespace Bb.Binders
 
             if (_sourceReader != null
                 && _source != null
-                && _target != null
+                && EqualityComparer<TTarget>.Default.Equals(_target, default)
                 && !string.IsNullOrEmpty(e.PropertyName)
                 && _configuration.TryGet(e.PropertyName, out var action) && action != null)
             {

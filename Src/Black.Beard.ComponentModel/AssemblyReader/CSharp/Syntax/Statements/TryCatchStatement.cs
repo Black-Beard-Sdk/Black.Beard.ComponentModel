@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // TryCatchStatement.cs
 //
 // Author:

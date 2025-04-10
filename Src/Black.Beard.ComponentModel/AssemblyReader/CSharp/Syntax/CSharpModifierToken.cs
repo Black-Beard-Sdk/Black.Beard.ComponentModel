@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // CSharpModifierToken.cs
 //
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // PropertyDeclaration.cs
 //
 // Author:

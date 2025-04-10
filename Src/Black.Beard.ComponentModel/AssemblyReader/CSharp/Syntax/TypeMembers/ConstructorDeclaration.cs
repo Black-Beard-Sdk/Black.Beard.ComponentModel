@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ConstructorDeclaration.cs
 //
 // Author:

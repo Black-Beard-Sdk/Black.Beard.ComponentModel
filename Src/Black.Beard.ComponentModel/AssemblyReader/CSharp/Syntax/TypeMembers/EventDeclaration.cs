@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // EventDeclaration.cs
 //
 // Author:

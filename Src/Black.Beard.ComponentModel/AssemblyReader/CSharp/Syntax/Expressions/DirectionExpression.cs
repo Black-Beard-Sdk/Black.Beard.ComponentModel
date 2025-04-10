@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // DirectionExpression.cs
 //  
 // Author:

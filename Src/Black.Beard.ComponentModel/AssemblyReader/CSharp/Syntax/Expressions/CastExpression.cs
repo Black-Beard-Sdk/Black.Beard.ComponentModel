@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // CastExpression.cs
 //  
 // Author:

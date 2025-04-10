@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // LabelStatement.cs
 //
 // Author:

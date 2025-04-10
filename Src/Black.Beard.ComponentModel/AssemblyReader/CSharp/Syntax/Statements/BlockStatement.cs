@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // BlockStatement.cs
 //
 // Author:

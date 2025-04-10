@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // FormattingOptionsFactory.cs
 //  
 // Author:

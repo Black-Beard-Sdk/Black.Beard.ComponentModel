@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // VariableInitializer.cs
 //
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ParenthesizedExpression.cs
 //
 // Author:

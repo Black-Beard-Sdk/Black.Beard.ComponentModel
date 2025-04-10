@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // UsingAliasDeclaration.cs
 //  
 // Author:

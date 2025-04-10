@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // DefaultValueExpression.cs
 //  
 // Author:

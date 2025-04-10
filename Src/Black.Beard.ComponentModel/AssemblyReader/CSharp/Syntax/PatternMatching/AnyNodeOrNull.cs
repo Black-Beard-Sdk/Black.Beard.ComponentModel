@@ -1,3 +1,4 @@
+// NOSONAR
 //
 // AnyNodeOrNull.cs
 //

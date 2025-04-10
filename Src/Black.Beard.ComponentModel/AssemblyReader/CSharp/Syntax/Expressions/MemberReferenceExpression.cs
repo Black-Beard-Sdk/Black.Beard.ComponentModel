@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // MemberReferenceExpression.cs
 //
 // Author:

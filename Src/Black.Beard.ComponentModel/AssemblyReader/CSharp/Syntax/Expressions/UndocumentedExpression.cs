@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // UndocumentedExpression.cs
 //  
 // Author:

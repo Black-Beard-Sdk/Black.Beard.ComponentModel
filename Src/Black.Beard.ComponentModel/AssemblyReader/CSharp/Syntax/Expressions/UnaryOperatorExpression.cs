@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // UnaryOperatorExpression.cs
 //
 // Author:

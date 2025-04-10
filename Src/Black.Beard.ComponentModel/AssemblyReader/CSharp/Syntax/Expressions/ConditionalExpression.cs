@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ConditionalExpression.cs
 //
 // Author:

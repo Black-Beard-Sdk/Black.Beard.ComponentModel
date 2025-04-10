@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // NodeType.cs
 //  
 // Author:

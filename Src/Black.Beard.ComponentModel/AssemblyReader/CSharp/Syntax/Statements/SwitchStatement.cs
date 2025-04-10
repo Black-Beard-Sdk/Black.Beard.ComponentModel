@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // SwitchStatement.cs
 //
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ForStatement.cs
 //
 // Author:

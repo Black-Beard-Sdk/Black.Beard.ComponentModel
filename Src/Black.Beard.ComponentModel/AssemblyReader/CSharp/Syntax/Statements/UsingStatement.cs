@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // UsingStatement.cs
 //  
 // Author:

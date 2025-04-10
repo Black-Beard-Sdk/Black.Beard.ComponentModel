@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // StackAllocExpression.cs
 //  
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // EnumMemberDeclaration.cs
 //
 // Author:

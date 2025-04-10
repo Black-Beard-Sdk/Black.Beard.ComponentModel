@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // AstNode.cs
 //
 // Author:

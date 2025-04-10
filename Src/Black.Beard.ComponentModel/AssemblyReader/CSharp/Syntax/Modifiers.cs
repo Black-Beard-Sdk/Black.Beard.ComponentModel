@@ -1,4 +1,5 @@
-﻿//
+﻿// NOSONAR
+//
 // Modifiers.cs
 //
 // Author:

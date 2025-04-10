@@ -1,3 +1,4 @@
+// NOSONAR
 // 
 // CSharpUtil.cs
 //  

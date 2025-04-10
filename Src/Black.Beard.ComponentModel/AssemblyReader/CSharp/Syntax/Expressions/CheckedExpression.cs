@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // CheckedExpression.cs
 //  
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // YieldStatement.cs
 //
 // Author:

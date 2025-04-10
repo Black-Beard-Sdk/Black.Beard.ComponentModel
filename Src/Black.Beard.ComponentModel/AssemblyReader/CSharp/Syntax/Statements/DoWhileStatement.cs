@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // DoWhileStatement.cs
 //  
 // Author:

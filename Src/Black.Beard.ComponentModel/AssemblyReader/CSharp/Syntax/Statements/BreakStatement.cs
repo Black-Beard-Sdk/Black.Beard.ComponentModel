@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // BreakStatement.cs
 //
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // LambdaExpression.cs
 //
 // Author:

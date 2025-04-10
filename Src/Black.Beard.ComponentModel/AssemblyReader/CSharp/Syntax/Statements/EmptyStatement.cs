@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // EmptyStatement.cs
 //  
 // Author:

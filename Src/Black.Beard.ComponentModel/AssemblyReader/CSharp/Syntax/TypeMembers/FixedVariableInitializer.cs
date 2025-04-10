@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // FixedFieldDeclaration.cs
 //
 // Author:

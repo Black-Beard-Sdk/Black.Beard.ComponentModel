@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // TokenNode.cs
 //  
 // Author:

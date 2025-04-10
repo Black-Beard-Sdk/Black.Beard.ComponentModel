@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // AsExpression.cs
 //  
 // Author:

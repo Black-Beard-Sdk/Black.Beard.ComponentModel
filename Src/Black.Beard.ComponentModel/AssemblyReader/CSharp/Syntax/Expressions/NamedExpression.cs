@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // NamedExpression.cs
 //  
 // Author:

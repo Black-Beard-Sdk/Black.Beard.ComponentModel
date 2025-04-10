@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // IAstVisitor.cs
 //
 // Author:

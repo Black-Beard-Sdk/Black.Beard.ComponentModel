@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // FullTypeName.cs
 //
 // Author:

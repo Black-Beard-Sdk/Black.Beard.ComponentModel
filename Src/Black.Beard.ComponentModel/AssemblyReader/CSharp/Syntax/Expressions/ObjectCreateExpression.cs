@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ObjectCreateExpression.cs
 //  
 // Author:

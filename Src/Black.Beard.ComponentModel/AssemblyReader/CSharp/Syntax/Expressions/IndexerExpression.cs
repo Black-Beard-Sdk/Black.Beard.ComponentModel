@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // IndexerExpression.cs
 //  
 // Author:

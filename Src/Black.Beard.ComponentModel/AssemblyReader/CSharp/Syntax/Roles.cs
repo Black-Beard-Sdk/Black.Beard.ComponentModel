@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // Roles.cs
 //  
 // Author:

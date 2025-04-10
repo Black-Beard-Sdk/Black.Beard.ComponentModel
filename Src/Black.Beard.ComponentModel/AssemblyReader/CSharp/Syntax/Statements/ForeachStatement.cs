@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ForeachStatement.cs
 //
 // Author:

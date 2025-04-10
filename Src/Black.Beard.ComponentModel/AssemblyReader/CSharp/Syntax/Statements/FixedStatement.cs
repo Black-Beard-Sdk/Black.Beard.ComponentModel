@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // FixedStatement.cs
 //
 // Author:

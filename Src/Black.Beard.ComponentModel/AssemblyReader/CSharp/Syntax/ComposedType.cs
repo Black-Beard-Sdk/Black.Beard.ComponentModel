@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ComposedType.cs
 //
 // Author:

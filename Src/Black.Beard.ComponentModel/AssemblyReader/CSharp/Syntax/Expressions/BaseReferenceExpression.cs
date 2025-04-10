@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // BaseReferenceExpression.cs
 //  
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // Comment.cs
 //  
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ReturnStatement.cs
 //  
 // Author:

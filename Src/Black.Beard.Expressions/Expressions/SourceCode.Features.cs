@@ -172,7 +172,7 @@ namespace Bb.Expressions
             Label? label = this._labels.Items.FirstOrDefault(c => c.Kind == kind);
 
             if (label == null && _parent == null)
-                label = _parent?.GetLabelImpl(kind);
+                label = _parent.GetLabelImpl(kind);
 
             if (label == null)
                 throw new Exceptions.InvalidArgumentNameException($"no label of {kind.ToString()} defined");

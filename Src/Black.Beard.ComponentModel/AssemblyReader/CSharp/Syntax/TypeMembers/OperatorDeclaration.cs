@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // OperatorDeclaration.cs
 //
 // Author:

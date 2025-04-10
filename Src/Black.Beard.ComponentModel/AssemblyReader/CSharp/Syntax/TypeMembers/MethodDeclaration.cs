@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // MethodDeclaration.cs
 //
 // Author:

@@ -1,4 +1,5 @@
-﻿// 
+﻿// NOSONAR
+// 
 // ErrorExpression.cs
 //  
 // Author:
