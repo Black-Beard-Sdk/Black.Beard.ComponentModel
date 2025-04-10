@@ -5,7 +5,9 @@ using System.Globalization;
 namespace Bb.ComponentModel.Attributes
 {
 
-
+    /// <summary>
+    /// Provides a list of cultures to use in a list selector
+    /// </summary>
     public class CultureProviderList : ProviderListBase<CultureInfo>
     {
 

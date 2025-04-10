@@ -1,3 +1,4 @@
+// NOSONAR
 //
 // UnicodeNewline.cs
 //

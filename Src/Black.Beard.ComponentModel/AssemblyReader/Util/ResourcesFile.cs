@@ -1,4 +1,5 @@
-﻿// Copyright (c) 2018 Daniel Grunwald
+﻿// NOSONAR
+// Copyright (c) 2018 Daniel Grunwald
 // Based on the .NET Core ResourceReader; make available under the MIT license
 // by the .NET Foundation.
 // 

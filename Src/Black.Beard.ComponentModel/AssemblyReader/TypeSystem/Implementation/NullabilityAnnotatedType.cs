@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿// NOSONAR
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace ICSharpCode.Decompiler.TypeSystem.Implementation

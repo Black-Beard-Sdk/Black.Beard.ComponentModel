@@ -1,4 +1,5 @@
-﻿// Copyright (c) 2018 Daniel Grunwald
+﻿// NOSONAR
+// Copyright (c) 2018 Daniel Grunwald
 //   This file is based on the Mono implementation of ResXResourceWriter.
 //   It is modified to add support for "ResourceSerializedObject" values.
 //
