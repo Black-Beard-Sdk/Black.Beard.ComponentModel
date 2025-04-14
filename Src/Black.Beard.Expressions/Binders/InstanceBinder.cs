@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Bb.Accessors;
 
 namespace Bb.Binders
@@ -129,38 +130,32 @@ namespace Bb.Binders
         private readonly PropertyBinder<TSource, TTarget> _configuration;
         private AccessorList? _sourceReader;
         private TTarget? _target;
-        private bool disposedValue;
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+
+            if (disposing && !IsDisposed)
             {
-                if (disposing)
-                {
+                DisposeImpl();
+                IsDisposed = true;
+            }
 
-                    if (disposing)
-                    {
-                        if (_source != null)
-                        {
+        }
 
-                            _source.PropertyChanged -= _source_PropertyChanged;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void DisposeImpl()
+        {
+            if (_source != null)
+            {
+                _source.PropertyChanged -= _source_PropertyChanged;
 
-                            if (_source is IDisposed disposed1)
-                                disposed1.Disposed -= Source_Disposed;
+                if (_source is IDisposed disposed1)
+                    disposed1.Disposed -= Source_Disposed;
 
-                            if (_target is IDisposed disposed2)
-                                disposed2.Disposed -= Target_Disposed;
+                if (_target is IDisposed disposed2)
+                    disposed2.Disposed -= Target_Disposed;
 
-                            Disposed?.Invoke(this, EventArgs.Empty);
-
-                        }
-
-                        IsDisposed = true;
-
-                    }
-                }
-
-                disposedValue = true;
+                Disposed?.Invoke(this, EventArgs.Empty);
             }
         }
 

@@ -8,9 +8,9 @@ namespace Bb.Translations
 {
 
     /// <summary>
-    /// Provides extension methods for working with <see cref="TranslatedKeyLabel"/> and related operations.
+    /// Provides extension methods for working with <see cref="TranslationKey"/> and related operations.
     /// </summary>
-    public static class TranslatedKeyLabelExtension
+    public static class TranslatedKeyExtension
     {
 
         /// <summary>
@@ -67,13 +67,13 @@ namespace Bb.Translations
         /// Retrieves the translations of the key from a member that contains <see cref="TranslationKeyAttribute"/>.
         /// </summary>
         /// <param name="info">The member information to retrieve translations from.</param>
-        /// <returns>An enumerable collection of <see cref="TranslatedKeyLabel"/> objects.</returns>
+        /// <returns>An enumerable collection of <see cref="TranslationKey"/> objects.</returns>
         /// <example>
         /// <code lang="C#">
         /// var translations = typeof(MyClass).GetProperty("MyProperty").GetFrom();
         /// </code>
         /// </example>
-        public static IEnumerable<TranslatedKeyLabel> GetFrom(this MemberInfo info)
+        public static IEnumerable<TranslationKey> GetFrom(this MemberInfo info)
         {
 
             var items = info.GetCustomAttributes<TranslationKeyAttribute>()
@@ -96,14 +96,14 @@ namespace Bb.Translations
         /// </example>
         public static bool IsValidTranslationKey(this string self)
         {
-            return TranslatedKeyLabel.IsValid(self);
+            return TranslationKey.IsValid(self);
         }
 
         /// <summary>
-        /// Attempts to convert the specified string into a <see cref="TranslatedKeyLabel"/>.
+        /// Attempts to convert the specified string into a <see cref="TranslationKey"/>.
         /// </summary>
         /// <param name="self">The string to convert.</param>
-        /// <param name="key">When this method returns, contains the converted <see cref="TranslatedKeyLabel"/> if the conversion succeeded; otherwise, <c>null</c>.</param>
+        /// <param name="key">When this method returns, contains the converted <see cref="TranslationKey"/> if the conversion succeeded; otherwise, <c>null</c>.</param>
         /// <returns><c>true</c> if the conversion succeeded; otherwise, <c>false</c>.</returns>
         /// <example>
         /// <code lang="C#">
@@ -113,9 +113,9 @@ namespace Bb.Translations
         /// }
         /// </code>
         /// </example>
-        public static bool TryConvertInTranslationKey(this string self, out TranslatedKeyLabel key)
+        public static bool TryConvertInTranslationKey(this string self, out TranslationKey key)
         {
-            return TranslatedKeyLabel.TryConvert(self, out key);
+            return TranslationKey.TryConvert(self, out key);
         }
 
         /// <summary>
@@ -123,17 +123,17 @@ namespace Bb.Translations
         /// </summary>
         /// <param name="self">The primary string to parse.</param>
         /// <param name="self2">Additional strings to parse.</param>
-        /// <returns>The first valid <see cref="TranslatedKeyLabel"/> found, or <see cref="TranslatedKeyLabel.EmptyKey"/> if none are valid.</returns>
+        /// <returns>The first valid <see cref="TranslationKey"/> found, or <see cref="TranslationKey.EmptyKey"/> if none are valid.</returns>
         /// <example>
         /// <code lang="C#">
         /// var key = "invalid.key".GetTranslation("path.to.key");
         /// </code>
         /// </example>
-        public static TranslatedKeyLabel GetTranslation(this string self, params string[] self2)
+        public static TranslationKey GetTranslation(this string self, params string[] self2)
         {
 
-            var results = new List<TranslatedKeyLabel>();
-            var result = TranslatedKeyLabel.Parse(self);
+            var results = new List<TranslationKey>();
+            var result = TranslationKey.Parse(self);
 
             if (result != null)
             {
@@ -144,7 +144,7 @@ namespace Bb.Translations
 
             foreach (var item in self2)
             {
-                result = TranslatedKeyLabel.Parse(item);
+                result = TranslationKey.Parse(item);
                 if (result != null)
                 {
                     if (!result.IsNotValidKey)
@@ -161,9 +161,20 @@ namespace Bb.Translations
             if (i != null)
                 return i;
 
-            return TranslatedKeyLabel.EmptyKey;
+            return TranslationKey.EmptyKey;
 
         }
+
+        /// <summary>
+        /// Retrieves the translation key from the specified string.
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        public static TranslationKey ToTranslation(this string self)
+        {
+            return TranslationKey.Parse(self);
+        }
+
 
     }
 

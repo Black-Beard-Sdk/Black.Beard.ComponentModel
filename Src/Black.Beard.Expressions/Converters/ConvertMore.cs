@@ -47,6 +47,14 @@ namespace Bb.Converters
             v *= 100;                                       // 2400                        
             v += (ulong)self.Month;                         // 2403
 
+            v = ComputToLong(self, limit, v);
+
+            return v;
+
+        }
+
+        private static ulong ComputToLong(DateTime self, DateTimeLimit limit, ulong v)
+        {
             if (limit > DateTimeLimit.Month)
             {
 
@@ -85,7 +93,6 @@ namespace Bb.Converters
             }
 
             return v;
-
         }
 
         /// <summary>

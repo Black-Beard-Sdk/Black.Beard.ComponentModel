@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace Bb.Expressions.Statements
 {
@@ -133,30 +134,37 @@ namespace Bb.Expressions.Statements
         public override Expression? GetExpression(HashSet<string> variableParent)
         {
 
-            ConditionalExpression? expression = null;
-            Expression? b1 = _then != null ? _then.GetExpression(new HashSet<string>(variableParent)) : null;
-            Expression? b2 = _else != null ? _else.GetExpression(new HashSet<string>(variableParent)) : null;
+            Expression? then = _then != null ? _then.GetExpression(new HashSet<string>(variableParent)) : null;
+            Expression? @else = _else != null ? _else.GetExpression(new HashSet<string>(variableParent)) : null;
 
-            if (b1 == null && b2 == null)
-                return null;
+            var expression = ResolveExpression(then, @else);
 
-            else if (b1 != null && b2 == null)
-                expression = Expression.IfThen(ConditionalExpression, b1);
-
-            else if (b1 == null && b2 != null)
-                expression = Expression.IfThen(ConditionalExpression.Not(), b2);
-
-            else
-            {
-                if (b1 == null) b1 = Expression.Empty();
-                if (b2 == null) b2 = Expression.Empty();
-                expression = Expression.IfThenElse(ConditionalExpression, b1, b2);
-            }
-            if (expression.CanReduce)
+            if (expression != null && expression.CanReduce)
                 return expression.Reduce();
 
-
             return expression;
+
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private Expression? ResolveExpression(Expression? then, Expression? @else)
+        {
+
+            if (then == null)
+            {
+
+                if (@else == null)
+                    return null;
+
+                return Expression.IfThen(ConditionalExpression.Not(), @else);
+
+            }
+
+            if (@else != null)
+                return Expression.IfThenElse(ConditionalExpression, then, @else);
+
+            return Expression.IfThen(ConditionalExpression, then);
+
         }
 
         /// <summary>

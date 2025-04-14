@@ -14,7 +14,7 @@ namespace Bb.Translations
     public class DataTranslation
     {
 
-        internal DataTranslation(TranslatedKeyLabel parent)
+        internal DataTranslation(TranslationKey parent)
         {
             this._parent = parent;
         }
@@ -42,11 +42,6 @@ namespace Bb.Translations
         /// <summary>
         /// return the default value of the parent
         /// </summary>
-        public string DefaultValueValue { get => _parent.DefaultDisplay; }
-
-        /// <summary>
-        /// return the default value of the parent
-        /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
@@ -60,11 +55,7 @@ namespace Bb.Translations
                 list.Add("k:" + _parent.Key);
 
             if (Culture != null)
-                list.Add("l:" + Culture.IetfLanguageTag);
-
-            if (!string.IsNullOrEmpty(Value))
-                list.Add("d:" + Value);
-
+                list.Add("d:" + Culture.IetfLanguageTag);
 
             StringBuilder sb = new StringBuilder();
             string comma = string.Empty;
@@ -79,7 +70,7 @@ namespace Bb.Translations
 
         }
 
-        private readonly TranslatedKeyLabel _parent;
+        private readonly TranslationKey _parent;
 
 
     }

@@ -7,23 +7,98 @@ using System.Text.Json;
 namespace Bb.Converters
 {
 
-
     /// <summary>
-    /// My Converter
+    /// Provides helper methods for converting objects to different types.
     /// </summary>
     public static partial class ConverterHelper
     {
 
+        /// <summary>
+        /// Attempts to convert an object to the specified target type.
+        /// </summary>
+        /// <param name="self">The object to convert.</param>
+        /// <param name="targetType">The target type to convert to.</param>
+        /// <param name="context">The conversion context. Can be <c>null</c>.</param>
+        /// <param name="result">When this method returns, contains the converted value if the conversion succeeded; otherwise, <c>null</c>.</param>
+        /// <returns><c>true</c> if the conversion succeeded; otherwise, <c>false</c>.</returns>
+        /// <remarks>
+        /// This method uses a conversion function specific to the source and target types.
+        /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// if ("123".TryConvertTo(typeof(int), null, out var result))
+        /// {
+        ///     Console.WriteLine(result); // Output: 123
+        /// }
+        /// </code>
+        /// </example>
+        public static bool TryConvertTo(this object self, Type targetType, ConverterContext? context, out object? result)
+        {
 
+            result = null;
+
+            if (self != null)
+            {
+
+                var function = GetFunctionForConvert(self.GetType(), targetType);
+
+                if (function != null)
+                {
+                    result = function(self, context ?? ConverterContext.Default);
+                    return true;
+                }
+
+            }
+
+            return false;
+
+        }
 
         /// <summary>
-        /// Converts a value to the specified target type.
+        /// Attempts to convert an object to the specified target type and cast it to a generic type.
         /// </summary>
         /// <typeparam name="T">The target type to convert to.</typeparam>
-        /// <param name="self">The initial value to convert. Must not be null.</param>
-        /// <returns>
-        /// The converted value.
-        /// </returns>
+        /// <param name="self">The object to convert.</param>
+        /// <param name="targetType">The target type to convert to.</param>
+        /// <param name="context">The conversion context. Can be <c>null</c>.</param>
+        /// <param name="result">When this method returns, contains the converted value if the conversion succeeded; otherwise, <c>null</c>.</param>
+        /// <returns><c>true</c> if the conversion succeeded; otherwise, <c>false</c>.</returns>
+        /// <example>
+        /// <code lang="C#">
+        /// if ("123".TryConvertTo&lt;int&gt;(typeof(int), null, out var result))
+        /// {
+        ///     Console.WriteLine(result); // Output: 123
+        /// }
+        /// </code>
+        /// </example>
+        public static bool TryConvertTo<T>(this object self, Type targetType, ConverterContext? context, out T? result)
+        {
+
+            result = default;
+
+            if (self != null)
+            {
+
+                var function = GetFunctionForConvert(self.GetType(), targetType);
+
+                if (function != null)
+                {
+                    result = (T)function(self, context ?? ConverterContext.Default);
+                    return true;
+                }
+
+            }
+
+            return false;
+
+        }
+
+        /// <summary>
+        /// Converts an object to the specified generic type.
+        /// </summary>
+        /// <typeparam name="T">The target type to convert to.</typeparam>
+        /// <param name="self">The object to convert.</param>
+        /// <returns>The converted value.</returns>
         /// <remarks>
         /// This method uses the default conversion context.
         /// </remarks>
@@ -39,14 +114,12 @@ namespace Bb.Converters
         }
 
         /// <summary>
-        /// Converts a value to the specified target type using a specific culture.
+        /// Converts an object to the specified generic type using a specific culture.
         /// </summary>
         /// <typeparam name="T">The target type to convert to.</typeparam>
-        /// <param name="self">The initial value to convert. Must not be null.</param>
-        /// <param name="culture">The culture to use for the conversion. Must not be null.</param>
-        /// <returns>
-        /// The converted value.
-        /// </returns>
+        /// <param name="self">The object to convert.</param>
+        /// <param name="culture">The culture to use for the conversion.</param>
+        /// <returns>The converted value.</returns>
         /// <remarks>
         /// This method allows specifying a culture to assist in the conversion process.
         /// </remarks>
@@ -62,14 +135,12 @@ namespace Bb.Converters
         }
 
         /// <summary>
-        /// Converts a value to the specified target type using a specific text encoding.
+        /// Converts an object to the specified generic type using a specific text encoding.
         /// </summary>
         /// <typeparam name="T">The target type to convert to.</typeparam>
-        /// <param name="self">The initial value to convert. Must not be null.</param>
-        /// <param name="encoding">The text encoding to use for the conversion. Must not be null.</param>
-        /// <returns>
-        /// The converted value.
-        /// </returns>
+        /// <param name="self">The object to convert.</param>
+        /// <param name="encoding">The text encoding to use for the conversion.</param>
+        /// <returns>The converted value.</returns>
         /// <remarks>
         /// This method allows specifying a text encoding to assist in the conversion process.
         /// </remarks>
@@ -85,15 +156,13 @@ namespace Bb.Converters
         }
 
         /// <summary>
-        /// Converts a value to the specified target type using a specific culture and text encoding.
+        /// Converts an object to the specified generic type using a specific culture and text encoding.
         /// </summary>
         /// <typeparam name="T">The target type to convert to.</typeparam>
-        /// <param name="self">The initial value to convert. Must not be null.</param>
-        /// <param name="culture">The culture to use for the conversion. Must not be null.</param>
-        /// <param name="encoding">The text encoding to use for the conversion. Must not be null.</param>
-        /// <returns>
-        /// The converted value.
-        /// </returns>
+        /// <param name="self">The object to convert.</param>
+        /// <param name="culture">The culture to use for the conversion.</param>
+        /// <param name="encoding">The text encoding to use for the conversion.</param>
+        /// <returns>The converted value.</returns>
         /// <remarks>
         /// This method allows specifying both a culture and a text encoding to assist in the conversion process.
         /// </remarks>
@@ -201,68 +270,28 @@ namespace Bb.Converters
             return self.ConvertTo(targetType, new ConverterContext(culture, encoding));
         }
 
-
         /// <summary>
-        /// Serializes the specified value in string.
+        /// Serializes the specified value into a string.
         /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns></returns>
+        /// <param name="value">The value to serialize.</param>
+        /// <returns>A string representation of the value.</returns>
+        /// <remarks>
+        /// This method attempts to serialize the value into a string using various strategies, including type-specific formatting.
+        /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// string result = ConverterHelper.Serialize(123);
+        /// Console.WriteLine(result); // Output: "123"
+        /// </code>
+        /// </example>
         public static string? Serialize(dynamic value)
         {
 
             if (value == null)
                 return string.Empty;
 
-            switch (value)
-            {
-
-                case byte _b1:
-                    return _b1.ToString(CultureInfo.CurrentCulture);
-
-                case sbyte _b10:
-                    return _b10.ToString(CultureInfo.CurrentCulture);
-
-                case decimal _b4:
-                    return _b4.ToString(CultureInfo.CurrentCulture);
-
-                case float _b9:
-                    return _b9.ToString(CultureInfo.CurrentCulture);
-
-                case double _b5:
-                    return _b5.ToString(CultureInfo.CurrentCulture);
-
-                case ushort _b6:
-                    return _b6.ToString(CultureInfo.CurrentCulture);
-
-                case short _b13:
-                    return _b13.ToString(CultureInfo.CurrentCulture);
-
-                case uint _b7:
-                    return _b7.ToString(CultureInfo.CurrentCulture);
-
-                case int _b11:
-                    return _b11.ToString(CultureInfo.CurrentCulture);
-
-                case ulong _b8:
-                    return _b8.ToString(CultureInfo.CurrentCulture);
-
-                case long _b12:
-                    return _b12.ToString(CultureInfo.CurrentCulture);
-
-                case DateTime:
-                case bool:
-                    return value.ToString();
-
-                case char _b3:
-                    return char.ToString(_b3);
-
-                case string _b11:
-                    return _b11;
-
-                default:
-                    break;
-
-            }
+           if (TryToSerialize(value, out string valueResult))
+                return valueResult;
 
             Type type = value.GetType();
 
@@ -328,6 +357,83 @@ namespace Bb.Converters
 
         }
 
+        
+        private static bool TryToSerialize(dynamic value, out string valueResult)
+        {
+
+            valueResult = string.Empty;
+
+            switch (value)
+            {
+
+                case byte _b1:
+                    valueResult = _b1.ToString(CultureInfo.CurrentCulture);
+                    return true;
+
+                case sbyte _b10:
+                    valueResult = _b10.ToString(CultureInfo.CurrentCulture);
+                    return true;
+
+                case decimal _b4:
+                    valueResult = _b4.ToString(CultureInfo.CurrentCulture);
+                    return true;
+
+                case float _b9:
+                    valueResult = _b9.ToString(CultureInfo.CurrentCulture);
+                    return true;
+
+                case double _b5:
+                    valueResult = _b5.ToString(CultureInfo.CurrentCulture);
+                    return true;
+
+                case ushort _b6:
+                    valueResult = _b6.ToString(CultureInfo.CurrentCulture);
+                    return true;
+
+                case short _b13:
+                    valueResult = _b13.ToString(CultureInfo.CurrentCulture);
+                    return true;
+
+                case uint _b7:
+                    valueResult = _b7.ToString(CultureInfo.CurrentCulture);
+                    return true;
+
+                case int _b11:
+                    valueResult = _b11.ToString(CultureInfo.CurrentCulture);
+                    return true;
+
+                case ulong _b8:
+                    valueResult = _b8.ToString(CultureInfo.CurrentCulture);
+                    return true;
+
+                case long _b12:
+                    valueResult = _b12.ToString(CultureInfo.CurrentCulture);
+                    return true;
+
+                case DateTime:
+                case bool:
+                    valueResult = value.ToString();
+                    return true;
+
+                case char _b3:
+                    valueResult = char.ToString(_b3);
+                    return true;
+
+                case string _b11:
+                    valueResult = _b11;
+                    return true;
+
+                default:
+                    break;
+
+            }
+
+            return false;
+
+        }
+
+    
+
         /// <summary>
         /// Deserializes the specified string value in the specified type.
         /// </summary>
@@ -343,58 +449,7 @@ namespace Bb.Converters
             if (type.IsEnum)
                 return Enum.Parse(type, value);
 
-            IConvertible convertible = value as IConvertible;
-
-            if (type == typeof(bool) || type == typeof(bool?))
-                return string.IsNullOrWhiteSpace(value) ? (bool?)null : convertible.ToBoolean(CultureInfo.CurrentCulture);
-
-            if (type == typeof(byte) || type == typeof(byte?))
-                return string.IsNullOrWhiteSpace(value) ? (byte?)null : convertible.ToByte(CultureInfo.CurrentCulture);
-
-            if (type == typeof(char) || type == typeof(char?))
-                return string.IsNullOrWhiteSpace(value) ? (char?)null : convertible.ToChar(CultureInfo.CurrentCulture);
-
-            if (type == typeof(DateTime) || type == typeof(DateTime?))
-                return string.IsNullOrWhiteSpace(value) ? (DateTime?)null : convertible.ToDateTime(CultureInfo.CurrentCulture);
-
-            if (type == typeof(decimal) || type == typeof(decimal?))
-                return string.IsNullOrWhiteSpace(value) ? (decimal?)null : convertible.ToDecimal(CultureInfo.CurrentCulture);
-
-            if (type == typeof(double) || type == typeof(double?))
-                return string.IsNullOrWhiteSpace(value) ? (double?)null : convertible.ToDouble(CultureInfo.CurrentCulture);
-
-            if (type == typeof(short) || type == typeof(short?))
-                return string.IsNullOrWhiteSpace(value) ? (short?)null : convertible.ToInt16(CultureInfo.CurrentCulture);
-
-            if (type == typeof(int) || type == typeof(int?))
-                return string.IsNullOrWhiteSpace(value) ? (int?)null : convertible.ToInt32(CultureInfo.CurrentCulture);
-
-            if (type == typeof(long) || type == typeof(long?))
-                return string.IsNullOrWhiteSpace(value) ? (long?)null : convertible.ToInt64(CultureInfo.CurrentCulture);
-
-            if (type == typeof(sbyte) || type == typeof(sbyte?))
-                return string.IsNullOrWhiteSpace(value) ? (sbyte?)null : convertible.ToSByte(CultureInfo.CurrentCulture);
-
-            if (type == typeof(float) || type == typeof(float?))
-                return string.IsNullOrWhiteSpace(value) ? (float?)null : convertible.ToSingle(CultureInfo.CurrentCulture);
-
-            if (type == typeof(string))
-                return value.ToString();
-
-            if (type == typeof(ushort) || type == typeof(ushort?))
-                return string.IsNullOrWhiteSpace(value) ? (ushort?)null : convertible.ToUInt16(CultureInfo.CurrentCulture);
-
-            if (type == typeof(uint) || type == typeof(uint?))
-                return string.IsNullOrWhiteSpace(value) ? (uint?)null : convertible.ToUInt32(CultureInfo.CurrentCulture);
-
-            if (type == typeof(ulong) || type == typeof(ulong?))
-                return string.IsNullOrWhiteSpace(value) ? (ulong?)null : convertible.ToUInt64(CultureInfo.CurrentCulture);
-
-            var c = TypeDescriptor.GetConverter(type);
-            if (c.CanConvertTo(typeof(string)))
-                return c.ConvertTo(value, typeof(string)) as string;
-
-            return (string?)ConverterHelper.ConvertTo(value, type);
+            return value.ConvertTo<string>();
 
         }
 
@@ -402,3 +457,4 @@ namespace Bb.Converters
 
 
 }
+

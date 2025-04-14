@@ -172,45 +172,21 @@ namespace Bb.Expressions.Statements
             {
                 CatchBlock c;
                 if (@catch.Parameter != null)
-                {
-
-                    if (!string.IsNullOrEmpty(@catch.Parameter.Name))
-                        variableParent.Add(@catch.Parameter.Name);
-
-                    @catch.Body.AddVarIfNotExists(@catch.Parameter);
-                    var body = @catch.GetExpression(variableParent);
-
-                    if (body  == null)
-                        throw new Exceptions.InvalidArgumentNameException($"the bloc must contains a bobt");
-
-                    c = Expression.Catch(@catch.Parameter, body);
-
-                    if (!string.IsNullOrEmpty(@catch.Parameter.Name))
-                        variableParent.Remove(@catch.Parameter.Name);
-                }
+                    c = AppendParameter(variableParent, @catch);
+                
                 else
-                {
-                    var body = @catch.GetExpression(variableParent);
+                    c = AppendBody(variableParent, @catch);
 
-                    if (body == null)
-                        throw new Exceptions.InvalidArgumentNameException($"the bloc must contains a bobt");
-
-                    c = Expression.Catch(@catch.TypeToCatch, body);
-
-                }
                 _catchs1.Add(c);
+
             }
 
             if (_finally != null)
                 expressionFinaly = _finally.GetExpression(new HashSet<string>(variableParent));
 
             if (expressionFinaly != null)
-            {
-                if (_catchs1.Count > 0)
-                    resultExpression = Expression.TryCatchFinally(expressionTry, expressionFinaly, _catchs1.ToArray());
-                else
-                    resultExpression = Expression.TryFinally(expressionTry, expressionFinaly);
-            }
+                resultExpression = AppendFinally(_catchs1, expressionFinaly, expressionTry);
+            
             else
                 resultExpression = Expression.TryCatch(expressionTry, _catchs1.ToArray());
 
@@ -218,6 +194,47 @@ namespace Bb.Expressions.Statements
                 resultExpression = resultExpression.Reduce();
 
             return resultExpression;
+        }
+
+        private static Expression AppendFinally(List<CatchBlock> _catchs1, Expression expressionFinaly, Expression expressionTry)
+        {
+            Expression resultExpression;
+            if (_catchs1.Count > 0)
+                resultExpression = Expression.TryCatchFinally(expressionTry, expressionFinaly, _catchs1.ToArray());
+            else
+                resultExpression = Expression.TryFinally(expressionTry, expressionFinaly);
+            return resultExpression;
+        }
+
+        private static CatchBlock AppendBody(HashSet<string> variableParent, CatchStatement @catch)
+        {
+            CatchBlock c;
+            var body = @catch.GetExpression(variableParent);
+
+            if (body == null)
+                throw new Exceptions.InvalidArgumentNameException($"the bloc must contains a bobt");
+
+            c = Expression.Catch(@catch.TypeToCatch, body);
+            return c;
+        }
+
+        private static CatchBlock AppendParameter(HashSet<string> variableParent, CatchStatement @catch)
+        {
+            CatchBlock c;
+            if (!string.IsNullOrEmpty(@catch.Parameter.Name))
+                variableParent.Add(@catch.Parameter.Name);
+
+            @catch.Body.AddVarIfNotExists(@catch.Parameter);
+            var body = @catch.GetExpression(variableParent);
+
+            if (body == null)
+                throw new Exceptions.InvalidArgumentNameException($"the bloc must contains a bobt");
+
+            c = Expression.Catch(@catch.Parameter, body);
+
+            if (!string.IsNullOrEmpty(@catch.Parameter.Name))
+                variableParent.Remove(@catch.Parameter.Name);
+            return c;
         }
 
         /// <summary>

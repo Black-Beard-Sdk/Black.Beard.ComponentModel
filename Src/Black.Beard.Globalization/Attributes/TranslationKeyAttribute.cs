@@ -41,7 +41,7 @@ namespace Bb.ComponentModel.Attributes
         /// 
         /// </summary>
         /// <returns></returns>
-        public TranslatedKeyLabel GetTranslation() => TranslatedKeyLabel.Parse(this.Key);
+        public TranslationKey GetTranslation() => TranslationKey.Parse(this.Key);
 
 
         /// <summary>

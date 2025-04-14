@@ -1,21 +1,25 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace Bb.Translations
 {
 
+
     /// <summary>
-    /// container for storing the translations
+    /// container for storing translations in memory
     /// </summary>
     public interface ITranslateContainer
     {
 
         /// <summary>
-        /// Return a translation for the key and the culture
+        /// Try to resolve the key for the specified culture
         /// </summary>
-        /// <param name="key">key translation</param>
-        /// <param name="culture">culture target</param>
+        /// <param name="path">The key to translate</param>
+        /// <param name="key">The key to translate</param>
+        /// <param name="culture">the target culture</param>
+        /// <param name="result">the result of the translation</param>
         /// <returns></returns>
-        DataTranslation Get(TranslatedKeyLabel key, CultureInfo culture);
+        bool Get(string path, string key, CultureInfo culture, out DataTranslation result);
 
 
         /// <summary>
@@ -25,47 +29,55 @@ namespace Bb.Translations
         /// <param name="culture">the target culture</param>
         /// <param name="result">the result of the translation</param>
         /// <returns></returns>
-        bool Get(TranslatedKeyLabel key, CultureInfo culture, out DataTranslation result);
+        bool Get(TranslationKey key, CultureInfo culture, out DataTranslation result);
 
 
         /// <summary>
-        /// Return a translation for the key mapped to the current culture
+        /// Return all paths context available in the container
         /// </summary>
-        /// <param name="key"></param>
         /// <returns></returns>
-        TranslatedKeyLabel Get(TranslatedKeyLabel key);
+        IEnumerable<string> GetAll();
 
 
         /// <summary>
-        /// Try to resolve the key
+        /// Return all translation available for the key mapped with culture
         /// </summary>
-        /// <param name="key">The key to translate</param>
-        /// <param name="result">the result of the translation</param>
+        /// <param name="path">specify the context</param>
         /// <returns></returns>
-        bool Get(TranslatedKeyLabel key, out DataTranslation result);
+        IEnumerable<DataTranslation> GetAll(string path);
 
         /// <summary>
-        /// Return a translation for the key mapped with culture
+        /// Return all translation available for the key mapped with culture
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="path">specify the context</param>
+        /// <param name="key">specify the key</param>
         /// <returns></returns>
-        TranslatedKeyLabel GetAll(TranslatedKeyLabel key);
+        IEnumerable<DataTranslation> GetAll(string path, string key);
 
         /// <summary>
         /// Add a new key in the referential
         /// </summary>
-        /// <param name="key"></param>
-        void Add(TranslatedKeyLabel key);
+        /// <param name="path">specify the context</param>
+        /// <param name="key">specify the key</param>
+        /// <param name="culture">the target culture</param>
+        /// <param name="result">the result of the translation</param>
+        DataTranslation? Add(string path, string key, CultureInfo culture, string result);
 
         /// <summary>
-        /// Load the translations
+        /// Add a new key in the referential
         /// </summary>
-        void Load();
+        /// <param name="key">specify the key</param>
+        /// <param name="culture">the target culture</param>
+        DataTranslation? Add(TranslationKey key, CultureInfo culture);
 
         /// <summary>
-        /// save the translations
+        /// Add a new key in the referential
         /// </summary>
-        void Save();
+        /// <param name="key">specify the key</param>
+        /// <param name="culture">the target culture</param>
+        /// <param name="result">translation</param>
+        DataTranslation? Add(TranslationKey key, CultureInfo culture, string result);
+
 
     }
 
