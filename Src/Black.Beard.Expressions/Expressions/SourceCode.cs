@@ -55,7 +55,7 @@ namespace Bb.Expressions
         /// <remarks>
         /// This method generates an expression tree based on the statements in the source code.
         /// </remarks>
-        internal Expression? GetExpression(HashSet<string> variableParent)
+        public Expression? GetExpression(HashSet<string> variableParent)
         {
             Expression? expression = null;
 
@@ -126,7 +126,7 @@ namespace Bb.Expressions
         /// <remarks>
         /// This method establishes a parent-child relationship between source code instances.
         /// </remarks>
-        internal void SetParent(SourceCode sourceCodes)
+        public void SetParent(SourceCode sourceCodes)
         {
             this._parent = sourceCodes;
             _variables.SetParent(sourceCodes._variables);

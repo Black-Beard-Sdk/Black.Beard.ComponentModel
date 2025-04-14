@@ -205,7 +205,7 @@ namespace Bb.Expressions
                     if (item2.Instance == item.Instance)
                         RemoveByName(item.Name);
                     else
-                        throw new Exceptions.DuplicatedArgumentNameException($"{item.Name} already existings");
+                        throw new Exceptions.DuplicatedArgumentNameException($"{item.Name} already existing");
                 }
 
             }
