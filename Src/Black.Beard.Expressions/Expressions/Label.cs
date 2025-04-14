@@ -23,7 +23,7 @@ namespace Bb.Expressions
         /// <remarks>
         /// This property holds the name of the label, which is used to identify it in the expression tree.
         /// </remarks>
-        public string? Name { get; internal set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Gets the kind of the label.
@@ -31,7 +31,7 @@ namespace Bb.Expressions
         /// <remarks>
         /// This property specifies the type of label, such as break, continue, or return.
         /// </remarks>
-        public KindLabel Kind { get; internal set; }
+        public KindLabel Kind { get; set; }
 
     }
 

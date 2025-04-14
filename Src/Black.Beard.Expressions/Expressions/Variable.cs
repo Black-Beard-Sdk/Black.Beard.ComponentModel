@@ -3,6 +3,10 @@ using System.Linq.Expressions;
 
 namespace Bb.Expressions
 {
+
+    /// <summary>
+    /// Represents a variable in an expression tree.
+    /// </summary>
     public class Variable
     {
 
@@ -28,7 +32,7 @@ namespace Bb.Expressions
         /// <remarks>
         /// This property provides access to the underlying expression tree representation of the variable.
         /// </remarks>
-        public ParameterExpression Instance { get; internal set; }
+        public ParameterExpression Instance { get; set; }
 
     }
 
