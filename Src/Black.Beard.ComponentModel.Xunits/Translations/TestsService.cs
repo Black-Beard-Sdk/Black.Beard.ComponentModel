@@ -15,7 +15,7 @@ namespace ComponentModels.Tests.Translations
 
         public TestsService()
         {
-            _apiKey = "288d019d-01cb-43e0-8d86-867086ed3bfe:fx";
+            _apiKey = "";
         }
 
         [Fact]
