@@ -24,7 +24,7 @@ namespace Bb.Expressions
         /// <exception cref="InvalidOperationException">
         /// Thrown when the prefix is null.
         /// </exception>
-        internal static string GetNewName(string prefix)
+        public static string GetNewName(string prefix)
         {
             if (prefix == null)
                 throw new InvalidOperationException(nameof(prefix));
@@ -45,7 +45,7 @@ namespace Bb.Expressions
         /// <remarks>
         /// If the type is null, a generic variable name is generated.
         /// </remarks>
-        internal static string GetNewName(Type? type = null)
+        public static string GetNewName(Type? type = null)
         {
             if (type == null)
                 return $"var_{PrivatesIndex.GetNewIndex()}";
