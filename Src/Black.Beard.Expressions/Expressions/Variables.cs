@@ -32,7 +32,13 @@ namespace Bb.Expressions
         /// <exception cref="Exceptions.DuplicatedArgumentNameException">
         /// Thrown when a variable with the same name but a different instance already exists.
         /// </exception>
-        internal Variable Add(Variable variable)
+        /// <example>
+        /// <code lang="C#">
+        /// var variables = new Variables();
+        /// variables.Add(new Variable { Name = "Variable1", Instance = someInstance });
+        /// </code>
+        /// </example>
+        public Variable Add(Variable variable)
         {
 
             if (variable.Type == null)
@@ -58,7 +64,12 @@ namespace Bb.Expressions
         /// <remarks>
         /// Searches the current collection and its parent for the specified variable.
         /// </remarks>
-        internal Variable? GetByName(string name)
+        /// <example>
+        /// <code lang="C#">
+        /// var variable = variables.GetByName("Variable1");
+        /// </code>
+        /// </example>
+        public Variable? GetByName(string name)
         {
 
             if (this._variables.TryGetValue(name, out Variable? variable))
@@ -84,6 +95,14 @@ namespace Bb.Expressions
         /// <remarks>
         /// This method combines variables from the current collection and its parent.
         /// </remarks>
+        /// <example>
+        /// <code lang="C#">
+        /// foreach (var variable in variables.GetVariables())
+        /// {
+        ///     Console.WriteLine(variable.Name);
+        /// }
+        /// </code>
+        /// </example>
         public IEnumerable<Variable> GetVariables()
         {
 
@@ -103,7 +122,12 @@ namespace Bb.Expressions
         /// <remarks>
         /// This method removes the variable from the current collection and its parent, if applicable.
         /// </remarks>
-        internal void RemoveByName(string name)
+        /// <example>
+        /// <code lang="C#">
+        /// variables.RemoveByName("Variable1");
+        /// </code>
+        /// </example>
+        public void RemoveByName(string name)
         {
             if (this._variables.ContainsKey(name))
                 this._variables.Remove(name);
@@ -116,10 +140,19 @@ namespace Bb.Expressions
         /// <summary>
         /// Gets the collection of variables in the current scope.
         /// </summary>
+        /// <returns>An enumerable collection of variables.</returns>
         /// <remarks>
         /// This property provides access to the variables stored in the current collection.
         /// </remarks>
-        internal IEnumerable<Variable> Items { get => this._variables.Values; }
+        /// <example>
+        /// <code lang="C#">
+        /// foreach (var variable in variables.Items)
+        /// {
+        ///     Console.WriteLine(variable.Name);
+        /// }
+        /// </code>
+        /// </example>
+        public IEnumerable<Variable> Items { get => this._variables.Values; }
 
         /// <summary>
         /// Merges the specified variables into the current collection.
@@ -128,7 +161,12 @@ namespace Bb.Expressions
         /// <remarks>
         /// Adds all variables from the specified collection to the current collection.
         /// </remarks>
-        internal void Merge(Variables variables)
+        /// <example>
+        /// <code lang="C#">
+        /// variables.Merge(otherVariables);
+        /// </code>
+        /// </example>
+        public void Merge(Variables variables)
         {
             if (variables != this)
                 foreach (var item in variables.Items)
@@ -145,7 +183,12 @@ namespace Bb.Expressions
         /// <exception cref="Exceptions.DuplicatedArgumentNameException">
         /// Thrown when a variable with the same name but a different instance exists in the parent collection.
         /// </exception>
-        internal void SetParent(Variables variables)
+        /// <example>
+        /// <code lang="C#">
+        /// variables.SetParent(parentVariables);
+        /// </code>
+        /// </example>
+        public void SetParent(Variables variables)
         {
 
             this._parent = null;
